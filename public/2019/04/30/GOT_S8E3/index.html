@@ -119,7 +119,7 @@
 
 
 <ul>
-    <li><div class="all active">全部文章<small>(5)</small></div></li>
+    <li><div class="all active">全部文章<small>(7)</small></div></li>
     
         
             
@@ -165,6 +165,34 @@
             
         
     
+        
+            
+            <li><div data-rel="命令"><i class="fold iconfont icon-right"></i>命令<small>(2)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="git">git<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="其它">其它<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
 </ul>
 <div class="left-bottom">
     <div class="menus">
@@ -175,8 +203,8 @@
     </div>
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="5">
-<input type="hidden" id="yelog_site_word_count" value="17.7k">
+<input type="hidden" id="yelog_site_posts_number" value="7">
+<input type="hidden" id="yelog_site_word_count" value="21.4k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -229,6 +257,18 @@
         <a class="color3">杂文</a>
     </li>
     
+    <li class="article-tag-list-item">
+        <a class="color4">git</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">latex</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">论文</a>
+    </li>
+    
     <div class="clearfix"></div>
 </div>
 
@@ -273,6 +313,22 @@
            data-author="" >
             <span class="post-title" title="改变">改变</span>
             <span class="post-date" title="2019-05-04 19:46:58">2019/05/04</span>
+        </a>
+        
+        <a  class="命令 git "
+           href="/2019/03/04/git%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/"
+           data-tag="git"
+           data-author="" >
+            <span class="post-title" title="git的基本命令">git的基本命令</span>
+            <span class="post-date" title="2019-03-04 21:26:47">2019/03/04</span>
+        </a>
+        
+        <a  class="命令 其它 "
+           href="/2019/02/20/latex%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D/"
+           data-tag="latex,论文"
+           data-author="" >
+            <span class="post-title" title="latex基本用法">latex基本用法</span>
+            <span class="post-date" title="2019-02-20 21:48:16">2019/02/20</span>
         </a>
         
     </nav>
@@ -431,7 +487,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#二叉树','#剧评','#日志','#散文','#杂文',],
+            'data': ['#二叉树','#剧评','#日志','#散文','#杂文','#git','#latex','#论文',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
