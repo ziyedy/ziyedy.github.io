@@ -15,7 +15,7 @@ hexo是一个基于Node.js的静态网页生成器，能直接将markdown文件�
 ```
 sudo apt-get install git
 ```
-可以直接使用命令行进行安装，但这种情况git版本往往较低，因此推荐前往[git官网](https://git-scm.com/)进行下载安装。安装完成后可以使用git --version查看一下版本。
+可以直接使用命令行进行安装，但这种情况git版本往往较低，因此推荐前往[git官网](https://git-scm.com/)进行下载安装。安装完成后可以使用`git --version`查看一下版本。
 
 #### 安装Node.js
 进入[官网](http://nodejs.cn/download/)选择下载相关版本的Linux二进制文件（Hexo官网建议使用10.0及以上版本，而apt-get下载版本过老因此此处建议在官网下载最新版本），输入以下命令
@@ -68,3 +68,21 @@ hexo s
 Windows下的安装方法更简单，到相关依赖项的官网上下载一直确定就能够安装成功。之后在git bash下的操作就与Linux基本一致了。
 
 ### 网站部署
+#### GithubPage
+1. 创建github账户并在本地创建ssh密匙，之后在github网站中的**setting**中找到SSH相关选项，将本地的ssh密匙添加进去即可（本地的ssh密匙都是在`.ssh\id_rsa.pub`中可以找到）。
+
+2. 在github下新建仓库，仓库命名必须为`<账户名称>.github.io`
+3. 修改本地博客文件中_config.yml中的设置如下
+```
+deploy:
+  type: git
+  repo: git@github.com:<Github账号名称>/<Github账号名称>.github.io.git
+  branch: master
+```
+4. 在博客本地目录下使用如下命令即可完成网页的生成与部署。之后在https://<Github账号名称>.github.io即可访问到自己的页面了。
+```
+hexo g  //生成
+hexo d  //部署
+```
+
+#### 云服务器
