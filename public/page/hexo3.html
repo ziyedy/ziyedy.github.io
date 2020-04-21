@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Hexo博客部署到腾讯云服务器全流程 | 子夜</title>
-  <meta name="keywords" content=" hexo , 云服务器 ">
-  <meta name="description" content="Hexo博客部署到腾讯云服务器全流程 | 子夜">
+  <title>Hexo实现多台机器同时编写博客 | 子夜</title>
+  <meta name="keywords" content=" hexo , git ">
+  <meta name="description" content="Hexo实现多台机器同时编写博客 | 子夜">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="前段时间写了一个手写电话号码识别的小程序，GUI用的是Python自带的Tkinter，但这种GUI太简陋可视化效果不佳，因此打算使用别的更加强大的GUI重构一下，目光就瞄准了pyqt，因为用C++时接触过，知道这是个好用的GUI吧。 Anaconda下安装在Anaconda在GitHub上的issue下知道由于兼容Python2的原因没法用conda安装最新版PyQt5包，所以得使用pip命令进">
 <meta property="og:type" content="article">
@@ -469,9 +469,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-Hexo博客部署到腾讯云服务器全流程" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Hexo实现多台机器同时编写博客" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Hexo博客部署到腾讯云服务器全流程</h1>
+        <h1 class="article-title">Hexo实现多台机器同时编写博客</h1>
     
     <div class="article-meta">
         
@@ -490,19 +490,19 @@
             
             <a class="color5">hexo</a>
             
-            <a class="color5">云服务器</a>
+            <a class="color4">git</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-03-13 10:58:55'>2020-03-13 02:48</time>
+        创建时间:<time class="date" title='更新时间: 2020-03-13 14:55:00'>2020-03-13 11:05</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:1.2k</span>
+        <span>字数:750</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -521,7 +521,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#部署环境"><span class="toc-text">部署环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#服务器配置"><span class="toc-text">服务器配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装git"><span class="toc-text">安装git</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建git用户"><span class="toc-text">创建git用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#密匙配置"><span class="toc-text">密匙配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试连接"><span class="toc-text">测试连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建网站根目录"><span class="toc-text">创建网站根目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装Nginx"><span class="toc-text">安装Nginx</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置Nginx"><span class="toc-text">配置Nginx</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hexo自动部署"><span class="toc-text">hexo自动部署</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#建立git裸库"><span class="toc-text">建立git裸库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用git-hooks同步网站根目录"><span class="toc-text">使用git-hooks同步网站根目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#本地配置"><span class="toc-text">本地配置</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建分支"><span class="toc-text">创建分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分支连接本地文件"><span class="toc-text">分支连接本地文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他问题"><span class="toc-text">其他问题</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -537,92 +537,28 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>部署到Githubpage上在国内访问速度很慢，正好前段时间买了一个腾讯云服务器，就干脆把hexo生成的博客文件直接放到云上跑算了，本文记录将hexo同时部署到GitHub与腾讯云服务器的过程。参考博客<a href="https://blog.csdn.net/StaunchKai/article/details/82878928" target="_blank" rel="noopener">https://blog.csdn.net/StaunchKai/article/details/82878928</a></p>
-<p>部署到Githubpage上在国内访问速度很慢，正好前段时间买了一个腾讯云服务器，就干脆把hexo生成的博客文件直接放到云上跑算了，本文记录将hexo同时部署到GitHub与腾讯云服务器的过程。参考博客<a href="https://blog.csdn.net/StaunchKai/article/details/82878928" target="_blank" rel="noopener">https://blog.csdn.net/StaunchKai/article/details/82878928</a></p>
-<p>Hexo署到Githubpage上在国内访问速度很慢，正好前段时间买了一个腾讯云服务器，就干脆把hexo生成的博客文件直接放到云上跑算了，本文记录将hexo同时部署到GitHub与腾讯云服务器的过程。参考博客<a href="https://blog.csdn.net/StaunchKai/article/details/82878928" target="_blank" rel="noopener">https://blog.csdn.net/StaunchKai/article/details/82878928</a></p>
-<h2 id="部署环境"><a href="#部署环境" class="headerlink" title="部署环境"></a>部署环境</h2><ul>
-<li>本地环境<ul>
-<li>Ubuntu 18.04（64bit）</li>
-<li>所需环境：git，Node.js，hexo</li>
-</ul>
+        <p>正常情况下，只在一台电脑上使用hexo编写部署博客非常方便，但多台电脑进行部署就需要云盘等媒介进行md文件的传输了。我的电脑是双系统，因此如果要部署的话还得重启，比较麻烦，因此干脆实现一个博客多设备管理，方便快捷。</p>
+<p>实现多设备的博客管理关键就是要实现本地hexo源文件的多台设备传输与修改，首先想到的当然是使用git了。本地的<code>_config.yml</code>文件中默认使用<code>hexo d</code>进行部署是部署在GitHub相应项目（也就是以用户名命名的博客项目）的<code>master</code>分支上的，因此，只需要在同一项目上新建一个存储源文件的分支即可解决问题。</p>
+<h3 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h3><p>在已经作为博客本地文件的地方打开终端输入以下命令</p>
+<pre><code>git branch &lt;hexo&gt;    //hexo处为你想建立的分支的名字</code></pre><p>之后在github中博客仓库的<code>-&gt;Settings-&gt;Branches-&gt;Default branch</code>下将默认分支改为新建的分支，并保存更新。</p>
+<h3 id="分支连接本地文件"><a href="#分支连接本地文件" class="headerlink" title="分支连接本地文件"></a>分支连接本地文件</h3><ol>
+<li><p>最简单且有效的方法就是将新建的<code>hexo</code>分支<code>git clone</code>到本地文件夹内，输入<code>git branch</code>即可看到当前分支为<code>hexo</code>。</p>
 </li>
-<li>服务器环境<ul>
-<li>腾讯云（CentOS 7.6 64bit）</li>
-<li>所需环境：git，Nginx</li>
-</ul>
+<li><p>再将之前新建的博客文件复制到以上文件夹中，注意将<code>themes</code>文件中隐藏的<code>.git</code>文件等与git有关的文件删除，否则主题文件会默认为是整个项目的一个子模块而不被上传到你的GitHub。</p>
 </li>
-</ul>
-<h2 id="服务器配置"><a href="#服务器配置" class="headerlink" title="服务器配置"></a>服务器配置</h2><h3 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h3><p>安装依赖包：</p>
-<pre><code>yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel
-yum install  gcc perl-ExtUtils-MakeMaker</code></pre><p>卸载旧版本git（如果服务器自带git太旧的话）</p>
-<pre><code>cd /usr/local/src   // 选择文件保存位置
-wget https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.19.0.tar.gz   // 下载链接
-tar -zxvf git-2.19.0.tar.gz   // 解压</code></pre><p>具体的版本选择可在<a href="https://mirrors.edge.kernel.org/pub/software/scm/git/" target="_blank" rel="noopener">https://mirrors.edge.kernel.org/pub/software/scm/git/</a> 查看。</p>
-<p>编译安装</p>
-<pre><code>cd git-2.19.0   // 进入文件夹
-make prefix=/usr/local/git all  // 编译源码
-make prefix=/usr/local/git install  // 安装至 /usr/local/git 路径</code></pre><p>之后正常的话<code>git --version</code>就可以看到git的版本了，如果在终端输入git没反应，则应该将git的安装位置加入环境变量中。</p>
-<h3 id="创建git用户"><a href="#创建git用户" class="headerlink" title="创建git用户"></a>创建git用户</h3><pre><code>adduser git
-passwd git
-chmod 740 /etc/sudoers
-vim /etc/sudoers</code></pre><p>找到以下内容</p>
-<pre><code>## Allow root to run any commands anywhere
-root    ALL=(ALL)       ALL</code></pre><p>在root的下面添加一行</p>
-<pre><code>git ALL=(ALL) ALL</code></pre><p>保存退出后将权限改回来</p>
-<pre><code>chmod 400 /etc/sudoers</code></pre><h3 id="密匙配置"><a href="#密匙配置" class="headerlink" title="密匙配置"></a>密匙配置</h3><p>与将本地博客文件连接至GitHub一样，将本地的<code>id_rsa.pub</code>复制好，在服务器创建.ssh下的文件，粘贴进去。</p>
-<pre><code>su git
-mkdir ~/.ssh
-vim ~/.ssh/authorized_keys</code></pre><p>修改权限</p>
-<pre><code>cd ~
-chmod 600 .ssh/authorzied_keys
-chmod 700 .ssh</code></pre><h3 id="测试连接"><a href="#测试连接" class="headerlink" title="测试连接"></a>测试连接</h3><p>在本地终端输入</p>
-<pre><code>ssh -v git@SERVER</code></pre><p>SERVER为你的服务器的公网地址，在控制台可以找到，如果成功连接说明服务器git配置成功。</p>
-<h3 id="创建网站根目录"><a href="#创建网站根目录" class="headerlink" title="创建网站根目录"></a>创建网站根目录</h3><p>网站根目录就是之后存放博客静态文件与资源的位置，你可以自己挑选位置创建你的根目录，之后再赋予权限。</p>
-<pre><code>su root
-mkdir /home/myblog    # 此目录为网站的根目录
-chown git:git -R /home/myblog</code></pre><h3 id="安装Nginx"><a href="#安装Nginx" class="headerlink" title="安装Nginx"></a>安装Nginx</h3><pre><code>yum install -y nginx    // 安装
-systemctl start nginx.service     // 启动服务</code></pre><p>此时访问<strong>公网ip/80</strong>应该就能看到nginx的初始界面。</p>
-<h3 id="配置Nginx"><a href="#配置Nginx" class="headerlink" title="配置Nginx"></a>配置Nginx</h3><p>使用<code>nginx -t</code>查看配置文件位置，一般为<code>/etc/nginx/nginx.conf</code></p>
-<p>打开nginx.conf文件，修改配置文件如下</p>
-<pre><code>server {
-    listen       80 default_server;
-    listen       [::]:80 default_server;
-    server_name  www.ziyedy.top;    # 修改为自己的域名
-    root         /home/myblog;    # 修改为网站的根目录
-
-    # Load configuration files for the default server block.
-    include /etc/nginx/default.d/*.conf;
-
-    location / {
-        index index.html    # 设置自己的index网页
-    }
-
-    error_page 404 /404.html;
-        location = /40x.html {
-    }
-
-    error_page 500 502 503 504 /50x.html;
-        location = /50x.html {
-    }
-}
-</code></pre><p>之后可以使用<code>nginx -t</code>检查配置文件中是否有语法错误，之后重启服务即可。</p>
-<h2 id="hexo自动部署"><a href="#hexo自动部署" class="headerlink" title="hexo自动部署"></a>hexo自动部署</h2><h3 id="建立git裸库"><a href="#建立git裸库" class="headerlink" title="建立git裸库"></a>建立git裸库</h3><p>在与文件同一根目录下建立裸库</p>
-<pre><code>su root
-git init --bare blog.git</code></pre><p>这时，<code>git</code> 用户的 <code>~</code> 目录下就存在一个 <code>blog.git</code> 文件夹，可使用 <code>ls</code> 命令查看。再修改 <code>blog.git</code> 的权限。</p>
-<pre><code>chown git:git -R blog.git</code></pre><h3 id="使用git-hooks同步网站根目录"><a href="#使用git-hooks同步网站根目录" class="headerlink" title="使用git-hooks同步网站根目录"></a>使用git-hooks同步网站根目录</h3><p>在这使用的是 <code>post-receive</code> 这个钩子，当 <code>git</code> 有收发的时候就会调用这个钩子。 在 <code>blog.git</code> 裸库的 hooks 文件夹中，新建 <code>post-receive</code> 文件。</p>
-<pre><code>vim blog.git/hooks/post-receive</code></pre><p>填入以下内容，注意myblog应该填入自己的根目录文件名</p>
-<pre><code>#!/bin/sh
-git --work-tree=/home/hexo --git-dir=/home/git/blog.git checkout -f</code></pre><p>保存后，赋予该文件可执行权限</p>
-<pre><code>chmod +x /home/git/blog.git/hooks/post-receive</code></pre><h3 id="本地配置"><a href="#本地配置" class="headerlink" title="本地配置"></a>本地配置</h3><p>与部署到GitHub相同，在本地博客文件根目录下的<code>_config.yml</code> 文件中修改<code>deploy</code>设置如下。SERVER为服务器的公网ip，如果不想部署到GitHub了将<code>github</code>一行删去即可。</p>
-<pre><code>deploy:
-  type: git
-  repo:
-    github: git@github.com:xxxx/xxxx.github.io.git
-    git1: git@SERVER:/home/git/blog.git 
-  branch: master</code></pre><p>之后正常配置</p>
-<pre><code>hexo clean
-hexo g
-hexo d</code></pre><p>这是输入你的公网ip即可进入你的博客，要实现域名访问，在你的域名内解析你的公网ip即可。</p>
+<li><p>将之前部署生成的<code>.deploy_git</code>文件删除，否则由于之前删去了部分原来的git信息部署时有可能会发生错误。</p>
+</li>
+<li><p>输入如下命令你的博客的源码分支hexo就建立好了。</p>
+</li>
+</ol>
+<pre><code>git add .
+git commit -m &quot;first push&quot;
+git push origin hexo</code></pre><ol start="5">
+<li>想在另一台电脑上写博客时。只要确保该电脑安装了hexo所需要的各种环境（再在GitHub上加入ssh密匙），只需要在本地建立一个文件夹将博客源文件<code>clone</code>下来即可。而每次更新上传后，在另一台计算机上只需每次使用<code>git pull</code>更新一下源文件即可十分方便。</li>
+</ol>
+<h3 id="其他问题"><a href="#其他问题" class="headerlink" title="其他问题"></a>其他问题</h3><p>多机同时管理博客其实就是在一个github仓库的<code>master</code>分支存储网页静态文件，在<code>hexo</code>分支存储博客源文件。由于hexo进行部署时默认是在<code>master</code>分支上部署（<code>_config.yml</code>文件中可见），因此部署博客时还是输入以下代码即可</p>
+<pre><code>hexo g
+hexo d</code></pre><p>同时应该注意的是，这样做会使得源文件开源，不想开源的话可以在github仓库中设置该仓库为private。这样该仓库就不可见但gitpage的功能也使用不了了，所以要怎样做仁者见仁智者见智吧。</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 ziyedy@qq.com </span>
@@ -632,12 +568,12 @@ hexo d</code></pre><p>这是输入你的公网ip即可进入你的博客，要�
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>Hexo博客部署到腾讯云服务器全流程</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">1.2k</span></p>
+    <p><span class="copy-title">文章标题:</span>Hexo实现多台机器同时编写博客</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">750</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="子夜">子夜</a></p>
-    <p><span class="copy-title">发布时间:</span>2020-03-13, 02:48:15</p>
-    <p><span class="copy-title">最后更新:</span>2020-03-13, 10:58:55</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/page/hexo2.html" title="Hexo博客部署到腾讯云服务器全流程">http://www.ziyedy.top/page/hexo2.html</a>
+    <p><span class="copy-title">发布时间:</span>2020-03-13, 11:05:41</p>
+    <p><span class="copy-title">最后更新:</span>2020-03-13, 14:55:00</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/page/hexo3.html" title="Hexo实现多台机器同时编写博客">http://www.ziyedy.top/page/hexo3.html</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
