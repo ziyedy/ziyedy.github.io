@@ -2,9 +2,10 @@
 title: Ubuntu环境下anaconda出现的问题及解决方法
 date: 2020-04-22 00:06:07
 tags:
-    - python
+    - Python
 categories:
-    - python
+    - Python
+	- 问题解决
 fileName: ubuntu_anaconda_problem
 ---
 

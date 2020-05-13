@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>雨与晴 | 子夜</title>
-  <meta name="keywords" content=" 散文 , 日志 ">
-  <meta name="description" content="雨与晴 | 子夜">
+  <title>1、Python基本数据类型 | 子夜</title>
+  <meta name="keywords" content=" python ">
+  <meta name="description" content="1、Python基本数据类型 | 子夜">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="装饰器： @name 用于拓展原来函数功能的一种函数 返回函数的函数 在不更改原函数代码的前提下给函数增加新的功能 带参数的装饰器 保留之前函数的参数 使用魔法参数 args, *kwargs 装饰器对函数进行封装改变了原函数的名称 使用装饰器后看不到之前函数的文档，还原回来的方法 @wraps(func)">
 <meta property="og:type" content="article">
@@ -508,9 +508,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-雨与晴" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Python1" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">雨与晴</h1>
+        <h1 class="article-title">1、Python基本数据类型</h1>
     
     <div class="article-meta">
         
@@ -518,30 +518,28 @@
         
         <span class="book">
             
-                <a  data-rel="随笔">随笔</a>/
+                <a  data-rel="Python">Python</a>/
             
-                <a  data-rel="散文">散文</a>
+                <a  data-rel="基础知识">基础知识</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a class="color3">散文</a>
-            
-            <a class="color3">日志</a>
+            <a class="color2">python</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-03-13 02:41:04'>2019-03-20 19:13</time>
+        创建时间:<time class="date" title='更新时间: 2020-05-13 23:10:16'>2020-05-08 12:46</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:2k</span>
+        <span>字数:1.2k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -560,7 +558,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串"><span class="toc-text">字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#列表（list）"><span class="toc-text">列表（list）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字典（dict）"><span class="toc-text">字典（dict）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建"><span class="toc-text">创建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#取值"><span class="toc-text">取值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#遍历字典"><span class="toc-text">遍历字典</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字典常用操作"><span class="toc-text">字典常用操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#元组（Tuple）"><span class="toc-text">元组（Tuple）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集合（Set）"><span class="toc-text">集合（Set）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#初始化"><span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#集合的常用运算"><span class="toc-text">集合的常用运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#集合间的关系操作"><span class="toc-text">集合间的关系操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用的转换"><span class="toc-text">常用的转换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生成器"><span class="toc-text">生成器</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -576,23 +574,137 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>今天早上8点半左右，我像往常一样上三楼接水，在楼梯间的窗户向外瞥，围墙外的篮球场的塑胶地上湿了一片。围墙略显斑驳，是本来就不那么年经了的建筑被大水冲洗过后的一种自然姿态，带着一些年迈的美丽。</p>
-<p>没事的时候我很喜欢透过这里向外望，但这次不是，因为我的眼光里多少带了些形色匆匆的味道。被水洗过的塑胶绿和围墙这边的绿色的植物，与其说是我看到了她们，不如说是她们的颜色主宰了那一秒内我的视神经。现在窗外夜色朦胧，是置身城市里很少见到的那种纯粹的墨蓝，纯粹的证明也并非是我自情自愿，是因为我抬头能看到星星。</p>
-<p>不对，在东边的天空，还有一轮月亮，也许足够用皓月来形容。</p>
-<p>我并不像一些下午一样，站在那个楼梯间的窗户面前带着什么思考或者纯粹性的发呆向外望。清晨的我手里拿着洗面奶和脸盆毛巾经过了那里，我现在也只能以上帝的姿态回顾那个瞬间我究竟是迈开了左腿还是右腿，脑子中想的究竟是窗外的绿还是一些什么别的乱七八糟的东西。这到底是模拟，有一万种不同的可能，这花了我很长的时间，沉淀了许多情感。我并不喜欢喝白酒，事实上也的确没怎么喝过，但我觉得所谓后劲，就是如此吧。在张开嘴的瞬间，咽下的酒精会让觥筹交错之后的你花上几个小时醉在自己的梦里，所需要的契机也只是热闹向平淡的自然转变。</p>
-<p>雨是早就要下的了，昨晚睡前就已经开始了，但我并没有太在意，只记得它很大，像是夏天的雷雨，全然不同于上个月那阴雨绵绵的枯燥，倒是热烈洒脱，干脆利落。昨晚12点左右的时候，我躺在床上，感觉很累很累。我不知道“累”这种感觉的产生是基于什么，也许是某种激素，那我觉得自己想必是有些内分泌失调了。我并没有什么能过得去的让我感觉到疲惫的理由，但我就是很累。这一个月来我思考了很多，这个多也只是相对于我某种程度上放弃思考开始自欺欺人的那大段时间而已，只是一个正常水平，就像冬末的阴雨只要地球还在正常的轨道上，只要太阳不出什么问题，就一定会消散一样。阴天和晴天，只不过是地球表面的两种正常状态，但其微小的不同，的确会对地表的生物造成一些困扰，这我想是肯定的。</p>
-<p>半夜的时候我被雨声惊醒了，这很少见，除去呼噜声与钟表的滴答，我是很难被别的声音惊醒的。半夜醒来的人对时间是没法计数的，一切理性和情感都处于朦胧的状态，也许这道朦胧会在大脑留下沙滩上城堡般的记忆，也许不会。但我却记得，那算是雨后的阴沉的味道吧。翠绿的世界总是会给人一种虽然充满生气但却脆弱稚嫩的感觉，在这脆弱稚嫩之下不知纯粹为何物，但被大雨蹂躏过后的植物的墨绿虽然给人阴沉郁结之感，却又十足纯粹。淅沥小雨下的天空阴沉混沌，赶时间的人会痛恨这种“欲擒故纵”般的感觉，世界并不是在接受清洗，而是在把污浊借雨水之名平摊到各地，也许是为了遮瑕，但却使原来作为“瑜”的部分都消失殆尽，纯粹一词无处藏身。而大雨磅礴的天空也许更是阴沉可怖，但却给人以十足的命令感，再赶时间你也不会为“走”或“不走”而面露难色，只有在屋檐下耐心等待。等待的过程也许是生活中难得的纯粹的仪式，因为静坐听雨的意境在当代实在是少的可怜，就连裤腿被大雨淋湿的触感都变得弥足珍贵。</p>
-<p>雨后，空气中会有清爽的纯粹，世界接受清洗之后，无论是借着日光还是霓虹，路面倒映出的射影，是世界的另一种面貌，印着纯粹二字。</p>
-<p>但我并不知道纯粹为何物，它是最狡诈多变的一个词。在我有不同的情感时，思考不同的问题时，面临不同的选择时，它是我最后的仪仗，是我追求的东西，尽管为此我注定没有方向。</p>
-<p>我不知道小时候庐山上的蓝天白云与我的无忧无虑算不算纯粹，也许无忧无虑只是假象，是人丢掉一段时间内的大部分记忆的一种自然而然的感受。我马上21了，在我以1开头的年岁里，我的确很少看到记忆中的那种蓝天了。在熬过二月的阴雨之后，最近武汉的天气晴空万里，就连今天早上阴沉潮湿的墨绿在我中午再一次以相同的视角观望时都已经消失殆尽了，但蓝天上仍然有一层阴霾，蓝的并不纯粹，而我已经习惯了这种蓝，并且也开始用湛蓝形容它。没事的时候我也会在教五门口的广场上休息，或者在万林艺术馆的天台上坐着以一个不至于让太阳抢去风头的角度欣赏蓝天，我为这种天气而欣喜，但内心中又似乎对一场夏天的雷雨更为期待。我不知道是因为暴雨真的能够洗刷世界，还是因为我仅仅期待那雨声给我带来的视觉、听觉再到触觉的全方位的模拟，能够带我回到小时候，或者说情感更加纯粹的年岁。</p>
-<p>现在外面天很黑，皓月当空，高悬东方，在宿舍门口我看到有人在用微单拍摄。我很遗憾单反不在身边，同时又很庆幸单反不在身边。我尝试用手机对这个美丽的夜色进行记录，但最后发现它只属于我的眼睛，属于在我记忆中注定渐渐消散的那一块区域。我很快会把昨晚的雨、清晨的绿以及东方的月这些印记着今天的一切特征给淡忘，因为未来还会有无数个相同的日子，武大的樱花会一直开下去，我的路，我的追求，我的思考也不会停下，至死方休。时不时想想上一个今天自己对纯粹的定义，也许会发现愚蠢，也许会发现美丽，但更重要的是找到不同日子纯粹变化的轨迹。文字的意义总会是虚无缥缈的，但追求的东西如果套用一个词来表达的话我认为总不至于两个时间的方向会是南北迥异的吧。</p>
-<p>说句实话，我想家了。</p>
-<p>人只有在意识到自己脆弱的时候才会顿生羁旅之情。</p>
-<p>但也从来没有用羁旅表达自己状态的人会停下脚步。</p>
-<blockquote>
-<p>记于 19.3.20 武汉</p>
-</blockquote>
+        <h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>单双引号的应用</p>
+<pre><code># 拼接字符串（直接使用 + 进行操作）
+len(str) # 获取长度
+str.find(string) # 返回搜索到的第一个index，没搜索到则返回-1
+str.replace(&#39;A&#39;, &#39;B&#39;) # A替换B
+</code></pre><p>格式化字符串，使用{}占位符进行</p>
+<pre><code>&quot;{} {} gg&quot;.format(&quot;huangkai&quot;,&quot;is&quot;)
+# huangkai is gg
 
+# 带索引的格式化字符串
+&quot;{1} {0} gg&quot;.format(&quot;huangkai&quot;,&quot;is&quot;)
+is huangkai gg
+
+# f形式
+str1 = &#39;Curry&#39;
+str2 = &#39;James&#39;
+combi = f&#39;{str1} and {str2}, NBA stars&#39;
+
+# 使用别名
+str3 = “gg {s1}， {s2}”。format(s1=str1, s2 str2)</code></pre><h3 id="列表（list）"><a href="#列表（list）" class="headerlink" title="列表（list）"></a>列表（list）</h3><p>在内存中按照顺序存储</p>
+<p>列表反转：</p>
+<pre><code>list.reverse()</code></pre><p>列表排序</p>
+<pre><code>list.sort() # 升序排列
+list.sort(reverse=True) # 降序排列</code></pre><p>列表常用操作</p>
+<pre><code>list.append(new_element) # 在列表末尾添加元素
+list.insert(index, new_element) # 在指定的index处加入一个元素，其后元素全部后移
+list.remove(element) # 删除值为element的元素
+list.pop(index) # 删除索引值为index的元素，无index则删除最后一个元素
+list.clear() # 清空列表</code></pre><p>列表其他操作</p>
+<pre><code>list.extend([e1, e2]) # 将列表追加进list（区别于append）</code></pre><p>列表的复制，想将一个列表赋值给另一个列表必须要使用.copy方法，否则修改其中一个表另一个也会变，如下：</p>
+<pre><code>l1 = [1,2,3,4]
+l2 = l1
+print(id(l1))
+print(id(l2))</code></pre><p>运行结果可以发现l1与l2指向了同一块内存，因此改变l1，l2也会相应改变。而copy()方法会重新创建一个空列表再将原列表的元素放进去。</p>
+<pre><code>l2 = list.copy()</code></pre><h3 id="字典（dict）"><a href="#字典（dict）" class="headerlink" title="字典（dict）"></a>字典（dict）</h3><p>键值对（key-value），可修改。</p>
+<p>散列值<code>hash(data)</code>，字典存储根据哈希值存储</p>
+<h4 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h4><pre><code>dic = dict.fromkeys([&#39;school number&#39;, &#39;bala1&#39;, &#39;bala2&#39;])
+print(dic)
+
+# 输出
+{&#39;school number&#39;: None, &#39;bala1&#39;: None, &#39;bala2&#39;: None}</code></pre><h4 id="取值"><a href="#取值" class="headerlink" title="取值"></a>取值</h4><pre><code># 直接使用key获取value
+dic[key]
+# 使用get方法（可以为不存在的key赋默认值）
+dic.get(key)</code></pre><h4 id="遍历字典"><a href="#遍历字典" class="headerlink" title="遍历字典"></a>遍历字典</h4><pre><code># 方案1
+for key in dic:
+    v = dic[key]
+
+# 方案2（返回每一个键值对）
+for key,value in dic.items():
+</code></pre><h4 id="字典常用操作"><a href="#字典常用操作" class="headerlink" title="字典常用操作"></a>字典常用操作</h4><pre><code>dic.update(k1 = new_value1, k2 = new_value2) # 对多个键值进行更新或新增
+dic,pop(key) # 删除键值为key
+dic.popitem() # 删除最后一个键值对，并返回该键值对的tuple
+dic.clear() # 清空字典
+dic.setdefault(&#39;key&#39;, &#39;value&#39;) # 设置默认值（如果没有该键值的话）
+
+# 修改字典时下面三个值都会变
+dic.keys()    # 返回所有键
+dic.values() # 返回所有值
+dic.items() # 返回所有键值对
+
+# 格式化字符串，使用format_map
+dic = {&#39;name&#39;:&#39;Curry&#39;,&#39;gg&#39;:&#39;no&#39;}
+s = &quot;姓名:{name},瞎写:{gg}&quot;.format_map(dic)
+print(s)
+# 输出
+姓名:Curry,瞎写:no</code></pre><h3 id="元组（Tuple）"><a href="#元组（Tuple）" class="headerlink" title="元组（Tuple）"></a>元组（Tuple）</h3><p>创建后不允许修改，当列表等可变对象为元组元素时，可以修改该元素的值。</p>
+<h3 id="集合（Set）"><a href="#集合（Set）" class="headerlink" title="集合（Set）"></a>集合（Set）</h3><p>元素是无序的、可变的、元素不能重复，在内存中是分散保存的（存储方式与字典相似），缺点，浪费内存空间</p>
+<h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><pre><code># 空集合的创建
+# 不能使用s = {}，这样默认创建的是字典
+set1 = set()</code></pre><h4 id="集合的常用运算"><a href="#集合的常用运算" class="headerlink" title="集合的常用运算"></a>集合的常用运算</h4><pre><code>set1 = {1,2,3,4,5}
+set2 = {4,5,6,7,8}
+
+# 交集运算
+set3 = set1.intersection(set2)    # 产生新集合
+# intersection_update为更新原有集合
+print(set3)
+# 输出
+{4, 5}
+
+# 并集运算
+set3 = set1.union(set2)
+print(set3)
+# 输出
+{1, 2, 3, 4, 5, 6, 7, 8}
+
+# 差集运算
+set3 = set1.difference(set2) # 得到set1中有，set2中没有的元素 
+print(set3)
+# 输出
+{1, 2, 3}
+
+# 双向差集
+set3 = set1.symmetric_difference(set2)
+print(set3)
+# 输出
+{1, 2, 3, 6, 7, 8}</code></pre><h4 id="集合间的关系操作"><a href="#集合间的关系操作" class="headerlink" title="集合间的关系操作"></a>集合间的关系操作</h4><pre><code># 判断两个集合的元素是否完全相同
+s1 = {1,2,3,4,5}
+s2 = {5,4,3,2,1}
+print(s1 == s2)
+# 输出
+True</code></pre><pre><code># 子集判断
+# 父集判断，同理。 .issuperset()
+s1 = {1,2,3,4,5}
+s2 = {5,4,3,2}
+print(s2.issubset(s1))
+# 输出
+True</code></pre><pre><code># 判断两个集合是否存在重复元素
+# 返回False代表存在重复元素
+s1 = {1,2,3,4,5}
+s2 = {5,4,3,2}
+print(s1.isdisjoint(s2))
+# 输出
+False
+</code></pre><pre><code># 新增数据
+set.add(element) # 一次添加一个元素
+set.update(列表或元组) # 一次添加多个元素
+# 删除元素
+set.remove(element) # 删除不存在的元素会报错
+set.discard(element) # 删除不存在的元素会直接忽略</code></pre><h3 id="常用的转换"><a href="#常用的转换" class="headerlink" title="常用的转换"></a>常用的转换</h3><pre><code>list() # 转换为列表
+tuple() # 转换为元组
+join(), str() # 转换为字符串</code></pre><h3 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h3><p>列表生成器，常用形式如下</p>
+<p>[数据 循环语句 循环或判断语句]</p>
+<pre><code>l = [i**2 for i in range(10)]
+# [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+
+l = [i**2 for i in range(10) if i%2 ==0]
+# [0, 4, 16, 36, 64]</code></pre><p>字典生成器</p>
+<pre><code>list1 = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;]
+dic = {i:list1[i] for i in range(len(list1))}
+# {0: &#39;A&#39;, 1: &#39;B&#39;, 2: &#39;C&#39;}</code></pre><p>集合生成器（跟列表生成式类似）</p>
+<pre><code>set1 = {i for i in range(10)}</code></pre>
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 ziyedy@qq.com </span>
     </div>
@@ -601,12 +713,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>雨与晴</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">2k</span></p>
+    <p><span class="copy-title">文章标题:</span>1、Python基本数据类型</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.2k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="子夜">子夜</a></p>
-    <p><span class="copy-title">发布时间:</span>2019-03-20, 19:13:06</p>
-    <p><span class="copy-title">最后更新:</span>2020-03-13, 02:41:04</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/page/the_rain_and_the_shine.html" title="雨与晴">http://www.ziyedy.top/page/the_rain_and_the_shine.html</a>
+    <p><span class="copy-title">发布时间:</span>2020-05-08, 12:46:26</p>
+    <p><span class="copy-title">最后更新:</span>2020-05-13, 23:10:16</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/page/python1.html" title="1、Python基本数据类型">http://www.ziyedy.top/page/python1.html</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>

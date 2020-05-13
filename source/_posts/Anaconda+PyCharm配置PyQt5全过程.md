@@ -5,7 +5,7 @@ tags:
 	- python
 	- GUI
 categories:
-	- 学习笔记
+	- Python
 	- PyQt5
 fileName: pyqt1
 ---
