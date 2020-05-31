@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Hexo实现多台机器同时编写博客 | 子夜</title>
-  <meta name="keywords" content=" hexo , git ">
-  <meta name="description" content="Hexo实现多台机器同时编写博客 | 子夜">
+  <title>post | 子夜</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="post | 子夜">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="装饰器用于拓展原来函数功能的一种函数，返回函数的函数，在不更改原函数代码的前提下给函数增加新的功能（易于代码重用） # 装饰器的常用写法 # 输入函数，在函数内部定义返回函数 def decoratre(func):     def wrapper():         print(&#39;start&#39;)         func()         print((&#39;end&amp;#3">
 <meta property="og:type" content="article">
@@ -544,40 +544,24 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-Hexo实现多台机器同时编写博客" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-post-1" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Hexo实现多台机器同时编写博客</h1>
+        <h1 class="article-title">post</h1>
     
     <div class="article-meta">
         
         
         
-        <span class="book">
-            
-                <a  data-rel="记录">记录</a>/
-            
-                <a  data-rel="hexo">hexo</a>
-            
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a class="color5">hexo</a>
-            
-            <a class="color4">git</a>
-            
-        </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-03-13 14:55:00'>2020-03-13 11:05</time>
+        创建时间:<time class="date" title='更新时间: 2020-05-26 23:45:28'>2020-05-18 09:59</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:750</span>
+        <span>字数:1.3k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -596,7 +580,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建分支"><span class="toc-text">创建分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分支连接本地文件"><span class="toc-text">分支连接本地文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他问题"><span class="toc-text">其他问题</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Python多线程"><span class="toc-text">Python多线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Python进程"><span class="toc-text">Python进程</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -612,28 +596,265 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>正常情况下，只在一台电脑上使用hexo编写部署博客非常方便，但多台电脑进行部署就需要云盘等媒介进行md文件的传输了。我的电脑是双系统，因此如果要部署的话还得重启，比较麻烦，因此干脆实现一个博客多设备管理，方便快捷。</p>
-<p>实现多设备的博客管理关键就是要实现本地hexo源文件的多台设备传输与修改，首先想到的当然是使用git了。本地的<code>_config.yml</code>文件中默认使用<code>hexo d</code>进行部署是部署在GitHub相应项目（也就是以用户名命名的博客项目）的<code>master</code>分支上的，因此，只需要在同一项目上新建一个存储源文件的分支即可解决问题。</p>
-<h3 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h3><p>在已经作为博客本地文件的地方打开终端输入以下命令</p>
-<pre><code>git branch &lt;hexo&gt;    //hexo处为你想建立的分支的名字</code></pre><p>之后在github中博客仓库的<code>-&gt;Settings-&gt;Branches-&gt;Default branch</code>下将默认分支改为新建的分支，并保存更新。</p>
-<h3 id="分支连接本地文件"><a href="#分支连接本地文件" class="headerlink" title="分支连接本地文件"></a>分支连接本地文件</h3><ol>
-<li><p>最简单且有效的方法就是将新建的<code>hexo</code>分支<code>git clone</code>到本地文件夹内，输入<code>git branch</code>即可看到当前分支为<code>hexo</code>。</p>
-</li>
-<li><p>再将之前新建的博客文件复制到以上文件夹中，注意将<code>themes</code>文件中隐藏的<code>.git</code>文件等与git有关的文件删除，否则主题文件会默认为是整个项目的一个子模块而不被上传到你的GitHub。</p>
-</li>
-<li><p>将之前部署生成的<code>.deploy_git</code>文件删除，否则由于之前删去了部分原来的git信息部署时有可能会发生错误。</p>
-</li>
-<li><p>输入如下命令你的博客的源码分支hexo就建立好了。</p>
-</li>
-</ol>
-<pre><code>git add .
-git commit -m &quot;first push&quot;
-git push origin hexo</code></pre><ol start="5">
-<li>想在另一台电脑上写博客时。只要确保该电脑安装了hexo所需要的各种环境（再在GitHub上加入ssh密匙），只需要在本地建立一个文件夹将博客源文件<code>clone</code>下来即可。而每次更新上传后，在另一台计算机上只需每次使用<code>git pull</code>更新一下源文件即可十分方便。</li>
-</ol>
-<h3 id="其他问题"><a href="#其他问题" class="headerlink" title="其他问题"></a>其他问题</h3><p>多机同时管理博客其实就是在一个github仓库的<code>master</code>分支存储网页静态文件，在<code>hexo</code>分支存储博客源文件。由于hexo进行部署时默认是在<code>master</code>分支上部署（<code>_config.yml</code>文件中可见），因此部署博客时还是输入以下代码即可</p>
-<pre><code>hexo g
-hexo d</code></pre><p>同时应该注意的是，这样做会使得源文件开源，不想开源的话可以在github仓库中设置该仓库为private。这样该仓库就不可见但gitpage的功能也使用不了了，所以要怎样做仁者见仁智者见智吧。</p>
+        <p>代码高效、程序健壮</p>
+<p>值的类型，引用类型</p>
+<p>内存共享机制</p>
+<p>垃圾回收机制</p>
+<p>以引用计数为主，分代收集为辅</p>
+<p>每个对象都有指向该对象的引用总数</p>
+<pre><code>sys.getrefcount()</code></pre><p>满足特定条件，自动启动垃圾回收</p>
+<p>Python运行时，会记录分配对象与取消分配对象的次数。当两者差值高过阈值时。</p>
+<pre><code># 查看阈值
+gc.get_threshold()</code></pre><p>所有新建对象都是0代对象。所有对象分为0，1，2代。当某一代对象经历过垃圾回收，依然存活，则被归入下一代</p>
+<p>若一个对象的引用数为0，Python虚拟机就会回收这个对象的内存</p>
+<p>引用计数的缺陷是循环引用的问题</p>
+<p>内存池机制：当创建大量消耗小内存的对象时，频繁调用new/malloc会导致大量的内存碎片，使效率降低。</p>
+<p>内存池就是预先在内存中申请一定数量的、大小相等的内存块留作备用，当有新的内存需求时，就先从内存池中分配内存给这个需求，不够了再申请新的内存，这样做最显著的优势就是能够减小内存碎片，提升效率</p>
+<p>pymalloc</p>
+<p>针对小对象，pymalloc会在内存池中申请内存空间</p>
+<p>大对象，申请新的内存空间</p>
+<h3 id="Python多线程"><a href="#Python多线程" class="headerlink" title="Python多线程"></a>Python多线程</h3><p>进程：一个执行中的程序，每个进程都拥有自己的地址空间、内存、数据栈以及其他用于跟踪执行的辅助数据。操作系统管理其上所有进程，并为这些进程合理分配时间。</p>
+<p>threading模块</p>
+<p>线程：在同一个进程下执行，并共享相同的上下文。一个进程中的各个线程与主线程共享同一片数据空间。</p>
+<p>线程包括开始、执行顺序、结束三部分</p>
+<p>可以被抢占（中断）和临时挂起（睡眠）</p>
+<p>一般以并发方式执行（是一种属性，并行只是并发问题的可能方法之一，若两个事件互不影响，则两个事件是并发的）</p>
+<p>对多核CPU的应用</p>
+<p>GIL——全局解释器锁（强制在任何时候只有一个线程可以执行python代码）</p>
+<p>I/O密集型应用（如网页之类），CPU密集型应用（数据分析，可借助C或CPP的拓展）</p>
+<p>GIL执行顺序</p>
+<p>实现一个线程</p>
+<pre><code>import threading
+import time
+
+class LoopThread(threading.Thread):
+    n = 0
+    def run(self) -&gt; None:
+        while self.n &lt; 5:
+            now_thread = threading.current_thread()
+            print(&#39;loop now: {0}&#39;.format(now_thread.name))
+            print(self.n)
+            time.sleep(1)
+            self.n += 1
+
+if __name__ == &#39;__main__&#39;:
+    now_thread = threading.current_thread()
+    print(&#39;now: {0}&#39;.format(now_thread.name))
+
+    t = LoopThread(name=&#39;loop_thread&#39;)
+    t.start()
+    t.join()
+
+############################################
+now: MainThread
+loop now: loop_thread
+0
+loop now: loop_thread
+1
+loop now: loop_thread
+2
+loop now: loop_thread
+3
+loop now: loop_thread
+4</code></pre><p>多线程并发</p>
+<pre><code>import threading
+import time
+
+num = 0
+
+def test(n):
+    global num
+    num += n
+    time.sleep(2)
+    num -= n
+    time.sleep(1)
+    print(&#39;----------------{0}&#39;.format(num))
+
+class testThread(threading.Thread):
+    def __init__(self, n, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.n = n
+
+    def run(self) -&gt; None:
+        for i in range(1000):
+            test(self.n)
+
+if __name__ == &#39;__main__&#39;:
+    t1 = testThread(1)
+    t2 = testThread(2)
+    t1.start()
+    t2.start()
+    t1.join()
+    t2.join()
+
+############################################
+----------------0
+----------------2
+----------------0
+----------------2
+----------------0
+----------------1
+----------------0
+----------------1</code></pre><p>多线程中的锁</p>
+<p><code>RLock</code>在一个线程中锁住了还能够再锁</p>
+<p>不能重复锁，否则资源被死锁</p>
+<pre><code>import threading
+import time
+
+num = 0
+lock = threading.Lock()
+
+def test(n):
+    global num
+    num += n
+    time.sleep(2)
+    num -= n
+    time.sleep(1)
+    print(&#39;----------------{0}&#39;.format(num))
+
+class testThread(threading.Thread):
+    def __init__(self, n, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.n = n
+
+    def run(self) -&gt; None:
+        for i in range(1000):
+            lock.acquire()
+            try:
+                test(self.n)
+            finally:
+                lock.release()
+
+if __name__ == &#39;__main__&#39;:
+    t1 = testThread(1)
+    t2 = testThread(2)
+    t1.start()
+    t2.start()
+    t1.join()
+    t2.join()
+
+###########################################
+----------------0
+----------------0
+----------------0
+----------------0
+----------------0
+----------------0</code></pre><p>产生死锁</p>
+<pre><code>def run(self) -&gt; None:
+    for i in range(1000):
+        print(&#39;start lock&#39;)
+        lock.acquire()
+        print(&#39;lock again&#39;)
+        lock.acquire()
+        print(&#39;lock end&#39;)
+        try:
+            test(self.n)
+        finally:
+            lock.release()
+
+###########################################
+start lock
+lock again
+start lock</code></pre><p>线程的调度与优化</p>
+<pre><code>import threading, time
+from multiprocessing.dummy import Pool as ThreadPool
+
+def run(n):
+    time.sleep(1)
+    print(threading.current_thread().name, n)
+
+def test():
+    t1 = time.time()
+    for n in range(10):
+        run(n)
+    print(time.time() - t1)
+
+
+if __name__ == &#39;__main__&#39;:
+    test()
+
+########################################
+MainThread 0
+MainThread 1
+MainThread 2
+MainThread 3
+MainThread 4
+MainThread 5
+MainThread 6
+MainThread 7
+MainThread 8
+MainThread 9
+10.0053870677948</code></pre><p>快了很多</p>
+<pre><code>import threading, time
+from multiprocessing.dummy import Pool as ThreadPool
+
+def run(n):
+    time.sleep(1)
+    print(threading.current_thread().name, n)
+
+def test_use_thread():
+    t1 = time.time()
+    ls = []
+    for i in range(10):
+        t = threading.Thread(target=run, args=(i,))
+        ls.append(t)
+        t.start()
+
+    for l in ls:
+        l.join()
+    print(time.time() - t1)
+
+def test():
+    t1 = time.time()
+    for n in range(10):
+        run(n)
+    print(time.time() - t1)
+
+
+if __name__ == &#39;__main__&#39;:
+    test_use_thread()
+
+###############################################
+Thread-2 1
+Thread-3 2
+Thread-1 0
+Thread-5 4
+Thread-4 3
+Thread-6 5
+Thread-10 9
+Thread-8 7
+Thread-9 8
+Thread-7 6
+1.0038871765136719</code></pre><pre><code>def test_use_pool():
+    t1 = time.time()
+    n_list = range(100)
+    pool = Pool(10)
+    pool.map(run, n_list)
+    pool.close()
+    pool.join()
+    print(time.time() - t1)</code></pre><p>达到了线程的复用</p>
+<h3 id="Python进程"><a href="#Python进程" class="headerlink" title="Python进程"></a>Python进程</h3><p>进程的实现</p>
+<pre><code>import time
+from multiprocessing import Process
+
+def run(name):
+    &quot;&quot;&quot;
+    name: 进程名称
+    &quot;&quot;&quot;
+    print(&quot;进程名称：{}&quot;.format(name))
+    time.sleep(5)
+    print(&quot;进程完成&quot;)
+
+if __name__ == &#39;__main__&#39;:
+    p = Process(target=run, args=(&#39;my process&#39;,))
+    p.start()
+    p.join()
+
+##############################################
+进程名称：my process
+进程完成</code></pre><p>使用过os模块下的<code>os.getpid()</code>可以得到当前进程的ID</p>
+<p>进程间的通信</p>
+<p>多进程中的锁：</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 ziyedy@qq.com </span>
@@ -643,12 +864,12 @@ hexo d</code></pre><p>同时应该注意的是，这样做会使得源文件开�
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>Hexo实现多台机器同时编写博客</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">750</span></p>
+    <p><span class="copy-title">文章标题:</span>post</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.3k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="子夜">子夜</a></p>
-    <p><span class="copy-title">发布时间:</span>2020-03-13, 11:05:41</p>
-    <p><span class="copy-title">最后更新:</span>2020-03-13, 14:55:00</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/page/hexo3.html" title="Hexo实现多台机器同时编写博客">http://www.ziyedy.top/page/hexo3.html</a>
+    <p><span class="copy-title">发布时间:</span>2020-05-18, 09:59:00</p>
+    <p><span class="copy-title">最后更新:</span>2020-05-26, 23:45:28</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/page/null.html" title="post">http://www.ziyedy.top/page/null.html</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>

@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Hexo实现多台机器同时编写博客 | 子夜</title>
-  <meta name="keywords" content=" hexo , git ">
-  <meta name="description" content="Hexo实现多台机器同时编写博客 | 子夜">
+  <title>pygame基础 | 子夜</title>
+  <meta name="keywords" content=" pygame ">
+  <meta name="description" content="pygame基础 | 子夜">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="装饰器用于拓展原来函数功能的一种函数，返回函数的函数，在不更改原函数代码的前提下给函数增加新的功能（易于代码重用） # 装饰器的常用写法 # 输入函数，在函数内部定义返回函数 def decoratre(func):     def wrapper():         print(&#39;start&#39;)         func()         print((&#39;end&amp;#3">
 <meta property="og:type" content="article">
@@ -544,9 +544,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-Hexo实现多台机器同时编写博客" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-pygame基础" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Hexo实现多台机器同时编写博客</h1>
+        <h1 class="article-title">pygame基础</h1>
     
     <div class="article-meta">
         
@@ -554,30 +554,28 @@
         
         <span class="book">
             
-                <a  data-rel="记录">记录</a>/
+                <a  data-rel="Python">Python</a>/
             
-                <a  data-rel="hexo">hexo</a>
+                <a  data-rel="pygame">pygame</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a class="color5">hexo</a>
-            
-            <a class="color4">git</a>
+            <a class="color2">pygame</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-03-13 14:55:00'>2020-03-13 11:05</time>
+        创建时间:<time class="date" title='更新时间: 2020-05-31 20:50:07'>2020-05-15 16:11</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:750</span>
+        <span>字数:597</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -596,7 +594,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建分支"><span class="toc-text">创建分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分支连接本地文件"><span class="toc-text">分支连接本地文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他问题"><span class="toc-text">其他问题</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本流程"><span class="toc-text">基本流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#绘制图片"><span class="toc-text">绘制图片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#绘制文字"><span class="toc-text">绘制文字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#游戏音效"><span class="toc-text">游戏音效</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#动画切换"><span class="toc-text">动画切换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#精灵及精灵组"><span class="toc-text">精灵及精灵组</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -612,29 +610,91 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>正常情况下，只在一台电脑上使用hexo编写部署博客非常方便，但多台电脑进行部署就需要云盘等媒介进行md文件的传输了。我的电脑是双系统，因此如果要部署的话还得重启，比较麻烦，因此干脆实现一个博客多设备管理，方便快捷。</p>
-<p>实现多设备的博客管理关键就是要实现本地hexo源文件的多台设备传输与修改，首先想到的当然是使用git了。本地的<code>_config.yml</code>文件中默认使用<code>hexo d</code>进行部署是部署在GitHub相应项目（也就是以用户名命名的博客项目）的<code>master</code>分支上的，因此，只需要在同一项目上新建一个存储源文件的分支即可解决问题。</p>
-<h3 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h3><p>在已经作为博客本地文件的地方打开终端输入以下命令</p>
-<pre><code>git branch &lt;hexo&gt;    //hexo处为你想建立的分支的名字</code></pre><p>之后在github中博客仓库的<code>-&gt;Settings-&gt;Branches-&gt;Default branch</code>下将默认分支改为新建的分支，并保存更新。</p>
-<h3 id="分支连接本地文件"><a href="#分支连接本地文件" class="headerlink" title="分支连接本地文件"></a>分支连接本地文件</h3><ol>
-<li><p>最简单且有效的方法就是将新建的<code>hexo</code>分支<code>git clone</code>到本地文件夹内，输入<code>git branch</code>即可看到当前分支为<code>hexo</code>。</p>
-</li>
-<li><p>再将之前新建的博客文件复制到以上文件夹中，注意将<code>themes</code>文件中隐藏的<code>.git</code>文件等与git有关的文件删除，否则主题文件会默认为是整个项目的一个子模块而不被上传到你的GitHub。</p>
-</li>
-<li><p>将之前部署生成的<code>.deploy_git</code>文件删除，否则由于之前删去了部分原来的git信息部署时有可能会发生错误。</p>
-</li>
-<li><p>输入如下命令你的博客的源码分支hexo就建立好了。</p>
+        <h3 id="基本流程"><a href="#基本流程" class="headerlink" title="基本流程"></a>基本流程</h3><ol>
+<li>引入相关的包</li>
+<li>初始化，pygame.init()</li>
+<li>得到屏幕对象，<code>screen = pygame.display.set_mode((320, 240))</code></li>
+<li>游戏主循环<ul>
+<li>处理游戏事件</li>
+<li>更新游戏状态</li>
+<li>屏幕重新绘制</li>
+</ul>
 </li>
 </ol>
-<pre><code>git add .
-git commit -m &quot;first push&quot;
-git push origin hexo</code></pre><ol start="5">
-<li>想在另一台电脑上写博客时。只要确保该电脑安装了hexo所需要的各种环境（再在GitHub上加入ssh密匙），只需要在本地建立一个文件夹将博客源文件<code>clone</code>下来即可。而每次更新上传后，在另一台计算机上只需每次使用<code>git pull</code>更新一下源文件即可十分方便。</li>
-</ol>
-<h3 id="其他问题"><a href="#其他问题" class="headerlink" title="其他问题"></a>其他问题</h3><p>多机同时管理博客其实就是在一个github仓库的<code>master</code>分支存储网页静态文件，在<code>hexo</code>分支存储博客源文件。由于hexo进行部署时默认是在<code>master</code>分支上部署（<code>_config.yml</code>文件中可见），因此部署博客时还是输入以下代码即可</p>
-<pre><code>hexo g
-hexo d</code></pre><p>同时应该注意的是，这样做会使得源文件开源，不想开源的话可以在github仓库中设置该仓库为private。这样该仓库就不可见但gitpage的功能也使用不了了，所以要怎样做仁者见仁智者见智吧。</p>
+<p>基本代码框架</p>
+<pre><code>import pygame
+# 初始化
+pygame.init()
+# 获取屏幕对象
+screen = pygame.display.set_mode((width, height))
+# 游戏主循环
+while True:
+    # 处理游戏事件
+    for event in pygame.event.get():
+        pass
+    # 更新游戏状态（游戏逻辑）
 
+    # 重新绘制屏幕</code></pre><h3 id="绘制图片"><a href="#绘制图片" class="headerlink" title="绘制图片"></a>绘制图片</h3><pre><code># 加载图片
+ball = pygame.image.load(&#39;assets/images/background.png&#39;)
+
+# 图片绘制
+    screen.blit(ball, (10, 10))
+    pygame.display.flip()</code></pre><p>绘制其他模块自带的图形</p>
+<pre><code>red = pygame.Color(255, 0, 0)
+# 画线
+pygame.draw.line(screen, red, (10,10), (200, 200),10)
+# 画矩形
+pygame.draw.rect(screen,red,(10,20,200,300),10)
+# 画圆
+pygame.draw.circle(screen, red, (100, 100),50,5)
+</code></pre><h3 id="绘制文字"><a href="#绘制文字" class="headerlink" title="绘制文字"></a>绘制文字</h3><p>可以使用系统默认的字体进行加载，也可以在项目中使用ttf文件作为资源进行加载。</p>
+<pre><code># 加载字体（使用系统默认字体进行加载）
+red = pygame.Color(255, 0, 0)
+fonts = pygame.font.SysFont(&#39;宋体&#39;, 40)
+text = fonts.render(&#39;Scores:&#39;, True, red)
+
+    screen.blit(text, (20, 20))
+    pygame.display.flip()</code></pre><p>加载项目中所带的ttf文件</p>
+<pre><code>fonts = pygame.font.Font(&#39;*.ttf&#39;, 40)</code></pre><h3 id="游戏音效"><a href="#游戏音效" class="headerlink" title="游戏音效"></a>游戏音效</h3><pre><code># 加载音乐
+bgm = pygame.mixer_music.load(&#39;assets/sounds/game_bg_music.mp3&#39;)
+# 循环播放
+pygame.mixer_music.play(-1)</code></pre><p>设置音量大小</p>
+<pre><code>pygame.mixer_music.set_volume(0.1) 输入值为（0，1）</code></pre><h3 id="动画切换"><a href="#动画切换" class="headerlink" title="动画切换"></a>动画切换</h3><p>两张图片的切换</p>
+<p>思路：通过设置帧率进行切换，<code>pygame.time.Clock</code></p>
+<pre><code>import sys, pygame
+# 初始化
+pygame.init()
+# 屏幕对象
+screen = pygame.display.set_mode((320, 800))
+
+image1 = pygame.image.load(&#39;assets/images/hero1.png&#39;)
+image2 = pygame.image.load(&#39;assets/images/hero2.png&#39;)
+count = 0
+clock = pygame.time.Clock()
+
+# 游戏主循环
+while True:
+
+    count += 1
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+    screen.fill(pygame.Color(255, 255, 255))
+    # 每秒60次
+    clock.tick(60)
+    if count % 5 == 0:
+        screen.blit(image1, (20, 20))
+    else:
+        screen.blit(image2, (20, 20))
+
+    pygame.display.flip()</code></pre><h3 id="精灵及精灵组"><a href="#精灵及精灵组" class="headerlink" title="精灵及精灵组"></a>精灵及精灵组</h3><p><strong>精灵</strong>：一个个小图片，一种可以在屏幕上移动的图形对象，并且可以和其他图形对象交互。可以使用pygame绘制，也可以是资源图片。</p>
+<p><strong>精灵组</strong>：是一个容器，用于管理组内精灵的绘制与更新</p>
+<p><strong>碰撞检测</strong>：检测两个精灵有没有重叠的部分</p>
+<pre><code># 输入两个精灵，输出为布尔值
+res = pygame.sprite.collide_rect(sprite1, sprite2)
+# 指定碰撞精度
+res = pygame.sprite.collide_rect_ratio(0.5)(sprite1, sprite2)</code></pre>
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 ziyedy@qq.com </span>
     </div>
@@ -643,12 +703,12 @@ hexo d</code></pre><p>同时应该注意的是，这样做会使得源文件开�
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>Hexo实现多台机器同时编写博客</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">750</span></p>
+    <p><span class="copy-title">文章标题:</span>pygame基础</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">597</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="子夜">子夜</a></p>
-    <p><span class="copy-title">发布时间:</span>2020-03-13, 11:05:41</p>
-    <p><span class="copy-title">最后更新:</span>2020-03-13, 14:55:00</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/page/hexo3.html" title="Hexo实现多台机器同时编写博客">http://www.ziyedy.top/page/hexo3.html</a>
+    <p><span class="copy-title">发布时间:</span>2020-05-15, 16:11:20</p>
+    <p><span class="copy-title">最后更新:</span>2020-05-31, 20:50:07</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/page/pygame1.html" title="pygame基础">http://www.ziyedy.top/page/pygame1.html</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
