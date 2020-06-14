@@ -66,7 +66,6 @@ pygame.draw.line(screen, red, (10,10), (200, 200),10)
 pygame.draw.rect(screen,red,(10,20,200,300),10)
 # 画圆
 pygame.draw.circle(screen, red, (100, 100),50,5)
-
 ```
 
 
@@ -81,8 +80,9 @@ red = pygame.Color(255, 0, 0)
 fonts = pygame.font.SysFont('宋体', 40)
 text = fonts.render('Scores:', True, red)
 
-	screen.blit(text, (20, 20))
-    pygame.display.flip()
+# 写于游戏主循环
+screen.blit(text, (20, 20))
+pygame.display.flip()
 ```
 
 加载项目中所带的ttf文件
@@ -165,4 +165,3 @@ res = pygame.sprite.collide_rect(sprite1, sprite2)
 # 指定碰撞精度
 res = pygame.sprite.collide_rect_ratio(0.5)(sprite1, sprite2)
 ```
-

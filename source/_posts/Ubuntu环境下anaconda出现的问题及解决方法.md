@@ -4,7 +4,6 @@ date: 2020-04-22 00:06:07
 tags:
     - Python
 categories:
-    - Python
 	- 问题解决
 fileName: ubuntu_anaconda_problem
 ---

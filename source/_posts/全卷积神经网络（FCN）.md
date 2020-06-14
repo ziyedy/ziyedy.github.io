@@ -6,8 +6,7 @@ tags:
 	- 语义分割
 categories:
 	- 论文笔记
-fileName:	
-	- FCN
+fileName: FCN
 ---
 
 Fully Convolutional Networks for Semantic Segmentation	（2015 CVPR）
