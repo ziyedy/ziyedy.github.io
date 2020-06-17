@@ -205,8 +205,6 @@ if __name__ == '__main__':
 
 
 
-
-
 ### 生成器
 
 ```
@@ -214,4 +212,3 @@ def square():
     for i in range(5):
         yield i ** 2
 ```
-

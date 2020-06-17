@@ -1,5 +1,5 @@
 ---
-title: 4、Python文件读写
+title: 4、Python模块与文件读写
 date: 2020-05-10 21:03:43
 tags:
 categories:
@@ -8,21 +8,21 @@ categories:
 fileName: python4
 ---
 
-模块属性
+### 模块属性
 
 dir——列出对象的所有属性和方法
 
 help——查看类、方法的帮助信息
 
-__name___ ——模块的名称
+\__name__ ——模块的名称
 
-file——文件全路径
-
-
+\__file__ ——文件全路径
 
 
 
-文件读写
+
+
+### 文件读写
 
 with 上下文管理器（到达语句末尾，将自动关闭文件）
 
