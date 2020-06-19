@@ -1,9 +1,10 @@
 ---
-title: post
+title: Git出现的报错合集
 date: 2020-06-15 23:31:46
 tags:
 categories:
-fileName:
+	- 问题处理
+fileName: git_error
 ---
 
 

@@ -3,7 +3,8 @@ title: Python操作MySQL数据库
 date: 2020-06-15 15:37:28
 tags:
 categories:
-fileName:
+	- Python
+fileName: python_mysql
 ---
 
 123
