@@ -17,12 +17,12 @@ fileName: python1
 'a"s hhh'
 ```
 
-2、 字符串的一些基本操作（拼接、搜索、替换）
+2、 字符串的一些基本操作（拼接、搜索、替换），其中**替换操作必须要将str赋给一个新的变量**
 ```
 str = str1 + str2	# 拼接字符串（直接使用 + 进行操作）
 len(str) # 获取长度
 str.find(string) # 返回搜索到的第一个index，没搜索到则返回-1
-str.replace('A', 'B') # A替换B
+str = str.replace('A', 'B') # A替换B
 ```
 
 3、 格式化字符串（使用.format语句），使用{}占位符进行
