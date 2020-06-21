@@ -1,5 +1,5 @@
 ---
-title: 1、JS内置对象
+title: 1、JS内置对象与基本语法
 date: 2020-06-05 20:18:08
 tags:
 	- 前端
@@ -86,6 +86,24 @@ str.toLowerCase()
 ```
 
 
+
+
+
+### debug方法
+
+JavaScript程序中添加断点，使用debugger。示例如下：
+
+```
+<script>
+    var a = [1,2,3,4,5];
+    for(i=0;i<5;i++){
+        console.log(a[i]);
+        debugger;
+    }
+</script>
+```
+
+刷新Google页面即可进行debug
 
 
 

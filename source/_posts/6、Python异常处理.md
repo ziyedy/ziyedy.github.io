@@ -72,7 +72,7 @@ unsupported operand type(s) for /: 'int' and 'str'
 
 
 
-处理必须处理的语句
+处理必须处理的语句（finally中的语句不管有没有问题都会执行）
 
 `try except finally`语句
 
@@ -97,7 +97,9 @@ unsupported operand type(s) for /: 'int' and 'str'
 
 ### 自定义异常和抛出异常
 
-通过继承Exception类来定义异常，通过使用raise关键字来抛出异常。
+通过继承**Exception类**来定义异常，通过使用**raise**关键字来抛出异常。
+
+1、**自定义异常**。通过创建一个继承自Exception类的新的异常类来记录自己的异常
 
 ```
 class test(Exception):
@@ -113,6 +115,4 @@ Traceback (most recent call last):
     raise test('出现了自定义的测试错误')
 __main__.test: 出现了自定义的测试错误
 ```
-
-
 

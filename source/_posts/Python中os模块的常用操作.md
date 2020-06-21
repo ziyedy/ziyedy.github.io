@@ -29,7 +29,7 @@ os.getpid()：获取当前进程ID
 
 ### 目录操作
 
-os.listdir()：列出指定目录下的所有文件和子目录，包括隐藏文件;参数为空,为当前目录。
+**os.listdir(path)**：列出指定目录下的所有文件和子目录，包括隐藏文件；参数为空，为当前目录，返回一个列表。
 
 os.mkdir()：创建一个目录。
 
@@ -37,11 +37,7 @@ os.rmdir()：删除一个空目录，如果该目录中有文件则删除不了�
 
 
 
-os.listdir(path)：得到path下的所有文件，返回一个列表。
-
-
-
-os.rename(src, dst) ：用于重命名文件或目录，从src改为dst。若运行出错会抛出OSError。
+**os.rename(src, dst) **：用于重命名文件或目录，从src改为dst。若运行出错会抛出OSError。
 
 
 
@@ -67,11 +63,11 @@ os.path.basename(path) ：返回文件名
 
 os.path.split(path) ：拆分路径dirname和basename，返回为元组
 
-os.path.splitext('')：将文件名与后缀名分开
+**os.path.splitext('')**：将文件名与后缀名分开
 
 
 
-os.path.join(path, name)：连接目录与文件名或目录
+**os.path.join(path, name)**：连接目录与文件名或目录
 
 示例：
 
