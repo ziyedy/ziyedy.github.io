@@ -6,14 +6,14 @@
   <meta name="keywords" content="">
   <meta name="description" content="3、Python类的使用 | 子夜">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="逻辑库 CREATE DATABASE; 逻辑库名称 SHOW DATABASES; DROP DATABASE 逻辑库名称; USE 逻辑库名称;数据表 CREATE TABLE 数据表(             列名 数据类型 [约束] [COMMENT 注释],             列名 数据类型 [约束] [COMMENT 注释],             )[COMMENT 注释];">
+<meta name="description" content="123 事务机制 事务是一个或多个SQL语句组成的整体，要么全部执行成功，要么全部执行失败 START TRANSACTION SQL语句 [COMMIT | ROLLBACK]导出SQL文件 导出 SQL注入攻击： SQL预编译机制 数据加密 对称加密（DES加密、AES加密） AES加密函数：AES_ENCRYPT(原始数据，密钥字符串) AES解密函数：AES_DECRYPT(加密结果，密钥">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQL的增删改等语句">
-<meta property="og:url" content="http://www.ziyedy.top/page/mysql1.html">
+<meta property="og:title" content="SQL的一些机制">
+<meta property="og:url" content="http://www.ziyedy.top/page/mysql3.html">
 <meta property="og:site_name" content="子夜">
-<meta property="og:description" content="逻辑库 CREATE DATABASE; 逻辑库名称 SHOW DATABASES; DROP DATABASE 逻辑库名称; USE 逻辑库名称;数据表 CREATE TABLE 数据表(             列名 数据类型 [约束] [COMMENT 注释],             列名 数据类型 [约束] [COMMENT 注释],             )[COMMENT 注释];">
-<meta property="article:published_time" content="2020-06-07T01:44:15.000Z">
-<meta property="article:modified_time" content="2020-06-14T14:34:16.917Z">
+<meta property="og:description" content="123 事务机制 事务是一个或多个SQL语句组成的整体，要么全部执行成功，要么全部执行失败 START TRANSACTION SQL语句 [COMMIT | ROLLBACK]导出SQL文件 导出 SQL注入攻击： SQL预编译机制 数据加密 对称加密（DES加密、AES加密） AES加密函数：AES_ENCRYPT(原始数据，密钥字符串) AES解密函数：AES_DECRYPT(加密结果，密钥">
+<meta property="article:published_time" content="2020-06-12T02:39:37.000Z">
+<meta property="article:modified_time" content="2020-06-16T15:28:14.867Z">
 <meta property="article:author" content="子夜">
 <meta property="article:tag" content="数据库">
 <meta name="twitter:card" content="summary">
@@ -127,11 +127,11 @@
 
 
 <ul>
-    <li><div class="all active">全部文章<small>(28)</small></div></li>
+    <li><div class="all active">全部文章<small>(34)</small></div></li>
     
         
             
-            <li><div data-rel="Python"><i class="fold iconfont icon-right"></i>Python<small>(9)</small></div>
+            <li><div data-rel="Python"><i class="fold iconfont icon-right"></i>Python<small>(13)</small></div>
                 
                     <ul class="sub hide">
                         
@@ -139,11 +139,15 @@
                             
                         </li>
                             
-                        <li><div data-rel="基础知识">基础知识<small>(7)</small></div>
+                        <li><div data-rel="基础知识">基础知识<small>(8)</small></div>
                             
                         </li>
                             
                         <li><div data-rel="pygame">pygame<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Django">Django<small>(1)</small></div>
                             
                         </li>
                             
@@ -321,6 +325,18 @@
             
         
     
+        
+            
+            <li><div data-rel="问题处理">问题处理<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
 </ul>
 <div class="left-bottom">
     <div class="menus">
@@ -331,8 +347,8 @@
     </div>
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="28">
-<input type="hidden" id="yelog_site_word_count" value="34.7k">
+<input type="hidden" id="yelog_site_posts_number" value="34">
+<input type="hidden" id="yelog_site_word_count" value="38.7k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -553,14 +569,6 @@
             <span class="post-date" title="2020-05-08 15:20:53">2020/05/08</span>
         </a>
         
-        <a  class="前端 JS "
-           href="/page/javascript1.html"
-           data-tag="前端"
-           data-author="" >
-            <span class="post-title" title="1、JS内置对象">1、JS内置对象</span>
-            <span class="post-date" title="2020-06-05 20:18:08">2020/06/05</span>
-        </a>
-        
         <a  class="Python 基础知识 "
            href="/page/python3.html"
            data-tag=""
@@ -575,14 +583,6 @@
            data-author="" >
             <span class="post-title" title="5、Python装饰器、迭代器、生成器">5、Python装饰器、迭代器、生成器</span>
             <span class="post-date" title="2020-05-13 14:25:10">2020/05/13</span>
-        </a>
-        
-        <a  class="Python 基础知识 "
-           href="/page/python4.html"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title="4、Python文件读写">4、Python文件读写</span>
-            <span class="post-date" title="2020-05-10 21:03:43">2020/05/10</span>
         </a>
         
         <a  class="Python 基础知识 "
@@ -681,6 +681,70 @@
             <span class="post-date" title="2020-04-22 00:06:07">2020/04/22</span>
         </a>
         
+        <a  class=""
+           href="/page/javascript2.html"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="2、DOM节点操作">2、DOM节点操作</span>
+            <span class="post-date" title="2020-06-21 14:38:46">2020/06/21</span>
+        </a>
+        
+        <a  class="Python 基础知识 "
+           href="/page/python8.html"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="8、Python的一些语言特性与机制">8、Python的一些语言特性与机制</span>
+            <span class="post-date" title="2020-06-19 15:01:02">2020/06/19</span>
+        </a>
+        
+        <a  class="Python 基础知识 "
+           href="/page/python4.html"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="4、Python模块与文件读写">4、Python模块与文件读写</span>
+            <span class="post-date" title="2020-05-10 21:03:43">2020/05/10</span>
+        </a>
+        
+        <a  class="问题处理 "
+           href="/page/git_error.html"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Git出现的报错合集">Git出现的报错合集</span>
+            <span class="post-date" title="2020-06-15 23:31:46">2020/06/15</span>
+        </a>
+        
+        <a  class="前端 JS "
+           href="/page/javascript1.html"
+           data-tag="前端"
+           data-author="" >
+            <span class="post-title" title="1、JS内置对象与基本语法">1、JS内置对象与基本语法</span>
+            <span class="post-date" title="2020-06-05 20:18:08">2020/06/05</span>
+        </a>
+        
+        <a  class="Python Django "
+           href="/page/django1.html"
+           data-tag="Python"
+           data-author="" >
+            <span class="post-title" title="1、Django基础内容">1、Django基础内容</span>
+            <span class="post-date" title="2020-06-19 10:46:18">2020/06/19</span>
+        </a>
+        
+        <a  class="Python "
+           href="/page/python_mysql.html"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Python操作MySQL数据库">Python操作MySQL数据库</span>
+            <span class="post-date" title="2020-06-15 15:37:28">2020/06/15</span>
+        </a>
+        
+        <a  class="Python "
+           href="/page/Python_os1.html"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Python中os模块的常用操作">Python中os模块的常用操作</span>
+            <span class="post-date" title="2020-06-20 09:41:07">2020/06/20</span>
+        </a>
+        
     </nav>
 </div>
     </div>
@@ -713,12 +777,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-05-13 23:09:50'>2020-05-08 15:40</time>
+        创建时间:<time class="date" title='更新时间: 2020-06-16 23:40:12'>2020-05-08 15:40</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:593</span>
+        <span>字数:965</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -737,7 +801,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#调用父类方法"><span class="toc-text">调用父类方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#property"><span class="toc-text">@property</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#slots"><span class="toc-text">__slots__</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一些基本内容"><span class="toc-text">一些基本内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调用父类方法"><span class="toc-text">调用父类方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#property"><span class="toc-text">@property</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#slots-lt-限制类中的属性-gt"><span class="toc-text">_slots_&lt;限制类中的属性&gt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Python类中的方法"><span class="toc-text">Python类中的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#staticmethod，静态方法"><span class="toc-text">@staticmethod，静态方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#classmethod，类方法"><span class="toc-text">@classmethod，类方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#动态添加实例方法"><span class="toc-text">动态添加实例方法</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -753,10 +817,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Python的析构函数<code>__del__(self)</code>。默认会直接进行操作。</p>
-<p><code>__name</code>私有变量</p>
+        <h3 id="一些基本内容"><a href="#一些基本内容" class="headerlink" title="一些基本内容"></a>一些基本内容</h3><p>_name：单前置下划线，私有化属性或方法，类对象和子类可以访问，from somemodule import *禁止导入</p>
+<p>__name：双前置下划线，私有化属性或方法，无法在外部直接访问（名字重整所以访问不到）</p>
+<p>__name__：系统定义的名字，自己不要创建</p>
+<p>Python的析构函数<code>__del__(self)</code>。默认会直接进行操作。</p>
 <pre><code># 判断是否为子类
-issubclass(cat, animal)</code></pre><h4 id="调用父类方法"><a href="#调用父类方法" class="headerlink" title="调用父类方法"></a>调用父类方法</h4><p><code>super()</code>方法</p>
+issubclass(cat, animal)</code></pre><h3 id="调用父类方法"><a href="#调用父类方法" class="headerlink" title="调用父类方法"></a>调用父类方法</h3><p><code>super()</code>方法</p>
 <p>若方法重名，先继承的优先调用</p>
 <pre><code>class A():
     def test(self):
@@ -809,8 +875,8 @@ if __name__ == &#39;__main__&#39;:
 ​```
 pig1
 pig2
-​```</code></pre><h4 id="slots"><a href="#slots" class="headerlink" title="__slots__"></a><code>__slots__</code></h4><p>为指定的类设置一个静态属性列表，为属性很少的类节约内存空间，同时提供更快的属性访问速度</p>
-<p>使用<code>__slots__</code>后不允许给类添加新的属性与方法（对其子类也适用，子类新加的会拼接到后面）</p>
+​```</code></pre><h3 id="slots-lt-限制类中的属性-gt"><a href="#slots-lt-限制类中的属性-gt" class="headerlink" title="_slots_&lt;限制类中的属性&gt;"></a>_<em>slots_</em>&lt;限制类中的属性&gt;</h3><p>为指定的类设置一个静态属性列表，为属性很少的类节约内存空间，同时提供更快的属性访问速度</p>
+<p>使用<code>__slots__</code>后<strong>不允许给类添加新的属性与方法</strong>（对其子类也适用，子类新加的会拼接到后面）。示例如下：</p>
 <pre><code># 不加__slots__
 class B():
     pass
@@ -820,7 +886,7 @@ b.gg = 1
 print(b.gg)
 
 ###############################
-# 1</code></pre><pre><code># 加上__slots__
+1</code></pre><pre><code># 加上__slots__
 class A():
     __slots__ = (&#39;name&#39;)
     def __init__(self, name):
@@ -835,9 +901,14 @@ if __name__ == &#39;__main__&#39;:
 Traceback (most recent call last):
   File &quot;C:/Users/lenovo/Desktop/python学习/decorate.py&quot;, line 13, in &lt;module&gt;
     a.gg = 1
-AttributeError: &#39;A&#39; object has no attribute &#39;gg&#39;</code></pre><p>可见，使用<code>__slots__</code>指定了类的属性后就无法对实例添加属性了</p>
-<p><code>@staticmethod</code></p>
-<p>静态方法，可以直接通过类名对其进行调用（类的实例也可以调用 ）</p>
+AttributeError: &#39;A&#39; object has no attribute &#39;gg&#39;</code></pre><p>可见，使用__slots__指定了类的属性后就无法对实例添加属性了</p>
+<h3 id="Python类中的方法"><a href="#Python类中的方法" class="headerlink" title="Python类中的方法"></a>Python类中的方法</h3><p>Python类中的方法主要可以分为以下三种：</p>
+<ul>
+<li>实例方法：需要绑定要一个对象上，第一个参数默认使用self，会把对象作为第一个参数传递进来</li>
+<li>静态方法：使用装饰器@staticmethod进行定义，类和对象都可以调用，不需要默认参数</li>
+<li>类方法：使用装饰器@classmethod进行定义，类和对象都可以调用，第一个参数默认使用cls，会把类作为第一个参数传递进来</li>
+</ul>
+<h4 id="staticmethod，静态方法"><a href="#staticmethod，静态方法" class="headerlink" title="@staticmethod，静态方法"></a>@staticmethod，静态方法</h4><p>静态方法，可以直接通过类名对其进行调用（类的实例也可以调用 ）。相当于变为了”类的方法”。&lt;类和对象都可以调用，不需要默认参数（如self等）&gt;</p>
 <pre><code>class Pig():
     @staticmethod
     def func():
@@ -846,8 +917,7 @@ AttributeError: &#39;A&#39; object has no attribute &#39;gg&#39;</code></pre><p>
 Pig()
 
 #############################################
-聪明的猪</code></pre><p><code>@classmethod</code></p>
-<p>用于表示类的方法，可以不实例化调用类的属性和方法。有一个<code>cls</code>参数用于表示类本身。</p>
+聪明的猪</code></pre><h4 id="classmethod，类方法"><a href="#classmethod，类方法" class="headerlink" title="@classmethod，类方法"></a>@classmethod，类方法</h4><p>用于表示类的方法，可以<strong>不实例化调用类的属性和方法</strong>。有一个<code>cls</code>参数用于表示类本身。&lt;类和对象都可以调用，第一个参数默认使用cls，会把类作为第一个参数传递进来&gt;</p>
 <pre><code>class A():
     def test(self):
         print(&quot;test&quot;)
@@ -859,7 +929,15 @@ Pig()
 A.gg()
 
 ############################################
-test</code></pre>
+test</code></pre><h4 id="动态添加实例方法"><a href="#动态添加实例方法" class="headerlink" title="动态添加实例方法"></a>动态添加实例方法</h4><pre><code>class A():
+    pass
+
+def func(self):
+    pass
+
+a = A()
+a.func = types.MethodType(func, a)    # 给实例添加方法</code></pre><p>如上，可以使用types.MethodType的方式给类的实例添加其实例方法，但该对象的另一个实例则不具备该方法。</p>
+
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 ziyedy@qq.com </span>
     </div>
@@ -869,10 +947,10 @@ test</code></pre>
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>3、Python类的使用</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">593</span></p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">965</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="子夜">子夜</a></p>
     <p><span class="copy-title">发布时间:</span>2020-05-08, 15:40:45</p>
-    <p><span class="copy-title">最后更新:</span>2020-05-13, 23:09:50</p>
+    <p><span class="copy-title">最后更新:</span>2020-06-16, 23:40:12</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/page/python3.html" title="3、Python类的使用">http://www.ziyedy.top/page/python3.html</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
