@@ -6,14 +6,14 @@
   <meta name="keywords" content=" python ">
   <meta name="description" content="1、Python基本数据类型 | 子夜">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="逻辑库 CREATE DATABASE; 逻辑库名称 SHOW DATABASES; DROP DATABASE 逻辑库名称; USE 逻辑库名称;数据表 CREATE TABLE 数据表(             列名 数据类型 [约束] [COMMENT 注释],             列名 数据类型 [约束] [COMMENT 注释],             )[COMMENT 注释];">
+<meta name="description" content="123 事务机制 事务是一个或多个SQL语句组成的整体，要么全部执行成功，要么全部执行失败 START TRANSACTION SQL语句 [COMMIT | ROLLBACK]导出SQL文件 导出 SQL注入攻击： SQL预编译机制 数据加密 对称加密（DES加密、AES加密） AES加密函数：AES_ENCRYPT(原始数据，密钥字符串) AES解密函数：AES_DECRYPT(加密结果，密钥">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQL的增删改等语句">
-<meta property="og:url" content="http://www.ziyedy.top/page/mysql1.html">
+<meta property="og:title" content="SQL的一些机制">
+<meta property="og:url" content="http://www.ziyedy.top/page/mysql3.html">
 <meta property="og:site_name" content="子夜">
-<meta property="og:description" content="逻辑库 CREATE DATABASE; 逻辑库名称 SHOW DATABASES; DROP DATABASE 逻辑库名称; USE 逻辑库名称;数据表 CREATE TABLE 数据表(             列名 数据类型 [约束] [COMMENT 注释],             列名 数据类型 [约束] [COMMENT 注释],             )[COMMENT 注释];">
-<meta property="article:published_time" content="2020-06-07T01:44:15.000Z">
-<meta property="article:modified_time" content="2020-06-14T14:34:16.917Z">
+<meta property="og:description" content="123 事务机制 事务是一个或多个SQL语句组成的整体，要么全部执行成功，要么全部执行失败 START TRANSACTION SQL语句 [COMMIT | ROLLBACK]导出SQL文件 导出 SQL注入攻击： SQL预编译机制 数据加密 对称加密（DES加密、AES加密） AES加密函数：AES_ENCRYPT(原始数据，密钥字符串) AES解密函数：AES_DECRYPT(加密结果，密钥">
+<meta property="article:published_time" content="2020-06-12T02:39:37.000Z">
+<meta property="article:modified_time" content="2020-06-16T15:28:14.867Z">
 <meta property="article:author" content="子夜">
 <meta property="article:tag" content="数据库">
 <meta name="twitter:card" content="summary">
@@ -127,11 +127,11 @@
 
 
 <ul>
-    <li><div class="all active">全部文章<small>(28)</small></div></li>
+    <li><div class="all active">全部文章<small>(34)</small></div></li>
     
         
             
-            <li><div data-rel="Python"><i class="fold iconfont icon-right"></i>Python<small>(9)</small></div>
+            <li><div data-rel="Python"><i class="fold iconfont icon-right"></i>Python<small>(13)</small></div>
                 
                     <ul class="sub hide">
                         
@@ -139,11 +139,15 @@
                             
                         </li>
                             
-                        <li><div data-rel="基础知识">基础知识<small>(7)</small></div>
+                        <li><div data-rel="基础知识">基础知识<small>(8)</small></div>
                             
                         </li>
                             
                         <li><div data-rel="pygame">pygame<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Django">Django<small>(1)</small></div>
                             
                         </li>
                             
@@ -321,6 +325,18 @@
             
         
     
+        
+            
+            <li><div data-rel="问题处理">问题处理<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
 </ul>
 <div class="left-bottom">
     <div class="menus">
@@ -331,8 +347,8 @@
     </div>
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="28">
-<input type="hidden" id="yelog_site_word_count" value="34.7k">
+<input type="hidden" id="yelog_site_posts_number" value="34">
+<input type="hidden" id="yelog_site_word_count" value="38.7k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -553,14 +569,6 @@
             <span class="post-date" title="2020-05-08 15:20:53">2020/05/08</span>
         </a>
         
-        <a  class="前端 JS "
-           href="/page/javascript1.html"
-           data-tag="前端"
-           data-author="" >
-            <span class="post-title" title="1、JS内置对象">1、JS内置对象</span>
-            <span class="post-date" title="2020-06-05 20:18:08">2020/06/05</span>
-        </a>
-        
         <a  class="Python 基础知识 "
            href="/page/python3.html"
            data-tag=""
@@ -575,14 +583,6 @@
            data-author="" >
             <span class="post-title" title="5、Python装饰器、迭代器、生成器">5、Python装饰器、迭代器、生成器</span>
             <span class="post-date" title="2020-05-13 14:25:10">2020/05/13</span>
-        </a>
-        
-        <a  class="Python 基础知识 "
-           href="/page/python4.html"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title="4、Python文件读写">4、Python文件读写</span>
-            <span class="post-date" title="2020-05-10 21:03:43">2020/05/10</span>
         </a>
         
         <a  class="Python 基础知识 "
@@ -681,6 +681,70 @@
             <span class="post-date" title="2020-04-22 00:06:07">2020/04/22</span>
         </a>
         
+        <a  class=""
+           href="/page/javascript2.html"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="2、DOM节点操作">2、DOM节点操作</span>
+            <span class="post-date" title="2020-06-21 14:38:46">2020/06/21</span>
+        </a>
+        
+        <a  class="Python 基础知识 "
+           href="/page/python8.html"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="8、Python的一些语言特性与机制">8、Python的一些语言特性与机制</span>
+            <span class="post-date" title="2020-06-19 15:01:02">2020/06/19</span>
+        </a>
+        
+        <a  class="Python 基础知识 "
+           href="/page/python4.html"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="4、Python模块与文件读写">4、Python模块与文件读写</span>
+            <span class="post-date" title="2020-05-10 21:03:43">2020/05/10</span>
+        </a>
+        
+        <a  class="问题处理 "
+           href="/page/git_error.html"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Git出现的报错合集">Git出现的报错合集</span>
+            <span class="post-date" title="2020-06-15 23:31:46">2020/06/15</span>
+        </a>
+        
+        <a  class="前端 JS "
+           href="/page/javascript1.html"
+           data-tag="前端"
+           data-author="" >
+            <span class="post-title" title="1、JS内置对象与基本语法">1、JS内置对象与基本语法</span>
+            <span class="post-date" title="2020-06-05 20:18:08">2020/06/05</span>
+        </a>
+        
+        <a  class="Python Django "
+           href="/page/django1.html"
+           data-tag="Python"
+           data-author="" >
+            <span class="post-title" title="1、Django基础内容">1、Django基础内容</span>
+            <span class="post-date" title="2020-06-19 10:46:18">2020/06/19</span>
+        </a>
+        
+        <a  class="Python "
+           href="/page/python_mysql.html"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Python操作MySQL数据库">Python操作MySQL数据库</span>
+            <span class="post-date" title="2020-06-15 15:37:28">2020/06/15</span>
+        </a>
+        
+        <a  class="Python "
+           href="/page/Python_os1.html"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Python中os模块的常用操作">Python中os模块的常用操作</span>
+            <span class="post-date" title="2020-06-20 09:41:07">2020/06/20</span>
+        </a>
+        
     </nav>
 </div>
     </div>
@@ -719,12 +783,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-05-13 23:10:16'>2020-05-08 12:46</time>
+        创建时间:<time class="date" title='更新时间: 2020-06-21 00:34:42'>2020-05-08 12:46</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:1.2k</span>
+        <span>字数:1.4k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -743,7 +807,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串"><span class="toc-text">字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#列表（list）"><span class="toc-text">列表（list）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字典（dict）"><span class="toc-text">字典（dict）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建"><span class="toc-text">创建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#取值"><span class="toc-text">取值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#遍历字典"><span class="toc-text">遍历字典</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字典常用操作"><span class="toc-text">字典常用操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#元组（Tuple）"><span class="toc-text">元组（Tuple）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集合（Set）"><span class="toc-text">集合（Set）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#初始化"><span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#集合的常用运算"><span class="toc-text">集合的常用运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#集合间的关系操作"><span class="toc-text">集合间的关系操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用的转换"><span class="toc-text">常用的转换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生成器"><span class="toc-text">生成器</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串"><span class="toc-text">字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#列表（list）"><span class="toc-text">列表（list）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字典（dict）"><span class="toc-text">字典（dict）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#元组（tuple）"><span class="toc-text">元组（tuple）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集合（Set）"><span class="toc-text">集合（Set）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用的转换函数"><span class="toc-text">常用的转换函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生成器"><span class="toc-text">生成器</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -759,12 +823,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>单双引号的应用</p>
-<pre><code># 拼接字符串（直接使用 + 进行操作）
+        <h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>1、 单双引号的应用，即字符串中包含单引号时可以使用双引号进行包含，包含双引号时使用单引号进行包含，如下：</p>
+<pre><code>&quot;a&#39;s hhh&quot;
+&#39;a&quot;s hhh&#39;</code></pre><p>2、 字符串的一些基本操作（拼接、搜索、替换），其中<strong>替换操作必须要将str赋给一个新的变量</strong></p>
+<pre><code>str = str1 + str2    # 拼接字符串（直接使用 + 进行操作）
 len(str) # 获取长度
 str.find(string) # 返回搜索到的第一个index，没搜索到则返回-1
-str.replace(&#39;A&#39;, &#39;B&#39;) # A替换B
-</code></pre><p>格式化字符串，使用{}占位符进行</p>
+str = str.replace(&#39;A&#39;, &#39;B&#39;) # A替换B</code></pre><p>3、 格式化字符串（使用.format语句），使用{}占位符进行</p>
 <pre><code>&quot;{} {} gg&quot;.format(&quot;huangkai&quot;,&quot;is&quot;)
 # huangkai is gg
 
@@ -772,43 +837,51 @@ str.replace(&#39;A&#39;, &#39;B&#39;) # A替换B
 &quot;{1} {0} gg&quot;.format(&quot;huangkai&quot;,&quot;is&quot;)
 is huangkai gg
 
-# f形式
+# f形式的格式化字符串
 str1 = &#39;Curry&#39;
 str2 = &#39;James&#39;
 combi = f&#39;{str1} and {str2}, NBA stars&#39;
 
 # 使用别名
-str3 = “gg {s1}， {s2}”。format(s1=str1, s2 str2)</code></pre><h3 id="列表（list）"><a href="#列表（list）" class="headerlink" title="列表（list）"></a>列表（list）</h3><p>在内存中按照顺序存储</p>
-<p>列表反转：</p>
-<pre><code>list.reverse()</code></pre><p>列表排序</p>
-<pre><code>list.sort() # 升序排列
-list.sort(reverse=True) # 降序排列</code></pre><p>列表常用操作</p>
+str3 = “gg {s1}， {s2}”。format(s1=str1, s2 str2)</code></pre><h3 id="列表（list）"><a href="#列表（list）" class="headerlink" title="列表（list）"></a>列表（list）</h3><p>列表在内存中按照顺序存储</p>
+<p>1、 列表反转与排序</p>
+<pre><code>list.reverse()    # 列表反转
+list.sort() # 升序排列
+list.sort(reverse=True) # 降序排列</code></pre><p>2、 列表常用操作</p>
 <pre><code>list.append(new_element) # 在列表末尾添加元素
 list.insert(index, new_element) # 在指定的index处加入一个元素，其后元素全部后移
 list.remove(element) # 删除值为element的元素
 list.pop(index) # 删除索引值为index的元素，无index则删除最后一个元素
-list.clear() # 清空列表</code></pre><p>列表其他操作</p>
-<pre><code>list.extend([e1, e2]) # 将列表追加进list（区别于append）</code></pre><p>列表的复制，想将一个列表赋值给另一个列表必须要使用.copy方法，否则修改其中一个表另一个也会变，如下：</p>
+list.clear() # 清空列表</code></pre><p>4、 列表其他操作（区别于append）</p>
+<pre><code>list.extend([e1, e2]) # 将列表追加进list（区别于append）</code></pre><p>5、 <strong>列表的复制</strong>，想将一个列表赋值给另一个列表必须要使用.copy方法，否则修改其中一个表另一个也会变，如下：</p>
 <pre><code>l1 = [1,2,3,4]
 l2 = l1
 print(id(l1))
 print(id(l2))</code></pre><p>运行结果可以发现l1与l2指向了同一块内存，因此改变l1，l2也会相应改变。而copy()方法会重新创建一个空列表再将原列表的元素放进去。</p>
-<pre><code>l2 = list.copy()</code></pre><h3 id="字典（dict）"><a href="#字典（dict）" class="headerlink" title="字典（dict）"></a>字典（dict）</h3><p>键值对（key-value），可修改。</p>
-<p>散列值<code>hash(data)</code>，字典存储根据哈希值存储</p>
-<h4 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h4><pre><code>dic = dict.fromkeys([&#39;school number&#39;, &#39;bala1&#39;, &#39;bala2&#39;])
+<pre><code>l2 = list.copy()</code></pre><p>6、列表元素直接的对应操作，以相加为例，使用列表生成器如下。其中zip函数为将a、b两个列表中的元素一一组合。</p>
+<pre><code>a = [1,2,3,4]
+b = [1,2,3,4]
+c = [i+j for i, j in zip(a,b)]
+########################################
+[2, 4, 6, 8]</code></pre><h3 id="字典（dict）"><a href="#字典（dict）" class="headerlink" title="字典（dict）"></a>字典（dict）</h3><p>键值对（key-value），可修改。Python中的散列值函数<code>hash(data)</code>，字典存储根据其哈希值存储。</p>
+<p>1、 创建</p>
+<pre><code>dic = dict.fromkeys([&#39;school number&#39;, &#39;bala1&#39;, &#39;bala2&#39;])
 print(dic)
 
 # 输出
-{&#39;school number&#39;: None, &#39;bala1&#39;: None, &#39;bala2&#39;: None}</code></pre><h4 id="取值"><a href="#取值" class="headerlink" title="取值"></a>取值</h4><pre><code># 直接使用key获取value
+{&#39;school number&#39;: None, &#39;bala1&#39;: None, &#39;bala2&#39;: None}</code></pre><p>2、 取值</p>
+<pre><code># 直接使用key获取value
 dic[key]
 # 使用get方法（可以为不存在的key赋默认值）
-dic.get(key)</code></pre><h4 id="遍历字典"><a href="#遍历字典" class="headerlink" title="遍历字典"></a>遍历字典</h4><pre><code># 方案1
+dic.get(key)</code></pre><p>3、 遍历字典</p>
+<pre><code># 方案1
 for key in dic:
     v = dic[key]
 
 # 方案2（返回每一个键值对）
 for key,value in dic.items():
-</code></pre><h4 id="字典常用操作"><a href="#字典常用操作" class="headerlink" title="字典常用操作"></a>字典常用操作</h4><pre><code>dic.update(k1 = new_value1, k2 = new_value2) # 对多个键值进行更新或新增
+</code></pre><p>4、 字典常用操作</p>
+<pre><code>dic.update(k1 = new_value1, k2 = new_value2) # 对多个键值进行更新或新增
 dic,pop(key) # 删除键值为key
 dic.popitem() # 删除最后一个键值对，并返回该键值对的tuple
 dic.clear() # 清空字典
@@ -824,11 +897,13 @@ dic = {&#39;name&#39;:&#39;Curry&#39;,&#39;gg&#39;:&#39;no&#39;}
 s = &quot;姓名:{name},瞎写:{gg}&quot;.format_map(dic)
 print(s)
 # 输出
-姓名:Curry,瞎写:no</code></pre><h3 id="元组（Tuple）"><a href="#元组（Tuple）" class="headerlink" title="元组（Tuple）"></a>元组（Tuple）</h3><p>创建后不允许修改，当列表等可变对象为元组元素时，可以修改该元素的值。</p>
+姓名:Curry,瞎写:no</code></pre><h3 id="元组（tuple）"><a href="#元组（tuple）" class="headerlink" title="元组（tuple）"></a>元组（tuple）</h3><p>创建后不允许修改，当列表等可变对象为元组元素时，可以修改该元素的值。</p>
 <h3 id="集合（Set）"><a href="#集合（Set）" class="headerlink" title="集合（Set）"></a>集合（Set）</h3><p>元素是无序的、可变的、元素不能重复，在内存中是分散保存的（存储方式与字典相似），缺点，浪费内存空间</p>
-<h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><pre><code># 空集合的创建
+<p>1、 初始化</p>
+<pre><code># 空集合的创建
 # 不能使用s = {}，这样默认创建的是字典
-set1 = set()</code></pre><h4 id="集合的常用运算"><a href="#集合的常用运算" class="headerlink" title="集合的常用运算"></a>集合的常用运算</h4><pre><code>set1 = {1,2,3,4,5}
+set1 = set()</code></pre><p>2、 集合的常用运算</p>
+<pre><code>set1 = {1,2,3,4,5}
 set2 = {4,5,6,7,8}
 
 # 交集运算
@@ -854,7 +929,8 @@ print(set3)
 set3 = set1.symmetric_difference(set2)
 print(set3)
 # 输出
-{1, 2, 3, 6, 7, 8}</code></pre><h4 id="集合间的关系操作"><a href="#集合间的关系操作" class="headerlink" title="集合间的关系操作"></a>集合间的关系操作</h4><pre><code># 判断两个集合的元素是否完全相同
+{1, 2, 3, 6, 7, 8}</code></pre><p>3、 集合间的关系操作</p>
+<pre><code># 判断两个集合的元素是否完全相同
 s1 = {1,2,3,4,5}
 s2 = {5,4,3,2,1}
 print(s1 == s2)
@@ -871,24 +947,23 @@ s1 = {1,2,3,4,5}
 s2 = {5,4,3,2}
 print(s1.isdisjoint(s2))
 # 输出
-False
-</code></pre><pre><code># 新增数据
+False</code></pre><pre><code># 新增数据
 set.add(element) # 一次添加一个元素
 set.update(列表或元组) # 一次添加多个元素
 # 删除元素
 set.remove(element) # 删除不存在的元素会报错
-set.discard(element) # 删除不存在的元素会直接忽略</code></pre><h3 id="常用的转换"><a href="#常用的转换" class="headerlink" title="常用的转换"></a>常用的转换</h3><pre><code>list() # 转换为列表
+set.discard(element) # 删除不存在的元素会直接忽略</code></pre><h3 id="常用的转换函数"><a href="#常用的转换函数" class="headerlink" title="常用的转换函数"></a>常用的转换函数</h3><pre><code>list() # 转换为列表
 tuple() # 转换为元组
-join(), str() # 转换为字符串</code></pre><h3 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h3><p>列表生成器，常用形式如下</p>
+join(), str() # 转换为字符串</code></pre><h3 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h3><p>1、 <strong>列表生成器</strong>，常用形式如下</p>
 <p>[数据 循环语句 循环或判断语句]</p>
 <pre><code>l = [i**2 for i in range(10)]
 # [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
 
 l = [i**2 for i in range(10) if i%2 ==0]
-# [0, 4, 16, 36, 64]</code></pre><p>字典生成器</p>
+# [0, 4, 16, 36, 64]</code></pre><p>2、 字典生成器</p>
 <pre><code>list1 = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;]
 dic = {i:list1[i] for i in range(len(list1))}
-# {0: &#39;A&#39;, 1: &#39;B&#39;, 2: &#39;C&#39;}</code></pre><p>集合生成器（跟列表生成式类似）</p>
+# {0: &#39;A&#39;, 1: &#39;B&#39;, 2: &#39;C&#39;}</code></pre><p>3、 集合生成器（跟列表生成式类似）</p>
 <pre><code>set1 = {i for i in range(10)}</code></pre>
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 ziyedy@qq.com </span>
@@ -899,10 +974,10 @@ dic = {i:list1[i] for i in range(len(list1))}
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>1、Python基本数据类型</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">1.2k</span></p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.4k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="子夜">子夜</a></p>
     <p><span class="copy-title">发布时间:</span>2020-05-08, 12:46:26</p>
-    <p><span class="copy-title">最后更新:</span>2020-05-13, 23:10:16</p>
+    <p><span class="copy-title">最后更新:</span>2020-06-21, 00:34:42</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/page/python1.html" title="1、Python基本数据类型">http://www.ziyedy.top/page/python1.html</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。

@@ -6,14 +6,14 @@
   <meta name="keywords" content=" 数据库 ">
   <meta name="description" content="SQL查询语句 | 子夜">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="逻辑库 CREATE DATABASE; 逻辑库名称 SHOW DATABASES; DROP DATABASE 逻辑库名称; USE 逻辑库名称;数据表 CREATE TABLE 数据表(             列名 数据类型 [约束] [COMMENT 注释],             列名 数据类型 [约束] [COMMENT 注释],             )[COMMENT 注释];">
+<meta name="description" content="123 事务机制 事务是一个或多个SQL语句组成的整体，要么全部执行成功，要么全部执行失败 START TRANSACTION SQL语句 [COMMIT | ROLLBACK]导出SQL文件 导出 SQL注入攻击： SQL预编译机制 数据加密 对称加密（DES加密、AES加密） AES加密函数：AES_ENCRYPT(原始数据，密钥字符串) AES解密函数：AES_DECRYPT(加密结果，密钥">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQL的增删改等语句">
-<meta property="og:url" content="http://www.ziyedy.top/page/mysql1.html">
+<meta property="og:title" content="SQL的一些机制">
+<meta property="og:url" content="http://www.ziyedy.top/page/mysql3.html">
 <meta property="og:site_name" content="子夜">
-<meta property="og:description" content="逻辑库 CREATE DATABASE; 逻辑库名称 SHOW DATABASES; DROP DATABASE 逻辑库名称; USE 逻辑库名称;数据表 CREATE TABLE 数据表(             列名 数据类型 [约束] [COMMENT 注释],             列名 数据类型 [约束] [COMMENT 注释],             )[COMMENT 注释];">
-<meta property="article:published_time" content="2020-06-07T01:44:15.000Z">
-<meta property="article:modified_time" content="2020-06-14T14:34:16.917Z">
+<meta property="og:description" content="123 事务机制 事务是一个或多个SQL语句组成的整体，要么全部执行成功，要么全部执行失败 START TRANSACTION SQL语句 [COMMIT | ROLLBACK]导出SQL文件 导出 SQL注入攻击： SQL预编译机制 数据加密 对称加密（DES加密、AES加密） AES加密函数：AES_ENCRYPT(原始数据，密钥字符串) AES解密函数：AES_DECRYPT(加密结果，密钥">
+<meta property="article:published_time" content="2020-06-12T02:39:37.000Z">
+<meta property="article:modified_time" content="2020-06-16T15:28:14.867Z">
 <meta property="article:author" content="子夜">
 <meta property="article:tag" content="数据库">
 <meta name="twitter:card" content="summary">
@@ -127,11 +127,11 @@
 
 
 <ul>
-    <li><div class="all active">全部文章<small>(28)</small></div></li>
+    <li><div class="all active">全部文章<small>(34)</small></div></li>
     
         
             
-            <li><div data-rel="Python"><i class="fold iconfont icon-right"></i>Python<small>(9)</small></div>
+            <li><div data-rel="Python"><i class="fold iconfont icon-right"></i>Python<small>(13)</small></div>
                 
                     <ul class="sub hide">
                         
@@ -139,11 +139,15 @@
                             
                         </li>
                             
-                        <li><div data-rel="基础知识">基础知识<small>(7)</small></div>
+                        <li><div data-rel="基础知识">基础知识<small>(8)</small></div>
                             
                         </li>
                             
                         <li><div data-rel="pygame">pygame<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Django">Django<small>(1)</small></div>
                             
                         </li>
                             
@@ -321,6 +325,18 @@
             
         
     
+        
+            
+            <li><div data-rel="问题处理">问题处理<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
 </ul>
 <div class="left-bottom">
     <div class="menus">
@@ -331,8 +347,8 @@
     </div>
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="28">
-<input type="hidden" id="yelog_site_word_count" value="34.7k">
+<input type="hidden" id="yelog_site_posts_number" value="34">
+<input type="hidden" id="yelog_site_word_count" value="38.7k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -553,14 +569,6 @@
             <span class="post-date" title="2020-05-08 15:20:53">2020/05/08</span>
         </a>
         
-        <a  class="前端 JS "
-           href="/page/javascript1.html"
-           data-tag="前端"
-           data-author="" >
-            <span class="post-title" title="1、JS内置对象">1、JS内置对象</span>
-            <span class="post-date" title="2020-06-05 20:18:08">2020/06/05</span>
-        </a>
-        
         <a  class="Python 基础知识 "
            href="/page/python3.html"
            data-tag=""
@@ -575,14 +583,6 @@
            data-author="" >
             <span class="post-title" title="5、Python装饰器、迭代器、生成器">5、Python装饰器、迭代器、生成器</span>
             <span class="post-date" title="2020-05-13 14:25:10">2020/05/13</span>
-        </a>
-        
-        <a  class="Python 基础知识 "
-           href="/page/python4.html"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title="4、Python文件读写">4、Python文件读写</span>
-            <span class="post-date" title="2020-05-10 21:03:43">2020/05/10</span>
         </a>
         
         <a  class="Python 基础知识 "
@@ -681,6 +681,70 @@
             <span class="post-date" title="2020-04-22 00:06:07">2020/04/22</span>
         </a>
         
+        <a  class=""
+           href="/page/javascript2.html"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="2、DOM节点操作">2、DOM节点操作</span>
+            <span class="post-date" title="2020-06-21 14:38:46">2020/06/21</span>
+        </a>
+        
+        <a  class="Python 基础知识 "
+           href="/page/python8.html"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="8、Python的一些语言特性与机制">8、Python的一些语言特性与机制</span>
+            <span class="post-date" title="2020-06-19 15:01:02">2020/06/19</span>
+        </a>
+        
+        <a  class="Python 基础知识 "
+           href="/page/python4.html"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="4、Python模块与文件读写">4、Python模块与文件读写</span>
+            <span class="post-date" title="2020-05-10 21:03:43">2020/05/10</span>
+        </a>
+        
+        <a  class="问题处理 "
+           href="/page/git_error.html"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Git出现的报错合集">Git出现的报错合集</span>
+            <span class="post-date" title="2020-06-15 23:31:46">2020/06/15</span>
+        </a>
+        
+        <a  class="前端 JS "
+           href="/page/javascript1.html"
+           data-tag="前端"
+           data-author="" >
+            <span class="post-title" title="1、JS内置对象与基本语法">1、JS内置对象与基本语法</span>
+            <span class="post-date" title="2020-06-05 20:18:08">2020/06/05</span>
+        </a>
+        
+        <a  class="Python Django "
+           href="/page/django1.html"
+           data-tag="Python"
+           data-author="" >
+            <span class="post-title" title="1、Django基础内容">1、Django基础内容</span>
+            <span class="post-date" title="2020-06-19 10:46:18">2020/06/19</span>
+        </a>
+        
+        <a  class="Python "
+           href="/page/python_mysql.html"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Python操作MySQL数据库">Python操作MySQL数据库</span>
+            <span class="post-date" title="2020-06-15 15:37:28">2020/06/15</span>
+        </a>
+        
+        <a  class="Python "
+           href="/page/Python_os1.html"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Python中os模块的常用操作">Python中os模块的常用操作</span>
+            <span class="post-date" title="2020-06-20 09:41:07">2020/06/20</span>
+        </a>
+        
     </nav>
 </div>
     </div>
@@ -719,12 +783,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-06-14 22:34:23'>2020-06-10 17:30</time>
+        创建时间:<time class="date" title='更新时间: 2020-06-22 23:57:54'>2020-06-10 17:30</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:775</span>
+        <span>字数:1.1k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -743,7 +807,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#SELECT语句"><span class="toc-text">SELECT语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查询相关功能"><span class="toc-text">查询相关功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#表的连接"><span class="toc-text">表的连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一些注意事项"><span class="toc-text">一些注意事项</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -759,38 +823,49 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <pre><code>SELECT * FROM 数据表</code></pre><p>使用别名</p>
+        <h3 id="SELECT语句"><a href="#SELECT语句" class="headerlink" title="SELECT语句"></a>SELECT语句</h3><p>1、基本使用框架</p>
+<pre><code>SELECT * FROM 数据表
+[WHERE]
+[LIMIT]
+[OFFSET]</code></pre><p>2、使用别名</p>
 <pre><code>SELECT
     字段名 AS 别名
-FROM 数据表</code></pre><p>查询语句的执行顺序：</p>
+FROM 数据表</code></pre><p>3、查询语句的执行顺序：</p>
 <p>先进行语法分析和优化，找到关键字优先级，先执行FROM，再执行SELECT</p>
-<pre><code>SELECT * FROM * LIMIT 起始位置, 偏移量;
-// 查找t_gg表中gg字段的前20条消息
-SELECCT gg FROM t_gg 0, 20;</code></pre><p>对查询的结果进行排序</p>
+<h3 id="查询相关功能"><a href="#查询相关功能" class="headerlink" title="查询相关功能"></a>查询相关功能</h3><p>1、<strong>ORDER BY</strong>子句功能，对查询的结果进行<strong>排序</strong>，示例如下</p>
 <pre><code>// 按照相关信息进行排序
 SELECT * FROM * ORDER BY 列名 [ASC|DESC]
 // 多个排序信息
-SELECT * FROM * ORDER BY 列名 [ASC|DESC],列名 [ASC|DESC]</code></pre><p>去除结果中的重复记录，在字段名称前加上DISTINCT字段，只支持一个字段名。</p>
-<pre><code>SELECT DISTINCT 字段名 FROM *;</code></pre><p>条件查询</p>
-<pre><code>SELECT * FROM * WHERE 条件1 [AND|OR] 条件2 ......;</code></pre><p>聚合函数</p>
-<p>也就是平均值、最大值等函数，以下为求该字段名下的平均值，其他函数使用方法与此类似。</p>
-<pre><code>SELECT AVG(字段名) FROM 表名</code></pre><p>COUNT(*)用于获得包含空值的记录数，COUNT(列名)用于获取包含非空值的记录数。</p>
-<p>分组查询，使用<code>GROUP BY</code>字句。即通过一定规则将数据集分为若干个部分进行查询处理。以下即为使用字段1进行分组统计每一组中字段2的平均值。</p>
-<pre><code>SELECT 字段1,AVG(字段2) FROM 表名 GROUP BY 字段1;</code></pre><p>使用分组查询SELECT语句中只能出现用以分组的字段以及其他字段的聚合函数，否则会报错。为解决这个问题，可以使用<code>GROUP_CONCAT</code>函数，这个函数可以将符合条件的值连接起来进行输出。</p>
-<pre><code>SELECT 字段1,GROUP_CONCAT(字段2) FROM 表名 GROUP BY 字段1;</code></pre><p>同时可以加上<code>WITH ROLLUP</code>再进行一次汇总运算。</p>
-<pre><code>SELECT 字段1,AVG(字段2) FROM 表名 GROUP BY 字段1 WITH ROLLUP;</code></pre><p>由于WHERE子句执行在GROUP BY子句之前，因此如果WHERE子句中出现了如平均值等信息时SQL会不知道在哪个范围内进行平均，因此会出错，如以下代码即为错误的（聚合函数作为判断条件）。所以需要使用<code>HAVING</code>子句。</p>
-<pre><code>SELECT f1
+SELECT * FROM * ORDER BY 列名 [ASC|DESC],列名 [ASC|DESC]</code></pre><p>2、去除结果中的<strong>重复记录</strong>，在字段名称前加上<strong>DISTINCT</strong>字段，只支持一个字段名。</p>
+<pre><code>SELECT DISTINCT 字段名 FROM *;</code></pre><p>3、<strong>条件查询</strong>，使用<strong>WHERE</strong>语句指定查询的条件逻辑，中间使用AND|OR等逻辑连接符连接，同时注意判断相等的条件是“=”而不是“==”。</p>
+<pre><code>SELECT * FROM * WHERE 条件1 [AND|OR] 条件2 ......;</code></pre><p>4、使用<strong>聚合函数</strong>。所谓聚合函数，也就是平均值、最大值等函数，以下为求该字段名下的平均值函数（AVG），其他函数使用方法与此类似。该类方法在实际使用时可以将统计结果作为一个子表进行查询。</p>
+<pre><code>SELECT AVG(字段名) FROM 表名</code></pre><p><strong>COUNT(*)</strong>用于获得包含空值的记录数，<strong>COUNT(字段名)</strong>用于获取包含非空值的记录数。</p>
+<p>5、<strong>分组查询</strong>，使用<strong>GROUP BY</strong>字句。即通过一定规则将数据集分为若干个部分进行查询处理。以下即为使用字段1进行分组统计每一组中字段2的平均值。</p>
+<pre><code>SELECT 字段1,AVG(字段2) FROM 表名 GROUP BY 字段1;</code></pre><p>使用分组查询SELECT语句中只能出现用以分组的字段以及其他字段的聚合函数，否则会报错（由于产生了<strong>一对多</strong>的关系）。为解决这个问题，可以使用<code>GROUP_CONCAT</code>函数，这个函数可以将符合条件的值连接起来进行输出，可以理解为将“多”的部分进行了字符串拼接。</p>
+<pre><code>SELECT 字段1,GROUP_CONCAT(字段2) FROM 表名 GROUP BY 字段1;</code></pre><p>同时可以加上<code>WITH ROLLUP</code>再进行一次汇总运算（即在返回的查询结果之下再加上一条汇总记录）。</p>
+<pre><code>SELECT 字段1,AVG(字段2) FROM 表名 GROUP BY 字段1 WITH ROLLUP;</code></pre><p>6、<strong>HAVING</strong>子句，以及为何要使用HAVING子句</p>
+<p>由于WHERE子句执行在GROUP BY子句之前，因此如果WHERE子句中出现了如平均值等信息时SQL会不知道在哪个范围内进行平均，因此会出错，如以下代码即为错误的（聚合函数作为判断条件）。所以需要使用<code>HAVING</code>子句。</p>
+<pre><code># 使用错误
+SELECT f1
 FROM table
 WHERE AVG(f2) &gt; 10
-GROUP BY f1;</code></pre><pre><code>SELECT f1
+GROUP BY f1;</code></pre><pre><code># 使用正确
+SELECT f1
 FROM table
-GROUP BY f1 HAVING AVG(f2) &gt; 10;</code></pre><p>表的连接</p>
-<p>内连接：结果集中只保留符合连接条件的记录</p>
+GROUP BY f1 HAVING AVG(f2) &gt; 10;</code></pre><h3 id="表的连接"><a href="#表的连接" class="headerlink" title="表的连接"></a>表的连接</h3><p>表的连接很重要，具体有内外两种连接构成。</p>
+<p>1、<strong>内连接</strong>：结果集中只保留符合连接条件的记录</p>
 <pre><code>SELECT * FROM 表1 [INNER] JOIN 表2 ON 连接条件;
 
 SELECT * FROM 表1 [INNER] JOIN 表2 WHERE 连接条件;
 
-SELECT * FROM 表1, 表2 WHERE 连接条件;</code></pre><p>以下不推荐，因为查询速度会很慢，每一次都会执行WHERE语句中的内容。</p>
+SELECT * FROM 表1, 表2 WHERE 连接条件;</code></pre><p>2、<strong>外连接</strong>：不管是否符合连接条件，记录都要保留在结果集里</p>
+<pre><code>// 右表出NULL值和左表连接
+LEFT JOIN </code></pre><p>3、<strong>内外连接的区别</strong>。具体如图所示（图片摘自LeetCode）</p>
+<p>1）左联结（left join），联结结果保留左表的全部数据<br>2）右联结（right join），联结结果保留右表的全部数据<br>3）内联结（inner join），取两表的公共数据</p>
+<p><img src="/page/mysql2/%5CSQL%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5%5Csql%E8%BF%9E%E6%8E%A5.png" alt></p>
+<p>应用在<a href="https://leetcode-cn.com/problems/combine-two-tables/" target="_blank" rel="noopener">175.组合两个表中</a>。该题需要满足“无论 person 是否有地址信息，都需要基于上述两表提供 person 的以下信息”，所以当person表在左时采用左连接。</p>
+<h3 id="一些注意事项"><a href="#一些注意事项" class="headerlink" title="一些注意事项"></a>一些注意事项</h3><p>1、<strong>表连接时on和where的区别</strong></p>
+<p>以下不推荐，因为查询速度会很慢，每一次都会执行WHERE语句中的内容。</p>
 <pre><code>SELECT ename 
 FROM t_emp
 WHERE deptno = (SELECT deptno FROM t_emp WHERE ename=&quot;SCOTT&quot;)</code></pre><pre><code>SELECT e2.ename
@@ -802,9 +877,7 @@ FROM t_emp e1 JOIN t_emp e2 ON e2.sal &gt;= AVG(e1.sal)</code></pre><p>正确</p
 <pre><code>SELECT e.ename
 FROM t_emp e 
 JOIN (SELECT AVG(sal) avg FROM t_emp) t
-ON e.sal &gt;= t.avg;</code></pre><p>外连接：不管是否符合连接条件，记录都要保留在结果集里</p>
-<pre><code>// 右表出NULL值和左表连接
-LEFT JOIN </code></pre>
+ON e.sal &gt;= t.avg;</code></pre>
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 ziyedy@qq.com </span>
     </div>
@@ -814,10 +887,10 @@ LEFT JOIN </code></pre>
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>SQL查询语句</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">775</span></p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.1k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="子夜">子夜</a></p>
     <p><span class="copy-title">发布时间:</span>2020-06-10, 17:30:10</p>
-    <p><span class="copy-title">最后更新:</span>2020-06-14, 22:34:23</p>
+    <p><span class="copy-title">最后更新:</span>2020-06-22, 23:57:54</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/page/mysql2.html" title="SQL查询语句">http://www.ziyedy.top/page/mysql2.html</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
