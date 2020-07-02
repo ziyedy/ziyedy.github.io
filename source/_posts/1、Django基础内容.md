@@ -187,3 +187,204 @@ GET、POST、COOKIES、FILES
 响应对象
 
 HttpResponse
+
+status：查看状态码
+
+content_type：设置响应类型
+
+
+
+FileResponse
+
+
+
+使用类重写视图
+
+1、继承视图。django.views.generic.TemplateView
+
+2、配置模板地址
+
+3、配置URL
+
+
+
+TemplateView原理
+
+1、从项目主目录寻找模板文件
+
+2、从app进行寻找
+
+```
+class ShowClassView(TemplateView):
+    """ class视图 """
+    template_name = 'class.html'
+    
+url(r'^show/class/$', views.ShowClassView.as_view(), name
+```
+
+
+
+
+
+模板：
+
+模板具有一定的格式或骨架，可以动态的生成HTML
+
+
+
+模板引擎决定以何种方式组织代码
+
+DTL
+
+Jinja2
+
+
+
+渲染机制
+
+1、从磁盘读取模板文件（get_template）
+
+2、选择合适模板引擎（select_template）
+
+3、将制定内容对模板进行渲染（render）
+
+4、发送给浏览器显示
+
+
+
+
+
+渲染python中的对象
+
+
+
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    我制定的值为: {{ p1 }}
+</body>
+</html>
+```
+
+
+
+
+
+```
+url(r'^text/$', views.text_show)
+
+def text_show(request):
+    """ 变量在模板中的渲染 """
+    p1 = 10
+    return render(request, 'index.html', {
+        'p1' : p1
+    })
+```
+
+
+
+模板标签
+
+{% %}
+
+循环控制
+
+{% for item in list %}
+
+<li> </li>
+
+{% endfor %}
+
+
+
+条件控制
+
+{% if A %}
+
+​	满足A
+
+{% elif B %}
+
+​	满足B
+
+{% else %}
+
+​	都不满足
+
+{% endif %}
+
+
+
+注释
+
+{# 注释内容 #}
+
+
+
+示例
+
+```
+def text_show(request):
+    """ 变量在模板中的渲染 """
+    list = ['北京', "上海", "广州", "深圳"]
+    return render(request, 'index.html', {
+        'list': list
+    })
+```
+
+
+
+```
+<ul>
+    {% for item in list  %}
+        <li>
+            {{ item }}
+        </li>
+    {% endfor %}
+</ul>
+```
+
+
+
+模板过滤器：对变量进行处理后再渲染
+
+```
+{{ value|filter_name:params }}
+```
+
+
+
+自定义过滤器
+
+1、在app目录下新建包templatetags，并新建filter.py
+
+2、定义过滤器
+
+```
+from django import template
+
+register = template.Library()
+
+def func(value):
+    pass
+
+# 注册过滤器
+register.filter('func', func)
+```
+
+3、在模板中使用过滤器（）
+
+```
+{% load filter %}
+{{ value|func }}
+```
+
+
+
+模板的抽象和继承
+

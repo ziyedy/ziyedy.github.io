@@ -1,5 +1,5 @@
 ---
-title: SQL查询语句
+title: SQL语句——查
 date: 2020-06-10 17:30:10
 tags:
 	- 数据库
@@ -149,7 +149,7 @@ LEFT JOIN
 2）右联结（right join），联结结果保留右表的全部数据
 3）内联结（inner join），取两表的公共数据
 
-![](\SQL查询语句\sql连接.png)
+![](\SQL语句——查\sql连接.png)
 
 应用在[175.组合两个表中](https://leetcode-cn.com/problems/combine-two-tables/)。该题需要满足“无论 person 是否有地址信息，都需要基于上述两表提供 person 的以下信息”，所以当person表在左时采用左连接。
 
