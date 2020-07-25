@@ -10,6 +10,7 @@ toc: true
 ## 二叉树的基本名词
 满二叉树：树中每层都含有最多的结点
 完全二叉树：简单来讲就是每一个结点编号都与满二叉树相同的二叉树，满二叉树是一种特殊的完全二叉树。**(lchild=father*2)**
+
 ## 二叉树的几种遍历
 PreOrder Traversal
 InOrder Traversal
