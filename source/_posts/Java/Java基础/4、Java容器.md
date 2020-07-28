@@ -1,57 +1,15 @@
 ---
-title: 3、Java中的容器
+title: 3、Java容器
 date: 2020-07-10 14:34:11
 tags:
 	- Java
 categories:
 	- Java
-	- 语言基础
-fileName: java3
+	- Java基础
+fileName: java-collection
 ---
 
 
-
-
-
-
-
-### 异常
-
-Throwable根类
-
-Error、Exception（程序本身可以处理的异常）
-
-
-
-try块后可以接0或多个catch块，若没有catch块，则必须跟一个finally块
-
-```
-try {
-
-} catch(Exception e) {
-	e.printStackTrace();
-} finally {
-
-}
-```
-
-
-
-throws声明方法将要抛出何种异常的声明，通过throw将产生的异常抛出
-
-若一个方法可能出现异常，但没有能力处理异常，可以在方法声明处用throws子句来声明抛出异常
-
-```
-public void method() throws Exception1, Exception2 {
-	//可能产生异常的代码
-}
-```
-
-
-
-
-
-### 字符串
 
 equal方法指内容是否相同
 
@@ -145,35 +103,6 @@ Collections.sort(list);
 使用Comparable或Comparator接口对自定义类进行排序
 
 
-
-
-
-### 泛型
-
-变量声明的类型必须匹配传递给实际对象的类型（即前后尖括号中的内容必须相同）
-
-
-
-<? extends 类名>   该类与其子类都可以
-
-<? super 类名> 该类与其父类都可以
-
-
-
-泛型方法不一定要写在泛型类当中
-
-```
-// 泛型方法
-public class Generic {
-	public <T> void func(T t) {
-		
-	}
-	// 可以输入Number的子类
-	public <T extents Number> void func1(T t) {
-	
-	}
-}
-```
 
 
 

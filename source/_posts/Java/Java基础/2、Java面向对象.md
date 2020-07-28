@@ -1,15 +1,13 @@
 ---
-title: 2、Java中的类与接口
+title: 2、Java面向对象
 date: 2020-07-04 10:43:51
 tags:
 	- Java
 categories:
 	- Java
-	- 语言基础
-fileName: java2
+	- Java基础
+fileName: java-orient-object
 ---
-
-主要参考：https://github.com/Snailclimb/JavaGuide
 
 ### 面向对象三大特征
 
@@ -35,7 +33,7 @@ fileName: java2
 
 ### Object类的常见方法总结
 
-Object类是所有类的父类，主要提供11个方法。
+**Object类是所有类的父类**，主要提供11个方法。
 
 ```
 // 用于返回当前运行时对象的Class对象。
@@ -81,3 +79,18 @@ protected void finalize() throws Throwable
 
 
 
+### 访问权限修饰符
+
+Java 中有三个访问权限修饰符：private、protected 以及 public，如果不加访问修饰符，表示包级可见。**所以Java的访问权限应该有四个**
+
+
+
+
+
+
+
+
+
+
+
+主要参考：https://github.com/Snailclimb/JavaGuide

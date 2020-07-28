@@ -5,7 +5,7 @@ tags:
 	- Java
 categories:
 	- Java
-	- 语言基础
+	- Java基础
 fileName: java_polymorphic
 ---
 
