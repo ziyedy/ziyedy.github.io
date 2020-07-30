@@ -6,7 +6,7 @@ tags:
 categories:
 	- 前端
 	- JS
-fileName: js
+fileName: js-basic-grammer
 ---
 
 ## 基本概念
@@ -47,3 +47,41 @@ JavaScript中的输入输出主要用于调试
 
 
 
+## 基本语法
+
+### 变量基本类型
+
+ES6前，使用`var`关键字来声明一个变量
+
+**JS中一共有六种数据类型：**
+
+- **基本数据类型（值类型，传值）**：String 字符串、Number 数值、Boolean 布尔值、Null 空值、Undefined 未定义。
+- **引用数据类型（引用类型，传址）**：Object 对象（除去五种基本数据类型之外，其他的，都称之为 Object类型）。
+
+### 运算符
+
+JS中运算符比较特殊的是`==`与`===`。
+
+其中，`==`这个符号会自动进行隐式转换，将不同的数据类型，转为相同类型进行比较（大部分情况下，都是转换为数字）。而`===`这个符号在进行比较时不会进行类型转换，是绝对等于。
+
+
+
+
+
+
+
+### debug方法
+
+JavaScript程序中添加断点，使用debugger。示例如下：
+
+```
+<script>
+    var a = [1,2,3,4,5];
+    for(i=0;i<5;i++){
+        console.log(a[i]);
+        debugger;
+    }
+</script>
+```
+
+刷新Google页面即可进行debug

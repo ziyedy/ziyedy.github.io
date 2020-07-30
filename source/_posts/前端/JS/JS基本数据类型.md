@@ -1,0 +1,214 @@
+---
+title: JS基本数据类型
+date: 2020-06-05 20:18:08
+tags:
+	- 前端
+categories:
+	- 前端
+	- JS
+fileName: js-basic-datatype
+---
+
+## 字符串：String
+
+js中的字符串使用" "或者' '进行包裹（跟python相同）。
+
+```
+str1 = "str";
+str2 = 'str';
+```
+
+### 不可变性
+
+字符串里面的值不可被改变。虽然看上去可以改变内容，但其实是地址变了，内存中新开辟了一个内存空间（与Java中的String类很像）。
+
+如下，看上去str 的值变了，其实'aaaa'仍然保存在内存中，str只是改为指向了'bbbb'。
+
+```
+var str = 'aaaa';
+str = 'bbbb';
+```
+
+### 字符串常用操作（长度、拼接）
+
+```
+// 获取长度
+str.length
+```
+
+拼接字符串使用 “+”即可，很方便。
+
+### 字符串的查找与替换
+
+```
+// 返回子字符串的位置，若没有，返回-1
+str.indexOf("char")
+
+// 从后向前检索
+str.lastIndexOf("char")
+
+// 替换字符串，将a替换为b
+str.replace(a,b)
+```
+
+### 子字符串的截取
+
+```
+str.slice(start, end) // 截取字符串（end索引不在截取范围之内）
+
+str.substring(start, end) // 功能与slice一致
+
+str.substr(start, len) // 从start处截取长为len的字符串
+```
+
+### 字符串分割为数组
+
+```
+str.split(separate) // 把字符串分割为字符串数组，参数为分隔符
+```
+
+示例
+
+```
+a = "a,b,b,df,s";
+console.log(a);
+b = a.split(',');
+console.log(b);
+```
+
+
+
+## 数值型：Number
+
+### 最大值与最小值
+
+```
+max = Number.MAX_VALUE;
+min = Number.MIN_VALUE;
+```
+
+### 注意点
+
+1、使用 Number 表示的变量超过了最大值，则会返回Infinity。`typeof Infinity`的返回结果是number。
+
+2、**NaN（Not a Number）**，非数值
+
+```
+console.log("a" / 10);	// NaN
+console.log(typeof NaN);	// number
+```
+
+3、在JS中，**浮点数的运算无法保证较高的精度**
+
+
+
+## 布尔型：Boolean
+
+就是简单的true与false，与数字相加时，**true为1，false为0**
+
+
+
+## Null和Undefined
+
+### Null：空值
+
+专门用来表示空对象，同时`typeof null`会返回object。（**null视为空对象**）
+
+### undefined：未定义
+
+#### 1、变量已声明，但是没有赋值
+
+```
+var a;
+console.log(typeof a); // undefined
+```
+
+#### 2、变量未定义
+
+```
+console.log(typeof a);	// undefined
+console.log(a); // 打印结果：Uncaught ReferenceError: a is not defined
+```
+
+#### 3、函数无返回值
+
+如果一个函数没有返回值，那么，这个函数的返回值就是 undefined。
+
+或者，也可以这样理解：在定义一个函数时，如果末尾没有 return 语句，那么，其实就是 `return undefined`。
+
+```
+function foo() {}
+console.log(foo()); // 打印结果：undefined
+```
+
+#### 4、调用函数时，未传参
+
+调用函数时，如果没有传参，那么，这个参数的值就是 undefined。
+
+```
+function foo(name) {
+    console.log(name);
+}
+
+foo(); // 调用函数时，未传参。执行函数后的打印结果：undefined
+```
+
+### 两者之间的差别
+
+```
+console.log(null == undefined);		// true
+console.log(null === undefined);	// false
+```
+
+**和数字运算时，null相当于0，而undefined相当于NaN**
+
+
+
+## 类型转换
+
+### 其他类型-->String
+
+#### 1、通过字符串拼接隐式转换
+
+```
+var a = 1;
+a = a + '';
+console.log(typeof a);	// string
+```
+
+#### 2、调用toString()方法
+
+```
+变量.toString()
+```
+
+该方法不会影响到原变量，它会将转换的结果返回，同时，null与undefined没有toString方法。
+
+#### 3、使用String()函数强制转换
+
+```
+String(变量)
+```
+
+- 对于 Number 和 Boolean 而言，本质上就是调用 toString()方法。
+
+- 对于 null 和 undefined，它会将 null 直接转换为 "null"。将 undefined 直接转换为 "undefined"。
+
+### 其他类型-->Number
+
+```
+parseInt("str");
+parseFloat("str");
+```
+
+### typeof总结
+
+| typeof 的代码写法 | 返回结果  |
+| :---------------- | :-------: |
+| typeof 数字       |  number   |
+| typeof 字符串     |  string   |
+| typeof 布尔型     |  boolean  |
+| typeof 对象       |  object   |
+| typeof 方法       | function  |
+| typeof null       |  object   |
+| typeof undefined  | undefined |
