@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>3、Java容器 | 子夜</title>
-  <meta name="keywords" content=" Java ">
-  <meta name="description" content="3、Java容器 | 子夜">
+  <title>并查集 | 子夜</title>
+  <meta name="keywords" content=" 数据结构 ">
+  <meta name="description" content="并查集 | 子夜">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS中的类与对象">
@@ -1079,9 +1079,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-Java/Java基础/4、Java容器" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-计算机基础/数据结构/并查集" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">3、Java容器</h1>
+        <h1 class="article-title">并查集</h1>
     
     <div class="article-meta">
         
@@ -1089,28 +1089,28 @@
         
         <span class="book">
             
-                <a  data-rel="Java">Java</a>/
+                <a  data-rel="计算机基础">计算机基础</a>/
             
-                <a  data-rel="Java基础">Java基础</a>
+                <a  data-rel="数据结构">数据结构</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a class="color5">Java</a>
+            <a class="color5">数据结构</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-07-28 19:27:16'>2020-07-10 14:34</time>
+        创建时间:<time class="date" title='更新时间: 2020-07-31 18:05:59'>2020-07-31 13:24</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:432</span>
+        <span>字数:1.1k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -1129,7 +1129,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#集合"><span class="toc-text">集合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#迭代器"><span class="toc-text">迭代器</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#并查集定义"><span class="toc-text">并查集定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基本操作"><span class="toc-text">基本操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现思路"><span class="toc-text">实现思路</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Quick-Find概述"><span class="toc-text">Quick Find概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Quick-Union概述"><span class="toc-text">Quick Union概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#优化"><span class="toc-text">优化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#思路1：记录每棵树的节点个数"><span class="toc-text">思路1：记录每棵树的节点个数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#思路2：记录没棵树的深度"><span class="toc-text">思路2：记录没棵树的深度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#思路3：路径压缩（Path-Compression）"><span class="toc-text">思路3：路径压缩（Path Compression）</span></a></li></ol></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1145,40 +1145,154 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>equal方法指内容是否相同</p>
-<p>==指地址是否相同</p>
-<p>String的对象一旦被创建，则不能修改，是不可变的（即使用substr等函数时其本身是不会变的）</p>
-<p>当频繁操作字符串时，使用StringBuilder</p>
-<p>常用方法</p>
-<pre><code>StringBuilder str = new StringBuilder(&quot;hello&quot;);
-str.append(&quot; world&quot;);    // 向后添加字符串
-str.delete(0,5);    // 删除第0-4个字符
-str.insert(4,&quot;gg&quot;);    // 在索引4向后插入gg
-str.replace(4,6,&quot;aa&quot;);    // 在缩影4到5处替换为aa
-</code></pre><h3 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h3><p>Collection：List，Queue，Set</p>
-<p>List是元素有序并且可以重复的集合，称为序列</p>
-<p>两个主要实现类：ArrayList，LinkedList</p>
-<p>ArrayList底层由数组实现，动态增长，其中元素可以为null</p>
-<pre><code>ArrayList list = new ArrayList();
-list.add(1);    // 向后添加
-list.size();    // 获取元素数量
-list.get(1);    // 取出索引值为1的元素
-list.remove(2);    // 移除索引为2的元素
-</code></pre><p>Set</p>
-<p>元素无序且不可以重复的集合。</p>
-<p>HashSet是Set的一个重要元素，称为哈希集，其中元素无序且不可以重复，只允许一个null元素。</p>
-<h3 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h3><p>Iterator接口可以以统一的方式对各种集合元素进行遍历，调用各种集合元素的iterator()方法得到迭代器。</p>
-<p>hasNext()方法检测集合中是否还有下一个元素</p>
-<p>next()方法返回集合中的下一个元素</p>
-<pre><code>Iterator it = set.iterator();
-while (it.hasNext()) {
-    System.out.println(it.next());
-}</code></pre><p>hashCode()和equals()，用于判断是否相同，选哟进行重写  </p>
-<p>Map。以键值对的形式存储</p>
-<p>HashMap：基于哈希表的Map接口的实现，允许使用null值和null键，无序排列。</p>
-<p>排序</p>
-<pre><code>Collections.sort(list);</code></pre><p>使用Comparable或Comparator接口对自定义类进行排序</p>
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="并查集定义"><a href="#并查集定义" class="headerlink" title="并查集定义"></a>并查集定义</h3><p><strong>并查集(Union-Find Set)</strong>，顾名思义，是实现快速合并集合与查询元素所在集合的数据结构。</p>
+<h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><ol>
+<li>合并两个不相交集合<strong>（Union）</strong></li>
+<li>判断两个元素是否属于同一个集合<strong>（Find）</strong></li>
+</ol>
+<p>基于此，可以实现一个并查集的Java接口如下：</p>
+<pre><code>public interface UF {
+    int getSize();  // 获取元素个数
+    boolean find(int p, int q); // 判断两个元素是否属于同一集合
+    void union(int p, int q);   // 合并两个不相交的集合
+}</code></pre><h2 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h2><h3 id="Quick-Find概述"><a href="#Quick-Find概述" class="headerlink" title="Quick Find概述"></a>Quick Find概述</h3><p>如图，使用一个数组id标识不同元素所属的集合。</p>
+<p><img src="%E5%B9%B6%E6%9F%A5%E9%9B%86%5Cquickfind.jpg" alt=""></p>
+<p>则并查集的实现逻辑如下。由于可以直接通过索引得到某元素所属的集合，则<strong>Find操作的时间复杂度为O(1)</strong>，但Union操作由于要遍历整个数组，因此<strong>时间复杂度为O(n)</strong>。</p>
+<pre><code>public class UnionFind1 implements UF {
 
+    private int[] id;
+
+    public UnionFind1(int size) {
+        id = new int[size];
+        for(int i=0;i&lt;id.length;i++)
+            id[i] = i;
+    }
+
+    @Override
+    public int getSize() {
+        return id.length;
+    }
+
+    // 获取元素所属集合
+    private int getID(int p) {
+        if (p &lt; 0 || p &gt;=id.length)
+            throw new IllegalArgumentException(&quot;p is illegal&quot;);
+        return id[p];
+    }
+
+    // 查看元素p和元素q是否所属同一个集合
+    @Override
+    public boolean find(int p, int q) {
+        return getID(p) == getID(q);
+    }
+
+    // 合并元素p和元素q
+    @Override
+    public void union(int p, int q) {
+        int pID = getID(p);
+        int qID = getID(q);
+        if(pID == qID)
+            return;
+        for (int i=0;i&lt;id.length;i++) {
+            if(id[i] == qID)
+                id[i] = pID;
+        }
+    }
+}</code></pre><h3 id="Quick-Union概述"><a href="#Quick-Union概述" class="headerlink" title="Quick Union概述"></a>Quick Union概述</h3><p>很显然，之前的Quick Find中查找是否属于同一元素速度很快，而Quick Union则着重于合并的速度。</p>
+<p>如图所示，Quick Union的设计思想采用树（森林）进行。每个集合都使用一个根节点进行标识（根节点的父节点为其自身），<strong>在具体存储时，也可以使用一个parent数组来标识其父节点的位置</strong>。因此：</p>
+<p><strong>Find操作只需要找到对应节点的根节点判断是否相等即可；</strong></p>
+<p><strong>Union操作只需要将一个元素的根节点指向Union操作的另一元素的根节点即可</strong>，具体如图将元素1与元素2进行合并的操作示意</p>
+<p><img src="%E5%B9%B6%E6%9F%A5%E9%9B%86%5Cquickunion.jpg" alt=""></p>
+<p>具体实现如下（略去了不关键的几个方法）：这种方法下，find与union操作的时间复杂度都为O(h)，h为树的深度。</p>
+<pre><code>public class UnionFind2 implements UF {
+
+    private int[] parent;
+
+    public UnionFind2(int size) {
+        parent = new int[size];
+
+        for (int i=0;i&lt;size;i++) {
+            parent[i] = i;
+        }
+    }
+
+    private int getID(int p) {
+        if (p &lt; 0 || p &gt;= parent.length)
+            throw new IllegalArgumentException(&quot;p is out of bound&quot;);
+        while (p != parent[p])
+            p = parent[p];
+        return p;
+    }
+
+    @Override
+    public boolean find(int p, int q) {
+        return getID(p) == getID(q);
+    }
+
+    @Override
+    public void union(int p, int q) {
+        int pRoot = getID(p);
+        int qRoot = getID(q);
+
+        if(pRoot == qRoot)
+            return;
+
+        parent[pRoot] = qRoot;
+    }
+}</code></pre><h3 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h3><p>Quick Union的效率与树的深度有关，因此需要尽可能的缩短树的深度，从而提高效率。</p>
+<h4 id="思路1：记录每棵树的节点个数"><a href="#思路1：记录每棵树的节点个数" class="headerlink" title="思路1：记录每棵树的节点个数"></a>思路1：记录每棵树的节点个数</h4><p>节点个数多的树<strong>大概率</strong>深度高，因此让节点个数少的集合的根节点指向节点个数大的根节点即可。代码逻辑如下（sz[i]表示以i为根的集合中元素个数）</p>
+<pre><code>@Override
+public void union(int p, int q) {
+    int pRoot = getID(p);
+    int qRoot = getID(q);
+
+    if(pRoot == qRoot)
+        return;
+
+    if(sz[pRoot] &lt; sz[qRoot]) {
+        parent[pRoot] = qRoot;
+        sz[qRoot] += sz[pRoot];
+    }
+    else {
+        parent[qRoot] = pRoot;
+        sz[pRoot] += sz[qRoot];
+    }
+}</code></pre><h4 id="思路2：记录没棵树的深度"><a href="#思路2：记录没棵树的深度" class="headerlink" title="思路2：记录没棵树的深度"></a>思路2：记录没棵树的深度</h4><p>思路1的主要漏洞在于节点个数多的树未必深度大，因此可以通过记录树的深度来进行判断，代码逻辑如下（rank[i]表示以i为根的集合的层数）</p>
+<pre><code>public void union(int p, int q) {
+    int pRoot = getID(p);
+    int qRoot = getID(q);
+
+    if(pRoot == qRoot)
+        return;
+
+    if(rank[pRoot] &lt; rank[qRoot]) {
+        parent[pRoot] = qRoot;
+    }
+    else if(rank[qRoot] &lt; rank[pRoot]){
+        parent[qRoot] = pRoot;
+    }
+    else {
+        parent[pRoot] = qRoot;
+        rank[qRoot]++;
+    }
+}</code></pre><h4 id="思路3：路径压缩（Path-Compression）"><a href="#思路3：路径压缩（Path-Compression）" class="headerlink" title="思路3：路径压缩（Path Compression）"></a>思路3：路径压缩（Path Compression）</h4><p>使用<code>parent[p] = parent[parent[p]]</code>这种逻辑在每次获取根节点时将树的高度缩减。</p>
+<pre><code>private int getID(int p) {
+    if (p &lt; 0 || p &gt;= parent.length)
+        throw new IllegalArgumentException(&quot;p is out of bound&quot;);
+    while (p != parent[p]) {
+        parent[p] = parent[parent[p]];  // 路径压缩
+        p = parent[p];
+    }
+    return p;
+}</code></pre><p>使用递归直接将，每个元素直接连接在集合的根节点上</p>
+<pre><code>private int getID2(int p) {
+    if (p &lt; 0 || p &gt;= parent.length)
+        throw new IllegalArgumentException(&quot;p is out of bound&quot;);
+    if(p != parent[p]) {
+        parent[p] = getID2(p);
+    }
+    return parent[p];
+}</code></pre>
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 ziyedy@qq.com </span>
     </div>
@@ -1187,12 +1301,12 @@ while (it.hasNext()) {
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>3、Java容器</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">432</span></p>
+    <p><span class="copy-title">文章标题:</span>并查集</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.1k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="子夜">子夜</a></p>
-    <p><span class="copy-title">发布时间:</span>2020-07-10, 14:34:11</p>
-    <p><span class="copy-title">最后更新:</span>2020-07-28, 19:27:16</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/page/java-collection.html" title="3、Java容器">http://www.ziyedy.top/page/java-collection.html</a>
+    <p><span class="copy-title">发布时间:</span>2020-07-31, 13:24:46</p>
+    <p><span class="copy-title">最后更新:</span>2020-07-31, 18:05:59</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/page/ds-Union-Find.html" title="并查集">http://www.ziyedy.top/page/ds-Union-Find.html</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
