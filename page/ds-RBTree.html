@@ -1239,7 +1239,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-08-02 22:36:36'>2020-08-02 08:50</time>
+        创建时间:<time class="date" title='更新时间: 2020-08-06 08:20:25'>2020-08-02 08:50</time>
         
     </div>
     <div class="article-meta">
@@ -1347,9 +1347,11 @@ private Node rightRotate(Node node) {
     node.left.color = BLACK;
     node.right.color = BLACK;
 }</code></pre><h3 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h3><p>插入时可能会遇到的情况下图已经总结的很清楚了。主要考虑情景4</p>
-<p><img src="%5C5.4%E3%80%81%E7%BA%A2%E9%BB%91%E6%A0%91%5C%E7%BA%A2%E9%BB%91%E6%A0%91%E6%8F%92%E5%85%A5.png" alt=""></p>
+<img src="/page/红黑树插入.png">
+
 <p>而情景4主要可以分为以下①②③三种插入情况，其实是可以分别转化的</p>
-<p><img src="%5C5.4%E3%80%81%E7%BA%A2%E9%BB%91%E6%A0%91%5C%E6%8F%92%E5%85%A5.jpg" alt=""></p>
+<img src="/page/插入.jpg" style="zoom:80%;">
+
 <p>这三种操作具体可见辅助方法中的代码。同时应当注意，在这种代码实现下，<strong>红节点是只会出现在左孩子上的（由于颜色翻转的实现）</strong></p>
 <h4 id="情况③"><a href="#情况③" class="headerlink" title="情况③"></a>情况③</h4><p>这种情况直接插入并进行<strong>颜色翻转</strong>操作。</p>
 <h4 id="情况②"><a href="#情况②" class="headerlink" title="情况②"></a>情况②</h4><p>这种情况先进行右旋再进行颜色翻转</p>
@@ -1397,7 +1399,7 @@ private Node add(Node node, E e) {
     <p><span class="copy-title">文章字数:</span><span class="post-count">1.1k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="子夜">子夜</a></p>
     <p><span class="copy-title">发布时间:</span>2020-08-02, 08:50:13</p>
-    <p><span class="copy-title">最后更新:</span>2020-08-02, 22:36:36</p>
+    <p><span class="copy-title">最后更新:</span>2020-08-06, 08:20:25</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/page/ds-RBTree.html" title="5.4、红黑树">http://www.ziyedy.top/page/ds-RBTree.html</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
