@@ -1237,7 +1237,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-08-06 09:05:46'>2019-02-23 23:26</time>
+        创建时间:<time class="date" title='更新时间: 2020-08-06 09:14:48'>2019-02-23 23:26</time>
         
     </div>
     <div class="article-meta">
@@ -1278,7 +1278,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="osm文件在ArcGis中打开"><a href="#osm文件在ArcGis中打开" class="headerlink" title=".osm文件在ArcGis中打开"></a>.osm文件在ArcGis中打开</h2><p>.osm有一万种方式可以转化为ArcGis支持的格式，但本人有些强迫症就是想让ArcGis能够直接打开.osm文件，好在官方已经提供了插件，不过只支持ArcGis 10.6的版本，所以版本滞后的小伙伴请先进行更新。<br>更新完之后，请移步<a href="https://www.esri.com/en-us/arcgis/products/arcgis-editor-for-openstreetmap" target="_blank" rel="noopener">传送门</a>,里面只有一个选项，相信诸位不会弄错。之后，解压安装包，选择电脑相应位数安装即可，十分方便。安装完成后，打开arcgis后，在ArcToolbox中你会发现新增了一个<strong>OSM Toolbox</strong>，其中内容如下，接下来根据英文与帮助文档，就可以很轻松地进行相应的处理了。在这儿，我们使用<em>Load OSM File</em>，选择文件路径与数据库后，即可打开OSM文件，效果如下。<br><img src="/page/osm_data_process\arcgis.png" alt="OSM工具" style="zoom:80%;"><br><img src="/page/osm_data_process\arcgis1.png" alt="生成的查询代码" style="zoom:67%;"></p>
-<h2 id="Overpass-Turbo"><a href="#Overpass-Turbo" class="headerlink" title="Overpass Turbo"></a>Overpass Turbo</h2><h3 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h3><p><strong>Overpass Turbo</strong><a href="http://overpass-turbo.eu/" target="_blank" rel="noopener">传送门</a>我认为是提供了一个用于查询与分析OSM数据的平台吧，它的较为标准的说明以及功能描述如下：<br>A web-based data filtering tool for OpenStreetMap. With overpass turbo you can run Overpass API queries and analyse the resulting OSM data interactively on a map. There is an integrated Wizard which makes creating queries super easy.<br>下面简单记录一下其中常用到的操作，有些命名不是其文档的标准命名，反正领会其意即可。如下是Overpass Turbo的整个界面，其中<strong>红色笔</strong>圈出区域内为工具条（toolbar），<strong>黄色笔</strong>圈出的区域内为查询代码的编写处，其右侧相信大家都能猜到了，就是用于显示所查询内容的部分，其中显示方式的话可以在<strong>绿色笔</strong>圈出的区域内调整。<br><img src="/page/OSM数据基本操作\total.jpg" alt="整体界面" style="zoom:80%;"><br>该界面的工具条很简单，没有什么选项，都是一些常见的英文因此简单说一说吧。<strong>Run</strong>就是运行查询代码并在右侧区域进行结果显示，刚进去Overpass Turbo时会有一个例子代码如上图，<code>node</code>自然代表一个点要素，<code>amenity=*****</code>同OSM中的标签进行查找，很好理解。<strong>Share</strong>自然就是分享；<strong>Export</strong>是下载数据；<strong>Wizard</strong>同其意，作为搜索向导简化查找过程；<strong>Load</strong>则可以载入包括示例之类的东西，其余三个都同其字面意思，在此不做赘述。</p>
+<h2 id="Overpass-Turbo"><a href="#Overpass-Turbo" class="headerlink" title="Overpass Turbo"></a>Overpass Turbo</h2><h3 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h3><p><strong>Overpass Turbo</strong><a href="http://overpass-turbo.eu/" target="_blank" rel="noopener">传送门</a>我认为是提供了一个用于查询与分析OSM数据的平台吧，它的较为标准的说明以及功能描述如下：<br>A web-based data filtering tool for OpenStreetMap. With overpass turbo you can run Overpass API queries and analyse the resulting OSM data interactively on a map. There is an integrated Wizard which makes creating queries super easy.<br>下面简单记录一下其中常用到的操作，有些命名不是其文档的标准命名，反正领会其意即可。如下是Overpass Turbo的整个界面，其中<strong>红色笔</strong>圈出区域内为工具条（toolbar），<strong>黄色笔</strong>圈出的区域内为查询代码的编写处，其右侧相信大家都能猜到了，就是用于显示所查询内容的部分，其中显示方式的话可以在<strong>绿色笔</strong>圈出的区域内调整。</p>
+<p><img src="/page/.%5COSM%E6%95%B0%E6%8D%AE%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%5Ctotal.jpg" alt><br>该界面的工具条很简单，没有什么选项，都是一些常见的英文因此简单说一说吧。<strong>Run</strong>就是运行查询代码并在右侧区域进行结果显示，刚进去Overpass Turbo时会有一个例子代码如上图，<code>node</code>自然代表一个点要素，<code>amenity=*****</code>同OSM中的标签进行查找，很好理解。<strong>Share</strong>自然就是分享；<strong>Export</strong>是下载数据；<strong>Wizard</strong>同其意，作为搜索向导简化查找过程；<strong>Load</strong>则可以载入包括示例之类的东西，其余三个都同其字面意思，在此不做赘述。</p>
 <h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><p>下面简单做一次使用。<br>首先点击<strong>Wizard</strong>，在其对话框中输入<em>bus route</em>，完成后可见左侧代码区自动生成了查询代码，如下图，其上方注释表明这是由wizard生成的。接下来点击<strong>Run</strong>（若在Wizard中已经运行过请忽略这一步），可见其查找结果（查找的大致范围为武昌地区），如下。</p>
 <img src="/page/OSM数据基本操作\query.png">
 <img src="/page/OSM数据基本操作\map1.png" style="zoom: 80%;">
@@ -1300,7 +1301,7 @@
     <p><span class="copy-title">文章字数:</span><span class="post-count">786</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="子夜">子夜</a></p>
     <p><span class="copy-title">发布时间:</span>2019-02-23, 23:26:10</p>
-    <p><span class="copy-title">最后更新:</span>2020-08-06, 09:05:46</p>
+    <p><span class="copy-title">最后更新:</span>2020-08-06, 09:14:48</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/page/osm_data_process.html" title="OSM数据基本操作">http://www.ziyedy.top/page/osm_data_process.html</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
