@@ -40,13 +40,13 @@ pip install -i https://pypi.tuna.tsinghua.edu.cn/simple PyQt5
 
 在PyCharm中的`File->Settings`下，进行如下操作，即可配置完成QDesigner。
 
-![](Anaconda+PyCharm配置PyQt5全过程/1.png)
+![](http://cdn.ziyedy.top/image/Python/GUI/Anaconda%2BPyCharm%E9%85%8D%E7%BD%AEPyQt5%E5%85%A8%E8%BF%87%E7%A8%8B/1.png)
 
 ### 配置PyUIC
 
 使用QDesigner生成的文件格式为.ui的格式，要将其转化为.py格式安装的pyqt包中也已经写好的相应的程序。在上图中的相同界面中输入以下信息。
 
-![](Anaconda+PyCharm配置PyQt5全过程/2.png)
+![](http://cdn.ziyedy.top/image/Python/GUI/Anaconda%2BPyCharm%E9%85%8D%E7%BD%AEPyQt5%E5%85%A8%E8%BF%87%E7%A8%8B/2.png)
 
 program中输入pyuic5.exe的路径。
 
@@ -62,17 +62,17 @@ $FileName$ -o $FileNameWithoutExtension$.py
 
 在菜单栏“工具”中找到拓展工具，选择QDesigner即可。
 
-![](Anaconda+PyCharm配置PyQt5全过程/3.png)
+![](http://cdn.ziyedy.top/image/Python/GUI/Anaconda%2BPyCharm%E9%85%8D%E7%BD%AEPyQt5%E5%85%A8%E8%BF%87%E7%A8%8B/3.png)
 
 
 
 打开设计工具之后，即可创建相应的ui界面如下：
 
-![](Anaconda+PyCharm配置PyQt5全过程/4.png)
+![](http://cdn.ziyedy.top/image/Python/GUI/Anaconda%2BPyCharm%E9%85%8D%E7%BD%AEPyQt5%E5%85%A8%E8%BF%87%E7%A8%8B/4.png)
 
 这时候可以看到PyCharm界面中多了一个.ui文件，在该文件上右击，选择拓展工具中的PyUIC即可完成.ui到.py的转换。
 
-![](/Anaconda+PyCharm配置PyQt5全过程/5.png)
+![](http://cdn.ziyedy.top/image/Python/GUI/Anaconda%2BPyCharm%E9%85%8D%E7%BD%AEPyQt5%E5%85%A8%E8%BF%87%E7%A8%8B/5.png)
 
 此时可以发现多了一个同名的.py文件，打开文件里面包含的就是之前设计好的界面的python代码了，加入以下主函数运行：
 
@@ -90,7 +90,7 @@ if __name__ == '__main__':
 
 即可得到如下结果：
 
-![](/Anaconda+PyCharm配置PyQt5全过程/6.png)
+![](http://cdn.ziyedy.top/image/Python/GUI/Anaconda%2BPyCharm%E9%85%8D%E7%BD%AEPyQt5%E5%85%A8%E8%BF%87%E7%A8%8B/6.png)
 
 OK，那使用PyQt5构建python的GUI程序的流程总算整通了。
 

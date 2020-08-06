@@ -10,12 +10,6 @@ categories:
 fileName: hexo2
 ---
 
-部署到Githubpage上在国内访问速度很慢，正好前段时间买了一个腾讯云服务器，就干脆把hexo生成的博客文件直接放到云上跑算了，本文记录将hexo同时部署到GitHub与腾讯云服务器的过程。参考博客https://blog.csdn.net/StaunchKai/article/details/82878928
-
-部署到Githubpage上在国内访问速度很慢，正好前段时间买了一个腾讯云服务器，就干脆把hexo生成的博客文件直接放到云上跑算了，本文记录将hexo同时部署到GitHub与腾讯云服务器的过程。参考博客https://blog.csdn.net/StaunchKai/article/details/82878928
-
-
-
 Hexo署到Githubpage上在国内访问速度很慢，正好前段时间买了一个腾讯云服务器，就干脆把hexo生成的博客文件直接放到云上跑算了，本文记录将hexo同时部署到GitHub与腾讯云服务器的过程。参考博客https://blog.csdn.net/StaunchKai/article/details/82878928
 
 ## 部署环境

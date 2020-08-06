@@ -75,7 +75,7 @@ float: left;
 
 避免如下情况导致的布局问题，应当进行浮动清除
 
-<img src="CSS定位与浮动\浮动出错.png" style="zoom: 67%;" />
+<img src="http://cdn.ziyedy.top/image/%E5%89%8D%E7%AB%AF/CSS/CSS%E5%AE%9A%E4%BD%8D%E4%B8%8E%E6%B5%AE%E5%8A%A8/%E6%B5%AE%E5%8A%A8%E5%87%BA%E9%94%99.png" style="zoom: 67%;" />
 
 #### 1、给浮动元素的祖先设置合适的高度（大于孩子的高度）
 
@@ -173,7 +173,7 @@ div {
 
 表现：
 
-<img src="CSS定位与浮动\绝对定位.png" style="zoom: 67%;" />
+<img src="http://cdn.ziyedy.top/image/%E5%89%8D%E7%AB%AF/CSS/CSS%E5%AE%9A%E4%BD%8D%E4%B8%8E%E6%B5%AE%E5%8A%A8/%E7%BB%9D%E5%AF%B9%E5%AE%9A%E4%BD%8D.png" style="zoom: 67%;" />
 
 
 
@@ -195,15 +195,15 @@ div {
 
 （1）如果用**top描述**，那么参考点就是**页面的左上角**，而不是浏览器的左上角
 
-<img src="CSS定位与浮动\定位1.png" style="zoom:75%;" />
+<img src="http://cdn.ziyedy.top/image/%E5%89%8D%E7%AB%AF/CSS/CSS%E5%AE%9A%E4%BD%8D%E4%B8%8E%E6%B5%AE%E5%8A%A8/%E5%AE%9A%E4%BD%8D1.png" style="zoom:75%;" />
 
 （2）如果用**bottom描述**，那么参考点就是**浏览器首屏窗口尺寸**（好好理解“首屏”二字），对应的页面的左下角
 
-<img src="CSS定位与浮动\定位2.png" style="zoom:75%;" />
+<img src="http://cdn.ziyedy.top/image/%E5%89%8D%E7%AB%AF/CSS/CSS%E5%AE%9A%E4%BD%8D%E4%B8%8E%E6%B5%AE%E5%8A%A8/%E5%AE%9A%E4%BD%8D2.png" style="zoom:75%;" />
 
 （3）一个绝对定位的元素，如果父辈元素中也出现了已定位（无论是绝对定位、相对定位，还是固定定位）的元素，那么将以父辈这个元素，为参考点。
 
-<img src="CSS定位与浮动\定位3.png" style="zoom:75%;" />
+<img src="http://cdn.ziyedy.top/image/%E5%89%8D%E7%AB%AF/CSS/CSS%E5%AE%9A%E4%BD%8D%E4%B8%8E%E6%B5%AE%E5%8A%A8/%E5%AE%9A%E4%BD%8D3.png" style="zoom:75%;" />
 
 子绝父相：使得整体不脱离文档流
 
