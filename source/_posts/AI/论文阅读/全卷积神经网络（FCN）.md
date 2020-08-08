@@ -5,8 +5,8 @@ tags:
 	- CNN
 	- 语义分割
 categories:
-	- 学习笔记
-	- 论文
+	- AI
+	- 论文阅读
 fileName: FCN
 ---
 

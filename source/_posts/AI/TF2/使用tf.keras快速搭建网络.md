@@ -1,5 +1,5 @@
 ---
-title: 使用tf.keras快速搭建
+title: 使用tf.keras快速搭建网络
 date: 2020-08-07 20:22:41
 tags:
 	- AI
