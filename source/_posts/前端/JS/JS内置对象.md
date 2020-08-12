@@ -11,10 +11,6 @@ fileName: js-buildin-obj
 
 
 
-
-
-
-
 ## 数组
 
 数组（Array）是内置对象（typeof返回值为object）。数组中的元素可以是任意的数据类型，也可以是对象，也可以是函数，也可以是数组

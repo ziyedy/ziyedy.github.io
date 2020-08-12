@@ -6,8 +6,8 @@ tags:
 	- GUI
 categories:
 	- Python
-	- GUI
-fileName: pyqt1
+	- PyQt5
+fileName: pyqt5-env-ide-build
 ---
 
 

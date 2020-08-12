@@ -4,7 +4,7 @@ date: 2020-06-20 09:41:07
 tags:
 categories:
 	- Python
-	- 语言基础
+	- 常用模块
 fileName: Python_os1
 ---
 
