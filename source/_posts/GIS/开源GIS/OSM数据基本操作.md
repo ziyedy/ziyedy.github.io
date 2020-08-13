@@ -5,6 +5,7 @@ tags:
     - GIS
 categories:
     - GIS
+	- 开源GIS
 fileName: osm_data_process
 ---
 ## .osm文件在ArcGis中打开

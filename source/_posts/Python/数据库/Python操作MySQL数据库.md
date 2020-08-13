@@ -2,10 +2,12 @@
 title: Python操作MySQL数据库
 date: 2020-06-15 15:37:28
 tags:
+	- Python
+	- 数据库
 categories:
 	- Python
 	- 数据库
-fileName: python_mysql
+fileName: python_mysql_handle
 ---
 
 123
@@ -86,6 +88,3 @@ pool = mysql.connector.pooling.MySQLConnectionPool(
 )
 con = pool.get_connection()
 ```
-
-
-
