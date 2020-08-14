@@ -10,9 +10,11 @@ categories:
 fileName: python_mysql_handle
 ---
 
-123
+**使用`mysql.connector`模块实现MySQL与Python的交互**
 
-创建连接
+### 创建连接
+
+代码示例如下
 
 ```
 import mysql.connector
@@ -34,9 +36,11 @@ con.close()
 
 
 
-游标（Cursor）
+### 游标（Cursor）
 
-执行SQL语句
+`mysql.connector`中使用游标来执行SQL语句，并且查询结果也会保存在游标中
+
+#### 执行SQL语句
 
 ```
 curser = con.cursor()
@@ -88,3 +92,8 @@ pool = mysql.connector.pooling.MySQLConnectionPool(
 )
 con = pool.get_connection()
 ```
+
+
+
+### SQL注入攻击
+

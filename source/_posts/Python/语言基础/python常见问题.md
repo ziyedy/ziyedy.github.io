@@ -2,8 +2,10 @@
 title: python常见问题
 date: 2020-06-26 17:29:13
 tags:
+	- Python
 categories:
 	- Python
+	- 语言基础
 fileName: python_method
 ---
 

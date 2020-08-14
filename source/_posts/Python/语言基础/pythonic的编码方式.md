@@ -19,9 +19,11 @@ a, b = b, a
 
 
 ```
-a = Curry
-b = Player
+a = 'Curry'
+b = 'Player'
 print("%s is the best %s" % (a,b))
+#################
+Curry is the best Player
 ```
 
 
@@ -30,7 +32,7 @@ enumerate() 提供列表的索引值和数值
 
 
 
-将两个字典合并
+### 将两个字典合并（解包操作）
 
 ```
 a = {}
