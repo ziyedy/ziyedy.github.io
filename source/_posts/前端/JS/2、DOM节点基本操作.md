@@ -1,5 +1,5 @@
 ---
-title: DOM节点基本操作
+title: 2、DOM节点基本操作
 date: 2020-06-21 14:38:46
 tags:
 	- 前端
@@ -61,6 +61,20 @@ document.getElementsByTagName("div1")[0];
 var class1 = document.getElementsByClassName("class1");
 document.getElementsByClassName("class1")[0];
 ```
+
+### querySelector()方法
+
+```
+document.querySelector(css选择器);
+
+// 获取文档中有 "target" 属性的第一个 <a> 元素
+document.querySelector("a[target]");
+
+// 找到符合条件的所有元素
+document.querySelectorAll(css选择器);
+```
+
+
 
 
 
@@ -204,6 +218,20 @@ document.getElementsByClassName("class1")[0];
 ```
 元素节点.removeAttribute(属性名);
 ```
+
+### 类名的增删操作
+
+```
+Node.classList.add("class") // 添加class
+
+Node.classList.remove("class") // 移除class
+
+Node.classList.toggle("class") // 切换class，有则移除，无则添加
+
+Node.classList.contains("class") // 检测是否存在class
+```
+
+
 
 
 

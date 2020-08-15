@@ -1,8 +1,8 @@
 ---
-title: JS基础
+title: 1、JS基础
 date: 2020-07-29 20:14:04
 tags:
-	- 前端
+	- JS
 categories:
 	- 前端
 	- JS

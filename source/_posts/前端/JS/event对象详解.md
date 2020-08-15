@@ -1,12 +1,12 @@
 ---
-title: JS事件处理
-date: 2020-07-30 22:51:57
+title: 2.1、JS事件处理
+date: 2020-08-15 22:51:57
 tags:
 	- 前端
 categories:
 	- 前端
 	- JS
-fileName: js-event-handle
+fileName: event-obj
 ---
 
 ## 事件
@@ -100,6 +100,14 @@ element.addEventListener('click', function () {
 ### event属性
 
 ![](http://cdn.ziyedy.top/image/JS%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86/event%E5%B1%9E%E6%80%A7.png)
+
+除此之外，还有以下等信息：
+
+```
+keyCode	// 返回响应的键盘信息
+```
+
+
 
 
 
