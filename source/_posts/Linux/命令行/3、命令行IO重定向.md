@@ -1,5 +1,5 @@
 ---
-title: Linux命令行IO重定向
+title: 命令行IO重定向
 date: 2020-08-04 09:18:16
 tags:
    - Linux
