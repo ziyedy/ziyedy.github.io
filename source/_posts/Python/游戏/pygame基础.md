@@ -6,7 +6,7 @@ tags:
 categories:
 	- Python
 	- 游戏
-fileName: pygame1
+fileName: pygame-basic-knowledge
 ---
 
 官方文档：https://www.pygame.org/docs/

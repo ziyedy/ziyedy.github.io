@@ -1,9 +1,12 @@
 ---
-title: post
+title: PyQt5基本组件
 date: 2020-08-10 16:18:07
 tags:
+	- PyQt5
 categories:
-fileName:a
+	- Python
+	- PyQt5
+fileName: pyqt5-basic-widget
 ---
 
 

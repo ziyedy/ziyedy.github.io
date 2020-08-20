@@ -3,9 +3,9 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 子夜
+title: 子夜子夜
 subtitle: ''
-description: ''
+description: 子夜写字的地方
 keywords:
 author: 子夜
 language: zh-Hans
@@ -13,7 +13,7 @@ timezone: ''
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://www.ziyedy.top
+url: http://ziyedy.top
 root: /
 # permalink: :year/:month/:day/:title/
 permalink: page/:fileName.html
@@ -99,8 +99,16 @@ theme: 3-hexo
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: git
-  repo:
-    github: git@github.com:ziyedy/ziyedy.github.io.git
-    git1: git@118.126.106.242:/home/git/blog.git 
-  branch: master
+  - type: git
+    repo:
+      github: git@github.com:ziyedy/ziyedy.github.io.git
+      git1: git@118.126.106.242:/home/git/blog.git 
+    branch: master
+  - type: baidu_url_submitter
+
+
+baidu_url_submit:
+  count: 100               # 提交最新的多少个链接
+  host: ziyedy.top    # 在百度站长平台中添加的域名
+  token: xbJpKpPCXbhWdfvz      # 秘钥
+  path: baidu_urls.txt   # 文本文档的地址， 新链接会保存在此文本文档里

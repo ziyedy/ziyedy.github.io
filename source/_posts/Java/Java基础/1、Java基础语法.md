@@ -1,5 +1,5 @@
 ---
-title: 1、Java基础语法
+title: Java基础语法
 date: 2020-06-27 17:25:12
 tags:
 	- Java

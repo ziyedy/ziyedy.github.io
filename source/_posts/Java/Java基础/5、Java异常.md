@@ -1,5 +1,5 @@
 ---
-title: 5、Java异常
+title: Java异常
 date: 2020-07-28 11:38:50
 tags:
 	- Java

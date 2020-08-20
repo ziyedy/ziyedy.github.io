@@ -1,5 +1,5 @@
 ---
-title: 6、Java泛型
+title: Java泛型
 date: 2020-07-28 11:40:48
 tags:
 	- Java

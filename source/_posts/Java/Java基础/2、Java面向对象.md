@@ -1,5 +1,5 @@
 ---
-title: 2、Java面向对象
+title: Java面向对象
 date: 2020-07-04 10:43:51
 tags:
 	- Java

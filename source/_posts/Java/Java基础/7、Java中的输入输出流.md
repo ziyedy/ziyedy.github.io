@@ -1,5 +1,5 @@
 ---
-title: 7、Java中的输入输出流
+title: Java中的输入输出流
 date: 2020-07-28 08:21:32
 tags:
 	- java

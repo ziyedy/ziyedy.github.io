@@ -1,5 +1,5 @@
 ---
-title: 4、Java多线程
+title: Java多线程
 date: 2020-07-12 18:47:21
 tags:
 	- Java

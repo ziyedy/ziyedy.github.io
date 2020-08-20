@@ -3,7 +3,9 @@ title: vi基本用法
 date: 2020-08-16 09:52:18
 tags:
 categories:
-fileName:
+	- 其他
+	- 工作效率
+fileName: vim-basic-use
 ---
 
 ### 启动vi

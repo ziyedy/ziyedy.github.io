@@ -7,7 +7,7 @@ tags:
 categories:
 	- Python
 	- 数据库
-fileName: python_mysql_handle
+fileName: python-mysql-handle
 ---
 
 **使用`mysql.connector`模块实现MySQL与Python的交互**
