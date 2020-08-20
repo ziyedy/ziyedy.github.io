@@ -2,24 +2,27 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>全卷积神经网络（FCN） | 子夜</title>
-  <meta name="keywords" content=" CNN , 语义分割 ">
-  <meta name="description" content="全卷积神经网络（FCN） | 子夜">
+  <title>PyQt5基本组件 | 子夜子夜</title>
+  <meta name="keywords" content=" PyQt5 ">
+  <meta name="description" content="PyQt5基本组件 | 子夜子夜">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="图的基本概念图是由顶点的集合和顶点之间的边的集合组成的，通常表示为G(V, E)。其中G表示一个图，V是图G中的顶点的集合，E是图G中边的集合。 图按照边是否有方向和边是否带权重可以分为四类，即有向无权图、有向有权图、无向无权图、无向有权图。 无向图的边通常使用“()”表示，如A与B之间的边就是(A, B)或(B, A) 有向边则通常使用“&lt;&gt;”表示，如A到B的边就是&lt;A, B&amp;">
+<meta name="description" content="事件事件指的是一些特定的交互瞬间，如点击某个元素等等 JavaScript 是以事件驱动为核心的一门语言。JavaScript 与 HTML 之间的交互是通过事件实现的。 事件的基本要素 事件源：引发后续事件的html标签。  事件：js中已经定义好了（见下图）。  事件驱动程序：对样式和html的操作。也就是DOM。    事件程序的基本书写1、获取事件源详见DOM操作中的相关操作，主要有doc">
 <meta property="og:type" content="article">
-<meta property="og:title" content="图的概念与存储结构">
-<meta property="og:url" content="http://www.ziyedy.top/page/graph-basic-knowledge.html">
-<meta property="og:site_name" content="子夜">
-<meta property="og:description" content="图的基本概念图是由顶点的集合和顶点之间的边的集合组成的，通常表示为G(V, E)。其中G表示一个图，V是图G中的顶点的集合，E是图G中边的集合。 图按照边是否有方向和边是否带权重可以分为四类，即有向无权图、有向有权图、无向无权图、无向有权图。 无向图的边通常使用“()”表示，如A与B之间的边就是(A, B)或(B, A) 有向边则通常使用“&lt;&gt;”表示，如A到B的边就是&lt;A, B&amp;">
-<meta property="og:image" content="http://cdn.ziyedy.top/image/%E5%9B%BE%E7%9A%84%E6%A6%82%E5%BF%B5%E4%B8%8E%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5.png">
-<meta property="og:image" content="http://cdn.ziyedy.top/image/%E5%9B%BE%E7%9A%84%E6%A6%82%E5%BF%B5%E4%B8%8E%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/%E9%82%BB%E6%8E%A5%E8%A1%A8.png">
-<meta property="article:published_time" content="2020-08-15T20:00:14.000Z">
-<meta property="article:modified_time" content="2020-08-17T15:22:30.779Z">
+<meta property="og:title" content="2.1、JS事件处理">
+<meta property="og:url" content="http://ziyedy.top/page/event-obj.html">
+<meta property="og:site_name" content="子夜子夜">
+<meta property="og:description" content="事件事件指的是一些特定的交互瞬间，如点击某个元素等等 JavaScript 是以事件驱动为核心的一门语言。JavaScript 与 HTML 之间的交互是通过事件实现的。 事件的基本要素 事件源：引发后续事件的html标签。  事件：js中已经定义好了（见下图）。  事件驱动程序：对样式和html的操作。也就是DOM。    事件程序的基本书写1、获取事件源详见DOM操作中的相关操作，主要有doc">
+<meta property="og:image" content="http://cdn.ziyedy.top/image/JS%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86/js%E4%BA%8B%E4%BB%B6.png">
+<meta property="og:image" content="http://cdn.ziyedy.top/image/JS%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86/event%E4%BF%A1%E6%81%AF.png">
+<meta property="og:image" content="http://cdn.ziyedy.top/image/JS%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86/event%E5%B1%9E%E6%80%A7.png">
+<meta property="og:image" content="http://cdn.ziyedy.top/image/JS%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86/%E6%8D%95%E8%8E%B7%E4%B8%8E%E5%86%92%E6%B3%A1.png">
+<meta property="og:image" content="http://cdn.ziyedy.top/image/JS%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86/%E5%86%92%E6%B3%A1%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C.png">
+<meta property="article:published_time" content="2020-08-15T14:51:57.000Z">
+<meta property="article:modified_time" content="2020-08-15T08:05:44.656Z">
 <meta property="article:author" content="子夜">
-<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://cdn.ziyedy.top/image/%E5%9B%BE%E7%9A%84%E6%A6%82%E5%BF%B5%E4%B8%8E%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5.png">
+<meta name="twitter:image" content="http://cdn.ziyedy.top/image/JS%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86/js%E4%BA%8B%E4%BB%B6.png">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -130,15 +133,15 @@
 
 
 <ul>
-    <li><div class="all active">全部文章<small>(94)</small></div></li>
+    <li><div class="all active">全部文章<small>(96)</small></div></li>
     
         
             
-            <li><div data-rel="Python"><i class="fold iconfont icon-right"></i>Python<small>(17)</small></div>
+            <li><div data-rel="Python"><i class="fold iconfont icon-right"></i>Python<small>(18)</small></div>
                 
                     <ul class="sub hide">
                         
-                        <li><div data-rel="PyQt5">PyQt5<small>(1)</small></div>
+                        <li><div data-rel="PyQt5">PyQt5<small>(2)</small></div>
                             
                         </li>
                             
@@ -450,8 +453,8 @@
     </div>
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="94">
-<input type="hidden" id="yelog_site_word_count" value="86.6k">
+<input type="hidden" id="yelog_site_posts_number" value="96">
+<input type="hidden" id="yelog_site_word_count" value="87.5k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -516,10 +519,6 @@
     
     <li class="article-tag-list-item">
         <a class="color4">二叉树</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a class="color4">CNN</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -608,6 +607,10 @@
     
     <li class="article-tag-list-item">
         <a class="color5">机器学习</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">PyQt5</a>
     </li>
     
     <div class="clearfix"></div>
@@ -809,7 +812,7 @@
         </a>
         
         <a  class="Python 游戏 "
-           href="/page/pygame1.html"
+           href="/page/pygame-basic-knowledge.html"
            data-tag="pygame"
            data-author="" >
             <span class="post-title" title="pygame基础">pygame基础</span>
@@ -865,7 +868,7 @@
         </a>
         
         <a  class="Python 数据库 "
-           href="/page/python_mysql_handle.html"
+           href="/page/python-mysql-handle.html"
            data-tag="数据库,Python"
            data-author="" >
             <span class="post-title" title="Python操作MySQL数据库">Python操作MySQL数据库</span>
@@ -924,7 +927,7 @@
            href="/page/java-orient-object.html"
            data-tag="Java"
            data-author="" >
-            <span class="post-title" title="2、Java面向对象">2、Java面向对象</span>
+            <span class="post-title" title="Java面向对象">Java面向对象</span>
             <span class="post-date" title="2020-07-04 10:43:51">2020/07/04</span>
         </a>
         
@@ -932,7 +935,7 @@
            href="/page/java-collection.html"
            data-tag="Java"
            data-author="" >
-            <span class="post-title" title="3、Java容器">3、Java容器</span>
+            <span class="post-title" title="Java容器">Java容器</span>
             <span class="post-date" title="2020-07-10 14:34:11">2020/07/10</span>
         </a>
         
@@ -940,7 +943,7 @@
            href="/page/java-interface.html"
            data-tag=""
            data-author="" >
-            <span class="post-title" title="3、Java接口与抽象类">3、Java接口与抽象类</span>
+            <span class="post-title" title="Java接口与抽象类">Java接口与抽象类</span>
             <span class="post-date" title="2020-07-28 11:38:34">2020/07/28</span>
         </a>
         
@@ -948,7 +951,7 @@
            href="/page/Java-exception.html"
            data-tag="Java"
            data-author="" >
-            <span class="post-title" title="5、Java异常">5、Java异常</span>
+            <span class="post-title" title="Java异常">Java异常</span>
             <span class="post-date" title="2020-07-28 11:38:50">2020/07/28</span>
         </a>
         
@@ -956,7 +959,7 @@
            href="/page/java4.html"
            data-tag="Java"
            data-author="" >
-            <span class="post-title" title="4、Java多线程">4、Java多线程</span>
+            <span class="post-title" title="Java多线程">Java多线程</span>
             <span class="post-date" title="2020-07-12 18:47:21">2020/07/12</span>
         </a>
         
@@ -964,7 +967,7 @@
            href="/page/java-input-output.html"
            data-tag="java"
            data-author="" >
-            <span class="post-title" title="7、Java中的输入输出流">7、Java中的输入输出流</span>
+            <span class="post-title" title="Java中的输入输出流">Java中的输入输出流</span>
             <span class="post-date" title="2020-07-28 08:21:32">2020/07/28</span>
         </a>
         
@@ -980,7 +983,7 @@
            href="/page/Java-generic.html"
            data-tag="Java"
            data-author="" >
-            <span class="post-title" title="6、Java泛型">6、Java泛型</span>
+            <span class="post-title" title="Java泛型">Java泛型</span>
             <span class="post-date" title="2020-07-28 11:40:48">2020/07/28</span>
         </a>
         
@@ -996,7 +999,7 @@
            href="/page/java-basic-grammar.html"
            data-tag="Java"
            data-author="" >
-            <span class="post-title" title="1、Java基础语法">1、Java基础语法</span>
+            <span class="post-title" title="Java基础语法">Java基础语法</span>
             <span class="post-date" title="2020-06-27 17:25:12">2020/06/27</span>
         </a>
         
@@ -1080,14 +1083,6 @@
             <span class="post-date" title="2020-08-07 20:22:41">2020/08/07</span>
         </a>
         
-        <a  class=""
-           href="/page/null.html"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title="post">post</span>
-            <span class="post-date" title="2020-08-09 15:50:25">2020/08/09</span>
-        </a>
-        
         <a  class="Linux 命令行 "
            href="/page/linux-terminal-1.html"
            data-tag="Linux"
@@ -1104,28 +1099,12 @@
             <span class="post-date" title="2020-08-04 09:18:16">2020/08/04</span>
         </a>
         
-        <a  class="AI 论文阅读 "
-           href="/page/FCN.html"
-           data-tag="CNN,语义分割"
-           data-author="" >
-            <span class="post-title" title="全卷积神经网络（FCN）">全卷积神经网络（FCN）</span>
-            <span class="post-date" title="2020-03-23 11:50:01">2020/03/23</span>
-        </a>
-        
         <a  class="Linux 命令行 "
            href="/page/linux-temp.html"
            data-tag="Linux"
            data-author="" >
             <span class="post-title" title="权限">权限</span>
             <span class="post-date" title="2020-08-06 10:00:19">2020/08/06</span>
-        </a>
-        
-        <a  class="Java Java基础 "
-           href="/page/java-for-algorithm-test.html"
-           data-tag="Java"
-           data-author="" >
-            <span class="post-title" title="Java容器与方法（常用于算法题）">Java容器与方法（常用于算法题）</span>
-            <span class="post-date" title="2020-08-15 14:34:11">2020/08/15</span>
         </a>
         
         <a  class="Linux 命令行 "
@@ -1153,7 +1132,7 @@
         </a>
         
         <a  class="Python 常用模块 "
-           href="/page/Python_os1.html"
+           href="/page/Python-os.html"
            data-tag=""
            data-author="" >
             <span class="post-title" title="Python中os模块的常用操作">Python中os模块的常用操作</span>
@@ -1368,6 +1347,46 @@
             <span class="post-date" title="2020-07-31 13:24:46">2020/07/31</span>
         </a>
         
+        <a  class=""
+           href="/page/null.html"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="post">post</span>
+            <span class="post-date" title="2020-08-18 22:42:30">2020/08/18</span>
+        </a>
+        
+        <a  class="AI 论文阅读 "
+           href="/page/FCN-summary.html"
+           data-tag="语义分割"
+           data-author="" >
+            <span class="post-title" title="Fully Convolutional Networks for Semantic Segmentation">Fully Convolutional Networks for Semantic Segmentation</span>
+            <span class="post-date" title="2020-03-23 11:50:01">2020/03/23</span>
+        </a>
+        
+        <a  class="Java Java基础 "
+           href="/page/java-for-algorithm-test.html"
+           data-tag="Java"
+           data-author="" >
+            <span class="post-title" title="Java容器与方法（常用于算法题）">Java容器与方法（常用于算法题）</span>
+            <span class="post-date" title="2020-08-15 14:34:11">2020/08/15</span>
+        </a>
+        
+        <a  class=""
+           href="/page/pyqt5-signals-and-slots.html"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="post">post</span>
+            <span class="post-date" title="2020-08-12 16:18:07">2020/08/12</span>
+        </a>
+        
+        <a  class="Python PyQt5 "
+           href="/page/pyqt5-basic-widget.html"
+           data-tag="PyQt5"
+           data-author="" >
+            <span class="post-title" title="PyQt5基本组件">PyQt5基本组件</span>
+            <span class="post-date" title="2020-08-10 16:18:07">2020/08/10</span>
+        </a>
+        
     </nav>
 </div>
     </div>
@@ -1380,9 +1399,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-AI/论文阅读/全卷积神经网络（FCN）" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Python/PyQt5/PyQt5基本组件" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">全卷积神经网络（FCN）</h1>
+        <h1 class="article-title">PyQt5基本组件</h1>
     
     <div class="article-meta">
         
@@ -1390,30 +1409,28 @@
         
         <span class="book">
             
-                <a  data-rel="AI">AI</a>/
+                <a  data-rel="Python">Python</a>/
             
-                <a  data-rel="论文阅读">论文阅读</a>
+                <a  data-rel="PyQt5">PyQt5</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a class="color4">CNN</a>
-            
-            <a class="color5">语义分割</a>
+            <a class="color1">PyQt5</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-08-08 23:11:51'>2020-03-23 11:50</time>
+        创建时间:<time class="date" title='更新时间: 2020-08-20 10:23:45'>2020-08-10 16:18</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:372</span>
+        <span>字数:831</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -1432,7 +1449,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#核心思想"><span class="toc-text">核心思想</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#主要内容"><span class="toc-text">主要内容</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#构建一般程序"><span class="toc-text">构建一般程序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#导入"><span class="toc-text">导入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建一个QApplication对象"><span class="toc-text">创建一个QApplication对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建一个QWidget对象"><span class="toc-text">创建一个QWidget对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进入主循环"><span class="toc-text">进入主循环</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#布局管理"><span class="toc-text">布局管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#绝对布局"><span class="toc-text">绝对布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#布局管理器"><span class="toc-text">布局管理器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#信号与槽"><span class="toc-text">信号与槽</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#窗口"><span class="toc-text">窗口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#QMainWindow"><span class="toc-text">QMainWindow</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#QWidget"><span class="toc-text">QWidget</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#QLabel"><span class="toc-text">QLabel</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#按钮"><span class="toc-text">按钮</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对话框"><span class="toc-text">对话框</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#QMessageBox"><span class="toc-text">QMessageBox</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#QInputDialog"><span class="toc-text">QInputDialog</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#QFileDialog"><span class="toc-text">QFileDialog</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#绘图"><span class="toc-text">绘图</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#QPainter"><span class="toc-text">QPainter</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多线程"><span class="toc-text">多线程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#QTimer"><span class="toc-text">QTimer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#QThread"><span class="toc-text">QThread</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网页交互"><span class="toc-text">网页交互</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#方法"><span class="toc-text">方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#示例"><span class="toc-text">示例</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1448,34 +1465,55 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Fully Convolutional Networks for Semantic Segmentation    （2015 CVPR）</p>
-<h3 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h3><p>建立全卷积神经网络，将经典的分类网络如AlexNet、VGG、GoogLeNet中网络结构最后的全连接层用上采样替换</p>
-<p>pixelwise prediction</p>
-<h3 id="主要内容"><a href="#主要内容" class="headerlink" title="主要内容"></a>主要内容</h3><ol>
-<li><strong>全卷积化</strong></li>
-</ol>
-<ul>
-<li>将经典CNN网络结构最后的全连接层替换为卷积层（即对最后一个特征图（feature）进行反卷积操作），使得输出图像与输入图像的尺寸完全一致。</li>
-<li>经典CNN网络全连接层后对图像进行分类改为了对所有像素都进行softmax分类计算。可以理解为传统分类网络将一幅图像作为一个分类样本，而FCN则将图像中的每一个像素作为分类样本。这样其实就解决了图像语义分割的问题，即进行了密集预测（dense prediction）</li>
-</ul>
-<ol start="2">
-<li>进行了对特征图的<strong>上采样</strong></li>
-</ol>
-<p>文中主要提出了三种上采样方法</p>
-<ol>
-<li>Shift-and-Stitch</li>
-<li>decreasing subsampling</li>
-<li>Deconvolution</li>
-</ol>
-<ol start="3">
-<li>使用了<strong>跳跃结构</strong>（ skip architecture）</li>
-</ol>
-<blockquote>
-<p>We address this by <strong>adding skips</strong> that combine the final prediction layer with lower layers with finer strides</p>
-</blockquote>
-<p>使用跳跃结构融合多层输出，使得网络能够预测更多的位置信息。因为在浅层网络位置信息等保留的比较好，将他们加入到深层输出中，就可以预测到更精细的信息。</p>
-<p>本文的做法为将对应的两个位置的网络进行逐元素相加的处理。</p>
+        <h3 id="构建一般程序"><a href="#构建一般程序" class="headerlink" title="构建一般程序"></a>构建一般程序</h3><h4 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h4><pre><code>import sys
+from PyQt5.QtWidgets import QApplication, QWidget</code></pre><h4 id="创建一个QApplication对象"><a href="#创建一个QApplication对象" class="headerlink" title="创建一个QApplication对象"></a>创建一个QApplication对象</h4><p>每一个PyQt5程序都需要有一个QApplication对象。</p>
+<pre><code>app = QApplication(sys.argv)</code></pre><h4 id="创建一个QWidget对象"><a href="#创建一个QWidget对象" class="headerlink" title="创建一个QWidget对象"></a>创建一个QWidget对象</h4><p>不为控件指定一个父对象，那么该控件就会被当作窗口处理</p>
+<pre><code>window = QWidget()
+window.show()</code></pre><h4 id="进入主循环"><a href="#进入主循环" class="headerlink" title="进入主循环"></a>进入主循环</h4><p>进入程序主循环，事件处理从本行代码开始。主循环接收事件消息并将其分发给程序的各个控件。</p>
+<p>使用<code>sys.exit()</code>方法退出可以确保程序完整的结束，若程序运行成功，<code>exec_()</code>的返回值为0，否则为非0。（与底层使用C++有关）</p>
+<pre><code>sys.exit(app.exec_())</code></pre><h2 id="布局管理"><a href="#布局管理" class="headerlink" title="布局管理"></a>布局管理</h2><h3 id="绝对布局"><a href="#绝对布局" class="headerlink" title="绝对布局"></a>绝对布局</h3><h3 id="布局管理器"><a href="#布局管理器" class="headerlink" title="布局管理器"></a>布局管理器</h3><p>选中需要布局的几个元素，右键在“布局”中即可选择相应布局</p>
+<p>使用布局管理器后，属性编辑器中geometry属性变为了灰色不可用，说明这些标签的位置大小已经由布局管理器接管了。</p>
+<h2 id="信号与槽"><a href="#信号与槽" class="headerlink" title="信号与槽"></a>信号与槽</h2><p>创建事件循环后，通过建立信号与槽的连接就可以实现对象之间的通信（信号发射时，连接的槽函数会自动执行）</p>
+<p>QObject.signal.connect()</p>
+<h2 id="窗口"><a href="#窗口" class="headerlink" title="窗口"></a>窗口</h2><h3 id="QMainWindow"><a href="#QMainWindow" class="headerlink" title="QMainWindow"></a>QMainWindow</h3><p>QMainWindow、QWidget、QDialog三个类都可以创建窗口。其中主窗口包含菜单栏等等，主窗口继承自（QWidget）</p>
+<p>将按钮button的clicked信号与closeWin槽函数关联起来</p>
+<pre><code>self.button = QPushButton(&#39;关闭&#39;)
+self.button.clicked.connect(self.closeWin)</code></pre><h3 id="QWidget"><a href="#QWidget" class="headerlink" title="QWidget"></a>QWidget</h3><p>基础窗口控件QWidget类是所有用户界面对象的基类，所有窗口和控件都直接或间接继承自QWidget</p>
+<h3 id="QLabel"><a href="#QLabel" class="headerlink" title="QLabel"></a>QLabel</h3><h2 id="按钮"><a href="#按钮" class="headerlink" title="按钮"></a>按钮</h2><p>按钮的基类是QAbstractButton，提供了按钮的通用性功能</p>
+<h2 id="对话框"><a href="#对话框" class="headerlink" title="对话框"></a>对话框</h2><p>对话框的基类是QDialog，主要子类有QMessageBox、QFileDialog、QFontDialog、QInputDialog</p>
+<h3 id="QMessageBox"><a href="#QMessageBox" class="headerlink" title="QMessageBox"></a>QMessageBox</h3><p>弹出提示信息，各参数如下</p>
+<pre><code>QMessageBox.information(QWidget, title, text, buttons, defaultButton)
+QMessageBox.warning()
+QMessageBox.question()
+QMessageBox.critical()
+QMessageBox.about()</code></pre><p>示例</p>
+<pre><code>QMessageBox.information(self, &quot;标题&quot;, &quot;关于对话框&quot;, QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)</code></pre><h3 id="QInputDialog"><a href="#QInputDialog" class="headerlink" title="QInputDialog"></a>QInputDialog</h3><p>该标准对话框可以收集控件输入的信息</p>
+<pre><code>self.btn2 = QPushButton(&quot;获得字符串&quot;)
+self.btn2.clicked.connect(self.getIext)
+self.le2 = QLineEdit()</code></pre><pre><code>def getIext(self):    
+    text, ok = QInputDialog.getText(self, &#39;Text Input Dialog&#39;, &#39;输入姓名:&#39;)
+    if ok:
+        self.le2.setText(str(text)) </code></pre><h3 id="QFileDialog"><a href="#QFileDialog" class="headerlink" title="QFileDialog"></a>QFileDialog</h3><p>QFileDialog是用于打开和保存文件的标准对话框</p>
+<p>主要方法如下</p>
+<pre><code>QFileDialog.getOpenFileName(父组件, 标题, 默认打开目录, 文件拓展名过滤器)</code></pre><p>示例</p>
+<pre><code>f = QFileDialog.getOpenFileName()
+print(f)
+########################
+(&#39;C:/Users/lenovo/Desktop/pyqt/t1.ui&#39;, &#39;All Files (*)&#39;)</code></pre><h2 id="绘图"><a href="#绘图" class="headerlink" title="绘图"></a>绘图</h2><p>主要可以通过QPainter、QPen与QBrush等三个类进行绘图</p>
+<h3 id="QPainter"><a href="#QPainter" class="headerlink" title="QPainter"></a>QPainter</h3><p>绘制方法在QPainter对象的begin()和end()之间。</p>
+<h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h2><p>GUI中部分程序十分耗时可能会造成卡顿，这时候就需要使用多线程技术。PyQt中主要涉及三个内容，一个是使用计时器模块QTimer；一种是使用多线程模块QThread，还有使用事件处理的功能</p>
+<h3 id="QTimer"><a href="#QTimer" class="headerlink" title="QTimer"></a>QTimer</h3><h3 id="QThread"><a href="#QThread" class="headerlink" title="QThread"></a>QThread</h3><p>PyQt线程使用非常简单，建立一个自定义的类（继承自QThread），并实现其run()方法</p>
+<h2 id="网页交互"><a href="#网页交互" class="headerlink" title="网页交互"></a>网页交互</h2><p>PyQt5使用PyQt5.QtWebEngineWidgets中的QWebEngineView控件来展示HTML页面</p>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><pre><code>class MainWindow(QMainWindow):
 
+def __init__(self):
+    super(QMainWindow, self).__init__()
+    self.setWindowTitle(&#39;打开外部网页例子&#39;)
+    self.setGeometry(5, 30, 1355, 730)
+    self.browser = QWebEngineView()
+    # 加载外部页面
+    self.browser.load(QUrl(&#39;http://ziyedy.top&#39;))
+    self.setCentralWidget(self.browser)</code></pre>
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 ziyedy@qq.com </span>
     </div>
@@ -1484,12 +1522,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>全卷积神经网络（FCN）</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">372</span></p>
+    <p><span class="copy-title">文章标题:</span>PyQt5基本组件</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">831</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="子夜">子夜</a></p>
-    <p><span class="copy-title">发布时间:</span>2020-03-23, 11:50:01</p>
-    <p><span class="copy-title">最后更新:</span>2020-08-08, 23:11:51</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/page/FCN.html" title="全卷积神经网络（FCN）">http://www.ziyedy.top/page/FCN.html</a>
+    <p><span class="copy-title">发布时间:</span>2020-08-10, 16:18:07</p>
+    <p><span class="copy-title">最后更新:</span>2020-08-20, 10:23:45</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/page/pyqt5-basic-widget.html" title="PyQt5基本组件">http://ziyedy.top/page/pyqt5-basic-widget.html</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
@@ -1533,7 +1571,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#python','#GUI','#剧评','#hexo','#云服务器','#git','#latex','#论文','#二叉树','#CNN','#语义分割','#散文','#杂文','#日志','#pygame','#matlab','#图像','#前端','#ArcGIS','#GIS','#数据库','#Python','#Java','#数据结构','#java','#Linux','#工作效率','#AI','#QGis','#CSS','#JS','#机器学习',],
+            'data': ['#python','#GUI','#剧评','#hexo','#云服务器','#git','#latex','#论文','#二叉树','#语义分割','#散文','#杂文','#日志','#pygame','#matlab','#图像','#前端','#ArcGIS','#GIS','#数据库','#Python','#Java','#数据结构','#java','#Linux','#工作效率','#AI','#QGis','#CSS','#JS','#机器学习','#PyQt5',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');

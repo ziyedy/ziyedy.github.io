@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Java接口与抽象类 | 子夜子夜</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="Java接口与抽象类 | 子夜子夜">
+  <title>Fully Convolutional Networks for Semantic Segmentation | 子夜子夜</title>
+  <meta name="keywords" content=" 语义分割 ">
+  <meta name="description" content="Fully Convolutional Networks for Semantic Segmentation | 子夜子夜">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="事件事件指的是一些特定的交互瞬间，如点击某个元素等等 JavaScript 是以事件驱动为核心的一门语言。JavaScript 与 HTML 之间的交互是通过事件实现的。 事件的基本要素 事件源：引发后续事件的html标签。  事件：js中已经定义好了（见下图）。  事件驱动程序：对样式和html的操作。也就是DOM。    事件程序的基本书写1、获取事件源详见DOM操作中的相关操作，主要有doc">
 <meta property="og:type" content="article">
@@ -1399,9 +1399,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-Java/Java基础/3、Java接口与抽象类" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-AI/论文阅读/FCN" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Java接口与抽象类</h1>
+        <h1 class="article-title">Fully Convolutional Networks for Semantic Segmentation</h1>
     
     <div class="article-meta">
         
@@ -1409,22 +1409,28 @@
         
         <span class="book">
             
-                <a  data-rel="Java">Java</a>/
+                <a  data-rel="AI">AI</a>/
             
-                <a  data-rel="Java基础">Java基础</a>
+                <a  data-rel="论文阅读">论文阅读</a>
             
         </span>
         
         
+        <span class="tag">
+            
+            <a class="color5">语义分割</a>
+            
+        </span>
+        
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-08-20 10:21:13'>2020-07-28 11:38</time>
+        创建时间:<time class="date" title='更新时间: 2020-08-20 10:19:01'>2020-03-23 11:50</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:10</span>
+        <span>字数:370</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -1443,7 +1449,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#接口与抽象类的区别"><span class="toc-text">接口与抽象类的区别</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Fully-Convolutional-Networks-for-Semantic-Segmentation"><span class="toc-text">Fully Convolutional Networks for Semantic Segmentation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#核心思想"><span class="toc-text">核心思想</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#主要内容"><span class="toc-text">主要内容</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1459,7 +1465,32 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="接口与抽象类的区别"><a href="#接口与抽象类的区别" class="headerlink" title="接口与抽象类的区别"></a>接口与抽象类的区别</h3><p>1、 </p>
+        <h3 id="Fully-Convolutional-Networks-for-Semantic-Segmentation"><a href="#Fully-Convolutional-Networks-for-Semantic-Segmentation" class="headerlink" title="Fully Convolutional Networks for Semantic Segmentation"></a>Fully Convolutional Networks for Semantic Segmentation</h3><h3 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h3><p>建立全卷积神经网络，将经典的分类网络如AlexNet、VGG、GoogLeNet中网络结构最后的全连接层用上采样替换</p>
+<p>pixelwise prediction</p>
+<h3 id="主要内容"><a href="#主要内容" class="headerlink" title="主要内容"></a>主要内容</h3><ol>
+<li><strong>全卷积化</strong></li>
+</ol>
+<ul>
+<li>将经典CNN网络结构最后的全连接层替换为卷积层（即对最后一个特征图（feature）进行反卷积操作），使得输出图像与输入图像的尺寸完全一致。</li>
+<li>经典CNN网络全连接层后对图像进行分类改为了对所有像素都进行softmax分类计算。可以理解为传统分类网络将一幅图像作为一个分类样本，而FCN则将图像中的每一个像素作为分类样本。这样其实就解决了图像语义分割的问题，即进行了密集预测（dense prediction）</li>
+</ul>
+<ol start="2">
+<li>进行了对特征图的<strong>上采样</strong></li>
+</ol>
+<p>文中主要提出了三种上采样方法</p>
+<ol>
+<li>Shift-and-Stitch</li>
+<li>decreasing subsampling</li>
+<li>Deconvolution</li>
+</ol>
+<ol start="3">
+<li>使用了<strong>跳跃结构</strong>（ skip architecture）</li>
+</ol>
+<blockquote>
+<p>We address this by <strong>adding skips</strong> that combine the final prediction layer with lower layers with finer strides</p>
+</blockquote>
+<p>使用跳跃结构融合多层输出，使得网络能够预测更多的位置信息。因为在浅层网络位置信息等保留的比较好，将他们加入到深层输出中，就可以预测到更精细的信息。</p>
+<p>本文的做法为将对应的两个位置的网络进行逐元素相加的处理。</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 ziyedy@qq.com </span>
@@ -1469,12 +1500,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>Java接口与抽象类</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">10</span></p>
+    <p><span class="copy-title">文章标题:</span>Fully Convolutional Networks for Semantic Segmentation</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">370</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="子夜">子夜</a></p>
-    <p><span class="copy-title">发布时间:</span>2020-07-28, 11:38:34</p>
-    <p><span class="copy-title">最后更新:</span>2020-08-20, 10:21:13</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/page/java-interface.html" title="Java接口与抽象类">http://ziyedy.top/page/java-interface.html</a>
+    <p><span class="copy-title">发布时间:</span>2020-03-23, 11:50:01</p>
+    <p><span class="copy-title">最后更新:</span>2020-08-20, 10:19:01</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/page/FCN-summary.html" title="Fully Convolutional Networks for Semantic Segmentation">http://ziyedy.top/page/FCN-summary.html</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>

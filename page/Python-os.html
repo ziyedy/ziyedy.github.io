@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Java接口与抽象类 | 子夜子夜</title>
+  <title>Python中os模块的常用操作 | 子夜子夜</title>
   <meta name="keywords" content="">
-  <meta name="description" content="Java接口与抽象类 | 子夜子夜">
+  <meta name="description" content="Python中os模块的常用操作 | 子夜子夜">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="事件事件指的是一些特定的交互瞬间，如点击某个元素等等 JavaScript 是以事件驱动为核心的一门语言。JavaScript 与 HTML 之间的交互是通过事件实现的。 事件的基本要素 事件源：引发后续事件的html标签。  事件：js中已经定义好了（见下图）。  事件驱动程序：对样式和html的操作。也就是DOM。    事件程序的基本书写1、获取事件源详见DOM操作中的相关操作，主要有doc">
 <meta property="og:type" content="article">
@@ -1399,9 +1399,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-Java/Java基础/3、Java接口与抽象类" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Python/常用模块/Python中os模块的常用操作" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Java接口与抽象类</h1>
+        <h1 class="article-title">Python中os模块的常用操作</h1>
     
     <div class="article-meta">
         
@@ -1409,9 +1409,9 @@
         
         <span class="book">
             
-                <a  data-rel="Java">Java</a>/
+                <a  data-rel="Python">Python</a>/
             
-                <a  data-rel="Java基础">Java基础</a>
+                <a  data-rel="常用模块">常用模块</a>
             
         </span>
         
@@ -1419,12 +1419,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-08-20 10:21:13'>2020-07-28 11:38</time>
+        创建时间:<time class="date" title='更新时间: 2020-08-20 10:24:34'>2020-06-20 09:41</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:10</span>
+        <span>字数:594</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -1443,7 +1443,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#接口与抽象类的区别"><span class="toc-text">接口与抽象类的区别</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#模块简介"><span class="toc-text">模块简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#系统操作"><span class="toc-text">系统操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#目录操作"><span class="toc-text">目录操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Path模块"><span class="toc-text">Path模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#操作实例"><span class="toc-text">操作实例</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1459,8 +1459,55 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="接口与抽象类的区别"><a href="#接口与抽象类的区别" class="headerlink" title="接口与抽象类的区别"></a>接口与抽象类的区别</h3><p>1、 </p>
+        <h3 id="模块简介"><a href="#模块简介" class="headerlink" title="模块简介"></a>模块简介</h3><p>os模块是Python标准库中的一个用于<strong>访问操作系统功能</strong>的模块。使用os模块中提供的接口可以实现跨平台访问。</p>
+<h3 id="系统操作"><a href="#系统操作" class="headerlink" title="系统操作"></a>系统操作</h3><p>os.sep：用于系统路径的分隔符。Windows为“\\”，Linux为“/”。</p>
+<p>os.name：指示正在使用的工作平台。Windows为‘nt’，Linux为‘posix’。</p>
+<p>os.getenv(‘path’)：读取环境变量名称</p>
+<p>os.getcwd()：获取当前路径</p>
+<p>os.getpid()：获取当前进程ID</p>
+<h3 id="目录操作"><a href="#目录操作" class="headerlink" title="目录操作"></a>目录操作</h3><p><strong>os.listdir(path)</strong>：列出指定目录下的所有文件和子目录，包括隐藏文件；参数为空，为当前目录，返回一个列表。</p>
+<p>os.mkdir()：创建一个目录。</p>
+<p>os.rmdir()：删除一个空目录，如果该目录中有文件则删除不了。</p>
+<p>*<em>os.rename(src, dst) *</em>：用于重命名文件或目录，从src改为dst。若运行出错会抛出OSError。</p>
+<h3 id="Path模块"><a href="#Path模块" class="headerlink" title="Path模块"></a>Path模块</h3><p>os.path.exists(path)：判断文件或者目录是否存在。存在返回True，不存在返回False。</p>
+<p>os.path.isfile(path)：判断是否为文件。是返回True，不是返回False。</p>
+<p>os.path.isdir(path)：判断是否为目录。是返回True，不是返回False。</p>
+<p>os.path.abspath()：返回绝对路径</p>
+<p>os.path.realpath(_<em>file_</em>)：获取当前.py文件的目录</p>
+<p>os.path.dirname()：返回文件路径</p>
+<p>os.path.basename(path) ：返回文件名</p>
+<p>os.path.split(path) ：拆分路径dirname和basename，返回为元组</p>
+<p><strong>os.path.splitext(‘’)</strong>：将文件名与后缀名分开</p>
+<p><strong>os.path.join(path, name)</strong>：连接目录与文件名或目录</p>
+<p>示例：</p>
+<pre><code>import os
 
+file_path = os.path.realpath(__file__)  # 该py文件目录
+print(file_path)
+print(os.path.dirname(file_path))   # 上级目录
+print(os.path.basename(file_path))  # py文件名称
+print(os.path.split(file_path)) # 分割目录与名称
+
+##############################################
+C:\Users\lenovo\Desktop\vega\gg.py
+C:\Users\lenovo\Desktop\vega
+gg.py
+(&#39;C:\\Users\\lenovo\\Desktop\\vega&#39;, &#39;gg.py&#39;)</code></pre><h3 id="操作实例"><a href="#操作实例" class="headerlink" title="操作实例"></a>操作实例</h3><p>1、将某一路径下的文件名称中的广告部分去除并填上文件后缀名</p>
+<pre><code>def rename():
+    path = &#39;你的路径&#39;
+    file_list = os.listdir(path)    # 得到文件名列表
+    for file in file_list:
+        old_dir = os.path.join(path, file)    #得到初始路径
+        # 若该文件名为路径，则继续遍历
+        if os.path.isdir(old_dir):
+            continue
+        file_name = os.path.splitext(file)[0]
+        # 在该处进行文件名的字符串更改操作
+        file_type = os.path.splitext(file)[1]
+        # 在该处变更文件的后缀
+        file_name = file_name+file_type
+        new_dir = os.path.join(path, file_name)    # 新的路径
+        os.rename(old_dir, new_dir)    # 完成文件的重命名</code></pre>
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 ziyedy@qq.com </span>
     </div>
@@ -1469,12 +1516,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>Java接口与抽象类</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">10</span></p>
+    <p><span class="copy-title">文章标题:</span>Python中os模块的常用操作</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">594</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="子夜">子夜</a></p>
-    <p><span class="copy-title">发布时间:</span>2020-07-28, 11:38:34</p>
-    <p><span class="copy-title">最后更新:</span>2020-08-20, 10:21:13</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/page/java-interface.html" title="Java接口与抽象类">http://ziyedy.top/page/java-interface.html</a>
+    <p><span class="copy-title">发布时间:</span>2020-06-20, 09:41:07</p>
+    <p><span class="copy-title">最后更新:</span>2020-08-20, 10:24:34</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/page/Python-os.html" title="Python中os模块的常用操作">http://ziyedy.top/page/Python-os.html</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
