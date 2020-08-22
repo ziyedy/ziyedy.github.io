@@ -1,3 +1,6 @@
+http://ziyedy.top/page/pandas-basic-use.html
+http://ziyedy.top/page/python-matplotlib-use.html
+http://ziyedy.top/page/numpy-basic-use.html
 http://ziyedy.top/page/vim-basic-use.html
 http://ziyedy.top/page/graph-basic-knowledge.html
 http://ziyedy.top/page/event-obj.html
@@ -7,6 +10,9 @@ http://ziyedy.top/page/python-bs4-basic.html
 http://ziyedy.top/page/python-requests-basic.html
 http://ziyedy.top/page/pyqt5-signals-and-slots.html
 http://ziyedy.top/page/pyqt5-basic-widget.html
+http://ziyedy.top/page/DPOD-summary.html
+http://ziyedy.top/page/deepim-summary.html
+http://ziyedy.top/page/tf2-nn-basic-handle.html
 http://ziyedy.top/page/tf2-keras-build-nn.html
 http://ziyedy.top/page/nn-basic-concept-summary.html
 http://ziyedy.top/page/TF2-basic-function.html
@@ -36,6 +42,7 @@ http://ziyedy.top/page/java-input-output.html
 http://ziyedy.top/page/Java-string.html
 http://ziyedy.top/page/ds-set-and-map.html
 http://ziyedy.top/page/ds-bst.html
+http://ziyedy.top/page/ds-tree-binarytree.html
 http://ziyedy.top/page/ds_linked_list.html
 http://ziyedy.top/page/ds-queue.html
 http://ziyedy.top/page/java4.html
@@ -48,10 +55,9 @@ http://ziyedy.top/page/ds-stack.html
 http://ziyedy.top/page/ds-dynamic-array.html
 http://ziyedy.top/page/java2.html
 http://ziyedy.top/page/java-orient-object.html
-http://ziyedy.top/page/pythonic.html
 http://ziyedy.top/page/java1.html
 http://ziyedy.top/page/java-basic-grammar.html
-http://ziyedy.top/page/python_method.html
+http://ziyedy.top/page/python-common-method.html
 http://ziyedy.top/page/js-bom-basic-handle.html
 http://ziyedy.top/page/js-dom-basic-handle.html
 http://ziyedy.top/page/Python-os.html
