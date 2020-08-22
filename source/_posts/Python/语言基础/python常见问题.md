@@ -6,8 +6,10 @@ tags:
 categories:
 	- Python
 	- 语言基础
-fileName: python_method
+fileName: python-common-method
 ---
+
+## 项目常用
 
 ### 生成requirements.txt
 
@@ -24,5 +26,37 @@ pipreqs . --encoding=utf8 --force
 
 ```\
 pip install -r requirements.txt
+```
+
+
+
+## pythonic的编码方式
+
+### 变量的交换
+
+```
+a, b = b, a
+```
+
+
+
+### 利用百分号语法进行字符串格式化
+
+```
+a = 'Curry'
+b = 'Player'
+print("%s is the best %s" % (a,b))
+#################
+Curry is the best Player
+```
+
+
+
+### 将两个字典合并（解包操作）
+
+```
+a = {}
+b = {}
+c = {**a, **b}	# 解包
 ```
 

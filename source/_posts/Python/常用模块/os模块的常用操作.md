@@ -1,5 +1,5 @@
 ---
-title: Python中os模块的常用操作
+title: os模块的常用操作
 date: 2020-06-20 09:41:07
 tags:
 categories:

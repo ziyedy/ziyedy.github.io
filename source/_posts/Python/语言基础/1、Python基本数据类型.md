@@ -1,5 +1,5 @@
 ---
-title: 1、Python基本数据类型
+title: Python基本数据类型
 date: 2020-05-08 12:46:26
 tags:
 	- python

@@ -1,5 +1,5 @@
 ---
-title: 7、Python的线程与进程
+title: Python的线程与进程
 date: 2020-05-18 09:59:00
 tags:
 categories:

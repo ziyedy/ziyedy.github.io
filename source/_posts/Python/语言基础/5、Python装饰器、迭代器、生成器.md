@@ -1,5 +1,5 @@
 ---
-title: 5、Python装饰器、迭代器、生成器
+title: Python装饰器、迭代器、生成器
 date: 2020-05-13 14:25:10
 tags:
 categories:

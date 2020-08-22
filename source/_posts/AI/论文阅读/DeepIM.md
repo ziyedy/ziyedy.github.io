@@ -1,8 +1,7 @@
 ---
-title: DeepIM: Deep Iterative Matching for 6D Pose Estimation
+title: DeepIM：Deep Iterative Matching for 6D Pose Estimation
 date: 2020-08-08 22:41:52
 tags:
-	- AI
 	- 6dof
 categories:
 	- AI

@@ -32,7 +32,7 @@
         <%}%>
 
         /*高亮代码块行号*/
-        <%if(theme.highlight && theme.highlight.on&& theme.highlight.lineNum){%>
+        <%if(theme.highlight && theme.highlight.on && theme.highlight.lineNum){%>
         $('pre code').each(function(){
             var lines = $(this).text().split('\n').length - 1, widther='';
             if (lines>99) {

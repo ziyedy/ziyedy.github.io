@@ -1,5 +1,5 @@
 ---
-title: 8、Python的一些语言特性与机制
+title: Python的一些语言特性与机制
 date: 2020-06-19 15:01:02
 tags:
 categories:

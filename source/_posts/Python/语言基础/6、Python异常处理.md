@@ -1,5 +1,5 @@
 ---
-title: 6、Python异常处理
+title: Python异常处理
 date: 2020-05-15 15:15:49
 tags:
 categories:

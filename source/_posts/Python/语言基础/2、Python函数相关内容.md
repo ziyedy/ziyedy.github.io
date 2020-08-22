@@ -1,5 +1,5 @@
 ---
-title: 2、Python函数相关内容
+title: Python函数相关内容
 date: 2020-05-08 15:20:53
 tags:
 	- python

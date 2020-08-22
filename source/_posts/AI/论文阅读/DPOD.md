@@ -1,5 +1,5 @@
 ---
-title: DPOD: 6D Pose Object Detector and Refiner
+title: DPOD：6D Pose Object Detector and Refiner
 date: 2020-08-09 09:30:37
 tags:
 	- 6dof

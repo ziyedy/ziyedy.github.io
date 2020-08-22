@@ -1,5 +1,5 @@
 ---
-title: 3、Python类的使用
+title: Python类的使用
 date: 2020-05-08 15:40:45
 tags:
 categories:
