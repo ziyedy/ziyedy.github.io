@@ -104,9 +104,19 @@ Collections.sort(list);
 
 
 
+Comparator接口
+
+强行对某个对象进行整体排序的比较函数
+
+可以将Comparator传递给sort方法（Collections.sort()或Arrays.sort）
+
+int compare()
 
 
 
+Comparable接口
+
+此接口强行对实现它的每个类的对象进行整体排序
 
 
 
