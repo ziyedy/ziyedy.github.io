@@ -106,7 +106,7 @@ model.compile(optimizer=优化器,
 ‘sparse_categorical_crossentropy' or tf.keras.losses.SparseCategoricalCrossentropy(from_logits=False)
 ```
 
-损失函数常需要经过 softmax 等函数将输出转化为概率分布的形式。from_logits 则用来标注该损失函数是否需要转换为概率的形式，取 False 时表示转化为概率分布，取 True 时表示没有转化为概率分布，直接输出。
+损失函数常需要经过 softmax 等函数将输出转化为概率分布的形式。**from_logits 则用来标注该损失函数是否需要转换为概率的形式，取 False 时表示转化为概率分布，取 True 时表示没有转化为概率分布，直接输出**。
 
 #### metrics
 
@@ -146,7 +146,7 @@ model.fit(x_train, y_train, batch_size=32, epochs=500, validation_split=0.2, val
 
 ### 使用class封装上述过程
 
-将上述流程封装到一个类中，即为：
+将上述流程封装到一个类中，即为：（**只需要完成构造函数和call函数即可**）
 
 ```
 import tensorflow as tf
