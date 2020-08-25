@@ -11,14 +11,20 @@ fileName: tf2-keras-build-nn
 
 主要在于与《TF2原生语法构建简单网络》的比较
 
-### 逐层搭建网络结构
+## 逐层搭建网络结构
 
-#### tf.keras.models.Sequential()
+### tf.keras.models.Sequential()
 
 Sequential 函数是一个容器，封装了神经网络结构，主要可以进行以下输入：
 
 ```
+# 直接在列表中加入各层
+model = tf.keras.models.Sequential([layer1, layer2, ...])
+
+# 使用add加入各层
 model = tf.keras.models.Sequential()
+model.add(layer1)
+model.add(layer2)
 ```
 
 #### 压平层
@@ -146,7 +152,7 @@ model.fit(x_train, y_train, batch_size=32, epochs=500, validation_split=0.2, val
 
 ### 使用class封装上述过程
 
-将上述流程封装到一个类中，即为：（**只需要完成构造函数和call函数即可**）
+将上述流程封装到一个类中，即为：（**只需要重写构造函数和call函数即可**）
 
 ```
 import tensorflow as tf
@@ -171,3 +177,95 @@ model.fit(x_train, y_train, batch_size=32, epochs=500, validation_split=0.2, val
 model.summary()
 ```
 
+
+
+## 实例（以Fashion MNIST数据集）为例
+
+### 载入并可视化数据
+
+```
+import tensorflow as tf
+from tensorflow import keras
+import matplotlib.pyplot as plt
+
+fashion_mnist = keras.datasets.fashion_mnist
+(train_images, train_labels), (test_images, test_labels) = fashion_mnist.load_data()
+
+class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat',
+               'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
+
+plt.figure(figsize=(10, 10))
+for i in range(100, 125):
+    plt.subplot(5, 5, i-99)
+    plt.imshow(train_images[i])
+    plt.title(class_names[train_labels[i]])
+plt.show()
+```
+
+<img src="http://cdn.ziyedy.top/image/%E4%BD%BF%E7%94%A8tf.keras%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E7%BD%91%E7%BB%9C/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96.png" style="zoom: 80%;" />
+
+### 进行数据预处理，将值置于0-1范围内
+
+```
+train_images = train_images / 255.0
+test_images = test_images / 255.0
+```
+
+### 构建网络并进行训练
+
+```
+model = keras.Sequential([
+    keras.layers.Flatten(input_shape=(28, 28)),
+    keras.layers.Dense(128, activation='relu'),
+    keras.layers.Dense(10)
+])
+
+model.compile(optimizer='adam',
+              loss=keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+              metrics=['accuracy'])
+
+history = model.fit(train_images, train_labels, epochs=10)
+```
+
+### 进行评估并绘制训练曲线
+
+```
+test_loss, test_acc = model.evaluate(test_images, test_labels)
+
+plt.plot(history.history['accuracy'], label='accuracy')
+plt.plot(history.history['loss'], label='loss')
+plt.xlabel('Epoch')
+plt.ylabel('Accuracy and Loss')
+plt.legend(loc='lower left')
+plt.show()
+```
+
+<img src="http://cdn.ziyedy.top/%E4%BD%BF%E7%94%A8tf.keras%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E7%BD%91%E7%BB%9C/%E8%AE%AD%E7%BB%83%E6%9B%B2%E7%BA%BF.png" style="zoom:67%;" />
+
+### 使用模型进行预测
+
+```
+predict_model = keras.Sequential([
+    model,
+    tf.keras.layers.Softmax()
+])
+prediction = predict_model.predict(test_images)
+print(prediction[0])
+# [7.7702840e-05 5.1073805e-08 1.0888911e-05 1.1339294e-07 5.7997750e-06
+#  1.0903468e-03 8.1863102e-05 2.4046257e-02 5.1835599e-07 9.7468650e-01]
+
+plt.subplot(1, 2, 1)
+plt.imshow(test_images[0])
+plt.title(class_names[tf.argmax(prediction[0])])
+plt.subplot(1, 2, 2)
+plt.bar(class_names, prediction[0])
+plt.show()
+```
+
+<img src="http://cdn.ziyedy.top/image/%E4%BD%BF%E7%94%A8tf.keras%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E7%BD%91%E7%BB%9C/%E9%A2%84%E6%B5%8B%E7%BB%93%E6%9E%9C.png" style="zoom:80%;" />
+
+
+
+### 参考链接
+
+https://www.tensorflow.org/tutorials/

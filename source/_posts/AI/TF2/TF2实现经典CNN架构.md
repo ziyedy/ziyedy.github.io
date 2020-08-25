@@ -1,12 +1,12 @@
 ---
-title: TF2实现基本CNN与经典网络结构
+title: TF2实现经典CNN架构
 date: 2020-08-24 17:08:00
 tags:
 	- AI
 categories:
 	- AI
 	- TF2
-fileName: tf2-cnn-and-classic-network
+fileName: tf2-classic-cnn
 ---
 
 ## 卷积神经网络经典操作

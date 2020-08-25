@@ -73,7 +73,7 @@ tf.random.uniform(维度, minval=0, maxval=1)
 
 ### 常用函数
 
-#### 将输入特征与标签配对
+#### 将输入特征与标签配对（常用于构建数据集）
 
 ```
 tf.data.Dataset.from_tensor_slices( (输入特征, 标签) )
