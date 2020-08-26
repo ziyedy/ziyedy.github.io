@@ -1,12 +1,14 @@
 ---
-title: os模块的常用操作
+title: 路径操作常用模块（os与pathlib）
 date: 2020-06-20 09:41:07
 tags:
 categories:
 	- Python
 	- 常用模块
-fileName: Python-os
+fileName: Python-path-operation
 ---
+
+## OS模块
 
 ### 模块简介
 
@@ -112,3 +114,67 @@ def rename():
         os.rename(old_dir, new_dir)	# 完成文件的重命名
 ```
 
+
+
+## pathlib模块
+
+### 基础使用
+
+#### 导入
+
+```
+from pathlib import Path
+```
+
+#### 列出子目录
+
+```
+In[5]: p = Path('C:\\Users\\lenovo\\.keras\\datasets\\flower_photos')
+In[6]: [x for x in p.iterdir() if x.is_dir()]
+Out[6]: 
+[WindowsPath('C:/Users/lenovo/.keras/datasets/flower_photos/daisy'),
+ WindowsPath('C:/Users/lenovo/.keras/datasets/flower_photos/dandelion'),
+ WindowsPath('C:/Users/lenovo/.keras/datasets/flower_photos/roses'),
+ WindowsPath('C:/Users/lenovo/.keras/datasets/flower_photos/sunflowers'),
+ WindowsPath('C:/Users/lenovo/.keras/datasets/flower_photos/tulips')]
+```
+
+#### 获取当前目录下所有文件与文件夹
+
+```
+In[7]: list(p.glob('*/'))
+Out[7]: 
+[WindowsPath('C:/Users/lenovo/.keras/datasets/flower_photos/daisy'),
+ WindowsPath('C:/Users/lenovo/.keras/datasets/flower_photos/dandelion'),
+ WindowsPath('C:/Users/lenovo/.keras/datasets/flower_photos/LICENSE.txt'),
+ WindowsPath('C:/Users/lenovo/.keras/datasets/flower_photos/roses'),
+ WindowsPath('C:/Users/lenovo/.keras/datasets/flower_photos/sunflowers'),
+ WindowsPath('C:/Users/lenovo/.keras/datasets/flower_photos/tulips')]
+```
+
+#### 路径拼接
+
+```
+In[9]: q = p / 'daisy'
+In[10]: print(q)
+C:\Users\lenovo\.keras\datasets\flower_photos\daisy
+```
+
+#### 查询属性
+
+路径是否存在与是否是路径
+
+```
+In[11]: q.exists()
+Out[11]: True
+In[12]: q.is_dir()
+Out[12]: True
+```
+
+
+
+
+
+### 参考链接
+
+https://docs.python.org/zh-cn/3/library/pathlib.html
