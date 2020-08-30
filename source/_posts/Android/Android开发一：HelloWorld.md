@@ -1,5 +1,5 @@
 ---
-title: 一、Android开发HelloWorld
+title: Android开发一：HelloWorld
 date: 2020-08-29 10:13:02
 tags:
 	- 移动端
@@ -123,9 +123,9 @@ public class MainActivity extends AppCompatActivity {
 </resources>
 ```
 
-> 在代码中通过`R.string.app_name`来引用
+> **在代码中通过`R.string.app_name`来引用**
 >
-> 在XML中通过`@string/app_name`来引用
+> **在XML中通过`@string/app_name`来引用**
 
 如AndroidManifest.xml中部分代码如下
 
