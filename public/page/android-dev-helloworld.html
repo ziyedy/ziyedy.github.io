@@ -2,24 +2,20 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>os模块的常用操作 | 子夜子夜</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="os模块的常用操作 | 子夜子夜">
+  <title>Android开发一：HelloWorld | 子夜子夜</title>
+  <meta name="keywords" content=" 移动端 ">
+  <meta name="description" content="Android开发一：HelloWorld | 子夜子夜">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="图的基本概念图是由顶点的集合和顶点之间的边的集合组成的，通常表示为G(V, E)。其中G表示一个图，V是图G中的顶点的集合，E是图G中边的集合。 图按照边是否有方向和边是否带权重可以分为四类，即有向无权图、有向有权图、无向无权图、无向有权图。 无向图的边通常使用“()”表示，如A与B之间的边就是(A, B)或(B, A) 有向边则通常使用“&lt;&gt;”表示，如A到B的边就是&lt;A, B&amp;">
+<meta name="description" content="Pandas基础Pandas是Python第三方库，提供高性能易用数据类型和分析工具，其基于NumPy实现，常与NumPy和Matplotlib一同使用. 器有两个主要数据类型：Series, DataFrame 基于上述数据类型的各类操作基本操作、运算操作、特征类操作、关联类操作    NumPy Pandas    基础数据类型 扩展数据类型   关注数据的结构表达 关注数据的应用表达   维">
 <meta property="og:type" content="article">
-<meta property="og:title" content="图的概念与存储结构">
-<meta property="og:url" content="http://ziyedy.top/page/graph-basic-knowledge.html">
+<meta property="og:title" content="Pandas库基本用法">
+<meta property="og:url" content="http://ziyedy.top/page/pandas-basic-use.html">
 <meta property="og:site_name" content="子夜子夜">
-<meta property="og:description" content="图的基本概念图是由顶点的集合和顶点之间的边的集合组成的，通常表示为G(V, E)。其中G表示一个图，V是图G中的顶点的集合，E是图G中边的集合。 图按照边是否有方向和边是否带权重可以分为四类，即有向无权图、有向有权图、无向无权图、无向有权图。 无向图的边通常使用“()”表示，如A与B之间的边就是(A, B)或(B, A) 有向边则通常使用“&lt;&gt;”表示，如A到B的边就是&lt;A, B&amp;">
-<meta property="og:image" content="http://cdn.ziyedy.top/image/%E5%9B%BE%E7%9A%84%E6%A6%82%E5%BF%B5%E4%B8%8E%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5.png">
-<meta property="og:image" content="http://cdn.ziyedy.top/image/%E5%9B%BE%E7%9A%84%E6%A6%82%E5%BF%B5%E4%B8%8E%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/%E9%82%BB%E6%8E%A5%E8%A1%A8.png">
-<meta property="article:published_time" content="2020-08-15T20:00:14.000Z">
-<meta property="article:modified_time" content="2020-08-17T15:22:30.779Z">
+<meta property="og:description" content="Pandas基础Pandas是Python第三方库，提供高性能易用数据类型和分析工具，其基于NumPy实现，常与NumPy和Matplotlib一同使用. 器有两个主要数据类型：Series, DataFrame 基于上述数据类型的各类操作基本操作、运算操作、特征类操作、关联类操作    NumPy Pandas    基础数据类型 扩展数据类型   关注数据的结构表达 关注数据的应用表达   维">
+<meta property="article:published_time" content="2020-08-22T03:38:29.000Z">
+<meta property="article:modified_time" content="2020-08-22T15:08:19.307Z">
 <meta property="article:author" content="子夜">
-<meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://cdn.ziyedy.top/image/%E5%9B%BE%E7%9A%84%E6%A6%82%E5%BF%B5%E4%B8%8E%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5.png">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -138,11 +134,11 @@
 
 
 <ul>
-    <li><div class="all active">全部文章<small>(100)</small></div></li>
+    <li><div class="all active">全部文章<small>(109)</small></div></li>
     
         
             
-            <li><div data-rel="Python"><i class="fold iconfont icon-right"></i>Python<small>(20)</small></div>
+            <li><div data-rel="Python"><i class="fold iconfont icon-right"></i>Python<small>(21)</small></div>
                 
                     <ul class="sub hide">
                         
@@ -158,7 +154,7 @@
                             
                         </li>
                             
-                        <li><div data-rel="语言基础">语言基础<small>(9)</small></div>
+                        <li><div data-rel="语言基础">语言基础<small>(10)</small></div>
                             
                         </li>
                             
@@ -346,11 +342,15 @@
     
         
             
-            <li><div data-rel="计算机基础"><i class="fold iconfont icon-right"></i>计算机基础<small>(14)</small></div>
+            <li><div data-rel="计算机基础"><i class="fold iconfont icon-right"></i>计算机基础<small>(16)</small></div>
                 
                     <ul class="sub hide">
                         
-                        <li><div data-rel="数据结构与算法">数据结构与算法<small>(14)</small></div>
+                        <li><div data-rel="数据结构与算法">数据结构与算法<small>(15)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="计网-topdown">计网-topdown<small>(1)</small></div>
                             
                         </li>
                             
@@ -402,11 +402,11 @@
     
         
             
-            <li><div data-rel="AI"><i class="fold iconfont icon-right"></i>AI<small>(8)</small></div>
+            <li><div data-rel="AI"><i class="fold iconfont icon-right"></i>AI<small>(10)</small></div>
                 
                     <ul class="sub hide">
                         
-                        <li><div data-rel="TF2">TF2<small>(4)</small></div>
+                        <li><div data-rel="TF2">TF2<small>(6)</small></div>
                             
                         </li>
                             
@@ -448,6 +448,18 @@
             
         
     
+        
+            
+            <li><div data-rel="Android">Android<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
 </ul>
 <div class="left-bottom">
     <div class="menus">
@@ -458,8 +470,8 @@
     </div>
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="100">
-<input type="hidden" id="yelog_site_word_count" value="93k">
+<input type="hidden" id="yelog_site_posts_number" value="109">
+<input type="hidden" id="yelog_site_word_count" value="104.2k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -620,6 +632,22 @@
     
     <li class="article-tag-list-item">
         <a class="color5">6dof</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">移动端</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">TF2</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">算法</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">计算机网络</a>
     </li>
     
     <div class="clearfix"></div>
@@ -1340,14 +1368,6 @@
             <span class="post-date" title="2020-03-23 11:50:01">2020/03/23</span>
         </a>
         
-        <a  class="Java Java基础 "
-           href="/page/java-for-algorithm-test.html"
-           data-tag="Java"
-           data-author="" >
-            <span class="post-title" title="Java容器与方法（常用于算法题）">Java容器与方法（常用于算法题）</span>
-            <span class="post-date" title="2020-08-15 14:34:11">2020/08/15</span>
-        </a>
-        
         <a  class="Python PyQt5 "
            href="/page/pyqt5-basic-widget.html"
            data-tag="PyQt5"
@@ -1364,14 +1384,6 @@
             <span class="post-date" title="2020-08-12 16:18:07">2020/08/12</span>
         </a>
         
-        <a  class="AI TF2 "
-           href="/page/tf2-nn-basic-handle.html"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title="TF2搭建网络所需要的基本操作">TF2搭建网络所需要的基本操作</span>
-            <span class="post-date" title="2020-08-08 12:12:34">2020/08/08</span>
-        </a>
-        
         <a  class="Python 常用模块 "
            href="/page/pandas-basic-use.html"
            data-tag=""
@@ -1386,14 +1398,6 @@
            data-author="" >
             <span class="post-title" title="numpy常用属性与方法">numpy常用属性与方法</span>
             <span class="post-date" title="2020-08-21 09:51:27">2020/08/21</span>
-        </a>
-        
-        <a  class="Python 常用模块 "
-           href="/page/Python-os.html"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title="os模块的常用操作">os模块的常用操作</span>
-            <span class="post-date" title="2020-06-20 09:41:07">2020/06/20</span>
         </a>
         
         <a  class="Python 常用模块 "
@@ -1428,6 +1432,102 @@
             <span class="post-date" title="2020-07-20 16:11:47">2020/07/20</span>
         </a>
         
+        <a  class="Android "
+           href="/page/Android3-layout.html"
+           data-tag="移动端"
+           data-author="" >
+            <span class="post-title" title="Android开发三：布局（layout）">Android开发三：布局（layout）</span>
+            <span class="post-date" title="2020-08-30 10:06:09">2020/08/30</span>
+        </a>
+        
+        <a  class="Android "
+           href="/page/Android2-activity.html"
+           data-tag="移动端"
+           data-author="" >
+            <span class="post-title" title="Android开发二：活动（Activity）">Android开发二：活动（Activity）</span>
+            <span class="post-date" title="2020-08-30 09:21:58">2020/08/30</span>
+        </a>
+        
+        <a  class="Android "
+           href="/page/android-dev-helloworld.html"
+           data-tag="移动端"
+           data-author="" >
+            <span class="post-title" title="Android开发一：HelloWorld">Android开发一：HelloWorld</span>
+            <span class="post-date" title="2020-08-29 10:13:02">2020/08/29</span>
+        </a>
+        
+        <a  class="AI TF2 "
+           href="/page/tf2-nn-basic-handle.html"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="TF2存储模型参数等基本操作">TF2存储模型参数等基本操作</span>
+            <span class="post-date" title="2020-08-08 12:12:34">2020/08/08</span>
+        </a>
+        
+        <a  class=""
+           href="/page/null.html"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="post">post</span>
+            <span class="post-date" title="2020-08-28 22:21:26">2020/08/28</span>
+        </a>
+        
+        <a  class="AI TF2 "
+           href="/page/tf2-classic-cnn.html"
+           data-tag="AI"
+           data-author="" >
+            <span class="post-title" title="TF2实现经典CNN架构">TF2实现经典CNN架构</span>
+            <span class="post-date" title="2020-08-24 17:08:00">2020/08/24</span>
+        </a>
+        
+        <a  class="AI TF2 "
+           href="/page/tf2-create-dataset.html"
+           data-tag="TF2"
+           data-author="" >
+            <span class="post-title" title="使用TF2创建数据集">使用TF2创建数据集</span>
+            <span class="post-date" title="2020-08-25 16:31:59">2020/08/25</span>
+        </a>
+        
+        <a  class="Java Java基础 "
+           href="/page/java-for-algorithm-test.html"
+           data-tag="Java"
+           data-author="" >
+            <span class="post-title" title="Java算法题的常用语法">Java算法题的常用语法</span>
+            <span class="post-date" title="2020-08-15 14:34:11">2020/08/15</span>
+        </a>
+        
+        <a  class="Python 语言基础 "
+           href="/page/python-magic-method.html"
+           data-tag="Python"
+           data-author="" >
+            <span class="post-title" title="Python中的魔法方法（Magic Method）">Python中的魔法方法（Magic Method）</span>
+            <span class="post-date" title="2020-08-26 09:19:41">2020/08/26</span>
+        </a>
+        
+        <a  class="Python 常用模块 "
+           href="/page/Python-path-operation.html"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="路径操作常用模块（os与pathlib）">路径操作常用模块（os与pathlib）</span>
+            <span class="post-date" title="2020-06-20 09:41:07">2020/06/20</span>
+        </a>
+        
+        <a  class="计算机基础 数据结构与算法 "
+           href="/page/graph-traverse-and-user.html"
+           data-tag="算法"
+           data-author="" >
+            <span class="post-title" title="图的遍历及应用">图的遍历及应用</span>
+            <span class="post-date" title="2020-08-23 12:37:02">2020/08/23</span>
+        </a>
+        
+        <a  class="计算机基础 计网-topdown "
+           href="/page/no1-computer-network-and-the-internet.html"
+           data-tag="计算机网络"
+           data-author="" >
+            <span class="post-title" title="第一章：计算机网络与英特网">第一章：计算机网络与英特网</span>
+            <span class="post-date" title="2020-08-27 22:00:15">2020/08/27</span>
+        </a>
+        
     </nav>
 </div>
     </div>
@@ -1440,9 +1540,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-Python/常用模块/os模块的常用操作" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Android/Android开发一：HelloWorld" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">os模块的常用操作</h1>
+        <h1 class="article-title">Android开发一：HelloWorld</h1>
     
     <div class="article-meta">
         
@@ -1450,22 +1550,26 @@
         
         <span class="book">
             
-                <a  data-rel="Python">Python</a>/
-            
-                <a  data-rel="常用模块">常用模块</a>
+                <a  data-rel="Android">Android</a>
             
         </span>
         
         
+        <span class="tag">
+            
+            <a class="color4">移动端</a>
+            
+        </span>
+        
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-08-22 12:01:36'>2020-06-20 09:41</time>
+        创建时间:<time class="date" title='更新时间: 2020-08-31 10:43:13'>2020-08-29 10:13</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:594</span>
+        <span>字数:1.2k</span>
         
         
         
@@ -1473,7 +1577,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#模块简介"><span class="toc-text">模块简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#系统操作"><span class="toc-text">系统操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#目录操作"><span class="toc-text">目录操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Path模块"><span class="toc-text">Path模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#操作实例"><span class="toc-text">操作实例</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#HelloWorld程序运行"><span class="toc-text">HelloWorld程序运行</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#AS设置"><span class="toc-text">AS设置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#gradle版本设置"><span class="toc-text">gradle版本设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用镜像"><span class="toc-text">使用镜像</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#运行程序"><span class="toc-text">运行程序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Android项目结构"><span class="toc-text">Android项目结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#app文件下的文件"><span class="toc-text">app文件下的文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#build"><span class="toc-text">build</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#libs"><span class="toc-text">libs</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#androidTest"><span class="toc-text">androidTest</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#java"><span class="toc-text">java</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#res"><span class="toc-text">res</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#AndroidManifest-xml"><span class="toc-text">AndroidManifest.xml</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#test"><span class="toc-text">test</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#主活动代码"><span class="toc-text">主活动代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#res中的资源文件"><span class="toc-text">res中的资源文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#build-gradle文件"><span class="toc-text">build.gradle文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#外层build-gradle"><span class="toc-text">外层build.gradle</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#app文件下的build-gradle"><span class="toc-text">app文件下的build.gradle</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1489,55 +1593,120 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="模块简介"><a href="#模块简介" class="headerlink" title="模块简介"></a>模块简介</h3><p>os模块是Python标准库中的一个用于<strong>访问操作系统功能</strong>的模块。使用os模块中提供的接口可以实现跨平台访问。</p>
-<h3 id="系统操作"><a href="#系统操作" class="headerlink" title="系统操作"></a>系统操作</h3><p>os.sep：用于系统路径的分隔符。Windows为“\\”，Linux为“/”。</p>
-<p>os.name：指示正在使用的工作平台。Windows为‘nt’，Linux为‘posix’。</p>
-<p>os.getenv(‘path’)：读取环境变量名称</p>
-<p>os.getcwd()：获取当前路径</p>
-<p>os.getpid()：获取当前进程ID</p>
-<h3 id="目录操作"><a href="#目录操作" class="headerlink" title="目录操作"></a>目录操作</h3><p><strong>os.listdir(path)</strong>：列出指定目录下的所有文件和子目录，包括隐藏文件；参数为空，为当前目录，返回一个列表。</p>
-<p>os.mkdir()：创建一个目录。</p>
-<p>os.rmdir()：删除一个空目录，如果该目录中有文件则删除不了。</p>
-<p>*<em>os.rename(src, dst) *</em>：用于重命名文件或目录，从src改为dst。若运行出错会抛出OSError。</p>
-<h3 id="Path模块"><a href="#Path模块" class="headerlink" title="Path模块"></a>Path模块</h3><p>os.path.exists(path)：判断文件或者目录是否存在。存在返回True，不存在返回False。</p>
-<p>os.path.isfile(path)：判断是否为文件。是返回True，不是返回False。</p>
-<p>os.path.isdir(path)：判断是否为目录。是返回True，不是返回False。</p>
-<p>os.path.abspath()：返回绝对路径</p>
-<p>os.path.realpath(_<em>file_</em>)：获取当前.py文件的目录</p>
-<p>os.path.dirname()：返回文件路径</p>
-<p>os.path.basename(path) ：返回文件名</p>
-<p>os.path.split(path) ：拆分路径dirname和basename，返回为元组</p>
-<p><strong>os.path.splitext(‘’)</strong>：将文件名与后缀名分开</p>
-<p><strong>os.path.join(path, name)</strong>：连接目录与文件名或目录</p>
-<p>示例：</p>
-<pre><code>import os
+        <h2 id="HelloWorld程序运行"><a href="#HelloWorld程序运行" class="headerlink" title="HelloWorld程序运行"></a>HelloWorld程序运行</h2><h3 id="AS设置"><a href="#AS设置" class="headerlink" title="AS设置"></a>AS设置</h3><h4 id="gradle版本设置"><a href="#gradle版本设置" class="headerlink" title="gradle版本设置"></a>gradle版本设置</h4><p>在<code>gradle-wrapper.properties</code>文件中修改以下代码中的版本号即可</p>
+<pre><code>distributionUrl=https\://services.gradle.org/distributions/gradle-6.1.1-all.zip</code></pre><p>同时，可以去gradle官网上下载相关版本，避免下载缓慢的问题</p>
+<h4 id="使用镜像"><a href="#使用镜像" class="headerlink" title="使用镜像"></a>使用镜像</h4><p>在<code>build.gradle</code>文件中的仓库前加上阿里镜像加快下载速度（两处都要进行更改）</p>
+<pre><code>repositories {
+    maven{ url &#39;http://maven.aliyun.com/nexus/content/groups/public/&#39;}
+    google()
+    jcenter()
+}</code></pre><h3 id="运行程序"><a href="#运行程序" class="headerlink" title="运行程序"></a>运行程序</h3><p>在AS设置正常的情况下，直接按运行健即可运行IDE自动创建的helloworld程序了，此时需要先在右上角的<code>AVD Manager</code>中创建虚拟机器，之后按运行按钮即可运行，运行效果如下</p>
+<img src="http://cdn.ziyedy.top/%E4%B8%80%E3%80%81Android%E5%BC%80%E5%8F%91HelloWorld/helloworld.png" style="zoom:50%;" />
 
-file_path = os.path.realpath(__file__)  # 该py文件目录
-print(file_path)
-print(os.path.dirname(file_path))   # 上级目录
-print(os.path.basename(file_path))  # py文件名称
-print(os.path.split(file_path)) # 分割目录与名称
+<h2 id="Android项目结构"><a href="#Android项目结构" class="headerlink" title="Android项目结构"></a>Android项目结构</h2><p>将项目结构模式设置为<strong>Project</strong>后（默认为Android），项目结构如下。</p>
+<p>其中重点需要关注的是<strong>app</strong>文件，项目中的代码、资源等内容基本都在该文件夹下。而其他文件多半是自动生成的配置文件，一般情况下不需要进行修改</p>
+<p><img src="http://cdn.ziyedy.top/%E4%B8%80%E3%80%81Android%E5%BC%80%E5%8F%91HelloWorld/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84.png" alt=""></p>
+<h3 id="app文件下的文件"><a href="#app文件下的文件" class="headerlink" title="app文件下的文件"></a>app文件下的文件</h3><h4 id="build"><a href="#build" class="headerlink" title="build"></a>build</h4><p>包含了一些在编译时自动生成的文件，一般情况下不需要修改</p>
+<h4 id="libs"><a href="#libs" class="headerlink" title="libs"></a>libs</h4><p>项目中需要用到的jar包都放置在该目录下</p>
+<h4 id="androidTest"><a href="#androidTest" class="headerlink" title="androidTest"></a>androidTest</h4><p>用来编写Android Test测试用例的，可以对项目进行一些自动化测试</p>
+<h4 id="java"><a href="#java" class="headerlink" title="java"></a>java</h4><p>放置Java代码的文件夹</p>
+<h4 id="res"><a href="#res" class="headerlink" title="res"></a>res</h4><p>项目中用到的所有图片、布局等资源都存放在该目录下（如：<strong>图片放在drawable下，布局放在layout下，字符串放在values下</strong>）</p>
+<h4 id="AndroidManifest-xml"><a href="#AndroidManifest-xml" class="headerlink" title="AndroidManifest.xml"></a>AndroidManifest.xml</h4><p>整个Android项目的配置文件，在程序中定义的四大组件都需要在这个文件中注册，也可以在该文件中给应用程序添加权限声明。</p>
+<p>如下是该文件中的部分代码，该段代码表示对MainActivity这个活动进行注册（未在该文件中进行注册的活动是不能使用的）</p>
+<pre><code>&lt;activity android:name=&quot;.MainActivity&quot;&gt;
+    &lt;intent-filter&gt;
+        &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;    &lt;!--表示该活动是主活动--&gt;
 
-##############################################
-C:\Users\lenovo\Desktop\vega\gg.py
-C:\Users\lenovo\Desktop\vega
-gg.py
-(&#39;C:\\Users\\lenovo\\Desktop\\vega&#39;, &#39;gg.py&#39;)</code></pre><h3 id="操作实例"><a href="#操作实例" class="headerlink" title="操作实例"></a>操作实例</h3><p>1、将某一路径下的文件名称中的广告部分去除并填上文件后缀名</p>
-<pre><code>def rename():
-    path = &#39;你的路径&#39;
-    file_list = os.listdir(path)    # 得到文件名列表
-    for file in file_list:
-        old_dir = os.path.join(path, file)    #得到初始路径
-        # 若该文件名为路径，则继续遍历
-        if os.path.isdir(old_dir):
-            continue
-        file_name = os.path.splitext(file)[0]
-        # 在该处进行文件名的字符串更改操作
-        file_type = os.path.splitext(file)[1]
-        # 在该处变更文件的后缀
-        file_name = file_name+file_type
-        new_dir = os.path.join(path, file_name)    # 新的路径
-        os.rename(old_dir, new_dir)    # 完成文件的重命名</code></pre>
+        &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;
+    &lt;/intent-filter&gt;
+&lt;/activity&gt;</code></pre><h4 id="test"><a href="#test" class="headerlink" title="test"></a>test</h4><p>用来编写单元测试用例</p>
+<h3 id="主活动代码"><a href="#主活动代码" class="headerlink" title="主活动代码"></a>主活动代码</h3><p>由于Android讲究<strong>逻辑和视图分离</strong>，因此应该在<strong>布局文件中编写界面，在活动中引入进来</strong>。</p>
+<pre><code class="java">public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);    // 引入了一个布局
+    }
+}</code></pre>
+<p>因此，在<code>res/layout</code>中能够找到helloworld程序的布局样式如下</p>
+<p><img src="http://cdn.ziyedy.top/%E4%B8%80%E3%80%81Android%E5%BC%80%E5%8F%91HelloWorld/%E5%B8%83%E5%B1%80.png" alt=""></p>
+<h3 id="res中的资源文件"><a href="#res中的资源文件" class="headerlink" title="res中的资源文件"></a>res中的资源文件</h3><p>在之前已经简单叙述过了，现在简单讲讲如何使用这些资源</p>
+<p>以<code>res/values/strings.xml</code>为例，该处定义了一个应用程序名的字符串</p>
+<pre><code>&lt;resources&gt;
+    &lt;string name=&quot;app_name&quot;&gt;My Application&lt;/string&gt;
+&lt;/resources&gt;</code></pre><blockquote>
+<p><strong>在代码中通过<code>R.string.app_name</code>来引用</strong></p>
+<p><strong>在XML中通过<code>@string/app_name</code>来引用</strong></p>
+</blockquote>
+<p>如AndroidManifest.xml中部分代码如下</p>
+<pre><code>android:icon=&quot;@mipmap/ic_launcher&quot;
+android:label=&quot;@string/app_name&quot;
+android:roundIcon=&quot;@mipmap/ic_launcher_round&quot;</code></pre><h3 id="build-gradle文件"><a href="#build-gradle文件" class="headerlink" title="build.gradle文件"></a>build.gradle文件</h3><p>整个项目结构中有两个这个文件，一个是在项目最外层（之前添加阿里镜像就是在这儿添加的），一个则是在app文件夹下面</p>
+<h4 id="外层build-gradle"><a href="#外层build-gradle" class="headerlink" title="外层build.gradle"></a>外层build.gradle</h4><p>其中<strong>jcenter()</strong>声明了一个代码托管仓库，很多开源项目都会选择将代码托管在jcenter中。</p>
+<p>之后<strong>classpath</strong>声明了一个Gradle插件，该插件表示是使用Gradle来构建Android项目</p>
+<pre><code>buildscript {
+    repositories {
+        maven{ url &#39;http://maven.aliyun.com/nexus/content/groups/public/&#39;}
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath &quot;com.android.tools.build:gradle:4.0.1&quot;
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}</code></pre><h4 id="app文件下的build-gradle"><a href="#app文件下的build-gradle" class="headerlink" title="app文件下的build.gradle"></a>app文件下的build.gradle</h4><pre><code>apply plugin: &#39;com.android.application&#39;
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion &quot;30.0.2&quot;
+
+    defaultConfig {
+        applicationId &quot;com.example.myapplication&quot;
+        minSdkVersion 15
+        targetSdkVersion 30
+        versionCode 1
+        versionName &quot;1.0&quot;
+
+        testInstrumentationRunner &quot;androidx.test.runner.AndroidJUnitRunner&quot;
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile(&#39;proguard-android-optimize.txt&#39;), &#39;proguard-rules.pro&#39;
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: &quot;libs&quot;, include: [&quot;*.jar&quot;])
+    implementation &#39;androidx.appcompat:appcompat:1.2.0&#39;
+    implementation &#39;androidx.constraintlayout:constraintlayout:2.0.1&#39;
+    testImplementation &#39;junit:junit:4.12&#39;
+    androidTestImplementation &#39;androidx.test.ext:junit:1.1.2&#39;
+    androidTestImplementation &#39;androidx.test.espresso:espresso-core:3.3.0&#39;
+
+}</code></pre><p><strong>apply plugin</strong>：</p>
+<blockquote>
+<p>应用了一个插件，通常是com.android.application与com.android.library二选一。</p>
+<p>前者表示一个应用程序模块，后者表示一个库模块（不能直接运行）</p>
+</blockquote>
+<p><strong>android</strong></p>
+<blockquote>
+<p>配置项目构建的各种属性</p>
+</blockquote>
+<p><strong>dependencies</strong></p>
+<blockquote>
+<p>指定项目所有依赖关系：</p>
+<p>1、本地依赖</p>
+<p>2、库依赖</p>
+<p>3、远程依赖：对jcenter库上的开源项目添加依赖关系</p>
+</blockquote>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>第一行代码——Android（郭霖）</p>
+
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 ziyedy@qq.com </span>
     </div>
@@ -1546,12 +1715,12 @@ gg.py
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>os模块的常用操作</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">594</span></p>
+    <p><span class="copy-title">文章标题:</span>Android开发一：HelloWorld</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.2k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="子夜">子夜</a></p>
-    <p><span class="copy-title">发布时间:</span>2020-06-20, 09:41:07</p>
-    <p><span class="copy-title">最后更新:</span>2020-08-22, 12:01:36</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/page/Python-os.html" title="os模块的常用操作">http://ziyedy.top/page/Python-os.html</a>
+    <p><span class="copy-title">发布时间:</span>2020-08-29, 10:13:02</p>
+    <p><span class="copy-title">最后更新:</span>2020-08-31, 10:43:13</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/page/android-dev-helloworld.html" title="Android开发一：HelloWorld">http://ziyedy.top/page/android-dev-helloworld.html</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
@@ -1595,7 +1764,7 @@ gg.py
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#python','#GUI','#剧评','#hexo','#云服务器','#git','#latex','#论文','#二叉树','#语义分割','#散文','#杂文','#日志','#pygame','#matlab','#图像','#前端','#ArcGIS','#GIS','#数据库','#Python','#Java','#数据结构','#java','#Linux','#工作效率','#AI','#QGis','#CSS','#JS','#机器学习','#PyQt5','#6dof',],
+            'data': ['#python','#GUI','#剧评','#hexo','#云服务器','#git','#latex','#论文','#二叉树','#语义分割','#散文','#杂文','#日志','#pygame','#matlab','#图像','#前端','#ArcGIS','#GIS','#数据库','#Python','#Java','#数据结构','#java','#Linux','#工作效率','#AI','#QGis','#CSS','#JS','#机器学习','#PyQt5','#6dof','#移动端','#TF2','#算法','#计算机网络',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
@@ -1612,7 +1781,7 @@ gg.py
         /*高亮代码块行号*/
         
         $('pre code').each(function(){
-            var lines = $(this).text().split('\n').length - 1, widther='';
+            var lines = $(this).text().split('\n').length, widther='';
             if (lines>99) {
                 widther = 'widther'
             }

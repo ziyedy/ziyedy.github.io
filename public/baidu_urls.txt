@@ -1,3 +1,12 @@
+http://ziyedy.top/page/Android3-layout.html
+http://ziyedy.top/page/Android2-activity.html
+http://ziyedy.top/page/android-dev-helloworld.html
+http://ziyedy.top/page/null.html
+http://ziyedy.top/page/no1-computer-network-and-the-internet.html
+http://ziyedy.top/page/python-magic-method.html
+http://ziyedy.top/page/tf2-create-dataset.html
+http://ziyedy.top/page/tf2-classic-cnn.html
+http://ziyedy.top/page/graph-traverse-and-user.html
 http://ziyedy.top/page/pandas-basic-use.html
 http://ziyedy.top/page/python-matplotlib-use.html
 http://ziyedy.top/page/numpy-basic-use.html
@@ -60,7 +69,7 @@ http://ziyedy.top/page/java-basic-grammar.html
 http://ziyedy.top/page/python-common-method.html
 http://ziyedy.top/page/js-bom-basic-handle.html
 http://ziyedy.top/page/js-dom-basic-handle.html
-http://ziyedy.top/page/Python-os.html
+http://ziyedy.top/page/Python-path-operation.html
 http://ziyedy.top/page/python8.html
 http://ziyedy.top/page/django1.html
 http://ziyedy.top/page/git_error.html
@@ -89,12 +98,3 @@ http://ziyedy.top/page/hexo1.html
 http://ziyedy.top/page/Li_Hongzhang.html
 http://ziyedy.top/page/qgis-thematic-map-drawing.html
 http://ziyedy.top/page/qgis-Surface-coverage-mapping.html
-http://ziyedy.top/page/the_change.html
-http://ziyedy.top/page/GOT_S8E3.html
-http://ziyedy.top/page/ArcGIS_dev.html
-http://ziyedy.top/page/the_rain_and_the_shine.html
-http://ziyedy.top/page/git1.html
-http://ziyedy.top/page/undefined.html
-http://ziyedy.top/page/osm_data_process.html
-http://ziyedy.top/page/batch_RS.html
-http://ziyedy.top/page/latex1.html

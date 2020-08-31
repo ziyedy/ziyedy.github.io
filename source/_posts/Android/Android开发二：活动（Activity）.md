@@ -49,7 +49,7 @@ protected void onCreate(Bundle savedInstanceState) {
 
 其中makeText()包含三个参数，第一个是要求的上下文，第二个是显示的文本内容，第三个是显示的时长
 
-
+<img src="http://cdn.ziyedy.top/Android%E5%BC%80%E5%8F%91%E4%BA%8C%EF%BC%9A%E6%B4%BB%E5%8A%A8%EF%BC%88Activity%EF%BC%89/toast-demo.png" style="zoom: 50%;" />
 
 ### 使用menu
 
@@ -96,7 +96,7 @@ public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 }
 ```
 
-
+<img src="http://cdn.ziyedy.top/Android%E5%BC%80%E5%8F%91%E4%BA%8C%EF%BC%9A%E6%B4%BB%E5%8A%A8%EF%BC%88Activity%EF%BC%89/menu-demo.png" style="zoom:50%;" />
 
 
 
@@ -172,24 +172,28 @@ button1.setOnClickListener(new View.OnClickListener() {
 
 用隐式 Intent，我们**不仅可以启动自己程序内的活动，还可以启动其他程序的活动（如调用浏览器）**，这使得 Android 多个应用程序之间的功能共享成为了可能
 
-
-
 ```
 button1.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("http://www.baidu.com"));	// 将Uri对象传递进去
+        intent.setData(Uri.parse("http://www.baidu.com"));	// 将Uri对象传递进去，可以使用浏览器打开
         startActivity(intent);
     }
 });
 ```
 
+<img src="http://cdn.ziyedy.top/Android%E5%BC%80%E5%8F%91%E4%BA%8C%EF%BC%9A%E6%B4%BB%E5%8A%A8%EF%BC%88Activity%EF%BC%89/%E6%89%93%E5%BC%80%E6%B5%8F%E8%A7%88%E5%99%A8.png" style="zoom:50%;" />
+
 
 
 ### Intent向下一个活动传递数据
 
+Intent 中提供了一系列 **putExtra()** 方法的重载，可以把我们想要传递的数据暂存在 Intent 中，启动了另一个活动后，只需要把这些数据再从 Intent 中取出就可以了
+
 putExtra() 方法接收两个参数，第一个参数是键，用于后面从 Intent 中取值，第二个参数才是真正要传递的数据。
+
+#### 示例
 
 在FirstActivity中相应位置填入以下代码
 
@@ -213,21 +217,23 @@ protected void onCreate(Bundle savedInstanceState) {
 }
 ```
 
-
+<img src="http://cdn.ziyedy.top/Android%E5%BC%80%E5%8F%91%E4%BA%8C%EF%BC%9A%E6%B4%BB%E5%8A%A8%EF%BC%88Activity%EF%BC%89/%E4%BC%A0%E9%80%92%E6%B6%88%E6%81%AF%E7%BB%99%E4%B8%8B%E4%B8%80%E4%B8%AA%E5%BA%94%E7%94%A8.png" style="zoom: 67%;" />
 
 ### Intent返回数据给上一个活动
 
-startActivityForResult() 方法接收两个参数，第一个参数还是 Intent，第二个参数是请求码，用于在之后的回调中判断数据的来源。
+**1、 使用startActivityForResult() 方法启动活动，在活动销毁后即可将数据传递回来**
 
+> startActivityForResult() 方法接收两个参数，第一个参数还是 Intent，第二个参数是**请求码（requestCode）**，用于在之后的回调中判断数据的来源。
 
+**2、在第二个活动中使用setResult() 方法将带有数据的Intent传递回去**
 
-setResult() 方法接收两个参数，第一个参数用于向上一个活动返回处理结果，一般只使用 RESULT_OK 或 RESULT_CANCELED 这两个值，第二个参数则把带有数据的 Intent 传递回去
+> setResult() 方法接收两个参数，第一个参数用于向上一个活动返回处理结果，一般只使用 RESULT_OK 或 RESULT_CANCELED 这两个值，第二个参数则把带有数据的 Intent 传递回去
 
+**3、使用startActivityForResult() 方法启动活动在活动销毁后会回调onActivityResult() 方法**，因此在第一个活动中重写该方法。
 
+>  onActivityResult() 方法带有三个参数，第一个参数 requestCode ，即我们在启动活动时传入的请求码。第二个参数 resultCode ，即我们在返回数据时传入的处理结果。第三个参数 data，即携带着返回数据的 Intent
 
-onActivityResult() 方法带有三个参数，第一个参数 requestCode ，即我们在启动活动时传入的请求码。第二个参数 resultCode ，即我们在返回数据时传入的处理结果。第三个参数 data，即携带着返回数据的 Intent
-
-
+#### 示例
 
 在FirstActivity中相应位置填入以下代码
 
@@ -241,7 +247,7 @@ protected void onCreate(Bundle savedInstanceState) {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(FirstActivity.this, SecondActivity.class);
-            startActivityForResult(intent, 1);
+            startActivityForResult(intent, 1);	// 请求码为1
         }
     });
 }
@@ -258,8 +264,6 @@ protected void onActivityResult(int requestCode, int resultCode, @Nullable Inten
     }
 }
 ```
-
-
 
 在SecondActivity中相应位置填入以下代码
 
@@ -281,9 +285,70 @@ protected void onCreate(Bundle savedInstanceState) {
 }
 ```
 
+<img src="http://cdn.ziyedy.top/Android%E5%BC%80%E5%8F%91%E4%BA%8C%EF%BC%9A%E6%B4%BB%E5%8A%A8%EF%BC%88Activity%EF%BC%89/%E4%BB%8E%E4%B8%8B%E4%B8%80%E4%B8%AA%E5%BA%94%E7%94%A8%E8%BF%94%E5%9B%9E%E6%B6%88%E6%81%AF.png" style="zoom:67%;" />
+
+
+
+## 活动的生命周期
+
+### 活动状态
+
+每个活动在其生命周期最多可能有4种状态
+
+#### 运行状态
+
+一个活动位于返回栈的**栈顶**时，这时活动就处于运行状态
+
+#### 暂停状态
+
+当一个活动**不再处于栈顶位置，但仍然可见**时，这时活动就进入了暂停状态。
+
+#### 停止状态
+
+当一个活动不再处于栈顶位置，并且完全不可见的时候，就进入了停止状态。（当其他地方需要内存时，处于停止状态的活动有可能会被系统回收）
+
+#### 销毁状态
+
+当一个活动**从返回栈中移除后**就变成了销毁状态。系统会最倾向于回收处于这种状态的活动，从而保证手机的内存充足。
+
+### 活动的生存期
+
+Activity 类中定义了 7 个回调方法，覆盖了活动生命周期的每一个环节
+
+#### onCreate()
+
+> 在活动第一次被创建的时候调用
+>
+> 在这个方法中完成活动的初始化操作，比如说加载布局、绑定事件等
+
+#### onStart()
+
+> 活动由不可见变为可见的时候调用
+
+#### onResume()
+
+> 活动准备好和用户进行交互的时候调用。此时的活动一定位于返回栈的栈顶，并且处于运行状态
+
+#### onPause()
+
+> 这个方法在系统准备去启动或者恢复另一个活动的时候调用
+
+#### onStop()
+
+> 这个方法在活动完全不可见的时候调用
+
+#### onDestroy()
+
+> 这个方法在活动被销毁之前调用，之后活动的状态将变为销毁状态。
+
+#### onRestart()
+
+> 这个方法在活动由停止状态变为运行状态之前调用，也就是活动被重新启动了。
 
 
 
 
 
+### 参考
 
+第一行代码——Android（郭霖）

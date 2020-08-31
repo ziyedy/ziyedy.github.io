@@ -2,14 +2,119 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://ziyedy.top/page/pandas-basic-use.html</loc>
+    <loc>http://ziyedy.top/page/Android2-activity.html</loc>
     
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://ziyedy.top/page/Android3-layout.html</loc>
+    
+    <lastmod>2020-08-31</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://ziyedy.top/page/android-dev-helloworld.html</loc>
+    
+    <lastmod>2020-08-31</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://ziyedy.top/page/null.html</loc>
+    
+    <lastmod>2020-08-28</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://ziyedy.top/page/no1-computer-network-and-the-internet.html</loc>
+    
+    <lastmod>2020-08-28</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://ziyedy.top/page/Python-path-operation.html</loc>
+    
+    <lastmod>2020-08-26</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://ziyedy.top/page/tf2-create-dataset.html</loc>
+    
+    <lastmod>2020-08-26</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://ziyedy.top/page/python-magic-method.html</loc>
+    
+    <lastmod>2020-08-26</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://ziyedy.top/page/TF2-basic-function.html</loc>
+    
+    <lastmod>2020-08-25</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://ziyedy.top/page/tf2-keras-build-nn.html</loc>
+    
+    <lastmod>2020-08-25</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://ziyedy.top/page/nn-basic-concept-summary.html</loc>
+    
+    <lastmod>2020-08-25</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://ziyedy.top/page/tf2-classic-cnn.html</loc>
+    
+    <lastmod>2020-08-25</lastmod>
     
   </url>
   
   <url>
     <loc>http://ziyedy.top/page/tf2-nn-basic-handle.html</loc>
+    
+    <lastmod>2020-08-24</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://ziyedy.top/page/java-for-algorithm-test.html</loc>
+    
+    <lastmod>2020-08-24</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://ziyedy.top/page/java-collection.html</loc>
+    
+    <lastmod>2020-08-23</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://ziyedy.top/page/graph-traverse-and-user.html</loc>
+    
+    <lastmod>2020-08-23</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://ziyedy.top/page/pandas-basic-use.html</loc>
     
     <lastmod>2020-08-22</lastmod>
     
@@ -38,13 +143,6 @@
   
   <url>
     <loc>http://ziyedy.top/page/numpy-basic-use.html</loc>
-    
-    <lastmod>2020-08-22</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://ziyedy.top/page/Python-os.html</loc>
     
     <lastmod>2020-08-22</lastmod>
     
@@ -178,13 +276,6 @@
   
   <url>
     <loc>http://ziyedy.top/page/Java-exception.html</loc>
-    
-    <lastmod>2020-08-20</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://ziyedy.top/page/java-collection.html</loc>
     
     <lastmod>2020-08-20</lastmod>
     
@@ -373,13 +464,6 @@
   </url>
   
   <url>
-    <loc>http://ziyedy.top/page/java-for-algorithm-test.html</loc>
-    
-    <lastmod>2020-08-15</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://ziyedy.top/page/js-class-object.html</loc>
     
     <lastmod>2020-08-15</lastmod>
@@ -453,27 +537,6 @@
     <loc>http://ziyedy.top/page/pyqt5-env-ide-build.html</loc>
     
     <lastmod>2020-08-12</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://ziyedy.top/page/tf2-keras-build-nn.html</loc>
-    
-    <lastmod>2020-08-08</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://ziyedy.top/page/nn-basic-concept-summary.html</loc>
-    
-    <lastmod>2020-08-08</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://ziyedy.top/page/TF2-basic-function.html</loc>
-    
-    <lastmod>2020-08-07</lastmod>
     
   </url>
   
@@ -704,7 +767,7 @@
 
   <url>
     <loc>http://ziyedy.top/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -712,231 +775,259 @@
   
   <url>
     <loc>http://ziyedy.top/tags/python/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/tags/GUI/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/tags/%E5%89%A7%E8%AF%84/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/tags/hexo/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/tags/git/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/tags/latex/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/tags/%E8%AE%BA%E6%96%87/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/tags/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/tags/%E6%95%A3%E6%96%87/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/tags/%E6%9D%82%E6%96%87/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/tags/%E6%97%A5%E5%BF%97/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/tags/pygame/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/tags/matlab/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/tags/%E5%9B%BE%E5%83%8F/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/tags/%E5%89%8D%E7%AB%AF/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/tags/ArcGIS/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/tags/GIS/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/tags/Python/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/tags/Java/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/tags/java/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/tags/Linux/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/tags/%E5%B7%A5%E4%BD%9C%E6%95%88%E7%8E%87/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/tags/AI/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/tags/QGis/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/tags/CSS/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/tags/JS/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/tags/PyQt5/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/tags/6dof/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://ziyedy.top/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/</loc>
+    <lastmod>2020-08-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://ziyedy.top/tags/TF2/</loc>
+    <lastmod>2020-08-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://ziyedy.top/tags/%E7%AE%97%E6%B3%95/</loc>
+    <lastmod>2020-08-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://ziyedy.top/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</loc>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -945,238 +1036,252 @@
   
   <url>
     <loc>http://ziyedy.top/categories/Python/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/categories/Python/PyQt5/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/categories/%E5%89%8D%E7%AB%AF/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/categories/%E5%89%8D%E7%AB%AF/JS/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/categories/GIS/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/categories/Python/Django/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/categories/Java/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/categories/Java/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/categories/%E7%9E%8E%E4%BE%83/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/categories/%E7%9E%8E%E4%BE%83/%E6%9D%82%E6%96%87/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/categories/%E7%9E%8E%E4%BE%83/%E6%95%A3%E6%96%87/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/categories/%E5%88%B7%E9%A2%98/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/categories/%E7%9E%8E%E4%BE%83/%E5%89%A7%E8%AF%84/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/categories/%E5%89%8D%E7%AB%AF/hexo/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/categories/%E5%85%B6%E4%BB%96/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/categories/%E5%85%B6%E4%BB%96/debug/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/categories/%E5%85%B6%E4%BB%96/%E5%B7%A5%E4%BD%9C%E6%95%88%E7%8E%87/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/categories/Python/%E6%B8%B8%E6%88%8F/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/categories/Python/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/categories/Python/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/categories/Java/Java%E5%9F%BA%E7%A1%80/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/categories/Linux/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/categories/%E5%89%8D%E7%AB%AF/CSS/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/categories/Linux/%E5%91%BD%E4%BB%A4%E8%A1%8C/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/categories/AI/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/categories/AI/TF2/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/categories/AI/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/categories/Python/%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/categories/Python/%E7%88%AC%E8%99%AB/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://ziyedy.top/categories/AI/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2020-08-22</lastmod>
+    <lastmod>2020-08-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://ziyedy.top/categories/Android/</loc>
+    <lastmod>2020-08-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://ziyedy.top/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%BD%91-topdown/</loc>
+    <lastmod>2020-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>

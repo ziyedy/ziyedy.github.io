@@ -2,24 +2,20 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Java容器与方法（常用于算法题） | 子夜子夜</title>
+  <title>Java算法题的常用语法 | 子夜子夜</title>
   <meta name="keywords" content=" Java ">
-  <meta name="description" content="Java容器与方法（常用于算法题） | 子夜子夜">
+  <meta name="description" content="Java算法题的常用语法 | 子夜子夜">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="图的基本概念图是由顶点的集合和顶点之间的边的集合组成的，通常表示为G(V, E)。其中G表示一个图，V是图G中的顶点的集合，E是图G中边的集合。 图按照边是否有方向和边是否带权重可以分为四类，即有向无权图、有向有权图、无向无权图、无向有权图。 无向图的边通常使用“()”表示，如A与B之间的边就是(A, B)或(B, A) 有向边则通常使用“&lt;&gt;”表示，如A到B的边就是&lt;A, B&amp;">
+<meta name="description" content="Pandas基础Pandas是Python第三方库，提供高性能易用数据类型和分析工具，其基于NumPy实现，常与NumPy和Matplotlib一同使用. 器有两个主要数据类型：Series, DataFrame 基于上述数据类型的各类操作基本操作、运算操作、特征类操作、关联类操作    NumPy Pandas    基础数据类型 扩展数据类型   关注数据的结构表达 关注数据的应用表达   维">
 <meta property="og:type" content="article">
-<meta property="og:title" content="图的概念与存储结构">
-<meta property="og:url" content="http://ziyedy.top/page/graph-basic-knowledge.html">
+<meta property="og:title" content="Pandas库基本用法">
+<meta property="og:url" content="http://ziyedy.top/page/pandas-basic-use.html">
 <meta property="og:site_name" content="子夜子夜">
-<meta property="og:description" content="图的基本概念图是由顶点的集合和顶点之间的边的集合组成的，通常表示为G(V, E)。其中G表示一个图，V是图G中的顶点的集合，E是图G中边的集合。 图按照边是否有方向和边是否带权重可以分为四类，即有向无权图、有向有权图、无向无权图、无向有权图。 无向图的边通常使用“()”表示，如A与B之间的边就是(A, B)或(B, A) 有向边则通常使用“&lt;&gt;”表示，如A到B的边就是&lt;A, B&amp;">
-<meta property="og:image" content="http://cdn.ziyedy.top/image/%E5%9B%BE%E7%9A%84%E6%A6%82%E5%BF%B5%E4%B8%8E%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5.png">
-<meta property="og:image" content="http://cdn.ziyedy.top/image/%E5%9B%BE%E7%9A%84%E6%A6%82%E5%BF%B5%E4%B8%8E%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/%E9%82%BB%E6%8E%A5%E8%A1%A8.png">
-<meta property="article:published_time" content="2020-08-15T20:00:14.000Z">
-<meta property="article:modified_time" content="2020-08-17T15:22:30.779Z">
+<meta property="og:description" content="Pandas基础Pandas是Python第三方库，提供高性能易用数据类型和分析工具，其基于NumPy实现，常与NumPy和Matplotlib一同使用. 器有两个主要数据类型：Series, DataFrame 基于上述数据类型的各类操作基本操作、运算操作、特征类操作、关联类操作    NumPy Pandas    基础数据类型 扩展数据类型   关注数据的结构表达 关注数据的应用表达   维">
+<meta property="article:published_time" content="2020-08-22T03:38:29.000Z">
+<meta property="article:modified_time" content="2020-08-22T15:08:19.307Z">
 <meta property="article:author" content="子夜">
-<meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://cdn.ziyedy.top/image/%E5%9B%BE%E7%9A%84%E6%A6%82%E5%BF%B5%E4%B8%8E%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5.png">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -138,11 +134,11 @@
 
 
 <ul>
-    <li><div class="all active">全部文章<small>(100)</small></div></li>
+    <li><div class="all active">全部文章<small>(109)</small></div></li>
     
         
             
-            <li><div data-rel="Python"><i class="fold iconfont icon-right"></i>Python<small>(20)</small></div>
+            <li><div data-rel="Python"><i class="fold iconfont icon-right"></i>Python<small>(21)</small></div>
                 
                     <ul class="sub hide">
                         
@@ -158,7 +154,7 @@
                             
                         </li>
                             
-                        <li><div data-rel="语言基础">语言基础<small>(9)</small></div>
+                        <li><div data-rel="语言基础">语言基础<small>(10)</small></div>
                             
                         </li>
                             
@@ -346,11 +342,15 @@
     
         
             
-            <li><div data-rel="计算机基础"><i class="fold iconfont icon-right"></i>计算机基础<small>(14)</small></div>
+            <li><div data-rel="计算机基础"><i class="fold iconfont icon-right"></i>计算机基础<small>(16)</small></div>
                 
                     <ul class="sub hide">
                         
-                        <li><div data-rel="数据结构与算法">数据结构与算法<small>(14)</small></div>
+                        <li><div data-rel="数据结构与算法">数据结构与算法<small>(15)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="计网-topdown">计网-topdown<small>(1)</small></div>
                             
                         </li>
                             
@@ -402,11 +402,11 @@
     
         
             
-            <li><div data-rel="AI"><i class="fold iconfont icon-right"></i>AI<small>(8)</small></div>
+            <li><div data-rel="AI"><i class="fold iconfont icon-right"></i>AI<small>(10)</small></div>
                 
                     <ul class="sub hide">
                         
-                        <li><div data-rel="TF2">TF2<small>(4)</small></div>
+                        <li><div data-rel="TF2">TF2<small>(6)</small></div>
                             
                         </li>
                             
@@ -448,6 +448,18 @@
             
         
     
+        
+            
+            <li><div data-rel="Android">Android<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
 </ul>
 <div class="left-bottom">
     <div class="menus">
@@ -458,8 +470,8 @@
     </div>
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="100">
-<input type="hidden" id="yelog_site_word_count" value="93k">
+<input type="hidden" id="yelog_site_posts_number" value="109">
+<input type="hidden" id="yelog_site_word_count" value="104.2k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -620,6 +632,22 @@
     
     <li class="article-tag-list-item">
         <a class="color5">6dof</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">移动端</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">TF2</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">算法</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">计算机网络</a>
     </li>
     
     <div class="clearfix"></div>
@@ -1340,14 +1368,6 @@
             <span class="post-date" title="2020-03-23 11:50:01">2020/03/23</span>
         </a>
         
-        <a  class="Java Java基础 "
-           href="/page/java-for-algorithm-test.html"
-           data-tag="Java"
-           data-author="" >
-            <span class="post-title" title="Java容器与方法（常用于算法题）">Java容器与方法（常用于算法题）</span>
-            <span class="post-date" title="2020-08-15 14:34:11">2020/08/15</span>
-        </a>
-        
         <a  class="Python PyQt5 "
            href="/page/pyqt5-basic-widget.html"
            data-tag="PyQt5"
@@ -1364,14 +1384,6 @@
             <span class="post-date" title="2020-08-12 16:18:07">2020/08/12</span>
         </a>
         
-        <a  class="AI TF2 "
-           href="/page/tf2-nn-basic-handle.html"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title="TF2搭建网络所需要的基本操作">TF2搭建网络所需要的基本操作</span>
-            <span class="post-date" title="2020-08-08 12:12:34">2020/08/08</span>
-        </a>
-        
         <a  class="Python 常用模块 "
            href="/page/pandas-basic-use.html"
            data-tag=""
@@ -1386,14 +1398,6 @@
            data-author="" >
             <span class="post-title" title="numpy常用属性与方法">numpy常用属性与方法</span>
             <span class="post-date" title="2020-08-21 09:51:27">2020/08/21</span>
-        </a>
-        
-        <a  class="Python 常用模块 "
-           href="/page/Python-os.html"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title="os模块的常用操作">os模块的常用操作</span>
-            <span class="post-date" title="2020-06-20 09:41:07">2020/06/20</span>
         </a>
         
         <a  class="Python 常用模块 "
@@ -1428,6 +1432,102 @@
             <span class="post-date" title="2020-07-20 16:11:47">2020/07/20</span>
         </a>
         
+        <a  class="Android "
+           href="/page/Android3-layout.html"
+           data-tag="移动端"
+           data-author="" >
+            <span class="post-title" title="Android开发三：布局（layout）">Android开发三：布局（layout）</span>
+            <span class="post-date" title="2020-08-30 10:06:09">2020/08/30</span>
+        </a>
+        
+        <a  class="Android "
+           href="/page/Android2-activity.html"
+           data-tag="移动端"
+           data-author="" >
+            <span class="post-title" title="Android开发二：活动（Activity）">Android开发二：活动（Activity）</span>
+            <span class="post-date" title="2020-08-30 09:21:58">2020/08/30</span>
+        </a>
+        
+        <a  class="Android "
+           href="/page/android-dev-helloworld.html"
+           data-tag="移动端"
+           data-author="" >
+            <span class="post-title" title="Android开发一：HelloWorld">Android开发一：HelloWorld</span>
+            <span class="post-date" title="2020-08-29 10:13:02">2020/08/29</span>
+        </a>
+        
+        <a  class="AI TF2 "
+           href="/page/tf2-nn-basic-handle.html"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="TF2存储模型参数等基本操作">TF2存储模型参数等基本操作</span>
+            <span class="post-date" title="2020-08-08 12:12:34">2020/08/08</span>
+        </a>
+        
+        <a  class=""
+           href="/page/null.html"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="post">post</span>
+            <span class="post-date" title="2020-08-28 22:21:26">2020/08/28</span>
+        </a>
+        
+        <a  class="AI TF2 "
+           href="/page/tf2-classic-cnn.html"
+           data-tag="AI"
+           data-author="" >
+            <span class="post-title" title="TF2实现经典CNN架构">TF2实现经典CNN架构</span>
+            <span class="post-date" title="2020-08-24 17:08:00">2020/08/24</span>
+        </a>
+        
+        <a  class="AI TF2 "
+           href="/page/tf2-create-dataset.html"
+           data-tag="TF2"
+           data-author="" >
+            <span class="post-title" title="使用TF2创建数据集">使用TF2创建数据集</span>
+            <span class="post-date" title="2020-08-25 16:31:59">2020/08/25</span>
+        </a>
+        
+        <a  class="Java Java基础 "
+           href="/page/java-for-algorithm-test.html"
+           data-tag="Java"
+           data-author="" >
+            <span class="post-title" title="Java算法题的常用语法">Java算法题的常用语法</span>
+            <span class="post-date" title="2020-08-15 14:34:11">2020/08/15</span>
+        </a>
+        
+        <a  class="Python 语言基础 "
+           href="/page/python-magic-method.html"
+           data-tag="Python"
+           data-author="" >
+            <span class="post-title" title="Python中的魔法方法（Magic Method）">Python中的魔法方法（Magic Method）</span>
+            <span class="post-date" title="2020-08-26 09:19:41">2020/08/26</span>
+        </a>
+        
+        <a  class="Python 常用模块 "
+           href="/page/Python-path-operation.html"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="路径操作常用模块（os与pathlib）">路径操作常用模块（os与pathlib）</span>
+            <span class="post-date" title="2020-06-20 09:41:07">2020/06/20</span>
+        </a>
+        
+        <a  class="计算机基础 数据结构与算法 "
+           href="/page/graph-traverse-and-user.html"
+           data-tag="算法"
+           data-author="" >
+            <span class="post-title" title="图的遍历及应用">图的遍历及应用</span>
+            <span class="post-date" title="2020-08-23 12:37:02">2020/08/23</span>
+        </a>
+        
+        <a  class="计算机基础 计网-topdown "
+           href="/page/no1-computer-network-and-the-internet.html"
+           data-tag="计算机网络"
+           data-author="" >
+            <span class="post-title" title="第一章：计算机网络与英特网">第一章：计算机网络与英特网</span>
+            <span class="post-date" title="2020-08-27 22:00:15">2020/08/27</span>
+        </a>
+        
     </nav>
 </div>
     </div>
@@ -1440,9 +1540,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-Java/Java基础/Java算法题常用容器与方法" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Java/Java基础/Java算法题的常用语法" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Java容器与方法（常用于算法题）</h1>
+        <h1 class="article-title">Java算法题的常用语法</h1>
     
     <div class="article-meta">
         
@@ -1466,12 +1566,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-08-15 12:59:23'>2020-08-15 14:34</time>
+        创建时间:<time class="date" title='更新时间: 2020-08-24 14:30:50'>2020-08-15 14:34</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:432</span>
+        <span>字数:843</span>
         
         
         
@@ -1479,7 +1579,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#集合"><span class="toc-text">集合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#迭代器"><span class="toc-text">迭代器</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#控制台输入与输出"><span class="toc-text">控制台输入与输出</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#控制台输入"><span class="toc-text">控制台输入</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#输入一整行数据"><span class="toc-text">输入一整行数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#输入单个数据（方法名为next后面跟基本数据类型名）"><span class="toc-text">输入单个数据（方法名为next后面跟基本数据类型名）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#输入一个字符串"><span class="toc-text">输入一个字符串</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#控制台输出"><span class="toc-text">控制台输出</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基本语法"><span class="toc-text">基本语法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#格式化输出常用转换符"><span class="toc-text">格式化输出常用转换符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#搭配转换符的常用标志"><span class="toc-text">搭配转换符的常用标志</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常用示例"><span class="toc-text">常用示例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本容器的使用"><span class="toc-text">基本容器的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用容器的基本使用"><span class="toc-text">常用容器的基本使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#容器的基本操作"><span class="toc-text">容器的基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Arrays"><span class="toc-text">Arrays</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Arrays-sort-——排序"><span class="toc-text">Arrays.sort()——排序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Arrays-fill-——填充"><span class="toc-text">Arrays.fill()——填充</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Arrays-equals-——判断两个数组各元素是否都相等"><span class="toc-text">Arrays.equals()——判断两个数组各元素是否都相等</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Arrays-binarySerch-——二分查找定位元素下标"><span class="toc-text">Arrays.binarySerch()——二分查找定位元素下标</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Arrays-copyOfRange-——截取数组"><span class="toc-text">Arrays.copyOfRange()——截取数组</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Collections"><span class="toc-text">Collections</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#void-reverse-List-list-：反转"><span class="toc-text">void reverse(List list)：反转</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#void-sort-List-list-：排序"><span class="toc-text">void sort(List list)：排序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#void-swap-List-list-int-i-int-j-：交换两个索引位置的元素"><span class="toc-text">void swap(List list, int i , int j)：交换两个索引位置的元素</span></a></li></ol></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1495,40 +1595,108 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>equal方法指内容是否相同</p>
-<p>==指地址是否相同</p>
-<p>String的对象一旦被创建，则不能修改，是不可变的（即使用substr等函数时其本身是不会变的）</p>
-<p>当频繁操作字符串时，使用StringBuilder</p>
-<p>常用方法</p>
-<pre><code>StringBuilder str = new StringBuilder(&quot;hello&quot;);
-str.append(&quot; world&quot;);    // 向后添加字符串
-str.delete(0,5);    // 删除第0-4个字符
-str.insert(4,&quot;gg&quot;);    // 在索引4向后插入gg
-str.replace(4,6,&quot;aa&quot;);    // 在缩影4到5处替换为aa
-</code></pre><h3 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h3><p>Collection：List，Queue，Set</p>
-<p>List是元素有序并且可以重复的集合，称为序列</p>
-<p>两个主要实现类：ArrayList，LinkedList</p>
-<p>ArrayList底层由数组实现，动态增长，其中元素可以为null</p>
-<pre><code>ArrayList list = new ArrayList();
-list.add(1);    // 向后添加
-list.size();    // 获取元素数量
-list.get(1);    // 取出索引值为1的元素
-list.remove(2);    // 移除索引为2的元素
-</code></pre><p>Set</p>
-<p>元素无序且不可以重复的集合。</p>
-<p>HashSet是Set的一个重要元素，称为哈希集，其中元素无序且不可以重复，只允许一个null元素。</p>
-<h3 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h3><p>Iterator接口可以以统一的方式对各种集合元素进行遍历，调用各种集合元素的iterator()方法得到迭代器。</p>
-<p>hasNext()方法检测集合中是否还有下一个元素</p>
-<p>next()方法返回集合中的下一个元素</p>
-<pre><code>Iterator it = set.iterator();
-while (it.hasNext()) {
-    System.out.println(it.next());
-}</code></pre><p>hashCode()和equals()，用于判断是否相同，选哟进行重写  </p>
-<p>Map。以键值对的形式存储</p>
-<p>HashMap：基于哈希表的Map接口的实现，允许使用null值和null键，无序排列。</p>
-<p>排序</p>
-<pre><code>Collections.sort(list);</code></pre><p>使用Comparable或Comparator接口对自定义类进行排序</p>
+        <h2 id="控制台输入与输出"><a href="#控制台输入与输出" class="headerlink" title="控制台输入与输出"></a>控制台输入与输出</h2><h3 id="控制台输入"><a href="#控制台输入" class="headerlink" title="控制台输入"></a>控制台输入</h3><pre><code class="java">Scanner sc = new Scanner(System.in);</code></pre>
+<h4 id="输入一整行数据"><a href="#输入一整行数据" class="headerlink" title="输入一整行数据"></a>输入一整行数据</h4><p>以换行为终止，返回一个String类型变量.</p>
+<pre><code>String s = sc.nextLine();</code></pre><h4 id="输入单个数据（方法名为next后面跟基本数据类型名）"><a href="#输入单个数据（方法名为next后面跟基本数据类型名）" class="headerlink" title="输入单个数据（方法名为next后面跟基本数据类型名）"></a>输入单个数据（方法名为next后面跟基本数据类型名）</h4><p>如下为输入一个整型</p>
+<pre><code>int a = sc.nextInt();</code></pre><h4 id="输入一个字符串"><a href="#输入一个字符串" class="headerlink" title="输入一个字符串"></a>输入一个字符串</h4><pre><code>String str = sc.next();</code></pre><h3 id="控制台输出"><a href="#控制台输出" class="headerlink" title="控制台输出"></a>控制台输出</h3><h4 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h4><p>输出内容：<code>System.out.print(&quot;&quot;);</code></p>
+<p>输出内容并换行：<code>System.out.println(&quot;&quot;);</code></p>
+<p>格式化输出1： <code>System.out.format(String format, Object ... args);</code></p>
+<p>格式化输出2：<code>System.out.printf((String format, Object ... args);</code></p>
+<h4 id="格式化输出常用转换符"><a href="#格式化输出常用转换符" class="headerlink" title="格式化输出常用转换符"></a>格式化输出常用转换符</h4><table>
+<thead>
+<tr>
+<th>转 换 符</th>
+<th>说  明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%s</td>
+<td>字符串类型</td>
+</tr>
+<tr>
+<td>%c</td>
+<td>字符类型</td>
+</tr>
+<tr>
+<td>%d</td>
+<td>整数类型（十进制）</td>
+</tr>
+<tr>
+<td>%f</td>
+<td>浮点类型</td>
+</tr>
+<tr>
+<td>%n 或 \n</td>
+<td>换行符</td>
+</tr>
+</tbody></table>
+<h4 id="搭配转换符的常用标志"><a href="#搭配转换符的常用标志" class="headerlink" title="搭配转换符的常用标志"></a>搭配转换符的常用标志</h4><table>
+<thead>
+<tr>
+<th>标  志</th>
+<th>说  明</th>
+<th>示  例</th>
+<th>结  果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>+</td>
+<td>为正数或者负数添加符号</td>
+<td>(“%+d %+d”, -10, 10)</td>
+<td>-10 +10</td>
+</tr>
+<tr>
+<td>0</td>
+<td>数字前面补0</td>
+<td>(“%05d”, 10)</td>
+<td>00010</td>
+</tr>
+</tbody></table>
+<h4 id="常用示例"><a href="#常用示例" class="headerlink" title="常用示例"></a>常用示例</h4><pre><code>// 输出带有五位小数的浮点型
+System.out.printf(&quot;%.5f&quot;, 99.89);    // 99.89000
+// 输出在前面补齐5位数
+System.out.printf(&quot;%05d&quot;, 99);    // 00099</code></pre><h2 id="基本容器的使用"><a href="#基本容器的使用" class="headerlink" title="基本容器的使用"></a>基本容器的使用</h2><h3 id="常用容器的基本使用"><a href="#常用容器的基本使用" class="headerlink" title="常用容器的基本使用"></a>常用容器的基本使用</h3><p><img src="http://cdn.ziyedy.top/image/Java%E7%AE%97%E6%B3%95%E9%A2%98%E7%9A%84%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/Collection.png" alt=""></p>
+<h2 id="容器的基本操作"><a href="#容器的基本操作" class="headerlink" title="容器的基本操作"></a>容器的基本操作</h2><h3 id="Arrays"><a href="#Arrays" class="headerlink" title="Arrays"></a>Arrays</h3><h4 id="Arrays-sort-——排序"><a href="#Arrays-sort-——排序" class="headerlink" title="Arrays.sort()——排序"></a>Arrays.sort()——排序</h4><p>对所有数组元素进行排序（默认正序）</p>
+<pre><code class="java">int[] a = new int[]{-2,-3,2,1,9};
+Arrays.sort(a);    // 默认升序： -3 -2 1 2 9
+</code></pre>
+<p>使用<strong>lamda表达式</strong>更改排序方式，以倒序为例，此时需要注意<strong>声明数组必须使用其包装类</strong>，否则会报错</p>
+<pre><code class="java">Integer[] a = new Integer[]{-2,-3,2,1,9};
+Arrays.sort(a, (a1, a2)-&gt;a2-a1);    // 倒序：9 2 1 -2 -3</code></pre>
+<p>对指定索引范围内元素进行排序</p>
+<pre><code>int[] b = new int[]{-2,-3,2,1,9};
+// 对[0, 2)范围内数组元素进行排序
+// 之后也可更改排序方式
+Arrays.sort(b, 0, 2);    // -3 -2 2 1 9</code></pre><h4 id="Arrays-fill-——填充"><a href="#Arrays-fill-——填充" class="headerlink" title="Arrays.fill()——填充"></a>Arrays.fill()——填充</h4><p>为数组元素填充相同值</p>
+<pre><code>int[] a = new int[]{-2,-3,2,1,9};
+Arrays.fill(a, 10);    // 10 10 10 10 10</code></pre><p>为指定索引范围内数组填充相同值</p>
+<pre><code>int[] a = new int[]{-2,-3,2,1,9};
+// 在索引[1, 3)范围内填充5
+Arrays.fill(a, 1, 3, 5);    // -2 5 5 1 9</code></pre><h4 id="Arrays-equals-——判断两个数组各元素是否都相等"><a href="#Arrays-equals-——判断两个数组各元素是否都相等" class="headerlink" title="Arrays.equals()——判断两个数组各元素是否都相等"></a>Arrays.equals()——判断两个数组各元素是否都相等</h4><pre><code class="java">int[] a = new int[]{-2,-3,2,1,9};
+int[] b = new int[]{-2,-3,2,1,9};
+System.out.println(Arrays.equals(a, b));    // true</code></pre>
+<h4 id="Arrays-binarySerch-——二分查找定位元素下标"><a href="#Arrays-binarySerch-——二分查找定位元素下标" class="headerlink" title="Arrays.binarySerch()——二分查找定位元素下标"></a>Arrays.binarySerch()——二分查找定位元素下标</h4><p>注意：数组一定要是<strong>排好序的</strong>，否则会出错，若没有搜索到返回一个负值</p>
+<pre><code>int[] a = new int[]{-3,-2,2,3,9};
+System.out.println(Arrays.binarySearch(a, 2));    // 2</code></pre><h4 id="Arrays-copyOfRange-——截取数组"><a href="#Arrays-copyOfRange-——截取数组" class="headerlink" title="Arrays.copyOfRange()——截取数组"></a>Arrays.copyOfRange()——截取数组</h4><pre><code>int[] a = new int[]{-2,-3,2,1,9};
+// 截取[1, 3)的数组
+int[] b = Arrays.copyOfRange(a,1,3);
+for (int m : b) System.out.print(m + &quot; &quot;);    // -3 2</code></pre><h3 id="Collections"><a href="#Collections" class="headerlink" title="Collections"></a>Collections</h3><p>示例列表如下：</p>
+<pre><code>ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;();
+list.add(2);
+list.add(-2);
+list.add(5);
+list.add(99);
+list.add(-10);
+for (int v : list) System.out.print(v + &quot; &quot;);    // 2 -2 5 99 -10</code></pre><h4 id="void-reverse-List-list-：反转"><a href="#void-reverse-List-list-：反转" class="headerlink" title="void reverse(List list)：反转"></a>void reverse(List list)：反转</h4><pre><code>// 反转整个列表
+Collections.reverse(list);    // -10 99 5 -2 2
 
+// 反转[1, 3)的列表
+Collections.reverse(list.subList(1, 3));    // 2 5 -2 99 -10</code></pre><h4 id="void-sort-List-list-：排序"><a href="#void-sort-List-list-：排序" class="headerlink" title="void sort(List list)：排序"></a>void sort(List list)：排序</h4><pre><code>// 自然升序
+Collections.sort(list);    // -10 -2 2 5 99
+
+// 自定义排序方法（此处为降序）
+Collections.sort(list, (a, b)-&gt;b-a);    // 99 5 2 -2 -10</code></pre><h4 id="void-swap-List-list-int-i-int-j-：交换两个索引位置的元素"><a href="#void-swap-List-list-int-i-int-j-：交换两个索引位置的元素" class="headerlink" title="void swap(List list, int i , int j)：交换两个索引位置的元素"></a>void swap(List list, int i , int j)：交换两个索引位置的元素</h4><pre><code>// 交换索引为0 和 4的元素
+Collections.swap(list, 0, 4);    // -10 -2 5 99 2</code></pre>
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 ziyedy@qq.com </span>
     </div>
@@ -1537,12 +1705,12 @@ while (it.hasNext()) {
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>Java容器与方法（常用于算法题）</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">432</span></p>
+    <p><span class="copy-title">文章标题:</span>Java算法题的常用语法</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">843</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="子夜">子夜</a></p>
     <p><span class="copy-title">发布时间:</span>2020-08-15, 14:34:11</p>
-    <p><span class="copy-title">最后更新:</span>2020-08-15, 12:59:23</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/page/java-for-algorithm-test.html" title="Java容器与方法（常用于算法题）">http://ziyedy.top/page/java-for-algorithm-test.html</a>
+    <p><span class="copy-title">最后更新:</span>2020-08-24, 14:30:50</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/page/java-for-algorithm-test.html" title="Java算法题的常用语法">http://ziyedy.top/page/java-for-algorithm-test.html</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
@@ -1586,7 +1754,7 @@ while (it.hasNext()) {
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#python','#GUI','#剧评','#hexo','#云服务器','#git','#latex','#论文','#二叉树','#语义分割','#散文','#杂文','#日志','#pygame','#matlab','#图像','#前端','#ArcGIS','#GIS','#数据库','#Python','#Java','#数据结构','#java','#Linux','#工作效率','#AI','#QGis','#CSS','#JS','#机器学习','#PyQt5','#6dof',],
+            'data': ['#python','#GUI','#剧评','#hexo','#云服务器','#git','#latex','#论文','#二叉树','#语义分割','#散文','#杂文','#日志','#pygame','#matlab','#图像','#前端','#ArcGIS','#GIS','#数据库','#Python','#Java','#数据结构','#java','#Linux','#工作效率','#AI','#QGis','#CSS','#JS','#机器学习','#PyQt5','#6dof','#移动端','#TF2','#算法','#计算机网络',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
@@ -1603,7 +1771,7 @@ while (it.hasNext()) {
         /*高亮代码块行号*/
         
         $('pre code').each(function(){
-            var lines = $(this).text().split('\n').length - 1, widther='';
+            var lines = $(this).text().split('\n').length, widther='';
             if (lines>99) {
                 widther = 'widther'
             }
