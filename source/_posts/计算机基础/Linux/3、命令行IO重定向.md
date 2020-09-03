@@ -4,8 +4,8 @@ date: 2020-08-04 09:18:16
 tags:
    - Linux
 categories:
+   - 计算机基础
    - Linux
-   - 命令行
 fileName: linux-io-redirection
 ---
 

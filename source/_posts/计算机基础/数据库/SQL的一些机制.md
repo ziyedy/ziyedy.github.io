@@ -2,10 +2,10 @@
 title: SQL的一些机制
 date: 2020-06-12 10:39:37
 tags:
-	- 数据库
+	- SQL
 categories:
+	- 计算机基础
 	- 数据库
-	- MySQL
 fileName: mysql3
 ---
 

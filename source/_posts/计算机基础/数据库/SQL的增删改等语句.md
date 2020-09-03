@@ -4,8 +4,8 @@ date: 2020-06-07 09:44:15
 tags:
 	- 数据库
 categories:
+	- 计算机技术
 	- 数据库
-	- MySQL
 fileName: mysql1
 ---
 

@@ -4,8 +4,8 @@ date: 2020-06-10 17:30:10
 tags:
 	- 数据库
 categories:
+	- 计算机基础
 	- 数据库
-	- MySQL
 fileName: mysql2
 ---
 
