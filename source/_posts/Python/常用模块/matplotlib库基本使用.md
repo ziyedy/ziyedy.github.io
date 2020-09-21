@@ -28,6 +28,16 @@ fileName: python-matplotlib-use
 plt.plot(x, y, format_string, **kwargs)
 ```
 
+### plt.gca()获取修改坐标轴
+
+```
+
+```
+
+
+
+
+
 ### pyplot的文本显示函数
 
 | 函数           | 说明                     |

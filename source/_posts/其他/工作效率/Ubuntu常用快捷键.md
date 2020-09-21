@@ -68,3 +68,5 @@ Alt + Enter – 查看选择文件/文件夹的属性，代替单击右键选择
 Alt + Up/Down Arrow – 移动到父文件夹/选择的文件夹（左右的用的多一些）
 
 Alt + Left/Right Arrow – 在文件夹中后退/前进
+
+Ctrl + L - 得到文件路径

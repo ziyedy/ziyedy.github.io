@@ -11,7 +11,7 @@ fileName: tf2-keras-build-nn
 
 主要在于与《TF2原生语法构建简单网络》的比较
 
-## 逐层搭建网络结构
+## 逐层搭建网络结构（使用Sequential()）
 
 ### tf.keras.models.Sequential()
 
@@ -73,6 +73,23 @@ model = tf.keras.models.Sequential([
 ])
 ```
 
+### 使用model.layers查看模型信息
+
+```
+model.layers
+
+[<tensorflow.python.keras.layers.core.Flatten at 0x2239c7f9888>,
+ <tensorflow.python.keras.layers.core.Dense at 0x2239c7f9f08>,
+ <tensorflow.python.keras.layers.core.Dense at 0x2239c800248>,
+ <tensorflow.python.keras.layers.core.Dense at 0x2239c800688>]
+```
+
+
+
+### model.summary()
+
+>  同时，在最后可以使用`model.summary()`查看网络参数量等基本信息。
+
 
 
 
@@ -125,7 +142,7 @@ model.compile(optimizer=优化器,
 ```
 model.compile(optimizer=tf.keras.optimizers.SGD(lr=0.1),
               loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=False),
-              metrics=['sparse_categorical_accuracy'])
+              metrics=['accuracy'])
 ```
 
 
@@ -133,7 +150,9 @@ model.compile(optimizer=tf.keras.optimizers.SGD(lr=0.1),
 ### 在model.fit()中执行训练过程
 
 ```
-model.fit( 训练集的输入特征， 训练集的标签， batch _size, epochs,
+# fit可以返回中间的一些数据结构
+# 通常命名为history
+history = model.fit( 训练集的输入特征， 训练集的标签， batch _size, epochs,
 		   validation_data = ( 测试集的输入特征，测试集的标签 ) ，
 		   validataion_split = 从测试集划分多少比例给训练集，
 		   validation_freq = 测试的 epoch 间隔次数
@@ -143,14 +162,54 @@ model.fit( 训练集的输入特征， 训练集的标签， batch _size, epochs
 #### 实践
 
 ```
-model.fit(x_train, y_train, batch_size=32, epochs=500, validation_split=0.2, validation_freq=20)
+history = model.fit(x_train, y_train, batch_size=32, epochs=500, validation_split=0.2, validation_freq=20)
 ```
 
-同时，在最后可以使用`model.summary()`查看网络参数量等基本信息。
+
+
+### 使用history.history绘制训练图表
+
+#### history类型
+
+```
+type(history)
+tensorflow.python.keras.callbacks.History
+```
+
+#### 
+
+```
+print(history.history)
+
+{'loss': [nan, nan, nan, nan, nan, nan, nan, nan, nan, nan],
+ 'accuracy': [0.101127274,
+  0.10078182,
+  0.10078182,
+  0.10078182,
+  0.10078182,
+  0.10078182,
+  0.10078182,
+  0.10078182,
+  0.10078182,
+  0.10078182],
+ 'val_loss': [nan, nan, nan, nan, nan, nan, nan, nan, nan, nan],
+ 'val_accuracy': [0.0914,
+  0.0914,
+  0.0914,
+  0.0914,
+  0.0914,
+  0.0914,
+  0.0914,
+  0.0914,
+  0.0914,
+  0.0914]}
+```
 
 
 
-### 使用class封装上述过程
+
+
+## 使用class搭建网络
 
 将上述流程封装到一个类中，即为：（**只需要重写构造函数和call函数即可**）
 
