@@ -11,7 +11,7 @@ fileName: java-basic-grammar
 
 参考：https://github.com/Snailclimb/JavaGuide
 
-### 基本概念
+## 基本概念
 
 1、**JVM**：Java虚拟机，用于运行Java字节码，其针对不同的操作系统有着特定的实现，使得相同的字节码运行会给出相同的结果。
 
@@ -21,19 +21,26 @@ fileName: java-basic-grammar
 
 3、**JRE（Java Runtime Environment）**，即Java运行时环境。其为运行已编译Java程序所需要的所有内容的集合，包括Java虚拟机、Java类库、Java命令和其他一些基础的构建。但是，其不能用于创建新程序。
 
-
-
 **编译与解释并存**：Java程序要经过先编译、后解释两个步骤。（先经过编译生成字节码文件*.class，再经过解释进行执行）
 
+### 命令行编译
+
+```
+javac Test.java
+java Test
+```
+
+`javac`程序是一个Java编译器，将`*.java`编译成`*.class`（需要`.java`后缀）
+
+`java`程序启动Java虚拟机（只需要指定类名）
 
 
 
-
-### 基本数据类型
+## 基本数据类型
 
 Java有8中基本数据类型，数字类型（byte<1>、short<2>、int<4>、long<8>、float<4>、double<8>）；字符类型（char<2>）；布尔型（boolean<依赖于JVM的具体实现>），其中<>内为其所对应的字节数，每个基本数据类型又有对应的默认值。
 
-#### 装箱与拆箱
+### 装箱与拆箱
 
 参考：https://www.cnblogs.com/dolphin0520/p/3780005.html
 
@@ -114,7 +121,7 @@ true
 
 
 
-### 方法（函数）
+## 方法（函数）
 
 #### 参数
 
@@ -238,7 +245,7 @@ s2:小李
 
 
 
-#### 方法重载（Overload）
+### 方法重载（Overload）
 
 同样的方法根据输入数据的不同，做出不同处理（同一个类中多个同名方法根据不同的传参来执行不同的逻辑处理）。满足如下要求：
 
@@ -250,7 +257,7 @@ c、访问修饰符。
 
 
 
-#### 方法重写（Override）：
+### 方法重写（Override）
 
 重写发生在**运行期**，是子类对父类的允许访问的方法的实现过程进行重新编写（重写就是**子类对父类方法的重新改造**，外部样子不能改变，内部逻辑可以改变）。满足以下条件：
 
@@ -283,9 +290,9 @@ class SubClass extends SuperClass {
 
 
 
-### 关键字
+## 关键字
 
-#### 1、final
+### 1、final
 
 **a. 数据**
 
@@ -306,7 +313,7 @@ class SubClass extends SuperClass {
 
 
 
-#### 4、static
+### 4、static
 
 **a. 静态变量**
 

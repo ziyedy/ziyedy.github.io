@@ -1,5 +1,5 @@
 ---
-title: Blender脚本编写基础
+title: Blender物体渲染脚本
 date: 2020-09-13 09:17:32
 tags:
 	- 插件开发
