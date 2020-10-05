@@ -41,6 +41,19 @@ sudo chmod 777 -R /opt/anaconda3/
 conda config --remove-key channels
 ```
 
+换成清华源或中科大源，将以下配置文件写入`~/.condarc`中
+
+```
+channels:
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/
+ssl_verify: true
+```
+
+
+
 
 
 ### 异常关机导致的conda异常中断
