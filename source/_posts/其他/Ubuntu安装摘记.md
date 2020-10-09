@@ -12,6 +12,8 @@ fileName: ubuntu-install-summary
 
 ## 卸载双系统Ubuntu
 
+> 从Win10系统中卸载ubuntu
+
 
 
 
