@@ -10,7 +10,7 @@ fileName: blender-script-basic
 
 ## bpy模块
 
-
+bpy模块是blender脚本插件核心库
 
 ### bpy.ops
 
@@ -174,6 +174,8 @@ def look_at(obj_camera, point=Vector((0, 0, 0))):
 bpy.ops.import_scene.obj(filepath=obj_path)
 ```
 
+除导入模型外，就是合理设置输入路径和输出路径了，这个可以用os等模块进行处理
+
 #### 设置渲染输出的基本信息
 
 根据官网可以设置输出分辨率等基本信息
@@ -199,11 +201,13 @@ scene.render.filepath = output_path + "0".zfill(5) + ".png"
 bpy.ops.render.render(write_still=True, use_viewport=False)
 ```
 
+#### 渲染结果
+
+渲染结果如下，实现了**模型的批量渲染处理**
+
 ![](http://cdn.ziyedy.top/Blender%E7%89%A9%E4%BD%93%E6%B8%B2%E6%9F%93%E8%84%9A%E6%9C%AC/%E6%B8%B2%E6%9F%93%E7%BB%93%E6%9E%9C1.png)
 
 ![](http://cdn.ziyedy.top/Blender%E7%89%A9%E4%BD%93%E6%B8%B2%E6%9F%93%E8%84%9A%E6%9C%AC/%E6%B8%B2%E6%9F%93%E7%BB%93%E6%9E%9C2.png)
-
-
 
 ## 总结
 
