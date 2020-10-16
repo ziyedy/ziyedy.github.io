@@ -8,6 +8,8 @@ categories:
 fileName: blender-script-basic
 ---
 
+> 渲染可以简单理解为将3D场景转化为2D场景的过程
+
 ## bpy模块
 
 bpy模块是blender脚本插件核心库

@@ -12,7 +12,7 @@ fileName: Python-path-operation
 
 ### 模块简介
 
-os模块是Python标准库中的一个用于**访问操作系统功能**的模块。使用os模块中提供的接口可以实现跨平台访问。
+> os模块是Python标准库中的一个用于**访问操作系统功能**的模块。使用os模块中提供的接口可以实现跨平台访问。
 
 
 
@@ -27,6 +27,12 @@ os.getenv('path')：读取环境变量名称
 os.getcwd()：获取当前路径
 
 os.getpid()：获取当前进程ID
+
+#### os.system
+
+> 将字符串转化为命令行在操作系统上执行。每次执行system函数，会创建一个子进程在系统上执行命令（**子进程的执行结果无法影响主进程**）
+
+
 
 
 
@@ -72,7 +78,9 @@ os.path.split(path) ：拆分路径dirname和basename，返回为元组
 
 **os.path.join(path, name)**：连接目录与文件名或目录
 
-示例：
+
+
+#### 示例
 
 ```
 import os
