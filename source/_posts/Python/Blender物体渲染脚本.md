@@ -213,7 +213,9 @@ bpy.ops.render.render(write_still=True, use_viewport=False)
 
 之后如果还会使用blender的话我会写一个专题好好记录一下学习的过程（希望不会有这一天）
 
+### 参考
 
+https://github.com/zju3dv/pvnet-rendering
 
 
 
