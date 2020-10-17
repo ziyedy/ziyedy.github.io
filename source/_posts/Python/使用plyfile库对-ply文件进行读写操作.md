@@ -1,5 +1,5 @@
 ---
-title: Python使用plyfile库对.ply文件进行读写操作
+title: 使用plyfile库对.ply文件进行读写操作
 date: 2020-10-04 11:04:48
 tags:
 	- 3D视觉
