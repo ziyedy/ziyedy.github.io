@@ -9,6 +9,12 @@ categories:
 fileName: css-float-position
 ---
 
+c
+
+传统布局方式：
+
+> display + position + float
+
 ## Web标准文档流
 
 ### 行内元素与块级元素
