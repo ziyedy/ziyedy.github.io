@@ -3859,72 +3859,6 @@ valign="top">停止。这个信号导致进程停止运行，而不是终止。�
       </tags>
   </entry>
   <entry>
-    <title>CSS基础</title>
-    <url>/page/css-basic-knowledge.html</url>
-    <content><![CDATA[<h2 id="CSS基础"><a href="#CSS基础" class="headerlink" title="CSS基础"></a>CSS基础</h2><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><pre><code>选择器{
-    k:v;
-    k:v;
-    k:v;
-    k:v;
-}
-
-/*
-    注释内容
-*/</code></pre><h3 id="引用方式"><a href="#引用方式" class="headerlink" title="引用方式"></a>引用方式</h3><h4 id="1、行内样式"><a href="#1、行内样式" class="headerlink" title="1、行内样式"></a>1、行内样式</h4><p>在HTML标签里写</p>
-<h4 id="2、内部样式"><a href="#2、内部样式" class="headerlink" title="2、内部样式"></a>2、内部样式</h4><p>在页面的head里采用<code>&lt;style&gt;</code>写</p>
-<h4 id="3、链入外部样式：页面加载时，同时加载CSS样式"><a href="#3、链入外部样式：页面加载时，同时加载CSS样式" class="headerlink" title="3、链入外部样式：页面加载时，同时加载CSS样式"></a>3、链入外部样式：页面加载时，同时加载CSS样式</h4><pre><code>&lt;link rel = &quot;stylesheet&quot; type = &quot;text/css&quot; href = &quot;a.css&quot;&gt;&lt;/link&gt;</code></pre><h4 id="4、导入式（-import）：读取完html文件后加载"><a href="#4、导入式（-import）：读取完html文件后加载" class="headerlink" title="4、导入式（@import）：读取完html文件后加载"></a>4、导入式（@import）：读取完html文件后加载</h4><p>写在<code>&lt;style&gt;</code>标签中，且必须是第一句。<code>@import url(a.css);</code></p>
-<h3 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h3><h4 id="1、标签选择器"><a href="#1、标签选择器" class="headerlink" title="1、标签选择器"></a>1、标签选择器</h4><pre><code>p {
-}</code></pre><h4 id="2、ID选择器"><a href="#2、ID选择器" class="headerlink" title="2、ID选择器"></a>2、ID选择器</h4><pre><code># id1 {
-}</code></pre><h4 id="3、类选择器"><a href="#3、类选择器" class="headerlink" title="3、类选择器"></a>3、类选择器</h4><pre><code>.class1 {
-}</code></pre><h4 id="4、通用选择器（通配符）"><a href="#4、通用选择器（通配符）" class="headerlink" title="4、通用选择器（通配符）"></a>4、通用选择器（通配符）</h4><p>在初始化时常常使用该选择器将整个网页的边距等去掉</p>
-<pre><code>* {
-}</code></pre><h4 id="其他组合"><a href="#其他组合" class="headerlink" title="其他组合"></a>其他组合</h4><p>在父子间加上一个空格，如下表示设置div元素的p子元素的样式</p>
-<pre><code>&lt;div&gt; &lt;p&gt;&lt;/p&gt; &lt;/div&gt;
-
-div p {
-}</code></pre><p>还有交集和并集，分别使用 . 与 , 进行分隔</p>
-<h4 id="伪类"><a href="#伪类" class="headerlink" title="伪类"></a>伪类</h4><p>同一个标签，根据其<strong>不同的种状态，有不同的样式</strong>。这就叫做“伪类”。伪类用冒号来表示。</p>
-<p>比如div是属于box类，这一点很明确，就是属于box类。但是a属于什么类？不明确。因为需要看用户点击前是什么状态，点击后是什么状态。所以，就叫做“伪类”。</p>
-<p>1、<strong>静态伪类：</strong>只能用于超链接的样式</p>
-<ul>
-<li><code>:link</code> 超链接点击之前</li>
-<li><code>:visited</code> 链接被访问过之后</li>
-</ul>
-<p>2、<strong>动态伪类</strong>：针对<strong>所有标签</strong>都适用的样式。如下：</p>
-<ul>
-<li><code>:hover</code> “悬停”：鼠标放到标签上的时候</li>
-<li><code>:active</code>    “激活”： 鼠标点击标签，但是不松手时。</li>
-<li><code>:focus</code> 是某个标签获得焦点时的样式（比如某个输入框获得焦点）</li>
-</ul>
-<h3 id="继承与层叠"><a href="#继承与层叠" class="headerlink" title="继承与层叠"></a>继承与层叠</h3><h4 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h4><p>如文字样式等能够继承，如盒子、定位等不能继承</p>
-<h4 id="层叠"><a href="#层叠" class="headerlink" title="层叠"></a>层叠</h4><p>层叠性就是css处理冲突的能力。</p>
-<p><img src="http://cdn.ziyedy.top/image/CSS%E5%9F%BA%E7%A1%80/%E5%B1%82%E5%8F%A0.jpg" alt=""></p>
-<p><strong>以下为计算权重的方法，即优先级</strong>，实际时分别查看以下有没有定义样式，如果有，比较优先级，如果优先级一致，<strong>就近原则（即最后一个进行覆盖）</strong></p>
-<p>1、行内样式优先于内部样式，内部样式与链接样式取决于书写先后顺序（后定义覆盖新定义）</p>
-<p>2、id选择器&gt;class选择器&gt;标签选择器</p>
-<p>3、选择器有权值 ，使用<code>!important;</code>标记优先级最高</p>
-<h2 id="盒子模型"><a href="#盒子模型" class="headerlink" title="盒子模型"></a>盒子模型</h2><p>盒子模型如下，即包含外边距（margin）、边界（border）、内边距（padding）和内容的一种模型。</p>
-<p><img src="http://cdn.ziyedy.top/image/CSS%E5%9F%BA%E7%A1%80%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B.png" alt=""></p>
-<h3 id="padding"><a href="#padding" class="headerlink" title="padding"></a>padding</h3><p>padding为内边距，其区域有背景颜色（与内容区域相同），background-color将填充所有border以内的区域</p>
-<h4 id="写法"><a href="#写法" class="headerlink" title="写法"></a>写法</h4><p>四个值：上、右、下、左</p>
-<pre><code>padding:30px 40px 30px 40px;</code></pre><p>三个值：上、右、下、（左与右一样）</p>
-<p>上下、左右</p>
-<pre><code>padding:30px 40px;</code></pre><h3 id="margin"><a href="#margin" class="headerlink" title="margin"></a>margin</h3><p>注意：<strong><code>&lt;body&gt;</code>标签默认有margin，为8px，因此很多情况下都需要加上以下语句清除margin。</strong></p>
-<pre><code>* {
-    margin: 0;
-    padding: 0;
-}</code></pre><p>其余操作与padding中差不多</p>
-<h3 id="border"><a href="#border" class="headerlink" title="border"></a>border</h3><p>边框主要有三个要素：像素（粗细）、线型、颜色</p>
-<pre><code>border: 2px solid red;</code></pre>]]></content>
-      <categories>
-        <category>前端</category>
-        <category>CSS</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>CSS定位与浮动</title>
     <url>/page/css-float-position.html</url>
     <content><![CDATA[<p>c</p>
@@ -4031,6 +3965,72 @@ div p {
 <p>2、定位了的元素，永远能够压住没有定位的元素</p>
 <p>3、从父现象：父亲怂了，儿子再牛逼也没用</p>
 ]]></content>
+      <categories>
+        <category>前端</category>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CSS基础</title>
+    <url>/page/css-basic-knowledge.html</url>
+    <content><![CDATA[<h2 id="CSS基础"><a href="#CSS基础" class="headerlink" title="CSS基础"></a>CSS基础</h2><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><pre><code>选择器{
+    k:v;
+    k:v;
+    k:v;
+    k:v;
+}
+
+/*
+    注释内容
+*/</code></pre><h3 id="引用方式"><a href="#引用方式" class="headerlink" title="引用方式"></a>引用方式</h3><h4 id="1、行内样式"><a href="#1、行内样式" class="headerlink" title="1、行内样式"></a>1、行内样式</h4><p>在HTML标签里写</p>
+<h4 id="2、内部样式"><a href="#2、内部样式" class="headerlink" title="2、内部样式"></a>2、内部样式</h4><p>在页面的head里采用<code>&lt;style&gt;</code>写</p>
+<h4 id="3、链入外部样式：页面加载时，同时加载CSS样式"><a href="#3、链入外部样式：页面加载时，同时加载CSS样式" class="headerlink" title="3、链入外部样式：页面加载时，同时加载CSS样式"></a>3、链入外部样式：页面加载时，同时加载CSS样式</h4><pre><code>&lt;link rel = &quot;stylesheet&quot; type = &quot;text/css&quot; href = &quot;a.css&quot;&gt;&lt;/link&gt;</code></pre><h4 id="4、导入式（-import）：读取完html文件后加载"><a href="#4、导入式（-import）：读取完html文件后加载" class="headerlink" title="4、导入式（@import）：读取完html文件后加载"></a>4、导入式（@import）：读取完html文件后加载</h4><p>写在<code>&lt;style&gt;</code>标签中，且必须是第一句。<code>@import url(a.css);</code></p>
+<h3 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h3><h4 id="1、标签选择器"><a href="#1、标签选择器" class="headerlink" title="1、标签选择器"></a>1、标签选择器</h4><pre><code>p {
+}</code></pre><h4 id="2、ID选择器"><a href="#2、ID选择器" class="headerlink" title="2、ID选择器"></a>2、ID选择器</h4><pre><code># id1 {
+}</code></pre><h4 id="3、类选择器"><a href="#3、类选择器" class="headerlink" title="3、类选择器"></a>3、类选择器</h4><pre><code>.class1 {
+}</code></pre><h4 id="4、通用选择器（通配符）"><a href="#4、通用选择器（通配符）" class="headerlink" title="4、通用选择器（通配符）"></a>4、通用选择器（通配符）</h4><p>在初始化时常常使用该选择器将整个网页的边距等去掉</p>
+<pre><code>* {
+}</code></pre><h4 id="其他组合"><a href="#其他组合" class="headerlink" title="其他组合"></a>其他组合</h4><p>在父子间加上一个空格，如下表示设置div元素的p子元素的样式</p>
+<pre><code>&lt;div&gt; &lt;p&gt;&lt;/p&gt; &lt;/div&gt;
+
+div p {
+}</code></pre><p>还有交集和并集，分别使用 . 与 , 进行分隔</p>
+<h4 id="伪类"><a href="#伪类" class="headerlink" title="伪类"></a>伪类</h4><p>同一个标签，根据其<strong>不同的种状态，有不同的样式</strong>。这就叫做“伪类”。伪类用冒号来表示。</p>
+<p>比如div是属于box类，这一点很明确，就是属于box类。但是a属于什么类？不明确。因为需要看用户点击前是什么状态，点击后是什么状态。所以，就叫做“伪类”。</p>
+<p>1、<strong>静态伪类：</strong>只能用于超链接的样式</p>
+<ul>
+<li><code>:link</code> 超链接点击之前</li>
+<li><code>:visited</code> 链接被访问过之后</li>
+</ul>
+<p>2、<strong>动态伪类</strong>：针对<strong>所有标签</strong>都适用的样式。如下：</p>
+<ul>
+<li><code>:hover</code> “悬停”：鼠标放到标签上的时候</li>
+<li><code>:active</code>    “激活”： 鼠标点击标签，但是不松手时。</li>
+<li><code>:focus</code> 是某个标签获得焦点时的样式（比如某个输入框获得焦点）</li>
+</ul>
+<h3 id="继承与层叠"><a href="#继承与层叠" class="headerlink" title="继承与层叠"></a>继承与层叠</h3><h4 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h4><p>如文字样式等能够继承，如盒子、定位等不能继承</p>
+<h4 id="层叠"><a href="#层叠" class="headerlink" title="层叠"></a>层叠</h4><p>层叠性就是css处理冲突的能力。</p>
+<p><img src="http://cdn.ziyedy.top/image/CSS%E5%9F%BA%E7%A1%80/%E5%B1%82%E5%8F%A0.jpg" alt=""></p>
+<p><strong>以下为计算权重的方法，即优先级</strong>，实际时分别查看以下有没有定义样式，如果有，比较优先级，如果优先级一致，<strong>就近原则（即最后一个进行覆盖）</strong></p>
+<p>1、行内样式优先于内部样式，内部样式与链接样式取决于书写先后顺序（后定义覆盖新定义）</p>
+<p>2、id选择器&gt;class选择器&gt;标签选择器</p>
+<p>3、选择器有权值 ，使用<code>!important;</code>标记优先级最高</p>
+<h2 id="盒子模型"><a href="#盒子模型" class="headerlink" title="盒子模型"></a>盒子模型</h2><p>盒子模型如下，即包含外边距（margin）、边界（border）、内边距（padding）和内容的一种模型。</p>
+<p><img src="http://cdn.ziyedy.top/image/CSS%E5%9F%BA%E7%A1%80%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B.png" alt=""></p>
+<h3 id="padding"><a href="#padding" class="headerlink" title="padding"></a>padding</h3><p>padding为内边距，其区域有背景颜色（与内容区域相同），background-color将填充所有border以内的区域</p>
+<h4 id="写法"><a href="#写法" class="headerlink" title="写法"></a>写法</h4><p>四个值：上、右、下、左</p>
+<pre><code>padding:30px 40px 30px 40px;</code></pre><p>三个值：上、右、下、（左与右一样）</p>
+<p>上下、左右</p>
+<pre><code>padding:30px 40px;</code></pre><h3 id="margin"><a href="#margin" class="headerlink" title="margin"></a>margin</h3><p>注意：<strong><code>&lt;body&gt;</code>标签默认有margin，为8px，因此很多情况下都需要加上以下语句清除margin。</strong></p>
+<pre><code>* {
+    margin: 0;
+    padding: 0;
+}</code></pre><p>其余操作与padding中差不多</p>
+<h3 id="border"><a href="#border" class="headerlink" title="border"></a>border</h3><p>边框主要有三个要素：像素（粗细）、线型、颜色</p>
+<pre><code>border: 2px solid red;</code></pre>]]></content>
       <categories>
         <category>前端</category>
         <category>CSS</category>
@@ -5035,51 +5035,6 @@ private void set(int treeIndex, int l, int r, int index, E e) {
       </tags>
   </entry>
   <entry>
-    <title>1.3、JS中的类与对象</title>
-    <url>/page/js-class-object.html</url>
-    <content><![CDATA[<h2 id="创建自定义对象"><a href="#创建自定义对象" class="headerlink" title="创建自定义对象"></a>创建自定义对象</h2><h3 id="使用键值对创建"><a href="#使用键值对创建" class="headerlink" title="使用键值对创建"></a>使用键值对创建</h3><p>举例如下</p>
-<pre><code>var obj1 = {
-    // 成员
-    name: &quot;ziye&quot;,
-    // 嵌套的对象
-    obj2: {
-        name: &quot;gg&quot;
-    }
-    // 方法
-    func1: function() {
-        alert(&quot;gg&quot;)
-    }
-}</code></pre><h3 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h3><p>即<strong>使用一个函数将创建好的对象作为返回值</strong>，举例如下</p>
-<pre><code>function createObj(name) {
-    // 创建一个对象
-    var obj = new Object();
-    // 向对象中添加属性
-    obj.name = name;
-    obj.func = function() {
-        alert(this.name);
-    }
-    // 将创建的对象返回
-    return obj;
-}</code></pre><h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><p>是一种特殊的函数，主要用来创建和初始化对象，也就是为对象的成员变量赋初始值。它与 <strong>new</strong> 一起使用才有意义。是js中从前最通用的构建构造函数的方法，<strong>其中this指的是当前对象的实例</strong></p>
-<pre><code>function Obj(name) {
-    this.name = name;
-    this.func = function() {
-        alert(this.name);
-    };
-}
-
-var o1 = new Obj(&quot;xxx&quot;);</code></pre><h2 id="JS原型对象（prototype）"><a href="#JS原型对象（prototype）" class="headerlink" title="JS原型对象（prototype）"></a>JS原型对象（prototype）</h2><p>所有的 JavaScript 对象都会从一个 prototype（原型对象）中继承属性和方法。</p>
-<h3 id="添加属性和方法"><a href="#添加属性和方法" class="headerlink" title="添加属性和方法"></a>添加属性和方法</h3><pre><code>Obj.prototype.attr = newValue;
-Obj.prototype.func = function() {}</code></pre>]]></content>
-      <categories>
-        <category>前端</category>
-        <category>JS</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>2.1、JS事件处理</title>
     <url>/page/js-event-handle.html</url>
     <content><![CDATA[<h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><p>事件指的是一些特定的交互瞬间，如点击某个元素等等</p>
@@ -5151,6 +5106,51 @@ Obj.prototype.func = function() {}</code></pre>]]></content>
 &lt;/body&gt;</code></pre><p><strong>实验结果</strong></p>
 <p><img src="http://cdn.ziyedy.top/image/JS%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86/%E5%86%92%E6%B3%A1%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C.png" alt=""></p>
 ]]></content>
+      <categories>
+        <category>前端</category>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1.3、JS中的类与对象</title>
+    <url>/page/js-class-object.html</url>
+    <content><![CDATA[<h2 id="创建自定义对象"><a href="#创建自定义对象" class="headerlink" title="创建自定义对象"></a>创建自定义对象</h2><h3 id="使用键值对创建"><a href="#使用键值对创建" class="headerlink" title="使用键值对创建"></a>使用键值对创建</h3><p>举例如下</p>
+<pre><code>var obj1 = {
+    // 成员
+    name: &quot;ziye&quot;,
+    // 嵌套的对象
+    obj2: {
+        name: &quot;gg&quot;
+    }
+    // 方法
+    func1: function() {
+        alert(&quot;gg&quot;)
+    }
+}</code></pre><h3 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h3><p>即<strong>使用一个函数将创建好的对象作为返回值</strong>，举例如下</p>
+<pre><code>function createObj(name) {
+    // 创建一个对象
+    var obj = new Object();
+    // 向对象中添加属性
+    obj.name = name;
+    obj.func = function() {
+        alert(this.name);
+    }
+    // 将创建的对象返回
+    return obj;
+}</code></pre><h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><p>是一种特殊的函数，主要用来创建和初始化对象，也就是为对象的成员变量赋初始值。它与 <strong>new</strong> 一起使用才有意义。是js中从前最通用的构建构造函数的方法，<strong>其中this指的是当前对象的实例</strong></p>
+<pre><code>function Obj(name) {
+    this.name = name;
+    this.func = function() {
+        alert(this.name);
+    };
+}
+
+var o1 = new Obj(&quot;xxx&quot;);</code></pre><h2 id="JS原型对象（prototype）"><a href="#JS原型对象（prototype）" class="headerlink" title="JS原型对象（prototype）"></a>JS原型对象（prototype）</h2><p>所有的 JavaScript 对象都会从一个 prototype（原型对象）中继承属性和方法。</p>
+<h3 id="添加属性和方法"><a href="#添加属性和方法" class="headerlink" title="添加属性和方法"></a>添加属性和方法</h3><pre><code>Obj.prototype.attr = newValue;
+Obj.prototype.func = function() {}</code></pre>]]></content>
       <categories>
         <category>前端</category>
         <category>JS</category>
@@ -7136,6 +7136,55 @@ c = {**a, **b}    # 解包</code></pre>]]></content>
       </tags>
   </entry>
   <entry>
+    <title>BOM基本内容</title>
+    <url>/page/js-bom-basic-handle.html</url>
+    <content><![CDATA[<h2 id="常见的BOM对象"><a href="#常见的BOM对象" class="headerlink" title="常见的BOM对象"></a>常见的BOM对象</h2><p>BOM可以让我们通过JS来操作浏览器。BOM中为我们提供了一些对象，来完成对浏览器相关的操作。</p>
+<p>常见的 BOM对象有：</p>
+<ul>
+<li><p>Window：代表整个浏览器的窗口，同时 window 也是<strong>网页中的全局对象</strong>。</p>
+</li>
+<li><p>Navigator：代表当前浏览器的信息，通过该对象可以识别不同的浏览器。</p>
+</li>
+<li><p>Location：代表当前浏览器的地址栏信息，通过 Location 可以获取地址栏信息，或者操作浏览器跳转页面。</p>
+</li>
+<li><p>History：代表浏览器的历史记录，通过该对象可以操作浏览器的历史记录。由于隐私原因，该对象不能获取到具体的历史记录，只能操作浏览器向前或向后翻页，而且该操作只在当次访问时有效。</p>
+</li>
+<li><p>Screen：代表用户的屏幕信息，通过该对象可以获取用户的显示器的相关信息。</p>
+</li>
+</ul>
+<p>备注：这些 BOM 对象都是<strong>作为 window 对象的属性</strong>保存的，可以通过window对象来使用，也可以直接使用。比如说，我可以使用 <code>window.location.href</code>，也可以直接使用 <code>location.href</code>，二者是等价的。</p>
+<p>备注2：不要忘了，之前学习过的<code>document</code>也是在<code>window</code>中保存的。</p>
+<h2 id="Navigator"><a href="#Navigator" class="headerlink" title="Navigator"></a>Navigator</h2><p>Navigator代表当前浏览器的信息，通过该对象可以识别不同的浏览器。</p>
+<p>通常使用<code>navigator.userAgent</code>来获取浏览器信息</p>
+<h2 id="History"><a href="#History" class="headerlink" title="History"></a>History</h2><p>History对象：可以用来操作浏览器的向前或向后翻页。</p>
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><p>获取浏览器历史列表中的 url 数量。注意，只是统计当次的数量，如果浏览器关了，数量会重置为1。</p>
+<pre><code>history.length</code></pre><h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>回退到上一个页面，作用和浏览器的「回退按钮」一样。</p>
+<pre><code>history.back();</code></pre><p>跳转下一个页面，作用和浏览器的「前进按钮」一样。</p>
+<pre><code>history.forward();</code></pre><p><strong>go方法</strong></p>
+<pre><code>// 向前跳转2个页面
+history.go( 2 );
+
+// 向后跳转2个页面
+history.go( -2 );
+
+// 刷新当前页面
+history.go( 0 );</code></pre><h2 id="Location"><a href="#Location" class="headerlink" title="Location"></a>Location</h2><p>Location 对象：封装了浏览器地址栏的 URL 信息。</p>
+<h3 id="属性-1"><a href="#属性-1" class="headerlink" title="属性"></a>属性</h3><p>获取当前页面的 url 路径</p>
+<pre><code>location.href</code></pre><p>也可以通过设置该属性的方法使页面跳转</p>
+<pre><code>location.href = &#39;ziyedy.top&#39;;</code></pre><h3 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h3><p>用来跳转到其他的页面，作用和直接修改<code>location.href</code>一样。</p>
+<pre><code>location.assign(str);</code></pre><p>用于重新加载当前页面，作用和刷新按钮一样。在方法的参数中传递一个true，则会强制清空缓存刷新页面.</p>
+<pre><code>location.reload();
+location.reload(true);</code></pre><p>使用一个新的页面替换当前页面，调用完毕也会跳转页面。但不会生成历史记录，不能使用「后退按钮」后退。</p>
+<pre><code>location.replace();</code></pre>]]></content>
+      <categories>
+        <category>前端</category>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>2、DOM节点基本操作</title>
     <url>/page/js-dom-basic-handle.html</url>
     <content><![CDATA[<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="节点"><a href="#节点" class="headerlink" title="节点"></a>节点</h3><p><strong>节点</strong>（Node）：构成 HTML 网页的最基本单元。网页中的每一个部分都可以称为是一个节点，比如：html标签、属性、文本、注释、整个文档等都是一个节点。</p>
@@ -7217,55 +7266,6 @@ Node.classList.contains(&quot;class&quot;) // 检测是否存在class</code></pr
 &lt;/body&gt;</code></pre><p>如图可见，div内部已经多出了我们添加的元素</p>
 <p><img src="http://cdn.ziyedy.top/image/DOM%E8%8A%82%E7%82%B9%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/innerHTML.png" alt=""></p>
 ]]></content>
-      <categories>
-        <category>前端</category>
-        <category>JS</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>BOM基本内容</title>
-    <url>/page/js-bom-basic-handle.html</url>
-    <content><![CDATA[<h2 id="常见的BOM对象"><a href="#常见的BOM对象" class="headerlink" title="常见的BOM对象"></a>常见的BOM对象</h2><p>BOM可以让我们通过JS来操作浏览器。BOM中为我们提供了一些对象，来完成对浏览器相关的操作。</p>
-<p>常见的 BOM对象有：</p>
-<ul>
-<li><p>Window：代表整个浏览器的窗口，同时 window 也是<strong>网页中的全局对象</strong>。</p>
-</li>
-<li><p>Navigator：代表当前浏览器的信息，通过该对象可以识别不同的浏览器。</p>
-</li>
-<li><p>Location：代表当前浏览器的地址栏信息，通过 Location 可以获取地址栏信息，或者操作浏览器跳转页面。</p>
-</li>
-<li><p>History：代表浏览器的历史记录，通过该对象可以操作浏览器的历史记录。由于隐私原因，该对象不能获取到具体的历史记录，只能操作浏览器向前或向后翻页，而且该操作只在当次访问时有效。</p>
-</li>
-<li><p>Screen：代表用户的屏幕信息，通过该对象可以获取用户的显示器的相关信息。</p>
-</li>
-</ul>
-<p>备注：这些 BOM 对象都是<strong>作为 window 对象的属性</strong>保存的，可以通过window对象来使用，也可以直接使用。比如说，我可以使用 <code>window.location.href</code>，也可以直接使用 <code>location.href</code>，二者是等价的。</p>
-<p>备注2：不要忘了，之前学习过的<code>document</code>也是在<code>window</code>中保存的。</p>
-<h2 id="Navigator"><a href="#Navigator" class="headerlink" title="Navigator"></a>Navigator</h2><p>Navigator代表当前浏览器的信息，通过该对象可以识别不同的浏览器。</p>
-<p>通常使用<code>navigator.userAgent</code>来获取浏览器信息</p>
-<h2 id="History"><a href="#History" class="headerlink" title="History"></a>History</h2><p>History对象：可以用来操作浏览器的向前或向后翻页。</p>
-<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><p>获取浏览器历史列表中的 url 数量。注意，只是统计当次的数量，如果浏览器关了，数量会重置为1。</p>
-<pre><code>history.length</code></pre><h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>回退到上一个页面，作用和浏览器的「回退按钮」一样。</p>
-<pre><code>history.back();</code></pre><p>跳转下一个页面，作用和浏览器的「前进按钮」一样。</p>
-<pre><code>history.forward();</code></pre><p><strong>go方法</strong></p>
-<pre><code>// 向前跳转2个页面
-history.go( 2 );
-
-// 向后跳转2个页面
-history.go( -2 );
-
-// 刷新当前页面
-history.go( 0 );</code></pre><h2 id="Location"><a href="#Location" class="headerlink" title="Location"></a>Location</h2><p>Location 对象：封装了浏览器地址栏的 URL 信息。</p>
-<h3 id="属性-1"><a href="#属性-1" class="headerlink" title="属性"></a>属性</h3><p>获取当前页面的 url 路径</p>
-<pre><code>location.href</code></pre><p>也可以通过设置该属性的方法使页面跳转</p>
-<pre><code>location.href = &#39;ziyedy.top&#39;;</code></pre><h3 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h3><p>用来跳转到其他的页面，作用和直接修改<code>location.href</code>一样。</p>
-<pre><code>location.assign(str);</code></pre><p>用于重新加载当前页面，作用和刷新按钮一样。在方法的参数中传递一个true，则会强制清空缓存刷新页面.</p>
-<pre><code>location.reload();
-location.reload(true);</code></pre><p>使用一个新的页面替换当前页面，调用完毕也会跳转页面。但不会生成历史记录，不能使用「后退按钮」后退。</p>
-<pre><code>location.replace();</code></pre>]]></content>
       <categories>
         <category>前端</category>
         <category>JS</category>
