@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-Hans">
+
+
+<head>
+  <meta charset="utf-8" />
+   
+  <meta name="keywords" content="生活" />
+   
+  <meta name="description" content="子夜写字的地方" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    Android开发二：活动（Activity） |  浔庐子夜
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-Android/Android开发二：活动（Activity）"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  Android开发二：活动（Activity）
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/page/Android2-activity.html" class="article-date">
+  <time datetime="2020-08-30T01:21:58.000Z" itemprop="datePublished">2020-08-30</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">2.6k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">10 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="从0构建一个活动"><a href="#从0构建一个活动" class="headerlink" title="从0构建一个活动"></a>从0构建一个活动</h2><h3 id="构建活动及布局"><a href="#构建活动及布局" class="headerlink" title="构建活动及布局"></a>构建活动及布局</h3><ol>
+<li>在创建项目时选择<strong>“Add no Activity”</strong></li>
+<li>在项目架构中的app-&gt;src-&gt;main下的包中右击，选择新建一个Activity，命名为FirstActivity</li>
+<li>在布局文件夹layout中新建一个布局，命名为first_layout，并修改加上一个按钮，代码如下</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;Button</span><br><span class="line">    android:id&#x3D;&quot;@+id&#x2F;button_1&quot;	&lt;!-- 定义id用于代码中使用 --&gt;</span><br><span class="line">    android:layout_width&#x3D;&quot;match_parent&quot;</span><br><span class="line">    android:layout_height&#x3D;&quot;wrap_content&quot;</span><br><span class="line">    android:text&#x3D;&quot;Button 1&quot;</span><br><span class="line">    &#x2F;&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>在<strong>AndroidManifest.xml</strong>文件中注册活动，使用<code>&lt;activity&gt;</code>标签注册活动（AS已经自动注册好了），并放在<code>&lt;application&gt;</code>标签内，之后</li>
+</ol>
+<h3 id="使用Toast完成消息提醒"><a href="#使用Toast完成消息提醒" class="headerlink" title="使用Toast完成消息提醒"></a>使用Toast完成消息提醒</h3><p><strong>Android中的Toast类似于其他GUI中的messagebox，“弹出”一条消息</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">    setContentView(R.layout.first_layout);</span><br><span class="line">    Button button1 = (Button) findViewById(R.id.button_1);	<span class="comment">// 获取该活动中的按钮</span></span><br><span class="line">    button1.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;	<span class="comment">// 为按钮注册一个监听器</span></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>&#123;	<span class="comment">// 点击按钮，即执行监听器下的onClick方法</span></span><br><span class="line">            Toast.makeText(FirstActivity.<span class="keyword">this</span>, <span class="string">"You clicked Button 1"</span>,</span><br><span class="line">                    Toast.LENGTH_SHORT).show();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中makeText()包含三个参数，第一个是要求的上下文，第二个是显示的文本内容，第三个是显示的时长</p>
+<img src="http://cdn.ziyedy.top/Android%E5%BC%80%E5%8F%91%E4%BA%8C%EF%BC%9A%E6%B4%BB%E5%8A%A8%EF%BC%88Activity%EF%BC%89/toast-demo.png" style="zoom: 50%;" />
+
+<h3 id="使用menu"><a href="#使用menu" class="headerlink" title="使用menu"></a>使用menu</h3><ol>
+<li>在res目录下创建一个menu文件，之后创建一个menu资源文件。</li>
+<li>之后使用<code>&lt;item&gt;</code>标签创建一个菜单项，如下</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;menu xmlns:android&#x3D;&quot;http:&#x2F;&#x2F;schemas.android.com&#x2F;apk&#x2F;res&#x2F;android&quot;&gt;</span><br><span class="line">    &lt;item</span><br><span class="line">        android:id&#x3D;&quot;@+id&#x2F;add_item&quot;	&lt;!-- 创建唯一标识符 --&gt;</span><br><span class="line">        android:title&#x3D;&quot;Add&quot; &#x2F;&gt;	&lt;!-- 创建菜单项的名称 --&gt;</span><br><span class="line">    &lt;item</span><br><span class="line">        android:id&#x3D;&quot;@+id&#x2F;remove_item&quot;</span><br><span class="line">        android:title&#x3D;&quot;Remove&quot; &#x2F;&gt;</span><br><span class="line">&lt;&#x2F;menu&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>之后在相应活动中重写<code>onCreateOptionsMenu</code>函数，用以显示菜单，如下</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onCreateOptionsMenu</span><span class="params">(Menu menu)</span> </span>&#123;</span><br><span class="line">    getMenuInflater().inflate(R.menu.main, menu);	<span class="comment">// </span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;	<span class="comment">// 返回true表示允许菜单显示出来</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>定义菜单响应事件，重写<code>onOptionsItemSelected()</code>方法</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public boolean onOptionsItemSelected(@NonNull MenuItem item) &#123;</span><br><span class="line">    switch (item.getItemId()) &#123;</span><br><span class="line">        case R.id.add_item:</span><br><span class="line">            Toast.makeText(this, &quot;You clicked Add&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">            break;</span><br><span class="line">        case R.id.remove_item:</span><br><span class="line">            Toast.makeText(this, &quot;You clicked remove&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">            break;</span><br><span class="line">        default:</span><br><span class="line">    &#125;</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="http://cdn.ziyedy.top/Android%E5%BC%80%E5%8F%91%E4%BA%8C%EF%BC%9A%E6%B4%BB%E5%8A%A8%EF%BC%88Activity%EF%BC%89/menu-demo.png" style="zoom:50%;" />
+
+
+
+<h3 id="使用finish-销毁一个活动，类似于返回键"><a href="#使用finish-销毁一个活动，类似于返回键" class="headerlink" title="使用finish()销毁一个活动，类似于返回键"></a>使用finish()销毁一个活动，类似于返回键</h3><p>使用Activity类提供的<strong>finish()</strong>方法，取得的效果跟按下Back一致</p>
+<h2 id="使用Intent构建不同活动间的联系"><a href="#使用Intent构建不同活动间的联系" class="headerlink" title="使用Intent构建不同活动间的联系"></a>使用Intent构建不同活动间的联系</h2><p>intent是Android程序中<strong>各组件之间进行交互的一种重要方式</strong>，一般可用于启动活动、启动服务以及发送广播。根据指定响应对象是否直接可以分为显式Intent和隐式Intent。</p>
+<p>以下，像之前一样构建一个<code>SecondActivity</code>，用于响应实验。</p>
+<h3 id="显式Intent"><a href="#显式Intent" class="headerlink" title="显式Intent"></a>显式Intent</h3><p><strong>直接指定响应对象</strong>，如下（点击按钮即可跳转到第二个页面）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">button1.setOnClickListener(new View.OnClickListener() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onClick(View view) &#123;</span><br><span class="line">        Intent intent &#x3D; new Intent(FirstActivity.this, SecondActivity.class);	&#x2F;&#x2F; 由上下文响应目标活动</span><br><span class="line">        startActivity(intent);	&#x2F;&#x2F; 启动传入的Intent参数</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><code>Intent(Context packageContext, Class &lt;?&gt; cls)</code>，第一个参数 Context 要求提供一个启动活动的上下文，第二个参数 Class 则是指定想要启动的目标活动</p>
+<p>Activity 类中提供了一个 startActivity() 方法，这个方法是专门用于启动活动的，它接收一个 Intent 参数，这里我们将构建好的 Intent 传入 startActivity() 方法就可以启动目标活动了。</p>
+<h3 id="隐式Intent"><a href="#隐式Intent" class="headerlink" title="隐式Intent"></a>隐式Intent</h3><p>隐式Intent<strong>并不明确指出我们想要启动哪一个活动，而是指定了一系列更为抽象的 action 和 category 等信息，然后交由系统去分析这个 Intent，并帮我们找出合适的活动</strong>（即能够相应该隐式intent的活动）去启动</p>
+<p>通过在<code>&lt;activity&gt;</code>标签下配置<code>&lt; intent-filter &gt;</code>的内容，可以指定当前活动能够响应的 action 和 category。同时，<strong>只有 <code>&lt;action&gt;</code> 和 <code>&lt;category&gt;</code> 中的内容同时能够匹配上 Intent 中指定的 action 和 category 时，这个活动才能响应该 Intent</strong>。</p>
+<p>如下，在<strong>AndroidManifest.xml</strong>文件中配置SecondActivity的信息如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;activity android:name&#x3D;&quot;.SecondActivity&quot;&gt;</span><br><span class="line">    &lt;intent-filter&gt;</span><br><span class="line">        &lt;action android:name&#x3D;&quot;com.example.activitytest.ACTION_START&quot; &#x2F;&gt;</span><br><span class="line">        &lt;category android:name&#x3D;&quot;android.intent.category.DEFAULT&quot; &#x2F;&gt;</span><br><span class="line">        &lt;category android:name&#x3D;&quot;com.example.activitytest.MY_CATEGORY&quot; &#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;intent-filter&gt;</span><br><span class="line">&lt;&#x2F;activity&gt;</span><br><span class="line">&lt;activity</span><br></pre></td></tr></table></figure>
+
+<p>在FirstActivity中使用隐式Intent，完成点击按钮跳转到第二个界面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">button1.setOnClickListener(new View.OnClickListener() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onClick(View view) &#123;</span><br><span class="line">        Intent intent &#x3D; new Intent(&quot;com.example.activitytest.ACTION_START&quot;);</span><br><span class="line">        intent.addCategory(&quot;com.example.activitytest.MY_CATEGORY&quot;);</span><br><span class="line">        startActivity(intent);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>用隐式 Intent，我们<strong>不仅可以启动自己程序内的活动，还可以启动其他程序的活动（如调用浏览器）</strong>，这使得 Android 多个应用程序之间的功能共享成为了可能</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">button1.setOnClickListener(new View.OnClickListener() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onClick(View view) &#123;</span><br><span class="line">        Intent intent &#x3D; new Intent(Intent.ACTION_VIEW);</span><br><span class="line">        intent.setData(Uri.parse(&quot;http:&#x2F;&#x2F;www.baidu.com&quot;));	&#x2F;&#x2F; 将Uri对象传递进去，可以使用浏览器打开</span><br><span class="line">        startActivity(intent);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<img src="http://cdn.ziyedy.top/Android%E5%BC%80%E5%8F%91%E4%BA%8C%EF%BC%9A%E6%B4%BB%E5%8A%A8%EF%BC%88Activity%EF%BC%89/%E6%89%93%E5%BC%80%E6%B5%8F%E8%A7%88%E5%99%A8.png" style="zoom:50%;" />
+
+
+
+<h3 id="Intent向下一个活动传递数据"><a href="#Intent向下一个活动传递数据" class="headerlink" title="Intent向下一个活动传递数据"></a>Intent向下一个活动传递数据</h3><p>Intent 中提供了一系列 <strong>putExtra()</strong> 方法的重载，可以把我们想要传递的数据暂存在 Intent 中，启动了另一个活动后，只需要把这些数据再从 Intent 中取出就可以了</p>
+<p>putExtra() 方法接收两个参数，第一个参数是键，用于后面从 Intent 中取值，第二个参数才是真正要传递的数据。</p>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p>在FirstActivity中相应位置填入以下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String data &#x3D; &quot;Hello, Second Activity&quot;;</span><br><span class="line">Intent intent &#x3D; new Intent(FirstActivity.this, SecondActivity.class);</span><br><span class="line">intent.putExtra(&quot;extra_data&quot;, data);	&#x2F;&#x2F; 将data传入，同时键值为extra_dat</span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure>
+
+<p>在SecondActivity中相应位置填入以下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">    super.onCreate(savedInstanceState);</span><br><span class="line">    setContentView(R.layout.second_layout);</span><br><span class="line">    Intent intent &#x3D; getIntent();</span><br><span class="line">    String data &#x3D; intent.getStringExtra(&quot;extra_data&quot;);	&#x2F;&#x2F; 通过键值获取信息</span><br><span class="line">    Toast.makeText(this, data, Toast.LENGTH_SHORT).show();	&#x2F;&#x2F; 显示信息</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="http://cdn.ziyedy.top/Android%E5%BC%80%E5%8F%91%E4%BA%8C%EF%BC%9A%E6%B4%BB%E5%8A%A8%EF%BC%88Activity%EF%BC%89/%E4%BC%A0%E9%80%92%E6%B6%88%E6%81%AF%E7%BB%99%E4%B8%8B%E4%B8%80%E4%B8%AA%E5%BA%94%E7%94%A8.png" style="zoom: 67%;" />
+
+<h3 id="Intent返回数据给上一个活动"><a href="#Intent返回数据给上一个活动" class="headerlink" title="Intent返回数据给上一个活动"></a>Intent返回数据给上一个活动</h3><p><strong>1、 使用startActivityForResult() 方法启动活动，在活动销毁后即可将数据传递回来</strong></p>
+<blockquote>
+<p>startActivityForResult() 方法接收两个参数，第一个参数还是 Intent，第二个参数是<strong>请求码（requestCode）</strong>，用于在之后的回调中判断数据的来源。</p>
+</blockquote>
+<p><strong>2、在第二个活动中使用setResult() 方法将带有数据的Intent传递回去</strong></p>
+<blockquote>
+<p>setResult() 方法接收两个参数，第一个参数用于向上一个活动返回处理结果，一般只使用 RESULT_OK 或 RESULT_CANCELED 这两个值，第二个参数则把带有数据的 Intent 传递回去</p>
+</blockquote>
+<p><strong>3、使用startActivityForResult() 方法启动活动在活动销毁后会回调onActivityResult() 方法</strong>，因此在第一个活动中重写该方法。</p>
+<blockquote>
+<p> onActivityResult() 方法带有三个参数，第一个参数 requestCode ，即我们在启动活动时传入的请求码。第二个参数 resultCode ，即我们在返回数据时传入的处理结果。第三个参数 data，即携带着返回数据的 Intent</p>
+</blockquote>
+<h4 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h4><p>在FirstActivity中相应位置填入以下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">    super.onCreate(savedInstanceState);</span><br><span class="line">    setContentView(R.layout.first_layout);</span><br><span class="line">    Button button1 &#x3D; (Button) findViewById(R.id.button_1);</span><br><span class="line">    button1.setOnClickListener(new View.OnClickListener() &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void onClick(View view) &#123;</span><br><span class="line">            Intent intent &#x3D; new Intent(FirstActivity.this, SecondActivity.class);</span><br><span class="line">            startActivityForResult(intent, 1);	&#x2F;&#x2F; 请求码为1</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) &#123;</span><br><span class="line">    super.onActivityResult(requestCode, resultCode, data);</span><br><span class="line">    if (requestCode &#x3D;&#x3D; 1) &#123;</span><br><span class="line">        if (resultCode &#x3D;&#x3D; RESULT_OK) &#123;</span><br><span class="line">            assert data !&#x3D; null;</span><br><span class="line">            String returnData &#x3D; data.getStringExtra(&quot;data_return&quot;);</span><br><span class="line">            Toast.makeText(FirstActivity.this, returnData, Toast.LENGTH_SHORT).show();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在SecondActivity中相应位置填入以下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">    super.onCreate(savedInstanceState);</span><br><span class="line">    setContentView(R.layout.second_layout);</span><br><span class="line">    Button button2 &#x3D; (Button) findViewById(R.id.button_2);</span><br><span class="line">    button2.setOnClickListener(new View.OnClickListener() &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void onClick(View view) &#123;</span><br><span class="line">            Intent intent &#x3D; new Intent();</span><br><span class="line">            intent.putExtra(&quot;data_return&quot;, &quot;Return message from SecondActivity&quot;);</span><br><span class="line">            setResult(RESULT_OK, intent);</span><br><span class="line">            finish();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="http://cdn.ziyedy.top/Android%E5%BC%80%E5%8F%91%E4%BA%8C%EF%BC%9A%E6%B4%BB%E5%8A%A8%EF%BC%88Activity%EF%BC%89/%E4%BB%8E%E4%B8%8B%E4%B8%80%E4%B8%AA%E5%BA%94%E7%94%A8%E8%BF%94%E5%9B%9E%E6%B6%88%E6%81%AF.png" style="zoom:67%;" />
+
+
+
+<h2 id="活动的生命周期"><a href="#活动的生命周期" class="headerlink" title="活动的生命周期"></a>活动的生命周期</h2><h3 id="活动状态"><a href="#活动状态" class="headerlink" title="活动状态"></a>活动状态</h3><p>每个活动在其生命周期最多可能有4种状态</p>
+<h4 id="运行状态"><a href="#运行状态" class="headerlink" title="运行状态"></a>运行状态</h4><p>一个活动位于返回栈的<strong>栈顶</strong>时，这时活动就处于运行状态</p>
+<h4 id="暂停状态"><a href="#暂停状态" class="headerlink" title="暂停状态"></a>暂停状态</h4><p>当一个活动<strong>不再处于栈顶位置，但仍然可见</strong>时，这时活动就进入了暂停状态。</p>
+<h4 id="停止状态"><a href="#停止状态" class="headerlink" title="停止状态"></a>停止状态</h4><p>当一个活动不再处于栈顶位置，并且完全不可见的时候，就进入了停止状态。（当其他地方需要内存时，处于停止状态的活动有可能会被系统回收）</p>
+<h4 id="销毁状态"><a href="#销毁状态" class="headerlink" title="销毁状态"></a>销毁状态</h4><p>当一个活动<strong>从返回栈中移除后</strong>就变成了销毁状态。系统会最倾向于回收处于这种状态的活动，从而保证手机的内存充足。</p>
+<h3 id="活动的生存期"><a href="#活动的生存期" class="headerlink" title="活动的生存期"></a>活动的生存期</h3><p>Activity 类中定义了 7 个回调方法，覆盖了活动生命周期的每一个环节</p>
+<h4 id="onCreate"><a href="#onCreate" class="headerlink" title="onCreate()"></a>onCreate()</h4><blockquote>
+<p>在活动第一次被创建的时候调用</p>
+<p>在这个方法中完成活动的初始化操作，比如说加载布局、绑定事件等</p>
+</blockquote>
+<h4 id="onStart"><a href="#onStart" class="headerlink" title="onStart()"></a>onStart()</h4><blockquote>
+<p>活动由不可见变为可见的时候调用</p>
+</blockquote>
+<h4 id="onResume"><a href="#onResume" class="headerlink" title="onResume()"></a>onResume()</h4><blockquote>
+<p>活动准备好和用户进行交互的时候调用。此时的活动一定位于返回栈的栈顶，并且处于运行状态</p>
+</blockquote>
+<h4 id="onPause"><a href="#onPause" class="headerlink" title="onPause()"></a>onPause()</h4><blockquote>
+<p>这个方法在系统准备去启动或者恢复另一个活动的时候调用</p>
+</blockquote>
+<h4 id="onStop"><a href="#onStop" class="headerlink" title="onStop()"></a>onStop()</h4><blockquote>
+<p>这个方法在活动完全不可见的时候调用</p>
+</blockquote>
+<h4 id="onDestroy"><a href="#onDestroy" class="headerlink" title="onDestroy()"></a>onDestroy()</h4><blockquote>
+<p>这个方法在活动被销毁之前调用，之后活动的状态将变为销毁状态。</p>
+</blockquote>
+<h4 id="onRestart"><a href="#onRestart" class="headerlink" title="onRestart()"></a>onRestart()</h4><blockquote>
+<p>这个方法在活动由停止状态变为运行状态之前调用，也就是活动被重新启动了。</p>
+</blockquote>
+<h2 id="活动的启动模式"><a href="#活动的启动模式" class="headerlink" title="活动的启动模式"></a>活动的启动模式</h2><h3 id="standard"><a href="#standard" class="headerlink" title="standard"></a>standard</h3><blockquote>
+<p>活动默认的启动模式，每次启动都会创建该活动的一个新的实例</p>
+</blockquote>
+<h3 id="singleTop"><a href="#singleTop" class="headerlink" title="singleTop"></a>singleTop</h3><blockquote>
+<p>启动活动时如果发现返回栈的栈顶已经是该活动，则认为可以直接使用它，不会再创建新的活动实例</p>
+<p><strong>不重复创建栈顶活动</strong></p>
+</blockquote>
+<p>在<code>AndroidManifest.xml</code>中<code>&lt;activity&gt;</code>标签内设置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android:launchMode&#x3D;&quot;singleTop&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="singleTask"><a href="#singleTask" class="headerlink" title="singleTask"></a>singleTask</h3><blockquote>
+<p>让任意活动在整个应用程序的上下文中<strong>只存在一个实例</strong></p>
+<p><code>android:launchMode=&quot;singleTask&quot;</code></p>
+</blockquote>
+<h3 id="singleInstance"><a href="#singleInstance" class="headerlink" title="singleInstance"></a>singleInstance</h3><blockquote>
+<p>这种模式下会有一个<strong>单独的返回栈</strong>来管理这个活动，不管是哪个应用程序来访问这个活动，都共用的同一个返回栈，解决了<strong>共享活动实例</strong>的问题</p>
+</blockquote>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>第一行代码——Android（郭霖）</p>
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          Donate
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://ziyedy.top/page/Android2-activity.html" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/" rel="tag">移动端</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/page/Android3-layout.html" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            Android开发三：布局（layout）
+          
+        </div>
+      </a>
+    
+    
+      <a href="/page/android-dev-helloworld.html" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">Android开发一：HelloWorld</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "pgmMLBlWl23i6NPFUgTT7XqR-gzGzoHsz",
+    app_key: "yx9IIauIiK8JBBHDxxqPpEFQ",
+    path: window.location.pathname,
+    avatar: "retro",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2019-2021
+        <i class="ri-heart-fill heart_icon"></i> 子夜
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s4.cnzz.com/z_stat.php?id=1279587217&amp;web_id=1279587217'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="浔庐子夜"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gg">足迹</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-Hans">
+
+
+<head>
+  <meta charset="utf-8" />
+   
+  <meta name="keywords" content="生活" />
+   
+  <meta name="description" content="子夜写字的地方" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    5.3、AVL树 |  浔庐子夜
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-计算机基础/数据结构与算法/5.3、AVL树"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  5.3、AVL树
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/page/ds-avl-tree.html" class="article-date">
+  <time datetime="2020-08-01T00:44:56.000Z" itemprop="datePublished">2020-08-01</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a> / <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">1.6k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">7 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="概况"><a href="#概况" class="headerlink" title="概况"></a>概况</h2><h3 id="AVL树（平衡二叉树）"><a href="#AVL树（平衡二叉树）" class="headerlink" title="AVL树（平衡二叉树）"></a>AVL树（平衡二叉树）</h3><p>平衡二叉树是一种二叉搜索树，对于其中任意一个节点，左子树和右子树的高度差不能超过1。</p>
+<p>两位俄罗斯数学家共同发明了一种解决平衡二叉树的算法，所以这种树也称为AVL树（取其名称）。</p>
+<p><img src="http://cdn.ziyedy.top/image/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/5.3%E3%80%81AVL%E6%A0%91/AVL.png" alt=""></p>
+<p>注意的地方：<strong>平衡二叉树从叶子节点向上记录节点的高度</strong>，即叶子节点高度为1，向上依次类推。而使用<strong>平衡因子</strong>用来表示左右子树高度差。</p>
+<h3 id="平衡二叉树的作用"><a href="#平衡二叉树的作用" class="headerlink" title="平衡二叉树的作用"></a>平衡二叉树的作用</h3><p>根据之前对二叉搜索树的时间复杂度分析可知，其各项操作的时间复杂度介于O(log n)与O(n)之间，在节点足够多的情况下这两者的效率相差很大。O(n)复杂度的BST实际上已经退化成了一个链表，而复杂度接近O(log n)的情况则就是平衡二叉树的状态了，因此对二叉树进行“平衡处理”是很重要的。</p>
+<h3 id="平衡性分析"><a href="#平衡性分析" class="headerlink" title="平衡性分析"></a>平衡性分析</h3><p>由于AVL树仍然是一个二叉搜索树，所以二叉搜索树的一切操作都可以进行调用，唯一需要注意的就是<strong>当有破坏平衡的操作发生时，需要进行对应操作维护树的平衡性</strong>。</p>
+<p>显然，BST的相关操作中添加元素与删除元素这两个操作可能会破坏树的平衡性，因此在add与remove中递归实现的基础上，应该在递归完成之后沿着节点向上维护平衡性（有点后续遍历的味道）。</p>
+<h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><h4 id="1、右旋（左左）"><a href="#1、右旋（左左）" class="headerlink" title="1、右旋（左左）"></a>1、右旋（左左）</h4><p>这种情况发生在<strong>向左子树的左孩子添加一个元素，且正好打破了平衡时（即二叉树向左倾斜）</strong>。这种情况我们可以称为<strong>左左</strong>，需要进行<strong>右旋</strong>操作维持平衡</p>
+<p><img src="http://cdn.ziyedy.top/image/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/5.3%E3%80%81AVL%E6%A0%91/%E5%8F%B3%E6%97%8B1.png" alt=""></p>
+<p>右旋操作简单来讲如下伪码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">右旋(L):	</span><br><span class="line">	temp &#x3D; L.right;</span><br><span class="line">	L.right &#x3D; T;</span><br><span class="line">	T.left &#x3D; temp;</span><br></pre></td></tr></table></figure>
+
+<p>如图所示：</p>
+<p><img src="http://cdn.ziyedy.top/image/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/5.3%E3%80%81AVL%E6%A0%91/%E5%8F%B3%E6%97%8B2.png" alt=""></p>
+<h4 id="2、左旋（右右）"><a href="#2、左旋（右右）" class="headerlink" title="2、左旋（右右）"></a>2、左旋（右右）</h4><p>这种情况发生在<strong>向右子树的右孩子添加一个元素，且正好打破了平衡时（即二叉树向右倾斜）</strong>。这种情况我们可以称为<strong>右右</strong>，需要进行<strong>左旋</strong>操作维持平衡。</p>
+<p><strong>左旋操作可以视为右旋的镜像</strong></p>
+<p><img src="http://cdn.ziyedy.top/image/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/5.3%E3%80%81AVL%E6%A0%91/%E5%B7%A6%E6%97%8B1.png" alt=""></p>
+<p>伪码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">左旋(R):</span><br><span class="line">	temp &#x3D; R.left;</span><br><span class="line">	R.left &#x3D; T;</span><br><span class="line">	T.right &#x3D; temp;</span><br></pre></td></tr></table></figure>
+
+<p>如图所示：</p>
+<p><img src="http://cdn.ziyedy.top/image/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/5.3%E3%80%81AVL%E6%A0%91/%E5%B7%A6%E6%97%8B2.png" alt=""></p>
+<h3 id="3、左右"><a href="#3、左右" class="headerlink" title="3、左右"></a>3、左右</h3><p>顾名思义，也就是向左子树的右孩子插入一个节点。</p>
+<p>这种情况下，我们需要<strong>先对右孩子进行一次左旋，再对对应的“根节点”进行一次右旋</strong>。如图所示：</p>
+<p><img src="http://cdn.ziyedy.top/image/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/5.3%E3%80%81AVL%E6%A0%91/%E5%B7%A6%E5%8F%B31.png" alt=""></p>
+<p>伪码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">左旋(R);</span><br><span class="line">右旋(L);</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://cdn.ziyedy.top/image/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/5.3%E3%80%81AVL%E6%A0%91/%E5%B7%A6%E5%8F%B32.png" alt=""></p>
+<h4 id="4、右左"><a href="#4、右左" class="headerlink" title="4、右左"></a>4、右左</h4><p>与“左右”是镜像操作，故不再赘述</p>
+<p><img src="http://cdn.ziyedy.top/image/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/5.3%E3%80%81AVL%E6%A0%91/%E5%8F%B3%E5%B7%A6.png" alt=""></p>
+<h2 id="操作实现"><a href="#操作实现" class="headerlink" title="操作实现"></a>操作实现</h2><h3 id="node中新增height用于记录高度"><a href="#node中新增height用于记录高度" class="headerlink" title="node中新增height用于记录高度"></a>node中新增height用于记录高度</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">private class Node &#123;</span><br><span class="line">    public E e;</span><br><span class="line">    public Node left, right;</span><br><span class="line">    public int height;	&#x2F;&#x2F; 记录高度</span><br><span class="line"></span><br><span class="line">    public Node(E e) &#123;</span><br><span class="line">        this.e &#x3D; e;</span><br><span class="line">        left &#x3D; null;</span><br><span class="line">        right &#x3D; null;</span><br><span class="line">        height &#x3D; 1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="功能函数"><a href="#功能函数" class="headerlink" title="功能函数"></a>功能函数</h3><h4 id="获取节点的高度"><a href="#获取节点的高度" class="headerlink" title="获取节点的高度"></a>获取节点的高度</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 获取每个节点的高度</span><br><span class="line">private int getHeight(Node node) &#123;</span><br><span class="line">    if(node &#x3D;&#x3D; null)</span><br><span class="line">        return 0;</span><br><span class="line">    return node.height;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="计算每个点的平衡因子"><a href="#计算每个点的平衡因子" class="headerlink" title="计算每个点的平衡因子"></a>计算每个点的平衡因子</h4><p>这个功能方法在AVL树的实现中至关重要，记住由于之后在维护平衡时需要判断是上述基本操作中的哪一种，因此<strong>该函数计算的平衡因子一定不能加上abs函数</strong>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 计算每个点的平衡因子</span><br><span class="line">    private int getBalenceFactor(Node node) &#123;</span><br><span class="line">        if(node &#x3D;&#x3D; null)</span><br><span class="line">            return 0;</span><br><span class="line">        return getHeight(node.left) - getHeight(node.right);	&#x2F;&#x2F; 不要加abs函数</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="右旋操作"><a href="#右旋操作" class="headerlink" title="右旋操作"></a>右旋操作</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 对节点y进行向右旋转操作，返回旋转后新的根节点x</span><br><span class="line">&#x2F;&#x2F;        y                              x</span><br><span class="line">&#x2F;&#x2F;       &#x2F; \                           &#x2F;   \</span><br><span class="line">&#x2F;&#x2F;      x   T4     向右旋转 (y)        z     y</span><br><span class="line">&#x2F;&#x2F;     &#x2F; \       - - - - - - - -&gt;    &#x2F; \   &#x2F; \</span><br><span class="line">&#x2F;&#x2F;    z   T3                       T1  T2 T3 T4</span><br><span class="line">&#x2F;&#x2F;   &#x2F; \</span><br><span class="line">&#x2F;&#x2F; T1   T2</span><br><span class="line">private Node rightRotate(Node y) &#123;</span><br><span class="line">    Node x &#x3D; y.left;</span><br><span class="line">    Node T3 &#x3D; x.right;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 右旋转</span><br><span class="line">    x.right &#x3D; y;</span><br><span class="line">    y.left &#x3D; T3;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 更新height</span><br><span class="line">    y.height &#x3D; Math.max(getHeight(y.left), getHeight(y.right)) + 1;</span><br><span class="line">    x.height &#x3D; Math.max(getHeight(x.left), getHeight(x.right)) + 1;</span><br><span class="line"></span><br><span class="line">    return x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="左旋操作"><a href="#左旋操作" class="headerlink" title="左旋操作"></a>左旋操作</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 对节点y进行向左旋转操作，返回旋转后新的根节点x</span><br><span class="line">&#x2F;&#x2F;    y                             x</span><br><span class="line">&#x2F;&#x2F;  &#x2F;  \                          &#x2F;   \</span><br><span class="line">&#x2F;&#x2F; T1   x      向左旋转 (y)       y     z</span><br><span class="line">&#x2F;&#x2F;     &#x2F; \   - - - - - - - -&gt;   &#x2F; \   &#x2F; \</span><br><span class="line">&#x2F;&#x2F;   T2  z                     T1 T2 T3 T4</span><br><span class="line">&#x2F;&#x2F;      &#x2F; \</span><br><span class="line">&#x2F;&#x2F;     T3 T4</span><br><span class="line">private Node leftRotate(Node y) &#123;</span><br><span class="line">    Node x &#x3D; y.right;</span><br><span class="line">    Node T2 &#x3D; x.left;</span><br><span class="line"></span><br><span class="line">    x.left &#x3D; y;</span><br><span class="line">    y.right &#x3D; T2;</span><br><span class="line"></span><br><span class="line">    y.height &#x3D; Math.max(getHeight(y.left), getHeight(y.right)) + 1;</span><br><span class="line">    x.height &#x3D; Math.max(getHeight(x.left), getHeight(x.right)) + 1;</span><br><span class="line">    return x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="判断是否是平衡二叉树"><a href="#判断是否是平衡二叉树" class="headerlink" title="判断是否是平衡二叉树"></a>判断是否是平衡二叉树</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 判断是否是平衡二叉树</span><br><span class="line">public boolean isBalanced() &#123;</span><br><span class="line">    return isBalanced(root);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private boolean isBalanced(Node node) &#123;</span><br><span class="line">    if(node &#x3D;&#x3D; null)</span><br><span class="line">        return true;</span><br><span class="line">    int balanceFactor &#x3D; getBalenceFactor(node);</span><br><span class="line">    if(Math.abs(balanceFactor) &gt; 1)</span><br><span class="line">        return false;</span><br><span class="line">    return isBalanced(node.left) &amp;&amp; isBalanced(node.right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="维护平衡与更新高度"><a href="#维护平衡与更新高度" class="headerlink" title="维护平衡与更新高度"></a>维护平衡与更新高度</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 返回进行平衡维护后的节点</span><br><span class="line">private Node keepBalence(Node node) &#123;</span><br><span class="line">    &#x2F;&#x2F; 更新height</span><br><span class="line">    node.height &#x3D; 1 + Math.max(getHeight(node.left), getHeight(node.right));</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 平衡维护</span><br><span class="line">    int balanceFactor &#x3D; getBalenceFactor(node);</span><br><span class="line">    if(balanceFactor &gt; 1 &amp;&amp; getBalenceFactor(node.left) &gt;&#x3D; 0) &#123;</span><br><span class="line">        return rightRotate(node);</span><br><span class="line">    &#125;</span><br><span class="line">    if(balanceFactor &lt; -1 &amp;&amp; getBalenceFactor(node.right) &lt;&#x3D;0) &#123;</span><br><span class="line">        return leftRotate(node);</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F; LR</span><br><span class="line">    if(balanceFactor &gt; 1 &amp;&amp; getBalenceFactor(node.left) &lt; 0) &#123;</span><br><span class="line">        node.left &#x3D; leftRotate(node.left);</span><br><span class="line">        return rightRotate(node);</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F; RL</span><br><span class="line">    if(balanceFactor &lt; -1 &amp;&amp; getBalenceFactor(node.right) &gt; 0) &#123;</span><br><span class="line">        node.right &#x3D; rightRotate(node.right);</span><br><span class="line">        return leftRotate(node);</span><br><span class="line">    &#125;</span><br><span class="line">    return node;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="插入节点"><a href="#插入节点" class="headerlink" title="插入节点"></a>插入节点</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">private Node add(Node node, E e) &#123;</span><br><span class="line">    if(node &#x3D;&#x3D; null) &#123;</span><br><span class="line">        size++;</span><br><span class="line">        return new Node(e);</span><br><span class="line">    &#125;</span><br><span class="line">    if(e.compareTo(node.e) &lt; 0) &#123;</span><br><span class="line">        node.left &#x3D; add(node.left, e);</span><br><span class="line">    &#125;</span><br><span class="line">    else if(e.compareTo(node.e) &gt;0) &#123;</span><br><span class="line">        node.right &#x3D; add(node.right, e);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return keepBalence(node);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除节点"><a href="#删除节点" class="headerlink" title="删除节点"></a>删除节点</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> Node <span class="title">remove</span><span class="params">(Node node, E e)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(node == <span class="keyword">null</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    Node retNode;</span><br><span class="line">    <span class="keyword">if</span>(e.compareTo(node.e) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        node.left = remove(node.left, e);</span><br><span class="line">        retNode = node;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(e.compareTo(node.e) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        node.right = remove(node.right, e);</span><br><span class="line">        retNode = node;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(node.left == <span class="keyword">null</span> || node.right == <span class="keyword">null</span>) &#123;</span><br><span class="line">            node = (node.left == <span class="keyword">null</span>) ? node.right : node.left;</span><br><span class="line">            retNode = node;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            Node temp = node.right;</span><br><span class="line">            <span class="keyword">while</span> (temp.left != <span class="keyword">null</span>)</span><br><span class="line">                temp = temp.left;</span><br><span class="line">            node.e = temp.e;</span><br><span class="line">            node.right = remove(node.right, temp.e);</span><br><span class="line">            retNode = node;</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 当前节点被删除时</span></span><br><span class="line">    <span class="keyword">if</span>(retNode == <span class="keyword">null</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> keepBalence(retNode);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h3 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h3><p><a href="https://www.cnblogs.com/linhaostudy/p/11300556.html" target="_blank" rel="noopener">https://www.cnblogs.com/linhaostudy/p/11300556.html</a>    （图画的相当清楚，点赞！）</p>
+<p><a href="https://github.com/liuyubobobo/Play-with-Data-Structures" target="_blank" rel="noopener">https://github.com/liuyubobobo/Play-with-Data-Structures</a></p>
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          Donate
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://ziyedy.top/page/ds-avl-tree.html" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/page/ds-hashtable.html" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            8、哈希表
+          
+        </div>
+      </a>
+    
+    
+      <a href="/page/ds-Union-Find.html" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">并查集</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "pgmMLBlWl23i6NPFUgTT7XqR-gzGzoHsz",
+    app_key: "yx9IIauIiK8JBBHDxxqPpEFQ",
+    path: window.location.pathname,
+    avatar: "retro",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2019-2021
+        <i class="ri-heart-fill heart_icon"></i> 子夜
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s4.cnzz.com/z_stat.php?id=1279587217&amp;web_id=1279587217'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="浔庐子夜"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gg">足迹</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+</body>
+
+</html>

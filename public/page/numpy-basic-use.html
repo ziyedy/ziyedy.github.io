@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-Hans">
+
+
+<head>
+  <meta charset="utf-8" />
+   
+  <meta name="keywords" content="生活" />
+   
+  <meta name="description" content="子夜写字的地方" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    numpy常用属性与方法 |  浔庐子夜
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-Python/常用模块/numpy常用属性与方法"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  numpy常用属性与方法
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/page/numpy-basic-use.html" class="article-date">
+  <time datetime="2020-08-21T01:51:27.000Z" itemprop="datePublished">2020-08-21</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Python/">Python</a> / <a class="article-category-link" href="/categories/Python/%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97/">常用模块</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">1.9k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">7 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="n维数组对象：ndarray"><a href="#n维数组对象：ndarray" class="headerlink" title="n维数组对象：ndarray"></a>n维数组对象：ndarray</h2><p>ndarray对象主要由两部分构成，即实际的数据和描述这些数据的元数据（数据维度、类型）等。</p>
+<h3 id="相比于Python列表的优势"><a href="#相比于Python列表的优势" class="headerlink" title="相比于Python列表的优势"></a>相比于Python列表的优势</h3><p><strong>1、数组对象可以去掉元素间运算所需的循环，使一维向量更像单个数据</strong>，如下：</p>
+<p>Python中的数组对象进行平方：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">l &#x3D; [1, 2, 3]</span><br><span class="line">for i in range(len(a));</span><br><span class="line">	a[i] &#x3D; a[i]**2</span><br></pre></td></tr></table></figure>
+
+<p>ndarray进行平方</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">a &#x3D; np.array([1, 2, 3])</span><br><span class="line">a &#x3D; a**2</span><br></pre></td></tr></table></figure>
+
+<p>2、设置专门的数组对象，经过优化，可以提升这类应用的运算速度</p>
+<p>3、数组对象采用相同的数据类型，有助于节省运算和存储空间</p>
+<h3 id="ndarray对象属性"><a href="#ndarray对象属性" class="headerlink" title="ndarray对象属性"></a>ndarray对象属性</h3><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>.ndim</td>
+<td>秩，即轴的数量或维度的数量</td>
+</tr>
+<tr>
+<td>.shape</td>
+<td>ndarray对象的尺度，对于矩阵，n行m列</td>
+</tr>
+<tr>
+<td>.size</td>
+<td>ndarray对象元素的个数，相当于.shape中n*m的值</td>
+</tr>
+<tr>
+<td>.dtype</td>
+<td>ndarray对象的元素类型</td>
+</tr>
+<tr>
+<td>.itemsize</td>
+<td>ndarray对象中每个元素的大小，以字节为单位</td>
+</tr>
+</tbody></table>
+<h3 id="ndarray元素类型"><a href="#ndarray元素类型" class="headerlink" title="ndarray元素类型"></a>ndarray元素类型</h3><p>包括主要的一些类型，类型后面的数字代表长度，常见的如bool、int32、float32、complex64（虚数）等等。</p>
+<h2 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h2><h3 id="创建方法"><a href="#创建方法" class="headerlink" title="创建方法"></a>创建方法</h3><h4 id="从Python中的列表、元组等类型创建"><a href="#从Python中的列表、元组等类型创建" class="headerlink" title="从Python中的列表、元组等类型创建"></a>从Python中的列表、元组等类型创建</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x &#x3D; np.array(list&#x2F;tuple)</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用相应函数创建"><a href="#使用相应函数创建" class="headerlink" title="使用相应函数创建"></a>使用相应函数创建</h4><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>np.arange(n)</td>
+<td>类似range()函数，返回ndarray类型，元素从0到n‐1</td>
+</tr>
+<tr>
+<td>np.ones(shape)</td>
+<td>根据shape生成一个全1数组，shape是元组类型</td>
+</tr>
+<tr>
+<td>np.zeros(shape)</td>
+<td>根据shape生成一个全0数组，shape是元组类型</td>
+</tr>
+<tr>
+<td>np.full(shape,val)</td>
+<td>根据shape生成一个数组，每个元素值都是val</td>
+</tr>
+<tr>
+<td>np.eye(n)</td>
+<td>创建一个正方的n*n单位矩阵，对角线为1，其余为0</td>
+</tr>
+<tr>
+<td>np.ones_like(a)</td>
+<td>根据数组a的形状生成一个全1数组</td>
+</tr>
+<tr>
+<td>np.zeros_like(a)</td>
+<td>根据数组a的形状生成一个全0数组</td>
+</tr>
+<tr>
+<td>np.full_like(a,val)</td>
+<td>根据数组a的形状生成一个数组，每个元素值都是val</td>
+</tr>
+</tbody></table>
+<h4 id="创建网格（meshgrid）"><a href="#创建网格（meshgrid）" class="headerlink" title="创建网格（meshgrid）"></a>创建网格（meshgrid）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="其他方法创建"><a href="#其他方法创建" class="headerlink" title="其他方法创建"></a>其他方法创建</h4><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>np.linspace(begin, end, bia)</td>
+<td>根据起止数据等间距地填充数据，形成数组（从begin到end，共bia个数）</td>
+</tr>
+<tr>
+<td>np.concatenate()</td>
+<td>将两个或多个数组合并成一个新的数组</td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a &#x3D; np.linspace(1,10,3)</span><br><span class="line">&gt;&gt;&gt; a</span><br><span class="line">array([ 1. ,  5.5, 10. ])</span><br><span class="line">&gt;&gt;&gt; b &#x3D; np.linspace(1,10,3, endpoint&#x3D;False)</span><br><span class="line">&gt;&gt;&gt; b</span><br><span class="line">array([1., 4., 7.])</span><br><span class="line">&gt;&gt;&gt; c &#x3D; np.concatenate((a, b))</span><br><span class="line">&gt;&gt;&gt; c</span><br><span class="line">array([ 1. ,  5.5, 10. ,  1. ,  4. ,  7. ])</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="变换方法"><a href="#变换方法" class="headerlink" title="变换方法"></a>变换方法</h3><h4 id="维度变换"><a href="#维度变换" class="headerlink" title="维度变换"></a>维度变换</h4><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>.reshape(shape)</td>
+<td>不改变数组元素，返回一个shape形状的数组，<strong>原数组不变</strong></td>
+</tr>
+<tr>
+<td>.resize(shape)</td>
+<td>与.reshape()功能一致，但<strong>修改原数组</strong></td>
+</tr>
+<tr>
+<td>.flatten()</td>
+<td>对数组进行降维，返回折叠后的一维数组，原数组不变</td>
+</tr>
+</tbody></table>
+<p><strong>如果只想指示一个维度，而自动决定其他维度有多少个值，可以使用-1的写法（如果不能整除会报错）</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 想让数组有5行，列数自动决定</span><br><span class="line">x.reshape(5, -1)</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="类型变换"><a href="#类型变换" class="headerlink" title="类型变换"></a>类型变换</h4><p>astype()方法一定会创建新的数组（原始数据的一个拷贝），即使两个类型一致</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_l &#x3D; l.astype(new_type)</span><br></pre></td></tr></table></figure>
+
+<h4 id="转换为列表"><a href="#转换为列表" class="headerlink" title="转换为列表"></a>转换为列表</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">l &#x3D; n.tolist()</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="数组的操作"><a href="#数组的操作" class="headerlink" title="数组的操作"></a>数组的操作</h3><h4 id="索引与切片"><a href="#索引与切片" class="headerlink" title="索引与切片"></a>索引与切片</h4><p><strong>ndarray数组的索引与切片与Python中的索引与切片大致相同</strong></p>
+<h4 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h4><p><strong>ndarray数组与标量之间的运算作用于数组的每一个元素，包括平方立方等等，示例如下：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">np.abs(n)	&#x2F;&#x2F; 各元素的绝对值</span><br><span class="line">np.sqrt(x)	&#x2F;&#x2F; 各元素的平方根</span><br></pre></td></tr></table></figure>
+
+<p>同时使用数组中进行大小比较等运算时，会返回一个数值为布尔类型的数组（<strong>也是每个元素进行比较</strong>）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">X &#x3D; np.array([[1,2,3],[4,5,6]])</span><br><span class="line">print(X &gt; 3)</span><br><span class="line">#######################################</span><br><span class="line">[[False False False]</span><br><span class="line"> [ True  True  True]]</span><br></pre></td></tr></table></figure>
+
+<p>借用这个特性，可以完成对满足某一要求的元素进行如赋值等其他操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">X &#x3D; np.array([[1,2,3],[4,5,6]])</span><br><span class="line">X[X &gt; 3] &#x3D; 10</span><br><span class="line">print(X)</span><br><span class="line">####################################</span><br><span class="line">[[ 1  2  3]</span><br><span class="line"> [10 10 10]]</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="合并与分割"><a href="#合并与分割" class="headerlink" title="合并与分割"></a>合并与分割</h4><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>np.concatenate([n1, n2], axis=1)</td>
+<td>将矩阵n1、n2按照第1个维度合并（axis默认为0）。同时返回一个新的矩阵</td>
+</tr>
+<tr>
+<td>np.vstack([n1, n2])</td>
+<td>在垂直的维度合并n1，n2</td>
+</tr>
+<tr>
+<td>np.hstack([n1, n2])</td>
+<td>在水平方向合并n1,n2</td>
+</tr>
+<tr>
+<td>x1, x2, x3 = np.split(x, [2,4], axis=1)</td>
+<td>将x按照[0, 2)、[2, 4)、[4, end)进行分割并赋值（依此类推）</td>
+</tr>
+<tr>
+<td>np.vsplit()、np.hsplit()</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="矩阵运算"><a href="#矩阵运算" class="headerlink" title="矩阵运算"></a>矩阵运算</h3><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A.dot(B)</td>
+<td>矩阵乘法</td>
+</tr>
+<tr>
+<td>A.T</td>
+<td>矩阵转置</td>
+</tr>
+<tr>
+<td>np.linalg.inv(A)</td>
+<td>矩阵的逆</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>np.random.shuffle(x)</td>
+<td>对x进行乱序处理</td>
+</tr>
+<tr>
+<td>np.sort(x)</td>
+<td>返回排序后的x</td>
+</tr>
+</tbody></table>
+<h3 id="随机数函数"><a href="#随机数函数" class="headerlink" title="随机数函数"></a>随机数函数</h3><p>在numpy的子库numpy.random中</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>rand(d0,d1,..,dn)</td>
+<td>根据d0‐dn作为维度创建随机数数组，浮点数，[0,1)，均匀分布</td>
+</tr>
+<tr>
+<td>randn(d0,d1,..,dn)</td>
+<td>根据d0‐dn创建随机数数组，标准正态分布</td>
+</tr>
+<tr>
+<td>randint(low, high, shape)</td>
+<td>根据shape创建随机整数或整数数组，范围是[low, high)</td>
+</tr>
+<tr>
+<td>seed(s)</td>
+<td>随机数种子，s是给定的种子值（计算机中随机数都是“伪随机数”，依赖于该随机种子）</td>
+</tr>
+<tr>
+<td>normal(均值, 方差, shape)</td>
+<td>生成给定均值与方差的符合正态分布的数或矩阵，shape为(元组)</td>
+</tr>
+</tbody></table>
+<h3 id="统计函数（聚合函数）"><a href="#统计函数（聚合函数）" class="headerlink" title="统计函数（聚合函数）"></a>统计函数（聚合函数）</h3><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sum(a, axis=None)</td>
+<td>根据给定轴axis计算数组a相关元素之和，axis整数或元组</td>
+</tr>
+<tr>
+<td>mean(a, axis=None)</td>
+<td>根据给定轴axis计算数组a相关元素的期望，axis整数或元组</td>
+</tr>
+<tr>
+<td>average(a,axis=None,weights=None)</td>
+<td>根据给定轴axis计算数组a相关元素的加权平均值，weights是列表</td>
+</tr>
+<tr>
+<td>std(a, axis=None)</td>
+<td>根据给定轴axis计算数组a相关元素的标准差</td>
+</tr>
+<tr>
+<td>var(a, axis=None)</td>
+<td>根据给定轴axis计算数组a相关元素的方差</td>
+</tr>
+<tr>
+<td>min(a)  max(a)</td>
+<td>计算数组a中元素的最小值、最大值</td>
+</tr>
+<tr>
+<td>argmin(a)  argmax(a)</td>
+<td>计算数组a中元素最小值、最大值的降一维后下标</td>
+</tr>
+</tbody></table>
+<h3 id="梯度函数"><a href="#梯度函数" class="headerlink" title="梯度函数"></a>梯度函数</h3><p><code>np.gradient(f)</code>，计算数组f中元素的梯度（即连续值之间的变化率），当f为多维时，返回每个维度梯度</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a &#x3D; np.arange(5)</span><br><span class="line">&gt;&gt;&gt; a</span><br><span class="line">array([0, 1, 2, 3, 4])</span><br><span class="line">&gt;&gt;&gt; np.gradient(a)</span><br><span class="line">array([1., 1., 1., 1., 1.])</span><br></pre></td></tr></table></figure>
+
+<p><strong>说明：</strong>以索引为2的值为例，该处梯度的计算值为(a[3] - a[1]) / 2 = 1</p>
+<h3 id="ndarray数据的读写"><a href="#ndarray数据的读写" class="headerlink" title="ndarray数据的读写"></a>ndarray数据的读写</h3><h4 id="二维数据读写"><a href="#二维数据读写" class="headerlink" title="二维数据读写"></a>二维数据读写</h4><p><strong>CSV文件</strong>，以逗号作为分隔符的常见文件格式</p>
+<p><strong>np.savetxt()</strong>：写入文件</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># frame : 文件、字符串或产生器</span></span><br><span class="line"><span class="comment"># array : 存入文件的数组</span></span><br><span class="line"><span class="comment"># fmt : 写入文件的格式</span></span><br><span class="line"><span class="comment"># delimiter : 分割字符串，默认是任何空格</span></span><br><span class="line">np.savetxt(frame, array, fmt=<span class="string">'%.18e'</span>, delimiter=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
+
+<p>例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.savetxt(&#39;a.csv&#39;, a, fmt&#x3D;&#39;%d&#39;, delimiter&#x3D;&#39;,&#39;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>np.loadtxt()</strong>：读取文件</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># unpack  : 如果True，读入属性将分别写入不同变量</span></span><br><span class="line">np.loadtxt(frame, dtype=np.float, delimiter=<span class="literal">None</span>， unpack=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="多维数据存取"><a href="#多维数据存取" class="headerlink" title="多维数据存取"></a>多维数据存取</h4><p><strong>a.tofile()</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># frame  : 文件、字符串</span><br><span class="line"># sep : 数据分割字符串，如果是空串，写入文件为二进制</span><br><span class="line"># format : 写入数据的格式</span><br><span class="line">a.tofile(frame, sep&#x3D;&#39;&#39;, format&#x3D;&#39;%s&#39;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>np.fromfile()</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># count  : 读入元素个数，‐1表示读入整个文件</span><br><span class="line"># sep : 数据分割字符串，如果是空串，写入文件为二进制</span><br><span class="line">np.fromfile(frame, dtype&#x3D;float, count&#x3D;‐1, sep&#x3D;&#39;&#39;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="便捷文件存取"><a href="#便捷文件存取" class="headerlink" title="便捷文件存取"></a>便捷文件存取</h4><p>其中文件名称通常以.npy为拓展名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">np.save(fname, array)</span><br><span class="line"></span><br><span class="line">np.load(fname)</span><br></pre></td></tr></table></figure>
+
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          Donate
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://ziyedy.top/page/numpy-basic-use.html" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/page/python-matplotlib-use.html" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            matplotlib库基本使用
+          
+        </div>
+      </a>
+    
+    
+      <a href="/page/vim-basic-use.html" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">vi基本用法</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "pgmMLBlWl23i6NPFUgTT7XqR-gzGzoHsz",
+    app_key: "yx9IIauIiK8JBBHDxxqPpEFQ",
+    path: window.location.pathname,
+    avatar: "retro",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2019-2021
+        <i class="ri-heart-fill heart_icon"></i> 子夜
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s4.cnzz.com/z_stat.php?id=1279587217&amp;web_id=1279587217'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="浔庐子夜"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gg">足迹</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+</body>
+
+</html>

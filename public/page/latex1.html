@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-Hans">
+
+
+<head>
+  <meta charset="utf-8" />
+   
+  <meta name="keywords" content="生活" />
+   
+  <meta name="description" content="子夜写字的地方" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    latex基本用法 |  浔庐子夜
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-其他/工作效率/latex基本用法"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  latex基本用法
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/page/latex1.html" class="article-date">
+  <time datetime="2019-02-20T13:48:16.000Z" itemprop="datePublished">2019-02-20</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a> / <a class="article-category-link" href="/categories/%E5%85%B6%E4%BB%96/%E5%B7%A5%E4%BD%9C%E6%95%88%E7%8E%87/">工作效率</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">2.1k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">8 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>谈到码字与排版大家首先想到的一定是word等办公软件，即一些“所见即所得”的排版与“码字”软件，这些软件功能强大足够应付日常的一切工作。<br>但当大家有英文论文的写作与排版需求时，尤其是面对美赛这种“英文写作比赛”时，输出的PDF文件的美观性就尤其重要了（本人也是因为美赛才接触了latex这个让人又爱又恨的软件）。出于实用与给自己进行用法记录的目的，我也就不拿软件的历史之类的凑字数了，直接上可以产生效果的东西。<br><strong>PS：</strong>我个人认为latex 与HTML之类的标签语言十分相似，学习成本低，易用难精（也没必要精），因此本文只针对相应排版的具体问题，不涉及任何latex的理论与底层问题，想精学的朋友建议移步刘海洋的《LaTeX入门》（可以联系本人电子版），同时有其他问题建议百度搜索或混混相应论坛，这儿给一个tackle problems的<a href="http://www.latexstudio.net/" target="_blank" rel="noopener">传送门</a>,下载TEXLive请移步<a href="http://tug.org/texlive/" target="_blank" rel="noopener">传送</a>,选择相应版本后耐心等待。<br><strong>以下未经说明使用TeXworks编辑器，编译方式选择XELaTeX</strong></p>
+<h2 id="目录及其相关设置"><a href="#目录及其相关设置" class="headerlink" title="目录及其相关设置"></a>目录及其相关设置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">\tableofcontents            %插入目录，由于latex的“交叉引用”，注意应编译两次</span><br><span class="line">\thispagestyle&#123;empty&#125;       %设置目录页不计入页码，用于文章其他部位亦可</span><br><span class="line">\clearpage                  %该语句使得文章后面内容另起一页显示，此处使得目录单独写在一页</span><br><span class="line">\setcounter&#123;page&#125;&#123;1&#125;        %设置目录后正文第一页目录计数为1</span><br></pre></td></tr></table></figure>
+
+<h2 id="正文文章结构的设置"><a href="#正文文章结构的设置" class="headerlink" title="正文文章结构的设置"></a>正文文章结构的设置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">\section&#123;一级标题内容&#125;</span><br><span class="line">正文</span><br><span class="line">\subsection&#123;二级标题内容&#125;</span><br><span class="line">正文</span><br><span class="line">\subsubsection&#123;三级标题内容&#125;</span><br><span class="line">正文</span><br></pre></td></tr></table></figure>
+<p>以上模式相信用过word的朋友都很容易理解了，同时通过上一条所述的目录内容会根据正文中的\section{}等标签自动生成文章目录，十分方便。</p>
+<h2 id="字体字号的常用设置"><a href="#字体字号的常用设置" class="headerlink" title="字体字号的常用设置"></a>字体字号的常用设置</h2><p>latex中包含了很多种字体，但如果没有特殊需求，我认为以下内容完全能够满足需要了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\textbf&#123;内容&#125;       %将大括号内字体加粗</span><br><span class="line">\textit&#123;内容&#125;       %将大括号内字体变为斜体</span><br><span class="line">\emph&#123;内容&#125;         %强调括号内字体内容</span><br></pre></td></tr></table></figure>
+
+<h2 id="列表环境"><a href="#列表环境" class="headerlink" title="列表环境"></a>列表环境</h2><h3 id="有计数的列表"><a href="#有计数的列表" class="headerlink" title="有计数的列表"></a>有计数的列表</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;enumerate&#125;</span><br><span class="line">    \item 内容1</span><br><span class="line">    \item 内容2</span><br><span class="line">\end&#123;enumerate&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="无计数的列表（bulleted-list）"><a href="#无计数的列表（bulleted-list）" class="headerlink" title="无计数的列表（bulleted list）"></a>无计数的列表（bulleted list）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;itemize&#125;</span><br><span class="line">    \item 内容1</span><br><span class="line">    \item 内容2</span><br><span class="line">\end&#123;itemize&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="复杂列表"><a href="#复杂列表" class="headerlink" title="复杂列表"></a>复杂列表</h3><p>同时上述各个列表可以相互嵌套，如下即为在一个bulleted list下又嵌套了一个计数列表。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;itemize&#125;</span><br><span class="line">    \item 内容1</span><br><span class="line">    \begin&#123;enumerate&#125;</span><br><span class="line">        \item 内容1.1</span><br><span class="line">        \item 内容1.2</span><br><span class="line">    \end&#123;enumerate&#125;</span><br><span class="line">\end&#123;itemize&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h2><p>在正文中插入图片很简单，如果你没有特殊的需求copy下面这段代码并且更改里面一些参数完全够用了，图片的资源文件和其他开发都是一样的，建议在根目录下建立一个img文件夹专门存放，同时记得将文件的命名与格式搞清楚。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">%下行代码中[]内为可选项意义分别为</span><br><span class="line">%h 代表here,将表格排在当前文字位置</span><br><span class="line">%t 表示将表格放在下一页的 top (页首)</span><br><span class="line">%b 表示将表格放在当前页的 bottom (底部)</span><br><span class="line">%! 表示忽略美观因素，尽可能按照参数指定的方式来处理表格浮动位置</span><br><span class="line">\begin&#123;figure&#125;[h]</span><br><span class="line">    \centering      %使图片居中</span><br><span class="line">    %下面这行可以简单理解为载入图片的函数，width&#x3D;0.6\textwidth是将图片等比例设为宽度为0.6个间页长（排版的名词不大记得可以简单这么理解），你也可以使用px之类的将其设置为定宽。后面大括号内一定得是如image1.jpg这种格式，后缀不能漏</span><br><span class="line">    \includegraphics[width&#x3D;0.6\textwidth]&#123;加后缀的图片名&#125;</span><br><span class="line">    \caption&#123;图片的名称&#125;    %大括号内为页面显示的图片的名称</span><br><span class="line">    \label&#123;fig:1&#125;          %设置图片的标签方便交叉引用</span><br><span class="line">\end&#123;figure&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="插入表格"><a href="#插入表格" class="headerlink" title="插入表格"></a>插入表格</h2><p>表格是一切论文或其他议论文体中非常常见的数据表达形式，由于数据的不同各种类型多种多样，不想上节所述的图片那么一段代码打天下，所以表格内容较多，我尽量将我认为的常用的表格形式的通用代码附上，同时也列举一下表格的基本形式，方便读者进行变换。</p>
+<h3 id="普通表格"><a href="#普通表格" class="headerlink" title="普通表格"></a>普通表格</h3><p>普通表格是指一个没有任何改动的最基本的表格（参考word你便知道样式），我也可以借由此说明一下表格中的一些常用参数<br>同时，如\centering；\caption{};\label{}等操作，与上一节所述关于图片相同</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;table&#125;[!htb] %[]内与上一节所述图片相同</span><br><span class="line">    \begin&#123;tabular&#125;&#123;|c|r|l|&#125;    %后一个括号内c代表居中，r代表靠右，l代表靠左，|为表格竖线，可以舍去</span><br><span class="line">        \hline  %为表格横线，可以舍去</span><br><span class="line">        内容1 &amp; 内容2 &amp; 内容3 \\    %每个单元格间由&amp;分开，\\表示换行</span><br><span class="line">        \hline</span><br><span class="line">        内容4 &amp; 内容5 &amp; 内容6 \\</span><br><span class="line">        \hline</span><br><span class="line">    \end&#123;tabular&#125;</span><br><span class="line">\end&#123;table&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="表格其他的常用设置"><a href="#表格其他的常用设置" class="headerlink" title="表格其他的常用设置"></a>表格其他的常用设置</h3><p>重新定义表格线的宽度代码如下，可随意更改使用相应代号的名称。使用时找到代码相应位置进行相应更改即可。<br>注意：<strong>以下内容要放在导言区</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">%定义表格横线\ttline的线宽为1.4pt，使用时用\ttline代替上一节中的\hline即可</span><br><span class="line">\newcommand&#123;\ttline&#125;&#123;</span><br><span class="line">    \noalign &#123;\ifnum 0&#x3D;&#96;&#125;\fi \hrule height 1.4pt</span><br><span class="line">    \futurelet \reserved@a \@xhline</span><br><span class="line">&#125;</span><br><span class="line">%重定义表格竖线！的线宽为2pt，使用时用！代替上一节中的|即可</span><br><span class="line">\newcolumntype&#123;!&#125;&#123;@&#123;\hskip\tabcolsep\vrule width 2pt\hskip\tabcolsep&#125;&#125;</span><br><span class="line">\makeatother</span><br></pre></td></tr></table></figure>
+<p>剩下的一些小功能如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">%设置表格标题置于表格上面（默认置于下面）</span><br><span class="line">\setlength&#123;\belowcaptionskip&#125;&#123;6pt&#125;  %置于表格上面6pt</span><br><span class="line"></span><br><span class="line">%如果想单独使一个单元格居中，可以这么写</span><br><span class="line">\multicolumn&#123;1&#125;&#123;c&#125;&#123;content&#125;</span><br><span class="line"></span><br><span class="line">%想调整表格上下间距，可以在\begin&#123;table&#125;前加（同样适用于更改正文行距）</span><br><span class="line">\linespread&#123;倍数&#125; %更改后值为 倍数*默认间距</span><br><span class="line"></span><br><span class="line">%合并单元格，合并行列可以使用以下公式进行嵌套</span><br><span class="line">\multicolumn&#123;项数&#125;&#123;新列格式&#125;&#123;单元格内容&#125; %合并列</span><br><span class="line">\multirow&#123;项数&#125;&#123;新列格式&#125;&#123;单元格内容&#125; %合并行</span><br><span class="line"></span><br><span class="line">\cline&#123;2-3&#125; %表示画出一条位于第2列到第3列的横线段，其他列将不会有横线段</span><br></pre></td></tr></table></figure>
+<h3 id="几种特殊表格代码"><a href="#几种特殊表格代码" class="headerlink" title="几种特殊表格代码"></a>几种特殊表格代码</h3><p>下面是几种相对特殊的表格的代码，根据这些代码结合前两小节的内容更改相应部分即可完成自己的制定。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">\linespread&#123;1.1&#125;</span><br><span class="line">\begin&#123;table&#125;[h]</span><br><span class="line">\setlength&#123;\belowcaptionskip&#125;&#123;6pt&#125;\centering\caption&#123;dia test&#125;\label&#123;tab:dia&#125;</span><br><span class="line">\begin&#123;tabular&#125;&#123;ccc&#125;\ttline</span><br><span class="line">\diagbox&#123;test1&#125;&#123;test2&#125; &amp; altitude &amp; vavlue \\ \tline</span><br><span class="line">testa &amp; $22.2$ &amp; $22.1$ \\ </span><br><span class="line">testb &amp; $1.22$ &amp; $2.22$ \\</span><br><span class="line">\end&#123;tabular&#125;</span><br><span class="line">\end&#123;table&#125;</span><br></pre></td></tr></table></figure>
+<p>此种表格应记住在导言区加上 <strong>\usepackage{diagbox}</strong><br><img src="/assets/BlogPic/2.1/t1.png" alt="示例1"><br>三线表是各种论文中较为常用的部分，代码与示例见下</p>
+<h2 id="插入公式及其他数学式"><a href="#插入公式及其他数学式" class="headerlink" title="插入公式及其他数学式"></a>插入公式及其他数学式</h2><p>公式环境与图片和表格类似，也可以自动编号以及使用交叉引用，只需设置好\label{}内容即可，具体如下：</p>
+<h3 id="公式环境"><a href="#公式环境" class="headerlink" title="公式环境"></a>公式环境</h3><p>一般公式编辑：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;equation&#125;</span><br><span class="line">    公式内容</span><br><span class="line">    \label&#123;eq:1&#125;</span><br><span class="line">\end&#123;equation&#125;</span><br></pre></td></tr></table></figure>
+<p>分段函数模板：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;equation&#125;</span><br><span class="line">p_&#123;j&#125;&#x3D;\begin&#123;cases&#125; </span><br><span class="line">    0,j&#x3D;2\\</span><br><span class="line">    1,j&#x3D;1</span><br><span class="line">\end&#123;cases&#125;</span><br><span class="line">\label&#123;&#125;</span><br><span class="line">\end&#123;equation&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="常见数学公式的编辑"><a href="#常见数学公式的编辑" class="headerlink" title="常见数学公式的编辑"></a>常见数学公式的编辑</h3> 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          Donate
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://ziyedy.top/page/latex1.html" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/latex/" rel="tag">latex</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%BA%E6%96%87/" rel="tag">论文</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/page/undefined.html" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            树（二）二叉树
+          
+        </div>
+      </a>
+    
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "pgmMLBlWl23i6NPFUgTT7XqR-gzGzoHsz",
+    app_key: "yx9IIauIiK8JBBHDxxqPpEFQ",
+    path: window.location.pathname,
+    avatar: "retro",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2019-2021
+        <i class="ri-heart-fill heart_icon"></i> 子夜
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s4.cnzz.com/z_stat.php?id=1279587217&amp;web_id=1279587217'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="浔庐子夜"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gg">足迹</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+</body>
+
+</html>

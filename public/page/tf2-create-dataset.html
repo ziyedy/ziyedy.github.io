@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-Hans">
+
+
+<head>
+  <meta charset="utf-8" />
+   
+  <meta name="keywords" content="生活" />
+   
+  <meta name="description" content="子夜写字的地方" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    使用TF2创建数据集 |  浔庐子夜
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-AI/TF2/使用TF2创建数据集"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  使用TF2创建数据集
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/page/tf2-create-dataset.html" class="article-date">
+  <time datetime="2020-08-25T08:31:59.000Z" itemprop="datePublished">2020-08-25</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/AI/">AI</a> / <a class="article-category-link" href="/categories/AI/TF2/">TF2</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">893</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">4 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="使用数据集"><a href="#使用数据集" class="headerlink" title="使用数据集"></a>使用数据集</h3><p>本例中使用的数据集分布在图片文件夹中，一个文件夹含有一类图片。数据集存储格式如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">flower_photo&#x2F;</span><br><span class="line">  daisy&#x2F;</span><br><span class="line">  dandelion&#x2F;</span><br><span class="line">  roses&#x2F;</span><br><span class="line">  sunflowers&#x2F;</span><br><span class="line">  tulips&#x2F;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="下载并查看数据集"><a href="#下载并查看数据集" class="headerlink" title="下载并查看数据集"></a>下载并查看数据集</h3><h4 id="获取数据根目录"><a href="#获取数据根目录" class="headerlink" title="获取数据根目录"></a>获取数据根目录</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import pathlib</span><br><span class="line">data_url &#x3D; &#39;https:&#x2F;&#x2F;storage.googleapis.com&#x2F;download.tensorflow.org&#x2F;example_images&#x2F;flower_photos.tgz&#39;</span><br><span class="line">data_root_orig &#x3D; tf.keras.utils.get_file(origin&#x3D;data_url,</span><br><span class="line">                                         fname&#x3D;&#39;flower_photos&#39;, </span><br><span class="line">                                         untar&#x3D;True)</span><br><span class="line">data_root &#x3D; pathlib.Path(data_root_orig)	# data_root存储数据的文件夹的根目录</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取所有图片路径并打乱"><a href="#获取所有图片路径并打乱" class="headerlink" title="获取所有图片路径并打乱"></a>获取所有图片路径并打乱</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">all_image_paths = list(data_root.glob(<span class="string">'*/*.jpg'</span>))	<span class="comment">## 获取所有图片路径</span></span><br><span class="line">all_image_paths = [str(path) <span class="keyword">for</span> path <span class="keyword">in</span> all_image_paths]	<span class="comment"># 转化为str</span></span><br><span class="line">random.shuffle(all_image_paths)	<span class="comment"># 打乱</span></span><br><span class="line">image_count = len(all_image_paths)	<span class="comment"># 获取图片个数：3670</span></span><br><span class="line"></span><br><span class="line">print(all_image_paths[<span class="number">99</span>])	<span class="comment"># 打印第100张图的路径</span></span><br><span class="line"><span class="comment"># C:\Users\lenovo\.keras\datasets\flower_photos\tulips\5704726114_a92f753514.jpg</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="获取图片标签信息"><a href="#获取图片标签信息" class="headerlink" title="获取图片标签信息"></a>获取图片标签信息</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">label_names = sorted(item.name <span class="keyword">for</span> item <span class="keyword">in</span> data_root.glob(<span class="string">'*/'</span>) <span class="keyword">if</span> item.is_dir())	<span class="comment"># 根据文件夹名获取标签名</span></span><br><span class="line">label_to_index = dict((name, index) <span class="keyword">for</span> index, name <span class="keyword">in</span> enumerate(label_names))	<span class="comment"># 从0开始给标签设置索引</span></span><br><span class="line">all_image_labels = [label_to_index[pathlib.Path(path).parent.name]</span><br><span class="line">                    <span class="keyword">for</span> path <span class="keyword">in</span> all_image_paths]	<span class="comment"># 将每张图片与标签一一对应</span></span><br><span class="line"></span><br><span class="line">print(label_names)	<span class="comment"># ['daisy', 'dandelion', 'roses', 'sunflowers', 'tulips']</span></span><br><span class="line">print(label_to_index)	<span class="comment"># &#123;'daisy': 0, 'dandelion': 1, 'roses': 2, 'sunflowers': 3, 'tulips': 4&#125;</span></span><br><span class="line">print(all_image_labels[<span class="number">99</span>])	<span class="comment"># 打印第100张图的标签：4</span></span><br></pre></td></tr></table></figure>
+
+<p>由此可见，已经完成了图片与标签一一对应的关系</p>
+<h4 id="可视化图片与标签"><a href="#可视化图片与标签" class="headerlink" title="可视化图片与标签"></a>可视化图片与标签</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">for i in range(200, 209):</span><br><span class="line">    plt.subplot(3, 3, i-199)</span><br><span class="line">    img &#x3D; plt.imread(all_image_paths[i])</span><br><span class="line">    plt.imshow(img)</span><br><span class="line">    plt.xlabel(label_names[all_image_labels[i]])</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://cdn.ziyedy.top/%E4%BD%BF%E7%94%A8TF2%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E9%9B%86/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%9B%BE%E7%89%87%E4%B8%8E%E6%A0%87%E7%AD%BE.png" alt=""></p>
+<h3 id="加载和格式化图片"><a href="#加载和格式化图片" class="headerlink" title="加载和格式化图片"></a>加载和格式化图片</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_and_preprocess_image</span><span class="params">(path)</span>:</span></span><br><span class="line">	<span class="string">""" 输入为图片路径列表，输出为图片处理后的列表 """</span></span><br><span class="line">    images = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(path)):</span><br><span class="line">        url = path[i]</span><br><span class="line">        image = tf.io.read_file(url)</span><br><span class="line">        image = tf.image.decode_jpeg(image, channels=<span class="number">3</span>)</span><br><span class="line">        image = tf.image.resize(image, [<span class="number">192</span>, <span class="number">192</span>])</span><br><span class="line">        image = image / <span class="number">255.0</span></span><br><span class="line">        images.append(image)</span><br><span class="line">    <span class="keyword">return</span> images</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://cdn.ziyedy.top/%E4%BD%BF%E7%94%A8TF2%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E9%9B%86/%E5%A4%84%E7%90%86%E5%90%8E%E6%95%B0%E6%8D%AE%E5%B1%95%E7%A4%BA.png" alt="处理后数据可视化"></p>
+<h3 id="构建数据集"><a href="#构建数据集" class="headerlink" title="构建数据集"></a>构建数据集</h3><h4 id="tf-data-Dataset的基本使用"><a href="#tf-data-Dataset的基本使用" class="headerlink" title="tf.data.Dataset的基本使用"></a>tf.data.Dataset的基本使用</h4><p>tf.data.Dataset是TF2中专门用于数据输入的接口，可以高效的实现数据的读入、打乱（shuffle）、增强（augment）等功能，以下示例简单介绍该接口使用方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">data &#x3D; np.array([0.1, 0.2, 0.4, 0.05])</span><br><span class="line">label &#x3D; np.array([0, 1, 1, 0])</span><br><span class="line">dataset &#x3D; tf.data.Dataset.from_tensor_slices((data, label))	# 组合为数据集</span><br><span class="line"></span><br><span class="line"># 遍历打印</span><br><span class="line"># tf.Tensor(0.1, shape&#x3D;(), dtype&#x3D;float64) tf.Tensor(0, shape&#x3D;(), dtype&#x3D;int32)</span><br><span class="line"># tf.Tensor(0.2, shape&#x3D;(), dtype&#x3D;float64) tf.Tensor(1, shape&#x3D;(), dtype&#x3D;int32)</span><br><span class="line"># tf.Tensor(0.4, shape&#x3D;(), dtype&#x3D;float64) tf.Tensor(1, shape&#x3D;(), dtype&#x3D;int32)</span><br><span class="line"># tf.Tensor(0.05, shape&#x3D;(), dtype&#x3D;float64) tf.Tensor(0, shape&#x3D;(), dtype&#x3D;int32)</span><br><span class="line"></span><br><span class="line">dataset &#x3D; dataset.shuffle(buffer_size&#x3D;image_count)	# 打乱数据</span><br><span class="line">dataset &#x3D; dataset.repeat()	# 使数据能够重复使用</span><br><span class="line">dataset &#x3D; dataset.batch(batch_size&#x3D;32)	# 每一个batch为32</span><br><span class="line"></span><br><span class="line"># 设置batch后遍历打印</span><br><span class="line"># tf.Tensor([0.1 0.2], shape&#x3D;(2,), dtype&#x3D;float64) tf.Tensor([0 1], shape&#x3D;(2,), dtype&#x3D;int32)</span><br><span class="line"># tf.Tensor([0.4  0.05], shape&#x3D;(2,), dtype&#x3D;float64) tf.Tensor([1 0], shape&#x3D;(2,), dtype&#x3D;int32)</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用map函数</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">def func(data, label):</span><br><span class="line">    data &#x3D; data * 100</span><br><span class="line">    return data, label</span><br><span class="line"></span><br><span class="line">dataset &#x3D; dataset.map(func)</span><br><span class="line"></span><br><span class="line"># tf.Tensor(10.0, shape&#x3D;(), dtype&#x3D;float64) tf.Tensor(0, shape&#x3D;(), dtype&#x3D;int32)</span><br><span class="line"># tf.Tensor(20.0, shape&#x3D;(), dtype&#x3D;float64) tf.Tensor(1, shape&#x3D;(), dtype&#x3D;int32)</span><br><span class="line"># tf.Tensor(40.0, shape&#x3D;(), dtype&#x3D;float64) tf.Tensor(1, shape&#x3D;(), dtype&#x3D;int32)</span><br><span class="line"># tf.Tensor(5.0, shape&#x3D;(), dtype&#x3D;float64) tf.Tensor(0, shape&#x3D;(), dtype&#x3D;int32)</span><br></pre></td></tr></table></figure>
+
+<p><strong>处理data的map函数的通用格式：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">def func(data, label):</span><br><span class="line">	# 对data进行处理</span><br><span class="line">	return data, label</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="本次构建数据集"><a href="#本次构建数据集" class="headerlink" title="本次构建数据集"></a>本次构建数据集</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dataset &#x3D; tf.data.Dataset.from_tensor_slices((load_and_preprocess_image(all_image_paths), all_image_labels))</span><br><span class="line">dataset &#x3D; dataset.shuffle(buffer_size&#x3D;image_count)</span><br><span class="line">dataset &#x3D; dataset.repeat()</span><br><span class="line">dataset &#x3D; dataset.batch(batch_size&#x3D;32)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="进行训练"><a href="#进行训练" class="headerlink" title="进行训练"></a>进行训练</h3><p>之后按照通用的构建网络的模板进行训练即可（构建网络的过程略）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">history &#x3D; model.fit(dataset, epochs&#x3D;10, steps_per_epoch&#x3D;115)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p><a href="https://www.tensorflow.org/tutorials/load_data/images?hl=zh-cn" target="_blank" rel="noopener">https://www.tensorflow.org/tutorials/load_data/images?hl=zh-cn</a></p>
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          Donate
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://ziyedy.top/page/tf2-create-dataset.html" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TF2/" rel="tag">TF2</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/page/python-magic-method.html" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            Python中的魔法方法（Magic Method）
+          
+        </div>
+      </a>
+    
+    
+      <a href="/page/tf2-classic-cnn.html" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">TF2实现经典CNN架构</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "pgmMLBlWl23i6NPFUgTT7XqR-gzGzoHsz",
+    app_key: "yx9IIauIiK8JBBHDxxqPpEFQ",
+    path: window.location.pathname,
+    avatar: "retro",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2019-2021
+        <i class="ri-heart-fill heart_icon"></i> 子夜
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s4.cnzz.com/z_stat.php?id=1279587217&amp;web_id=1279587217'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="浔庐子夜"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gg">足迹</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+</body>
+
+</html>

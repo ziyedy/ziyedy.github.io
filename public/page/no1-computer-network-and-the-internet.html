@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-Hans">
+
+
+<head>
+  <meta charset="utf-8" />
+   
+  <meta name="keywords" content="生活" />
+   
+  <meta name="description" content="子夜写字的地方" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    第一章：计算机网络与英特网 |  浔庐子夜
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-计算机基础/计网-topdown/第一章：计算机网络与英特网"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  第一章：计算机网络与英特网
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/page/no1-computer-network-and-the-internet.html" class="article-date">
+  <time datetime="2020-08-27T14:00:15.000Z" itemprop="datePublished">2020-08-27</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a> / <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%BD%91-topdown/">计网-topdown</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">2.8k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">9 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="什么是Internet"><a href="#什么是Internet" class="headerlink" title="什么是Internet"></a>什么是Internet</h2><p>计算机网络：通过<strong>通信信道</strong>，将地理上分布的多个计算机系统连接起来，在相应<strong>网络协议</strong>的支持下，实现信息传送、资源共享和网络计算功能的系统</p>
+<h3 id="分类依据"><a href="#分类依据" class="headerlink" title="分类依据"></a>分类依据</h3><p>1、根据覆盖范围（Coverage）</p>
+<p>2、根据节点移动性（Node Mobility）</p>
+<h2 id="网络边缘"><a href="#网络边缘" class="headerlink" title="网络边缘"></a>网络边缘</h2><p><strong>端系统（End System）</strong>：与因特网相连的计算机和其它设备，往往处于网络的边缘，因此称为端系统，也被称为<strong>主机（host）</strong>，主机有时可以进一步被划分为<strong>客户（client）</strong>和<strong>服务器（server）</strong></p>
+<h3 id="两种模型"><a href="#两种模型" class="headerlink" title="两种模型"></a>两种模型</h3><p>1、client/server model</p>
+<p>2、peer-peer model</p>
+<h3 id="接入网"><a href="#接入网" class="headerlink" title="接入网"></a>接入网</h3><p><strong>接入网</strong>：是指将端系统连入到边缘路由器的物理链路</p>
+<p><strong>边缘路由器</strong>：是指端系统到任何其他远程端系统路径上的第一台路由器</p>
+<h2 id="网络核心"><a href="#网络核心" class="headerlink" title="网络核心"></a>网络核心</h2><blockquote>
+<p> 网络核心即由网端系统的<strong>分组交换机（主要有路由器（router）和链路层交换机（link-layer switch））</strong>和<strong>链路</strong>构成的网状网络</p>
+</blockquote>
+<h3 id="网络核心两个主要功能"><a href="#网络核心两个主要功能" class="headerlink" title="网络核心两个主要功能"></a>网络核心两个主要功能</h3><ol>
+<li><p><strong>路由（Routing）</strong>决定包的路径，包括路由算法等</p>
+</li>
+<li><p><strong>转发（Forwarding）</strong>将数据包从路由器的输入转移到输出</p>
+</li>
+</ol>
+<p><img src="http://cdn.ziyedy.top/%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B8%8E%E8%8B%B1%E7%89%B9%E7%BD%91/%E6%95%B0%E6%8D%AE%E7%9A%84%E7%A7%BB%E5%8A%A8.png" alt=""></p>
+<h3 id="网络核心的数据传输模式"><a href="#网络核心的数据传输模式" class="headerlink" title="网络核心的数据传输模式"></a>网络核心的数据传输模式</h3><h4 id="电路交换（circuit-switching）"><a href="#电路交换（circuit-switching）" class="headerlink" title="电路交换（circuit switching）"></a>电路交换（circuit switching）</h4><blockquote>
+<p>在电路交换网络中，在端系统通信会话期间，交换机会预留端系统间通信路径上的相关资源（缓存，链路传输速率），即先建立连接，然后通信；而在分组交换网络中，这些资源没有被预留；也就是说，在端系统进行通信时，其所需要的资源是被保持的，其他通信是无法使用这一部分资源的；也就说，端系统间真正建立了一条“连接”；而这一连接，用电话的术语被称为“电路”。传统的电话网络就是电路交换网络的例子。</p>
+</blockquote>
+<h4 id="分组交换（packet-switching）"><a href="#分组交换（packet-switching）" class="headerlink" title="分组交换（packet switching）"></a>分组交换（packet switching）</h4><p>从源端系统向目的端系统发送一个报文（message），要先<strong>将长报文划分为较小的数据块</strong>，称为分组（packet）。在传输过程中，每个分组都<strong>通过链路和分组交换机传送</strong>。</p>
+<p><strong>存储转发</strong></p>
+<blockquote>
+<p> 存储转发是指<strong>交换机在收到一个完成的分组，才会向链路输出转发分组，否则就将收到的部分分组缓存起来（因为需要缓存分组，所以分组交换机需要一个缓冲队列）</strong>；因为缓存等待一个分组的全部数据而导致的时间开销被称为存储转发时延</p>
+</blockquote>
+<p><strong>排队时延与分组丢失</strong></p>
+<p>发生在缓冲队列满的情况，具体见下一节</p>
+<p><strong>转发表与路由选择协议</strong></p>
+<p>实际上，分组交换机之所以能够知道往哪去是因为其内部有一个<strong>转发表</strong>，这个表维护了一个IP地址和链路的对应关系，所以处理流程为：</p>
+<ol>
+<li>通过分组的必要信息，获得目的端系统的<em>IP地址</em></li>
+<li>通过IP地址<em>索引转发表</em>，从而确定输出链路</li>
+</ol>
+<h3 id="分组交换和电路交换的对比"><a href="#分组交换和电路交换的对比" class="headerlink" title="分组交换和电路交换的对比"></a>分组交换和电路交换的对比</h3><h4 id="分组交换的优点"><a href="#分组交换的优点" class="headerlink" title="分组交换的优点"></a>分组交换的优点</h4><p>提供了比电路交换更好的带宽共享；</p>
+<p>比电路交换更简单、更有效、实现成本更低；</p>
+<h4 id="分组交换的缺点"><a href="#分组交换的缺点" class="headerlink" title="分组交换的缺点"></a>分组交换的缺点</h4><p>分组交换不适合实时服务，因为端到端的时延是可变、不可预测的，这和整个网络的情况相关</p>
+<h4 id="电路交换的优点"><a href="#电路交换的优点" class="headerlink" title="电路交换的优点"></a>电路交换的优点</h4><p>提供了端对端传输数据的速率保证</p>
+<h4 id="电路交换的缺点"><a href="#电路交换的缺点" class="headerlink" title="电路交换的缺点"></a>电路交换的缺点</h4><p>电路交换存在静默期，这是指专用电路空闲时，其占用的资源并没有得到充分的利用</p>
+<p>建立连接的过程比较复杂</p>
+<p>总体上来说，分组交换的性能要好于电路交换的性能，但是不同类型的分组交换方式有不同的应用场景；比如一些对最低速率有着严格要求的应用，比如实时服务等，为了获得速率保证，牺牲网络的效率也是可以接受的。趋势向着分组交换发展</p>
+<h2 id="分组交换中的时延、丢包、吞吐量"><a href="#分组交换中的时延、丢包、吞吐量" class="headerlink" title="分组交换中的时延、丢包、吞吐量"></a>分组交换中的时延、丢包、吞吐量</h2><h3 id="时延（delay）"><a href="#时延（delay）" class="headerlink" title="时延（delay）"></a>时延（delay）</h3><blockquote>
+<p>一个分组在沿途<strong>每个节点</strong>承受不同类型的时延，这些时延中最为重要有四个的是：结点处理时延、排队时延、传输时延和传播时延.这些时延总体累加起来是结点总时延</p>
+</blockquote>
+<h4 id="处理时延"><a href="#处理时延" class="headerlink" title="处理时延"></a>处理时延</h4><p>处理时延是由于节点需要解析分组的必要信息然后<strong>决定其出链路</strong>而产生的，通常在微秒或者更低数量级。</p>
+<p>常用耗时在查找比特错误、索引转发表等操作</p>
+<h4 id="排队时延"><a href="#排队时延" class="headerlink" title="排队时延"></a>排队时延</h4><p>排队时延是因为分组所对应的出链路前面有其他分组正在传输，所以分组需要该链路的缓冲队列里等待其他分组传输完毕而产生的（即在分组交换机中<strong>等待其他分组处理发送完成</strong>造成的时延）；一般来说，排队时延是到达该队列的<strong>流量强度</strong>和性质的函数，通常可以达到毫秒级到微秒级。</p>
+<blockquote>
+<p>R：带宽</p>
+<p>L：数据报长</p>
+<p>a：平均到达速率</p>
+</blockquote>
+<h4 id="传输时延"><a href="#传输时延" class="headerlink" title="传输时延"></a>传输时延</h4><p>传输时延是将所有分组的比特推向链路所有需要的时间（<strong>即向外推的动作</strong>），实际的传输时延通常在毫秒到微秒数量级。用L（bit）表示分组的长度，用R（bps，b/s）表示从路由器A到B的链路传输速率。传输时延是<strong>L/R</strong>。影响因素也就是L与R的大小了</p>
+<h4 id="传播时延"><a href="#传播时延" class="headerlink" title="传播时延"></a>传播时延</h4><p>传播时延是指比特进入链路后，从该链路的起点到下一个结点所用的时间（<strong>即在向外推之后，借链路速度到答下一个节点的事件</strong>）；一旦分组中的最后一个比特到达路由器就意味着该分组的所有比特都已到达路由器；广域网中，传播时延一般是毫秒级的。传播时延是d/s。d是路由器A到B的距离。s是链路的传播速率。</p>
+<p>影响因素也就是物理链路的长度以及使用的介质的传播速度了</p>
+<h4 id="端到端时延"><a href="#端到端时延" class="headerlink" title="端到端时延"></a>端到端时延</h4><p>假设源主机与目的地主机之间有N-1台路由器，且无拥塞（排队时延微不足道），则节点累计起来，得到端到端时延D=N(d)</p>
+<h3 id="丢包（loss）"><a href="#丢包（loss）" class="headerlink" title="丢包（loss）"></a>丢包（loss）</h3><blockquote>
+<p>到达的分组发现一个满的队列。由于没有地方存储这个分组，路由器将丢弃该分组，该分组将会丢失（<strong>即当分组交换机缓存满的情况</strong>）</p>
+</blockquote>
+<p>排队时延和丢包与网络的状况和结点的缓冲空间大小、处理速度相关；如果分组到达的速度高于结点的处理速度，那么分组就会在缓冲队列里排队等待。当缓冲空间用完后，如果还有到的分组，那么该分组将被迫丢弃，产生丢包</p>
+<p><strong>流量强度 = 分组到达的速度 / 结点的处理速度，当流量强度大于1时，会出现丢包现象</strong></p>
+<p>为降低丢包率，使用决定每个节点buffer的大小也需要进行考量</p>
+<h3 id="吞吐量（throughput）"><a href="#吞吐量（throughput）" class="headerlink" title="吞吐量（throughput）"></a>吞吐量（throughput）</h3><blockquote>
+<p>计算机网络的吞吐量实际上是一个<strong>速度指标</strong>，它描述了比特经过某个节点的速度（单位时间传输的文件bit/time）。网络的吞吐量可以衡量网络的性能。通常有<strong>瞬时吞吐量</strong>和<strong>平均吞吐量</strong>两个指标进行评价，在今天，因特网对吞吐率的限制因素通常是接入网。</p>
+</blockquote>
+<p>对于某条路径上的<strong>结点</strong>来说，和该结点有关的速度有两个：接收数据的速度和发送数据的速度，而该结点的吞吐量是这两个速度中较小的一个；</p>
+<p>对于某条<strong>路径</strong>来说，该路径的吞吐量可以近似是<strong>所有节点的吞吐量的最小值（瓶颈）</strong>，该最小传输速率的链路为<strong>瓶颈链路</strong>。</p>
+<h2 id="协议层次及服务模型"><a href="#协议层次及服务模型" class="headerlink" title="协议层次及服务模型"></a>协议层次及服务模型</h2><h3 id="分层体系结构"><a href="#分层体系结构" class="headerlink" title="分层体系结构"></a>分层体系结构</h3><p>计算机网络中的协议可以简单理解为两个端系统交流的语法与语义，即交流的规范。</p>
+<p>总体来说，将各层的所有协议组合起来，称为<strong>协议栈</strong>。因特网的协议栈有5个层次组成<strong>：物理层、链路层、网络成、传输层、应用层</strong>（OSI七层模型相比之下还在应用层下添加了<strong>表示层、会话层</strong>两层）</p>
+<p>同时，网络传输过程中，<strong>对等层间使用协议关系（Protocol），上下层间使用接口关系（Interface）</strong></p>
+<h4 id="应用层（进程-进程process）"><a href="#应用层（进程-进程process）" class="headerlink" title="应用层（进程-进程process）"></a>应用层（进程-进程process）</h4><p>应用层协议分布在多个端系统，端系统中的应用程序使用该协议与另一个端系统中的应用程序通信。处于应用层的分组称为<strong>报文（message）</strong></p>
+<ul>
+<li>FTP、SMTP、HTTP</li>
+</ul>
+<h4 id="传输层（端-端end）"><a href="#传输层（端-端end）" class="headerlink" title="传输层（端-端end）"></a>传输层（端-端end）</h4><p>传输层在应<strong>用程序端点</strong>之间传输应用层报文，因特网中有两个传输层协议：TCP和UDP。处于传输层的分组称为<strong>报文段（segment）</strong>。TCP提供确保传递、流量控制、拥塞控制机制。UDP提供无连接服务，即不提供不必要服务的服务。没有可靠性、没有流量和拥塞控制。</p>
+<ul>
+<li>TCP、UDP</li>
+</ul>
+<h4 id="网络层（主机-主机host）"><a href="#网络层（主机-主机host）" class="headerlink" title="网络层（主机-主机host）"></a>网络层（主机-主机host）</h4><p>网络层将称为数据报的网络层分组从<strong>一台主机移动到另一台主机（任意两台机器）</strong>。网络层协议包含著名的IP协议以及其他一些路由选择协议。<strong>数据报</strong></p>
+<ul>
+<li>IP、routing protocols</li>
+</ul>
+<h4 id="数据链路层（节点-节点point）"><a href="#数据链路层（节点-节点point）" class="headerlink" title="数据链路层（节点-节点point）"></a>数据链路层（节点-节点point）</h4><p>链路层将称为<strong>帧（frame）</strong>的链路层分组从一个<strong>节点移动到路径上的下一个节点（两个节点要相邻）</strong>。一个帧可能被沿途不同链路上的不同链路层协议处理。</p>
+<ul>
+<li>PPP</li>
+</ul>
+<h4 id="物理层（比特流）"><a href="#物理层（比特流）" class="headerlink" title="物理层（比特流）"></a>物理层（比特流）</h4><p>物理层的任务是将<strong>帧中的比特</strong>从一个结点移动到下一个节点，它提供了传输信息的实际物理通道；</p>
+<h3 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h3><p>一个分组，在不同的层次有不同的称谓，是因为它们经过每一层的时候就被该层<strong>封装上了属于该层的相关信息</strong>，也就是前面提到的必要信息；于是，每一分层的分组有两种类型的字段：<strong>首部字段</strong>和<strong>有效负载</strong>；其中有效负载即为来自上一层的分组数据，而首部字段就是该层加上的必要信息；分组不断被封装以实现各层协议规定的相关功能</p>
+<p><img src="http://cdn.ziyedy.top/%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B8%8E%E8%8B%B1%E7%89%B9%E7%BD%91/%E7%BD%91%E7%BB%9C%E5%B1%82%E6%AC%A1%E6%8E%A5%E5%8F%A3%E6%A8%A1%E5%9E%8B.png" alt=""></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>《计算机网络——自顶向下方法》</p>
+<p><a href="https://blog.csdn.net/qq_39326472/article/details/88089747" target="_blank" rel="noopener">https://blog.csdn.net/qq_39326472/article/details/88089747</a></p>
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          Donate
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://ziyedy.top/page/no1-computer-network-and-the-internet.html" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/page/TF-Hub-transfer-learning.html" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            使用TensorFlow Hub进行迁移学习
+          
+        </div>
+      </a>
+    
+    
+      <a href="/page/python-magic-method.html" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">Python中的魔法方法（Magic Method）</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "pgmMLBlWl23i6NPFUgTT7XqR-gzGzoHsz",
+    app_key: "yx9IIauIiK8JBBHDxxqPpEFQ",
+    path: window.location.pathname,
+    avatar: "retro",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2019-2021
+        <i class="ri-heart-fill heart_icon"></i> 子夜
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s4.cnzz.com/z_stat.php?id=1279587217&amp;web_id=1279587217'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="浔庐子夜"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gg">足迹</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+</body>
+
+</html>
