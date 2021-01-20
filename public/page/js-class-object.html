@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-前端/JS/1.3、JS中的类与对象"
+  id="post-编程相关/JavaScript/1.3、JS中的类与对象"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-07-30T14:51:57.000Z" itemprop="datePublished">2020-07-30</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a> / <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/JS/">JS</a>
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/JavaScript/">JavaScript</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">293</span>
+            <span class="post-count">264</span>
         </span>
     </span>
 
@@ -103,18 +103,18 @@
     <div class="article-entry" itemprop="articleBody">
        
   <h2 id="创建自定义对象"><a href="#创建自定义对象" class="headerlink" title="创建自定义对象"></a>创建自定义对象</h2><h3 id="使用键值对创建"><a href="#使用键值对创建" class="headerlink" title="使用键值对创建"></a>使用键值对创建</h3><p>举例如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var obj1 &#x3D; &#123;</span><br><span class="line">	&#x2F;&#x2F; 成员</span><br><span class="line">	name: &quot;ziye&quot;,</span><br><span class="line">	&#x2F;&#x2F; 嵌套的对象</span><br><span class="line">	obj2: &#123;</span><br><span class="line">		name: &quot;gg&quot;</span><br><span class="line">	&#125;</span><br><span class="line">	&#x2F;&#x2F; 方法</span><br><span class="line">	func1: function() &#123;</span><br><span class="line">		alert(&quot;gg&quot;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs actionscript"><span class="hljs-keyword">var</span> obj1 = &#123;<br>	<span class="hljs-comment">// 成员</span><br>	name: <span class="hljs-string">"ziye"</span>,<br>	<span class="hljs-comment">// 嵌套的对象</span><br>	obj2: &#123;<br>		name: <span class="hljs-string">"gg"</span><br>	&#125;<br>	<span class="hljs-comment">// 方法</span><br>	func1: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>&#123;<br>		alert(<span class="hljs-string">"gg"</span>)<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <h3 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h3><p>即<strong>使用一个函数将创建好的对象作为返回值</strong>，举例如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function createObj(name) &#123;</span><br><span class="line">	&#x2F;&#x2F; 创建一个对象</span><br><span class="line">	var obj &#x3D; new Object();</span><br><span class="line">	&#x2F;&#x2F; 向对象中添加属性</span><br><span class="line">	obj.name &#x3D; name;</span><br><span class="line">	obj.func &#x3D; function() &#123;</span><br><span class="line">		alert(this.name);</span><br><span class="line">	&#125;</span><br><span class="line">	&#x2F;&#x2F; 将创建的对象返回</span><br><span class="line">	return obj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createObj</span>(<span class="hljs-params">name</span>) </span>&#123;<br>	<span class="hljs-comment">// 创建一个对象</span><br>	<span class="hljs-keyword">var</span> obj = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Object</span>();<br>	<span class="hljs-comment">// 向对象中添加属性</span><br>	obj.name = name;<br>	obj.func = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>		alert(<span class="hljs-keyword">this</span>.name);<br>	&#125;<br>	<span class="hljs-comment">// 将创建的对象返回</span><br>	<span class="hljs-keyword">return</span> obj;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 
 <h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><p>是一种特殊的函数，主要用来创建和初始化对象，也就是为对象的成员变量赋初始值。它与 <strong>new</strong> 一起使用才有意义。是js中从前最通用的构建构造函数的方法，<strong>其中this指的是当前对象的实例</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function Obj(name) &#123;</span><br><span class="line">	this.name &#x3D; name;</span><br><span class="line">	this.func &#x3D; function() &#123;</span><br><span class="line">		alert(this.name);</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var o1 &#x3D; new Obj(&quot;xxx&quot;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs actionscript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Obj</span><span class="hljs-params">(name)</span> </span>&#123;<br>	<span class="hljs-keyword">this</span>.name = name;<br>	<span class="hljs-keyword">this</span>.func = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>&#123;<br>		alert(<span class="hljs-keyword">this</span>.name);<br>	&#125;;<br>&#125;<br><br><span class="hljs-keyword">var</span> o1 = <span class="hljs-keyword">new</span> Obj(<span class="hljs-string">"xxx"</span>);<br></code></pre></td></tr></table></figure>
 
 <h2 id="JS原型对象（prototype）"><a href="#JS原型对象（prototype）" class="headerlink" title="JS原型对象（prototype）"></a>JS原型对象（prototype）</h2><p>所有的 JavaScript 对象都会从一个 prototype（原型对象）中继承属性和方法。</p>
-<h3 id="添加属性和方法"><a href="#添加属性和方法" class="headerlink" title="添加属性和方法"></a>添加属性和方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Obj.prototype.attr &#x3D; newValue;</span><br><span class="line">Obj.prototype.func &#x3D; function() &#123;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="添加属性和方法"><a href="#添加属性和方法" class="headerlink" title="添加属性和方法"></a>添加属性和方法</h3><figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs elm"><span class="hljs-type">Obj</span>.proto<span class="hljs-keyword">type</span>.attr = newValue;<br><span class="hljs-type">Obj</span>.proto<span class="hljs-keyword">type</span>.func = function() &#123;&#125;<br></code></pre></td></tr></table></figure>
 
  
       <!-- reward -->
@@ -191,7 +191,7 @@
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li></ul>
 
     </footer>
   </div>

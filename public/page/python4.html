@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Python/语言基础/4、Python模块与文件读写"
+  id="post-编程相关/Python/Python基础/4、Python模块与文件读写"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-05-10T13:03:43.000Z" itemprop="datePublished">2020-05-10</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Python/">Python</a> / <a class="article-category-link" href="/categories/Python/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/">语言基础</a>
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Python/">Python</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Python/Python%E5%9F%BA%E7%A1%80/">Python基础</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">960</span>
+            <span class="post-count">938</span>
         </span>
     </span>
 
@@ -114,27 +114,27 @@
 <p>3、<strong>_<em>name_</em> ——模块的名称</strong></p>
 <p>4、_<em>file_</em> ——文件全路径</p>
 <h2 id="文件读写"><a href="#文件读写" class="headerlink" title="文件读写"></a>文件读写</h2><h3 id="open函数及其他基本操作"><a href="#open函数及其他基本操作" class="headerlink" title="open函数及其他基本操作"></a>open函数及其他基本操作</h3><p>Python使用<strong>open()</strong>打开文件，并返回文件的一个句柄。具体的参数为<strong>文件句柄 = open(‘文件路径’,打开模式, 编码方式)</strong>。其中编码方式encoding如果没有指定，将采用系统自带的编码方式。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">f &#x3D; open(&#39;aa.txt&#39;)</span><br><span class="line">print(f)</span><br><span class="line">f.close()</span><br><span class="line">####################################################</span><br><span class="line">&lt;_io.TextIOWrapper name&#x3D;&#39;aa.txt&#39; mode&#x3D;&#39;r&#39; encoding&#x3D;&#39;cp936&#39;&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs clean">f = open(<span class="hljs-string">'aa.txt'</span>)<br>print(f)<br>f.close()<br>####################################################<br>&lt;_io.TextIOWrapper name=<span class="hljs-string">'aa.txt'</span> mode=<span class="hljs-string">'r'</span> encoding=<span class="hljs-string">'cp936'</span>&gt;<br></code></pre></td></tr></table></figure>
 
 <p>由以上输出可以看到，没指定打开模式时文件默认为只读模式（r），这时使用写入操作就会出错，常用的文件打开方式主要有以下几个。</p>
 <p>1、<strong>r</strong>，只读的方式打开（文件必须存在，若文件不存在会抛出异常）。文件以什么编码写就以什么编码打开。</p>
 <p>2、<strong>w</strong>，只写模式（文件不可读，若文件不存在，则创建一个新的文件，如果文件存在，则会清空里面的内容）</p>
 <p>3、<strong>a</strong>，只追加写的模式 （文件不可读，不存在则创建新的文件，文件存在的话，可在后面追加内容）</p>
 <p>4、<strong>b</strong>，对于非文本的文件，使用b的模式。’b’表示以字节的方式进行操作 如：rb,wb,ab 分别对应以上内容，如果以b的方式打开，读取到的内容是字节类型</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># aa.txt文件中为一行字符串“hello world!”</span><br><span class="line">f &#x3D; open(&#39;aa.txt&#39;, mode&#x3D;&#39;rb&#39;)</span><br><span class="line">print(f.read())</span><br><span class="line">f.close()</span><br><span class="line">####################################</span><br><span class="line">b&#39;hello world!&#39;</span><br></pre></td></tr></table></figure>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs clean"># aa.txt文件中为一行字符串“hello world!”<br>f = open(<span class="hljs-string">'aa.txt'</span>, mode=<span class="hljs-string">'rb'</span>)<br>print(f.read())<br>f.close()<br>####################################<br>b<span class="hljs-string">'hello world!'</span><br></code></pre></td></tr></table></figure>
 
 <p>5、<strong>’+‘模式</strong>，r+: 读写模式  w+:写读模式  a+：写读模式。在 <strong>r+</strong> 模式下，应该先读，后写，如果先写，后读，同样的道理，光标移动到了文件末尾，将读取不到内容。</p>
 <p>同时使用<strong>open</strong>打开了一个文件操作完成后必须进行关闭，关闭文件使用<strong>close()</strong>。由于文件操作的这一性质，可以使用<strong>with</strong>关键字进行操作，如下：</p>
 <p><strong>with 上下文管理器（到达语句末尾，将自动关闭文件）</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">with open(&quot;*.txt&quot;) as f</span><br><span class="line">	pass</span><br></pre></td></tr></table></figure>
+<figure class="highlight fsharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs fsharp"><span class="hljs-keyword">with</span> <span class="hljs-keyword">open</span>(<span class="hljs-string">"*.txt"</span>) <span class="hljs-keyword">as</span> f<br>	pass<br></code></pre></td></tr></table></figure>
 
 
 
 <h3 id="与文件读写相关的一些功能函数"><a href="#与文件读写相关的一些功能函数" class="headerlink" title="与文件读写相关的一些功能函数"></a>与文件读写相关的一些功能函数</h3><p>1、读取文件的操作</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 读取文件，可以输入读取几个字符</span><br><span class="line">read()</span><br><span class="line"># 读取一行数据，也可以读取参数</span><br><span class="line">readline()</span><br><span class="line"># 读取所有行，并返回列表，之后可以通过对列表进行遍历得到数据</span><br><span class="line">readlines()</span><br></pre></td></tr></table></figure>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs vala"><span class="hljs-meta"># 读取文件，可以输入读取几个字符</span><br>read()<br><span class="hljs-meta"># 读取一行数据，也可以读取参数</span><br>readline()<br><span class="hljs-meta"># 读取所有行，并返回列表，之后可以通过对列表进行遍历得到数据</span><br>readlines()<br></code></pre></td></tr></table></figure>
 
 <p>2、写入文件的操作</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 向文件中写入内容</span><br><span class="line">write()</span><br><span class="line"># 输入一个列表，将列表内容分别写入</span><br><span class="line">wirtelines([])</span><br></pre></td></tr></table></figure>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs vala"><span class="hljs-meta"># 向文件中写入内容</span><br>write()<br><span class="hljs-meta"># 输入一个列表，将列表内容分别写入</span><br>wirtelines([])<br></code></pre></td></tr></table></figure>
 
 <p>3、其他操作（文件定位操作）</p>
 <p><strong>tell()</strong>方法告诉你文件内的当前位置, 换句话说，下一次的读写会发生在文件开头这么多字节之后。</p>
@@ -214,6 +214,8 @@
 </div>
 
 <div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+
     </footer>
   </div>
 

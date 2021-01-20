@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-前端/JS/1.2、JS内置对象使用"
+  id="post-编程相关/JavaScript/1.2、JS内置对象使用"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-07-30T13:44:41.000Z" itemprop="datePublished">2020-07-30</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a> / <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/JS/">JS</a>
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/JavaScript/">JavaScript</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">732</span>
+            <span class="post-count">678</span>
         </span>
     </span>
 
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">3 min</span>
+            <span class="post-count">2 min</span>
         </span>
     </span>
 </div>
@@ -103,37 +103,37 @@
     <div class="article-entry" itemprop="articleBody">
        
   <h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p>数组（Array）是内置对象（typeof返回值为object）。数组中的元素可以是任意的数据类型，也可以是对象，也可以是函数，也可以是数组</p>
-<h3 id="创建数组"><a href="#创建数组" class="headerlink" title="创建数组"></a>创建数组</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var arr &#x3D; [];</span><br><span class="line">var arr &#x3D; [1, 2];</span><br><span class="line"></span><br><span class="line">var arr &#x3D; new Array();	&#x2F;&#x2F; 创建一个空数组</span><br><span class="line">var arr &#x3D; new Array(2);	&#x2F;&#x2F; 创建一个长度为2的数组</span><br><span class="line">var arr &#x3D; new Array(1,2,3)	&#x2F;&#x2F; 创建一个经过初始化的数组</span><br></pre></td></tr></table></figure>
+<h3 id="创建数组"><a href="#创建数组" class="headerlink" title="创建数组"></a>创建数组</h3><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs haxe"><span class="hljs-keyword">var</span> arr = [];<br><span class="hljs-keyword">var</span> arr = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>];<br><br><span class="hljs-keyword">var</span> arr = <span class="hljs-keyword">new</span> <span class="hljs-type">Array</span>();	<span class="hljs-comment">// 创建一个空数组</span><br><span class="hljs-keyword">var</span> arr = <span class="hljs-keyword">new</span> <span class="hljs-type">Array</span>(<span class="hljs-number">2</span>);	<span class="hljs-comment">// 创建一个长度为2的数组</span><br><span class="hljs-keyword">var</span> arr = <span class="hljs-keyword">new</span> <span class="hljs-type">Array</span>(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>)	<span class="hljs-comment">// 创建一个经过初始化的数组</span><br></code></pre></td></tr></table></figure>
 
 <h3 id="元素的添加与删除"><a href="#元素的添加与删除" class="headerlink" title="元素的添加与删除"></a>元素的添加与删除</h3><p>在最后添加与删除（<strong>push  pop</strong>）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 向数组后插入一个或多个元素</span><br><span class="line">新数组长度 &#x3D; 数组.push(元素);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 删除数组中最后一个元素</span><br><span class="line">被删除的元素 &#x3D; 数组.pop();</span><br></pre></td></tr></table></figure>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs gauss"><span class="hljs-comment">// 向数组后插入一个或多个元素</span><br>新数组长度 = 数组.<span class="hljs-keyword">push</span>(元素);<br><br><span class="hljs-comment">// 删除数组中最后一个元素</span><br>被删除的元素 = 数组.<span class="hljs-keyword">pop</span>();<br></code></pre></td></tr></table></figure>
 
 <p>在最前添加与删除（<strong>unshift  shift</strong>）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">新数组的长度 &#x3D; 数组.unshift(元素);</span><br><span class="line"></span><br><span class="line">被删除的元素 &#x3D; 数组.shift();</span><br></pre></td></tr></table></figure>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs abnf">新数组的长度 = 数组.unshift(元素)<span class="hljs-comment">;</span><br><br>被删除的元素 = 数组.shift()<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
 
 <h3 id="数组的合并与拆分"><a href="#数组的合并与拆分" class="headerlink" title="数组的合并与拆分"></a>数组的合并与拆分</h3><p>数组的合并（使用cancat函数或使用…语法）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 连接数组1和作为参数的数组</span><br><span class="line">新数组 &#x3D; 数组1.concat(数组2, 数组3 ...);</span><br></pre></td></tr></table></figure>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-comment">// 连接数组1和作为参数的数组</span><br>新数组 = 数组<span class="hljs-number">1.</span>concat(数组<span class="hljs-number">2</span>, 数组<span class="hljs-number">3</span> ...);<br></code></pre></td></tr></table></figure>
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a &#x3D; [1,2,3]</span><br><span class="line">b &#x3D; [3,4,5,...a]</span><br><span class="line">alert(b)	&#x2F;&#x2F; [3,4,5,1,2,3]</span><br></pre></td></tr></table></figure>
-
-
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">a = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>]<br>b = [<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,...a]<br>alert(b)	<span class="hljs-comment">// [3,4,5,1,2,3]</span><br></code></pre></td></tr></table></figure>
 
 
 
-<h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 颠倒数组</span><br><span class="line">array.reverse()	</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 对数组进行排序（默认升序）</span><br><span class="line">array.sort()</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 传入比较函数，变为降序</span><br><span class="line">&#x2F;&#x2F; 作为参数的函数返回值大于0，则元素会交换位置</span><br><span class="line">array.sort(function(a, b) &#123;return b-a&#125;)</span><br><span class="line">array.slice(start, end)	&#x2F;&#x2F; 从[start, end)的切片</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs delphi"><span class="hljs-comment">// 颠倒数组</span><br><span class="hljs-keyword">array</span>.reverse()	<br><br><span class="hljs-comment">// 对数组进行排序（默认升序）</span><br><span class="hljs-keyword">array</span>.sort()<br><br><span class="hljs-comment">// 传入比较函数，变为降序</span><br><span class="hljs-comment">// 作为参数的函数返回值大于0，则元素会交换位置</span><br><span class="hljs-keyword">array</span>.sort(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(a, b)</span> <span class="hljs-comment">&#123;return b-a&#125;</span>)<br><span class="hljs-title">array</span>.<span class="hljs-title">slice</span><span class="hljs-params">(start, <span class="hljs-keyword">end</span>)</span>	<span class="hljs-comment">// 从[start, end)的切片</span></span><br></code></pre></td></tr></table></figure>
 
 
 
 <p>转化为字符串，默认无参数则用逗号“,”连接。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">str &#x3D; array.join()</span><br><span class="line">str &#x3D; array.join(&quot;&quot;)	&#x2F;&#x2F; 无连接符号直接连接</span><br></pre></td></tr></table></figure>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs lasso">str = <span class="hljs-built_in">array</span>.<span class="hljs-keyword">join</span>()<br>str = <span class="hljs-built_in">array</span>.<span class="hljs-keyword">join</span>(<span class="hljs-string">""</span>)	<span class="hljs-comment">// 无连接符号直接连接</span><br></code></pre></td></tr></table></figure>
 
 
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 删除从index处开始的零个或多个元素</span><br><span class="line">array.splice(index, count)</span><br><span class="line">&#x2F;&#x2F; 在index后插入值</span><br><span class="line">array.splice(index, 0, item1.....)</span><br><span class="line">&#x2F;&#x2F; 替换</span><br><span class="line">array.splice(index, count, item1.....)</span><br></pre></td></tr></table></figure>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs n1ql">// 删除从<span class="hljs-keyword">index</span>处开始的零个或多个元素<br><span class="hljs-keyword">array</span>.splice(<span class="hljs-keyword">index</span>, <span class="hljs-built_in">count</span>)<br>// 在<span class="hljs-keyword">index</span>后插入值<br><span class="hljs-keyword">array</span>.splice(<span class="hljs-keyword">index</span>, <span class="hljs-number">0</span>, item1.....)<br>// 替换<br><span class="hljs-keyword">array</span>.splice(<span class="hljs-keyword">index</span>, <span class="hljs-built_in">count</span>, item1.....)<br></code></pre></td></tr></table></figure>
 
-<h3 id="元素的查找"><a href="#元素的查找" class="headerlink" title="元素的查找"></a>元素的查找</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 查找值为value的索引，没有则返回-1</span><br><span class="line">array.indexOf(value)</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 找出第一个满足「指定条件返回 true」的元素</span><br><span class="line">find(func)</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 找出第一个满足「指定条件返回 true」的元素的 index</span><br><span class="line">findIndex(func)</span><br></pre></td></tr></table></figure>
+<h3 id="元素的查找"><a href="#元素的查找" class="headerlink" title="元素的查找"></a>元素的查找</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-comment">// 查找值为value的索引，没有则返回-1</span><br>array.indexOf(value)<br><br><span class="hljs-comment">// 找出第一个满足「指定条件返回 true」的元素</span><br><span class="hljs-function"><span class="hljs-title">find</span><span class="hljs-params">(func)</span></span><br><br><span class="hljs-comment">// 找出第一个满足「指定条件返回 true」的元素的 index</span><br><span class="hljs-function"><span class="hljs-title">findIndex</span><span class="hljs-params">(func)</span></span><br></code></pre></td></tr></table></figure>
 
-<h3 id="遍历数组"><a href="#遍历数组" class="headerlink" title="遍历数组"></a>遍历数组</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="遍历数组"><a href="#遍历数组" class="headerlink" title="遍历数组"></a>遍历数组</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plain"><br><br></code></pre></td></tr></table></figure>
 
 
 
@@ -274,7 +274,7 @@
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li></ul>
 
     </footer>
   </div>

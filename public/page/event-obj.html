@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-前端/JS/event对象详解"
+  id="post-编程相关/JavaScript/event对象详解"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-08-15T14:51:57.000Z" itemprop="datePublished">2020-08-15</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a> / <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/JS/">JS</a>
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/JavaScript/">JavaScript</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">782</span>
+            <span class="post-count">738</span>
         </span>
     </span>
 
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">3 min</span>
+            <span class="post-count">2 min</span>
         </span>
     </span>
 </div>
@@ -116,10 +116,10 @@
 <h3 id="事件程序的基本书写"><a href="#事件程序的基本书写" class="headerlink" title="事件程序的基本书写"></a>事件程序的基本书写</h3><h4 id="1、获取事件源"><a href="#1、获取事件源" class="headerlink" title="1、获取事件源"></a>1、获取事件源</h4><p>详见DOM操作中的相关操作，主要有<code>document.getElementById()</code>等方法</p>
 <h4 id="2、绑定事件"><a href="#2、绑定事件" class="headerlink" title="2、绑定事件"></a>2、绑定事件</h4><p>以onclick事件为例：</p>
 <p><strong>方法1（绑定匿名函数）：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">element.onclick &#x3D; function () &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs actionscript">element.onclick = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>&#123;<br><br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p><strong>方法2（addEventListener）：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">element.addEventListener(&#39;click&#39;, function () &#123;</span><br><span class="line"></span><br><span class="line">&#125;, false);</span><br></pre></td></tr></table></figure>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs actionscript">element.addEventListener(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>&#123;<br><br>&#125;, <span class="hljs-literal">false</span>);<br></code></pre></td></tr></table></figure>
 
 <ul>
 <li><p>参数1：事件名的字符串(注意，没有on)</p>
@@ -130,7 +130,7 @@
 </li>
 </ul>
 <p><strong>方法3（行内绑定）：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--行内绑定--&gt;</span><br><span class="line">&lt;div id&#x3D;&quot;box1&quot; onclick&#x3D;&quot;fn()&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">&lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt;</span><br><span class="line">    function fn() &#123;</span><br><span class="line">        alert(&quot;我是弹出的内容&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!--行内绑定--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"box1"</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">"fn()"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text/javascript"</span>&gt;</span><span class="actionscript"><br>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span><span class="hljs-params">()</span> </span>&#123;<br>        alert(<span class="hljs-string">"我是弹出的内容"</span>);<br>    &#125;<br></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
 
 
@@ -140,13 +140,13 @@
 <p>这个对象中包含了与当前事件相关的一切信息。比如鼠标的坐标、键盘的哪个按键被按下、鼠标滚轮滚动的方向等。</p>
 <p><img src="http://cdn.ziyedy.top/image/JS%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86/event%E4%BF%A1%E6%81%AF.png" alt=""></p>
 <h3 id="获取event对象"><a href="#获取event对象" class="headerlink" title="获取event对象"></a>获取event对象</h3><p>除去以上直接使用event外，标准兼容写法如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    &#x2F;&#x2F;点击页面的任何部分</span><br><span class="line">    document.onclick &#x3D; function (event) &#123;</span><br><span class="line">        event &#x3D; event || window.event; &#x2F;&#x2F;兼容性写法</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript"><br>    <span class="hljs-comment">//点击页面的任何部分</span><br>    <span class="hljs-built_in">document</span>.onclick = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>&#123;<br>        event = event || <span class="hljs-built_in">window</span>.event; <span class="hljs-comment">//兼容性写法</span><br>    &#125;<br></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
 
 
 <h3 id="event属性"><a href="#event属性" class="headerlink" title="event属性"></a>event属性</h3><p><img src="http://cdn.ziyedy.top/image/JS%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86/event%E5%B1%9E%E6%80%A7.png" alt=""></p>
 <p>除此之外，还有以下等信息：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keyCode	&#x2F;&#x2F; 返回响应的键盘信息</span><br></pre></td></tr></table></figure>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs processing"><span class="hljs-built_in">keyCode</span>	<span class="hljs-comment">// 返回响应的键盘信息</span><br></code></pre></td></tr></table></figure>
 
 
 
@@ -160,7 +160,7 @@
 </ul>
 <p><img src="http://cdn.ziyedy.top/image/JS%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86/%E6%8D%95%E8%8E%B7%E4%B8%8E%E5%86%92%E6%B3%A1.png" alt=""></p>
 <h3 id="捕获与冒泡实验"><a href="#捕获与冒泡实验" class="headerlink" title="捕获与冒泡实验"></a>捕获与冒泡实验</h3><p>addEventListener函数最后一个参数为true代表事件在捕获阶段执行，为false代表在冒泡阶段进行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div&gt;&lt;p&gt;click here&lt;&#x2F;p&gt;&lt;&#x2F;div&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        var div &#x3D; document.getElementsByTagName(&quot;div&quot;)[0];</span><br><span class="line">        var p &#x3D; document.getElementsByTagName(&quot;p&quot;)[0];</span><br><span class="line">        div.addEventListener(&quot;click&quot;, function() &#123;</span><br><span class="line">            console.log(&quot;div&quot;);</span><br><span class="line">        &#125;, true);</span><br><span class="line">        p.addEventListener(&quot;click&quot;, function() &#123;</span><br><span class="line">            console.log(&quot;p&quot;);</span><br><span class="line">        &#125;, true);</span><br><span class="line">    &lt;&#x2F;script&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>click here<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript"><br>        <span class="hljs-keyword">var</span> div = <span class="hljs-built_in">document</span>.getElementsByTagName(<span class="hljs-string">"div"</span>)[<span class="hljs-number">0</span>];<br>        <span class="hljs-keyword">var</span> p = <span class="hljs-built_in">document</span>.getElementsByTagName(<span class="hljs-string">"p"</span>)[<span class="hljs-number">0</span>];<br>        div.addEventListener(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"div"</span>);<br>        &#125;, <span class="hljs-literal">true</span>);<br>        p.addEventListener(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"p"</span>);<br>        &#125;, <span class="hljs-literal">true</span>);<br>    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
 <p><strong>实验结果</strong></p>
 <p><img src="http://cdn.ziyedy.top/image/JS%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86/%E5%86%92%E6%B3%A1%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C.png" alt=""></p>

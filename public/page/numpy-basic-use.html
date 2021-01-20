@@ -13,7 +13,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    numpy常用属性与方法 |  浔庐子夜
+    Numpy常用属性与方法 |  浔庐子夜
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Python/常用模块/numpy常用属性与方法"
+  id="post-编程相关/Python/Python常用模块/Numpy常用属性与方法"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -59,7 +59,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  numpy常用属性与方法
+  Numpy常用属性与方法
 </h1>
  
 
@@ -70,7 +70,7 @@
   <time datetime="2020-08-21T01:51:27.000Z" itemprop="datePublished">2020-08-21</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Python/">Python</a> / <a class="article-category-link" href="/categories/Python/%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97/">常用模块</a>
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Python/">Python</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Python/Python%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97/">Python常用模块</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1.9k</span>
+            <span class="post-count">1.8k</span>
         </span>
     </span>
 
@@ -105,10 +105,10 @@
   <h2 id="n维数组对象：ndarray"><a href="#n维数组对象：ndarray" class="headerlink" title="n维数组对象：ndarray"></a>n维数组对象：ndarray</h2><p>ndarray对象主要由两部分构成，即实际的数据和描述这些数据的元数据（数据维度、类型）等。</p>
 <h3 id="相比于Python列表的优势"><a href="#相比于Python列表的优势" class="headerlink" title="相比于Python列表的优势"></a>相比于Python列表的优势</h3><p><strong>1、数组对象可以去掉元素间运算所需的循环，使一维向量更像单个数据</strong>，如下：</p>
 <p>Python中的数组对象进行平方：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">l &#x3D; [1, 2, 3]</span><br><span class="line">for i in range(len(a));</span><br><span class="line">	a[i] &#x3D; a[i]**2</span><br></pre></td></tr></table></figure>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">l = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(len(a));<br>	a[i] = a[i]**<span class="hljs-number">2</span><br></code></pre></td></tr></table></figure>
 
 <p>ndarray进行平方</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">a &#x3D; np.array([1, 2, 3])</span><br><span class="line">a &#x3D; a**2</span><br></pre></td></tr></table></figure>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-keyword">import</span> numpy as np<br>a = np.<span class="hljs-built_in">array</span>([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>])<br>a = a**<span class="hljs-number">2</span><br></code></pre></td></tr></table></figure>
 
 <p>2、设置专门的数组对象，经过优化，可以提升这类应用的运算速度</p>
 <p>3、数组对象采用相同的数据类型，有助于节省运算和存储空间</p>
@@ -141,7 +141,7 @@
 </tr>
 </tbody></table>
 <h3 id="ndarray元素类型"><a href="#ndarray元素类型" class="headerlink" title="ndarray元素类型"></a>ndarray元素类型</h3><p>包括主要的一些类型，类型后面的数字代表长度，常见的如bool、int32、float32、complex64（虚数）等等。</p>
-<h2 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h2><h3 id="创建方法"><a href="#创建方法" class="headerlink" title="创建方法"></a>创建方法</h3><h4 id="从Python中的列表、元组等类型创建"><a href="#从Python中的列表、元组等类型创建" class="headerlink" title="从Python中的列表、元组等类型创建"></a>从Python中的列表、元组等类型创建</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x &#x3D; np.array(list&#x2F;tuple)</span><br></pre></td></tr></table></figure>
+<h2 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h2><h3 id="创建方法"><a href="#创建方法" class="headerlink" title="创建方法"></a>创建方法</h3><h4 id="从Python中的列表、元组等类型创建"><a href="#从Python中的列表、元组等类型创建" class="headerlink" title="从Python中的列表、元组等类型创建"></a>从Python中的列表、元组等类型创建</h4><figure class="highlight sas"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sas"><span class="hljs-meta">x</span> = np.<span class="hljs-meta">array</span>(<span class="hljs-meta">list</span>/tuple)<br></code></pre></td></tr></table></figure>
 
 <h4 id="使用相应函数创建"><a href="#使用相应函数创建" class="headerlink" title="使用相应函数创建"></a>使用相应函数创建</h4><table>
 <thead>
@@ -183,7 +183,7 @@
 <td>根据数组a的形状生成一个数组，每个元素值都是val</td>
 </tr>
 </tbody></table>
-<h4 id="创建网格（meshgrid）"><a href="#创建网格（meshgrid）" class="headerlink" title="创建网格（meshgrid）"></a>创建网格（meshgrid）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="创建网格（meshgrid）"><a href="#创建网格（meshgrid）" class="headerlink" title="创建网格（meshgrid）"></a>创建网格（meshgrid）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plain"><br><br></code></pre></td></tr></table></figure>
 
 
 
@@ -206,7 +206,7 @@
 </tr>
 </tbody></table>
 <p>示例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a &#x3D; np.linspace(1,10,3)</span><br><span class="line">&gt;&gt;&gt; a</span><br><span class="line">array([ 1. ,  5.5, 10. ])</span><br><span class="line">&gt;&gt;&gt; b &#x3D; np.linspace(1,10,3, endpoint&#x3D;False)</span><br><span class="line">&gt;&gt;&gt; b</span><br><span class="line">array([1., 4., 7.])</span><br><span class="line">&gt;&gt;&gt; c &#x3D; np.concatenate((a, b))</span><br><span class="line">&gt;&gt;&gt; c</span><br><span class="line">array([ 1. ,  5.5, 10. ,  1. ,  4. ,  7. ])</span><br></pre></td></tr></table></figure>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">&gt;&gt;&gt; a = np.linspace(<span class="hljs-number">1</span>,<span class="hljs-number">10</span>,<span class="hljs-number">3</span>)<br>&gt;&gt;&gt; a<br><span class="hljs-built_in">array</span>([ <span class="hljs-number">1.</span> ,  <span class="hljs-number">5.5</span>, <span class="hljs-number">10.</span> ])<br>&gt;&gt;&gt; b = np.linspace(<span class="hljs-number">1</span>,<span class="hljs-number">10</span>,<span class="hljs-number">3</span>, endpoint=False)<br>&gt;&gt;&gt; b<br><span class="hljs-built_in">array</span>([<span class="hljs-number">1.</span>, <span class="hljs-number">4.</span>, <span class="hljs-number">7.</span>])<br>&gt;&gt;&gt; c = np.concatenate((a, b))<br>&gt;&gt;&gt; c<br><span class="hljs-built_in">array</span>([ <span class="hljs-number">1.</span> ,  <span class="hljs-number">5.5</span>, <span class="hljs-number">10.</span> ,  <span class="hljs-number">1.</span> ,  <span class="hljs-number">4.</span> ,  <span class="hljs-number">7.</span> ])<br></code></pre></td></tr></table></figure>
 
 
 
@@ -231,26 +231,26 @@
 </tr>
 </tbody></table>
 <p><strong>如果只想指示一个维度，而自动决定其他维度有多少个值，可以使用-1的写法（如果不能整除会报错）</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 想让数组有5行，列数自动决定</span><br><span class="line">x.reshape(5, -1)</span><br></pre></td></tr></table></figure>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"># 想让数组有<span class="hljs-number">5</span>行，列数自动决定<br>x.reshape(<span class="hljs-number">5</span>, <span class="hljs-number">-1</span>)<br></code></pre></td></tr></table></figure>
 
 
 
 <h4 id="类型变换"><a href="#类型变换" class="headerlink" title="类型变换"></a>类型变换</h4><p>astype()方法一定会创建新的数组（原始数据的一个拷贝），即使两个类型一致</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_l &#x3D; l.astype(new_type)</span><br></pre></td></tr></table></figure>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elm"><span class="hljs-title">new_l</span> = l.<span class="hljs-keyword">as</span><span class="hljs-keyword">type</span>(new_type)<br></code></pre></td></tr></table></figure>
 
-<h4 id="转换为列表"><a href="#转换为列表" class="headerlink" title="转换为列表"></a>转换为列表</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">l &#x3D; n.tolist()</span><br></pre></td></tr></table></figure>
+<h4 id="转换为列表"><a href="#转换为列表" class="headerlink" title="转换为列表"></a>转换为列表</h4><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">l</span> = n.tolist()<br></code></pre></td></tr></table></figure>
 
 
 
 <h3 id="数组的操作"><a href="#数组的操作" class="headerlink" title="数组的操作"></a>数组的操作</h3><h4 id="索引与切片"><a href="#索引与切片" class="headerlink" title="索引与切片"></a>索引与切片</h4><p><strong>ndarray数组的索引与切片与Python中的索引与切片大致相同</strong></p>
 <h4 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h4><p><strong>ndarray数组与标量之间的运算作用于数组的每一个元素，包括平方立方等等，示例如下：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">np.abs(n)	&#x2F;&#x2F; 各元素的绝对值</span><br><span class="line">np.sqrt(x)	&#x2F;&#x2F; 各元素的平方根</span><br></pre></td></tr></table></figure>
+<figure class="highlight gml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gml">np.<span class="hljs-built_in">abs</span>(n)	<span class="hljs-comment">// 各元素的绝对值</span><br>np.<span class="hljs-built_in">sqrt</span>(<span class="hljs-symbol">x</span>)	<span class="hljs-comment">// 各元素的平方根</span><br></code></pre></td></tr></table></figure>
 
 <p>同时使用数组中进行大小比较等运算时，会返回一个数值为布尔类型的数组（<strong>也是每个元素进行比较</strong>）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">X &#x3D; np.array([[1,2,3],[4,5,6]])</span><br><span class="line">print(X &gt; 3)</span><br><span class="line">#######################################</span><br><span class="line">[[False False False]</span><br><span class="line"> [ True  True  True]]</span><br></pre></td></tr></table></figure>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs clean">X = np.array([[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>],[<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>]])<br>print(X &gt; <span class="hljs-number">3</span>)<br>#######################################<br>[[<span class="hljs-literal">False</span> <span class="hljs-literal">False</span> <span class="hljs-literal">False</span>]<br> [ <span class="hljs-literal">True</span>  <span class="hljs-literal">True</span>  <span class="hljs-literal">True</span>]]<br></code></pre></td></tr></table></figure>
 
 <p>借用这个特性，可以完成对满足某一要求的元素进行如赋值等其他操作</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">X &#x3D; np.array([[1,2,3],[4,5,6]])</span><br><span class="line">X[X &gt; 3] &#x3D; 10</span><br><span class="line">print(X)</span><br><span class="line">####################################</span><br><span class="line">[[ 1  2  3]</span><br><span class="line"> [10 10 10]]</span><br></pre></td></tr></table></figure>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs clean">X = np.array([[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>],[<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>]])<br>X[X &gt; <span class="hljs-number">3</span>] = <span class="hljs-number">10</span><br>print(X)<br>####################################<br>[[ <span class="hljs-number">1</span>  <span class="hljs-number">2</span>  <span class="hljs-number">3</span>]<br> [<span class="hljs-number">10</span> <span class="hljs-number">10</span> <span class="hljs-number">10</span>]]<br></code></pre></td></tr></table></figure>
 
 
 
@@ -386,27 +386,27 @@
 </tr>
 </tbody></table>
 <h3 id="梯度函数"><a href="#梯度函数" class="headerlink" title="梯度函数"></a>梯度函数</h3><p><code>np.gradient(f)</code>，计算数组f中元素的梯度（即连续值之间的变化率），当f为多维时，返回每个维度梯度</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a &#x3D; np.arange(5)</span><br><span class="line">&gt;&gt;&gt; a</span><br><span class="line">array([0, 1, 2, 3, 4])</span><br><span class="line">&gt;&gt;&gt; np.gradient(a)</span><br><span class="line">array([1., 1., 1., 1., 1.])</span><br></pre></td></tr></table></figure>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">&gt;&gt;&gt; a = np.arange(<span class="hljs-number">5</span>)<br>&gt;&gt;&gt; a<br><span class="hljs-built_in">array</span>([<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>])<br>&gt;&gt;&gt; np.gradient(a)<br><span class="hljs-built_in">array</span>([<span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>])<br></code></pre></td></tr></table></figure>
 
 <p><strong>说明：</strong>以索引为2的值为例，该处梯度的计算值为(a[3] - a[1]) / 2 = 1</p>
 <h3 id="ndarray数据的读写"><a href="#ndarray数据的读写" class="headerlink" title="ndarray数据的读写"></a>ndarray数据的读写</h3><h4 id="二维数据读写"><a href="#二维数据读写" class="headerlink" title="二维数据读写"></a>二维数据读写</h4><p><strong>CSV文件</strong>，以逗号作为分隔符的常见文件格式</p>
 <p><strong>np.savetxt()</strong>：写入文件</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># frame : 文件、字符串或产生器</span></span><br><span class="line"><span class="comment"># array : 存入文件的数组</span></span><br><span class="line"><span class="comment"># fmt : 写入文件的格式</span></span><br><span class="line"><span class="comment"># delimiter : 分割字符串，默认是任何空格</span></span><br><span class="line">np.savetxt(frame, array, fmt=<span class="string">'%.18e'</span>, delimiter=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># frame : 文件、字符串或产生器</span><br><span class="hljs-comment"># array : 存入文件的数组</span><br><span class="hljs-comment"># fmt : 写入文件的格式</span><br><span class="hljs-comment"># delimiter : 分割字符串，默认是任何空格</span><br>np.savetxt(frame, array, fmt=<span class="hljs-string">'%.18e'</span>, delimiter=<span class="hljs-literal">None</span>)<br></code></pre></td></tr></table></figure>
 
 <p>例:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.savetxt(&#39;a.csv&#39;, a, fmt&#x3D;&#39;%d&#39;, delimiter&#x3D;&#39;,&#39;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">np.savetxt(<span class="hljs-string">'a.csv'</span>, a, <span class="hljs-attribute">fmt</span>=<span class="hljs-string">'%d'</span>, <span class="hljs-attribute">delimiter</span>=<span class="hljs-string">','</span>)<br></code></pre></td></tr></table></figure>
 
 <p><strong>np.loadtxt()</strong>：读取文件</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># unpack  : 如果True，读入属性将分别写入不同变量</span></span><br><span class="line">np.loadtxt(frame, dtype=np.float, delimiter=<span class="literal">None</span>， unpack=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># unpack  : 如果True，读入属性将分别写入不同变量</span><br>np.loadtxt(frame, dtype=np.float, delimiter=<span class="hljs-literal">None</span>， unpack=<span class="hljs-literal">False</span>)<br></code></pre></td></tr></table></figure>
 
 <h4 id="多维数据存取"><a href="#多维数据存取" class="headerlink" title="多维数据存取"></a>多维数据存取</h4><p><strong>a.tofile()</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># frame  : 文件、字符串</span><br><span class="line"># sep : 数据分割字符串，如果是空串，写入文件为二进制</span><br><span class="line"># format : 写入数据的格式</span><br><span class="line">a.tofile(frame, sep&#x3D;&#39;&#39;, format&#x3D;&#39;%s&#39;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment"># frame  : 文件、字符串</span><br><span class="hljs-comment"># sep : 数据分割字符串，如果是空串，写入文件为二进制</span><br><span class="hljs-comment"># format : 写入数据的格式</span><br>a.tofile(frame, <span class="hljs-attribute">sep</span>=<span class="hljs-string">''</span>, <span class="hljs-attribute">format</span>=<span class="hljs-string">'%s'</span>)<br></code></pre></td></tr></table></figure>
 
 <p><strong>np.fromfile()</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># count  : 读入元素个数，‐1表示读入整个文件</span><br><span class="line"># sep : 数据分割字符串，如果是空串，写入文件为二进制</span><br><span class="line">np.fromfile(frame, dtype&#x3D;float, count&#x3D;‐1, sep&#x3D;&#39;&#39;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment"># count  : 读入元素个数，‐1表示读入整个文件</span><br><span class="hljs-comment"># sep : 数据分割字符串，如果是空串，写入文件为二进制</span><br>np.fromfile(frame, <span class="hljs-attribute">dtype</span>=float, <span class="hljs-attribute">count</span>=‐1, <span class="hljs-attribute">sep</span>=<span class="hljs-string">''</span>)<br></code></pre></td></tr></table></figure>
 
 <h4 id="便捷文件存取"><a href="#便捷文件存取" class="headerlink" title="便捷文件存取"></a>便捷文件存取</h4><p>其中文件名称通常以.npy为拓展名</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">np.save(fname, array)</span><br><span class="line"></span><br><span class="line">np.load(fname)</span><br></pre></td></tr></table></figure>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs maxima"><span class="hljs-built_in">np</span>.<span class="hljs-built_in">save</span>(fname, <span class="hljs-built_in">array</span>)<br><br><span class="hljs-built_in">np</span>.<span class="hljs-built_in">load</span>(fname)<br></code></pre></td></tr></table></figure>
 
  
       <!-- reward -->
@@ -483,7 +483,7 @@
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Numpy/" rel="tag">Numpy</a></li></ul>
 
     </footer>
   </div>
@@ -503,7 +503,7 @@
     
       <a href="/page/vim-basic-use.html" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">vi基本用法</div>
+        <div class="article-nav-title">vim基本用法</div>
       </a>
     
   </nav>

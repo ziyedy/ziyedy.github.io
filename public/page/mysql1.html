@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-计算机基础/数据库/SQL的增删改等语句"
+  id="post-编程相关/SQL/SQL的增删改等语句"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-06-07T01:44:15.000Z" itemprop="datePublished">2020-06-07</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%8A%80%E6%9C%AF/">计算机技术</a> / <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%8A%80%E6%9C%AF/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/SQL/">SQL</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">369</span>
+            <span class="post-count">359</span>
         </span>
     </span>
 
@@ -101,55 +101,55 @@
     <div class="article-entry" itemprop="articleBody">
        
   <p>逻辑库</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE; 逻辑库名称</span><br><span class="line">SHOW DATABASES;</span><br><span class="line">DROP DATABASE 逻辑库名称;</span><br><span class="line">USE 逻辑库名称;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">DATABASE</span>; 逻辑库名称<br><span class="hljs-keyword">SHOW</span> <span class="hljs-keyword">DATABASES</span>;<br><span class="hljs-keyword">DROP</span> <span class="hljs-keyword">DATABASE</span> 逻辑库名称;<br><span class="hljs-keyword">USE</span> 逻辑库名称;<br></code></pre></td></tr></table></figure>
 
 <p>数据表</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE 数据表(</span><br><span class="line">			列名 数据类型 [约束] [COMMENT 注释],</span><br><span class="line">			列名 数据类型 [约束] [COMMENT 注释],</span><br><span class="line">			)[COMMENT 注释];</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> 数据表(<br>			列名 数据类型 [约束] [<span class="hljs-keyword">COMMENT</span> 注释],<br>			列名 数据类型 [约束] [<span class="hljs-keyword">COMMENT</span> 注释],<br>			)[<span class="hljs-keyword">COMMENT</span> 注释];<br></code></pre></td></tr></table></figure>
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SHOW 表名;</span><br><span class="line">DESC 表名; &#x2F;&#x2F; 查看表的情况</span><br><span class="line">SHOW CREATE TABLE 表名;	&#x2F;&#x2F; 查看创建该表时的SQL语句</span><br><span class="line">DROP TABLEE 表名;	&#x2F;&#x2F; 删除数据表</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SHOW</span> 表名;<br>DESC 表名; // 查看表的情况<br><span class="hljs-keyword">SHOW</span> <span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> 表名;	// 查看创建该表时的SQL语句<br><span class="hljs-keyword">DROP</span> TABLEE 表名;	// 删除数据表<br></code></pre></td></tr></table></figure>
 
 
 
 <p>添加字段</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名</span><br><span class="line">ADD 列名 数据类型 [约束] [COMMENT 注释],</span><br><span class="line">...</span><br><span class="line">ADD 列名 数据类型 [约束] [COMMENT 注释];</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> 表名<br><span class="hljs-keyword">ADD</span> 列名 数据类型 [约束] [<span class="hljs-keyword">COMMENT</span> 注释],<br>...<br><span class="hljs-keyword">ADD</span> 列名 数据类型 [约束] [<span class="hljs-keyword">COMMENT</span> 注释];<br></code></pre></td></tr></table></figure>
 
 <p>修改字段数据类型等信息</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名</span><br><span class="line">MODIFY 列名 数据类型 [约束] [COMMENT 注释],</span><br><span class="line">...</span><br><span class="line">MODIFY 列名 数据类型 [约束] [COMMENT 注释];</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> 表名<br><span class="hljs-keyword">MODIFY</span> 列名 数据类型 [约束] [<span class="hljs-keyword">COMMENT</span> 注释],<br>...<br><span class="hljs-keyword">MODIFY</span> 列名 数据类型 [约束] [<span class="hljs-keyword">COMMENT</span> 注释];<br></code></pre></td></tr></table></figure>
 
 <p>修改字段名称</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名</span><br><span class="line">CHANGE 列名 新列名 数据类型 [约束] [COMMENT 注释],</span><br><span class="line">...</span><br><span class="line">CHANGE 列名 新列名 数据类型 [约束] [COMMENT 注释];</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> 表名<br><span class="hljs-keyword">CHANGE</span> 列名 新列名 数据类型 [约束] [<span class="hljs-keyword">COMMENT</span> 注释],<br>...<br><span class="hljs-keyword">CHANGE</span> 列名 新列名 数据类型 [约束] [<span class="hljs-keyword">COMMENT</span> 注释];<br></code></pre></td></tr></table></figure>
 
 <p>删除字段</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名</span><br><span class="line">DROP 字段名称,</span><br><span class="line">...</span><br><span class="line">DROP 字段名称;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> 表名<br><span class="hljs-keyword">DROP</span> 字段名称,<br>...<br><span class="hljs-keyword">DROP</span> 字段名称;<br></code></pre></td></tr></table></figure>
 
 
 
 <p>添加索引</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE *(</span><br><span class="line">		INDEX 索引名称 (字段名称),</span><br><span class="line">		);</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> *(<br>		<span class="hljs-keyword">INDEX</span> 索引名称 (字段名称),<br>		);<br></code></pre></td></tr></table></figure>
 
 <p>添加、显示、删除索引</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CREATE INDEX 索引名称 ON 表名(字段);</span><br><span class="line">ALTER TABLE 表名 ADD INDEX [索引名](字段);</span><br><span class="line"></span><br><span class="line">SHOW INDEX FROM 表名;</span><br><span class="line">DROP INDEX 索引名称 ON 表名;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">INDEX</span> 索引名称 <span class="hljs-keyword">ON</span> 表名(字段);<br><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> 表名 <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">INDEX</span> [索引名](字段);<br><br><span class="hljs-keyword">SHOW</span> <span class="hljs-keyword">INDEX</span> <span class="hljs-keyword">FROM</span> 表名;<br><span class="hljs-keyword">DROP</span> <span class="hljs-keyword">INDEX</span> 索引名称 <span class="hljs-keyword">ON</span> 表名;<br></code></pre></td></tr></table></figure>
 
 
 
 
 
 <p>向数据表中写入记录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO 表名(字段1,字段2......)</span><br><span class="line">VALUES(值1,值2......);</span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs routeros">INSERT INTO 表名(字段1,字段2<span class="hljs-built_in">..</span><span class="hljs-built_in">..</span><span class="hljs-built_in">..</span>)<br>VALUES(值1,值2<span class="hljs-built_in">..</span><span class="hljs-built_in">..</span><span class="hljs-built_in">..</span>);<br></code></pre></td></tr></table></figure>
 
 
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 当插入数据有问题时直接忽略</span><br><span class="line">NSERT IGNORE INTO</span><br></pre></td></tr></table></figure>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gradle"><span class="hljs-comment">// 当插入数据有问题时直接忽略</span><br>NSERT IGNORE <span class="hljs-keyword">INTO</span><br></code></pre></td></tr></table></figure>
 
 
 
 <p>修改表的记录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">UPDATE [IGNORE] 表名</span><br><span class="line">SET 字段1&#x3D;值1, 字段2&#x3D;值2 ......</span><br><span class="line">WHERE</span><br><span class="line">ORDER BY</span><br><span class="line">LIMIT</span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs routeros">UPDATE [IGNORE] 表名<br><span class="hljs-builtin-name">SET</span> 字段<span class="hljs-attribute">1</span>=值1, 字段<span class="hljs-attribute">2</span>=值2 <span class="hljs-built_in">..</span><span class="hljs-built_in">..</span><span class="hljs-built_in">..</span><br>WHERE<br>ORDER BY<br>LIMIT<br></code></pre></td></tr></table></figure>
 
 
 
 <p>删除数据</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">DELETE [IGNORE] FROM 表名</span><br><span class="line">[WHERE]</span><br><span class="line">[ORDER BY]</span><br><span class="line">[LIMIT]</span><br></pre></td></tr></table></figure>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs n1ql"><span class="hljs-keyword">DELETE</span> [<span class="hljs-keyword">IGNORE</span>] <span class="hljs-keyword">FROM</span> 表名<br>[<span class="hljs-keyword">WHERE</span>]<br>[<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span>]<br>[<span class="hljs-keyword">LIMIT</span>]<br></code></pre></td></tr></table></figure>
 
 
 
@@ -228,7 +228,7 @@
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
 
     </footer>
   </div>

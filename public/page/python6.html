@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Python/语言基础/6、Python异常处理"
+  id="post-编程相关/Python/Python基础/6、Python异常处理"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-05-15T07:15:49.000Z" itemprop="datePublished">2020-05-15</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Python/">Python</a> / <a class="article-category-link" href="/categories/Python/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/">语言基础</a>
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Python/">Python</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Python/Python%E5%9F%BA%E7%A1%80/">Python基础</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">415</span>
+            <span class="post-count">356</span>
         </span>
     </span>
 
@@ -108,27 +108,27 @@
 <li>有一些内置的异常类（Exception等）</li>
 </ol>
 <h3 id="捕获异常"><a href="#捕获异常" class="headerlink" title="捕获异常"></a>捕获异常</h3><p> <code>try except</code>句式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">def test(a, b):</span><br><span class="line">    return a&#x2F;b</span><br><span class="line"></span><br><span class="line">if __name__ &#x3D;&#x3D; &#39;__main__&#39;:</span><br><span class="line">    try:</span><br><span class="line">        print(test(2, 0))</span><br><span class="line">    except:</span><br><span class="line">        print(&quot;出错了&quot;)</span><br><span class="line">        </span><br><span class="line">#############################</span><br><span class="line">出错了</span><br></pre></td></tr></table></figure>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs clean">def test(a, b):<br>    return a/b<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:<br>    try:<br>        print(test(<span class="hljs-number">2</span>, <span class="hljs-number">0</span>))<br>    except:<br>        print(<span class="hljs-string">"出错了"</span>)<br>        <br>#############################<br>出错了<br></code></pre></td></tr></table></figure>
 
 <p>检测出错类型的方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">def test(a, b):</span><br><span class="line">    return a&#x2F;b</span><br><span class="line"></span><br><span class="line">if __name__ &#x3D;&#x3D; &#39;__main__&#39;:</span><br><span class="line">    try:</span><br><span class="line">        print(test(2, &#39;a&#39;))</span><br><span class="line">    except ZeroDivisionError:</span><br><span class="line">        print(&quot;除数为0&quot;)</span><br><span class="line">    except TypeError:</span><br><span class="line">        print(&quot;类型出错&quot;)</span><br><span class="line">        </span><br><span class="line">#######################################</span><br><span class="line">类型出错</span><br></pre></td></tr></table></figure>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs clean">def test(a, b):<br>    return a/b<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:<br>    try:<br>        print(test(<span class="hljs-number">2</span>, <span class="hljs-string">'a'</span>))<br>    except ZeroDivisionError:<br>        print(<span class="hljs-string">"除数为0"</span>)<br>    except TypeError:<br>        print(<span class="hljs-string">"类型出错"</span>)<br>        <br>#######################################<br>类型出错<br></code></pre></td></tr></table></figure>
 
 
 
 <p>获取出错信息</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">def test(a, b):</span><br><span class="line">    return a&#x2F;b</span><br><span class="line"></span><br><span class="line">if __name__ &#x3D;&#x3D; &#39;__main__&#39;:</span><br><span class="line">    try:</span><br><span class="line">        print(test(2, &#39;a&#39;))</span><br><span class="line">    except (ZeroDivisionError, TypeError) as e:</span><br><span class="line">        print(e)</span><br><span class="line">        </span><br><span class="line">############################################</span><br><span class="line">unsupported operand type(s) for &#x2F;: &#39;int&#39; and &#39;str&#39;</span><br></pre></td></tr></table></figure>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs clean">def test(a, b):<br>    return a/b<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:<br>    try:<br>        print(test(<span class="hljs-number">2</span>, <span class="hljs-string">'a'</span>))<br>    except (ZeroDivisionError, TypeError) <span class="hljs-keyword">as</span> e:<br>        print(e)<br>        <br>############################################<br>unsupported operand type(s) for /: <span class="hljs-string">'int'</span> and <span class="hljs-string">'str'</span><br></code></pre></td></tr></table></figure>
 
 
 
 <p>处理必须处理的语句（finally中的语句不管有没有问题都会执行）</p>
 <p><code>try except finally</code>语句</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">def test(a, b):</span><br><span class="line">    return a&#x2F;b</span><br><span class="line"></span><br><span class="line">if __name__ &#x3D;&#x3D; &#39;__main__&#39;:</span><br><span class="line">    try:</span><br><span class="line">        print(test(2, &#39;a&#39;))</span><br><span class="line">    except (ZeroDivisionError, TypeError) as e:</span><br><span class="line">        print(e)</span><br><span class="line">    finally:</span><br><span class="line">        print(&quot;我必须处理&quot;)</span><br><span class="line">        </span><br><span class="line">#################################################</span><br><span class="line">unsupported operand type(s) for &#x2F;: &#39;int&#39; and &#39;str&#39;</span><br><span class="line">我必须处理</span><br></pre></td></tr></table></figure>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs clean">def test(a, b):<br>    return a/b<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:<br>    try:<br>        print(test(<span class="hljs-number">2</span>, <span class="hljs-string">'a'</span>))<br>    except (ZeroDivisionError, TypeError) <span class="hljs-keyword">as</span> e:<br>        print(e)<br>    finally:<br>        print(<span class="hljs-string">"我必须处理"</span>)<br>        <br>#################################################<br>unsupported operand type(s) for /: <span class="hljs-string">'int'</span> and <span class="hljs-string">'str'</span><br>我必须处理<br></code></pre></td></tr></table></figure>
 
 
 
 <h3 id="自定义异常和抛出异常"><a href="#自定义异常和抛出异常" class="headerlink" title="自定义异常和抛出异常"></a>自定义异常和抛出异常</h3><p>通过继承<strong>Exception类</strong>来定义异常，通过使用<strong>raise</strong>关键字来抛出异常。</p>
 <p>1、<strong>自定义异常</strong>。通过创建一个继承自Exception类的新的异常类来记录自己的异常</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class test(Exception):</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line">if __name__ &#x3D;&#x3D; &#39;__main__&#39;:</span><br><span class="line">    if True:</span><br><span class="line">        raise test(&#39;出现了自定义的测试错误&#39;)</span><br><span class="line">        </span><br><span class="line">######################################################</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;C:&#x2F;Users&#x2F;lenovo&#x2F;Desktop&#x2F;python学习&#x2F;decorate.py&quot;, line 7, in &lt;module&gt;</span><br><span class="line">    raise test(&#39;出现了自定义的测试错误&#39;)</span><br><span class="line">__main__.test: 出现了自定义的测试错误</span><br></pre></td></tr></table></figure>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs clean"><span class="hljs-keyword">class</span> test(Exception):<br>    pass<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:<br>    <span class="hljs-keyword">if</span> <span class="hljs-literal">True</span>:<br>        raise test(<span class="hljs-string">'出现了自定义的测试错误'</span>)<br>        <br>######################################################<br>Traceback (most recent call last):<br>  File <span class="hljs-string">"C:/Users/lenovo/Desktop/python学习/decorate.py"</span>, line <span class="hljs-number">7</span>, <span class="hljs-keyword">in</span> &lt;<span class="hljs-keyword">module</span>&gt;<br>    raise test(<span class="hljs-string">'出现了自定义的测试错误'</span>)<br>__main__.test: 出现了自定义的测试错误<br></code></pre></td></tr></table></figure>
 
  
       <!-- reward -->
@@ -205,6 +205,8 @@
 </div>
 
 <div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+
     </footer>
   </div>
 

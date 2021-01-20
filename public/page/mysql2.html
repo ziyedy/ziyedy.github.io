@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-计算机基础/数据库/SQL语句——查"
+  id="post-编程相关/SQL/SQL语句——查"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-06-10T09:30:10.000Z" itemprop="datePublished">2020-06-10</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a> / <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/SQL/">SQL</a>
   </div>
   
 <div class="word_count">
@@ -103,48 +103,48 @@
     <div class="article-entry" itemprop="articleBody">
        
   <h3 id="SELECT语句"><a href="#SELECT语句" class="headerlink" title="SELECT语句"></a>SELECT语句</h3><p>1、基本使用框架</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM 数据表</span><br><span class="line">[WHERE]</span><br><span class="line">[LIMIT]</span><br><span class="line">[OFFSET]</span><br></pre></td></tr></table></figure>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs n1ql"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> 数据表<br>[<span class="hljs-keyword">WHERE</span>]<br>[<span class="hljs-keyword">LIMIT</span>]<br>[<span class="hljs-keyword">OFFSET</span>]<br></code></pre></td></tr></table></figure>
 
 <p>2、使用别名</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT</span><br><span class="line">	字段名 AS 别名</span><br><span class="line">FROM 数据表</span><br></pre></td></tr></table></figure>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs n1ql"><span class="hljs-keyword">SELECT</span><br>	字段名 <span class="hljs-keyword">AS</span> 别名<br><span class="hljs-keyword">FROM</span> 数据表<br></code></pre></td></tr></table></figure>
 
 <p>3、查询语句的执行顺序：</p>
 <p>先进行语法分析和优化，找到关键字优先级，先执行FROM，再执行SELECT</p>
 <h3 id="查询相关功能"><a href="#查询相关功能" class="headerlink" title="查询相关功能"></a>查询相关功能</h3><p>1、<strong>ORDER BY</strong>子句功能，对查询的结果进行<strong>排序</strong>，示例如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 按照相关信息进行排序</span><br><span class="line">SELECT * FROM * ORDER BY 列名 [ASC|DESC]</span><br><span class="line">&#x2F;&#x2F; 多个排序信息</span><br><span class="line">SELECT * FROM * ORDER BY 列名 [ASC|DESC],列名 [ASC|DESC]</span><br></pre></td></tr></table></figure>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs oxygene"><span class="hljs-comment">// 按照相关信息进行排序</span><br><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> * <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> 列名 [<span class="hljs-keyword">ASC</span>|<span class="hljs-keyword">DESC</span>]<br><span class="hljs-comment">// 多个排序信息</span><br><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> * <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> 列名 [<span class="hljs-keyword">ASC</span>|<span class="hljs-keyword">DESC</span>],列名 [<span class="hljs-keyword">ASC</span>|<span class="hljs-keyword">DESC</span>]<br></code></pre></td></tr></table></figure>
 
 
 
 <p>2、去除结果中的<strong>重复记录</strong>，在字段名称前加上<strong>DISTINCT</strong>字段，只支持一个字段名。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT DISTINCT 字段名 FROM *;</span><br></pre></td></tr></table></figure>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs n1ql"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">DISTINCT</span> 字段名 <span class="hljs-keyword">FROM</span> *;<br></code></pre></td></tr></table></figure>
 
 
 
 <p>3、<strong>条件查询</strong>，使用<strong>WHERE</strong>语句指定查询的条件逻辑，中间使用AND|OR等逻辑连接符连接，同时注意判断相等的条件是“=”而不是“==”。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM * WHERE 条件1 [AND|OR] 条件2 ......;</span><br></pre></td></tr></table></figure>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs n1ql"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> * <span class="hljs-keyword">WHERE</span> 条件<span class="hljs-number">1</span> [<span class="hljs-keyword">AND</span>|<span class="hljs-keyword">OR</span>] 条件<span class="hljs-number">2</span> ......;<br></code></pre></td></tr></table></figure>
 
 
 
 <p>4、使用<strong>聚合函数</strong>。所谓聚合函数，也就是平均值、最大值等函数，以下为求该字段名下的平均值函数（AVG），其他函数使用方法与此类似。该类方法在实际使用时可以将统计结果作为一个子表进行查询。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT AVG(字段名) FROM 表名</span><br></pre></td></tr></table></figure>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs n1ql"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">AVG</span>(字段名) <span class="hljs-keyword">FROM</span> 表名<br></code></pre></td></tr></table></figure>
 
 <p><strong>COUNT(*)</strong>用于获得包含空值的记录数，<strong>COUNT(字段名)</strong>用于获取包含非空值的记录数。</p>
 <p>5、<strong>分组查询</strong>，使用<strong>GROUP BY</strong>字句。即通过一定规则将数据集分为若干个部分进行查询处理。以下即为使用字段1进行分组统计每一组中字段2的平均值。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT 字段1,AVG(字段2) FROM 表名 GROUP BY 字段1;</span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">SELECT 字段1,AVG(字段2) <span class="hljs-keyword">FROM</span> 表名<span class="hljs-built_in"> GROUP </span>BY 字段1;<br></code></pre></td></tr></table></figure>
 
 <p>使用分组查询SELECT语句中只能出现用以分组的字段以及其他字段的聚合函数，否则会报错（由于产生了<strong>一对多</strong>的关系）。为解决这个问题，可以使用<code>GROUP_CONCAT</code>函数，这个函数可以将符合条件的值连接起来进行输出，可以理解为将“多”的部分进行了字符串拼接。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT 字段1,GROUP_CONCAT(字段2) FROM 表名 GROUP BY 字段1;</span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">SELECT 字段1,GROUP_CONCAT(字段2) <span class="hljs-keyword">FROM</span> 表名<span class="hljs-built_in"> GROUP </span>BY 字段1;<br></code></pre></td></tr></table></figure>
 
 <p>同时可以加上<code>WITH ROLLUP</code>再进行一次汇总运算（即在返回的查询结果之下再加上一条汇总记录）。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT 字段1,AVG(字段2) FROM 表名 GROUP BY 字段1 WITH ROLLUP;</span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">SELECT 字段1,AVG(字段2) <span class="hljs-keyword">FROM</span> 表名<span class="hljs-built_in"> GROUP </span>BY 字段1 WITH ROLLUP;<br></code></pre></td></tr></table></figure>
 
 
 
 <p>6、<strong>HAVING</strong>子句，以及为何要使用HAVING子句</p>
 <p>由于WHERE子句执行在GROUP BY子句之前，因此如果WHERE子句中出现了如平均值等信息时SQL会不知道在哪个范围内进行平均，因此会出错，如以下代码即为错误的（聚合函数作为判断条件）。所以需要使用<code>HAVING</code>子句。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 使用错误</span><br><span class="line">SELECT f1</span><br><span class="line">FROM table</span><br><span class="line">WHERE AVG(f2) &gt; 10</span><br><span class="line">GROUP BY f1;</span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment"># 使用错误</span><br>SELECT f1<br><span class="hljs-keyword">FROM</span> table<br>WHERE AVG(f2) &gt; 10<span class="hljs-built_in"><br>GROUP </span>BY f1;<br></code></pre></td></tr></table></figure>
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 使用正确</span><br><span class="line">SELECT f1</span><br><span class="line">FROM table</span><br><span class="line">GROUP BY f1 HAVING AVG(f2) &gt; 10;</span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment"># 使用正确</span><br>SELECT f1<br><span class="hljs-keyword">FROM</span> table<span class="hljs-built_in"><br>GROUP </span>BY f1 HAVING AVG(f2) &gt; 10;<br></code></pre></td></tr></table></figure>
 
 
 
@@ -152,12 +152,12 @@
 
 <h3 id="表的连接"><a href="#表的连接" class="headerlink" title="表的连接"></a>表的连接</h3><p>表的连接很重要，具体有内外两种连接构成。</p>
 <p>1、<strong>内连接</strong>：结果集中只保留符合连接条件的记录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM 表1 [INNER] JOIN 表2 ON 连接条件;</span><br><span class="line"></span><br><span class="line">SELECT * FROM 表1 [INNER] JOIN 表2 WHERE 连接条件;</span><br><span class="line"></span><br><span class="line">SELECT * FROM 表1, 表2 WHERE 连接条件;</span><br></pre></td></tr></table></figure>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs n1ql"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> 表<span class="hljs-number">1</span> [<span class="hljs-keyword">INNER</span>] <span class="hljs-keyword">JOIN</span> 表<span class="hljs-number">2</span> <span class="hljs-keyword">ON</span> 连接条件;<br><br><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> 表<span class="hljs-number">1</span> [<span class="hljs-keyword">INNER</span>] <span class="hljs-keyword">JOIN</span> 表<span class="hljs-number">2</span> <span class="hljs-keyword">WHERE</span> 连接条件;<br><br><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> 表<span class="hljs-number">1</span>, 表<span class="hljs-number">2</span> <span class="hljs-keyword">WHERE</span> 连接条件;<br></code></pre></td></tr></table></figure>
 
 
 
 <p>2、<strong>外连接</strong>：不管是否符合连接条件，记录都要保留在结果集里</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 右表出NULL值和左表连接</span><br><span class="line">LEFT JOIN</span><br></pre></td></tr></table></figure>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gradle"><span class="hljs-comment">// 右表出NULL值和左表连接</span><br>LEFT <span class="hljs-keyword">JOIN</span><br></code></pre></td></tr></table></figure>
 
 
 
@@ -167,20 +167,20 @@
 <p>应用在<a href="https://leetcode-cn.com/problems/combine-two-tables/" target="_blank" rel="noopener">175.组合两个表中</a>。该题需要满足“无论 person 是否有地址信息，都需要基于上述两表提供 person 的以下信息”，所以当person表在左时采用左连接。</p>
 <h3 id="一些注意事项"><a href="#一些注意事项" class="headerlink" title="一些注意事项"></a>一些注意事项</h3><p>1、<strong>表连接时on和where的区别</strong></p>
 <p>以下不推荐，因为查询速度会很慢，每一次都会执行WHERE语句中的内容。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT ename </span><br><span class="line">FROM t_emp</span><br><span class="line">WHERE deptno &#x3D; (SELECT deptno FROM t_emp WHERE ename&#x3D;&quot;SCOTT&quot;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">SELECT</span> ename <br><span class="hljs-keyword">FROM</span> t_emp<br><span class="hljs-keyword">WHERE</span> deptno = (<span class="hljs-keyword">SELECT</span> deptno <span class="hljs-keyword">FROM</span> t_emp <span class="hljs-keyword">WHERE</span> ename="SCOTT")<br></code></pre></td></tr></table></figure>
 
 
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT e2.ename</span><br><span class="line">FROM t_emp e1 JOIN t_emp e2 ON e1.deptno&#x3D;e2.deptno</span><br><span class="line">WHERE e1.ename &#x3D; &quot;SCOTT&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">SELECT</span> e2.ename<br><span class="hljs-keyword">FROM</span> t_emp e1 <span class="hljs-keyword">JOIN</span> t_emp e2 <span class="hljs-keyword">ON</span> e1.deptno=e2.deptno<br><span class="hljs-keyword">WHERE</span> e1.ename = "SCOTT"<br></code></pre></td></tr></table></figure>
 
 
 
 <p>将AVG的结果视为一个表，与原表进行连接。</p>
 <p>错误</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT e2.ename</span><br><span class="line">FROM t_emp e1 JOIN t_emp e2 ON e2.sal &gt;&#x3D; AVG(e1.sal)</span><br></pre></td></tr></table></figure>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs n1ql"><span class="hljs-keyword">SELECT</span> e2.ename<br><span class="hljs-keyword">FROM</span> t_emp e1 <span class="hljs-keyword">JOIN</span> t_emp e2 <span class="hljs-keyword">ON</span> e2.sal &gt;= <span class="hljs-built_in">AVG</span>(e1.sal)<br></code></pre></td></tr></table></figure>
 
 <p>正确</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT e.ename</span><br><span class="line">FROM t_emp e </span><br><span class="line">JOIN (SELECT AVG(sal) avg FROM t_emp) t</span><br><span class="line">ON e.sal &gt;&#x3D; t.avg;</span><br></pre></td></tr></table></figure>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs n1ql"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">e</span>.ename<br><span class="hljs-keyword">FROM</span> t_emp <span class="hljs-built_in">e</span> <br><span class="hljs-keyword">JOIN</span> (<span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">AVG</span>(sal) <span class="hljs-built_in">avg</span> <span class="hljs-keyword">FROM</span> t_emp) t<br><span class="hljs-keyword">ON</span> <span class="hljs-built_in">e</span>.sal &gt;= t.<span class="hljs-built_in">avg</span>;<br></code></pre></td></tr></table></figure>
 
  
       <!-- reward -->
@@ -257,7 +257,7 @@
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
 
     </footer>
   </div>

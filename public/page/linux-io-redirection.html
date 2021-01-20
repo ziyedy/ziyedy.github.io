@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-计算机基础/Linux/3、命令行IO重定向"
+  id="post-学习笔记/鸟哥的Linux私房菜/3、命令行IO重定向"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">605</span>
+            <span class="post-count">599</span>
         </span>
     </span>
 
@@ -105,33 +105,33 @@
   <p>I/O 重定向。”I/O”代表输入/输出，<br>通过这个工具，你可以重定向命令的输入输出，命令的输入来自文件，而输出也存到文件。</p>
 <h3 id="重定向标准输出"><a href="#重定向标准输出" class="headerlink" title="重定向标准输出"></a>重定向标准输出</h3><p>I/O 重定向允许我们来重定义标准输出的地点。我们使用 “&gt;” 重定向符后接文件名来重定向标准输出到除屏幕</p>
 <p>如下，ls 命令的运行结果输送到文件 ls-output.txt 中去，由文件代替屏幕。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l &#x2F;usr&#x2F;bin &gt; ls-output.txt</span><br></pre></td></tr></table></figure>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-keyword">ls</span> -l <span class="hljs-string">/usr/bin</span> &gt; ls-output.txt<br></code></pre></td></tr></table></figure>
 
 <h4 id="创建文件或删除文件内容"><a href="#创建文件或删除文件内容" class="headerlink" title="创建文件或删除文件内容"></a>创建文件或删除文件内容</h4><p>如果没有该文件则为创建一个新文件，如果文件已存在，则删除文件内容（由于目标文件总是从开头被重写）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; output.txt</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">&gt; <span class="hljs-selector-tag">output</span><span class="hljs-selector-class">.txt</span><br></code></pre></td></tr></table></figure>
 
 <h4 id="将结果追加到内容后面"><a href="#将结果追加到内容后面" class="headerlink" title="将结果追加到内容后面"></a>将结果追加到内容后面</h4><p>使用”&gt;&gt;“操作符，将导致输出结果添加到文件内容之后。如果文件不存在，文件会被创建。</p>
 <p>如下，ls-output.txt中的内容是正常输出的两倍。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ls -l &#x2F;usr&#x2F;bin &gt;&gt; ls-output.txt</span><br><span class="line">ls -l &#x2F;usr&#x2F;bin &gt;&gt; ls-output.txt</span><br></pre></td></tr></table></figure>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-keyword">ls</span> -l <span class="hljs-string">/usr/bin</span> &gt;&gt; ls-output.txt<br><span class="hljs-keyword">ls</span> -l <span class="hljs-string">/usr/bin</span> &gt;&gt; ls-output.txt<br></code></pre></td></tr></table></figure>
 
 
 
-<h2 id="重定向标准输入"><a href="#重定向标准输入" class="headerlink" title="重定向标准输入"></a>重定向标准输入</h2><h3 id="cat-－-读取、连接、输出文件"><a href="#cat-－-读取、连接、输出文件" class="headerlink" title="cat － 读取、连接、输出文件"></a>cat － 读取、连接、输出文件</h3><h4 id="1、cat读取一个或多个文件，然后复制它们到标准输出"><a href="#1、cat读取一个或多个文件，然后复制它们到标准输出" class="headerlink" title="1、cat读取一个或多个文件，然后复制它们到标准输出"></a>1、cat读取一个或多个文件，然后复制它们到标准输出</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat filename</span><br><span class="line">cat f1 f2 f3 &gt; output.txt</span><br></pre></td></tr></table></figure>
+<h2 id="重定向标准输入"><a href="#重定向标准输入" class="headerlink" title="重定向标准输入"></a>重定向标准输入</h2><h3 id="cat-－-读取、连接、输出文件"><a href="#cat-－-读取、连接、输出文件" class="headerlink" title="cat － 读取、连接、输出文件"></a>cat － 读取、连接、输出文件</h3><h4 id="1、cat读取一个或多个文件，然后复制它们到标准输出"><a href="#1、cat读取一个或多个文件，然后复制它们到标准输出" class="headerlink" title="1、cat读取一个或多个文件，然后复制它们到标准输出"></a>1、cat读取一个或多个文件，然后复制它们到标准输出</h4><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-symbol">cat</span> filename<br><span class="hljs-symbol">cat</span> <span class="hljs-built_in">f1</span> <span class="hljs-built_in">f2</span> <span class="hljs-built_in">f3</span> &gt; output.txt<br></code></pre></td></tr></table></figure>
 
-<h4 id="2、cat从键盘读取数据并输出"><a href="#2、cat从键盘读取数据并输出" class="headerlink" title="2、cat从键盘读取数据并输出"></a>2、cat从键盘读取数据并输出</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat &gt; output.txt</span><br></pre></td></tr></table></figure>
+<h4 id="2、cat从键盘读取数据并输出"><a href="#2、cat从键盘读取数据并输出" class="headerlink" title="2、cat从键盘读取数据并输出"></a>2、cat从键盘读取数据并输出</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">cat</span> &gt; <span class="hljs-selector-tag">output</span><span class="hljs-selector-class">.txt</span><br></code></pre></td></tr></table></figure>
 
 <p>之后在键盘输入内容，按下Ctrl-d表示到达文件末尾，输入的数据就被写入了output.txt</p>
 <h3 id="sort-－-排序文本行"><a href="#sort-－-排序文本行" class="headerlink" title="sort － 排序文本行"></a>sort － 排序文本行</h3><h3 id="uniq-－-报道或省略重复行"><a href="#uniq-－-报道或省略重复行" class="headerlink" title="uniq － 报道或省略重复行"></a>uniq － 报道或省略重复行</h3><h3 id="grep-－-打印匹配行"><a href="#grep-－-打印匹配行" class="headerlink" title="grep － 打印匹配行"></a>grep － 打印匹配行</h3><p>如下，即为答应当前目录下包含.log的文件名</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls | grep .log</span><br></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">ls</span> | <span class="hljs-keyword">grep</span> .<span class="hljs-built_in">log</span><br></code></pre></td></tr></table></figure>
 
 <h3 id="wc-－-打印文件中换行符，字，和字节个数"><a href="#wc-－-打印文件中换行符，字，和字节个数" class="headerlink" title="wc － 打印文件中换行符，字，和字节个数"></a>wc － 打印文件中换行符，字，和字节个数</h3><h3 id="head-－-输出文件第一部分"><a href="#head-－-输出文件第一部分" class="headerlink" title="head － 输出文件第一部分"></a>head － 输出文件第一部分</h3><h3 id="tail-输出文件最后一部分"><a href="#tail-输出文件最后一部分" class="headerlink" title="tail - 输出文件最后一部分"></a>tail - 输出文件最后一部分</h3><h3 id="tee-从标准输入读取数据，并同时写到标准输出和文件"><a href="#tee-从标准输入读取数据，并同时写到标准输出和文件" class="headerlink" title="tee - 从标准输入读取数据，并同时写到标准输出和文件"></a>tee - 从标准输入读取数据，并同时写到标准输出和文件</h3><h3 id="管道线"><a href="#管道线" class="headerlink" title="管道线"></a>管道线</h3><h4 id="管道操作符"><a href="#管道操作符" class="headerlink" title="管道操作符 |"></a>管道操作符 |</h4><p>命令从标准输入读取数据并输送到标准输出的能力被一个称为管道线的 shell 特性所利用。使用管道操作符”|”（竖杠），一个命令的标准输出可以通过管道送至另一个命令的标准输入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">command1 | command2</span><br></pre></td></tr></table></figure>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gcode">comma<span class="hljs-symbol">nd1</span> | comma<span class="hljs-symbol">nd2</span><br></code></pre></td></tr></table></figure>
 
 <p>如下，ls -l 的输出就直接输入到 less命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l | less</span><br></pre></td></tr></table></figure>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs 1c">ls -l <span class="hljs-string">| less</span><br></code></pre></td></tr></table></figure>
 
 <h4 id="过滤器，使用多个"><a href="#过滤器，使用多个" class="headerlink" title="过滤器，使用多个 |"></a>过滤器，使用多个 |</h4><p>如下，即将当前目录文件名排序去重后输出</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls | sort | uniq | less</span><br></pre></td></tr></table></figure> 
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs coq">ls | <span class="hljs-type">sort</span> | <span class="hljs-type">uniq</span> | <span class="hljs-type">less</span><br></code></pre></td></tr></table></figure> 
       <!-- reward -->
       
       <div id="reword-out">
@@ -214,19 +214,19 @@
    
   <nav class="article-nav">
     
-      <a href="/page/css-basic-knowledge.html" class="article-nav-link">
+      <a href="/page/linux-terminal-file-path.html" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            CSS基础
+            文件路径操作命令
           
         </div>
       </a>
     
     
-      <a href="/page/linux-terminal-file-path.html" class="article-nav-link">
+      <a href="/page/linux-terminal-1.html" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">文件路径操作命令</div>
+        <div class="article-nav-title">命令行基础</div>
       </a>
     
   </nav>

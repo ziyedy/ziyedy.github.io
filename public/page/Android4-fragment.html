@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Android/Android开发四：碎片（Fragment）"
+  id="post-编程相关/Android/Android开发四：碎片（Fragment）"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-09-01T06:48:59.000Z" itemprop="datePublished">2020-09-01</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Android/">Android</a>
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Android/">Android</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">667</span>
+            <span class="post-count">641</span>
         </span>
     </span>
 
@@ -109,12 +109,12 @@
 <li>新建一个碎片布局（xml文件）</li>
 <li>新建一个<code>LeftFragment</code>类，并让它继承自 <code>Fragment</code>，并重写<code>onCreateView()</code>方法（将刚刚新建的布局文件加载进来）</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class RightFragment extends Fragment &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public View onCreateView(LayoutInflater inflater, ViewGroup container,</span><br><span class="line">                             Bundle savedInstanceState) &#123;</span><br><span class="line">        View view &#x3D; inflater.inflate(R.layout.right_fragment, container, false);</span><br><span class="line">        return view;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs scala">public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RightFragment</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Fragment</span> </span>&#123;<br><br>    <span class="hljs-meta">@Override</span><br>    public <span class="hljs-type">View</span> onCreateView(<span class="hljs-type">LayoutInflater</span> inflater, <span class="hljs-type">ViewGroup</span> container,<br>                             <span class="hljs-type">Bundle</span> savedInstanceState) &#123;<br>        <span class="hljs-type">View</span> view = inflater.inflate(<span class="hljs-type">R</span>.layout.right_fragment, container, <span class="hljs-literal">false</span>);<br>        <span class="hljs-keyword">return</span> view;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <ol start="3">
 <li>使用<code>&lt;fragment&gt;</code>标签在<em>主布局</em>中添加碎片，通过 <code>android:name</code>属性来显式指明要添加的碎片类名</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;fragment</span><br><span class="line">    android:id&#x3D;&quot;@+id&#x2F;right_fragment&quot;</span><br><span class="line">    android:name&#x3D;&quot;com.example.fragmenttest.RightFragment&quot;</span><br><span class="line">    android:layout_width&#x3D;&quot;0dp&quot;</span><br><span class="line">    android:layout_height&#x3D;&quot;match_parent&quot;</span><br><span class="line">    android:layout_weight&#x3D;&quot;1&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs routeros">&lt;fragment<br>    android:<span class="hljs-attribute">id</span>=<span class="hljs-string">"@+id/right_fragment"</span><br>    android:<span class="hljs-attribute">name</span>=<span class="hljs-string">"com.example.fragmenttest.RightFragment"</span><br>    android:<span class="hljs-attribute">layout_width</span>=<span class="hljs-string">"0dp"</span><br>    android:<span class="hljs-attribute">layout_height</span>=<span class="hljs-string">"match_parent"</span><br>    android:<span class="hljs-attribute">layout_weight</span>=<span class="hljs-string">"1"</span> /&gt;<br></code></pre></td></tr></table></figure>
 
 
 
@@ -126,14 +126,14 @@
 <li>调用<code>commit()</code>方法来提交事务</li>
 </ol>
 <p><em>实现动态添加碎片如下：</em></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">private void replaceFragment(Fragment fragment) &#123;</span><br><span class="line">    FragmentManager fragmentManager &#x3D; getSupportFragmentManager();</span><br><span class="line">    FragmentTransaction transaction &#x3D; fragmentManager.beginTransaction();</span><br><span class="line">    transaction.replace(R.id.right_layout, fragment);</span><br><span class="line">    &#x2F;&#x2F; transaction.addToBackStack(null);	&#x2F;&#x2F; 将该事务添加到返回栈</span><br><span class="line">    transaction.commit();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-keyword">private</span> void replace<span class="hljs-constructor">Fragment(Fragment <span class="hljs-params">fragment</span>)</span> &#123;<br>    FragmentManager fragmentManager = get<span class="hljs-constructor">SupportFragmentManager()</span>;<br>    FragmentTransaction transaction = fragmentManager.<span class="hljs-keyword">begin</span><span class="hljs-constructor">Transaction()</span>;<br>    transaction.replace(<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">R</span>.</span></span>id.right_layout, fragment);<br>    <span class="hljs-comment">// transaction.addToBackStack(null);	// 将该事务添加到返回栈</span><br>    transaction.commit<span class="hljs-literal">()</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 
 <h3 id="碎片与活动之间的通信"><a href="#碎片与活动之间的通信" class="headerlink" title="碎片与活动之间的通信"></a>碎片与活动之间的通信</h3><h4 id="在碎片中获取活动"><a href="#在碎片中获取活动" class="headerlink" title="在碎片中获取活动"></a>在碎片中获取活动</h4><p>使用<code>getActivity()</code>方法来得到与当前碎片相关联的活动实例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MainActivity activity &#x3D; (MainActivity) getActivity();</span><br></pre></td></tr></table></figure>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs lisp">MainActivity activity = (<span class="hljs-name">MainActivity</span>) getActivity()<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
 
-<h4 id="在活动中获取碎片"><a href="#在活动中获取碎片" class="headerlink" title="在活动中获取碎片"></a>在活动中获取碎片</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RightFragment rightFragment &#x3D; (RightFragment) getSupportFragmentManager().findFragmentById(R.id.right_fragment);</span><br></pre></td></tr></table></figure>
+<h4 id="在活动中获取碎片"><a href="#在活动中获取碎片" class="headerlink" title="在活动中获取碎片"></a>在活动中获取碎片</h4><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">RightFragment rightFragment = (RightFragment) get<span class="hljs-constructor">SupportFragmentManager()</span>.find<span class="hljs-constructor">FragmentById(R.<span class="hljs-params">id</span>.<span class="hljs-params">right_fragment</span>)</span>;<br></code></pre></td></tr></table></figure>
 
 
 
@@ -266,7 +266,7 @@
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/" rel="tag">移动端</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li></ul>
 
     </footer>
   </div>

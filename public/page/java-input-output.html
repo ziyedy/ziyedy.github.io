@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Java/Java基础/7、Java输入输出流"
+  id="post-编程相关/Java/Java基础语法/7、Java输入输出流"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-07-28T00:21:32.000Z" itemprop="datePublished">2020-07-28</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Java/">Java</a> / <a class="article-category-link" href="/categories/Java/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Java/">Java</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Java/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">469</span>
+            <span class="post-count">453</span>
         </span>
     </span>
 
@@ -138,20 +138,20 @@
 <p><code>InputStream</code>是一个抽象类，是所有输入流的超类，最重要的方法为<code>int read()</code>方法，返回字节的int值，返回<code>-1</code>表示无法继续读取。</p>
 <p>常用的子类有<code>FileInputStream</code>，从文件流中读取数据。</p>
 </blockquote>
-<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) throws IOException &#123;</span><br><span class="line">    InputStream input &#x3D; new FileInputStream(&quot;aa.txt&quot;);</span><br><span class="line">    while (true) &#123;</span><br><span class="line">        int n &#x3D; input.read();</span><br><span class="line">        if(n &#x3D;&#x3D; -1)</span><br><span class="line">            break;</span><br><span class="line">        System.out.println(n);</span><br><span class="line">    &#125;</span><br><span class="line">    input.close();	&#x2F;&#x2F; 最后需要关闭</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">String</span>[] args)</span> throws IOException </span>&#123;<br>    InputStream input = <span class="hljs-keyword">new</span> FileInputStream(<span class="hljs-string">"aa.txt"</span>);<br>    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) &#123;<br>        <span class="hljs-keyword">int</span> n = input.<span class="hljs-built_in">read</span>();<br>        <span class="hljs-keyword">if</span>(n == <span class="hljs-number">-1</span>)<br>            <span class="hljs-keyword">break</span>;<br>        System.out.<span class="hljs-built_in">println</span>(n);<br>    &#125;<br>    input.<span class="hljs-built_in">close</span>();	<span class="hljs-comment">// 最后需要关闭</span><br>&#125;<br></code></pre></td></tr></table></figure>
 
 <h4 id="常用写法"><a href="#常用写法" class="headerlink" title="常用写法"></a>常用写法</h4><blockquote>
 <p>使用<code>try(resource)</code>语法，让编译器自动关闭资源</p>
 <p>编译器只看<code>try(resource = ...)</code>中的对象是否实现了<code>java.lang.AutoCloseable</code>接口，如果实现了，就自动加上<code>finally</code>语句并调用<code>close()</code>方法。</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">try (InputStream input &#x3D; new FileInputStream(&quot;src&#x2F;readme.txt&quot;)) &#123;</span><br><span class="line">    int n;</span><br><span class="line">    while ((n &#x3D; input.read()) !&#x3D; -1) &#123;</span><br><span class="line">        System.out.println(n);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">try (InputStream input = <span class="hljs-built_in">new</span> FileInputStream("src/readme.txt")) &#123;<br>    <span class="hljs-type">int</span> n;<br>    <span class="hljs-keyword">while</span> ((n = <span class="hljs-keyword">input</span>.<span class="hljs-keyword">read</span>()) != <span class="hljs-number">-1</span>) &#123;<br>        <span class="hljs-keyword">System</span>.<span class="hljs-keyword">out</span>.println(n);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 
 
 
 <h3 id="输出字节流：OutputStream"><a href="#输出字节流：OutputStream" class="headerlink" title="输出字节流：OutputStream"></a>输出字节流：OutputStream</h3><h3 id="缓冲输入流：BufferedInputStream"><a href="#缓冲输入流：BufferedInputStream" class="headerlink" title="缓冲输入流：BufferedInputStream"></a>缓冲输入流：BufferedInputStream</h3><h3 id="缓冲输出流：BufferedOutputStream"><a href="#缓冲输出流：BufferedOutputStream" class="headerlink" title="缓冲输出流：BufferedOutputStream"></a>缓冲输出流：BufferedOutputStream</h3><p>缓冲区满了自动写入，不满不写入，则需要调用<code>flush()</code>方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">BufferedOutputStream(OutputStream out)</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 创建size大小的buffer</span><br><span class="line">BufferedOutputStream(OutputStream out, int size)</span><br></pre></td></tr></table></figure>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-constructor">BufferedOutputStream(OutputStream <span class="hljs-params">out</span>)</span><br><br><span class="hljs-comment">// 创建size大小的buffer</span><br><span class="hljs-constructor">BufferedOutputStream(OutputStream <span class="hljs-params">out</span>, <span class="hljs-params">int</span> <span class="hljs-params">size</span>)</span><br></code></pre></td></tr></table></figure>
 
 
 
@@ -177,7 +177,7 @@
 </tbody></table>
 <h3 id="字符输入流：Reader"><a href="#字符输入流：Reader" class="headerlink" title="字符输入流：Reader"></a>字符输入流：Reader</h3><p>字节字符转换流</p>
 <p>InputStreamReader</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">InputStreamReader(InputSteam in)</span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-function"><span class="hljs-title">InputStreamReader</span><span class="hljs-params">(InputSteam in)</span></span><br></code></pre></td></tr></table></figure>
 
 
 

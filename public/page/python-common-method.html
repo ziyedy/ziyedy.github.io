@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Python/语言基础/python常见问题"
+  id="post-编程相关/Python/Python基础/python常见问题"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-06-26T09:29:13.000Z" itemprop="datePublished">2020-06-26</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Python/">Python</a> / <a class="article-category-link" href="/categories/Python/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/">语言基础</a>
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Python/">Python</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Python/Python%E5%9F%BA%E7%A1%80/">Python基础</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">131</span>
+            <span class="post-count">118</span>
         </span>
     </span>
 
@@ -103,22 +103,22 @@
     <div class="article-entry" itemprop="articleBody">
        
   <h2 id="项目常用"><a href="#项目常用" class="headerlink" title="项目常用"></a>项目常用</h2><h3 id="生成requirements-txt"><a href="#生成requirements-txt" class="headerlink" title="生成requirements.txt"></a>生成requirements.txt</h3><p>使用<code>pipreqs</code>生成requirements</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 安装</span><br><span class="line">pip install pipreqs</span><br><span class="line"># 在当前目录生成（若存在即覆盖）</span><br><span class="line">pipreqs . --encoding&#x3D;utf8 --force</span><br></pre></td></tr></table></figure>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-comment"># 安装</span><br>pip install pipreqs<br><span class="hljs-comment"># 在当前目录生成（若存在即覆盖）</span><br>pipreqs . <span class="hljs-params">--encoding=utf8</span> <span class="hljs-params">--force</span><br></code></pre></td></tr></table></figure>
 
 <p>使用requirement.txt安装依赖：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs \">pip install -r requirements.txt<br></code></pre></td></tr></table></figure>
 
 
 
-<h2 id="pythonic的编码方式"><a href="#pythonic的编码方式" class="headerlink" title="pythonic的编码方式"></a>pythonic的编码方式</h2><h3 id="变量的交换"><a href="#变量的交换" class="headerlink" title="变量的交换"></a>变量的交换</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a, b &#x3D; b, a</span><br></pre></td></tr></table></figure>
+<h2 id="pythonic的编码方式"><a href="#pythonic的编码方式" class="headerlink" title="pythonic的编码方式"></a>pythonic的编码方式</h2><h3 id="变量的交换"><a href="#变量的交换" class="headerlink" title="变量的交换"></a>变量的交换</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-selector-tag">a</span>, <span class="hljs-selector-tag">b</span> = <span class="hljs-selector-tag">b</span>, a<br></code></pre></td></tr></table></figure>
 
 
 
-<h3 id="利用百分号语法进行字符串格式化"><a href="#利用百分号语法进行字符串格式化" class="headerlink" title="利用百分号语法进行字符串格式化"></a>利用百分号语法进行字符串格式化</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a &#x3D; &#39;Curry&#39;</span><br><span class="line">b &#x3D; &#39;Player&#39;</span><br><span class="line">print(&quot;%s is the best %s&quot; % (a,b))</span><br><span class="line">#################</span><br><span class="line">Curry is the best Player</span><br></pre></td></tr></table></figure>
+<h3 id="利用百分号语法进行字符串格式化"><a href="#利用百分号语法进行字符串格式化" class="headerlink" title="利用百分号语法进行字符串格式化"></a>利用百分号语法进行字符串格式化</h3><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs clean">a = <span class="hljs-string">'Curry'</span><br>b = <span class="hljs-string">'Player'</span><br>print(<span class="hljs-string">"%s is the best %s"</span> % (a,b))<br>#################<br>Curry is the best Player<br></code></pre></td></tr></table></figure>
 
 
 
-<h3 id="将两个字典合并（解包操作）"><a href="#将两个字典合并（解包操作）" class="headerlink" title="将两个字典合并（解包操作）"></a>将两个字典合并（解包操作）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a &#x3D; &#123;&#125;</span><br><span class="line">b &#x3D; &#123;&#125;</span><br><span class="line">c &#x3D; &#123;**a, **b&#125;	# 解包</span><br></pre></td></tr></table></figure>
+<h3 id="将两个字典合并（解包操作）"><a href="#将两个字典合并（解包操作）" class="headerlink" title="将两个字典合并（解包操作）"></a>将两个字典合并（解包操作）</h3><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">a</span> = &#123;&#125;<br><span class="hljs-attr">b</span> = &#123;&#125;<br><span class="hljs-attr">c</span> = &#123;**a, **b&#125;	<span class="hljs-comment"># 解包</span><br></code></pre></td></tr></table></figure>
 
  
       <!-- reward -->
@@ -213,9 +213,9 @@
       </a>
     
     
-      <a href="/page/js-bom-basic-handle.html" class="article-nav-link">
+      <a href="/page/js-dom-basic-handle.html" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">BOM基本内容</div>
+        <div class="article-nav-title">2、DOM节点基本操作</div>
       </a>
     
   </nav>

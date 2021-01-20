@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-前端/CSS/CSS3：transition与transform"
+  id="post-编程相关/CSS/CSS3：transition与transform"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-08-15T07:08:01.000Z" itemprop="datePublished">2020-08-15</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a> / <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/CSS/">CSS</a>
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/CSS/">CSS</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">446</span>
+            <span class="post-count">435</span>
         </span>
     </span>
 
@@ -103,39 +103,39 @@
     <div class="article-entry" itemprop="articleBody">
        
   <h2 id="过渡"><a href="#过渡" class="headerlink" title="过渡"></a>过渡</h2><h3 id="transition"><a href="#transition" class="headerlink" title="transition"></a>transition</h3><p><strong>transition实现元素不同状态间的平滑过渡</strong>，可以用来制作动画效果</p>
-<h4 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 让哪些属性发生过渡，all表示所有属性 */</span></span><br><span class="line"><span class="selector-tag">transition-property</span>: <span class="selector-tag">all</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*过渡的持续时间*/</span></span><br><span class="line"><span class="selector-tag">transition-duration</span>: 1<span class="selector-tag">s</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*过渡的运动曲线</span></span><br><span class="line"><span class="comment">linear表示线性，ease表示减速，ease-in表示加速</span></span><br><span class="line"><span class="comment">也可以使用cubic-bezier，自定义曲线*/</span></span><br><span class="line"><span class="selector-tag">transition-timing-function</span>: <span class="selector-tag">linear</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*多长时间后执行过渡*/</span></span><br><span class="line"><span class="selector-tag">transition-delay</span>: 1<span class="selector-tag">s</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*综合写法*/</span></span><br><span class="line"><span class="selector-tag">transition</span>: 让哪些属性进行过度 过渡的持续时间 运动曲线 延迟时间;</span><br></pre></td></tr></table></figure>
+<h4 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-comment">/* 让哪些属性发生过渡，all表示所有属性 */</span><br><span class="hljs-selector-tag">transition-property</span>: <span class="hljs-selector-tag">all</span>;<br><br><span class="hljs-comment">/*过渡的持续时间*/</span><br><span class="hljs-selector-tag">transition-duration</span>: 1<span class="hljs-selector-tag">s</span>;<br><br><span class="hljs-comment">/*过渡的运动曲线<br>linear表示线性，ease表示减速，ease-in表示加速<br>也可以使用cubic-bezier，自定义曲线*/</span><br><span class="hljs-selector-tag">transition-timing-function</span>: <span class="hljs-selector-tag">linear</span>;<br><br><span class="hljs-comment">/*多长时间后执行过渡*/</span><br><span class="hljs-selector-tag">transition-delay</span>: 1<span class="hljs-selector-tag">s</span>;<br><br><span class="hljs-comment">/*综合写法*/</span><br><span class="hljs-selector-tag">transition</span>: 让哪些属性进行过度 过渡的持续时间 运动曲线 延迟时间;<br></code></pre></td></tr></table></figure>
 
 <h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p>给<code>&lt;div class=&quot;box&quot;&gt;&lt;/div&gt;</code>添加如下css代码。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    .box &#123;</span><br><span class="line">        width: 200px;</span><br><span class="line">        height: 200px;</span><br><span class="line">        background-color: greenyellow;</span><br><span class="line">        margin: 100px auto;</span><br><span class="line">        &#x2F;* 只渐变宽度，不渐变颜色 *&#x2F;</span><br><span class="line">        transition: width 2s linear 0s;</span><br><span class="line">    &#125;</span><br><span class="line">    .box:hover &#123;</span><br><span class="line">        width: 500px;</span><br><span class="line">        background-color: blue;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css"><br>    <span class="hljs-selector-class">.box</span> &#123;<br>        <span class="hljs-attribute">width</span>: <span class="hljs-number">200px</span>;<br>        <span class="hljs-attribute">height</span>: <span class="hljs-number">200px</span>;<br>        <span class="hljs-attribute">background-color</span>: greenyellow;<br>        <span class="hljs-attribute">margin</span>: <span class="hljs-number">100px</span> auto;<br>        <span class="hljs-comment">/* 只渐变宽度，不渐变颜色 */</span><br>        <span class="hljs-attribute">transition</span>: width <span class="hljs-number">2s</span> linear <span class="hljs-number">0s</span>;<br>    &#125;<br>    <span class="hljs-selector-class">.box</span><span class="hljs-selector-pseudo">:hover</span> &#123;<br>        <span class="hljs-attribute">width</span>: <span class="hljs-number">500px</span>;<br>        <span class="hljs-attribute">background-color</span>: blue;<br>    &#125;<br></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
 
 
 <h3 id="transitionend（过渡完成事件）"><a href="#transitionend（过渡完成事件）" class="headerlink" title="transitionend（过渡完成事件）"></a>transitionend（过渡完成事件）</h3><p>transitionend 事件在 CSS <strong>完成过渡后触发</strong>。</p>
 <h4 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h4><p>在过渡事件的代码中添加如下代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    const div &#x3D; document.querySelector(&quot;.box&quot;);</span><br><span class="line">    div.addEventListener(&quot;transitionend&quot;, function() &#123;</span><br><span class="line">        alert(&quot;过渡已完成！&quot;);</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript"><br>    <span class="hljs-keyword">const</span> div = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">".box"</span>);<br>    div.addEventListener(<span class="hljs-string">"transitionend"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>        alert(<span class="hljs-string">"过渡已完成！"</span>);<br>    &#125;)<br></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
 
 
 <h2 id="转换（transform）"><a href="#转换（transform）" class="headerlink" title="转换（transform）"></a>转换（transform）</h2><h3 id="缩放：scale"><a href="#缩放：scale" class="headerlink" title="缩放：scale"></a>缩放：scale</h3><p>参数解释：</p>
 <p> x：表示水平方向的缩放倍数；y：表示垂直方向的缩放倍数。大于1表示放大，小于1表示缩小</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">transform: scale(x, y);</span><br><span class="line">transform: scale(0.8, 1.2)</span><br></pre></td></tr></table></figure>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs maxima"><span class="hljs-built_in">transform</span>: <span class="hljs-built_in">scale</span>(x, y);<br><span class="hljs-built_in">transform</span>: <span class="hljs-built_in">scale</span>(<span class="hljs-number">0.8</span>, <span class="hljs-number">1.2</span>)<br></code></pre></td></tr></table></figure>
 
 
 
 <h3 id="位移：translate"><a href="#位移：translate" class="headerlink" title="位移：translate"></a>位移：translate</h3><p>参数为百分比，相对于自身移动。正值为向右和向下，只写一个值代表水平移动</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">transform: translate(水平位移, 垂直位移);</span><br><span class="line">transform: translate(-30%, 30%);</span><br></pre></td></tr></table></figure>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs maxima"><span class="hljs-built_in">transform</span>: <span class="hljs-built_in">translate</span>(水平位移, 垂直位移);<br><span class="hljs-built_in">transform</span>: <span class="hljs-built_in">translate</span>(-<span class="hljs-number">30</span><span class="hljs-symbol">%</span>, <span class="hljs-number">30</span><span class="hljs-symbol">%</span>);<br></code></pre></td></tr></table></figure>
 
 
 
 <h3 id="旋转：rotate"><a href="#旋转：rotate" class="headerlink" title="旋转：rotate"></a>旋转：rotate</h3><p>正值代表顺时针。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">transform: rotate(角度);</span><br><span class="line">transform: rotate(45deg);</span><br></pre></td></tr></table></figure>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-attribute">transform</span>: rotate(角度);<br><span class="hljs-attribute">transform</span>: rotate(<span class="hljs-number">45deg</span>);<br></code></pre></td></tr></table></figure>
 
 <h4 id="旋转的坐标原点"><a href="#旋转的坐标原点" class="headerlink" title="旋转的坐标原点"></a>旋转的坐标原点</h4><p>参数可为百分比、长度以及定位位置的词（如left，center等）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">transform-origin: x-axis y-axis z-axis;</span><br></pre></td></tr></table></figure>
+<figure class="highlight gml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gml">transform-origin: <span class="hljs-symbol">x</span>-axis <span class="hljs-symbol">y</span>-axis z-axis;<br></code></pre></td></tr></table></figure>
 
 
 
-<h3 id="3D转换"><a href="#3D转换" class="headerlink" title="3D转换"></a>3D转换</h3><h3 id="使用rotateX、rotateY、rotateZ进行旋转"><a href="#使用rotateX、rotateY、rotateZ进行旋转" class="headerlink" title="使用rotateX、rotateY、rotateZ进行旋转"></a>使用rotateX、rotateY、rotateZ进行旋转</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">transform: rotateX(360deg);</span><br></pre></td></tr></table></figure>
+<h3 id="3D转换"><a href="#3D转换" class="headerlink" title="3D转换"></a>3D转换</h3><h3 id="使用rotateX、rotateY、rotateZ进行旋转"><a href="#使用rotateX、rotateY、rotateZ进行旋转" class="headerlink" title="使用rotateX、rotateY、rotateZ进行旋转"></a>使用rotateX、rotateY、rotateZ进行旋转</h3><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-attribute">transform</span>: rotateX(<span class="hljs-number">360deg</span>);<br></code></pre></td></tr></table></figure>
 
  
       <!-- reward -->
@@ -212,7 +212,7 @@
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E6%A0%B7%E5%BC%8F/" rel="tag">前端样式</a></li></ul>
 
     </footer>
   </div>

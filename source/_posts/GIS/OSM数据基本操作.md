@@ -3,9 +3,9 @@ title: OSM数据基本操作
 date: 2019-02-23 23:26:10
 tags:
     - GIS
+	- OSM
 categories:
     - GIS
-	- 开源GIS
 fileName: osm_data_process
 ---
 ## .osm文件在ArcGis中打开

@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-前端/JS/2、DOM节点基本操作"
+  id="post-编程相关/JavaScript/2、DOM节点基本操作"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-06-21T06:38:46.000Z" itemprop="datePublished">2020-06-21</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a> / <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/JS/">JS</a>
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/JavaScript/">JavaScript</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1.2k</span>
+            <span class="post-count">1.1k</span>
         </span>
     </span>
 
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">5 min</span>
+            <span class="post-count">4 min</span>
         </span>
     </span>
 </div>
@@ -107,19 +107,19 @@
 <p><strong>解析过程</strong>：HTML加载完毕，渲染引擎会在内存中把HTML文档，生成一个DOM树。</p>
 <h3 id="文档的加载"><a href="#文档的加载" class="headerlink" title="文档的加载"></a>文档的加载</h3><p>浏览器在加载一个页面时，是按照自上向下的顺序加载的，读取到一行就运行一行。如果将script标签写到页面的上边，在代码执行时，页面及DOM对象还没有加载，会导致无法获取到DOM对象。</p>
 <p>onload 事件会在整个页面加载完成之后才触发。为 window 绑定一个onload事件，该事件对应的响应函数将会在页面加载完成之后执行，这样可以确保我们的代码执行时所有的DOM对象已经加载完毕了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">window.onload &#x3D; function() &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-built_in">window</span>.onload = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 
 
 
-<h2 id="获取节点"><a href="#获取节点" class="headerlink" title="获取节点"></a>获取节点</h2><h3 id="通过元素获取节点"><a href="#通过元素获取节点" class="headerlink" title="通过元素获取节点"></a>通过元素获取节点</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 获取id为“id1”的元素（id唯一）</span><br><span class="line">var id1 &#x3D; document.getElementById(&quot;id1&quot;);</span><br></pre></td></tr></table></figure>
+<h2 id="获取节点"><a href="#获取节点" class="headerlink" title="获取节点"></a>获取节点</h2><h3 id="通过元素获取节点"><a href="#通过元素获取节点" class="headerlink" title="通过元素获取节点"></a>通过元素获取节点</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-comment">// 获取id为“id1”的元素（id唯一）</span><br><span class="hljs-keyword">var</span> id1 = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"id1"</span>);<br></code></pre></td></tr></table></figure>
 
-<h3 id="通过标签名获取节点"><a href="#通过标签名获取节点" class="headerlink" title="通过标签名获取节点"></a>通过标签名获取节点</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 获取标签名为div的 元素节点数组（标签名不唯一）</span><br><span class="line">var div1 &#x3D; document.getElementsByTagName(&quot;div&quot;);</span><br><span class="line">&#x2F;&#x2F; 获取该数组中第一个元素</span><br><span class="line">document.getElementsByTagName(&quot;div1&quot;)[0];</span><br></pre></td></tr></table></figure>
+<h3 id="通过标签名获取节点"><a href="#通过标签名获取节点" class="headerlink" title="通过标签名获取节点"></a>通过标签名获取节点</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-comment">// 获取标签名为div的 元素节点数组（标签名不唯一）</span><br><span class="hljs-keyword">var</span> div1 = <span class="hljs-built_in">document</span>.getElementsByTagName(<span class="hljs-string">"div"</span>);<br><span class="hljs-comment">// 获取该数组中第一个元素</span><br><span class="hljs-built_in">document</span>.getElementsByTagName(<span class="hljs-string">"div1"</span>)[<span class="hljs-number">0</span>];<br></code></pre></td></tr></table></figure>
 
-<h3 id="通过类名获取节点"><a href="#通过类名获取节点" class="headerlink" title="通过类名获取节点"></a>通过类名获取节点</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 获取类名为 class1 的元素节点数组</span><br><span class="line">var class1 &#x3D; document.getElementsByClassName(&quot;class1&quot;);</span><br><span class="line">document.getElementsByClassName(&quot;class1&quot;)[0];</span><br></pre></td></tr></table></figure>
+<h3 id="通过类名获取节点"><a href="#通过类名获取节点" class="headerlink" title="通过类名获取节点"></a>通过类名获取节点</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-comment">// 获取类名为 class1 的元素节点数组</span><br><span class="hljs-keyword">var</span> class1 = <span class="hljs-built_in">document</span>.getElementsByClassName(<span class="hljs-string">"class1"</span>);<br><span class="hljs-built_in">document</span>.getElementsByClassName(<span class="hljs-string">"class1"</span>)[<span class="hljs-number">0</span>];<br></code></pre></td></tr></table></figure>
 
-<h3 id="querySelector-方法"><a href="#querySelector-方法" class="headerlink" title="querySelector()方法"></a>querySelector()方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">document.querySelector(css选择器);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 获取文档中有 &quot;target&quot; 属性的第一个 &lt;a&gt; 元素</span><br><span class="line">document.querySelector(&quot;a[target]&quot;);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 找到符合条件的所有元素</span><br><span class="line">document.querySelectorAll(css选择器);</span><br></pre></td></tr></table></figure>
+<h3 id="querySelector-方法"><a href="#querySelector-方法" class="headerlink" title="querySelector()方法"></a>querySelector()方法</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-built_in">document</span>.<span class="hljs-built_in">querySelector</span>(css选择器);<br><br><span class="hljs-comment">// 获取文档中有 "target" 属性的第一个 &lt;a&gt; 元素</span><br><span class="hljs-built_in">document</span>.<span class="hljs-built_in">querySelector</span>(<span class="hljs-string">"a[target]"</span>);<br><br><span class="hljs-comment">// 找到符合条件的所有元素</span><br><span class="hljs-built_in">document</span>.<span class="hljs-built_in">querySelectorAll</span>(css选择器);<br></code></pre></td></tr></table></figure>
 
 
 
@@ -127,43 +127,43 @@
 
 <h2 id="遍历节点"><a href="#遍历节点" class="headerlink" title="遍历节点"></a>遍历节点</h2><p>遍历操作如下，用红框圈起来的方法功能是一样的，只是在不同版本的浏览器中兼容不同，建议使用红框中第二种方法</p>
 <p><img src="http://cdn.ziyedy.top/image/DOM%E8%8A%82%E7%82%B9%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/%E9%81%8D%E5%8E%86%E8%8A%82%E7%82%B9.png" alt=""></p>
-<h3 id="获取父节点"><a href="#获取父节点" class="headerlink" title="获取父节点"></a>获取父节点</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">节点.parentNode</span><br></pre></td></tr></table></figure>
+<h3 id="获取父节点"><a href="#获取父节点" class="headerlink" title="获取父节点"></a>获取父节点</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">节点<span class="hljs-selector-class">.parentNode</span><br></code></pre></td></tr></table></figure>
 
-<h3 id="获取兄弟节点"><a href="#获取兄弟节点" class="headerlink" title="获取兄弟节点"></a>获取兄弟节点</h3><h4 id="下一个兄弟节点"><a href="#下一个兄弟节点" class="headerlink" title="下一个兄弟节点"></a>下一个兄弟节点</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">下一个兄弟节点 &#x3D; 节点.nextElementSibling || 节点.nextSibling</span><br></pre></td></tr></table></figure>
+<h3 id="获取兄弟节点"><a href="#获取兄弟节点" class="headerlink" title="获取兄弟节点"></a>获取兄弟节点</h3><h4 id="下一个兄弟节点"><a href="#下一个兄弟节点" class="headerlink" title="下一个兄弟节点"></a>下一个兄弟节点</h4><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">下一个兄弟节点 = 节点<span class="hljs-string">.nextElementSibling</span> || 节点<span class="hljs-string">.nextSibling</span><br></code></pre></td></tr></table></figure>
 
-<h4 id="上一个兄弟节点"><a href="#上一个兄弟节点" class="headerlink" title="上一个兄弟节点"></a>上一个兄弟节点</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">上一个兄弟节点 &#x3D; 节点.previousElementSibling || 节点.previousSibling</span><br></pre></td></tr></table></figure>
+<h4 id="上一个兄弟节点"><a href="#上一个兄弟节点" class="headerlink" title="上一个兄弟节点"></a>上一个兄弟节点</h4><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">上一个兄弟节点 = 节点<span class="hljs-string">.previousElementSibling</span> || 节点<span class="hljs-string">.previousSibling</span><br></code></pre></td></tr></table></figure>
 
-<h4 id="任意兄弟节点"><a href="#任意兄弟节点" class="headerlink" title="任意兄弟节点"></a>任意兄弟节点</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">节点.parentNode.children[index];</span><br></pre></td></tr></table></figure>
+<h4 id="任意兄弟节点"><a href="#任意兄弟节点" class="headerlink" title="任意兄弟节点"></a>任意兄弟节点</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">节点<span class="hljs-selector-class">.parentNode</span><span class="hljs-selector-class">.children</span><span class="hljs-selector-attr">[index]</span>;<br></code></pre></td></tr></table></figure>
 
-<h3 id="获取子节点"><a href="#获取子节点" class="headerlink" title="获取子节点"></a>获取子节点</h3><h4 id="第一个-最后一个"><a href="#第一个-最后一个" class="headerlink" title="第一个/最后一个"></a>第一个/最后一个</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">第一个子元素节点 &#x3D; 节点.firstElementChild || 节点.firstChild</span><br><span class="line"></span><br><span class="line">最后一个子元素节点 &#x3D; 节点.lastElementChild || 节点.lastChild</span><br></pre></td></tr></table></figure>
+<h3 id="获取子节点"><a href="#获取子节点" class="headerlink" title="获取子节点"></a>获取子节点</h3><h4 id="第一个-最后一个"><a href="#第一个-最后一个" class="headerlink" title="第一个/最后一个"></a>第一个/最后一个</h4><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">第一个子元素节点 = 节点<span class="hljs-string">.firstElementChild</span> || 节点<span class="hljs-string">.firstChild</span><br><br>最后一个子元素节点 = 节点<span class="hljs-string">.lastElementChild</span> || 节点<span class="hljs-string">.lastChild</span><br></code></pre></td></tr></table></figure>
 
-<h4 id="获取所有子节点"><a href="#获取所有子节点" class="headerlink" title="获取所有子节点"></a>获取所有子节点</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">子节点数组 &#x3D; 父节点.childNodes; </span><br><span class="line"></span><br><span class="line">子节点数组 &#x3D; 父节点.children;</span><br></pre></td></tr></table></figure>
+<h4 id="获取所有子节点"><a href="#获取所有子节点" class="headerlink" title="获取所有子节点"></a>获取所有子节点</h4><figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs abnf">子节点数组 = 父节点.childNodes<span class="hljs-comment">; </span><br><br>子节点数组 = 父节点.children<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
 
 
 
-<h2 id="操作节点"><a href="#操作节点" class="headerlink" title="操作节点"></a>操作节点</h2><h3 id="创建节点"><a href="#创建节点" class="headerlink" title="创建节点"></a>创建节点</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">新的标签(元素节点) &#x3D; document.createElement(&quot;标签名&quot;);</span><br><span class="line"></span><br><span class="line">文本节点 &#x3D; document.createTextNode(文本)</span><br><span class="line"></span><br><span class="line">文本片段 &#x3D; document.createDocumentFragment();</span><br></pre></td></tr></table></figure>
+<h2 id="操作节点"><a href="#操作节点" class="headerlink" title="操作节点"></a>操作节点</h2><h3 id="创建节点"><a href="#创建节点" class="headerlink" title="创建节点"></a>创建节点</h3><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs coffeescript">新的标签(元素节点) = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">"标签名"</span>);<br><br>文本节点 = <span class="hljs-built_in">document</span>.createTextNode(文本)<br><br>文本片段 = <span class="hljs-built_in">document</span>.createDocumentFragment();<br></code></pre></td></tr></table></figure>
 
-<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;ul id&#x3D;&quot;myList&quot;&gt;&lt;&#x2F;ul&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        var fragment &#x3D; document.createDocumentFragment();</span><br><span class="line">        var ul &#x3D; document.getElementById(&quot;myList&quot;);</span><br><span class="line">        var li &#x3D; null;</span><br><span class="line">        for(var i&#x3D;0; i&lt;3; i++) &#123;</span><br><span class="line">            li &#x3D; document.createElement(&quot;li&quot;);</span><br><span class="line">            li.appendChild(document.createTextNode(&quot;Item&quot; + (i+1)));</span><br><span class="line">            fragment.appendChild(li);</span><br><span class="line">        &#125;</span><br><span class="line">        ul.appendChild(fragment);</span><br><span class="line">    &lt;&#x2F;script&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"myList"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript"><br>        <span class="hljs-keyword">var</span> fragment = <span class="hljs-built_in">document</span>.createDocumentFragment();<br>        <span class="hljs-keyword">var</span> ul = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"myList"</span>);<br>        <span class="hljs-keyword">var</span> li = <span class="hljs-literal">null</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">3</span>; i++) &#123;<br>            li = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">"li"</span>);<br>            li.appendChild(<span class="hljs-built_in">document</span>.createTextNode(<span class="hljs-string">"Item"</span> + (i+<span class="hljs-number">1</span>)));<br>            fragment.appendChild(li);<br>        &#125;<br>        ul.appendChild(fragment);<br>    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
 <p><img src="http://cdn.ziyedy.top/image/DOM%E8%8A%82%E7%82%B9%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/%E5%88%9B%E5%BB%BA%E8%8A%82%E7%82%B9.png" alt=""></p>
-<h3 id="插入节点"><a href="#插入节点" class="headerlink" title="插入节点"></a>插入节点</h3><h4 id="在最后插入一个子节点"><a href="#在最后插入一个子节点" class="headerlink" title="在最后插入一个子节点"></a>在最后插入一个子节点</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">父节点.appendChild(新的子节点);</span><br></pre></td></tr></table></figure>
+<h3 id="插入节点"><a href="#插入节点" class="headerlink" title="插入节点"></a>插入节点</h3><h4 id="在最后插入一个子节点"><a href="#在最后插入一个子节点" class="headerlink" title="在最后插入一个子节点"></a>在最后插入一个子节点</h4><figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf">父节点.appendChild(新的子节点)<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
 
-<h4 id="在参考节点前插入一个新的节点"><a href="#在参考节点前插入一个新的节点" class="headerlink" title="在参考节点前插入一个新的节点"></a>在参考节点前插入一个新的节点</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">父节点.insertBefore(新的子节点,作为参考的子节点)</span><br></pre></td></tr></table></figure>
+<h4 id="在参考节点前插入一个新的节点"><a href="#在参考节点前插入一个新的节点" class="headerlink" title="在参考节点前插入一个新的节点"></a>在参考节点前插入一个新的节点</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">父节点<span class="hljs-selector-class">.insertBefore</span>(新的子节点,作为参考的子节点)<br></code></pre></td></tr></table></figure>
 
 
 
-<h3 id="删除节点"><a href="#删除节点" class="headerlink" title="删除节点"></a>删除节点</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">父节点.removeChild(子节点);</span><br></pre></td></tr></table></figure>
+<h3 id="删除节点"><a href="#删除节点" class="headerlink" title="删除节点"></a>删除节点</h3><figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf">父节点.removeChild(子节点)<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
 
 
 
 <h2 id="操作节点属性"><a href="#操作节点属性" class="headerlink" title="操作节点属性"></a>操作节点属性</h2><p>操作节点属性都有以下两种方法，但一定不能混用，</p>
-<h3 id="获取节点的属性值"><a href="#获取节点的属性值" class="headerlink" title="获取节点的属性值"></a>获取节点的属性值</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">元素节点.属性名;</span><br><span class="line">元素节点[属性名];</span><br><span class="line">	</span><br><span class="line">元素节点.getAttribute(&quot;属性名称&quot;);</span><br></pre></td></tr></table></figure>
+<h3 id="获取节点的属性值"><a href="#获取节点的属性值" class="headerlink" title="获取节点的属性值"></a>获取节点的属性值</h3><figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs abnf">元素节点.属性名<span class="hljs-comment">;</span><br>元素节点[属性名]<span class="hljs-comment">;</span><br>	<br>元素节点.getAttribute(<span class="hljs-string">"属性名称"</span>)<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
 
-<h3 id="设置节点属性值"><a href="#设置节点属性值" class="headerlink" title="设置节点属性值"></a>设置节点属性值</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">元素节点.属性名 &#x3D; 新属性值;</span><br><span class="line">元素节点[属性名] &#x3D; 新属性值;</span><br><span class="line"></span><br><span class="line">元素节点.setAttribute(&quot;属性名&quot;, &quot;新的属性值&quot;);</span><br></pre></td></tr></table></figure>
+<h3 id="设置节点属性值"><a href="#设置节点属性值" class="headerlink" title="设置节点属性值"></a>设置节点属性值</h3><figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs pf">元素节点.属性名 = 新属性值;<br>元素节点[属性名] = 新属性值;<br><br>元素节点.<span class="hljs-built_in">set</span>Attribute(<span class="hljs-string">"属性名"</span>, <span class="hljs-string">"新的属性值"</span>);<br></code></pre></td></tr></table></figure>
 
-<h3 id="删除节点的属性"><a href="#删除节点的属性" class="headerlink" title="删除节点的属性"></a>删除节点的属性</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">元素节点.removeAttribute(属性名);</span><br></pre></td></tr></table></figure>
+<h3 id="删除节点的属性"><a href="#删除节点的属性" class="headerlink" title="删除节点的属性"></a>删除节点的属性</h3><figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf">元素节点.removeAttribute(属性名)<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
 
-<h3 id="类名的增删操作"><a href="#类名的增删操作" class="headerlink" title="类名的增删操作"></a>类名的增删操作</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Node.classList.add(&quot;class&quot;) &#x2F;&#x2F; 添加class</span><br><span class="line"></span><br><span class="line">Node.classList.remove(&quot;class&quot;) &#x2F;&#x2F; 移除class</span><br><span class="line"></span><br><span class="line">Node.classList.toggle(&quot;class&quot;) &#x2F;&#x2F; 切换class，有则移除，无则添加</span><br><span class="line"></span><br><span class="line">Node.classList.contains(&quot;class&quot;) &#x2F;&#x2F; 检测是否存在class</span><br></pre></td></tr></table></figure>
+<h3 id="类名的增删操作"><a href="#类名的增删操作" class="headerlink" title="类名的增删操作"></a>类名的增删操作</h3><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs crmsh"><span class="hljs-keyword">Node</span>.<span class="hljs-title">classList</span>.add(<span class="hljs-string">"class"</span>) // 添加class<br><br><span class="hljs-keyword">Node</span>.<span class="hljs-title">classList</span>.remove(<span class="hljs-string">"class"</span>) // 移除class<br><br><span class="hljs-keyword">Node</span>.<span class="hljs-title">classList</span>.toggle(<span class="hljs-string">"class"</span>) // 切换class，有则移除，无则添加<br><br><span class="hljs-keyword">Node</span>.<span class="hljs-title">classList</span>.contains(<span class="hljs-string">"class"</span>) // 检测是否存在class<br></code></pre></td></tr></table></figure>
 
 
 
@@ -178,7 +178,7 @@
 </li>
 </ul>
 <h3 id="innerHTML"><a href="#innerHTML" class="headerlink" title="innerHTML"></a>innerHTML</h3><p>获取标签本身的html，也可以<strong>通过赋值变相的添加节点</strong></p>
-<h4 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div id&#x3D;&quot;content&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        var content &#x3D; document.getElementById(&quot;content&quot;);</span><br><span class="line">        var str &#x3D; &quot;ui * 2 li&quot;</span><br><span class="line">                    + &quot;&lt;ul&gt;&quot;</span><br><span class="line">                    + &quot;&lt;li&gt; Item 1 &lt;&#x2F;li&gt;&quot;</span><br><span class="line">                    + &quot;&lt;li&gt; Item 2 &lt;&#x2F;li&gt;&quot;</span><br><span class="line">                    + &quot;&lt;&#x2F;ul&gt;&quot;;</span><br><span class="line">        content.innerHTML &#x3D; str;</span><br><span class="line">        alert(content.innerHTML);</span><br><span class="line">    &lt;&#x2F;script&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h4><figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs xquery"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>    </span><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"content"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><span class="xml"><br>    </span><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript"><br>        <span class="hljs-keyword">var</span> content = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"content"</span>);<br>        <span class="hljs-keyword">var</span> str = <span class="hljs-string">"ui * 2 li"</span><br>                    + <span class="hljs-string">"</span></span></span><span class="xml"><span class="handlebars"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>"<br>                    + "</span></span></span><span class="xml"><span class="handlebars"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span> Item 1 <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span></span></span><span class="xml">"<br>                    + "</span><span class="xml"><span class="handlebars"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span> Item 2 <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span></span></span><span class="xml"><span class="handlebars"><span class="xml">"<br>                    + "<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></span></span></span><span class="xml">";<br>        content.innerHTML = str;<br>        alert(content.innerHTML);<br>    <span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><span class="xml"><br><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
 
 <p>如图可见，div内部已经多出了我们添加的元素</p>
 <p><img src="http://cdn.ziyedy.top/image/DOM%E8%8A%82%E7%82%B9%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/innerHTML.png" alt=""></p>
@@ -257,7 +257,7 @@
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li></ul>
 
     </footer>
   </div>
@@ -265,19 +265,19 @@
    
   <nav class="article-nav">
     
-      <a href="/page/js-bom-basic-handle.html" class="article-nav-link">
+      <a href="/page/python-common-method.html" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            BOM基本内容
+            python常见问题
           
         </div>
       </a>
     
     
-      <a href="/page/Python-path-operation.html" class="article-nav-link">
+      <a href="/page/js-bom-basic-handle.html" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">路径操作常用模块（os与pathlib）</div>
+        <div class="article-nav-title">BOM基本内容</div>
       </a>
     
   </nav>

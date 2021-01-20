@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-前端/JS/3、BOM基本内容"
+  id="post-编程相关/JavaScript/3、BOM基本内容"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-06-21T06:38:46.000Z" itemprop="datePublished">2020-06-21</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a> / <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/JS/">JS</a>
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/JavaScript/">JavaScript</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">691</span>
+            <span class="post-count">682</span>
         </span>
     </span>
 
@@ -122,34 +122,34 @@
 <p>通常使用<code>navigator.userAgent</code>来获取浏览器信息</p>
 <h2 id="History"><a href="#History" class="headerlink" title="History"></a>History</h2><p>History对象：可以用来操作浏览器的向前或向后翻页。</p>
 <h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><p>获取浏览器历史列表中的 url 数量。注意，只是统计当次的数量，如果浏览器关了，数量会重置为1。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">history.length</span><br></pre></td></tr></table></figure>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">history.<span class="hljs-built_in">length</span><br></code></pre></td></tr></table></figure>
 
 <h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>回退到上一个页面，作用和浏览器的「回退按钮」一样。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">history.back();</span><br></pre></td></tr></table></figure>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf">history.back()<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
 
 <p>跳转下一个页面，作用和浏览器的「前进按钮」一样。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">history.forward();</span><br></pre></td></tr></table></figure>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf">history.forward()<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
 
 <p><strong>go方法</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 向前跳转2个页面</span><br><span class="line">history.go( 2 );</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 向后跳转2个页面</span><br><span class="line">history.go( -2 );</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 刷新当前页面</span><br><span class="line">history.go( 0 );</span><br></pre></td></tr></table></figure>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-comment">// 向前跳转2个页面</span><br>history.go( <span class="hljs-number">2</span> );<br><br><span class="hljs-comment">// 向后跳转2个页面</span><br>history.go( <span class="hljs-number">-2</span> );<br><br><span class="hljs-comment">// 刷新当前页面</span><br>history.go( <span class="hljs-number">0</span> );<br></code></pre></td></tr></table></figure>
 
 
 
 <h2 id="Location"><a href="#Location" class="headerlink" title="Location"></a>Location</h2><p>Location 对象：封装了浏览器地址栏的 URL 信息。</p>
 <h3 id="属性-1"><a href="#属性-1" class="headerlink" title="属性"></a>属性</h3><p>获取当前页面的 url 路径</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">location.href</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">location</span><span class="hljs-selector-class">.href</span><br></code></pre></td></tr></table></figure>
 
 <p>也可以通过设置该属性的方法使页面跳转</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">location.href &#x3D; &#39;ziyedy.top&#39;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">location.href</span> = <span class="hljs-string">'ziyedy.top'</span><span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
 
 <h3 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h3><p>用来跳转到其他的页面，作用和直接修改<code>location.href</code>一样。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">location.assign(str);</span><br></pre></td></tr></table></figure>
+<figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs openscad">location.<span class="hljs-built_in">assign</span>(<span class="hljs-built_in">str</span>);<br></code></pre></td></tr></table></figure>
 
 <p>用于重新加载当前页面，作用和刷新按钮一样。在方法的参数中传递一个true，则会强制清空缓存刷新页面.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">location.reload();</span><br><span class="line">location.reload(true);</span><br></pre></td></tr></table></figure>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs glsl"><span class="hljs-keyword">location</span>.reload();<br><span class="hljs-keyword">location</span>.reload(<span class="hljs-literal">true</span>);<br></code></pre></td></tr></table></figure>
 
 <p>使用一个新的页面替换当前页面，调用完毕也会跳转页面。但不会生成历史记录，不能使用「后退按钮」后退。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">location.replace();</span><br></pre></td></tr></table></figure>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">location</span>.replace();<br></code></pre></td></tr></table></figure>
 
 
 
@@ -230,7 +230,7 @@
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li></ul>
 
     </footer>
   </div>
@@ -238,19 +238,19 @@
    
   <nav class="article-nav">
     
-      <a href="/page/python-common-method.html" class="article-nav-link">
+      <a href="/page/js-dom-basic-handle.html" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            python常见问题
+            2、DOM节点基本操作
           
         </div>
       </a>
     
     
-      <a href="/page/js-dom-basic-handle.html" class="article-nav-link">
+      <a href="/page/Python-path-operation.html" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">2、DOM节点基本操作</div>
+        <div class="article-nav-title">路径操作常用模块（os与pathlib）</div>
       </a>
     
   </nav>

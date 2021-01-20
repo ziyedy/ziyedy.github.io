@@ -2,7 +2,7 @@
 title: QGis地表覆盖图编制
 date: 2020-01-07 16:43:34
 tags:
-	- GIS
+	- QGis
 categories:
 	- GIS
 fileName: qgis-Surface-coverage-mapping

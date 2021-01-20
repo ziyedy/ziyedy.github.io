@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-AI/TF2/TF2的基础函数"
+  id="post-AI相关/TensorFlow2/TF2的基础函数"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-08-07T02:22:41.000Z" itemprop="datePublished">2020-08-07</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/AI/">AI</a> / <a class="article-category-link" href="/categories/AI/TF2/">TF2</a>
+    <a class="article-category-link" href="/categories/AI%E7%9B%B8%E5%85%B3/">AI相关</a> / <a class="article-category-link" href="/categories/AI%E7%9B%B8%E5%85%B3/TensorFlow2/">TensorFlow2</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">643</span>
+            <span class="post-count">629</span>
         </span>
     </span>
 
@@ -102,69 +102,69 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h3 id="张量生成"><a href="#张量生成" class="headerlink" title="张量生成"></a>张量生成</h3><h4 id="直接创建"><a href="#直接创建" class="headerlink" title="直接创建"></a>直接创建</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.constant(张量内容, dtype&#x3D;数据类型&lt;可选&gt;)</span><br></pre></td></tr></table></figure>
+  <h3 id="张量生成"><a href="#张量生成" class="headerlink" title="张量生成"></a>张量生成</h3><h4 id="直接创建"><a href="#直接创建" class="headerlink" title="直接创建"></a>直接创建</h4><figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elm"><span class="hljs-title">tf</span>.constant(张量内容, d<span class="hljs-keyword">type</span>=数据类型&lt;可选&gt;)<br></code></pre></td></tr></table></figure>
 
-<h4 id="创建全为0的张量"><a href="#创建全为0的张量" class="headerlink" title="创建全为0的张量"></a>创建全为0的张量</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.zeros(维度)</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="创建全为1的张量"><a href="#创建全为1的张量" class="headerlink" title="创建全为1的张量"></a>创建全为1的张量</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.ones(维度)</span><br></pre></td></tr></table></figure>
-
-<h4 id="创建全为指定值的张量"><a href="#创建全为指定值的张量" class="headerlink" title="创建全为指定值的张量"></a>创建全为指定值的张量</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.fill(维度, 指定值)</span><br></pre></td></tr></table></figure>
+<h4 id="创建全为0的张量"><a href="#创建全为0的张量" class="headerlink" title="创建全为0的张量"></a>创建全为0的张量</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">tf</span><span class="hljs-selector-class">.zeros</span>(维度)<br></code></pre></td></tr></table></figure>
 
 
 
-<h4 id="将numpy数据转化为Tensor数据"><a href="#将numpy数据转化为Tensor数据" class="headerlink" title="将numpy数据转化为Tensor数据"></a>将numpy数据转化为Tensor数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.convert_to_tensor(数据名, dtype&#x3D;数据类型&lt;可选&gt;)</span><br></pre></td></tr></table></figure>
+<h4 id="创建全为1的张量"><a href="#创建全为1的张量" class="headerlink" title="创建全为1的张量"></a>创建全为1的张量</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">tf</span><span class="hljs-selector-class">.ones</span>(维度)<br></code></pre></td></tr></table></figure>
+
+<h4 id="创建全为指定值的张量"><a href="#创建全为指定值的张量" class="headerlink" title="创建全为指定值的张量"></a>创建全为指定值的张量</h4><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">tf.<span class="hljs-built_in">fill</span>(维度, 指定值)<br></code></pre></td></tr></table></figure>
 
 
 
-<h4 id="生成正态分布的随机数，默认均值为0，标准差为1"><a href="#生成正态分布的随机数，默认均值为0，标准差为1" class="headerlink" title="生成正态分布的随机数，默认均值为0，标准差为1"></a>生成正态分布的随机数，默认均值为0，标准差为1</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.random.normal(维度, mean&#x3D;均值, stddev&#x3D;标准差)</span><br></pre></td></tr></table></figure>
+<h4 id="将numpy数据转化为Tensor数据"><a href="#将numpy数据转化为Tensor数据" class="headerlink" title="将numpy数据转化为Tensor数据"></a>将numpy数据转化为Tensor数据</h4><figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elm"><span class="hljs-title">tf</span>.convert_to_tensor(数据名, d<span class="hljs-keyword">type</span>=数据类型&lt;可选&gt;)<br></code></pre></td></tr></table></figure>
 
 
 
-<h4 id="生成截断式正态分布随机数"><a href="#生成截断式正态分布随机数" class="headerlink" title="生成截断式正态分布随机数"></a>生成截断式正态分布随机数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.random.truncated_normal(维度, mean&#x3D;均值, stddev&#x3D;标准差)</span><br></pre></td></tr></table></figure>
-
-<h4 id="生成均匀分布随机数（-minval-maxval-）"><a href="#生成均匀分布随机数（-minval-maxval-）" class="headerlink" title="生成均匀分布随机数（[minval, maxval)）"></a>生成均匀分布随机数（[minval, maxval)）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.random.uniform(维度, minval&#x3D;0, maxval&#x3D;1)</span><br></pre></td></tr></table></figure>
+<h4 id="生成正态分布的随机数，默认均值为0，标准差为1"><a href="#生成正态分布的随机数，默认均值为0，标准差为1" class="headerlink" title="生成正态分布的随机数，默认均值为0，标准差为1"></a>生成正态分布的随机数，默认均值为0，标准差为1</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">tf.random.normal(维度, <span class="hljs-attribute">mean</span>=均值, <span class="hljs-attribute">stddev</span>=标准差)<br></code></pre></td></tr></table></figure>
 
 
 
-<h3 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h3><h4 id="将输入特征与标签配对（常用于构建数据集）"><a href="#将输入特征与标签配对（常用于构建数据集）" class="headerlink" title="将输入特征与标签配对（常用于构建数据集）"></a>将输入特征与标签配对（常用于构建数据集）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.data.Dataset.from_tensor_slices( (输入特征, 标签) )</span><br></pre></td></tr></table></figure>
+<h4 id="生成截断式正态分布随机数"><a href="#生成截断式正态分布随机数" class="headerlink" title="生成截断式正态分布随机数"></a>生成截断式正态分布随机数</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">tf.random.truncated_normal(维度, <span class="hljs-attribute">mean</span>=均值, <span class="hljs-attribute">stddev</span>=标准差)<br></code></pre></td></tr></table></figure>
+
+<h4 id="生成均匀分布随机数（-minval-maxval-）"><a href="#生成均匀分布随机数（-minval-maxval-）" class="headerlink" title="生成均匀分布随机数（[minval, maxval)）"></a>生成均匀分布随机数（[minval, maxval)）</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">tf.random.uniform(维度, <span class="hljs-attribute">minval</span>=0, <span class="hljs-attribute">maxval</span>=1)<br></code></pre></td></tr></table></figure>
 
 
 
-<h4 id="强制tensor转换为该数据类型"><a href="#强制tensor转换为该数据类型" class="headerlink" title="强制tensor转换为该数据类型"></a>强制tensor转换为该数据类型</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.cast(张量名, dtype&#x3D;数据类型)</span><br></pre></td></tr></table></figure>
+<h3 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h3><h4 id="将输入特征与标签配对（常用于构建数据集）"><a href="#将输入特征与标签配对（常用于构建数据集）" class="headerlink" title="将输入特征与标签配对（常用于构建数据集）"></a>将输入特征与标签配对（常用于构建数据集）</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">tf</span><span class="hljs-selector-class">.data</span><span class="hljs-selector-class">.Dataset</span><span class="hljs-selector-class">.from_tensor_slices</span>( (输入特征, 标签) )<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="强制tensor转换为该数据类型"><a href="#强制tensor转换为该数据类型" class="headerlink" title="强制tensor转换为该数据类型"></a>强制tensor转换为该数据类型</h4><figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elm"><span class="hljs-title">tf</span>.cast(张量名, d<span class="hljs-keyword">type</span>=数据类型)<br></code></pre></td></tr></table></figure>
 
 
 
 <h4 id="将变量标记为“可训练”"><a href="#将变量标记为“可训练”" class="headerlink" title="将变量标记为“可训练”"></a>将变量标记为“可训练”</h4><p>使用该方法标记的变量会在反向传播中记录梯度信息</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.Variable(初始值)</span><br></pre></td></tr></table></figure>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs coq">tf.<span class="hljs-keyword">Variable</span>(初始值)<br></code></pre></td></tr></table></figure>
 
 
 
 
 
 <h4 id="某个函数对指定参数的求导运算"><a href="#某个函数对指定参数的求导运算" class="headerlink" title="某个函数对指定参数的求导运算"></a>某个函数对指定参数的求导运算</h4><p>with 结构记录计算过程，gradient求出张量的梯度</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">with tf.GradientTape() as tape:</span><br><span class="line">    若干个计算过程</span><br><span class="line">grad &#x3D; tape.gradient(函数, 对谁求导)</span><br></pre></td></tr></table></figure>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-keyword">with</span> tf.<span class="hljs-constructor">GradientTape()</span> <span class="hljs-keyword">as</span> tape:<br>    若干个计算过程<br>grad = tape.gradient(函数, 对谁求导)<br></code></pre></td></tr></table></figure>
 
 
 
 <h4 id="自减函数（常用于更新参数的值）"><a href="#自减函数（常用于更新参数的值）" class="headerlink" title="自减函数（常用于更新参数的值）"></a>自减函数（常用于更新参数的值）</h4><p>需要先用<code>tf.Variable(w)</code>定义w为可训练</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">w.assign_sub(w要自减的内容)</span><br></pre></td></tr></table></figure>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">w.assign<span class="hljs-constructor">_sub(<span class="hljs-params">w</span>要自减的内容)</span><br></code></pre></td></tr></table></figure>
 
 
 
 <h4 id="独热编码"><a href="#独热编码" class="headerlink" title="独热编码"></a>独热编码</h4><p>分类问题中，常用独热码做标签标记类别，1表示是，2表示非</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.one_hot(带转换数据, depth&#x3D;几分类)</span><br></pre></td></tr></table></figure>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">tf.one<span class="hljs-constructor">_hot(带转换数据, <span class="hljs-params">depth</span>=几分类)</span><br></code></pre></td></tr></table></figure>
 
 <blockquote>
 <p>one-hot编码，把正整数变为向量表达（生成一个不小于正整数的向量，只有正整数的位置为1，其余位置为0）</p>
 <p>三分类：2 -&gt; one-hot -&gt; [0, 0, 1]</p>
 </blockquote>
-<h4 id="softmax：使数值变为0-1之间的概率分布"><a href="#softmax：使数值变为0-1之间的概率分布" class="headerlink" title="softmax：使数值变为0-1之间的概率分布"></a>softmax：使数值变为0-1之间的概率分布</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.nn.softmax(张量名)</span><br></pre></td></tr></table></figure>
+<h4 id="softmax：使数值变为0-1之间的概率分布"><a href="#softmax：使数值变为0-1之间的概率分布" class="headerlink" title="softmax：使数值变为0-1之间的概率分布"></a>softmax：使数值变为0-1之间的概率分布</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">tf</span><span class="hljs-selector-class">.nn</span><span class="hljs-selector-class">.softmax</span>(张量名)<br></code></pre></td></tr></table></figure>
 
 
 
-<h4 id="argmax：返回张量沿指定维度最大值的索引"><a href="#argmax：返回张量沿指定维度最大值的索引" class="headerlink" title="argmax：返回张量沿指定维度最大值的索引"></a>argmax：返回张量沿指定维度最大值的索引</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.argmax(张量名, axis&#x3D;操作轴)</span><br></pre></td></tr></table></figure>
+<h4 id="argmax：返回张量沿指定维度最大值的索引"><a href="#argmax：返回张量沿指定维度最大值的索引" class="headerlink" title="argmax：返回张量沿指定维度最大值的索引"></a>argmax：返回张量沿指定维度最大值的索引</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">tf.argmax(张量名, <span class="hljs-attribute">axis</span>=操作轴)<br></code></pre></td></tr></table></figure>
 
 
 
@@ -172,33 +172,33 @@
 
 
 
-<h3 id="张量数值统计"><a href="#张量数值统计" class="headerlink" title="张量数值统计"></a>张量数值统计</h3><h4 id="计算张量元素最小值-最大值"><a href="#计算张量元素最小值-最大值" class="headerlink" title="计算张量元素最小值/最大值"></a>计算张量元素最小值/最大值</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tf.reduce_min()</span><br><span class="line">tf.reduce_max()</span><br></pre></td></tr></table></figure>
+<h3 id="张量数值统计"><a href="#张量数值统计" class="headerlink" title="张量数值统计"></a>张量数值统计</h3><h4 id="计算张量元素最小值-最大值"><a href="#计算张量元素最小值-最大值" class="headerlink" title="计算张量元素最小值/最大值"></a>计算张量元素最小值/最大值</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">tf</span><span class="hljs-selector-class">.reduce_min</span>()<br><span class="hljs-selector-tag">tf</span><span class="hljs-selector-class">.reduce_max</span>()<br></code></pre></td></tr></table></figure>
 
-<h4 id="计算张量沿着指定维度的平均值（不指定维度对所有操作）"><a href="#计算张量沿着指定维度的平均值（不指定维度对所有操作）" class="headerlink" title="计算张量沿着指定维度的平均值（不指定维度对所有操作）"></a>计算张量沿着指定维度的平均值（不指定维度对所有操作）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.reduce_mean(张量名, axis&#x3D;操作轴)</span><br></pre></td></tr></table></figure>
+<h4 id="计算张量沿着指定维度的平均值（不指定维度对所有操作）"><a href="#计算张量沿着指定维度的平均值（不指定维度对所有操作）" class="headerlink" title="计算张量沿着指定维度的平均值（不指定维度对所有操作）"></a>计算张量沿着指定维度的平均值（不指定维度对所有操作）</h4><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">tf.reduce<span class="hljs-constructor">_mean(张量名, <span class="hljs-params">axis</span>=操作轴)</span><br></code></pre></td></tr></table></figure>
 
-<h4 id="计算张量沿着指定维度的和"><a href="#计算张量沿着指定维度的和" class="headerlink" title="计算张量沿着指定维度的和"></a>计算张量沿着指定维度的和</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.reduce_sum(张量名, axis&#x3D;操作轴)</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="数学运算"><a href="#数学运算" class="headerlink" title="数学运算"></a>数学运算</h3><h4 id="两个张量对应元素相加"><a href="#两个张量对应元素相加" class="headerlink" title="两个张量对应元素相加"></a>两个张量对应元素相加</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.add(张量1, 张量2)</span><br></pre></td></tr></table></figure>
-
-<h4 id="相减"><a href="#相减" class="headerlink" title="相减"></a>相减</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.subtract()</span><br></pre></td></tr></table></figure>
-
-<h4 id="相乘"><a href="#相乘" class="headerlink" title="相乘"></a>相乘</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.multiply</span><br></pre></td></tr></table></figure>
+<h4 id="计算张量沿着指定维度的和"><a href="#计算张量沿着指定维度的和" class="headerlink" title="计算张量沿着指定维度的和"></a>计算张量沿着指定维度的和</h4><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">tf.reduce<span class="hljs-constructor">_sum(张量名, <span class="hljs-params">axis</span>=操作轴)</span><br></code></pre></td></tr></table></figure>
 
 
 
-<h4 id="相除"><a href="#相除" class="headerlink" title="相除"></a>相除</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.divide</span><br></pre></td></tr></table></figure>
+<h3 id="数学运算"><a href="#数学运算" class="headerlink" title="数学运算"></a>数学运算</h3><h4 id="两个张量对应元素相加"><a href="#两个张量对应元素相加" class="headerlink" title="两个张量对应元素相加"></a>两个张量对应元素相加</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">tf.add(张量<span class="hljs-number">1</span>, 张量<span class="hljs-number">2</span>)<br></code></pre></td></tr></table></figure>
+
+<h4 id="相减"><a href="#相减" class="headerlink" title="相减"></a>相减</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">tf</span><span class="hljs-selector-class">.subtract</span>()<br></code></pre></td></tr></table></figure>
+
+<h4 id="相乘"><a href="#相乘" class="headerlink" title="相乘"></a>相乘</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">tf</span><span class="hljs-selector-class">.multiply</span><br></code></pre></td></tr></table></figure>
 
 
 
-<h4 id="计算张量的平方"><a href="#计算张量的平方" class="headerlink" title="计算张量的平方"></a>计算张量的平方</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.square(张量名)</span><br></pre></td></tr></table></figure>
+<h4 id="相除"><a href="#相除" class="headerlink" title="相除"></a>相除</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">tf</span><span class="hljs-selector-class">.divide</span><br></code></pre></td></tr></table></figure>
 
-<h4 id="n次方"><a href="#n次方" class="headerlink" title="n次方"></a>n次方</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.pow(张量名, n次方)</span><br></pre></td></tr></table></figure>
 
-<h4 id="开方"><a href="#开方" class="headerlink" title="开方"></a>开方</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.sqrt(张量名)</span><br></pre></td></tr></table></figure>
 
-<h4 id="两个矩阵相乘"><a href="#两个矩阵相乘" class="headerlink" title="两个矩阵相乘"></a>两个矩阵相乘</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.matmul(矩阵1, 矩阵2)</span><br></pre></td></tr></table></figure>
+<h4 id="计算张量的平方"><a href="#计算张量的平方" class="headerlink" title="计算张量的平方"></a>计算张量的平方</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">tf</span><span class="hljs-selector-class">.square</span>(张量名)<br></code></pre></td></tr></table></figure>
+
+<h4 id="n次方"><a href="#n次方" class="headerlink" title="n次方"></a>n次方</h4><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">tf</span>.<span class="hljs-built_in">pow</span>(张量名, n次方)<br></code></pre></td></tr></table></figure>
+
+<h4 id="开方"><a href="#开方" class="headerlink" title="开方"></a>开方</h4><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">tf</span>.<span class="hljs-built_in">sqrt</span>(张量名)<br></code></pre></td></tr></table></figure>
+
+<h4 id="两个矩阵相乘"><a href="#两个矩阵相乘" class="headerlink" title="两个矩阵相乘"></a>两个矩阵相乘</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">tf.matmul(矩阵<span class="hljs-number">1</span>, 矩阵<span class="hljs-number">2</span>)<br></code></pre></td></tr></table></figure>
  
       <!-- reward -->
       
@@ -274,7 +274,7 @@
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AI/" rel="tag">AI</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TensorFlow2/" rel="tag">TensorFlow2</a></li></ul>
 
     </footer>
   </div>
@@ -282,19 +282,19 @@
    
   <nav class="article-nav">
     
-      <a href="/page/nn-basic-concept-summary.html" class="article-nav-link">
+      <a href="/page/tf2-basic-builder-simple-nn.html" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            神经网络基础概念总结
+            TF2原生语法构建简单网络
           
         </div>
       </a>
     
     
-      <a href="/page/tf2-basic-builder-simple-nn.html" class="article-nav-link">
+      <a href="/page/ubuntu-common-shortcut.html" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">TF2原生语法构建简单网络</div>
+        <div class="article-nav-title">Ubuntu常用快捷键</div>
       </a>
     
   </nav>

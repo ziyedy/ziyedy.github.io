@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-计算机基础/Linux/5、控制台进程管理"
+  id="post-学习笔记/鸟哥的Linux私房菜/5、控制台进程管理"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">543</span>
+            <span class="post-count">541</span>
         </span>
     </span>
 
@@ -105,9 +105,9 @@
   <h2 id="进程工作"><a href="#进程工作" class="headerlink" title="进程工作"></a>进程工作</h2><p>当系统启动的时候，内核先把一些它自己的活动初始化为进程，然后运行一个叫做 init 的程序。init，依次地，再运行一系列的称为 init 脚本的 shell 脚本（位于/etc），它们可以启动所有的系统服务。其中许多系统服务以守护（daemon）程序的形式实现，守护程序仅在后台运行，没有任何用户界面。这样，即使我们没有登录系统，至少系统也在忙于执行一些例行事务。</p>
 <p>内核维护每个进程的信息，以此来保持事情有序。例如，系统分配给每个进程一个数字，这个数字叫做进程 ID 或 PID。PID 号按升序分配，init 进程的 PID 总是1。内核也对分配给每个进程的内存和就绪状态进行跟踪以便继续执行这个进程。</p>
 <h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><h3 id="ps-–-报告当前进程快照"><a href="#ps-–-报告当前进程快照" class="headerlink" title="ps – 报告当前进程快照"></a>ps – 报告当前进程快照</h3><h4 id="不带任何参数"><a href="#不带任何参数" class="headerlink" title="不带任何参数"></a>不带任何参数</h4><p>默认情况下，ps 不会显示很多进程信息，只是列出与当前终端会话相关的进程</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ ps</span><br><span class="line">  PID TTY          TIME CMD</span><br><span class="line"> 3471 pts&#x2F;1    00:00:00 bash</span><br><span class="line">12266 pts&#x2F;1    00:00:00 ps</span><br></pre></td></tr></table></figure>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">$ ps<br>  PID TTY          TIME CMD<br> <span class="hljs-number">3471</span> pts/<span class="hljs-number">1</span>    <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span> bash<br><span class="hljs-number">12266</span> pts/<span class="hljs-number">1</span>    <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span> ps<br></code></pre></td></tr></table></figure>
 
-<h4 id="加上-x-，展示所有进程"><a href="#加上-x-，展示所有进程" class="headerlink" title="加上 x ，展示所有进程"></a>加上 x ，展示所有进程</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps x</span><br></pre></td></tr></table></figure>
+<h4 id="加上-x-，展示所有进程"><a href="#加上-x-，展示所有进程" class="headerlink" title="加上 x ，展示所有进程"></a>加上 x ，展示所有进程</h4><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">ps x</span><br></code></pre></td></tr></table></figure>
 
 <p>输出中”TTY”中的？表示没有控制终端。而新增的STAT表示进程的状态，状态如下。出去这些基本的状态，进程之后还会跟随其他字符，表示各种外来进程的特性</p>
 <table class="multi">
@@ -165,13 +165,13 @@ valign="top">一个高优先级进程。这可能会授予一个进程更多重�
 
 <h3 id="top-–-显示任务"><a href="#top-–-显示任务" class="headerlink" title="top – 显示任务"></a>top – 显示任务</h3><p>ps只显示ps执行那一个瞬间的信息，而top 程序以进程活动顺序显示连续更新的系统进程列表（默认情况下，每三秒钟更新一次）</p>
 <h3 id="jobs-–-列出活跃的任务"><a href="#jobs-–-列出活跃的任务" class="headerlink" title="jobs – 列出活跃的任务"></a>jobs – 列出活跃的任务</h3><p>如在当前窗口后台运行的进程，<strong>可用来查看PID等信息</strong></p>
-<h3 id="bg-–-把一个任务放到后台执行"><a href="#bg-–-把一个任务放到后台执行" class="headerlink" title="bg – 把一个任务放到后台执行"></a>bg – 把一个任务放到后台执行</h3><h3 id="fg-–-把一个任务放到前台执行"><a href="#fg-–-把一个任务放到前台执行" class="headerlink" title="fg – 把一个任务放到前台执行"></a>fg – 把一个任务放到前台执行</h3><h3 id="kill-–-给一个进程发送信号"><a href="#kill-–-给一个进程发送信号" class="headerlink" title="kill – 给一个进程发送信号"></a>kill – 给一个进程发送信号</h3><h4 id="默认中止程序"><a href="#默认中止程序" class="headerlink" title="默认中止程序"></a>默认中止程序</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill PID</span><br></pre></td></tr></table></figure>
+<h3 id="bg-–-把一个任务放到后台执行"><a href="#bg-–-把一个任务放到后台执行" class="headerlink" title="bg – 把一个任务放到后台执行"></a>bg – 把一个任务放到后台执行</h3><h3 id="fg-–-把一个任务放到前台执行"><a href="#fg-–-把一个任务放到前台执行" class="headerlink" title="fg – 把一个任务放到前台执行"></a>fg – 把一个任务放到前台执行</h3><h3 id="kill-–-给一个进程发送信号"><a href="#kill-–-给一个进程发送信号" class="headerlink" title="kill – 给一个进程发送信号"></a>kill – 给一个进程发送信号</h3><h4 id="默认中止程序"><a href="#默认中止程序" class="headerlink" title="默认中止程序"></a>默认中止程序</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">kill</span> PID<br></code></pre></td></tr></table></figure>
 
 <h4 id="发送信号"><a href="#发送信号" class="headerlink" title="发送信号"></a>发送信号</h4><p>查看所有信号</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -l</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">kill</span> -l<br></code></pre></td></tr></table></figure>
 
 <p>如下，是对PID为13546的进程发送了1号信号（HUP，挂起）。注意，信号既可以用号码，也可以用名字来指定，包括在前面加上字母 “SIG” 的名字</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -1 13546</span><br></pre></td></tr></table></figure>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">kill <span class="hljs-number">-1</span> <span class="hljs-number">13546</span><br></code></pre></td></tr></table></figure>
 
 <h4 id="常见信号"><a href="#常见信号" class="headerlink" title="常见信号"></a>常见信号</h4><table class="multi">
 <caption class="cap">常用信号</caption>
@@ -229,16 +229,16 @@ valign="top">停止。这个信号导致进程停止运行，而不是终止。�
 
 <h3 id="killall-–-杀死指定名字的进程、给多个进程发送信号"><a href="#killall-–-杀死指定名字的进程、给多个进程发送信号" class="headerlink" title="killall – 杀死指定名字的进程、给多个进程发送信号"></a>killall – 杀死指定名字的进程、给多个进程发送信号</h3><h3 id="shutdown-–-关机或重启系统"><a href="#shutdown-–-关机或重启系统" class="headerlink" title="shutdown – 关机或重启系统"></a>shutdown – 关机或重启系统</h3><h2 id="控制进程的基本使用"><a href="#控制进程的基本使用" class="headerlink" title="控制进程的基本使用"></a>控制进程的基本使用</h2><h3 id="中断一个进程"><a href="#中断一个进程" class="headerlink" title="中断一个进程"></a>中断一个进程</h3><p>按下 Ctrl-c</p>
 <h3 id="将一个进程放置到后台"><a href="#将一个进程放置到后台" class="headerlink" title="将一个进程放置到后台"></a>将一个进程放置到后台</h3><p>为了启动一个程序并让它立即在后台运行，我们在程序命令之后，加上”&amp;”字符。如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xlogo &amp;</span><br><span class="line">[1] 12453</span><br></pre></td></tr></table></figure>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">xlogo &amp;<br>[<span class="hljs-number">1</span>] <span class="hljs-number">12453</span><br></code></pre></td></tr></table></figure>
 
 <p>执行命令之后，这个 xlogo 窗口出现，并且 shell 提示符返回，同时打印一些有趣的数字。这条信息是 shell 特性的一部分，叫做任务控制。通过这条信息，shell 告诉我们，已经启动了任务号为1（“［1］”），PID 为12453的程序</p>
 <p>此时使用<strong>jobs</strong>命令即可看到后台运行的进程的信息</p>
 <h3 id="将一个进程返回到前台"><a href="#将一个进程返回到前台" class="headerlink" title="将一个进程返回到前台"></a>将一个进程返回到前台</h3><p>如下，将任务序号为1的进程返回前台。之后Ctrl-c即可中断进程</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fg %1</span><br></pre></td></tr></table></figure>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">fg %<span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
 
 <h3 id="停止一个进程"><a href="#停止一个进程" class="headerlink" title="停止一个进程"></a>停止一个进程</h3><p>使用Ctrl-z停止一个进程，目的是允许前台进程被移动到后台（处理忘记加”&amp;”的情况）。</p>
 <p>将任务序号为1的进程放置在后台</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bg %1</span><br></pre></td></tr></table></figure>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">bg %<span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
 
 <h3 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h3><p>综上所述的各种操作进程的命令，本质上是给程序发送信号。信号是操作系统与程序之间进行通信时所采用的几种方式中的一种</p>
 <h2 id="命令行启动程序"><a href="#命令行启动程序" class="headerlink" title="命令行启动程序"></a>命令行启动程序</h2><ol>
@@ -328,19 +328,19 @@ valign="top">停止。这个信号导致进程停止运行，而不是终止。�
    
   <nav class="article-nav">
     
-      <a href="/page/ubuntu-common-shortcut.html" class="article-nav-link">
+      <a href="/page/linux-temp.html" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            Ubuntu常用快捷键
+            权限
           
         </div>
       </a>
     
     
-      <a href="/page/linux-temp.html" class="article-nav-link">
+      <a href="/page/css-basic-knowledge.html" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">权限</div>
+        <div class="article-nav-title">CSS基础</div>
       </a>
     
   </nav>

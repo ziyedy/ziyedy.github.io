@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-计算机基础/Linux/1、命令行基础"
+  id="post-学习笔记/鸟哥的Linux私房菜/1、命令行基础"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -113,41 +113,41 @@
 <li><p>是一个命令别名。我们可以定义自己的命令，建立在其它命令之上。</p>
 </li>
 </ol>
-<h3 id="命令基本格式"><a href="#命令基本格式" class="headerlink" title="命令基本格式"></a>命令基本格式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">command -options arguments</span><br></pre></td></tr></table></figure>
+<h3 id="命令基本格式"><a href="#命令基本格式" class="headerlink" title="命令基本格式"></a>命令基本格式</h3><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver"><span class="hljs-keyword">command</span> -<span class="hljs-title">options</span> <span class="hljs-title">arguments</span><br></code></pre></td></tr></table></figure>
 
 <p>大多数命令使用的选项，是由一个中划线加上一个字符组成，例如，“-l”，但是许多命令，包括来自于GNU 项目的命令，也支持长选项，长选项由两个中划线加上一个字组成。当然，许多命令也允许把多个短选项串在一起使用。下面这个例子，ls 命令有两个选项，“l” 选项产生长格式输出，“t”选项按文件修改时间的先后来排序。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -lt --reverse</span><br></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">ls</span> -<span class="hljs-keyword">lt</span> --<span class="hljs-built_in">reverse</span><br></code></pre></td></tr></table></figure>
 
 <h3 id="命令行鼠标操作"><a href="#命令行鼠标操作" class="headerlink" title="命令行鼠标操作"></a>命令行鼠标操作</h3><h4 id="复制、粘贴"><a href="#复制、粘贴" class="headerlink" title="复制、粘贴"></a>复制、粘贴</h4><p>按下鼠标左键，沿着文本拖动鼠标（或者双击一个单词）高亮了一些文本，  那么这些高亮的文本就被拷贝到了一个由 X 管理的缓冲区里面。然后按下鼠标中键，  这些文本就被粘贴到光标所在的位置</p>
-<h3 id="创建与删除别名"><a href="#创建与删除别名" class="headerlink" title="创建与删除别名"></a>创建与删除别名</h3><h4 id="创建别名"><a href="#创建别名" class="headerlink" title="创建别名"></a>创建别名</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias name&#x3D;&#39;string&#39;</span><br></pre></td></tr></table></figure>
+<h3 id="创建与删除别名"><a href="#创建与删除别名" class="headerlink" title="创建与删除别名"></a>创建与删除别名</h3><h4 id="创建别名"><a href="#创建别名" class="headerlink" title="创建别名"></a>创建别名</h4><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript"><span class="hljs-built_in">alias</span> <span class="hljs-built_in">name</span>='<span class="hljs-built_in">string</span>'<br></code></pre></td></tr></table></figure>
 
-<h4 id="删除别名"><a href="#删除别名" class="headerlink" title="删除别名"></a>删除别名</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unalias name</span><br></pre></td></tr></table></figure>
+<h4 id="删除别名"><a href="#删除别名" class="headerlink" title="删除别名"></a>删除别名</h4><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">unalias <span class="hljs-built_in">name</span><br></code></pre></td></tr></table></figure>
 
 
 
 <h2 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h2><p>shell 在环境中存储了两种基本类型的数据，虽然对于 bash 来说，很大程度上这些类型是不可辨别的。它们是<strong>环境变量</strong>和 <strong>shell 变量</strong>。Shell 变量是由 bash 存放的少量数据，而剩下的基本上都是环境变量。除了变量，shell 也存储了一些可编程的数据，即别名和 shell 函数。</p>
 <h3 id="查看环境变量"><a href="#查看环境变量" class="headerlink" title="查看环境变量"></a>查看环境变量</h3><p>两者的区别为，printenv只显示环境变量，而set同时显示shell和环境变量两者。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">printenv | less</span><br><span class="line">set | less</span><br></pre></td></tr></table></figure>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cmake">printenv | <span class="hljs-keyword">less</span><br><span class="hljs-keyword">set</span> | <span class="hljs-keyword">less</span><br></code></pre></td></tr></table></figure>
 
 <p>也可以查看特定的环境变量</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printenv PATH</span><br></pre></td></tr></table></figure>
+<figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dos">printenv <span class="hljs-built_in">PATH</span><br></code></pre></td></tr></table></figure>
 
 
 
 
 
 <h2 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h2><h3 id="clear-－-清空屏幕"><a href="#clear-－-清空屏幕" class="headerlink" title="clear － 清空屏幕"></a>clear － 清空屏幕</h3><h3 id="history-－-显示历史列表内容"><a href="#history-－-显示历史列表内容" class="headerlink" title="history － 显示历史列表内容"></a>history － 显示历史列表内容</h3><p>更方便的进行浏览：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">history | less</span><br></pre></td></tr></table></figure>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs 1c">history <span class="hljs-string">| less</span><br></code></pre></td></tr></table></figure>
 
 <h3 id="type-－-显示命令的类型"><a href="#type-－-显示命令的类型" class="headerlink" title="type － 显示命令的类型"></a>type － 显示命令的类型</h3><p>type 命令是 shell 内部命令，它会显示命令的类别，给出一个特定的命令名（做为参数）。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type command</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">type</span> <span class="hljs-built_in">command</span><br></code></pre></td></tr></table></figure>
 
 <h3 id="which-－-显示一个可执行程序的位置"><a href="#which-－-显示一个可执行程序的位置" class="headerlink" title="which － 显示一个可执行程序的位置"></a>which － 显示一个可执行程序的位置</h3><p>有时候在一个操作系统中，不只安装了可执行程序的一个版本（如各种python）。为了确定所给定的执行程序的准确位置，使用 which 命令：</p>
 <p>这个命令只对可执行程序有效，不包括内建命令和命令别名（如cd等命令）</p>
 <h3 id="help-－-得到-shell-内建命令的帮助文档"><a href="#help-－-得到-shell-内建命令的帮助文档" class="headerlink" title="help － 得到 shell 内建命令的帮助文档"></a>help － 得到 shell 内建命令的帮助文档</h3><p>只对内建命令有效（如cd），对诸如ls等命令则无效。</p>
 <h3 id="help-显示用法信息"><a href="#help-显示用法信息" class="headerlink" title="--help - 显示用法信息"></a>--help - 显示用法信息</h3><p>与help类似，但个人认为更实用一些。</p>
 <h3 id="whatis-－-显示非常简洁的命令说明"><a href="#whatis-－-显示非常简洁的命令说明" class="headerlink" title="whatis － 显示非常简洁的命令说明"></a>whatis － 显示非常简洁的命令说明</h3><p>whatis 程序显示匹配特定关键字的手册页的名字和一行命令说明</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ whatis mkdir</span><br><span class="line">mkdir (1)            - make directories</span><br><span class="line">mkdir (2)            - create a directory</span><br></pre></td></tr></table></figure>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">$ whatis mkdir<br>mkdir (<span class="hljs-number">1</span>)            - make <span class="hljs-built_in">directories</span><br>mkdir (<span class="hljs-number">2</span>)            - <span class="hljs-built_in">create</span> <span class="hljs-keyword">a</span> <span class="hljs-built_in">directory</span><br></code></pre></td></tr></table></figure>
 
 
 
@@ -277,11 +277,11 @@
    
   <nav class="article-nav">
     
-      <a href="/page/linux-terminal-file-path.html" class="article-nav-link">
+      <a href="/page/linux-io-redirection.html" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            文件路径操作命令
+            命令行IO重定向
           
         </div>
       </a>

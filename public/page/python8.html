@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Python/语言基础/8、Python的一些语言特性与机制"
+  id="post-编程相关/Python/Python基础/8、Python的一些语言特性与机制"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-06-19T07:01:02.000Z" itemprop="datePublished">2020-06-19</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Python/">Python</a> / <a class="article-category-link" href="/categories/Python/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/">语言基础</a>
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Python/">Python</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Python/Python%E5%9F%BA%E7%A1%80/">Python基础</a>
   </div>
   
 <div class="word_count">
@@ -106,18 +106,18 @@
 <p>垃圾回收机制</p>
 <p>以引用计数为主，分代收集为辅</p>
 <p>每个对象都有指向该对象的引用总数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sys.getrefcount()</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">sys</span><span class="hljs-selector-class">.getrefcount</span>()<br></code></pre></td></tr></table></figure>
 
 <p>满足特定条件，自动启动垃圾回收</p>
 <p>Python运行时，会记录分配对象与取消分配对象的次数。当两者差值高过阈值时。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 查看阈值</span><br><span class="line">gc.get_threshold()</span><br></pre></td></tr></table></figure>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs vala"><span class="hljs-meta"># 查看阈值</span><br>gc.get_threshold()<br></code></pre></td></tr></table></figure>
 
 <p>所有新建对象都是0代对象。所有对象分为0，1，2代。当某一代对象经历过垃圾回收，依然存活，则被归入下一代</p>
 <p>若一个对象的引用数为0，Python虚拟机就会回收这个对象的内存</p>
 <p>引用计数的缺陷是循环引用的问题</p>
 <p>递归运行时报错“RecursionError”。这是python默认的递归深度是很有限的（默认是1000），因此当递归深度超过999的样子，就会引发这样的一个异常。</p>
 <p>解决方法：首先考虑对代码进行优化，其次也可以考虑将递归深度的数值调大一些。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import sys</span><br><span class="line">sys.setrecursionlimit(100000) #你想设置的递归深度（可为任意值）</span><br></pre></td></tr></table></figure>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-keyword">import</span> sys<br>sys.setrecursionlimit(<span class="hljs-number">100000</span>) #你想设置的递归深度（可为任意值）<br></code></pre></td></tr></table></figure>
 
 
 
@@ -196,6 +196,8 @@
 </div>
 
 <div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+
     </footer>
   </div>
 
@@ -212,9 +214,9 @@
       </a>
     
     
-      <a href="/page/django1.html" class="article-nav-link">
+      <a href="/page/git_error.html" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">1、Django基础内容</div>
+        <div class="article-nav-title">Git出现的报错合集</div>
       </a>
     
   </nav>

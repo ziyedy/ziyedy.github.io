@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Java/Java基础/8、Java多线程"
+  id="post-编程相关/Java/Java基础语法/8、Java多线程"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-07-12T10:47:21.000Z" itemprop="datePublished">2020-07-12</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Java/">Java</a> / <a class="article-category-link" href="/categories/Java/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Java/">Java</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Java/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">476</span>
+            <span class="post-count">470</span>
         </span>
     </span>
 
@@ -104,17 +104,17 @@
        
   <h3 id="线程的创建"><a href="#线程的创建" class="headerlink" title="线程的创建"></a>线程的创建</h3><p>1、创建一个Thread类，或者一个Thread子类的对象</p>
 <p>2、创建一个实现Runnable接口的类的对象（解决Java只能单继承的限制，同时可以避免重写Thread类中的其他方法）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class Test implements Runnable &#123;</span><br><span class="line">	@Override</span><br><span class="line">	public void run() &#123;</span><br><span class="line">		&#x2F;&#x2F; 添加你的代码</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Runnable</span> </span>&#123;<br>	<span class="hljs-meta">@Override</span><br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>		<span class="hljs-comment">// 添加你的代码</span><br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>之后在主函数中输入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Test t &#x3D; new Test();</span><br><span class="line">Thread t1 &#x3D; new Thread(pr);	&#x2F;&#x2F; 将创建好的通过参数传入Thread</span><br><span class="line">t1.start();</span><br></pre></td></tr></table></figure>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs subunit"><span class="hljs-keyword">Test </span>t = new Test();<br>Thread t1 = new Thread(pr);	// 将创建好的通过参数传入Thread<br>t1.start();<br></code></pre></td></tr></table></figure>
 
 
 
 
 
 <p>Thread类的常用方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 线程相关的代码写入该方法，一般需要重写</span><br><span class="line">public void run()</span><br><span class="line"></span><br><span class="line"># 启动线程</span><br><span class="line">public void start()</span><br><span class="line"></span><br><span class="line"># 线程休眠m毫秒的方法</span><br><span class="line">public static void sleep(long m)</span><br><span class="line"></span><br><span class="line"># 优先执行调用join()方法的线程</span><br><span class="line">public void join()</span><br><span class="line"># 等待该线程终止的最长时间为millis毫秒</span><br><span class="line">public final void join(long millis)</span><br></pre></td></tr></table></figure>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs vala"><span class="hljs-meta"># 线程相关的代码写入该方法，一般需要重写</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> run()<br><br><span class="hljs-meta"># 启动线程</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> start()<br><br><span class="hljs-meta"># 线程休眠m毫秒的方法</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> sleep(<span class="hljs-keyword">long</span> m)<br><br><span class="hljs-meta"># 优先执行调用join()方法的线程</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> join()<br><span class="hljs-meta"># 等待该线程终止的最长时间为millis毫秒</span><br><span class="hljs-keyword">public</span> final <span class="hljs-keyword">void</span> join(<span class="hljs-keyword">long</span> millis)<br></code></pre></td></tr></table></figure>
 
 
 
@@ -123,17 +123,17 @@
 <p>任何实现线程功能的类都必须实现该接口</p>
 <h3 id="线程优先级"><a href="#线程优先级" class="headerlink" title="线程优先级"></a>线程优先级</h3><p>Java为线程类提供了10个优先级，优先级可以用整数1-10表示，超过范围会抛出异常，主线程默认优先级为5</p>
 <p>优先级常量</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MAX_PRIORITY：线程的最高优先级10</span><br><span class="line">MIN_PRIORITY：线程的最低优先级1</span><br><span class="line">NORM_PRIORITY：线程的默认优先级5</span><br></pre></td></tr></table></figure>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">MAX_PRIORITY：线程的最高优先级<span class="hljs-number">10</span><br>MIN_PRIORITY：线程的最低优先级<span class="hljs-number">1</span><br>NORM_PRIORITY：线程的默认优先级<span class="hljs-number">5</span><br></code></pre></td></tr></table></figure>
 
 <p>优先级相关方法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 获取线程优先级</span><br><span class="line">public int getPriority()</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 设置线程优先级</span><br><span class="line">public void setPriority(int newPriority)</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 获取主线程优先级</span><br><span class="line">int mainpriority &#x3D; Thread.currentThread().getPriority()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs ;">&#x2F;&#x2F; 获取线程优先级<br>public int getPriority()<br><br>&#x2F;&#x2F; 设置线程优先级<br>public void setPriority(int newPriority)<br><br>&#x2F;&#x2F; 获取主线程优先级<br>int mainpriority &#x3D; Thread.currentThread().getPriority()<br></code></pre></td></tr></table></figure>
 
 
 
 <h3 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h3><p>各线程通过竞争CPU时间而获得运行机会，各线程什么时候得到CPU时间，占用多久，是不可预测的，一个正在运行着的线程在什么地方被暂停是不确定的</p>
 <p>synchronized</p>
 <p>成员方法，静态方法、语句块</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public synchronized void func() &#123;&#125;</span><br><span class="line">public static synchronized void func() &#123;&#125;</span><br><span class="line">synchronized(obj) &#123;&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs aspectj"><span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">func</span><span class="hljs-params">()</span> </span>&#123;&#125;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">func</span><span class="hljs-params">()</span> </span>&#123;&#125;<br><span class="hljs-keyword">synchronized</span>(obj) &#123;&#125;<br></code></pre></td></tr></table></figure>
 
 
 

@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Java/Java基础/5、Java异常"
+  id="post-编程相关/Java/Java基础语法/5、Java异常"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-07-28T03:38:50.000Z" itemprop="datePublished">2020-07-28</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Java/">Java</a> / <a class="article-category-link" href="/categories/Java/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Java/">Java</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Java/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">343</span>
+            <span class="post-count">341</span>
         </span>
     </span>
 
@@ -107,20 +107,20 @@
 <p> java.lang 包中的<strong>Throwable类</strong>是所有异常的根类。它有两个重要的子类</p>
 <p>1、<strong>Error。程序无法处理的错误</strong>。表示运行程序中较为严重的错误，通常是代码运行时JVM出现的问题</p>
 <p>2、<strong>Exception。程序本身可以处理的异常</strong>。</p>
-<h3 id="Throwable常用方法"><a href="#Throwable常用方法" class="headerlink" title="Throwable常用方法"></a>Throwable常用方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public string getMessage():返回异常发生时的简要描述</span><br><span class="line"></span><br><span class="line">public string toString():返回异常发生时的详细信息</span><br><span class="line"></span><br><span class="line">public void printStackTrace():在控制台上打印 Throwable 对象封装的异常信息</span><br></pre></td></tr></table></figure>
+<h3 id="Throwable常用方法"><a href="#Throwable常用方法" class="headerlink" title="Throwable常用方法"></a>Throwable常用方法</h3><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> getMessage():返回异常发生时的简要描述<br><br><span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> toString():返回异常发生时的详细信息<br><br><span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> printStackTrace():在控制台上打印 Throwable 对象封装的异常信息<br></code></pre></td></tr></table></figure>
 
 
 
 
 
 <h3 id="try-catch-finally"><a href="#try-catch-finally" class="headerlink" title="try-catch-finally"></a>try-catch-finally</h3><h4 id="try"><a href="#try" class="headerlink" title="try"></a>try</h4><p>用于捕获异常。其后可接零个或多个 catch 块，如果没有 catch 块，则必须跟一个 finally 块。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line"></span><br><span class="line">&#125; catch(Exception e) &#123;</span><br><span class="line">	e.printStackTrace();</span><br><span class="line">&#125; finally &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs julia"><span class="hljs-keyword">try</span> &#123;<br><br>&#125; <span class="hljs-keyword">catch</span>(<span class="hljs-built_in">Exception</span> <span class="hljs-literal">e</span>) &#123;<br>	<span class="hljs-literal">e</span>.printStackTrace();<br>&#125; <span class="hljs-keyword">finally</span> &#123;<br><br>&#125;<br></code></pre></td></tr></table></figure>
 
 <h4 id="catch"><a href="#catch" class="headerlink" title="catch"></a>catch</h4><p>用于处理 try 捕获到的异常。</p>
 <h4 id="finally"><a href="#finally" class="headerlink" title="finally"></a>finally</h4><p>无论是否捕获或处理异常，finally 块里的语句都会被执行。当在 try 块或 catch 块中遇到 return 语句时，finally 语句块将在方法返回之前被执行。</p>
 <h4 id="throw与throws"><a href="#throw与throws" class="headerlink" title="throw与throws"></a>throw与throws</h4><p>throws声明方法将要抛出何种异常的声明，通过throw将产生的异常抛出</p>
 <p>若一个方法可能出现异常，但没有能力处理异常，可以在方法声明处用throws子句来声明抛出异常</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public void method() throws Exception1, Exception2 &#123;</span><br><span class="line">	&#x2F;&#x2F;可能产生异常的代码</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs oxygene"><span class="hljs-keyword">public</span> void <span class="hljs-function"><span class="hljs-keyword">method</span><span class="hljs-params">()</span> <span class="hljs-title">throws</span> <span class="hljs-title">Exception1</span>, <span class="hljs-title">Exception2</span> <span class="hljs-comment">&#123;<br>	//可能产生异常的代码<br>&#125;</span></span><br></code></pre></td></tr></table></figure>
 
 
 

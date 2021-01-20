@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Python/数据库/Python操作MySQL数据库"
+  id="post-编程相关/Python/Python操作MySQL数据库"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">194</span>
+            <span class="post-count">161</span>
         </span>
     </span>
 
@@ -104,30 +104,30 @@
        
   <p><strong>使用<code>mysql.connector</code>模块实现MySQL与Python的交互</strong></p>
 <h3 id="创建连接"><a href="#创建连接" class="headerlink" title="创建连接"></a>创建连接</h3><p>代码示例如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import mysql.connector</span><br><span class="line"></span><br><span class="line">config &#x3D; &#123;</span><br><span class="line">    &quot;host&quot;: &quot;localhost&quot;,</span><br><span class="line">    &quot;port&quot;: &quot;3306&quot;,</span><br><span class="line">    &quot;user&quot;: &quot;root&quot;,</span><br><span class="line">    &quot;password&quot;: &quot;password&quot;,</span><br><span class="line">    &quot;database&quot;: &quot;demo&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">con &#x3D; mysql.connector.connect(**config)</span><br><span class="line"></span><br><span class="line">con.close()</span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs routeros">import mysql.connector<br><span class="hljs-built_in"><br>config </span>= &#123;<br>    <span class="hljs-string">"host"</span>: <span class="hljs-string">"localhost"</span>,<br>    <span class="hljs-string">"port"</span>: <span class="hljs-string">"3306"</span>,<br>    <span class="hljs-string">"user"</span>: <span class="hljs-string">"root"</span>,<br>    <span class="hljs-string">"password"</span>: <span class="hljs-string">"password"</span>,<br>    <span class="hljs-string">"database"</span>: <span class="hljs-string">"demo"</span><br>&#125;<br><br>con = mysql.connector.connect(*<span class="hljs-number">*c</span>onfig)<br><br>con.close()<br></code></pre></td></tr></table></figure>
 
 
 
 
 
 <h3 id="游标（Cursor）"><a href="#游标（Cursor）" class="headerlink" title="游标（Cursor）"></a>游标（Cursor）</h3><p><code>mysql.connector</code>中使用游标来执行SQL语句，并且查询结果也会保存在游标中</p>
-<h4 id="执行SQL语句"><a href="#执行SQL语句" class="headerlink" title="执行SQL语句"></a>执行SQL语句</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curser &#x3D; con.cursor()</span><br><span class="line">curser.execute()</span><br></pre></td></tr></table></figure>
+<h4 id="执行SQL语句"><a href="#执行SQL语句" class="headerlink" title="执行SQL语句"></a>执行SQL语句</h4><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs vim">curser = <span class="hljs-keyword">con</span>.<span class="hljs-built_in">cursor</span>()<br>curser.<span class="hljs-keyword">execute</span>()<br></code></pre></td></tr></table></figure>
 
 <p>示例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">curser &#x3D; con.cursor()</span><br><span class="line">sql &#x3D; &quot;SELECT ename FROM t_emp;&quot;</span><br><span class="line">curser.execute(sql)</span><br><span class="line">for one in curser:</span><br><span class="line">    print(one[0])</span><br></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs vim">curser = <span class="hljs-keyword">con</span>.<span class="hljs-built_in">cursor</span>()<br>sql = <span class="hljs-string">"SELECT ename FROM t_emp;"</span><br>curser.<span class="hljs-keyword">execute</span>(sql)<br><span class="hljs-keyword">for</span> one in curser:<br>    <span class="hljs-keyword">print</span>(one[<span class="hljs-number">0</span>])<br></code></pre></td></tr></table></figure>
 
 
 
 <p>事务控制</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">con.start_transaction()</span><br><span class="line">con.commit()</span><br><span class="line">con.rollback()</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">con</span><span class="hljs-selector-class">.start_transaction</span>()<br><span class="hljs-selector-tag">con</span><span class="hljs-selector-class">.commit</span>()<br><span class="hljs-selector-tag">con</span><span class="hljs-selector-class">.rollback</span>()<br></code></pre></td></tr></table></figure>
 
 <p>异常处理</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">try:</span><br><span class="line">    con &#x3D; mysql.connector.connect(**config)</span><br><span class="line">    con.start_transaction()</span><br><span class="line">    con.commit()</span><br><span class="line">except Exception as e:</span><br><span class="line">    con.rollback()</span><br><span class="line">finally:</span><br><span class="line">    if &quot;con&quot; in dir():</span><br><span class="line">        con.close()</span><br></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">try</span>:<br>    <span class="hljs-keyword">con</span> = mysql.connector.connect(**config)<br>    <span class="hljs-keyword">con</span>.start_transaction()<br>    <span class="hljs-keyword">con</span>.commit()<br>except Exception <span class="hljs-keyword">as</span> <span class="hljs-keyword">e</span>:<br>    <span class="hljs-keyword">con</span>.rollback()<br><span class="hljs-keyword">finally</span>:<br>    <span class="hljs-keyword">if</span> <span class="hljs-string">"con"</span> in dir():<br>        <span class="hljs-keyword">con</span>.<span class="hljs-keyword">close</span>()<br></code></pre></td></tr></table></figure>
 
 
 
 <p>数据库连接池</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pool &#x3D; mysql.connector.pooling.MySQLConnectionPool(</span><br><span class="line">    **config,</span><br><span class="line">    pool_size&#x3D;10</span><br><span class="line">)</span><br><span class="line">con &#x3D; pool.get_connection()</span><br></pre></td></tr></table></figure>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs nix"><span class="hljs-attr">pool</span> = mysql.connector.pooling.MySQLConnectionPool(<br>    **config,<br>    <span class="hljs-attr">pool_size=10</span><br>)<br><span class="hljs-attr">con</span> = pool.get_connection()<br></code></pre></td></tr></table></figure>
 
 
 

@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Java/Java基础/4、Java容器"
+  id="post-编程相关/Java/Java基础语法/4、Java容器"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-07-10T06:34:11.000Z" itemprop="datePublished">2020-07-10</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Java/">Java</a> / <a class="article-category-link" href="/categories/Java/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Java/">Java</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Java/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">512</span>
+            <span class="post-count">485</span>
         </span>
     </span>
 
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">2 min</span>
+            <span class="post-count">1 min</span>
         </span>
     </span>
 </div>
@@ -107,7 +107,7 @@
 <p>String的对象一旦被创建，则不能修改，是不可变的（即使用substr等函数时其本身是不会变的）</p>
 <p>当频繁操作字符串时，使用StringBuilder</p>
 <p>常用方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">StringBuilder str &#x3D; new StringBuilder(&quot;hello&quot;);</span><br><span class="line">str.append(&quot; world&quot;);	&#x2F;&#x2F; 向后添加字符串</span><br><span class="line">str.delete(0,5);	&#x2F;&#x2F; 删除第0-4个字符</span><br><span class="line">str.insert(4,&quot;gg&quot;);	&#x2F;&#x2F; 在索引4向后插入gg</span><br><span class="line">str.replace(4,6,&quot;aa&quot;);	&#x2F;&#x2F; 在缩影4到5处替换为aa</span><br></pre></td></tr></table></figure>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs processing">StringBuilder <span class="hljs-built_in">str</span> = <span class="hljs-keyword">new</span> StringBuilder(<span class="hljs-string">"hello"</span>);<br><span class="hljs-built_in">str</span>.<span class="hljs-built_in">append</span>(<span class="hljs-string">" world"</span>);	<span class="hljs-comment">// 向后添加字符串</span><br><span class="hljs-built_in">str</span>.delete(<span class="hljs-number">0</span>,<span class="hljs-number">5</span>);	<span class="hljs-comment">// 删除第0-4个字符</span><br><span class="hljs-built_in">str</span>.insert(<span class="hljs-number">4</span>,<span class="hljs-string">"gg"</span>);	<span class="hljs-comment">// 在索引4向后插入gg</span><br><span class="hljs-built_in">str</span>.replace(<span class="hljs-number">4</span>,<span class="hljs-number">6</span>,<span class="hljs-string">"aa"</span>);	<span class="hljs-comment">// 在缩影4到5处替换为aa</span><br></code></pre></td></tr></table></figure>
 
 
 
@@ -115,7 +115,7 @@
 <p>List是元素有序并且可以重复的集合，称为序列</p>
 <p>两个主要实现类：ArrayList，LinkedList</p>
 <p>ArrayList底层由数组实现，动态增长，其中元素可以为null</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ArrayList list &#x3D; new ArrayList();</span><br><span class="line">list.add(1);	&#x2F;&#x2F; 向后添加</span><br><span class="line">list.size();	&#x2F;&#x2F; 获取元素数量</span><br><span class="line">list.get(1);	&#x2F;&#x2F; 取出索引值为1的元素</span><br><span class="line">list.remove(2);	&#x2F;&#x2F; 移除索引为2的元素</span><br></pre></td></tr></table></figure>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs arduino">ArrayList <span class="hljs-built_in">list</span> = <span class="hljs-keyword">new</span> ArrayList();<br><span class="hljs-built_in">list</span>.add(<span class="hljs-number">1</span>);	<span class="hljs-comment">// 向后添加</span><br><span class="hljs-built_in">list</span>.<span class="hljs-built_in">size</span>();	<span class="hljs-comment">// 获取元素数量</span><br><span class="hljs-built_in">list</span>.<span class="hljs-built_in">get</span>(<span class="hljs-number">1</span>);	<span class="hljs-comment">// 取出索引值为1的元素</span><br><span class="hljs-built_in">list</span>.<span class="hljs-built_in">remove</span>(<span class="hljs-number">2</span>);	<span class="hljs-comment">// 移除索引为2的元素</span><br></code></pre></td></tr></table></figure>
 
 
 
@@ -125,7 +125,7 @@
 <h3 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h3><p>Iterator接口可以以统一的方式对各种集合元素进行遍历，调用各种集合元素的iterator()方法得到迭代器。</p>
 <p>hasNext()方法检测集合中是否还有下一个元素</p>
 <p>next()方法返回集合中的下一个元素</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Iterator it &#x3D; set.iterator();</span><br><span class="line">while (it.hasNext()) &#123;</span><br><span class="line">	System.out.println(it.next());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs applescript">Iterator <span class="hljs-keyword">it</span> = <span class="hljs-keyword">set</span>.iterator();<br><span class="hljs-keyword">while</span> (<span class="hljs-keyword">it</span>.hasNext()) &#123;<br>	System.out.println(<span class="hljs-keyword">it</span>.next());<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 
@@ -133,7 +133,7 @@
 <p>Map。以键值对的形式存储</p>
 <p>HashMap：基于哈希表的Map接口的实现，允许使用null值和null键，无序排列。</p>
 <p>排序</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Collections.sort(list);</span><br></pre></td></tr></table></figure>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Collections</span>.</span></span>sort(<span class="hljs-built_in">list</span>);<br></code></pre></td></tr></table></figure>
 
 <p>使用Comparable或Comparator接口对自定义类进行排序</p>
 <p>Comparator接口</p>
