@@ -5,6 +5,7 @@ tags:
 	- Ubuntu
 categories:
 	- 问题解决
+	- Ubuntu
 fileName: ubuntu-install-summary
 ---
 
