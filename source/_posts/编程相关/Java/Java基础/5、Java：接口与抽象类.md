@@ -1,5 +1,5 @@
 ---
-title: Java接口与抽象类
+title: Java：接口与抽象类
 date: 2020-07-28 11:38:34
 tags:
 	- Java
