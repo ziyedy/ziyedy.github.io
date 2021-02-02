@@ -14,7 +14,7 @@ fileName: Java-exception
 
 ### 异常层次结构
 
-<img src="5、Java异常/exception-chart.png" style="zoom:67%;" />
+<img src="http://cdn.ziyedy.top/6%E3%80%81Java%EF%BC%9A%E5%BC%82%E5%B8%B8%E4%B8%8E%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/exception-chart.png" style="zoom:67%;" />
 
  `java.lang`包中的`Throwable`类是所有异常的根类。它有两个重要的子类
 
