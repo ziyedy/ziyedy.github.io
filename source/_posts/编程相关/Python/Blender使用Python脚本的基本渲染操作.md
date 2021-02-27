@@ -1,12 +1,12 @@
 ---
-title: Blender物体渲染脚本
+title: Blender使用Python脚本的基本渲染操作
 date: 2020-09-13 09:17:32
 tags:
 	- Blender
 categories:
 	- 编程相关
 	- Python
-fileName: blender-script-basic
+fileName: blender-python-script-basic
 ---
 
 > 渲染可以简单理解为将3D场景转化为2D场景的过程
@@ -223,16 +223,3 @@ bpy.ops.render.render(write_still=True, use_viewport=False)
 ### 参考
 
 https://github.com/zju3dv/pvnet-rendering
-
-
-
-
-
-
-
-
-
-
-
-
-
