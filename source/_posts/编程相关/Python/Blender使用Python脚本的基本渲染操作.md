@@ -6,6 +6,7 @@ tags:
 categories:
 	- 编程相关
 	- Python
+top: true
 fileName: blender-python-script-basic
 ---
 
