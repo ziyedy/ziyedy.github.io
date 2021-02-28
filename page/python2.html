@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Python/语言基础/2、Python函数相关内容"
+  id="post-编程相关/Python/Python基础/2、Python函数相关内容"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-05-08T07:20:53.000Z" itemprop="datePublished">2020-05-08</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Python/">Python</a> / <a class="article-category-link" href="/categories/Python/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/">语言基础</a>
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Python/">Python</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Python/Python%E5%9F%BA%E7%A1%80/">Python基础</a>
   </div>
   
 <div class="word_count">
@@ -114,130 +114,73 @@
 </li>
 </ul>
 <p>1、函数赋值给变量，通过变量可以调用。且传递方法为<strong>值传递</strong>，这也就意味着即使删除函数f1，temp仍然能够正常运行。</p>
-<pre><code>def f1(str):
-  return len(str)
-temp=f1    # 函数赋值给对象
-del f1    # 删除函数
-print temp(&#39;hello&#39;)    # 仍然正常调用</code></pre><p>2、作为元素添加进入容器。</p>
-<pre><code>def f2(str1,str2):
-   return str1+str2
-a=[]
-a.append(f1)
-a.append(f2)
-print a[0](&#39;hello&#39;)
-print a[1](&#39;hello&#39;,&#39;world&#39;)</code></pre><p>3、作为函数参数</p>
-<pre><code>def func(f,str):
-  return f(str)
-print func(f1,&#39;hello&#39;)</code></pre><p>4、作为函数返回值</p>
-<pre><code>def mutiply(x,y):
-  reutrn x*y
-def sub(x,y):return x-y
-def func2(i):if i==1: return mutiplyelse:return sub
-temp=func2(2)
-print temp(2,4)</code></pre><p><strong>Python函数是最高级别的对象，而不仅仅为一小段代码</strong>。一个函数是一个被其自己定义和执行的对象，参数是一种“成员数据”，所以它们的状态和其他对象一样，会随着每一次调用而改变。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f1</span><span class="hljs-params">(str)</span>:</span><br>  <span class="hljs-keyword">return</span> len(str)<br>temp=f1	<span class="hljs-comment"># 函数赋值给对象</span><br><span class="hljs-keyword">del</span> f1	<span class="hljs-comment"># 删除函数</span><br><span class="hljs-keyword">print</span> temp(<span class="hljs-string">'hello'</span>)	<span class="hljs-comment"># 仍然正常调用</span><br></code></pre></td></tr></table></figure>
+
+<p>2、作为元素添加进入容器。</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs markdown">def f2(str1,str2):<br>   return str1+str2<br>a=[]<br>a.append(f1)<br>a.append(f2)<br>print a[<span class="hljs-string">0</span>](<span class="hljs-link">'hello'</span>)<br>print a[<span class="hljs-string">1</span>](<span class="hljs-link">'hello','world'</span>)<br></code></pre></td></tr></table></figure>
+
+<p>3、作为函数参数</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs autoit">def <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(f,str)</span>:</span><br>  <span class="hljs-keyword">return</span> f(str)<br>print <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(f1,<span class="hljs-string">'hello'</span>)</span></span><br></code></pre></td></tr></table></figure>
+
+<p>4、作为函数返回值</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">mutiply</span><span class="hljs-params">(x,y)</span></span>:<br>  reutrn x*y<br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">sub</span><span class="hljs-params">(x,y)</span></span><span class="hljs-symbol">:return</span> x-y<br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">func2</span><span class="hljs-params">(i)</span></span><span class="hljs-symbol">:if</span> i==<span class="hljs-number">1</span>: <span class="hljs-keyword">return</span> <span class="hljs-symbol">mutiplyelse:</span><span class="hljs-keyword">return</span> sub<br>temp=func2(<span class="hljs-number">2</span>)<br>print temp(<span class="hljs-number">2</span>,<span class="hljs-number">4</span>)<br></code></pre></td></tr></table></figure>
+
+<p><strong>Python函数是最高级别的对象，而不仅仅为一小段代码</strong>。一个函数是一个被其自己定义和执行的对象，参数是一种“成员数据”，所以它们的状态和其他对象一样，会随着每一次调用而改变。</p>
 <h4 id="嵌套与闭包"><a href="#嵌套与闭包" class="headerlink" title="嵌套与闭包"></a>嵌套与闭包</h4><p>1、函数的嵌套</p>
-<pre><code>def fun1():
-    def fun2():
-        def fun3():
-            print(&quot;Hello world!&quot;)
-        return fun3
-    return fun2
-fun1()()()
-##########################################
-Hello world!</code></pre><p>2、函数的闭包</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs clean">def fun1():<br>    def fun2():<br>        def fun3():<br>            print(<span class="hljs-string">"Hello world!"</span>)<br>        return fun3<br>    return fun2<br>fun1()()()<br>##########################################<br>Hello world!<br></code></pre></td></tr></table></figure>
+
+<p>2、函数的闭包</p>
 <p><strong>闭包函数就是函数可以读取到与自己不是一个作用域的局部变量</strong></p>
 <ol>
 <li>必须有一个内嵌函数</li>
 <li>内嵌函数必须引用外部函数中的变量</li>
 <li>外部函数的返回值必须是内嵌函数</li>
 </ol>
-<pre><code>def fun1(x):
-    def fun2(y):
-        print(x+y)
-    return fun2
-fun1(2)(3)
-#############################
-5</code></pre><p><strong>装饰器，匿名函数，map函数等都是函数的变体，都是通过这些基本特性来实现的</strong></p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs clean">def fun1(x):<br>    def fun2(y):<br>        print(x+y)<br>    return fun2<br>fun1(<span class="hljs-number">2</span>)(<span class="hljs-number">3</span>)<br>#############################<br><span class="hljs-number">5</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>装饰器，匿名函数，map函数等都是函数的变体，都是通过这些基本特性来实现的</strong></p>
 <p><strong>装饰器</strong>：使用函数的嵌套，外层函数传进来的参数为一个函数对象，里层函数对传进来的函数进行加工处理后再返回处理的函数</p>
 <h3 id="函数的一些传参方法"><a href="#函数的一些传参方法" class="headerlink" title="函数的一些传参方法"></a>函数的一些传参方法</h3><h4 id="关键字传参"><a href="#关键字传参" class="headerlink" title="关键字传参"></a>关键字传参</h4><p>可以增强代码可读性，每次传参都需要指定形参名，以下就是关键字传参。</p>
-<pre><code>def func(a,b):
-    pass
-func(a=1,b=2)</code></pre><p><strong>Tip：</strong> * 代表之后所有参数传参时必须使用关键字传参（混合形式传参）</p>
-<pre><code>def func(p1,*,p2,p3):
-    print(p2+p3)
-func(1,p2=2,p3=3)
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs autoit">def <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(a,b)</span>:</span><br>	pass<br><span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(a=<span class="hljs-number">1</span>,b=<span class="hljs-number">2</span>)</span></span><br></code></pre></td></tr></table></figure>
 
-# 输出
-5</code></pre><p>以下代码中p2、p3不使用关键字传参即会报错。</p>
-<pre><code>def func(p1,*,p2,p3):
-    print(p2+p3)
-func(1,2,3)
 
-# 输出（报错）
-TypeError                                 Traceback (most recent call last)
-&lt;ipython-input-17-83e9b0e5315e&gt; in &lt;module&gt;
-      1 def func(p1,*,p2,p3):
-      2     print(p2+p3)
-----&gt; 3 func(1,2,3)
 
-TypeError: func() takes 1 positional argument but 3 were given</code></pre><h4 id="列表传参"><a href="#列表传参" class="headerlink" title="列表传参"></a>列表传参</h4><p>将列表传入函数，只要在列表名前面加上*即可传入</p>
-<pre><code>def func(a, b):
-    print(a+b)
-l = [1, 2]
-func(*l)
+<p><strong>Tip：</strong> * 代表之后所有参数传参时必须使用关键字传参（混合形式传参）</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-symbol">def</span> func(<span class="hljs-built_in">p1</span>,*,<span class="hljs-built_in">p2</span>,<span class="hljs-built_in">p3</span>):<br>    print(<span class="hljs-built_in">p2</span>+<span class="hljs-built_in">p3</span>)<br><span class="hljs-symbol">func</span>(<span class="hljs-number">1</span>,<span class="hljs-built_in">p2</span><span class="hljs-number">=2</span>,<span class="hljs-built_in">p3</span><span class="hljs-number">=3</span>)<br><br># 输出<br><span class="hljs-number">5</span><br></code></pre></td></tr></table></figure>
 
-# 输出
-3</code></pre><h4 id="字典传参"><a href="#字典传参" class="headerlink" title="字典传参"></a>字典传参</h4><p>将字典你传入函数，只需要在字典名前面加上**即可，这种方法可以先将参数写为json格式之后进行传入。</p>
-<pre><code>def func(a,b,c):
-    print(a+b+c)
-param = {&quot;a&quot;:1,&quot;b&quot;:2,&quot;c&quot;:3}
-func(**param)
+<p>以下代码中p2、p3不使用关键字传参即会报错。</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs autoit">def <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(p1,*,p2,p3)</span>:</span><br>    print(p2+p3)<br><span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>)</span></span><br><br><span class="hljs-meta"># 输出（报错）</span><br>TypeError                                 Traceback (most recent <span class="hljs-built_in">call</span> last)<br>&lt;ipython-input<span class="hljs-number">-17</span><span class="hljs-number">-83e9</span>b0e5315e&gt; <span class="hljs-keyword">in</span> &lt;module&gt;<br>      <span class="hljs-number">1</span> def <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(p1,*,p2,p3)</span>:</span><br>      <span class="hljs-number">2</span>     print(p2+p3)<br>----&gt; <span class="hljs-number">3</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>)</span></span><br><br>TypeError: <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span> <span class="hljs-title">takes</span> 1 <span class="hljs-title">positional</span> <span class="hljs-title">argument</span> <span class="hljs-title">but</span> 3 <span class="hljs-title">were</span> <span class="hljs-title">given</span></span><br></code></pre></td></tr></table></figure>
 
-# 输出
-6</code></pre><h4 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h4><p>很好理解，在定义函数时指定该参数的值即可。</p>
-<pre><code># 参数a默认为1
-def func(a=1):
-    pass</code></pre><h3 id="可变参数（重要特性）"><a href="#可变参数（重要特性）" class="headerlink" title="可变参数（重要特性）"></a>可变参数（重要特性）</h3><p>在定义函数时，不限定参数的个数，而使用<em>args和*</em>kwargs表示。<em>args为元组，*</em>kwargs为字典。</p>
+<h4 id="列表传参"><a href="#列表传参" class="headerlink" title="列表传参"></a>列表传参</h4><p>将列表传入函数，只要在列表名前面加上*即可传入</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs autoit">def <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(a, b)</span>:</span><br>    print(a+b)<br>l = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>]<br><span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(*l)</span></span><br><br><span class="hljs-meta"># 输出</span><br><span class="hljs-number">3</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="字典传参"><a href="#字典传参" class="headerlink" title="字典传参"></a>字典传参</h4><p>将字典你传入函数，只需要在字典名前面加上**即可，这种方法可以先将参数写为json格式之后进行传入。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs swift">def <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(a,b,<span class="hljs-built_in">c</span>)</span></span>:<br>    <span class="hljs-built_in">print</span>(a+b+<span class="hljs-built_in">c</span>)<br>param = &#123;<span class="hljs-string">"a"</span>:<span class="hljs-number">1</span>,<span class="hljs-string">"b"</span>:<span class="hljs-number">2</span>,<span class="hljs-string">"c"</span>:<span class="hljs-number">3</span>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(**param)</span></span><br><br># 输出<br><span class="hljs-number">6</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h4><p>很好理解，在定义函数时指定该参数的值即可。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 参数a默认为1</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">func</span><span class="hljs-params">(a=<span class="hljs-number">1</span>)</span>:</span><br>	<span class="hljs-keyword">pass</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="可变参数（重要特性）"><a href="#可变参数（重要特性）" class="headerlink" title="可变参数（重要特性）"></a>可变参数（重要特性）</h3><p>在定义函数时，不限定参数的个数，而使用<em>args和*</em>kwargs表示。<em>args为元组，*</em>kwargs为字典。</p>
 <p>*args将参数打包为tuple给函数体使用，实例如下：</p>
-<pre><code>def func(a, *args):
-    print(a)
-    print(type(a))
-    print(args)
-    print(type(args))
-func(&#39;gg&#39;, 1, 2, &#39;gg3&#39;)
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs clean">def func(a, *args):<br>    print(a)<br>    print(type(a))<br>    print(args)<br>    print(type(args))<br>func(<span class="hljs-string">'gg'</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-string">'gg3'</span>)<br><br>######################################<br>gg<br>&lt;<span class="hljs-keyword">class</span> <span class="hljs-string">'str'</span>&gt;<br>(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-string">'gg3'</span>)<br>&lt;<span class="hljs-keyword">class</span> <span class="hljs-string">'tuple'</span>&gt;<br></code></pre></td></tr></table></figure>
 
-######################################
-gg
-&lt;class &#39;str&#39;&gt;
-(1, 2, &#39;gg3&#39;)
-&lt;class &#39;tuple&#39;&gt;</code></pre><p>**kwargs将参数打包为dict给函数使用，调用时实参为key=value的形式。</p>
-<pre><code>def func(a, **kwargs):
-    print(a)
-    print(type(a))
-    print(kwargs)
-    print(type(kwargs))
-func(&#39;gg&#39;, b=1, c=1)
+<p>**kwargs将参数打包为dict给函数使用，调用时实参为key=value的形式。</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs clean">def func(a, **kwargs):<br>    print(a)<br>    print(type(a))<br>    print(kwargs)<br>    print(type(kwargs))<br>func(<span class="hljs-string">'gg'</span>, b=<span class="hljs-number">1</span>, c=<span class="hljs-number">1</span>)<br><br>############################################<br>gg<br>&lt;<span class="hljs-keyword">class</span> <span class="hljs-string">'str'</span>&gt;<br>&#123;<span class="hljs-string">'b'</span>: <span class="hljs-number">1</span>, <span class="hljs-string">'c'</span>: <span class="hljs-number">1</span>&#125;<br>&lt;<span class="hljs-keyword">class</span> <span class="hljs-string">'dict'</span>&gt;<br></code></pre></td></tr></table></figure>
 
-############################################
-gg
-&lt;class &#39;str&#39;&gt;
-{&#39;b&#39;: 1, &#39;c&#39;: 1}
-&lt;class &#39;dict&#39;&gt;</code></pre><h4 id="参数组合"><a href="#参数组合" class="headerlink" title="参数组合"></a>参数组合</h4><p>当多种参数组合使用时，参数定义顺序为必选参数、默认参数、可变参数。</p>
+<h4 id="参数组合"><a href="#参数组合" class="headerlink" title="参数组合"></a>参数组合</h4><p>当多种参数组合使用时，参数定义顺序为必选参数、默认参数、可变参数。</p>
 <h3 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a>高阶函数</h3><p>可以简单理解为调用函数的函数。</p>
 <h4 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a><code>lambda</code>表达式</h4><p>lambda是python中的一种表达式，创建内嵌的简单<strong>匿名函数</strong>。可以避免取函数名</p>
-<pre><code>f = lambda i:i**2
-f(2)
-# 4</code></pre><h4 id="filter函数"><a href="#filter函数" class="headerlink" title="filter函数"></a>filter函数</h4><p>filter(func, seq)     返回seq中所有满足func结果为真的对象，可以简单理解为一个过滤器。</p>
-<pre><code># 找到所有奇数
-l = range(10)
-a = filter(lambda n: n%2!=0, l)
-print(list(a))
-# [1, 3, 5, 7, 9]</code></pre><h4 id="map函数"><a href="#map函数" class="headerlink" title="map函数"></a>map函数</h4><p>map (func, seq) 返回对seq执行func后的值，可以简单理解为一个映射。</p>
-<pre><code># 找到数的所有平方
-l = range(5)
-a = map(lambda n: n**2, l)
-print(list(a))
-# [0, 1, 4, 9, 16]</code></pre> 
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">f = lambda i:i**<span class="hljs-number">2</span><br>f(<span class="hljs-number">2</span>)<br># <span class="hljs-number">4</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="filter函数"><a href="#filter函数" class="headerlink" title="filter函数"></a>filter函数</h4><p>filter(func, seq)     返回seq中所有满足func结果为真的对象，可以简单理解为一个过滤器。</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"># 找到所有奇数<br>l = range(<span class="hljs-number">10</span>)<br>a = filter(lambda n: n%<span class="hljs-number">2</span>!=<span class="hljs-number">0</span>, l)<br>print(list(a))<br># [<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>, <span class="hljs-number">9</span>]<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="map函数"><a href="#map函数" class="headerlink" title="map函数"></a>map函数</h4><p>map (func, seq) 返回对seq执行func后的值，可以简单理解为一个映射。</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"># 找到数的所有平方<br>l = range(<span class="hljs-number">5</span>)<br>a = map(lambda n: n**<span class="hljs-number">2</span>, l)<br>print(list(a))<br># [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">4</span>, <span class="hljs-number">9</span>, <span class="hljs-number">16</span>]<br></code></pre></td></tr></table></figure> 
       <!-- reward -->
       
       <div id="reword-out">
@@ -312,7 +255,7 @@ print(list(a))
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
 
     </footer>
   </div>

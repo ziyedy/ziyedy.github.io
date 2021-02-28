@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Python/Python实现深度图转点云"
+  id="post-编程相关/Python/Python实现深度图转点云"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-10-04T02:44:17.000Z" itemprop="datePublished">2020-10-04</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Python/">Python</a>
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Python/">Python</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">387</span>
+            <span class="post-count">381</span>
         </span>
     </span>
 
@@ -106,37 +106,9 @@
 <p><img src="http://cdn.ziyedy.top/Python%E5%AE%9E%E7%8E%B0%E6%B7%B1%E5%BA%A6%E5%9B%BE%E8%BD%AC%E7%82%B9%E4%BA%91/%E5%9D%90%E6%A0%87%E7%B3%BB.jpg" alt=""></p>
 <p>忽略推导过程，其实可以归纳为从图像点<code>[u, v]</code>到相机坐标点<code>[x_c, y_c, z_c]</code>的过程，具体公式如下（其中depth(u, v)表示深度图(u, v)位置的像素值）<br>$$<br>x_c = z_c (u - u_0) / f_x \<br>y_c = z_c (v - v_0) / f_y \<br>z_c = depth(u, v)<br>$$</p>
 <h2 id="Python实现"><a href="#Python实现" class="headerlink" title="Python实现"></a>Python实现</h2><h3 id="深度图"><a href="#深度图" class="headerlink" title="深度图"></a>深度图</h3><p><img src="http://cdn.ziyedy.top/Python%E5%AE%9E%E7%8E%B0%E6%B7%B1%E5%BA%A6%E5%9B%BE%E8%BD%AC%E7%82%B9%E4%BA%91/%E6%B7%B1%E5%BA%A6%E5%9B%BE.png" alt="深度图"></p>
-<h3 id="转换代码"><a href="#转换代码" class="headerlink" title="转换代码"></a>转换代码</h3><pre><code>def depth2pc(depth_img):
-    &quot;&quot;&quot;
-    深度图转点云数据
-    图像坐标系 -&gt; 世界坐标系 
-    :param depth_img: 深度图
-    :return: 点云数据 N*3
-    &quot;&quot;&quot;
+<h3 id="转换代码"><a href="#转换代码" class="headerlink" title="转换代码"></a>转换代码</h3><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs nix">def depth2pc(depth_img):<br>    <span class="hljs-string">""</span><span class="hljs-string">"<br>    深度图转点云数据<br>    图像坐标系 -&gt; 世界坐标系 <br>    :param depth_img: 深度图<br>    :return: 点云数据 N*3<br>    "</span><span class="hljs-string">""</span><br>    <br>    <span class="hljs-comment"># 相机内参</span><br>    <span class="hljs-attr">cam_fx</span> = <span class="hljs-number">1120.12</span><br>    <span class="hljs-attr">cam_fy</span> = <span class="hljs-number">1120.12</span><br>    <span class="hljs-attr">cam_cx</span> = <span class="hljs-number">640.5</span><br>    <span class="hljs-attr">cam_cy</span> = <span class="hljs-number">360.5</span><br>    <span class="hljs-attr">factor</span> = <span class="hljs-number">1</span><br><br>	<span class="hljs-comment"># 逐点处理，此过程可以使用numpy优化</span><br>    m, <span class="hljs-attr">n</span> = depth_img.shape<br>    <span class="hljs-attr">point_cloud</span> = []<br>    for v <span class="hljs-keyword">in</span> range(m):<br>        for u <span class="hljs-keyword">in</span> range(n):<br>            <span class="hljs-keyword">if</span> depth_img[v, u] == <span class="hljs-number">0</span>:<br>                continue<br>            <span class="hljs-attr">depth</span> = depth_img[v, u]<br>            <span class="hljs-attr">p_z</span> = depth / factor<br>            <span class="hljs-attr">p_x</span> = (u - cam_cx) * p_z / cam_fx<br>            <span class="hljs-attr">p_y</span> = (v - cam_cy) * p_z / cam_fy<br>            point_cloud.append([p_x, p_y, p_z])<br><br>    <span class="hljs-attr">point_cloud</span> = np.array(point_cloud)<br><br>    return point_cloud<br></code></pre></td></tr></table></figure>
 
-    # 相机内参
-    cam_fx = 1120.12
-    cam_fy = 1120.12
-    cam_cx = 640.5
-    cam_cy = 360.5
-    factor = 1
-
-    # 逐点处理，此过程可以使用numpy优化
-    m, n = depth_img.shape
-    point_cloud = []
-    for v in range(m):
-        for u in range(n):
-            if depth_img[v, u] == 0:
-                continue
-            depth = depth_img[v, u]
-            p_z = depth / factor
-            p_x = (u - cam_cx) * p_z / cam_fx
-            p_y = (v - cam_cy) * p_z / cam_fy
-            point_cloud.append([p_x, p_y, p_z])
-
-    point_cloud = np.array(point_cloud)
-
-    return point_cloud</code></pre><h3 id="转换后的点云"><a href="#转换后的点云" class="headerlink" title="转换后的点云"></a>转换后的点云</h3><p><em>略去了将桌面等背景略去的相关代码</em>，转换后的点云数据如下</p>
+<h3 id="转换后的点云"><a href="#转换后的点云" class="headerlink" title="转换后的点云"></a>转换后的点云</h3><p><em>略去了将桌面等背景略去的相关代码</em>，转换后的点云数据如下</p>
 <p><img src="http://cdn.ziyedy.top/Python%E5%AE%9E%E7%8E%B0%E6%B7%B1%E5%BA%A6%E5%9B%BE%E8%BD%AC%E7%82%B9%E4%BA%91/%E7%82%B9%E4%BA%91%E6%95%B0%E6%8D%AE.png" alt=""></p>
 <h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>由于本人是初次接触点云相关数据，而任务又有时间要求，所以没有使用较为主流的C++下的pcl库，未来两个月打算学习以下点云相关的操作与理论，届时再进行更新</p>
 <p><a href="https://blog.csdn.net/weixin_30284355/article/details/98320637" target="_blank" rel="noopener">https://blog.csdn.net/weixin_30284355/article/details/98320637</a></p>
@@ -215,7 +187,7 @@
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/3D%E8%A7%86%E8%A7%89/" rel="tag">3D视觉</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/3D%E8%A7%86%E8%A7%89/" rel="tag">3D视觉</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%82%B9%E4%BA%91/" rel="tag">点云</a></li></ul>
 
     </footer>
   </div>

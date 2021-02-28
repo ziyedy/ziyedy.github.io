@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Python/语言基础/3、Python类的使用"
+  id="post-编程相关/Python/Python基础/3、Python类的使用"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-05-08T07:40:45.000Z" itemprop="datePublished">2020-05-08</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Python/">Python</a> / <a class="article-category-link" href="/categories/Python/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/">语言基础</a>
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Python/">Python</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Python/Python%E5%9F%BA%E7%A1%80/">Python基础</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">965</span>
+            <span class="post-count">934</span>
         </span>
     </span>
 
@@ -106,123 +106,50 @@
 <p>__name：双前置下划线，私有化属性或方法，无法在外部直接访问（名字重整所以访问不到）</p>
 <p>__name__：系统定义的名字，自己不要创建</p>
 <p>Python的析构函数<code>__del__(self)</code>。默认会直接进行操作。</p>
-<pre><code># 判断是否为子类
-issubclass(cat, animal)</code></pre><h3 id="调用父类方法"><a href="#调用父类方法" class="headerlink" title="调用父类方法"></a>调用父类方法</h3><p><code>super()</code>方法</p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs vala"><span class="hljs-meta"># 判断是否为子类</span><br>issubclass(cat, animal)<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="调用父类方法"><a href="#调用父类方法" class="headerlink" title="调用父类方法"></a>调用父类方法</h3><p><code>super()</code>方法</p>
 <p>若方法重名，先继承的优先调用</p>
-<pre><code>class A():
-    def test(self):
-        print(&quot;我是爸爸&quot;)
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs clean"><span class="hljs-keyword">class</span> A():<br>    def test(self):<br>        print(<span class="hljs-string">"我是爸爸"</span>)<br><br><span class="hljs-keyword">class</span> B(A):<br>    def test(self):<br>        super().test()<br>        print(<span class="hljs-string">"我是儿子"</span>)<br>        <br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:<br>    b = B()<br>    b.test()<br>    <br>#############################################<br>我是爸爸<br>我是儿子<br></code></pre></td></tr></table></figure>
 
-class B(A):
-    def test(self):
-        super().test()
-        print(&quot;我是儿子&quot;)
 
-if __name__ == &#39;__main__&#39;:
-    b = B()
-    b.test()
 
-#############################################
-我是爸爸
-我是儿子</code></pre><h3 id="property"><a href="#property" class="headerlink" title="@property"></a>@property</h3><p>@property：将类的方法当做属性来使用（可以简单理解为调用时可以将函数的括号去掉）</p>
+<h3 id="property"><a href="#property" class="headerlink" title="@property"></a>@property</h3><p>@property：将类的方法当做属性来使用（可以简单理解为调用时可以将函数的括号去掉）</p>
 <p>一般用来获取某些数据（如获取私有变量），不会向函数中传递参数</p>
-<pre><code>class pig():
-    def __init__(self, name):
-        self.__name = name
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">pig</span>():</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(<span class="hljs-keyword">self</span>, name)</span></span>:<br>        <span class="hljs-keyword">self</span>.__name = name<br><br>    @property<br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">name</span><span class="hljs-params">(<span class="hljs-keyword">self</span>)</span></span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">self</span>.__name<br>        <br>p = pig(<span class="hljs-string">"猪"</span>)<br>print(p.name) <span class="hljs-comment"># 等价于不加<span class="hljs-doctag">@property</span>时的，p.name()</span><br><br><span class="hljs-comment"># 猪</span><br></code></pre></td></tr></table></figure>
 
-    @property
-    def name(self):
-        return self.__name
 
-p = pig(&quot;猪&quot;)
-print(p.name) # 等价于不加@property时的，p.name()
 
-# 猪</code></pre><p>@*.setter 表示可读可写，可以向该函数中传递参数，使用方法为<code>对象.函数名 = 参数值</code>。一般用来设置某些数据。</p>
-<pre><code>class Pig():
-    def __init__(self, name):
-        self.__name = name
-
-    @property
-    def name(self):
-        return self.__name
-
-    @name.setter
-    def name(self, name):
-        # 在这即可对需要设置的值进行类型判断等操作
-        self.__name = name
-
-if __name__ == &#39;__main__&#39;:
-    p = Pig(&#39;pig1&#39;)
-    print(p.name)
-    p.name = &#39;pig2&#39; # 可进行更改
-    print(p.name)
-
-​```
-pig1
-pig2
-​```</code></pre><h3 id="slots-lt-限制类中的属性-gt"><a href="#slots-lt-限制类中的属性-gt" class="headerlink" title="_slots_&lt;限制类中的属性&gt;"></a>_<em>slots_</em>&lt;限制类中的属性&gt;</h3><p>为指定的类设置一个静态属性列表，为属性很少的类节约内存空间，同时提供更快的属性访问速度</p>
-<p>使用<code>__slots__</code>后<strong>不允许给类添加新的属性与方法</strong>（对其子类也适用，子类新加的会拼接到后面）。示例如下：</p>
-<pre><code># 不加__slots__
-class B():
-    pass
-
-b = B()
-b.gg = 1
-print(b.gg)
-
-###############################
-1</code></pre><pre><code># 加上__slots__
-class A():
-    __slots__ = (&#39;name&#39;)
-    def __init__(self, name):
-        self.name = name
-
-if __name__ == &#39;__main__&#39;:
-    a = A(&#39;aa&#39;)
-    a.gg = 1
-    print(a.gg)
-
-###############################################
-Traceback (most recent call last):
-  File &quot;C:/Users/lenovo/Desktop/python学习/decorate.py&quot;, line 13, in &lt;module&gt;
-    a.gg = 1
-AttributeError: &#39;A&#39; object has no attribute &#39;gg&#39;</code></pre><p>可见，使用__slots__指定了类的属性后就无法对实例添加属性了</p>
-<h3 id="Python类中的方法"><a href="#Python类中的方法" class="headerlink" title="Python类中的方法"></a>Python类中的方法</h3><p>Python类中的方法主要可以分为以下三种：</p>
-<ul>
-<li>实例方法：需要绑定要一个对象上，第一个参数默认使用self，会把对象作为第一个参数传递进来</li>
-<li>静态方法：使用装饰器@staticmethod进行定义，类和对象都可以调用，不需要默认参数</li>
-<li>类方法：使用装饰器@classmethod进行定义，类和对象都可以调用，第一个参数默认使用cls，会把类作为第一个参数传递进来</li>
-</ul>
-<h4 id="staticmethod，静态方法"><a href="#staticmethod，静态方法" class="headerlink" title="@staticmethod，静态方法"></a>@staticmethod，静态方法</h4><p>静态方法，可以直接通过类名对其进行调用（类的实例也可以调用 ）。相当于变为了”类的方法”。&lt;类和对象都可以调用，不需要默认参数（如self等）&gt;</p>
-<pre><code>class Pig():
-    @staticmethod
-    def func():
-        print(&quot;聪明的猪&quot;)
-
-Pig()
-
-#############################################
-聪明的猪</code></pre><h4 id="classmethod，类方法"><a href="#classmethod，类方法" class="headerlink" title="@classmethod，类方法"></a>@classmethod，类方法</h4><p>用于表示类的方法，可以<strong>不实例化调用类的属性和方法</strong>。有一个<code>cls</code>参数用于表示类本身。&lt;类和对象都可以调用，第一个参数默认使用cls，会把类作为第一个参数传递进来&gt;</p>
-<pre><code>class A():
-    def test(self):
-        print(&quot;test&quot;)
-
-    @classmethod
-    def gg(cls):
-        cls().test()
-
-A.gg()
-
-############################################
-test</code></pre><h4 id="动态添加实例方法"><a href="#动态添加实例方法" class="headerlink" title="动态添加实例方法"></a>动态添加实例方法</h4><pre><code>class A():
-    pass
-
-def func(self):
-    pass
-
-a = A()
-a.func = types.MethodType(func, a)    # 给实例添加方法</code></pre><p>如上，可以使用types.MethodType的方式给类的实例添加其实例方法，但该对象的另一个实例则不具备该方法。</p>
- 
+<p>@*.setter 表示可读可写，可以向该函数中传递参数，使用方法为<code>对象.函数名 = 参数值</code>。一般用来设置某些数据。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Pig</span>():</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(<span class="hljs-keyword">self</span>, name)</span></span>:<br>        <span class="hljs-keyword">self</span>.__name = name<br><br>    @property<br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">name</span><span class="hljs-params">(<span class="hljs-keyword">self</span>)</span></span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">self</span>.__name<br><br>    @name.setter<br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">name</span><span class="hljs-params">(<span class="hljs-keyword">self</span>, name)</span></span>:<br>        <span class="hljs-comment"># 在这即可对需要设置的值进行类型判断等操作</span><br>        <span class="hljs-keyword">self</span>.__name = name<br>        <br><span class="hljs-keyword">if</span> __name_<span class="hljs-number">_</span> == <span class="hljs-string">'__main__'</span>:<br>    p = Pig(<span class="hljs-string">'pig1'</span>)<br>    print(p.name)<br>    p.name = <span class="hljs-string">'pig2'</span> <span class="hljs-comment"># 可进行更改</span><br>    print(p.name)<br>  <br>​<br></code></pre></td></tr></table></figure>
+<p>pig1<br>pig2<br>​```</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs http"><br><br><span class="clean"><br>### \__slots__&lt;限制类中的属性&gt;<br><br>为指定的类设置一个静态属性列表，为属性很少的类节约内存空间，同时提供更快的属性访问速度<br><br>使用`__slots__`后**不允许给类添加新的属性与方法**（对其子类也适用，子类新加的会拼接到后面）。示例如下：</span><br></code></pre></td></tr></table></figure>
+<h1 id="不加slots"><a href="#不加slots" class="headerlink" title="不加slots"></a>不加<strong>slots</strong></h1><p>class B():<br>    pass</p>
+<p>b = B()<br>b.gg = 1<br>print(b.gg)</p>
+<p>###############################<br>1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plain"><br><br></code></pre></td></tr></table></figure>
+<h1 id="加上slots"><a href="#加上slots" class="headerlink" title="加上slots"></a>加上<strong>slots</strong></h1><p>class A():<br>    <strong>slots</strong> = (‘name’)<br>    def <strong>init</strong>(self, name):<br>        self.name = name</p>
+<p>if <strong>name</strong> == ‘<strong>main</strong>‘:<br>    a = A(‘aa’)<br>    a.gg = 1<br>    print(a.gg)</p>
+<p>###############################################<br>Traceback (most recent call last):<br>  File “C:/Users/lenovo/Desktop/python学习/decorate.py”, line 13, in <module><br>    a.gg = 1<br>AttributeError: ‘A’ object has no attribute ‘gg’</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs clean"><br>可见，使用\__slots__指定了类的属性后就无法对实例添加属性了<br><br><br><br>### Python类中的方法<br><br>Python类中的方法主要可以分为以下三种：<br><br>* 实例方法：需要绑定要一个对象上，第一个参数默认使用self，会把对象作为第一个参数传递进来<br>* 静态方法：使用装饰器@staticmethod进行定义，类和对象都可以调用，不需要默认参数<br>* 类方法：使用装饰器@classmethod进行定义，类和对象都可以调用，第一个参数默认使用cls，会把类作为第一个参数传递进来<br><br><br><br>#### @staticmethod，静态方法<br><br>静态方法，可以直接通过类名对其进行调用（类的实例也可以调用 ）。相当于变为了<span class="hljs-string">"类的方法"</span>。&lt;类和对象都可以调用，不需要默认参数（如self等）&gt;<br></code></pre></td></tr></table></figure>
+<p>class Pig():<br>    @staticmethod<br>    def func():<br>        print(“聪明的猪”)</p>
+<p>Pig()</p>
+<p>#############################################<br>聪明的猪</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs http"><br><br><span class="clean"><br>#### @classmethod，类方法<br><br>用于表示类的方法，可以**不实例化调用类的属性和方法**。有一个`cls`参数用于表示类本身。&lt;类和对象都可以调用，第一个参数默认使用cls，会把类作为第一个参数传递进来&gt;</span><br></code></pre></td></tr></table></figure>
+<p>class A():<br>    def test(self):<br>        print(“test”)</p>
+<pre><code>@classmethod
+def gg(cls):
+    cls().test()</code></pre><p>A.gg()</p>
+<p>############################################<br>test</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs http"><br><br><span class="clean"><br>#### 动态添加实例方法</span><br></code></pre></td></tr></table></figure>
+<p>class A():<br>    pass</p>
+<p>def func(self):<br>    pass</p>
+<p>a = A()<br>a.func = types.MethodType(func, a)    # 给实例添加方法</p>
+<pre><code>
+如上，可以使用types.MethodType的方式给类的实例添加其实例方法，但该对象的另一个实例则不具备该方法。
+</code></pre> 
       <!-- reward -->
       
       <div id="reword-out">
@@ -297,6 +224,8 @@ a.func = types.MethodType(func, a)    # 给实例添加方法</code></pre><p>如
 </div>
 
 <div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+
     </footer>
   </div>
 

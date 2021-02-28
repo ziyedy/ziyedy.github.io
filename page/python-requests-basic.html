@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Python/爬虫/requests库基本使用"
+  id="post-编程相关/Python/爬虫/requests库基本使用"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-08-13T08:09:39.000Z" itemprop="datePublished">2020-08-13</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Python/">Python</a> / <a class="article-category-link" href="/categories/Python/%E7%88%AC%E8%99%AB/">爬虫</a>
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Python/">Python</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Python/%E7%88%AC%E8%99%AB/">爬虫</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">197</span>
+            <span class="post-count">195</span>
         </span>
     </span>
 
@@ -103,21 +103,34 @@
     <div class="article-entry" itemprop="articleBody">
        
   <p><strong>requests库是python实现的最简单易用的HTTP库。</strong></p>
-<h3 id="主要方法"><a href="#主要方法" class="headerlink" title="主要方法"></a>主要方法</h3><pre><code>requests.request(method, url, **kwargs)</code></pre><p>method : 请求方式，对应get/put/post等7种<br>url : 拟获取页面的url链接<br>**kwargs: 控制访问的参数，共13个</p>
+<h3 id="主要方法"><a href="#主要方法" class="headerlink" title="主要方法"></a>主要方法</h3><figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs oxygene">requests.request(<span class="hljs-function"><span class="hljs-keyword">method</span>, <span class="hljs-title">url</span>, **<span class="hljs-title">kwargs</span>)</span><br></code></pre></td></tr></table></figure>
+
+<p>method : 请求方式，对应get/put/post等7种<br>url : 拟获取页面的url链接<br>**kwargs: 控制访问的参数，共13个</p>
 <h3 id="get方法"><a href="#get方法" class="headerlink" title="get方法"></a>get方法</h3><p>基本使用如下：</p>
-<pre><code>r = requests.get(url)</code></pre><p>其中r是返回的一个包含服务器资源的<strong>Response对象</strong></p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">r</span> = requests.get(url)<br></code></pre></td></tr></table></figure>
+
+<p>其中r是返回的一个包含服务器资源的<strong>Response对象</strong></p>
 <p>get方法是构造了一个向服务器请求资源的<strong>Request对象</strong></p>
 <h3 id="Response对象的属性"><a href="#Response对象的属性" class="headerlink" title="Response对象的属性"></a>Response对象的属性</h3><h4 id="判断异常"><a href="#判断异常" class="headerlink" title="判断异常"></a>判断异常</h4><p>r.raise_for_status()在方法内部判断r.status_code是否等于200，不需要增加额外的if语句，该语句<strong>便于利用try‐except进行异常处理</strong></p>
-<pre><code>r.raise_for_status()</code></pre><h3 id="爬取网页通用代码框架"><a href="#爬取网页通用代码框架" class="headerlink" title="爬取网页通用代码框架"></a>爬取网页通用代码框架</h3><pre><code>def getHTMLText(url):
-    import requests
-    try:
-        r = requests.get(url)
-        r.raise_for_status()
-        r.encoding = r.apparent_encoding
-        return r.text
-    except:
-        print(&quot;产生异常&quot;)
-        return None</code></pre> 
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">r</span><span class="hljs-selector-class">.raise_for_status</span>()<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="爬取网页通用代码框架"><a href="#爬取网页通用代码框架" class="headerlink" title="爬取网页通用代码框架"></a>爬取网页通用代码框架</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">getHTMLText</span><span class="hljs-params">(url)</span>:</span><br>    <span class="hljs-keyword">import</span> requests<br>    <span class="hljs-keyword">try</span>:<br>        r = requests.get(url)<br>        r.raise_for_status()<br>        r.encoding = r.apparent_encoding<br>        <span class="hljs-keyword">return</span> r.text<br>    <span class="hljs-keyword">except</span>:<br>        print(<span class="hljs-string">"产生异常"</span>)<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
       <!-- reward -->
       
       <div id="reword-out">
@@ -200,19 +213,19 @@
    
   <nav class="article-nav">
     
-      <a href="/page/java-for-algorithm-test.html" class="article-nav-link">
+      <a href="/page/python-bs4-basic.html" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            Java算法题的常用语法
+            bs4库基本使用
           
         </div>
       </a>
     
     
-      <a href="/page/python-bs4-basic.html" class="article-nav-link">
+      <a href="/page/pyqt5-signals-and-slots.html" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">bs4库基本使用</div>
+        <div class="article-nav-title">信号与槽</div>
       </a>
     
   </nav>

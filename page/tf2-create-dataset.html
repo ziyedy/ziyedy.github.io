@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-AI/TF2/使用TF2创建数据集"
+  id="post-AI相关/TensorFlow2/使用TF2创建数据集"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-08-25T08:31:59.000Z" itemprop="datePublished">2020-08-25</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/AI/">AI</a> / <a class="article-category-link" href="/categories/AI/TF2/">TF2</a>
+    <a class="article-category-link" href="/categories/AI%E7%9B%B8%E5%85%B3/">AI相关</a> / <a class="article-category-link" href="/categories/AI%E7%9B%B8%E5%85%B3/TensorFlow2/">TensorFlow2</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">848</span>
+            <span class="post-count">818</span>
         </span>
     </span>
 
@@ -103,86 +103,44 @@
     <div class="article-entry" itemprop="articleBody">
        
   <h3 id="使用数据集"><a href="#使用数据集" class="headerlink" title="使用数据集"></a>使用数据集</h3><p>本例中使用的数据集分布在图片文件夹中，一个文件夹含有一类图片。数据集存储格式如下</p>
-<pre><code>flower_photo/
-  daisy/
-  dandelion/
-  roses/
-  sunflowers/
-  tulips/</code></pre><h3 id="下载并查看数据集"><a href="#下载并查看数据集" class="headerlink" title="下载并查看数据集"></a>下载并查看数据集</h3><h4 id="获取数据根目录"><a href="#获取数据根目录" class="headerlink" title="获取数据根目录"></a>获取数据根目录</h4><pre><code>import pathlib
-data_url = &#39;https://storage.googleapis.com/download.tensorflow.org/example_images/flower_photos.tgz&#39;
-data_root_orig = tf.keras.utils.get_file(origin=data_url,
-                                         fname=&#39;flower_photos&#39;, 
-                                         untar=True)
-data_root = pathlib.Path(data_root_orig)    # data_root存储数据的文件夹的根目录</code></pre><h4 id="获取所有图片路径并打乱"><a href="#获取所有图片路径并打乱" class="headerlink" title="获取所有图片路径并打乱"></a>获取所有图片路径并打乱</h4><pre><code class="python">all_image_paths = list(data_root.glob(&#39;*/*.jpg&#39;))    ## 获取所有图片路径
-all_image_paths = [str(path) for path in all_image_paths]    # 转化为str
-random.shuffle(all_image_paths)    # 打乱
-image_count = len(all_image_paths)    # 获取图片个数：3670
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs plain">flower_photo&#x2F;<br>  daisy&#x2F;<br>  dandelion&#x2F;<br>  roses&#x2F;<br>  sunflowers&#x2F;<br>  tulips&#x2F;<br></code></pre></td></tr></table></figure>
 
-print(all_image_paths[99])    # 打印第100张图的路径
-# C:\Users\lenovo\.keras\datasets\flower_photos\tulips\5704726114_a92f753514.jpg</code></pre>
-<h4 id="获取图片标签信息"><a href="#获取图片标签信息" class="headerlink" title="获取图片标签信息"></a>获取图片标签信息</h4><pre><code class="python">label_names = sorted(item.name for item in data_root.glob(&#39;*/&#39;) if item.is_dir())    # 根据文件夹名获取标签名
-label_to_index = dict((name, index) for index, name in enumerate(label_names))    # 从0开始给标签设置索引
-all_image_labels = [label_to_index[pathlib.Path(path).parent.name]
-                    for path in all_image_paths]    # 将每张图片与标签一一对应
 
-print(label_names)    # [&#39;daisy&#39;, &#39;dandelion&#39;, &#39;roses&#39;, &#39;sunflowers&#39;, &#39;tulips&#39;]
-print(label_to_index)    # {&#39;daisy&#39;: 0, &#39;dandelion&#39;: 1, &#39;roses&#39;: 2, &#39;sunflowers&#39;: 3, &#39;tulips&#39;: 4}
-print(all_image_labels[99])    # 打印第100张图的标签：4</code></pre>
+
+<h3 id="下载并查看数据集"><a href="#下载并查看数据集" class="headerlink" title="下载并查看数据集"></a>下载并查看数据集</h3><h4 id="获取数据根目录"><a href="#获取数据根目录" class="headerlink" title="获取数据根目录"></a>获取数据根目录</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs routeros">import pathlib<br>data_url = <span class="hljs-string">'https://storage.googleapis.com/download.tensorflow.org/example_images/flower_photos.tgz'</span><br>data_root_orig = tf.keras.utils.get_file(<span class="hljs-attribute">origin</span>=data_url,<br>                                         <span class="hljs-attribute">fname</span>=<span class="hljs-string">'flower_photos'</span>, <br>                                         <span class="hljs-attribute">untar</span>=<span class="hljs-literal">True</span>)<br>data_root = pathlib.Path(data_root_orig)	# data_root存储数据的文件夹的根目录<br></code></pre></td></tr></table></figure>
+
+<h4 id="获取所有图片路径并打乱"><a href="#获取所有图片路径并打乱" class="headerlink" title="获取所有图片路径并打乱"></a>获取所有图片路径并打乱</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python">all_image_paths = list(data_root.glob(<span class="hljs-string">'*/*.jpg'</span>))	<span class="hljs-comment">## 获取所有图片路径</span><br>all_image_paths = [str(path) <span class="hljs-keyword">for</span> path <span class="hljs-keyword">in</span> all_image_paths]	<span class="hljs-comment"># 转化为str</span><br>random.shuffle(all_image_paths)	<span class="hljs-comment"># 打乱</span><br>image_count = len(all_image_paths)	<span class="hljs-comment"># 获取图片个数：3670</span><br><br>print(all_image_paths[<span class="hljs-number">99</span>])	<span class="hljs-comment"># 打印第100张图的路径</span><br><span class="hljs-comment"># C:\Users\lenovo\.keras\datasets\flower_photos\tulips\5704726114_a92f753514.jpg</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="获取图片标签信息"><a href="#获取图片标签信息" class="headerlink" title="获取图片标签信息"></a>获取图片标签信息</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python">label_names = sorted(item.name <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> data_root.glob(<span class="hljs-string">'*/'</span>) <span class="hljs-keyword">if</span> item.is_dir())	<span class="hljs-comment"># 根据文件夹名获取标签名</span><br>label_to_index = dict((name, index) <span class="hljs-keyword">for</span> index, name <span class="hljs-keyword">in</span> enumerate(label_names))	<span class="hljs-comment"># 从0开始给标签设置索引</span><br>all_image_labels = [label_to_index[pathlib.Path(path).parent.name]<br>                    <span class="hljs-keyword">for</span> path <span class="hljs-keyword">in</span> all_image_paths]	<span class="hljs-comment"># 将每张图片与标签一一对应</span><br><br>print(label_names)	<span class="hljs-comment"># ['daisy', 'dandelion', 'roses', 'sunflowers', 'tulips']</span><br>print(label_to_index)	<span class="hljs-comment"># &#123;'daisy': 0, 'dandelion': 1, 'roses': 2, 'sunflowers': 3, 'tulips': 4&#125;</span><br>print(all_image_labels[<span class="hljs-number">99</span>])	<span class="hljs-comment"># 打印第100张图的标签：4</span><br></code></pre></td></tr></table></figure>
+
 <p>由此可见，已经完成了图片与标签一一对应的关系</p>
-<h4 id="可视化图片与标签"><a href="#可视化图片与标签" class="headerlink" title="可视化图片与标签"></a>可视化图片与标签</h4><pre><code>import matplotlib.pyplot as plt
-for i in range(200, 209):
-    plt.subplot(3, 3, i-199)
-    img = plt.imread(all_image_paths[i])
-    plt.imshow(img)
-    plt.xlabel(label_names[all_image_labels[i]])
-plt.show()</code></pre><p><img src="http://cdn.ziyedy.top/%E4%BD%BF%E7%94%A8TF2%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E9%9B%86/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%9B%BE%E7%89%87%E4%B8%8E%E6%A0%87%E7%AD%BE.png" alt=""></p>
-<h3 id="加载和格式化图片"><a href="#加载和格式化图片" class="headerlink" title="加载和格式化图片"></a>加载和格式化图片</h3><pre><code class="python">def load_and_preprocess_image(path):
-    &quot;&quot;&quot; 输入为图片路径列表，输出为图片处理后的列表 &quot;&quot;&quot;
-    images = []
-    for i in range(len(path)):
-        url = path[i]
-        image = tf.io.read_file(url)
-        image = tf.image.decode_jpeg(image, channels=3)
-        image = tf.image.resize(image, [192, 192])
-        image = image / 255.0
-        images.append(image)
-    return images</code></pre>
+<h4 id="可视化图片与标签"><a href="#可视化图片与标签" class="headerlink" title="可视化图片与标签"></a>可视化图片与标签</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-keyword">import</span> matplotlib.pyplot as plt<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">200</span>, <span class="hljs-number">209</span>):<br>    plt.subplot(<span class="hljs-number">3</span>, <span class="hljs-number">3</span>, i<span class="hljs-number">-199</span>)<br>    img = plt.imread(all_image_paths[i])<br>    plt.imshow(img)<br>    plt.xlabel(label_names[all_image_labels[i]])<br>plt.show()<br></code></pre></td></tr></table></figure>
+
+<p><img src="http://cdn.ziyedy.top/%E4%BD%BF%E7%94%A8TF2%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E9%9B%86/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%9B%BE%E7%89%87%E4%B8%8E%E6%A0%87%E7%AD%BE.png" alt=""></p>
+<h3 id="加载和格式化图片"><a href="#加载和格式化图片" class="headerlink" title="加载和格式化图片"></a>加载和格式化图片</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">load_and_preprocess_image</span><span class="hljs-params">(path)</span>:</span><br>	<span class="hljs-string">""" 输入为图片路径列表，输出为图片处理后的列表 """</span><br>    images = []<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(len(path)):<br>        url = path[i]<br>        image = tf.io.read_file(url)<br>        image = tf.image.decode_jpeg(image, channels=<span class="hljs-number">3</span>)<br>        image = tf.image.resize(image, [<span class="hljs-number">192</span>, <span class="hljs-number">192</span>])<br>        image = image / <span class="hljs-number">255.0</span><br>        images.append(image)<br>    <span class="hljs-keyword">return</span> images<br></code></pre></td></tr></table></figure>
+
 <p><img src="http://cdn.ziyedy.top/%E4%BD%BF%E7%94%A8TF2%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E9%9B%86/%E5%A4%84%E7%90%86%E5%90%8E%E6%95%B0%E6%8D%AE%E5%B1%95%E7%A4%BA.png" alt="处理后数据可视化"></p>
 <h3 id="构建数据集"><a href="#构建数据集" class="headerlink" title="构建数据集"></a>构建数据集</h3><h4 id="tf-data-Dataset的基本使用"><a href="#tf-data-Dataset的基本使用" class="headerlink" title="tf.data.Dataset的基本使用"></a>tf.data.Dataset的基本使用</h4><p>tf.data.Dataset是TF2中专门用于数据输入的接口，可以高效的实现数据的读入、打乱（shuffle）、增强（augment）等功能，以下示例简单介绍该接口使用方法</p>
-<pre><code>data = np.array([0.1, 0.2, 0.4, 0.05])
-label = np.array([0, 1, 1, 0])
-dataset = tf.data.Dataset.from_tensor_slices((data, label))    # 组合为数据集
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">data = np.<span class="hljs-built_in">array</span>([<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.05</span>])<br>label = np.<span class="hljs-built_in">array</span>([<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>])<br>dataset = tf.data.Dataset.from_tensor_slices((data, label))	# 组合为数据集<br><br># 遍历打印<br># tf.Tensor(<span class="hljs-number">0.1</span>, shape=(), dtype=<span class="hljs-built_in">float</span>64) tf.Tensor(<span class="hljs-number">0</span>, shape=(), dtype=<span class="hljs-built_in">int</span>32)<br># tf.Tensor(<span class="hljs-number">0.2</span>, shape=(), dtype=<span class="hljs-built_in">float</span>64) tf.Tensor(<span class="hljs-number">1</span>, shape=(), dtype=<span class="hljs-built_in">int</span>32)<br># tf.Tensor(<span class="hljs-number">0.4</span>, shape=(), dtype=<span class="hljs-built_in">float</span>64) tf.Tensor(<span class="hljs-number">1</span>, shape=(), dtype=<span class="hljs-built_in">int</span>32)<br># tf.Tensor(<span class="hljs-number">0.05</span>, shape=(), dtype=<span class="hljs-built_in">float</span>64) tf.Tensor(<span class="hljs-number">0</span>, shape=(), dtype=<span class="hljs-built_in">int</span>32)<br><br>dataset = dataset.shuffle(buffer_size=image_count)	# 打乱数据<br>dataset = dataset.repeat()	# 使数据能够重复使用<br>dataset = dataset.batch(batch_size=<span class="hljs-number">32</span>)	# 每一个batch为<span class="hljs-number">32</span><br><br># 设置batch后遍历打印<br># tf.Tensor([<span class="hljs-number">0.1</span> <span class="hljs-number">0.2</span>], shape=(<span class="hljs-number">2</span>,), dtype=<span class="hljs-built_in">float</span>64) tf.Tensor([<span class="hljs-number">0</span> <span class="hljs-number">1</span>], shape=(<span class="hljs-number">2</span>,), dtype=<span class="hljs-built_in">int</span>32)<br># tf.Tensor([<span class="hljs-number">0.4</span>  <span class="hljs-number">0.05</span>], shape=(<span class="hljs-number">2</span>,), dtype=<span class="hljs-built_in">float</span>64) tf.Tensor([<span class="hljs-number">1</span> <span class="hljs-number">0</span>], shape=(<span class="hljs-number">2</span>,), dtype=<span class="hljs-built_in">int</span>32)<br></code></pre></td></tr></table></figure>
 
-# 遍历打印
-# tf.Tensor(0.1, shape=(), dtype=float64) tf.Tensor(0, shape=(), dtype=int32)
-# tf.Tensor(0.2, shape=(), dtype=float64) tf.Tensor(1, shape=(), dtype=int32)
-# tf.Tensor(0.4, shape=(), dtype=float64) tf.Tensor(1, shape=(), dtype=int32)
-# tf.Tensor(0.05, shape=(), dtype=float64) tf.Tensor(0, shape=(), dtype=int32)
+<p><strong>使用map函数</strong></p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">def func(data, label):<br>    data = data<span class="hljs-operator"> * </span><span class="hljs-number">100</span><br>    return data, label<br><br>dataset = dataset.map(func)<br><br># tf.<span class="hljs-constructor">Tensor(10.0, <span class="hljs-params">shape</span>=()</span>, dtype=float64) tf.<span class="hljs-constructor">Tensor(0, <span class="hljs-params">shape</span>=()</span>, dtype=<span class="hljs-built_in">int32</span>)<br># tf.<span class="hljs-constructor">Tensor(20.0, <span class="hljs-params">shape</span>=()</span>, dtype=float64) tf.<span class="hljs-constructor">Tensor(1, <span class="hljs-params">shape</span>=()</span>, dtype=<span class="hljs-built_in">int32</span>)<br># tf.<span class="hljs-constructor">Tensor(40.0, <span class="hljs-params">shape</span>=()</span>, dtype=float64) tf.<span class="hljs-constructor">Tensor(1, <span class="hljs-params">shape</span>=()</span>, dtype=<span class="hljs-built_in">int32</span>)<br># tf.<span class="hljs-constructor">Tensor(5.0, <span class="hljs-params">shape</span>=()</span>, dtype=float64) tf.<span class="hljs-constructor">Tensor(0, <span class="hljs-params">shape</span>=()</span>, dtype=<span class="hljs-built_in">int32</span>)<br></code></pre></td></tr></table></figure>
 
-dataset = dataset.shuffle(buffer_size=image_count)    # 打乱数据
-dataset = dataset.repeat()    # 使数据能够重复使用
-dataset = dataset.batch(batch_size=32)    # 每一个batch为32
+<p><strong>处理data的map函数的通用格式：</strong></p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs haskell"><span class="hljs-title">def</span> func(<span class="hljs-class"><span class="hljs-keyword">data</span>, label):</span><br>	# 对<span class="hljs-class"><span class="hljs-keyword">data</span>进行处理</span><br>	return <span class="hljs-class"><span class="hljs-keyword">data</span>, label</span><br></code></pre></td></tr></table></figure>
 
-# 设置batch后遍历打印
-# tf.Tensor([0.1 0.2], shape=(2,), dtype=float64) tf.Tensor([0 1], shape=(2,), dtype=int32)
-# tf.Tensor([0.4  0.05], shape=(2,), dtype=float64) tf.Tensor([1 0], shape=(2,), dtype=int32)</code></pre><p><strong>使用map函数</strong></p>
-<pre><code>def func(data, label):
-    data = data * 100
-    return data, label
 
-dataset = dataset.map(func)
 
-# tf.Tensor(10.0, shape=(), dtype=float64) tf.Tensor(0, shape=(), dtype=int32)
-# tf.Tensor(20.0, shape=(), dtype=float64) tf.Tensor(1, shape=(), dtype=int32)
-# tf.Tensor(40.0, shape=(), dtype=float64) tf.Tensor(1, shape=(), dtype=int32)
-# tf.Tensor(5.0, shape=(), dtype=float64) tf.Tensor(0, shape=(), dtype=int32)</code></pre><p><strong>处理data的map函数的通用格式：</strong></p>
-<pre><code>def func(data, label):
-    # 对data进行处理
-    return data, label</code></pre><h3 id="本次构建数据集"><a href="#本次构建数据集" class="headerlink" title="本次构建数据集"></a>本次构建数据集</h3><pre><code>dataset = tf.data.Dataset.from_tensor_slices((load_and_preprocess_image(all_image_paths), all_image_labels))
-dataset = dataset.shuffle(buffer_size=image_count)
-dataset = dataset.repeat()
-dataset = dataset.batch(batch_size=32)</code></pre><h3 id="进行训练"><a href="#进行训练" class="headerlink" title="进行训练"></a>进行训练</h3><p>之后按照通用的构建网络的模板进行训练即可（构建网络的过程略）</p>
-<pre><code>history = model.fit(dataset, epochs=10, steps_per_epoch=115)</code></pre><h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p><a href="https://www.tensorflow.org/tutorials/load_data/images?hl=zh-cn" target="_blank" rel="noopener">https://www.tensorflow.org/tutorials/load_data/images?hl=zh-cn</a></p>
+<h3 id="本次构建数据集"><a href="#本次构建数据集" class="headerlink" title="本次构建数据集"></a>本次构建数据集</h3><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">dataset</span> = tf.data.Dataset.from_tensor_slices((load_and_preprocess_image(all_image_paths), all_image_labels))<br><span class="hljs-attr">dataset</span> = dataset.shuffle(buffer_size=image_count)<br><span class="hljs-attr">dataset</span> = dataset.repeat()<br><span class="hljs-attr">dataset</span> = dataset.batch(batch_size=<span class="hljs-number">32</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="进行训练"><a href="#进行训练" class="headerlink" title="进行训练"></a>进行训练</h3><p>之后按照通用的构建网络的模板进行训练即可（构建网络的过程略）</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">history = model.fit(dataset, <span class="hljs-attribute">epochs</span>=10, <span class="hljs-attribute">steps_per_epoch</span>=115)<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p><a href="https://www.tensorflow.org/tutorials/load_data/images?hl=zh-cn" target="_blank" rel="noopener">https://www.tensorflow.org/tutorials/load_data/images?hl=zh-cn</a></p>
  
       <!-- reward -->
       
@@ -258,7 +216,7 @@ dataset = dataset.batch(batch_size=32)</code></pre><h3 id="进行训练"><a href
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TF2/" rel="tag">TF2</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TensorFlow2/" rel="tag">TensorFlow2</a></li></ul>
 
     </footer>
   </div>

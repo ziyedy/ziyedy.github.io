@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-其他/debug/Git出现的报错合集"
+  id="post-问题解决/Git出现的报错合集"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-06-15T15:31:46.000Z" itemprop="datePublished">2020-06-15</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a> / <a class="article-category-link" href="/categories/%E5%85%B6%E4%BB%96/debug/">debug</a>
+    <a class="article-category-link" href="/categories/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">问题解决</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">157</span>
+            <span class="post-count">159</span>
         </span>
     </span>
 
@@ -103,10 +103,19 @@
     <div class="article-entry" itemprop="articleBody">
        
   <h3 id="Git-fatal-refusing-to-merge-unrelated-histories解决"><a href="#Git-fatal-refusing-to-merge-unrelated-histories解决" class="headerlink" title="Git: fatal: refusing to merge unrelated histories解决"></a>Git: fatal: refusing to merge unrelated histories解决</h3><p>今天<code>git pull</code>时出现这个错误（在连接远程库与本地库时在远程库上进行了一些删除操作）。原因是两个分支为两个不同的版本，有不同的提交历史，使用以下语句进行强制合并即可解决这个问题。</p>
-<pre><code>$git pull origin master --allow-unrelated-histories</code></pre><h3 id="fatal-remote-origin-already-exists"><a href="#fatal-remote-origin-already-exists" class="headerlink" title="fatal: remote origin already exists"></a>fatal: remote origin already exists</h3><p>先将存在的库删除，再进行连接</p>
-<pre><code>git remote rm origin</code></pre><h3 id="non-fast-forward"><a href="#non-fast-forward" class="headerlink" title="non-fast-forward"></a>non-fast-forward</h3><p>没有对代码进行及时的同步产生的问题，应该先合并之前的历史，再进行提交</p>
-<pre><code>git fetch origin master
-git merge origin FETCH_HEAD </code></pre> 
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">$git pull origin <span class="hljs-keyword">master</span> <span class="hljs-title">--allow-unrelated-histories</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="fatal-remote-origin-already-exists"><a href="#fatal-remote-origin-already-exists" class="headerlink" title="fatal: remote origin already exists"></a>fatal: remote origin already exists</h3><p>先将存在的库删除，再进行连接</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">git remote rm origin</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="non-fast-forward"><a href="#non-fast-forward" class="headerlink" title="non-fast-forward"></a>non-fast-forward</h3><p>没有对代码进行及时的同步产生的问题，应该先合并之前的历史，再进行提交</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">git fetch origin <span class="hljs-keyword">master</span><br><span class="hljs-title">git</span> merge origin FETCH_HEAD<br></code></pre></td></tr></table></figure>
+
+ 
       <!-- reward -->
       
       <div id="reword-out">
@@ -181,17 +190,19 @@ git merge origin FETCH_HEAD </code></pre>
 </div>
 
 <div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li></ul>
+
     </footer>
   </div>
 
    
   <nav class="article-nav">
     
-      <a href="/page/django1.html" class="article-nav-link">
+      <a href="/page/python8.html" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            1、Django基础内容
+            Python的一些语言特性与机制
           
         </div>
       </a>

@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-AI/机器学习/PCA算法"
+  id="post-AI相关/机器学习/PCA算法"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-10-08T08:16:12.000Z" itemprop="datePublished">2020-10-08</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/AI/">AI</a> / <a class="article-category-link" href="/categories/AI/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+    <a class="article-category-link" href="/categories/AI%E7%9B%B8%E5%85%B3/">AI相关</a> / <a class="article-category-link" href="/categories/AI%E7%9B%B8%E5%85%B3/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">938</span>
+            <span class="post-count">893</span>
         </span>
     </span>
 
@@ -106,122 +106,45 @@
 <p>PCA算法是一种使用广泛的数据降维算法，主要思想是将n维特征映射到k维上（k &lt; n）。降维的本质也就是<em>从原始坐标系映射到另一个维数更小的坐标系</em></p>
 <p>PCA的工作就是从原始的空间中<em>顺序地</em>找一组<em>相互正交</em>的坐标轴（所以<strong>主成分也可以理解为降维后新坐标系的坐标轴</strong>，比如，第一主成分即为求出来的第一个坐标轴），新的坐标轴的选择与数据本身是密切相关的（原始数据中方差最大的方向）</p>
 </blockquote>
-<h2 id="二维数据可视化"><a href="#二维数据可视化" class="headerlink" title="二维数据可视化"></a>二维数据可视化</h2><h3 id="原始二维数据"><a href="#原始二维数据" class="headerlink" title="原始二维数据"></a>原始二维数据</h3><pre><code># 构建原始二维数据
-x = np.empty((50, 2))
-x[:, 0] = np.random.uniform(0, 50, size=50)
-x[:, 1] = 0.8 * x[:, 0] + 2 + np.random.normal(0, 5, size=50)</code></pre><img src="http://cdn.ziyedy.top/PCA%E7%AE%97%E6%B3%95/%E5%88%9D%E5%A7%8B%E6%95%B0%E6%8D%AE.png" style="zoom:67%;" />
+<h2 id="二维数据可视化"><a href="#二维数据可视化" class="headerlink" title="二维数据可视化"></a>二维数据可视化</h2><h3 id="原始二维数据"><a href="#原始二维数据" class="headerlink" title="原始二维数据"></a>原始二维数据</h3><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"># 构建原始二维数据<br>x = np.empty((<span class="hljs-number">50</span>, <span class="hljs-number">2</span>))<br>x[:, <span class="hljs-number">0</span>] = np.random.uniform(<span class="hljs-number">0</span>, <span class="hljs-number">50</span>, size=<span class="hljs-number">50</span>)<br>x[:, <span class="hljs-number">1</span>] = <span class="hljs-number">0.8</span> * x[:, <span class="hljs-number">0</span>] + <span class="hljs-number">2</span> + np.random.normal(<span class="hljs-number">0</span>, <span class="hljs-number">5</span>, size=<span class="hljs-number">50</span>)<br></code></pre></td></tr></table></figure>
+
+<img src="http://cdn.ziyedy.top/PCA%E7%AE%97%E6%B3%95/%E5%88%9D%E5%A7%8B%E6%95%B0%E6%8D%AE.png" style="zoom:67%;" />
 
 
 
 <h3 id="对数据样本进行中心化"><a href="#对数据样本进行中心化" class="headerlink" title="对数据样本进行中心化"></a>对数据样本进行中心化</h3><p>进行中心化即<strong>将样本的均值归为0</strong>，在计算方差时可以将尾数约掉</p>
-<pre><code>def demean(x):
-    return x - np.mean(x, axis=0)
+<figure class="highlight sas"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sas">def d<span class="hljs-meta">emean(</span><span class="hljs-meta">x</span>):<br>    <span class="hljs-meta">return</span> <span class="hljs-meta">x</span> - np<span class="hljs-meta">.mean(</span><span class="hljs-meta">x</span>, axis=0)<br><br>x_demean = d<span class="hljs-meta">emean(</span><span class="hljs-meta">x</span>)<br></code></pre></td></tr></table></figure>
 
-x_demean = demean(x)</code></pre><img src="http://cdn.ziyedy.top/PCA%E7%AE%97%E6%B3%95/%E5%BD%920%E5%8C%96%E6%95%B0%E6%8D%AE.png" style="zoom:67%;" />
+<img src="http://cdn.ziyedy.top/PCA%E7%AE%97%E6%B3%95/%E5%BD%920%E5%8C%96%E6%95%B0%E6%8D%AE.png" style="zoom:67%;" />
 
 
 
 <h3 id="最大化方差"><a href="#最大化方差" class="headerlink" title="最大化方差"></a>最大化方差</h3><p>找到<strong>一组权重</strong>，使得样本空间中所有点映射到这个轴后方差最大（有点类似于“梯度上升”）</p>
-<pre><code>def f(w, x):
-    return np.sum((x.dot(w)**2)) / len(x)
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(w, x)</span>:</span><br>    <span class="hljs-keyword">return</span> np.sum((x.dot(w)**<span class="hljs-number">2</span>)) / len(x)<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">df</span><span class="hljs-params">(w, x)</span>:</span><br>    <span class="hljs-keyword">return</span> x.T.dot(x.dot(w)) * <span class="hljs-number">2.</span> / len(x)<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">gradient_ascent</span><span class="hljs-params">(x, w)</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">direction</span><span class="hljs-params">(w)</span>:</span><br>        <span class="hljs-string">""" 将w转化为单位方向向量 """</span><br>        <span class="hljs-keyword">return</span> w / np.linalg.norm(w)<br>    cur_iter = <span class="hljs-number">0</span><br>    w = direction(w)<br>    <span class="hljs-keyword">while</span> cur_iter &lt; <span class="hljs-number">1e4</span>:<br>        gradient = df(w, x)<br>        last_w = w<br>        w = w + <span class="hljs-number">0.001</span> * gradient<br>        w = direction(w)<br>        <span class="hljs-keyword">if</span> abs(f(w, x) - f(last_w, x) &lt; <span class="hljs-number">1e-8</span>):<br>            <span class="hljs-keyword">break</span><br>        cur_iter += <span class="hljs-number">1</span><br>    <span class="hljs-keyword">return</span> w<br><br><br>initial_w = np.random.random(x.shape[<span class="hljs-number">1</span>])<br>w = gradient_ascent(x_demean, initial_w)<br><br>plt.scatter(x_demean[:, <span class="hljs-number">0</span>], x_demean[:, <span class="hljs-number">1</span>])<br>plt.plot([-w[<span class="hljs-number">0</span>]*<span class="hljs-number">50</span>, w[<span class="hljs-number">0</span>]*<span class="hljs-number">50</span>], [-w[<span class="hljs-number">1</span>]*<span class="hljs-number">50</span>, w[<span class="hljs-number">1</span>]*<span class="hljs-number">50</span>], c=<span class="hljs-string">'r'</span>)<br>plt.show()<br></code></pre></td></tr></table></figure>
 
-def df(w, x):
-    return x.T.dot(x.dot(w)) * 2. / len(x)
-
-def gradient_ascent(x, w):
-    def direction(w):
-        &quot;&quot;&quot; 将w转化为单位方向向量 &quot;&quot;&quot;
-        return w / np.linalg.norm(w)
-    cur_iter = 0
-    w = direction(w)
-    while cur_iter &lt; 1e4:
-        gradient = df(w, x)
-        last_w = w
-        w = w + 0.001 * gradient
-        w = direction(w)
-        if abs(f(w, x) - f(last_w, x) &lt; 1e-8):
-            break
-        cur_iter += 1
-    return w
-
-
-initial_w = np.random.random(x.shape[1])
-w = gradient_ascent(x_demean, initial_w)
-
-plt.scatter(x_demean[:, 0], x_demean[:, 1])
-plt.plot([-w[0]*50, w[0]*50], [-w[1]*50, w[1]*50], c=&#39;r&#39;)
-plt.show()</code></pre><p>如图所示，该红线即为方差最大时的权重（可以理解为将这些数据点投影上去能够保留最多信息）</p>
+<p>如图所示，该红线即为方差最大时的权重（可以理解为将这些数据点投影上去能够保留最多信息）</p>
 <img src="http://cdn.ziyedy.top/PCA%E7%AE%97%E6%B3%95/%E6%A0%87%E5%87%86%E6%AD%A3%E4%BA%A4%E5%9F%BA%E5%90%91%E9%87%8F.png" style="zoom:67%;" />
 
 
 
 <h2 id="PCA的实现"><a href="#PCA的实现" class="headerlink" title="PCA的实现"></a>PCA的实现</h2><p>模仿<code>sklearn</code>机器学习库的API，实现PCA类</p>
-<pre><code>class PCA:
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PCA</span>:</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, n_components)</span>:</span><br>        <span class="hljs-string">""" 初始化PCA """</span><br>        self.n_components = n_components<br>        self.components_ = <span class="hljs-literal">None</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fit</span><span class="hljs-params">(self, x)</span>:</span><br>        <span class="hljs-string">""" 获取数据集的前n个主成分 """</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">demean</span><span class="hljs-params">(x)</span>:</span><br>            <span class="hljs-keyword">return</span> x - np.mean(x, axis=<span class="hljs-number">0</span>)<br><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(w, x)</span>:</span><br>            <span class="hljs-keyword">return</span> np.sum((x.dot(w) ** <span class="hljs-number">2</span>)) / len(x)<br><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">df</span><span class="hljs-params">(w, x)</span>:</span><br>            <span class="hljs-keyword">return</span> x.T.dot(x.dot(w)) * <span class="hljs-number">2.</span> / len(x)<br><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">gradient_ascent</span><span class="hljs-params">(x, w)</span>:</span><br>            <span class="hljs-string">""" 梯度上升法获取第1主成分 """</span><br>            <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">direction</span><span class="hljs-params">(w)</span>:</span><br>                <span class="hljs-string">""" 将w转化为单位方向向量 """</span><br>                <span class="hljs-keyword">return</span> w / np.linalg.norm(w)<br>            cur_iter = <span class="hljs-number">0</span><br>            w = direction(w)<br>            <span class="hljs-keyword">while</span> cur_iter &lt; <span class="hljs-number">1e4</span>:<br>                gradient = df(w, x)<br>                last_w = w<br>                w = w + <span class="hljs-number">0.001</span> * gradient<br>                w = direction(w)<br>                <span class="hljs-keyword">if</span> abs(f(w, x) - f(last_w, x) &lt; <span class="hljs-number">1e-8</span>):<br>                    <span class="hljs-keyword">break</span><br>                cur_iter += <span class="hljs-number">1</span><br>            <span class="hljs-keyword">return</span> w<br><br>        x_pca = demean(x)<br>        self.components_ = np.empty(shape=(self.n_components, x.shape[<span class="hljs-number">1</span>]))<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(self.n_components):<br>            initial_w = np.random.random(x_pca.shape[<span class="hljs-number">1</span>])<br>            <span class="hljs-comment"># 在x_pca上求得第一主成分</span><br>            w = gradient_ascent(x_pca, initial_w)<br>            self.components_[i, :] = w<br>            <span class="hljs-comment"># 将x_pca映射到求出来的主成分上，在此基础上再求第一主成分</span><br>            x_pca = x_pca - x_pca.dot(w).reshape(<span class="hljs-number">-1</span>, <span class="hljs-number">1</span>) * w<br>        <span class="hljs-keyword">return</span> self<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">transform</span><span class="hljs-params">(self, X)</span>:</span><br>        <span class="hljs-string">""" 将给定的X，映射到各个主成分分量z中 """</span><br>        <span class="hljs-keyword">return</span> X.dot(self.components_.T)<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">detransform</span><span class="hljs-params">(self, X)</span>:</span><br>        <span class="hljs-string">""" 将给定的X，反向映射回原来的特征空间 """</span><br>        <span class="hljs-keyword">return</span> X.dot(self.components_)<br></code></pre></td></tr></table></figure>
 
-    def __init__(self, n_components):
-        &quot;&quot;&quot; 初始化PCA &quot;&quot;&quot;
-        self.n_components = n_components
-        self.components_ = None
 
-    def fit(self, x):
-        &quot;&quot;&quot; 获取数据集的前n个主成分 &quot;&quot;&quot;
-        def demean(x):
-            return x - np.mean(x, axis=0)
 
-        def f(w, x):
-            return np.sum((x.dot(w) ** 2)) / len(x)
+<h2 id="PCA的使用"><a href="#PCA的使用" class="headerlink" title="PCA的使用"></a>PCA的使用</h2><h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><p><code>sklearn</code>库中的PCA的用法与之前实现的基本一致。</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs stata">from sklearn.decomposition import <span class="hljs-keyword">PCA</span><br><br><span class="hljs-keyword">pca</span> = <span class="hljs-keyword">PCA</span>(n_components=1)<br><span class="hljs-keyword">pca</span>.<span class="hljs-keyword">fit</span>(x_data)<br><span class="hljs-keyword">pca</span>.components_  # 得到的主成分<br>x_reduction = <span class="hljs-keyword">pca</span>.transform(x_data)<br>x_restore = <span class="hljs-keyword">pca</span>.inverse_transform(x_reduction)<br></code></pre></td></tr></table></figure>
 
-        def df(w, x):
-            return x.T.dot(x.dot(w)) * 2. / len(x)
+<h3 id="PCA效果的查看"><a href="#PCA效果的查看" class="headerlink" title="PCA效果的查看"></a>PCA效果的查看</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">pca</span><span class="hljs-selector-class">.explained_variance_ratio_</span><br></code></pre></td></tr></table></figure>
 
-        def gradient_ascent(x, w):
-            &quot;&quot;&quot; 梯度上升法获取第1主成分 &quot;&quot;&quot;
-            def direction(w):
-                &quot;&quot;&quot; 将w转化为单位方向向量 &quot;&quot;&quot;
-                return w / np.linalg.norm(w)
-            cur_iter = 0
-            w = direction(w)
-            while cur_iter &lt; 1e4:
-                gradient = df(w, x)
-                last_w = w
-                w = w + 0.001 * gradient
-                w = direction(w)
-                if abs(f(w, x) - f(last_w, x) &lt; 1e-8):
-                    break
-                cur_iter += 1
-            return w
-
-        x_pca = demean(x)
-        self.components_ = np.empty(shape=(self.n_components, x.shape[1]))
-        for i in range(self.n_components):
-            initial_w = np.random.random(x_pca.shape[1])
-            # 在x_pca上求得第一主成分
-            w = gradient_ascent(x_pca, initial_w)
-            self.components_[i, :] = w
-            # 将x_pca映射到求出来的主成分上，在此基础上再求第一主成分
-            x_pca = x_pca - x_pca.dot(w).reshape(-1, 1) * w
-        return self
-
-    def transform(self, X):
-        &quot;&quot;&quot; 将给定的X，映射到各个主成分分量z中 &quot;&quot;&quot;
-        return X.dot(self.components_.T)
-
-    def detransform(self, X):
-        &quot;&quot;&quot; 将给定的X，反向映射回原来的特征空间 &quot;&quot;&quot;
-        return X.dot(self.components_)</code></pre><h2 id="PCA的使用"><a href="#PCA的使用" class="headerlink" title="PCA的使用"></a>PCA的使用</h2><h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><p><code>sklearn</code>库中的PCA的用法与之前实现的基本一致。</p>
-<pre><code>from sklearn.decomposition import PCA
-
-pca = PCA(n_components=1)
-pca.fit(x_data)
-pca.components_  # 得到的主成分
-x_reduction = pca.transform(x_data)
-x_restore = pca.inverse_transform(x_reduction)</code></pre><h3 id="PCA效果的查看"><a href="#PCA效果的查看" class="headerlink" title="PCA效果的查看"></a>PCA效果的查看</h3><pre><code>pca.explained_variance_ratio_</code></pre><blockquote>
+<blockquote>
 <p>该方法返回一个表示降维后每个轴能够代表整个数据信息的比例，可以查看降维的效果以及数据损失的程度</p>
 </blockquote>
-<pre><code># 获取PCA所有轴数据损失的程度
-pca = PCA(n_components=x_train.shape[1])
-pca.fit(x_train)
-pca.explained_variance_ratio_</code></pre> 
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs stata"># 获取<span class="hljs-keyword">PCA</span>所有轴数据损失的程度<br><span class="hljs-keyword">pca</span> = <span class="hljs-keyword">PCA</span>(n_components=x_train.shape[1])<br><span class="hljs-keyword">pca</span>.<span class="hljs-keyword">fit</span>(x_train)<br><span class="hljs-keyword">pca</span>.explained_variance_ratio_<br></code></pre></td></tr></table></figure>
+
+
+
+ 
       <!-- reward -->
       
       <div id="reword-out">
@@ -296,7 +219,7 @@ pca.explained_variance_ratio_</code></pre>
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95/" rel="tag">经典算法</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sklearn/" rel="tag">sklearn</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li></ul>
 
     </footer>
   </div>
@@ -314,7 +237,7 @@ pca.explained_variance_ratio_</code></pre>
       </a>
     
     
-      <a href="/page/null.html" class="article-nav-link">
+      <a href="/page/transport-layer.html" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
         <div class="article-nav-title">第三章：传输层</div>
       </a>

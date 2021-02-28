@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Java/Java基础/2、Java面向对象"
+  id="post-编程相关/Java/Java基础/4、Java：类、对象与方法"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-07-04T02:43:51.000Z" itemprop="datePublished">2020-07-04</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Java/">Java</a> / <a class="article-category-link" href="/categories/Java/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Java/">Java</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Java/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">897</span>
+            <span class="post-count">3.5k</span>
         </span>
     </span>
 
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">3 min</span>
+            <span class="post-count">13 min</span>
         </span>
     </span>
 </div>
@@ -102,51 +102,237 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h3 id="面向对象三大特征"><a href="#面向对象三大特征" class="headerlink" title="面向对象三大特征"></a>面向对象三大特征</h3><h4 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h4><p>封装是指把一个对象的状态信息（也就是属性）隐藏在对象内部，不允许外部对象直接访问对象的内部信息。但是可以提供一些可以被外界访问的方法来操作属性。</p>
-<h4 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h4><p>继承是使用已存在的类的定义作为基础建立新类的技术，新类的定义可以增加新的数据或新的功能，也可以用父类的功能，但不能选择性地继承父类。通过使用继承，可以快速地创建新的类，可以提高代码的重用，程序的可维护性，节省大量创建新类的时间 ，提高我们的开发效率。同时，<strong>Java语言中的继承是单继承</strong>。</p>
+  <h1 id="面向对象三大特性"><a href="#面向对象三大特性" class="headerlink" title="面向对象三大特性"></a>面向对象三大特性</h1><h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><p>封装是指把一个对象的状态信息（也就是属性）隐藏在对象内部，不允许外部对象直接访问对象的内部信息。但是可以提供一些可以被外界访问的方法来操作属性。</p>
+<h3 id="访问权限修饰符"><a href="#访问权限修饰符" class="headerlink" title="访问权限修饰符"></a>访问权限修饰符</h3><p>Java 中有三个访问权限修饰符：private、protected 以及 public，如果不加访问修饰符，表示包级可见。<strong>所以Java的访问权限应该有四个</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">作用范围/关键字</th>
+<th align="center">当前类</th>
+<th align="center">同一package</th>
+<th align="center">子孙类</th>
+<th align="center">其他package</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">public</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">√</td>
+</tr>
+<tr>
+<td align="center">protected</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">×</td>
+</tr>
+<tr>
+<td align="center">不使用关键字</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">×</td>
+<td align="center">×</td>
+</tr>
+<tr>
+<td align="center">private</td>
+<td align="center">√</td>
+<td align="center">×</td>
+<td align="center">×</td>
+<td align="center">×</td>
+</tr>
+</tbody></table>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><blockquote>
+<p>继承是使用已存在的类的定义作为基础建立新类的技术，新类的定义可以增加新的数据或新的功能，也可以用父类的功能，但不能选择性地继承父类。</p>
+</blockquote>
+<p>通过使用继承，可以快速地创建新的类，可以提高代码的重用，程序的可维护性，节省大量创建新类的时间 ，提高开发效率。同时，<strong>Java语言中的继承是单继承</strong>。</p>
 <p>1、子类拥有父类对象所有的属性和方法（包括私有属性和私有方法），但是父类中的私有属性和方法子类是无法访问，<strong>只是拥有</strong>。</p>
 <p>2、子类可以拥有自己属性和方法，即子类可以对父类进行扩展。</p>
 <p>3、子类可以用自己的方式实现父类的方法（方法重写）。</p>
-<h4 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h4><h3 id="Object类的常见方法总结"><a href="#Object类的常见方法总结" class="headerlink" title="Object类的常见方法总结"></a>Object类的常见方法总结</h3><p><strong>Object类是所有类的父类</strong>，主要提供11个方法。</p>
-<pre><code>// 用于返回当前运行时对象的Class对象。
-public final native Class&lt;?&gt; getClass()
+<h3 id="继承的常用关键字"><a href="#继承的常用关键字" class="headerlink" title="继承的常用关键字"></a>继承的常用关键字</h3><p>this：当前类对象的引用</p>
+<p>super：父类对象的引用，可用于访问父类成员方法与属性</p>
+<p><code>super()</code> 访问父类构造方法，必须位于子类构造方法的<strong>第一行</strong></p>
+<p>子类的构造过程必须调用其父类的构造方法，若子类构造方法中没有显式标注，则系统默认调用父类无参构造方法（若子类构造方法无显式标值且父类中没有无参构造方法，则编译出错），因此Java中每个类中都应该尽量写一个无参构造函数。</p>
+<h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><blockquote>
+<p>多态通俗意义上来讲就是：不同类的对象对同一消息做出不同响应，</p>
+</blockquote>
+<p>可以分为：</p>
+<ul>
+<li>编译时多态：即方法重载</li>
+<li>运行时多态：程序运行时动态决定调用哪个方法</li>
+</ul>
+<h3 id="向上转型"><a href="#向上转型" class="headerlink" title="向上转型"></a>向上转型</h3><blockquote>
+<p>向上转型，即父类（或者父接口）引用指向子类实例，是Java语言中多态的常见表现形式</p>
+</blockquote>
+<p>如下即为向上转型的示例，声明的是父类（父接口），实际指向的是子类的一个对象。这使得对象既可以<strong>使用子类强大的功能</strong>，又可以<strong>抽取父类的共性</strong>。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-built_in">List</span> l1 = <span class="hljs-keyword">new</span> ArrayList();<br><span class="hljs-built_in">List</span> l2 = <span class="hljs-keyword">new</span> LinkedList();<br></code></pre></td></tr></table></figure>
 
-// 用于返回对象的哈希码，主要使用在哈希表中，比如JDK中的HashMap
-public native int hashCode()
+<h3 id="向上转型规则"><a href="#向上转型规则" class="headerlink" title="向上转型规则"></a>向上转型规则</h3><p>向上转型<strong>可以调用子类重现父类的方法以及父类派生的方法，无法调用子类独有的方法</strong>，示例如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**<br> * 父类<br> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Father</span> </span>&#123;<br>    <span class="hljs-comment">// 父类中的func1方法</span><br>    <span class="hljs-comment">// 由于子类中对该方法只是进行了重载而没有进行重写</span><br>    <span class="hljs-comment">// 因此该方法仍然有效</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">func1</span><span class="hljs-params">()</span> </span>&#123;<br>        System.out.println(<span class="hljs-string">"Father func1"</span>);<br>    &#125;<br><br>    <span class="hljs-comment">// 父类中的func2方法</span><br>    <span class="hljs-comment">// 由于在子类中重写了该方法</span><br>    <span class="hljs-comment">// 所以在“向上转型”中，该方法不再有效</span><br>    <span class="hljs-comment">// 取而代之的是子类中的fun2方法</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">func2</span><span class="hljs-params">()</span> </span>&#123;<br>        System.out.println(<span class="hljs-string">"Father func2"</span>);<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">/**<br> * 子类<br> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Child</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Father</span> </span>&#123;<br>    <span class="hljs-comment">// 对func1方法的一个重载</span><br>    <span class="hljs-comment">// 由于在父类中没有定义该方法，所以该方法不能被父类的引用调用</span><br>    <span class="hljs-comment">// 如果进行调用即会报错</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">func1</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span> </span>&#123;<br>        System.out.println(<span class="hljs-string">"Child func1"</span>);<br>    &#125;<br><br>    <span class="hljs-comment">// 对父类方法的重写</span><br>    <span class="hljs-comment">// 能够起作用</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">func2</span><span class="hljs-params">()</span> </span>&#123;<br>        System.out.println(<span class="hljs-string">"Child func2"</span>);<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">/**<br> * 主函数<br> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>	<span class="hljs-comment">// write your code here</span><br>        Father test = <span class="hljs-keyword">new</span> Child();<br>        test.func1();   <span class="hljs-comment">// Father func1</span><br>        test.func2();   <span class="hljs-comment">// Child func2</span><br>        test.func1(<span class="hljs-number">10</span>); <span class="hljs-comment">// 报错</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-// 用于比较2个对象的内存地址是否相等，String类对该方法进行了重写用户比较字符串的值是否相等
-public boolean equals(Object obj)
+<h3 id="向下转型"><a href="#向下转型" class="headerlink" title="向下转型"></a>向下转型</h3><blockquote>
+<p>向下转型，子类引用指向父类实例，此处要求必须进行强转</p>
+</blockquote>
+<p>Java中向上转型是安全的，由JVM自动实现，而向下转型是不安全的，需要强制类型转换。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">Father father = <span class="hljs-keyword">new</span> Father();<br><span class="hljs-keyword">if</span>(father <span class="hljs-keyword">instanceof</span> Child) &#123;	<span class="hljs-comment">// instanceof 运算符，返回 true false</span><br>	Child temp = (Child)father;	<span class="hljs-comment">// 强制类型转换</span><br>&#125;<br></code></pre></td></tr></table></figure>
 
-// 用于创建并返回当前对象的一份拷贝。
-// 一般情况下，对于任何对象 x
-// 表达式 x.clone() != x 为true
-// x.clone().getClass() == x.getClass() 为true
-// Object本身没有实现Cloneable接口，所以不重写clone方法并且进行调用的话会产生异常。
-protected native Object clone() throws CloneNotSupportedException
 
-// 返回类的名字@实例的哈希码的16进制的字符串。建议Object所有的子类都重写这个方法。
-public String toString()
 
-// 不能重写。唤醒一个在此对象监视器上等待的线程(监视器相当于就是锁的概念)。如果有多个线程在等待只会任意唤醒一个。
-public final native void notify()
+<h1 id="嵌套类"><a href="#嵌套类" class="headerlink" title="嵌套类"></a>嵌套类</h1><blockquote>
+<p>一个类定义在另一个类（或方法）内部</p>
+</blockquote>
+<p>嵌套类的作用：</p>
+<p>1、实现更细粒度的访问权限控制</p>
+<p>2、避免过多的类定义</p>
+<h2 id="静态嵌套类"><a href="#静态嵌套类" class="headerlink" title="静态嵌套类"></a>静态嵌套类</h2><blockquote>
+<p>第三方需要通过外部包围类才能够访问</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Outer</span> </span>&#123;<br>    <span class="hljs-comment">// 静态嵌套类</span><br>    <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Inner</span> </span>&#123;<br>        <br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-// 不能重写。跟notify一样，唯一的区别就是会唤醒在此对象监视器上等待的所有线程，而不是一个线程。
-public final native void notifyAll()
+<h2 id="非静态嵌套类（内部类）"><a href="#非静态嵌套类（内部类）" class="headerlink" title="非静态嵌套类（内部类）"></a>非静态嵌套类（内部类）</h2><h3 id="普通内部类（成员内部类）"><a href="#普通内部类（成员内部类）" class="headerlink" title="普通内部类（成员内部类）"></a>普通内部类（成员内部类）</h3><blockquote>
+<p>定义后在类中均可以使用，类似于结构体的作用</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Outer</span> </span>&#123;<br>    <span class="hljs-comment">// 成员内部类</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Inner</span> </span>&#123;<br>        <br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-// 不能重写。暂停线程的执行。注意：sleep方法没有释放锁，而wait方法释放了锁 。timeout是等待时间。
-public final native void wait(long timeout) throws InterruptedException
+<h3 id="局部内部类"><a href="#局部内部类" class="headerlink" title="局部内部类"></a>局部内部类</h3><blockquote>
+<p>定义在代码块（如方法、for/if语句中）中的非静态的类</p>
+<p>只存活于该代码块内部，<strong>代码块结束后外界无法使用该类</strong></p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Outer</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">func</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-comment">// 局部内部类</span><br>        <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Inner</span> </span>&#123;<br>            <br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-// 多了nanos参数，这个参数表示额外时间（以毫微秒为单位，范围是 0-999999）。 所以超时的时间还需要加上nanos毫秒。
-public final void wait(long timeout, int nanos) throws InterruptedException
+<h3 id="匿名内部类"><a href="#匿名内部类" class="headerlink" title="匿名内部类"></a>匿名内部类</h3><blockquote>
+<p>没有类名的内部类，必须继承一个父类/实现一个父接口，同时在实例化后迅速转为父类/父接口</p>
+</blockquote>
+<p>匿名内部类通常只使用一次</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Outer</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">func</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-comment">// 匿名内部类</span><br>        <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Inner</span> </span>&#123;<br>            <span class="hljs-keyword">new</span> Thread(<span class="hljs-keyword">new</span> Runnable() &#123;<br>                <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>                    <br>                &#125;<br>            &#125;).start();<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-// 跟之前的2个wait方法一样，只不过该方法一直等待，没有超时时间这个概念
-public final void wait() throws InterruptedException
+<h2 id="四种嵌套类的比较"><a href="#四种嵌套类的比较" class="headerlink" title="四种嵌套类的比较"></a>四种嵌套类的比较</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>访问权限修饰</th>
+<th>作用范围</th>
+<th>可访问外部包围类内容</th>
+<th>和外部类关系</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>匿名内部类</td>
+<td>无</td>
+<td>所在代码块内，外部无法访问</td>
+<td>访问外部的所有成员</td>
+<td>在外部类对象内部</td>
+</tr>
+<tr>
+<td>局部内部类</td>
+<td>无</td>
+<td>所在代码块内，外部无法访问</td>
+<td>访问外部的所有成员</td>
+<td>在外部类对象内部</td>
+</tr>
+<tr>
+<td>普通内部类</td>
+<td>有</td>
+<td>包围类内可以访问，外部可以访问</td>
+<td>访问外部的所有成员</td>
+<td>外界可以new，但必须依附于一个外部类对象</td>
+</tr>
+<tr>
+<td>静态内部类</td>
+<td>有</td>
+<td>包围类内可以访问，外部可以访问</td>
+<td>访问外部的所有静态成员</td>
+<td>外界可以new，可独立进行工作</td>
+</tr>
+</tbody></table>
+<h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><h2 id="参数传递方式"><a href="#参数传递方式" class="headerlink" title="参数传递方式"></a>参数传递方式</h2><h3 id="Java形参的传递方法（值传递）"><a href="#Java形参的传递方法（值传递）" class="headerlink" title="Java形参的传递方法（值传递）"></a>Java形参的传递方法（值传递）</h3><blockquote>
+<p>总体而言，Java总是采用按值传递的方式进行传参，即<em>方法得到的是所有参数值的一个拷贝</em>，方法不能修改传递给它的任何参数的内容</p>
+</blockquote>
+<p><strong>1、一个方法不能修改一个基本数据类型的参数</strong></p>
+<p>示例：</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-built_in">public</span> static <span class="hljs-type">void</span> main(String[] args) &#123;<br>    <span class="hljs-type">int</span> num1 = <span class="hljs-number">10</span>;<br>    <span class="hljs-type">int</span> num2 = <span class="hljs-number">20</span>;<br><br>    swap(num1, num2);<br><br>    <span class="hljs-keyword">System</span>.<span class="hljs-keyword">out</span>.println("num1 = " + num1);<br>    <span class="hljs-keyword">System</span>.<span class="hljs-keyword">out</span>.println("num2 = " + num2);<br>&#125;<br><br><span class="hljs-built_in">public</span> static <span class="hljs-type">void</span> swap(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b) &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-keyword">temp</span> = a;<br>    a = b;<br>    b = <span class="hljs-keyword">temp</span>;<br><br>    <span class="hljs-keyword">System</span>.<span class="hljs-keyword">out</span>.println("a = " + a);<br>    <span class="hljs-keyword">System</span>.<span class="hljs-keyword">out</span>.println("b = " + b);<br>&#125;<br></code></pre></td></tr></table></figure>
 
-// 实例被垃圾回收器回收的时候触发的操作
-protected void finalize() throws Throwable
-</code></pre><p>其中native方法即为调用非Java代码的接口，一个native方法是指该方法的实现由非Java语言实现。</p>
-<h3 id="访问权限修饰符"><a href="#访问权限修饰符" class="headerlink" title="访问权限修饰符"></a>访问权限修饰符</h3><p>Java 中有三个访问权限修饰符：private、protected 以及 public，如果不加访问修饰符，表示包级可见。<strong>所以Java的访问权限应该有四个</strong></p>
-<p>主要参考：<a href="https://github.com/Snailclimb/JavaGuide" target="_blank" rel="noopener">https://github.com/Snailclimb/JavaGuide</a></p>
+<p>结果：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">a</span> = <span class="hljs-number">20</span><br><span class="hljs-attr">b</span> = <span class="hljs-number">10</span><br><span class="hljs-attr">num1</span> = <span class="hljs-number">10</span><br><span class="hljs-attr">num2</span> = <span class="hljs-number">20</span><br></code></pre></td></tr></table></figure>
+
+<p>说明：</p>
+<p>在 swap 方法中，a、b 的值进行交换，并不会影响到 num1、num2。因为，a、b 中的值，只是从 num1、num2 的复制过来的（<strong>值传递</strong>）。也就是说，a、b 相当于 num1、num2 的副本，副本的内容无论怎么修改，都不会影响到原件本身。</p>
+<p><strong>2、一个方法可以改变一个对象参数的状态</strong></p>
+<p>示例：</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-keyword">public</span> static <span class="hljs-built_in">void</span> main(String[] args) &#123;<br>	<span class="hljs-built_in">int</span>[] arr = &#123; <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span> &#125;;<br>	System.<span class="hljs-keyword">out</span>.println(arr[<span class="hljs-number">0</span>]);<br>	change(arr);<br>	System.<span class="hljs-keyword">out</span>.println(arr[<span class="hljs-number">0</span>]);<br>&#125;<br><br><span class="hljs-keyword">public</span> static <span class="hljs-built_in">void</span> change(<span class="hljs-built_in">int</span>[] <span class="hljs-built_in">array</span>) &#123;<br>	<span class="hljs-comment">// 将数组的第一个元素变为0</span><br>	<span class="hljs-built_in">array</span>[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-number">1</span><br><span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
+
+<p>说明：</p>
+<p>array 被初始化 arr 的拷贝也就是一个对象的引用，也就是说 array 和 arr 指向的是同一个数组对象。 因此，外部对引用对象的改变会反映到所对应的对象上（类似于C++ 的引用传递）。</p>
+<p><strong>3、一个方法不能让对象参数引用一个新的对象</strong></p>
+<p>示例：</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-built_in">public</span> <span class="hljs-keyword">class</span> Test &#123;<br><br>	<span class="hljs-built_in">public</span> static <span class="hljs-type">void</span> main(String[] args) &#123;<br>		// TODO Auto-<span class="hljs-keyword">generated</span> <span class="hljs-keyword">method</span> stub<br>		Student s1 = <span class="hljs-built_in">new</span> Student("小张");<br>		Student s2 = <span class="hljs-built_in">new</span> Student("小李");<br>		Test.swap(s1, s2);<br>		<span class="hljs-keyword">System</span>.<span class="hljs-keyword">out</span>.println("s1:" + s1.getName());<br>		<span class="hljs-keyword">System</span>.<span class="hljs-keyword">out</span>.println("s2:" + s2.getName());<br>	&#125;<br><br>	<span class="hljs-built_in">public</span> static <span class="hljs-type">void</span> swap(Student x, Student y) &#123;<br>		Student <span class="hljs-keyword">temp</span> = x;<br>		x = y;<br>		y = <span class="hljs-keyword">temp</span>;<br>		<span class="hljs-keyword">System</span>.<span class="hljs-keyword">out</span>.println("x:" + x.getName());<br>		<span class="hljs-keyword">System</span>.<span class="hljs-keyword">out</span>.println("y:" + y.getName());<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-symbol">x:</span>小李<br><span class="hljs-symbol">y:</span>小张<br><span class="hljs-symbol">s1:</span>小张<br><span class="hljs-symbol">s2:</span>小李<br></code></pre></td></tr></table></figure>
+
+<p>说明：</p>
+<p>方法并没有改变存储在变量 s1 和 s2 中的对象引用。swap 方法的参数 x 和 y 被初始化为两个对象引用的拷贝，这个方法交换的是这两个拷贝</p>
+<h3 id="深拷贝、浅拷贝"><a href="#深拷贝、浅拷贝" class="headerlink" title="深拷贝、浅拷贝"></a>深拷贝、浅拷贝</h3><p>1、<strong>浅拷贝</strong>：对基本数据类型进行值传递，对引用数据类型进行引用传递般的拷贝，此为浅拷贝。</p>
+<p>2、<strong>深拷贝</strong>：对基本数据类型进行值传递，对引用数据类型，创建一个新的对象，并复制其内容，此为深拷贝。</p>
+<p><img src="http://cdn.ziyedy.top/4%E3%80%81Java%EF%BC%9A%E7%B1%BB%E3%80%81%E5%AF%B9%E8%B1%A1%E4%B8%8E%E6%96%B9%E6%B3%95/java-deep-and-shallow-copy.jpg" alt=""></p>
+<h2 id="方法重载（Overload）"><a href="#方法重载（Overload）" class="headerlink" title="方法重载（Overload）"></a>方法重载（Overload）</h2><blockquote>
+<p>同样的方法根据输入数据的不同，做出不同处理（同一个类中多个同名方法根据不同的传参来执行不同的逻辑处理）</p>
+<p><strong>每个重载的方法都有独一无二的参数列表</strong>，包括参数的类型、顺序、参数数量等等</p>
+<p>重载是发生在<strong>编译时</strong>的，由编译器根据参数的类型来选择使用哪个方法</p>
+</blockquote>
+<h3 id="重载的条件"><a href="#重载的条件" class="headerlink" title="重载的条件"></a>重载的条件</h3><ol>
+<li><p>位于同一个类中，且方法名必须相同</p>
+</li>
+<li><p>参数列表必须不同（个数、类型、参数类型排列顺序不同）</p>
+</li>
+<li><p>返回值可以不同，仅返回值不同不能构成重载</p>
+</li>
+<li><p>可以有不同的访问修饰符，可以抛出不同的异常</p>
+</li>
+</ol>
+<h2 id="方法重写（Override）"><a href="#方法重写（Override）" class="headerlink" title="方法重写（Override）"></a>方法重写（Override）</h2><blockquote>
+<p>重写发生在<strong>运行期</strong>，是子类对父类的允许访问的方法的实现过程进行重新编写（重写就是<strong>子类对父类方法的重新改造</strong>，外部样子不能改变，内部逻辑可以改变）</p>
+</blockquote>
+<h3 id="重写的原则"><a href="#重写的原则" class="headerlink" title="重写的原则"></a>重写的原则</h3><ol>
+<li><p>发生有继承关系的<em>父类与子类</em>中，且父类方法的<em>访问修饰符为private/final/static则表示该方法不能重写</em>，但是使用static修饰的方法能够被再次声明，同时构造方法不能被重写。</p>
+</li>
+<li><p>重写的方法必须要和父类保持一致</p>
+</li>
+<li><p>子类方法的<em>访问权限必须大于等于</em>父类方法；</p>
+</li>
+<li><p>子类方法的返回类型必须是父类方法返回类型或为其子类型。</p>
+</li>
+<li><p>子类方法抛出的异常类型必须是父类抛出异常类型或为其子类型。</p>
+</li>
+</ol>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**<br> * 1、子类的访问权限public &gt; 父类访问权限protected<br> * 2、子类返回值是父类接口的一个类实现（父类的子类型）<br> * 3、子类抛出的异常为父类抛出异常的子类<br> * 使用 <span class="hljs-doctag">@Override</span> 注解，可以让编译器帮忙检查是否满足上面的限制条件*<br> */</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SuperClass</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">protected</span> List&lt;Integer&gt; <span class="hljs-title">func</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Throwable </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();<br>    &#125;<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SubClass</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">SuperClass</span> </span>&#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> ArrayList&lt;Integer&gt; <span class="hljs-title">func</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="所有类的父类——Object"><a href="#所有类的父类——Object" class="headerlink" title="所有类的父类——Object"></a>所有类的父类——Object</h1><h2 id="主要方法"><a href="#主要方法" class="headerlink" title="主要方法"></a>主要方法</h2><p><strong>Object类是所有类的父类</strong>，主要提供11个方法。</p>
+<p>其中native方法即为调用非Java代码的接口，一个native方法是指该方法的实现由非Java语言实现。</p>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs processing"><span class="hljs-comment">// 用于返回当前运行时对象的Class对象。</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">native</span> Class&lt;?&gt; getClass()<br><br><span class="hljs-comment">// 用于返回对象的哈希码，主要使用在哈希表中，比如JDK中的HashMap</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">native</span> <span class="hljs-built_in">int</span> hashCode()<br><br><span class="hljs-comment">// 用于比较2个对象的内存地址是否相等，String类对该方法进行了重写用户比较字符串的值是否相等</span><br><span class="hljs-keyword">public</span> <span class="hljs-built_in">boolean</span> equals(<span class="hljs-keyword">Object</span> obj)<br><br><span class="hljs-comment">// 用于创建并返回当前对象的一份拷贝。</span><br><span class="hljs-comment">// 一般情况下，对于任何对象 x</span><br><span class="hljs-comment">// 表达式 x.clone() != x 为true</span><br><span class="hljs-comment">// x.clone().getClass() == x.getClass() 为true</span><br><span class="hljs-comment">// Object本身没有实现Cloneable接口，所以不重写clone方法并且进行调用的话会产生异常。</span><br><span class="hljs-keyword">protected</span> <span class="hljs-keyword">native</span> <span class="hljs-keyword">Object</span> clone() <span class="hljs-keyword">throws</span> CloneNotSupportedException<br><br><span class="hljs-comment">// 返回类的名字@实例的哈希码的16进制的字符串。建议Object所有的子类都重写这个方法。</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">String</span> toString()<br><br><span class="hljs-comment">// 不能重写。唤醒一个在此对象监视器上等待的线程(监视器相当于就是锁的概念)。如果有多个线程在等待只会任意唤醒一个。</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">native</span> <span class="hljs-keyword">void</span> notify()<br><br><span class="hljs-comment">// 不能重写。跟notify一样，唯一的区别就是会唤醒在此对象监视器上等待的所有线程，而不是一个线程。</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">native</span> <span class="hljs-keyword">void</span> notifyAll()<br><br><span class="hljs-comment">// 不能重写。暂停线程的执行。注意：sleep方法没有释放锁，而wait方法释放了锁 。timeout是等待时间。</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">native</span> <span class="hljs-keyword">void</span> wait(<span class="hljs-keyword">long</span> timeout) <span class="hljs-keyword">throws</span> InterruptedException<br><br><span class="hljs-comment">// 多了nanos参数，这个参数表示额外时间（以毫微秒为单位，范围是 0-999999）。 所以超时的时间还需要加上nanos毫秒。</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">void</span> wait(<span class="hljs-keyword">long</span> timeout, <span class="hljs-built_in">int</span> nanos) <span class="hljs-keyword">throws</span> InterruptedException<br><br><span class="hljs-comment">// 跟之前的2个wait方法一样，只不过该方法一直等待，没有超时时间这个概念</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">void</span> wait() <span class="hljs-keyword">throws</span> InterruptedException<br><br><span class="hljs-comment">// 实例被垃圾回收器回收的时候触发的操作</span><br><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> finalize() <span class="hljs-keyword">throws</span> Throwable<br></code></pre></td></tr></table></figure>
+
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h3 id="与equals"><a href="#与equals" class="headerlink" title="==与equals"></a>==与equals</h3><ul>
+<li><strong>==</strong>：判断两个对象在内存中的地址是不是相等（基本数据类型==比较的是值，引用数据类型==比较的是内存地址）</li>
+<li><strong>equals()</strong>：通常用于判断两个对象的“值”是否相等（若类没有重写该方法，则等价于使用“==”，但通常都会对equals进行重写）</li>
+</ul>
+<h3 id="hashCode与equals"><a href="#hashCode与equals" class="headerlink" title="hashCode与equals"></a>hashCode与equals</h3><ul>
+<li><p>使用<code>equals()</code>进行对比是绝对可靠的：equals()相等的两个对象它们的hashCode()也一定相等</p>
+</li>
+<li><p>使用<code>hashCode()</code>进行对比不是绝对可靠的：hashCode()相等的两个对象equals()不一定相等（有时不同对象hashcode会一样）</p>
+</li>
+</ul>
+<p>在使用<code>Set</code>等hash结构的类中存储该类时，<strong>equals 方法被重写，则 hashCode 方法也必须被重写</strong></p>
+<p>如<code>String</code>重写了这两个方法，则可以在<code>HashMap</code>等类似结构中使用<code>String</code>对象。</p>
+<p>参考：</p>
+<blockquote>
+<p><a href="https://github.com/Snailclimb/JavaGuide" target="_blank" rel="noopener">https://github.com/Snailclimb/JavaGuide</a></p>
+</blockquote>
  
       <!-- reward -->
       
@@ -242,7 +428,7 @@ protected void finalize() throws Throwable
     
       <a href="/page/java-basic-grammar.html" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">Java基础语法</div>
+        <div class="article-nav-title">Java：基本概念与语言特点</div>
       </a>
     
   </nav>

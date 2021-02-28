@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-AI/TF2/TF2实现经典CNN架构"
+  id="post-AI相关/TensorFlow2/TF2实现经典CNN架构"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-08-24T09:08:00.000Z" itemprop="datePublished">2020-08-24</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/AI/">AI</a> / <a class="article-category-link" href="/categories/AI/TF2/">TF2</a>
+    <a class="article-category-link" href="/categories/AI%E7%9B%B8%E5%85%B3/">AI相关</a> / <a class="article-category-link" href="/categories/AI%E7%9B%B8%E5%85%B3/TensorFlow2/">TensorFlow2</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">218</span>
+            <span class="post-count">217</span>
         </span>
     </span>
 
@@ -102,26 +102,27 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="卷积神经网络经典操作"><a href="#卷积神经网络经典操作" class="headerlink" title="卷积神经网络经典操作"></a>卷积神经网络经典操作</h2><h3 id="卷积操作"><a href="#卷积操作" class="headerlink" title="卷积操作"></a>卷积操作</h3><pre><code>tf.keras.layers.Conv2D (
-    filters = 卷积核个数,
-    kernel_size = 卷积核尺寸, # 正方形写核长整数，或（核高h，核宽w）
-    strides = 滑动步长, # 横纵向相同写步长整数，或(纵向步长h，横向步长w)，默认1
-    padding = “same” or “valid”, # same表示全零填充，valid为默认值
-    activation = &quot;relu&quot; # 激活函数，如有BN，此处不写
-    input_shape = (高, 宽 , 通道数) # 输入特征图维度，可省略
-)</code></pre><h3 id="批标准化（Batch-Normalization，BN）"><a href="#批标准化（Batch-Normalization，BN）" class="headerlink" title="批标准化（Batch Normalization，BN）"></a>批标准化（Batch Normalization，BN）</h3><pre><code>tf.keras.layers.BatchNormalization()</code></pre><h3 id="激活函数（使用BN的情况下才要）"><a href="#激活函数（使用BN的情况下才要）" class="headerlink" title="激活函数（使用BN的情况下才要）"></a>激活函数（使用BN的情况下才要）</h3><pre><code>Activation(对应激活函数)</code></pre><h3 id="池化（Pooling）"><a href="#池化（Pooling）" class="headerlink" title="池化（Pooling）"></a>池化（Pooling）</h3><pre><code># 最大池化
-tf.keras.layers.MaxPool2D(
-    pool_size= 池化核尺寸,
-    strides= 池化步长, # 默认为pool_size
-    padding=‘valid’ or ‘same’
-)
+  <h2 id="卷积神经网络经典操作"><a href="#卷积神经网络经典操作" class="headerlink" title="卷积神经网络经典操作"></a>卷积神经网络经典操作</h2><h3 id="卷积操作"><a href="#卷积操作" class="headerlink" title="卷积操作"></a>卷积操作</h3><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs nix">tf.keras.layers.Conv2D (<br>	<span class="hljs-attr">filters</span> = 卷积核个数,<br>	<span class="hljs-attr">kernel_size</span> = 卷积核尺寸, <span class="hljs-comment"># 正方形写核长整数，或（核高h，核宽w）</span><br>	<span class="hljs-attr">strides</span> = 滑动步长, <span class="hljs-comment"># 横纵向相同写步长整数，或(纵向步长h，横向步长w)，默认1</span><br>	<span class="hljs-attr">padding</span> = “same” <span class="hljs-literal">or</span> “valid”, <span class="hljs-comment"># same表示全零填充，valid为默认值</span><br>	<span class="hljs-attr">activation</span> = <span class="hljs-string">"relu"</span> <span class="hljs-comment"># 激活函数，如有BN，此处不写</span><br>	<span class="hljs-attr">input_shape</span> = (高, 宽 , 通道数) <span class="hljs-comment"># 输入特征图维度，可省略</span><br>)<br></code></pre></td></tr></table></figure>
 
-# 平均池化
-tf.keras.layers.AveragePooling2D(
-    pool_size= 池化核尺寸,
-    strides= 池化步长, # 默认为pool_size
-    padding=‘valid’or‘same’
-)</code></pre><h3 id="Dropout"><a href="#Dropout" class="headerlink" title="Dropout"></a>Dropout</h3><pre><code>tf.keras.layers.Dropout(舍弃概率)</code></pre><h3 id="VGG"><a href="#VGG" class="headerlink" title="VGG"></a>VGG</h3> 
+
+
+<h3 id="批标准化（Batch-Normalization，BN）"><a href="#批标准化（Batch-Normalization，BN）" class="headerlink" title="批标准化（Batch Normalization，BN）"></a>批标准化（Batch Normalization，BN）</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">tf</span><span class="hljs-selector-class">.keras</span><span class="hljs-selector-class">.layers</span><span class="hljs-selector-class">.BatchNormalization</span>()<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="激活函数（使用BN的情况下才要）"><a href="#激活函数（使用BN的情况下才要）" class="headerlink" title="激活函数（使用BN的情况下才要）"></a>激活函数（使用BN的情况下才要）</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-function"><span class="hljs-title">Activation</span><span class="hljs-params">(对应激活函数)</span></span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="池化（Pooling）"><a href="#池化（Pooling）" class="headerlink" title="池化（Pooling）"></a>池化（Pooling）</h3><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs nix"><span class="hljs-comment"># 最大池化</span><br>tf.keras.layers.MaxPool2D(<br>	<span class="hljs-attr">pool_size=</span> 池化核尺寸,<br>	<span class="hljs-attr">strides=</span> 池化步长, <span class="hljs-comment"># 默认为pool_size</span><br>	<span class="hljs-attr">padding=‘valid’</span> <span class="hljs-literal">or</span> ‘same’<br>)<br><br><span class="hljs-comment"># 平均池化</span><br>tf.keras.layers.AveragePooling2D(<br>	<span class="hljs-attr">pool_size=</span> 池化核尺寸,<br>	<span class="hljs-attr">strides=</span> 池化步长, <span class="hljs-comment"># 默认为pool_size</span><br>	<span class="hljs-attr">padding=‘valid’or‘same’</span><br>)<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="Dropout"><a href="#Dropout" class="headerlink" title="Dropout"></a>Dropout</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">tf</span><span class="hljs-selector-class">.keras</span><span class="hljs-selector-class">.layers</span><span class="hljs-selector-class">.Dropout</span>(舍弃概率)<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="VGG"><a href="#VGG" class="headerlink" title="VGG"></a>VGG</h3> 
       <!-- reward -->
       
       <div id="reword-out">
@@ -196,7 +197,7 @@ tf.keras.layers.AveragePooling2D(
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AI/" rel="tag">AI</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TensorFlow2/" rel="tag">TensorFlow2</a></li></ul>
 
     </footer>
   </div>

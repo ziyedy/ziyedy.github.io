@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-计算机基础/数据结构与算法/5.2、二叉搜索树"
+  id="post-学习笔记/数据结构与算法/5.2、二叉搜索树"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-07-20T08:11:47.000Z" itemprop="datePublished">2020-07-20</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a> / <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a>
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a> / <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">765</span>
+            <span class="post-count">798</span>
         </span>
     </span>
 
@@ -107,39 +107,19 @@
 <p>二叉搜索树的相关分析见：<a href="https://www.jianshu.com/p/ff4b93b088eb" target="_blank" rel="noopener">https://www.jianshu.com/p/ff4b93b088eb</a></p>
 <h2 id="操作实现"><a href="#操作实现" class="headerlink" title="操作实现"></a>操作实现</h2><h3 id="插入元素"><a href="#插入元素" class="headerlink" title="插入元素"></a>插入元素</h3><p>题目来源：<a href="https://leetcode-cn.com/problems/insert-into-a-binary-search-tree/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/insert-into-a-binary-search-tree/</a></p>
 <p>利用二叉树的递归特性可以很简单的构造出相应的递归函数。</p>
-<pre><code>class Solution {
-    public TreeNode insertIntoBST(TreeNode root, int val) {
-        if(root==null) {
-            root = new TreeNode(val);
-            return root;
-        }
-        if(val&lt;root.val) {
-            root.left = insertIntoBST(root.left, val);
-        }
-        else {
-            root.right = insertIntoBST(root.right, val);
-        }
-        return root;
-    }
-}</code></pre><h3 id="查找某元素是否存在"><a href="#查找某元素是否存在" class="headerlink" title="查找某元素是否存在"></a>查找某元素是否存在</h3><p>使用递归进行判断，如果待判断元素比当前节点值小，则向左递归，否则向右递归。</p>
-<pre><code>private boolean contains(Node node, E e) {
-    if(node==null) return false;
-    if(e.compareTo(node.e) == 0) return true;
-    else if(e.compareTo(node.e) &lt; 0) return contains(node.left, e);
-    else return contains(node.right, e);
-}</code></pre><h3 id="最大最小值"><a href="#最大最小值" class="headerlink" title="最大最小值"></a>最大最小值</h3><p>这个思路很简单，使用递归与迭代都可以，就是向左或右一直搜索即可。</p>
-<pre><code>// 寻找二分搜索树最小值
-public E minimum() {
-    if(size == 0) {
-        throw new IllegalArgumentException(&quot;BST is empty&quot;);
-    }
-    return minimun(root).e;
-}
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-keyword">class</span> Solution &#123;<br>    public TreeNode insert<span class="hljs-constructor">IntoBST(TreeNode <span class="hljs-params">root</span>, <span class="hljs-params">int</span> <span class="hljs-params">val</span>)</span> &#123;<br>        <span class="hljs-keyword">if</span>(root==null) &#123;<br>            root = <span class="hljs-keyword">new</span> <span class="hljs-constructor">TreeNode(<span class="hljs-params">val</span>)</span>;<br>            return root;<br>        &#125;<br>        <span class="hljs-keyword">if</span>(<span class="hljs-keyword">val</span>&lt;root.<span class="hljs-keyword">val</span>) &#123;<br>            root.left = insert<span class="hljs-constructor">IntoBST(<span class="hljs-params">root</span>.<span class="hljs-params">left</span>, <span class="hljs-params">val</span>)</span>;<br>        &#125;<br>        <span class="hljs-keyword">else</span> &#123;<br>            root.right = insert<span class="hljs-constructor">IntoBST(<span class="hljs-params">root</span>.<span class="hljs-params">right</span>, <span class="hljs-params">val</span>)</span>;<br>        &#125;<br>        return root;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-private Node minimun(Node node) {
-    if(node.left == null) return node;
-    return minimun(node.left);
-}</code></pre><p>其中若要删除最小值或最大值，就可以对应以下“删除元素”中的第一或者第二种情况，十分方便。</p>
+
+
+<h3 id="查找某元素是否存在"><a href="#查找某元素是否存在" class="headerlink" title="查找某元素是否存在"></a>查找某元素是否存在</h3><p>使用递归进行判断，如果待判断元素比当前节点值小，则向左递归，否则向右递归。</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">private boolean contains(<span class="hljs-keyword">Node</span> <span class="hljs-title">node</span>, E e) &#123;<br>    if(<span class="hljs-keyword">node</span><span class="hljs-title">==null</span>) return <span class="hljs-literal">false</span>;<br>    if(e.compareTo(<span class="hljs-keyword">node</span>.<span class="hljs-title">e</span>) == <span class="hljs-number">0</span>) return <span class="hljs-literal">true</span>;<br>    else if(e.compareTo(<span class="hljs-keyword">node</span>.<span class="hljs-title">e</span>) <span class="hljs-tag">&lt; 0) return contains(node.left, e);<br>    else return contains(node.right, e);<br>&#125;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="最大最小值"><a href="#最大最小值" class="headerlink" title="最大最小值"></a>最大最小值</h3><p>这个思路很简单，使用递归与迭代都可以，就是向左或右一直搜索即可。</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">// 寻找二分搜索树最小值<br>public E minimum() &#123;<br>    if(size == <span class="hljs-number">0</span>) &#123;<br>        throw new IllegalArgumentException(<span class="hljs-string">"BST is empty"</span>);<br>    &#125;<br>    return minimun(root).e;<br>&#125;<br><br>private <span class="hljs-keyword">Node</span> <span class="hljs-title">minimun</span>(<span class="hljs-keyword">Node</span> <span class="hljs-title">node</span>) &#123;<br>    if(<span class="hljs-keyword">node</span>.<span class="hljs-title">left</span> == null) return <span class="hljs-keyword">node</span><span class="hljs-title">;<br>    return</span> minimun(<span class="hljs-keyword">node</span>.<span class="hljs-title">left</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>其中若要删除最小值或最大值，就可以对应以下“删除元素”中的第一或者第二种情况，十分方便。</p>
 <h3 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h3><p>图片来源：<a href="https://www.jianshu.com/p/ff4b93b088eb" target="_blank" rel="noopener">https://www.jianshu.com/p/ff4b93b088eb</a></p>
 <p>对二叉搜索树进行删除主要要考虑以下三种情况。</p>
 <p><strong>1、要删除的是叶子节点</strong></p>
@@ -155,31 +135,9 @@ private Node minimun(Node node) {
 <p><img src="http://cdn.ziyedy.top/image/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/5.2%E3%80%81%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/d3_1.png" alt="删除前"></p>
 <p><img src="http://cdn.ziyedy.top/image/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/5.2%E3%80%81%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/d3_2.png" alt="删除后"></p>
 <p>删除二叉搜索树的代码：来源于<a href="https://leetcode-cn.com/problems/delete-node-in-a-bst/submissions/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/delete-node-in-a-bst/submissions/</a></p>
-<pre><code>class Solution {
-    public TreeNode deleteNode(TreeNode root, int key) {
-        if(root==null) return root;
-        if(key &gt; root.val) {
-            root.right = deleteNode(root.right, key);
-        }
-        else if(key &lt; root.val) {
-            root.left = deleteNode(root.left, key);
-        }
-        else {
-            if(root.left==null || root.right==null) {
-                root = (root.left==null) ? root.right : root.left;
-            }
-            else {
-                TreeNode temp = root.right;
-                while(temp.left != null) {
-                    temp = root.left;
-                }
-                root.val = temp.val;
-                root.right = deleteNode(root.right, temp.val);
-            }
-        }
-        return root;
-    }
-}</code></pre><p>其中可见：</p>
+<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs xquery">class Solution &#123;<br>    public TreeNode deleteNode(TreeNode<span class="hljs-built_in"> root</span>, int<span class="hljs-built_in"> key</span>) &#123;<br>        <span class="hljs-keyword">if</span><span class="hljs-built_in">(root</span>==null) <span class="hljs-keyword">return</span><span class="hljs-built_in"> root</span>;<br>        <span class="hljs-keyword">if</span><span class="hljs-built_in">(key</span> &gt;<span class="hljs-built_in"> root</span>.val) &#123;<br>           <span class="hljs-built_in"> root</span>.right = deleteNode<span class="hljs-built_in">(root</span>.right,<span class="hljs-built_in"> key</span>);<br>        &#125;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span><span class="hljs-built_in">(key</span> &lt;<span class="hljs-built_in"> root</span>.val) &#123;<br>           <span class="hljs-built_in"> root</span>.left = deleteNode<span class="hljs-built_in">(root</span>.left,<span class="hljs-built_in"> key</span>);<br>        &#125;<br>        <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">if</span><span class="hljs-built_in">(root</span>.left==null ||<span class="hljs-built_in"> root</span>.right==null) &#123;<br>               <span class="hljs-built_in"> root</span> = <span class="hljs-built_in">(root</span>.left==null) ?<span class="hljs-built_in"> root</span>.right :<span class="hljs-built_in"> root</span>.left;<br>            &#125;<br>            <span class="hljs-keyword">else</span> &#123;<br>                TreeNode temp =<span class="hljs-built_in"> root</span>.right;<br>                while(temp.left != null) &#123;<br>                    temp =<span class="hljs-built_in"> root</span>.left;<br>                &#125;<br>               <span class="hljs-built_in"> root</span>.val = temp.val;<br>               <span class="hljs-built_in"> root</span>.right = deleteNode<span class="hljs-built_in">(root</span>.right, temp.val);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span><span class="hljs-built_in"> root</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>其中可见：</p>
 <p>若是上述第一种和第二种情况，则直接对二叉树节点进行赋值操作即可。</p>
 <p>若是第三种情况，则将找到的节点的val值赋给对应“根”节点，之后对其子树进行递归，删除对应的节点即可（此时需要删除的节点必满足一二两种情况）</p>
  
@@ -265,19 +223,19 @@ private Node minimun(Node node) {
    
   <nav class="article-nav">
     
-      <a href="/page/ds-set-and-map.html" class="article-nav-link">
+      <a href="/page/ds-tree-binarytree.html" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            6、集合与映射
+            5.1、树与二叉树
           
         </div>
       </a>
     
     
-      <a href="/page/ds-tree-binarytree.html" class="article-nav-link">
+      <a href="/page/ds_linked_list.html" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">5.1、树与二叉树</div>
+        <div class="article-nav-title">4、链表</div>
       </a>
     
   </nav>

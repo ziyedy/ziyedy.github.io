@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-前端/CSS/CSS基础"
+  id="post-编程相关/CSS/CSS基础"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-08-04T08:07:30.000Z" itemprop="datePublished">2020-08-04</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a> / <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/CSS/">CSS</a>
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/CSS/">CSS</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">775</span>
+            <span class="post-count">787</span>
         </span>
     </span>
 
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">2 min</span>
+            <span class="post-count">3 min</span>
         </span>
     </span>
 </div>
@@ -102,28 +102,26 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="CSS基础"><a href="#CSS基础" class="headerlink" title="CSS基础"></a>CSS基础</h2><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><pre><code>选择器{
-    k:v;
-    k:v;
-    k:v;
-    k:v;
-}
+  <h2 id="CSS基础"><a href="#CSS基础" class="headerlink" title="CSS基础"></a>CSS基础</h2><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs css">选择器&#123;<br>	<span class="hljs-attribute">k</span>:v;<br>	<span class="hljs-attribute">k</span>:v;<br>	<span class="hljs-attribute">k</span>:v;<br>	<span class="hljs-attribute">k</span>:v;<br>&#125;<br><br><span class="hljs-comment">/*<br>	注释内容<br>*/</span><br></code></pre></td></tr></table></figure>
 
-/*
-    注释内容
-*/</code></pre><h3 id="引用方式"><a href="#引用方式" class="headerlink" title="引用方式"></a>引用方式</h3><h4 id="1、行内样式"><a href="#1、行内样式" class="headerlink" title="1、行内样式"></a>1、行内样式</h4><p>在HTML标签里写</p>
+<h3 id="引用方式"><a href="#引用方式" class="headerlink" title="引用方式"></a>引用方式</h3><h4 id="1、行内样式"><a href="#1、行内样式" class="headerlink" title="1、行内样式"></a>1、行内样式</h4><p>在HTML标签里写</p>
 <h4 id="2、内部样式"><a href="#2、内部样式" class="headerlink" title="2、内部样式"></a>2、内部样式</h4><p>在页面的head里采用<code>&lt;style&gt;</code>写</p>
-<h4 id="3、链入外部样式：页面加载时，同时加载CSS样式"><a href="#3、链入外部样式：页面加载时，同时加载CSS样式" class="headerlink" title="3、链入外部样式：页面加载时，同时加载CSS样式"></a>3、链入外部样式：页面加载时，同时加载CSS样式</h4><pre><code>&lt;link rel = &quot;stylesheet&quot; type = &quot;text/css&quot; href = &quot;a.css&quot;&gt;&lt;/link&gt;</code></pre><h4 id="4、导入式（-import）：读取完html文件后加载"><a href="#4、导入式（-import）：读取完html文件后加载" class="headerlink" title="4、导入式（@import）：读取完html文件后加载"></a>4、导入式（@import）：读取完html文件后加载</h4><p>写在<code>&lt;style&gt;</code>标签中，且必须是第一句。<code>@import url(a.css);</code></p>
-<h3 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h3><h4 id="1、标签选择器"><a href="#1、标签选择器" class="headerlink" title="1、标签选择器"></a>1、标签选择器</h4><pre><code>p {
-}</code></pre><h4 id="2、ID选择器"><a href="#2、ID选择器" class="headerlink" title="2、ID选择器"></a>2、ID选择器</h4><pre><code># id1 {
-}</code></pre><h4 id="3、类选择器"><a href="#3、类选择器" class="headerlink" title="3、类选择器"></a>3、类选择器</h4><pre><code>.class1 {
-}</code></pre><h4 id="4、通用选择器（通配符）"><a href="#4、通用选择器（通配符）" class="headerlink" title="4、通用选择器（通配符）"></a>4、通用选择器（通配符）</h4><p>在初始化时常常使用该选择器将整个网页的边距等去掉</p>
-<pre><code>* {
-}</code></pre><h4 id="其他组合"><a href="#其他组合" class="headerlink" title="其他组合"></a>其他组合</h4><p>在父子间加上一个空格，如下表示设置div元素的p子元素的样式</p>
-<pre><code>&lt;div&gt; &lt;p&gt;&lt;/p&gt; &lt;/div&gt;
+<h4 id="3、链入外部样式：页面加载时，同时加载CSS样式"><a href="#3、链入外部样式：页面加载时，同时加载CSS样式" class="headerlink" title="3、链入外部样式：页面加载时，同时加载CSS样式"></a>3、链入外部样式：页面加载时，同时加载CSS样式</h4><figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs lasso">&lt;<span class="hljs-keyword">link</span> rel = <span class="hljs-string">"stylesheet"</span> <span class="hljs-keyword">type</span> = <span class="hljs-string">"text/css"</span> href = <span class="hljs-string">"a.css"</span>&gt;&lt;/<span class="hljs-keyword">link</span>&gt;<br></code></pre></td></tr></table></figure>
 
-div p {
-}</code></pre><p>还有交集和并集，分别使用 . 与 , 进行分隔</p>
+<h4 id="4、导入式（-import）：读取完html文件后加载"><a href="#4、导入式（-import）：读取完html文件后加载" class="headerlink" title="4、导入式（@import）：读取完html文件后加载"></a>4、导入式（@import）：读取完html文件后加载</h4><p>写在<code>&lt;style&gt;</code>标签中，且必须是第一句。<code>@import url(a.css);</code></p>
+<h3 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h3><h4 id="1、标签选择器"><a href="#1、标签选择器" class="headerlink" title="1、标签选择器"></a>1、标签选择器</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">p</span> &#123;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="2、ID选择器"><a href="#2、ID选择器" class="headerlink" title="2、ID选择器"></a>2、ID选择器</h4><figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs vala"><span class="hljs-meta"># id1 &#123;</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="3、类选择器"><a href="#3、类选择器" class="headerlink" title="3、类选择器"></a>3、类选择器</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.class1</span> &#123;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="4、通用选择器（通配符）"><a href="#4、通用选择器（通配符）" class="headerlink" title="4、通用选择器（通配符）"></a>4、通用选择器（通配符）</h4><p>在初始化时常常使用该选择器将整个网页的边距等去掉</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc"><span class="hljs-bullet">* </span>&#123;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="其他组合"><a href="#其他组合" class="headerlink" title="其他组合"></a>其他组合</h4><p>在父子间加上一个空格，如下表示设置div元素的p子元素的样式</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-params">&lt;div&gt;</span> <span class="hljs-params">&lt;p&gt;</span><span class="hljs-params">&lt;/p&gt;</span> <span class="hljs-params">&lt;/div&gt;</span><br><br>div <span class="hljs-class">p </span>&#123;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>还有交集和并集，分别使用 . 与 , 进行分隔</p>
 <h4 id="伪类"><a href="#伪类" class="headerlink" title="伪类"></a>伪类</h4><p>同一个标签，根据其<strong>不同的种状态，有不同的样式</strong>。这就叫做“伪类”。伪类用冒号来表示。</p>
 <p>比如div是属于box类，这一点很明确，就是属于box类。但是a属于什么类？不明确。因为需要看用户点击前是什么状态，点击后是什么状态。所以，就叫做“伪类”。</p>
 <p>1、<strong>静态伪类：</strong>只能用于超链接的样式</p>
@@ -148,15 +146,22 @@ div p {
 <p><img src="http://cdn.ziyedy.top/image/CSS%E5%9F%BA%E7%A1%80%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B.png" alt=""></p>
 <h3 id="padding"><a href="#padding" class="headerlink" title="padding"></a>padding</h3><p>padding为内边距，其区域有背景颜色（与内容区域相同），background-color将填充所有border以内的区域</p>
 <h4 id="写法"><a href="#写法" class="headerlink" title="写法"></a>写法</h4><p>四个值：上、右、下、左</p>
-<pre><code>padding:30px 40px 30px 40px;</code></pre><p>三个值：上、右、下、（左与右一样）</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">padding:<span class="hljs-number">30</span>px <span class="hljs-number">40</span>px <span class="hljs-number">30</span>px <span class="hljs-number">40</span>px;<br></code></pre></td></tr></table></figure>
+
+<p>三个值：上、右、下、（左与右一样）</p>
 <p>上下、左右</p>
-<pre><code>padding:30px 40px;</code></pre><h3 id="margin"><a href="#margin" class="headerlink" title="margin"></a>margin</h3><p>注意：<strong><code>&lt;body&gt;</code>标签默认有margin，为8px，因此很多情况下都需要加上以下语句清除margin。</strong></p>
-<pre><code>* {
-    margin: 0;
-    padding: 0;
-}</code></pre><p>其余操作与padding中差不多</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">padding:<span class="hljs-number">30</span>px <span class="hljs-number">40</span>px;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="margin"><a href="#margin" class="headerlink" title="margin"></a>margin</h3><p>注意：<strong><code>&lt;body&gt;</code>标签默认有margin，为8px，因此很多情况下都需要加上以下语句清除margin。</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs css">* &#123;<br>    <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;<br>    <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>其余操作与padding中差不多</p>
 <h3 id="border"><a href="#border" class="headerlink" title="border"></a>border</h3><p>边框主要有三个要素：像素（粗细）、线型、颜色</p>
-<pre><code>border: 2px solid red;</code></pre> 
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-attribute">border</span>: <span class="hljs-number">2px</span> solid red;<br></code></pre></td></tr></table></figure>
+
+ 
       <!-- reward -->
       
       <div id="reword-out">
@@ -231,7 +236,7 @@ div p {
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E6%A0%B7%E5%BC%8F/" rel="tag">前端样式</a></li></ul>
 
     </footer>
   </div>
@@ -239,11 +244,11 @@ div p {
    
   <nav class="article-nav">
     
-      <a href="/page/terminal-process-manage.html" class="article-nav-link">
+      <a href="/page/ubuntu-common-shortcut.html" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            控制台进程管理
+            Ubuntu常用快捷键
           
         </div>
       </a>

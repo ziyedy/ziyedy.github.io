@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-计算机基础/数据结构与算法/1、动态数组"
+  id="post-学习笔记/数据结构与算法/1、动态数组"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-07-05T09:52:25.000Z" itemprop="datePublished">2020-07-05</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a> / <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a>
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a> / <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">985</span>
+            <span class="post-count">1k</span>
         </span>
     </span>
 
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">3 min</span>
+            <span class="post-count">4 min</span>
         </span>
     </span>
 </div>
@@ -107,106 +107,30 @@
 <p>即：当元素超过数组当前容量时，对数组进行<strong>扩容</strong>（重新声明一个更大的数组，并将原数组中的元素迁移过去）。当元素由于删除操作远小于当前容量时，对数组容量进行缩小。</p>
 <h3 id="动态数组实现"><a href="#动态数组实现" class="headerlink" title="动态数组实现"></a>动态数组实现</h3><h4 id="类内基本信息"><a href="#类内基本信息" class="headerlink" title="类内基本信息"></a>类内基本信息</h4><p>类中使用泛型&lt;E&gt;，同时使用静态数组data作为底层容器，并记录数组中元素的个数size。</p>
 <p>同时，构建实现一些基本的方法。</p>
-<pre><code class="java">public class Array&lt;E&gt; {
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Array</span>&lt;<span class="hljs-title">E</span>&gt; </span>&#123;<br><br>    <span class="hljs-keyword">private</span> E[] data;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> size;<br><br>    <span class="hljs-comment">// 有参构造函数</span><br>    <span class="hljs-comment">// 传入预先设置的容量</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Array</span><span class="hljs-params">(<span class="hljs-keyword">int</span> capacity)</span> </span>&#123;<br>        data = (E[])<span class="hljs-keyword">new</span> Object[capacity];<br>        size = <span class="hljs-number">0</span>;<br>    &#125;<br><br>    <span class="hljs-comment">// 无参构造函数，默认容量为10</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Array</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>(<span class="hljs-number">10</span>);<br>    &#125;<br><br>    <span class="hljs-comment">// 获取数组中元素个数</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getSize</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> size;<br>    &#125;<br><br>    <span class="hljs-comment">// 获取Array中数组容量</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getCapacity</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> data.length;<br>    &#125;<br><br>    <span class="hljs-comment">// 判断是否为空</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isEmpty</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> size == <span class="hljs-number">0</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-    private E[] data;
-    private int size;
 
-    // 有参构造函数
-    // 传入预先设置的容量
-    public Array(int capacity) {
-        data = (E[])new Object[capacity];
-        size = 0;
-    }
 
-    // 无参构造函数，默认容量为10
-    public Array() {
-        this(10);
-    }
-
-    // 获取数组中元素个数
-    public int getSize() {
-        return size;
-    }
-
-    // 获取Array中数组容量
-    public int getCapacity() {
-        return data.length;
-    }
-
-    // 判断是否为空
-    public boolean isEmpty() {
-        return size == 0;
-    }
-}</code></pre>
 <h4 id="实现数组的伸缩"><a href="#实现数组的伸缩" class="headerlink" title="实现数组的伸缩"></a>实现数组的伸缩</h4><p>实现数组的伸缩其实就是重新声明一个容量符合要求的数组，并将原数组中的元素拷贝进去，如下：</p>
-<pre><code>// 改变数组中容量大小
-// 传入新容量
-private void resize(int newCapacity) {
-    E[] newData = (E[])new Object[newCapacity];
-    for (int i=0;i&lt;size;i++) {
-        newData[i] = data[i];
-    }
-    data = newData;
-}</code></pre><h4 id="向数组中添加元素"><a href="#向数组中添加元素" class="headerlink" title="向数组中添加元素"></a>向数组中添加元素</h4><p>1、对输入参数进行判断，不合理抛出异常</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs haxe"><span class="hljs-comment">// 改变数组中容量大小</span><br><span class="hljs-comment">// 传入新容量</span><br><span class="hljs-keyword">private</span> void resize(int <span class="hljs-keyword">new</span><span class="hljs-type">Capacity</span>) &#123;<br>    E[] <span class="hljs-keyword">new</span><span class="hljs-type">Data</span> = (E[])<span class="hljs-keyword">new</span> <span class="hljs-type">Object</span>[<span class="hljs-keyword">new</span><span class="hljs-type">Capacity</span>];<br>    <span class="hljs-keyword">for</span> (int i=<span class="hljs-number">0</span>;i&lt;size;i++) &#123;<br>        <span class="hljs-keyword">new</span><span class="hljs-type">Data</span>[i] = data[i];<br>    &#125;<br>    data = <span class="hljs-keyword">new</span><span class="hljs-type">Data</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="向数组中添加元素"><a href="#向数组中添加元素" class="headerlink" title="向数组中添加元素"></a>向数组中添加元素</h4><p>1、对输入参数进行判断，不合理抛出异常</p>
 <p>2、若原数组已经容纳不下新元素，进行上述resize操作，将新数组容量变为之前的2倍（可以指定为其他倍数）</p>
 <p>3、进行添加操作</p>
-<pre><code>// 向数组中index位置加入元素e
-public void add(int index, E e) {
-    if(index &lt; 0 || index &gt; size) {
-        throw new IllegalArgumentException(&quot;Add failed.&quot;);
-    }
+<figure class="highlight stan"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs stan"><span class="hljs-comment">// 向数组中index位置加入元素e</span><br>public <span class="hljs-keyword">void</span> add(<span class="hljs-keyword">int</span> index, E <span class="hljs-built_in">e</span>) &#123;<br>    <span class="hljs-keyword">if</span>(index &lt; <span class="hljs-number">0</span> || index &gt; <span class="hljs-built_in">size</span>) &#123;<br>        throw new IllegalArgumentException(<span class="hljs-string">"Add failed."</span>);<br>    &#125;<br><br>    <span class="hljs-keyword">if</span>(<span class="hljs-built_in">size</span> == <span class="hljs-title">data</span>.length) &#123;<br>        resize(<span class="hljs-number">2</span> * <span class="hljs-title">data</span>.length);<br>    &#125;<br><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-built_in">size</span>-<span class="hljs-number">1</span>;i&gt;=index;i--) &#123;<br>        <span class="hljs-title">data</span>[i+<span class="hljs-number">1</span>] = <span class="hljs-title">data</span>[i];<br>    &#125;<br>    <span class="hljs-title">data</span>[index] = <span class="hljs-built_in">e</span>;<br>    <span class="hljs-built_in">size</span>++;<br>&#125;<br><br><span class="hljs-comment">// 向最后添加一个元素</span><br>public <span class="hljs-keyword">void</span> addLast(E <span class="hljs-built_in">e</span>) &#123;<br>    add(<span class="hljs-built_in">size</span>, <span class="hljs-built_in">e</span>);<br>&#125;<br><br><span class="hljs-comment">// 向最前添加一个元素</span><br>public <span class="hljs-keyword">void</span> addFirst(E <span class="hljs-built_in">e</span>) &#123;<br>    add(<span class="hljs-number">0</span>, <span class="hljs-built_in">e</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
 
-    if(size == data.length) {
-        resize(2 * data.length);
-    }
 
-    for (int i=size-1;i&gt;=index;i--) {
-        data[i+1] = data[i];
-    }
-    data[index] = e;
-    size++;
-}
 
-// 向最后添加一个元素
-public void addLast(E e) {
-    add(size, e);
-}
-
-// 向最前添加一个元素
-public void addFirst(E e) {
-    add(0, e);
-}</code></pre><h4 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h4><p>1、对输入参数进行判断，不合理抛出异常</p>
+<h4 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h4><p>1、对输入参数进行判断，不合理抛出异常</p>
 <p>2、若删除元素后数组容量为含有元素个数的4倍，则使用resize将数组容量改为原来的1/2（与add中倍数不同是为了避免<strong>复杂度震荡</strong>）</p>
 <p>3、进行删除操作</p>
-<pre><code>// 删除索引为index的元素
-public E remove(int index) {
-    if(index&lt;0 || index &gt;= size) {
-        throw new IllegalArgumentException(&quot;Set failed&quot;);
-    }
-    E res = data[index];
-    for (int i=index+1;i&lt;size;i++) {
-        data[i-1] = data[i];
-    }
-    size--;
-    data[size] = null;
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs fortran">// 删除索引为<span class="hljs-built_in">index</span>的元素<br><span class="hljs-keyword">public</span> E remove(<span class="hljs-built_in">int</span> <span class="hljs-built_in">index</span>) &#123;<br>    <span class="hljs-keyword">if</span>(<span class="hljs-built_in">index</span>&lt;<span class="hljs-number">0</span> || <span class="hljs-built_in">index</span> &gt;= <span class="hljs-built_in">size</span>) &#123;<br>        throw new IllegalArgumentException(<span class="hljs-string">"Set failed"</span>);<br>    &#125;<br>    E res = <span class="hljs-keyword">data</span>[<span class="hljs-built_in">index</span>];<br>    for (<span class="hljs-built_in">int</span> i=<span class="hljs-built_in">index</span>+<span class="hljs-number">1</span>;i&lt;<span class="hljs-built_in">size</span>;i++) &#123;<br>        <span class="hljs-keyword">data</span>[i-<span class="hljs-number">1</span>] = <span class="hljs-keyword">data</span>[i];<br>    &#125;<br>    <span class="hljs-built_in">size</span>--;<br>    <span class="hljs-keyword">data</span>[<span class="hljs-built_in">size</span>] = null;<br><br>    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">size</span> == <span class="hljs-keyword">data</span>.length / <span class="hljs-number">4</span>) &#123;<br>        resize(<span class="hljs-keyword">data</span>.length / <span class="hljs-number">2</span>);<br>    &#125;<br><br>    <span class="hljs-keyword">return</span> res;<br>&#125;<br><br>// 删除第一个元素<br><span class="hljs-keyword">public</span> E removeFirst() &#123;<br>    <span class="hljs-keyword">return</span> remove(<span class="hljs-number">0</span>);<br>&#125;<br><br>// 删除最后一个元素<br><span class="hljs-keyword">public</span> E removeLast() &#123;<br>    <span class="hljs-keyword">return</span> remove(<span class="hljs-built_in">size</span>-<span class="hljs-number">1</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
 
-    if (size == data.length / 4) {
-        resize(data.length / 2);
-    }
 
-    return res;
-}
 
-// 删除第一个元素
-public E removeFirst() {
-    return remove(0);
-}
-
-// 删除最后一个元素
-public E removeLast() {
-    return remove(size-1);
-}</code></pre><h4 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h4><p>其余诸如查找索引等操作就是基本的数组操作了，直接进行实现即可。</p>
+<h4 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h4><p>其余诸如查找索引等操作就是基本的数组操作了，直接进行实现即可。</p>
 <h3 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h3><h4 id="复杂度震荡"><a href="#复杂度震荡" class="headerlink" title="复杂度震荡"></a>复杂度震荡</h4><p>在之前提到过，在此进行记录其产生的具体过程：</p>
 <p>1、假设现在我们有一个数组，容量是n，并且装满了元素。</p>
 <p>2、这时候，我想添加一个元素，显然是需要进行扩容，容量变为2n，耗时O(n)的时间。</p>

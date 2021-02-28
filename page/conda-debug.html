@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-其他/debug/conda产生的bug处理"
+  id="post-问题解决/conda产生的bug处理"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-09-26T02:35:45.000Z" itemprop="datePublished">2020-09-26</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a> / <a class="article-category-link" href="/categories/%E5%85%B6%E4%BB%96/debug/">debug</a>
+    <a class="article-category-link" href="/categories/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">问题解决</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">519</span>
+            <span class="post-count">508</span>
         </span>
     </span>
 
@@ -102,48 +102,54 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="没有写权限"><a href="#没有写权限" class="headerlink" title="没有写权限"></a>没有写权限</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><pre><code>EnvironmentNotWritableError: The current user does not have write permissions to the target environment.
-  environment location: /opt/anaconda3
-  uid: 1000
-  gid: 1000</code></pre><h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>将anconda及其子文件赋予最高权限</p>
-<pre><code>sudo chmod 777 -R /opt/anaconda3/</code></pre><h2 id="下载源问题"><a href="#下载源问题" class="headerlink" title="下载源问题"></a>下载源问题</h2><h3 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h3><p><img src="http://cdn.ziyedy.top/conda%E4%BA%A7%E7%94%9F%E7%9A%84bug%E5%A4%84%E7%90%86/%E4%B8%8B%E8%BD%BD%E6%BA%90%E9%97%AE%E9%A2%98.png" alt=""></p>
+  <h2 id="没有写权限"><a href="#没有写权限" class="headerlink" title="没有写权限"></a>没有写权限</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs routeros">EnvironmentNotWritableError: The current<span class="hljs-built_in"> user </span>does <span class="hljs-keyword">not</span> have write permissions <span class="hljs-keyword">to</span> the target environment.<br>  environment location: /opt/anaconda3<br>  uid: 1000<br>  gid: 1000<br></code></pre></td></tr></table></figure>
+
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>将anconda及其子文件赋予最高权限</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">sudo chmod <span class="hljs-number">777</span> -R /opt/anaconda3/<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="下载源问题"><a href="#下载源问题" class="headerlink" title="下载源问题"></a>下载源问题</h2><h3 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h3><p><img src="http://cdn.ziyedy.top/conda%E4%BA%A7%E7%94%9F%E7%9A%84bug%E5%A4%84%E7%90%86/%E4%B8%8B%E8%BD%BD%E6%BA%90%E9%97%AE%E9%A2%98.png" alt=""></p>
 <h3 id="解决方法-1"><a href="#解决方法-1" class="headerlink" title="解决方法"></a>解决方法</h3><p>换源或者直接采用conda默认的源（以下换回conda的默认源）</p>
-<pre><code>conda config --remove-key channels</code></pre><p>换成清华源或中科大源，将以下配置文件写入<code>~/.condarc</code>中</p>
-<pre><code>channels:
-  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
-  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
-  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
-  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/
-ssl_verify: true</code></pre><h2 id="异常关机导致的conda异常中断"><a href="#异常关机导致的conda异常中断" class="headerlink" title="异常关机导致的conda异常中断"></a>异常关机导致的conda异常中断</h2><h3 id="问题描述-2"><a href="#问题描述-2" class="headerlink" title="问题描述"></a>问题描述</h3><p><img src="http://cdn.ziyedy.top/conda%E4%BA%A7%E7%94%9F%E7%9A%84bug%E5%A4%84%E7%90%86/%E5%BC%82%E5%B8%B8%E5%85%B3%E6%9C%BA%E5%AF%BC%E8%87%B4%E7%9A%84conda%E5%BC%82%E5%B8%B8%E4%B8%AD%E6%96%AD.png" alt=""></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">conda<span class="hljs-built_in"> config </span>--remove-key channels<br></code></pre></td></tr></table></figure>
+
+<p>换成清华源或中科大源，将以下配置文件写入<code>~/.condarc</code>中</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs haml">channels:<br>  -<span class="ruby"> <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/mirrors.tuna.tsinghua.edu.cn/anaconda</span><span class="hljs-regexp">/pkgs/main</span><span class="hljs-regexp">/<br></span></span>  -<span class="ruby"><span class="hljs-regexp"> https:/</span><span class="hljs-regexp">/mirrors.tuna.tsinghua.edu.cn/anaconda</span><span class="hljs-regexp">/pkgs/free</span><span class="hljs-regexp">/<br></span></span>  -<span class="ruby"><span class="hljs-regexp"> https:/</span><span class="hljs-regexp">/mirrors.tuna.tsinghua.edu.cn/anaconda</span><span class="hljs-regexp">/cloud/conda</span>-forge/<br></span>  -<span class="ruby"> <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/mirrors.tuna.tsinghua.edu.cn/anaconda</span><span class="hljs-regexp">/cloud/pytorch</span><span class="hljs-regexp">/<br></span></span>ssl_verify: true<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="异常关机导致的conda异常中断"><a href="#异常关机导致的conda异常中断" class="headerlink" title="异常关机导致的conda异常中断"></a>异常关机导致的conda异常中断</h2><h3 id="问题描述-2"><a href="#问题描述-2" class="headerlink" title="问题描述"></a>问题描述</h3><p><img src="http://cdn.ziyedy.top/conda%E4%BA%A7%E7%94%9F%E7%9A%84bug%E5%A4%84%E7%90%86/%E5%BC%82%E5%B8%B8%E5%85%B3%E6%9C%BA%E5%AF%BC%E8%87%B4%E7%9A%84conda%E5%BC%82%E5%B8%B8%E4%B8%AD%E6%96%AD.png" alt=""></p>
 <h3 id="解决方法-2"><a href="#解决方法-2" class="headerlink" title="解决方法"></a>解决方法</h3><p>将所有出问题的文件移除</p>
-<pre><code>rm -rf &quot;出错文件路径&quot;</code></pre><h2 id="创建新环境报错"><a href="#创建新环境报错" class="headerlink" title="创建新环境报错"></a>创建新环境报错</h2><h3 id="报错信息"><a href="#报错信息" class="headerlink" title="报错信息"></a>报错信息</h3><pre><code>Collecting package metadata (current_repodata.json): failed
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">rm</span> -rf <span class="hljs-string">"出错文件路径"</span><br></code></pre></td></tr></table></figure>
 
-NotWritableError: The current user does not have write permissions to a required path.
-  path: /home/ziyedy/.conda/pkgs/urls.txt
-  uid: 1000
-  gid: 1000
 
-If you feel that permissions on this path are set incorrectly, you can manually
-change them by executing
 
-  $ sudo chown 1000:1000 /home/ziyedy/.conda/pkgs/urls.txt
+<h2 id="创建新环境报错"><a href="#创建新环境报错" class="headerlink" title="创建新环境报错"></a>创建新环境报错</h2><h3 id="报错信息"><a href="#报错信息" class="headerlink" title="报错信息"></a>报错信息</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs routeros">Collecting package metadata (current_repodata.json): failed<br><br>NotWritableError: The current<span class="hljs-built_in"> user </span>does <span class="hljs-keyword">not</span> have write permissions <span class="hljs-keyword">to</span> a required path.<br>  path: /home/ziyedy/.conda/pkgs/urls.txt<br>  uid: 1000<br>  gid: 1000<br><br><span class="hljs-keyword">If</span> you feel that permissions on this path are <span class="hljs-builtin-name">set</span> incorrectly, you can manually<br>change them by executing<br><br>  $ sudo chown 1000:1000 /home/ziyedy/.conda/pkgs/urls.txt<br><br><span class="hljs-keyword">In</span> general, it<span class="hljs-string">'s not advisable to use '</span>sudo conda<span class="hljs-string">'.</span><br></code></pre></td></tr></table></figure>
 
-In general, it&#39;s not advisable to use &#39;sudo conda&#39;.
-</code></pre><h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>按照提示尝试操作没用，解决方法是命令行输入如下：</p>
-<pre><code>sudo chown -R ziyedy anaconda3 # ziyedy is user name.</code></pre><p>参考：<a href="https://blog.csdn.net/PecoHe/article/details/104578700" target="_blank" rel="noopener">https://blog.csdn.net/PecoHe/article/details/104578700</a></p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>按照提示尝试操作没用，解决方法是命令行输入如下：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">sudo chown -R ziyedy anaconda3 # ziyedy is<span class="hljs-built_in"> user </span>name.<br></code></pre></td></tr></table></figure>
+
+<p>参考：<a href="https://blog.csdn.net/PecoHe/article/details/104578700" target="_blank" rel="noopener">https://blog.csdn.net/PecoHe/article/details/104578700</a></p>
 <h2 id="无法改变环境"><a href="#无法改变环境" class="headerlink" title="无法改变环境"></a>无法改变环境</h2><p>正常情况下输入<code>conda activate &lt;env_name&gt;</code>时，python应该改变为该环境下的python版本，可以使用<code>python -V</code>查看，但有时命令行显示上环境已经更改但实际上所使用的python解释器没有更换，解决方法如下：</p>
 <ol>
 <li>使用记事本打开编辑环境（该目录下的.bashrc存储的为个人的一些配置文件，如别名路径）</li>
 </ol>
-<pre><code>sudo gedit ~/.bashrc</code></pre><ol start="2">
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">sudo gedit ~<span class="hljs-string">/.bashrc</span><br></code></pre></td></tr></table></figure>
+
+<ol start="2">
 <li>在末尾按照规律添加如下内容</li>
 </ol>
-<pre><code>export PATH=&quot;export PATH=&quot;~/anaconda3/bin:$PATH&quot;   #base环境下的python，已有的
-alias python1=&quot;~/anaconda3/bin/python   # 你需要添加的</code></pre><p><code>alias</code>用于设置指令的别名，下面一条语句的意思就算你输入python1就会自动指向后面</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">PATH</span>=<span class="hljs-string">"export PATH="</span>~/anaconda3/bin:$PATH"   #base环境下的python，已有的<br>alias <span class="hljs-attribute">python1</span>=<span class="hljs-string">"~/anaconda3/bin/python   # 你需要添加的</span><br></code></pre></td></tr></table></figure>
+
+<p><code>alias</code>用于设置指令的别名，下面一条语句的意思就算你输入python1就会自动指向后面</p>
 <ol start="3">
 <li>使得修改生效</li>
 </ol>
-<pre><code>source ~/.bashrc</code></pre> 
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">source</span> ~/.bashrc<br></code></pre></td></tr></table></figure>
+
+ 
       <!-- reward -->
       
       <div id="reword-out">

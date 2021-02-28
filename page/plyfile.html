@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Python/使用plyfile库对-ply文件进行读写操作"
+  id="post-编程相关/Python/使用plyfile库对-ply文件进行读写操作"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-10-04T03:04:48.000Z" itemprop="datePublished">2020-10-04</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Python/">Python</a>
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Python/">Python</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">325</span>
+            <span class="post-count">277</span>
         </span>
     </span>
 
@@ -103,36 +103,18 @@
     <div class="article-entry" itemprop="articleBody">
        
   <h3 id="安装plyfile库"><a href="#安装plyfile库" class="headerlink" title="安装plyfile库"></a>安装plyfile库</h3><p>直接使用pip命令即可</p>
-<pre><code>pip install plyfile</code></pre><h3 id="进行-ply文件读取"><a href="#进行-ply文件读取" class="headerlink" title="进行*.ply文件读取"></a>进行*.ply文件读取</h3><p>读取ply文件返回的是numpy数组，读取的方法也比较简单</p>
-<pre><code># 读入ply文件
-plydata = PlyData.read(&#39;tet.ply&#39;)
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">pip <span class="hljs-keyword">install</span> plyfile<br></code></pre></td></tr></table></figure>
 
-# 读取所有x坐标
-plydata.elements[0].data[&#39;x&#39;]
-plydata[&#39;vertex&#39;].data[&#39;x&#39;]
-plydata[&#39;vertex&#39;][&#39;x&#39;]
+<h3 id="进行-ply文件读取"><a href="#进行-ply文件读取" class="headerlink" title="进行*.ply文件读取"></a>进行*.ply文件读取</h3><p>读取ply文件返回的是numpy数组，读取的方法也比较简单</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-section"># 读入ply文件</span><br>plydata = PlyData.read('tet.ply')<br><br><span class="hljs-section"># 读取所有x坐标</span><br>plydata.elements[0].data['x']<br>plydata['vertex'].data['x']<br>plydata[<span class="hljs-string">'vertex'</span>][<span class="hljs-symbol">'x'</span>]<br><br><span class="hljs-section"># 读取第一个点的3d坐标</span><br>plydata.elements[0].data[0]<br>plydata[<span class="hljs-string">'vertex'</span>][<span class="hljs-symbol">0</span>]<br></code></pre></td></tr></table></figure>
 
-# 读取第一个点的3d坐标
-plydata.elements[0].data[0]
-plydata[&#39;vertex&#39;][0]</code></pre><h4 id="读取函数"><a href="#读取函数" class="headerlink" title="读取函数"></a>读取函数</h4><pre><code>from plyfile import PlyData, PlyElement
-def read_ply(filename):
-    &quot;&quot;&quot; 读取坐标，返回值为 n * 3 &quot;&quot;&quot;
-    plydata = PlyData.read(filename)
-    pc = plydata[&#39;vertex&#39;].data
-    pc_array = np.array([[x, y, z] for x,y,z in pc])
-    return pc_array</code></pre><h3 id="进行-ply文件写入"><a href="#进行-ply文件写入" class="headerlink" title="进行*.ply文件写入"></a>进行*.ply文件写入</h3><pre><code>from plyfile import PlyData, PlyElement
-def write_ply(save_path, points, text=True):
-    &quot;&quot;&quot;
-    输入点云数据，并写入一个*.ply文件
-    :param save_path: 文件路径 + *.ply
-    :param points:
-    :param text:
-    :return: 
-    &quot;&quot;&quot;
-    points = [(points[i, 0], points[i, 1], points[i, 2]) for i in range(points.shape[0])]
-    vertex = np.array(points, dtype=[(&#39;x&#39;, &#39;f4&#39;), (&#39;y&#39;, &#39;f4&#39;), (&#39;z&#39;, &#39;f4&#39;)])
-    el = PlyElement.describe(vertex, &#39;vertex&#39;, comments=[&#39;vertices&#39;])
-    PlyData([el], text=text).write(save_path)</code></pre><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><blockquote>
+<h4 id="读取函数"><a href="#读取函数" class="headerlink" title="读取函数"></a>读取函数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> plyfile <span class="hljs-keyword">import</span> PlyData, PlyElement<br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read_ply</span><span class="hljs-params">(filename)</span>:</span><br>    <span class="hljs-string">""" 读取坐标，返回值为 n * 3 """</span><br>    plydata = PlyData.read(filename)<br>    pc = plydata[<span class="hljs-string">'vertex'</span>].data<br>    pc_array = np.array([[x, y, z] <span class="hljs-keyword">for</span> x,y,z <span class="hljs-keyword">in</span> pc])<br>    <span class="hljs-keyword">return</span> pc_array<br></code></pre></td></tr></table></figure>
+
+<h3 id="进行-ply文件写入"><a href="#进行-ply文件写入" class="headerlink" title="进行*.ply文件写入"></a>进行*.ply文件写入</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> plyfile <span class="hljs-keyword">import</span> PlyData, PlyElement<br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">write_ply</span><span class="hljs-params">(save_path, points, text=True)</span>:</span><br>    <span class="hljs-string">"""<br>    输入点云数据，并写入一个*.ply文件<br>    :param save_path: 文件路径 + *.ply<br>    :param points:<br>    :param text:<br>    :return: <br>    """</span><br>    points = [(points[i, <span class="hljs-number">0</span>], points[i, <span class="hljs-number">1</span>], points[i, <span class="hljs-number">2</span>]) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(points.shape[<span class="hljs-number">0</span>])]<br>    vertex = np.array(points, dtype=[(<span class="hljs-string">'x'</span>, <span class="hljs-string">'f4'</span>), (<span class="hljs-string">'y'</span>, <span class="hljs-string">'f4'</span>), (<span class="hljs-string">'z'</span>, <span class="hljs-string">'f4'</span>)])<br>    el = PlyElement.describe(vertex, <span class="hljs-string">'vertex'</span>, comments=[<span class="hljs-string">'vertices'</span>])<br>    PlyData([el], text=text).write(save_path)<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><blockquote>
 <p>以上主要就是利用plyfile库进行点数据的读取，关于面数据之类的其实与点数据差别不大，重点在于对ply文件格式的认识</p>
 </blockquote>
 <p><a href="https://blog.csdn.net/phy12321/article/details/107373073" target="_blank" rel="noopener">https://blog.csdn.net/phy12321/article/details/107373073</a></p>
@@ -212,7 +194,7 @@ def write_ply(save_path, points, text=True):
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/3D%E8%A7%86%E8%A7%89/" rel="tag">3D视觉</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/3D%E8%A7%86%E8%A7%89/" rel="tag">3D视觉</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%82%B9%E4%BA%91/" rel="tag">点云</a></li></ul>
 
     </footer>
   </div>
@@ -220,7 +202,7 @@ def write_ply(save_path, points, text=True):
    
   <nav class="article-nav">
     
-      <a href="/page/null.html" class="article-nav-link">
+      <a href="/page/transport-layer.html" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           

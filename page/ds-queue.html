@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-计算机基础/数据结构与算法/3、队列"
+  id="post-学习笔记/数据结构与算法/3、队列"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-07-14T03:32:36.000Z" itemprop="datePublished">2020-07-14</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a> / <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a>
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a> / <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a>
   </div>
   
 <div class="word_count">
@@ -106,225 +106,39 @@
 <p>其与栈相同，也是一种线性表，允许在队尾插入元素，在队头删除元素。</p>
 <h4 id="用处"><a href="#用处" class="headerlink" title="用处"></a>用处</h4><p>首先想到的就是操作系统中的进程调度方法？还有当然就是广度优先遍历了。</p>
 <h4 id="需要实现的基本内容"><a href="#需要实现的基本内容" class="headerlink" title="需要实现的基本内容"></a>需要实现的基本内容</h4><p>实现队列可以构建相应的接口，其需要实现的方法如下：</p>
-<pre><code>public interface Queue&lt;E&gt; {
-    int getSize();
-    boolean isEmpty();
-    void enqueue(E e);    // 入队列
-    E dequeue();    // 出队列
-    E getFront();    // 获取队首元素
-}</code></pre><p>队列有三种实现方法，分别是线性存储（底层数据结构为动态数组，根据实现思路区别可分为<strong>顺序队列</strong>与<strong>循环队列</strong>），链式存储（底层数据结构为链表）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Queue</span>&lt;<span class="hljs-title">E</span>&gt; </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">getSize</span><span class="hljs-params">()</span></span>;<br>    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">isEmpty</span><span class="hljs-params">()</span></span>;<br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">enqueue</span><span class="hljs-params">(E e)</span></span>;	<span class="hljs-comment">// 入队列</span><br>    <span class="hljs-function">E <span class="hljs-title">dequeue</span><span class="hljs-params">()</span></span>;	<span class="hljs-comment">// 出队列</span><br>    <span class="hljs-function">E <span class="hljs-title">getFront</span><span class="hljs-params">()</span></span>;	<span class="hljs-comment">// 获取队首元素</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>队列有三种实现方法，分别是线性存储（底层数据结构为动态数组，根据实现思路区别可分为<strong>顺序队列</strong>与<strong>循环队列</strong>），链式存储（底层数据结构为链表）</p>
 <h3 id="顺序队列"><a href="#顺序队列" class="headerlink" title="顺序队列"></a>顺序队列</h3><p>与栈的相应实现方法相同。</p>
-<pre><code>public class ArrayQueue&lt;E&gt; implements Queue&lt;E&gt; {
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ArrayQueue</span>&lt;E&gt; <span class="hljs-title">implements</span> <span class="hljs-title">Queue</span>&lt;E&gt; &#123;</span><br><br>    <span class="hljs-keyword">private</span> Array&lt;E&gt; <span class="hljs-built_in">array</span>;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ArrayQueue</span><span class="hljs-params">(<span class="hljs-keyword">int</span> capacity)</span> </span>&#123;<br>        <span class="hljs-built_in">array</span> = <span class="hljs-keyword">new</span> Array&lt;&gt;(capacity);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ArrayQueue</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-built_in">array</span> = <span class="hljs-keyword">new</span> Array&lt;&gt;();<br>    &#125;<br><br>    @<span class="hljs-function">Override<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getSize</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">array</span>.getSize();<br>    &#125;<br><br>    @<span class="hljs-function">Override<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isEmpty</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">array</span>.isEmpty();<br>    &#125;<br><br>    @<span class="hljs-function">Override<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">enqueue</span><span class="hljs-params">(E e)</span> </span>&#123;<br>        <span class="hljs-built_in">array</span>.addLast(e);<br>    &#125;<br><br>    @<span class="hljs-function">Override<br>    <span class="hljs-keyword">public</span> E <span class="hljs-title">dequeue</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">array</span>.removeFirst();<br>    &#125;<br><br>    @<span class="hljs-function">Override<br>    <span class="hljs-keyword">public</span> E <span class="hljs-title">getFront</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">array</span>.getFirst();<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
 
-    private Array&lt;E&gt; array;
 
-    public ArrayQueue(int capacity) {
-        array = new Array&lt;&gt;(capacity);
-    }
 
-    public ArrayQueue() {
-        array = new Array&lt;&gt;();
-    }
-
-    @Override
-    public int getSize() {
-        return array.getSize();
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return array.isEmpty();
-    }
-
-    @Override
-    public void enqueue(E e) {
-        array.addLast(e);
-    }
-
-    @Override
-    public E dequeue() {
-        return array.removeFirst();
-    }
-
-    @Override
-    public E getFront() {
-        return array.getFirst();
-    }
-
-}</code></pre><h3 id="循环队列"><a href="#循环队列" class="headerlink" title="循环队列"></a>循环队列</h3><h4 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h4><p>顺序队列有一个弊端，就是当出队列操作后，动态数组的前面会产生很大的空隙，造成内存的浪费。为了解决这个问题，提出了循环队列的思想，其核心思想就是分别使用<strong>front</strong>和<strong>tail</strong>记录队列的队头和队尾，具体思路见如下示意图（图来源于网上）。</p>
+<h3 id="循环队列"><a href="#循环队列" class="headerlink" title="循环队列"></a>循环队列</h3><h4 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h4><p>顺序队列有一个弊端，就是当出队列操作后，动态数组的前面会产生很大的空隙，造成内存的浪费。为了解决这个问题，提出了循环队列的思想，其核心思想就是分别使用<strong>front</strong>和<strong>tail</strong>记录队列的队头和队尾，具体思路见如下示意图（图来源于网上）。</p>
 <p><img src="http://cdn.ziyedy.top/image/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/3%E3%80%81%E9%98%9F%E5%88%97%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97.jpg" alt=""></p>
 <p>其中，为避免队列为空与队列为满产生的条件判断重叠（即都为front==tail），我们可以将队列满的条件设置为tail+1==front（即留出一个空间不进行使用）。</p>
 <p>除此之外，由于是“循环”队列，因此tail可能小于front，因此需要使用(tail) % (data.length)的形式对相关逻辑进行判断</p>
 <h4 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h4><p>具体实现如下</p>
-<pre><code>public class LoopQueue&lt;E&gt; implements Queue&lt;E&gt; {
-
-    private E[] data;
-    private int front, tail;
-    private int size;
-
-    public LoopQueue(int capacity) {
-        data = (E[])new Object[capacity+1];
-        front = 0;
-        tail = 0;
-        size = 0;
-    }
-
-    public LoopQueue() {
-        this(10);
-    }
-
-    public int getCapacity() {
-        return data.length - 1;
-    }
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LoopQueue</span>&lt;E&gt; <span class="hljs-title">implements</span> <span class="hljs-title">Queue</span>&lt;E&gt; &#123;</span><br><br>    <span class="hljs-keyword">private</span> E[] data;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> front, tail;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> <span class="hljs-built_in">size</span>;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">LoopQueue</span><span class="hljs-params">(<span class="hljs-keyword">int</span> capacity)</span> </span>&#123;<br>        data = (E[])<span class="hljs-keyword">new</span> Object[capacity+<span class="hljs-number">1</span>];<br>        front = <span class="hljs-number">0</span>;<br>        tail = <span class="hljs-number">0</span>;<br>        <span class="hljs-built_in">size</span> = <span class="hljs-number">0</span>;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">LoopQueue</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>(<span class="hljs-number">10</span>);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getCapacity</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> data.length - <span class="hljs-number">1</span>;<br>    &#125;<br><br><br>    @<span class="hljs-function">Override<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getSize</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">size</span>;<br>    &#125;<br><br>    @<span class="hljs-function">Override<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isEmpty</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> front==tail;<br>    &#125;<br><br>    @<span class="hljs-function">Override<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">enqueue</span><span class="hljs-params">(E e)</span> </span>&#123;<br>    	<span class="hljs-comment">// 判断队列满了的条件</span><br>        <span class="hljs-keyword">if</span>((tail+<span class="hljs-number">1</span>)%data.length == front) &#123;<br>            resize(getCapacity() * <span class="hljs-number">2</span>);<br>        &#125;<br>        data[tail] = e;<br>        tail = (tail + <span class="hljs-number">1</span>) % data.length;	<span class="hljs-comment">// 对tail进行更新</span><br>        <span class="hljs-built_in">size</span>++;<br>    &#125;<br><br>    @<span class="hljs-function">Override<br>    <span class="hljs-keyword">public</span> E <span class="hljs-title">dequeue</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">if</span>(isEmpty()) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(<span class="hljs-string">"Queue is empty"</span>);<br>        &#125;<br>        E res = data[front];<br>        data[front] = null;<br>        front = (front+<span class="hljs-number">1</span>) % data.length;<br>        <span class="hljs-built_in">size</span>--;<br>        <span class="hljs-keyword">if</span>(<span class="hljs-built_in">size</span> == getCapacity() / <span class="hljs-number">4</span> &amp;&amp; getCapacity() / <span class="hljs-number">2</span> != <span class="hljs-number">0</span>) &#123;<br>            resize(getCapacity() / <span class="hljs-number">2</span>);<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br><br>    @<span class="hljs-function">Override<br>    <span class="hljs-keyword">public</span> E <span class="hljs-title">getFront</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> data[front];<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">resize</span><span class="hljs-params">(<span class="hljs-keyword">int</span> newCapacity)</span> </span>&#123;<br>        E[] newData = (E[])<span class="hljs-keyword">new</span> Object[newCapacity + <span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-built_in">size</span>;i++) &#123;<br>            newData[i] = data[(i + front) % data.length];<br>        &#125;<br>        data = newData;<br>        front = <span class="hljs-number">0</span>;<br>        tail = <span class="hljs-built_in">size</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
-    @Override
-    public int getSize() {
-        return size;
-    }
 
-    @Override
-    public boolean isEmpty() {
-        return front==tail;
-    }
-
-    @Override
-    public void enqueue(E e) {
-        // 判断队列满了的条件
-        if((tail+1)%data.length == front) {
-            resize(getCapacity() * 2);
-        }
-        data[tail] = e;
-        tail = (tail + 1) % data.length;    // 对tail进行更新
-        size++;
-    }
-
-    @Override
-    public E dequeue() {
-        if(isEmpty()) {
-            throw new IllegalArgumentException(&quot;Queue is empty&quot;);
-        }
-        E res = data[front];
-        data[front] = null;
-        front = (front+1) % data.length;
-        size--;
-        if(size == getCapacity() / 4 &amp;&amp; getCapacity() / 2 != 0) {
-            resize(getCapacity() / 2);
-        }
-        return res;
-    }
-
-    @Override
-    public E getFront() {
-        return data[front];
-    }
-
-    private void resize(int newCapacity) {
-        E[] newData = (E[])new Object[newCapacity + 1];
-        for(int i=0;i&lt;size;i++) {
-            newData[i] = data[(i + front) % data.length];
-        }
-        data = newData;
-        front = 0;
-        tail = size;
-    }
-}</code></pre><h3 id="链式队列"><a href="#链式队列" class="headerlink" title="链式队列"></a>链式队列</h3><h4 id="实现分析"><a href="#实现分析" class="headerlink" title="实现分析"></a>实现分析</h4><p>需要记录队列的队首head与队尾tail。其中队首对应链表头（删除方便），队尾对应链表尾。</p>
+<h3 id="链式队列"><a href="#链式队列" class="headerlink" title="链式队列"></a>链式队列</h3><h4 id="实现分析"><a href="#实现分析" class="headerlink" title="实现分析"></a>实现分析</h4><p>需要记录队列的队首head与队尾tail。其中队首对应链表头（删除方便），队尾对应链表尾。</p>
 <h4 id="具体实现-1"><a href="#具体实现-1" class="headerlink" title="具体实现"></a>具体实现</h4><p>1、类中基础属性</p>
-<pre><code>public class LinkedListQueue&lt;E&gt; implements Queue&lt;E&gt; {
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-symbol">LinkedListQueue</span>&lt;<span class="hljs-symbol">E</span>&gt; <span class="hljs-symbol">implements</span> <span class="hljs-symbol">Queue</span>&lt;<span class="hljs-symbol">E</span>&gt; &#123;<br><br>	<span class="hljs-comment">// 定义链表的节点，作为内部类</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">class</span> <span class="hljs-symbol">Node</span> &#123;<br>        <span class="hljs-keyword">public</span> E e;<br>        <span class="hljs-keyword">public</span> Node next;<br><br>        <span class="hljs-keyword">public</span> Node(E e, Node next) &#123;<br>            <span class="hljs-keyword">this</span>.e = e;<br>            <span class="hljs-keyword">this</span>.next = next;<br>        &#125;<br><br>        <span class="hljs-keyword">public</span> Node(E e) &#123;<br>            <span class="hljs-keyword">this</span>(e, <span class="hljs-literal">null</span>);<br>        &#125;<br><br>        <span class="hljs-keyword">public</span> Node() &#123;<br>            <span class="hljs-keyword">this</span>(<span class="hljs-literal">null</span>, <span class="hljs-literal">null</span>);<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> Node head, tail;<br>    <span class="hljs-keyword">private</span> <span class="hljs-built_in">int</span> size;<br><br>    <span class="hljs-keyword">public</span> LinkedListQueue() &#123;<br>        head = <span class="hljs-literal">null</span>;<br>        tail = <span class="hljs-literal">null</span>;<br>        size = <span class="hljs-number">0</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-    // 定义链表的节点，作为内部类
-    private class Node {
-        public E e;
-        public Node next;
+<p>2、入队列</p>
+<figure class="highlight stan"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs stan">@Override<br>public <span class="hljs-keyword">void</span> enqueue(E <span class="hljs-built_in">e</span>) &#123;<br>    <span class="hljs-keyword">if</span>(<span class="hljs-built_in">tail</span>==null) &#123;<br>        <span class="hljs-built_in">tail</span> = new Node(<span class="hljs-built_in">e</span>);<br>        <span class="hljs-built_in">head</span> = <span class="hljs-built_in">tail</span>;<br>    &#125;<br>    <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-built_in">tail</span>.next = new Node(<span class="hljs-built_in">e</span>);<br>        <span class="hljs-built_in">tail</span> = <span class="hljs-built_in">tail</span>.next;<br>    &#125;<br>    <span class="hljs-built_in">size</span>++;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-        public Node(E e, Node next) {
-            this.e = e;
-            this.next = next;
-        }
+<p>3、出队列</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs gradle">@Override<br><span class="hljs-keyword">public</span> E dequeue() &#123;<br>    <span class="hljs-keyword">if</span>(isEmpty()) &#123;<br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(<span class="hljs-string">"Can not"</span>);<br>    &#125;<br>    Node res = head;<br>    head = head.<span class="hljs-keyword">next</span>;<br>    res.<span class="hljs-keyword">next</span> = <span class="hljs-keyword">null</span>;<br>    <span class="hljs-keyword">if</span>(head == <span class="hljs-keyword">null</span>) &#123;<br>        tail = <span class="hljs-keyword">null</span>;<br>    &#125;<br>    <span class="hljs-keyword">size</span>--;<br>    <span class="hljs-keyword">return</span> res.e;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-        public Node(E e) {
-            this(e, null);
-        }
-
-        public Node() {
-            this(null, null);
-        }
-    }
-
-    private Node head, tail;
-    private int size;
-
-    public LinkedListQueue() {
-        head = null;
-        tail = null;
-        size = 0;
-    }
-}</code></pre><p>2、入队列</p>
-<pre><code>@Override
-public void enqueue(E e) {
-    if(tail==null) {
-        tail = new Node(e);
-        head = tail;
-    }
-    else {
-        tail.next = new Node(e);
-        tail = tail.next;
-    }
-    size++;
-}</code></pre><p>3、出队列</p>
-<pre><code>@Override
-public E dequeue() {
-    if(isEmpty()) {
-        throw new IllegalArgumentException(&quot;Can not&quot;);
-    }
-    Node res = head;
-    head = head.next;
-    res.next = null;
-    if(head == null) {
-        tail = null;
-    }
-    size--;
-    return res.e;
-}</code></pre><p>其余方法略</p>
+<p>其余方法略</p>
 <h3 id="复杂度分析与测试"><a href="#复杂度分析与测试" class="headerlink" title="复杂度分析与测试"></a>复杂度分析与测试</h3><h4 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h4><p>不同队列实现方式的差距主要体现在出队中。</p>
 <p>其中顺序队列的出队的时间复杂度为O(n)，而循环队列与链接队列出队的时间复杂度为O(1)。</p>
-<h4 id="复杂度测试"><a href="#复杂度测试" class="headerlink" title="复杂度测试"></a>复杂度测试</h4><pre><code>import java.util.Random;
+<h4 id="复杂度测试"><a href="#复杂度测试" class="headerlink" title="复杂度测试"></a>复杂度测试</h4><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">import java.util.Random;<br><br>public <span class="hljs-keyword">class</span> Main &#123;<br><br>	<span class="hljs-comment">// 用于计算运行时间</span><br>    <span class="hljs-keyword">private</span> static double test<span class="hljs-constructor">Queue(Queue&lt;Integer&gt; <span class="hljs-params">q</span>, <span class="hljs-params">int</span> <span class="hljs-params">opCount</span>)</span> 	   &#123;<br>        long startTime = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>nano<span class="hljs-constructor">Time()</span>;<br><br>        Random random = <span class="hljs-keyword">new</span> <span class="hljs-constructor">Random()</span>;<br>        for(<span class="hljs-built_in">int</span> i=<span class="hljs-number">0</span>; i&lt;opCount;i++) &#123;<br>            q.enqueue(random.next<span class="hljs-constructor">Int(Integer.MAX_VALUE)</span>);<br>        &#125;<br>        for(<span class="hljs-built_in">int</span> i=<span class="hljs-number">0</span>; i&lt;opCount;i++) &#123;<br>            q.dequeue<span class="hljs-literal">()</span>;<br>        &#125;<br><br>        long endTime = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>nano<span class="hljs-constructor">Time()</span>;<br>        return (endTime - startTime)<span class="hljs-operator"> / </span><span class="hljs-number">1000000000.0</span>;<br>    &#125;<br><br>    public static void main(String<span class="hljs-literal">[]</span> args) &#123;<br>        <span class="hljs-built_in">int</span> opCount = <span class="hljs-number">100000</span>;<br>        ArrayQueue&lt;Integer&gt; arrayQueue = <span class="hljs-keyword">new</span> ArrayQueue&lt;&gt;<span class="hljs-literal">()</span>;<br>        double time1 = test<span class="hljs-constructor">Queue(<span class="hljs-params">arrayQueue</span>, <span class="hljs-params">opCount</span>)</span>;<br>        LoopQueue&lt;Integer&gt; loopQueue = <span class="hljs-keyword">new</span> LoopQueue&lt;&gt;<span class="hljs-literal">()</span>;<br>        double time2 = test<span class="hljs-constructor">Queue(<span class="hljs-params">loopQueue</span>,<span class="hljs-params">opCount</span>)</span>;<br>        LinkedListQueue&lt;Integer&gt; linkedListQueue = <span class="hljs-keyword">new</span> LinkedListQueue&lt;&gt;<span class="hljs-literal">()</span>;<br>        double time3 = test<span class="hljs-constructor">Queue(<span class="hljs-params">linkedListQueue</span>,<span class="hljs-params">opCount</span>)</span>;<br>        <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(<span class="hljs-string">"ArrayQueue: "</span>+time1+<span class="hljs-string">" s"</span>);<br>        <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(<span class="hljs-string">"LoopQueue: "</span>+time2+<span class="hljs-string">" s"</span>);<br>        <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(<span class="hljs-string">"LinkListQueue: "</span>+time3+<span class="hljs-string">" s"</span>);<br>    &#125;<br>&#125;<br><span class="hljs-comment">///////////////////////////////////////////</span><br>ArrayQueue: <span class="hljs-number">45.9780233</span> s<br>LoopQueue: <span class="hljs-number">0.0132119</span> s<br>LinkListQueue: <span class="hljs-number">0.0092766</span> s<br></code></pre></td></tr></table></figure>
 
-public class Main {
-
-    // 用于计算运行时间
-    private static double testQueue(Queue&lt;Integer&gt; q, int opCount)        {
-        long startTime = System.nanoTime();
-
-        Random random = new Random();
-        for(int i=0; i&lt;opCount;i++) {
-            q.enqueue(random.nextInt(Integer.MAX_VALUE));
-        }
-        for(int i=0; i&lt;opCount;i++) {
-            q.dequeue();
-        }
-
-        long endTime = System.nanoTime();
-        return (endTime - startTime) / 1000000000.0;
-    }
-
-    public static void main(String[] args) {
-        int opCount = 100000;
-        ArrayQueue&lt;Integer&gt; arrayQueue = new ArrayQueue&lt;&gt;();
-        double time1 = testQueue(arrayQueue, opCount);
-        LoopQueue&lt;Integer&gt; loopQueue = new LoopQueue&lt;&gt;();
-        double time2 = testQueue(loopQueue,opCount);
-        LinkedListQueue&lt;Integer&gt; linkedListQueue = new LinkedListQueue&lt;&gt;();
-        double time3 = testQueue(linkedListQueue,opCount);
-        System.out.println(&quot;ArrayQueue: &quot;+time1+&quot; s&quot;);
-        System.out.println(&quot;LoopQueue: &quot;+time2+&quot; s&quot;);
-        System.out.println(&quot;LinkListQueue: &quot;+time3+&quot; s&quot;);
-    }
-}
-///////////////////////////////////////////
-ArrayQueue: 45.9780233 s
-LoopQueue: 0.0132119 s
-LinkListQueue: 0.0092766 s</code></pre><p>由此可以看出，当操作数达到一定级别时，顺序队列的实现方式的速度要远小于其他两种实现方法。这与之前的分析是吻合的。</p>
+<p>由此可以看出，当操作数达到一定级别时，顺序队列的实现方式的速度要远小于其他两种实现方法。这与之前的分析是吻合的。</p>
  
       <!-- reward -->
       
@@ -418,9 +232,9 @@ LinkListQueue: 0.0092766 s</code></pre><p>由此可以看出，当操作数达�
       </a>
     
     
-      <a href="/page/java4.html" class="article-nav-link">
+      <a href="/page/java-collection.html" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">Java多线程</div>
+        <div class="article-nav-title">Java：集合与容器</div>
       </a>
     
   </nav>

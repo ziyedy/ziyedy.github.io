@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Android/Android开发三：布局（layout）"
+  id="post-编程相关/Android/Android开发三：布局（layout）"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-08-30T02:06:09.000Z" itemprop="datePublished">2020-08-30</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Android/">Android</a>
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Android/">Android</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">2.2k</span>
+            <span class="post-count">2.1k</span>
         </span>
     </span>
 
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">9 min</span>
+            <span class="post-count">8 min</span>
         </span>
     </span>
 </div>
@@ -105,51 +105,33 @@
   <h2 id="Android常用控件"><a href="#Android常用控件" class="headerlink" title="Android常用控件"></a>Android常用控件</h2><h3 id="TextView"><a href="#TextView" class="headerlink" title="TextView"></a>TextView</h3><blockquote>
 <p>在界面上显示一段文本信息</p>
 </blockquote>
-<h4 id="常用属性"><a href="#常用属性" class="headerlink" title="常用属性"></a>常用属性</h4><pre><code>android:text=&quot;TextView&quot;        显示的文本
-android:gravity=&quot;center&quot;    对齐方式
-android:textSize=&quot;30sp&quot;        文字大小
-android:textColor=&quot;#03A9F4&quot;    文字颜色</code></pre><p><img src="http://cdn.ziyedy.top/Android%E5%BC%80%E5%8F%91%E4%B8%89%EF%BC%9A%E5%B8%83%E5%B1%80%EF%BC%88layout%EF%BC%89/TextView.png" alt=""></p>
+<h4 id="常用属性"><a href="#常用属性" class="headerlink" title="常用属性"></a>常用属性</h4> <figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-symbol">android:</span>text=<span class="hljs-string">"TextView"</span>		显示的文本<br><span class="hljs-symbol">android:</span>gravity=<span class="hljs-string">"center"</span>	对齐方式<br><span class="hljs-symbol">android:</span>textSize=<span class="hljs-string">"30sp"</span>		文字大小<br><span class="hljs-symbol">android:</span>textColor=<span class="hljs-string">"#03A9F4"</span>	文字颜色<br></code></pre></td></tr></table></figure>
+
+<p><img src="http://cdn.ziyedy.top/Android%E5%BC%80%E5%8F%91%E4%B8%89%EF%BC%9A%E5%B8%83%E5%B1%80%EF%BC%88layout%EF%BC%89/TextView.png" alt=""></p>
 <h3 id="Button"><a href="#Button" class="headerlink" title="Button"></a>Button</h3><blockquote>
 <p>配置一个按钮，默认全为大写</p>
 </blockquote>
 <h4 id="常用属性-1"><a href="#常用属性-1" class="headerlink" title="常用属性"></a>常用属性</h4><p>常用属性与TextView类似</p>
-<pre><code>android:textAllCaps=&quot;false&quot;        将默认文字全部大写关掉</code></pre><h4 id="绑定逻辑代码（注册监听器）"><a href="#绑定逻辑代码（注册监听器）" class="headerlink" title="绑定逻辑代码（注册监听器）"></a>绑定逻辑代码（注册监听器）</h4><p><strong>使用匿名类的写法，不需要对view进行判断</strong></p>
-<pre><code>@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    Button button = (Button) findViewById(R.id.button);
-    button.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            // 添加逻辑代码
-        }
-    });
-}</code></pre><p><strong>使用实现View.OnClickListener接口的方法</strong></p>
-<pre><code>public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-symbol">android:</span>textAllCaps=<span class="hljs-string">"false"</span>		将默认文字全部大写关掉<br></code></pre></td></tr></table></figure>
 
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    Button button = (Button) findViewById(R.id.button);
-    button.setOnClickListener(this);
-}
+<h4 id="绑定逻辑代码（注册监听器）"><a href="#绑定逻辑代码（注册监听器）" class="headerlink" title="绑定逻辑代码（注册监听器）"></a>绑定逻辑代码（注册监听器）</h4><p><strong>使用匿名类的写法，不需要对view进行判断</strong></p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">@Override<br>protected void on<span class="hljs-constructor">Create(Bundle <span class="hljs-params">savedInstanceState</span>)</span> &#123;<br>    super.on<span class="hljs-constructor">Create(<span class="hljs-params">savedInstanceState</span>)</span>;<br>    set<span class="hljs-constructor">ContentView(R.<span class="hljs-params">layout</span>.<span class="hljs-params">activity_main</span>)</span>;<br>    Button button = (Button) find<span class="hljs-constructor">ViewById(R.<span class="hljs-params">id</span>.<span class="hljs-params">button</span>)</span>;<br>    button.set<span class="hljs-constructor">OnClickListener(<span class="hljs-params">new</span> View.OnClickListener()</span> &#123;<br>        @Override<br>        public void on<span class="hljs-constructor">Click(View <span class="hljs-params">view</span>)</span> &#123;<br>            <span class="hljs-comment">// 添加逻辑代码</span><br>        &#125;<br>    &#125;);<br>&#125;<br></code></pre></td></tr></table></figure>
 
-@Override
-public void onClick(View v) {
-    switch (v.getId()) {    // 判断触发监听器的是哪个按钮
-        case R.id.button:
-            // 添加逻辑代码
-            break;
-        default:
-            break;
-    }
-}</code></pre><h3 id="EditText"><a href="#EditText" class="headerlink" title="EditText"></a>EditText</h3><blockquote>
+<p><strong>使用实现View.OnClickListener接口的方法</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainActivity</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AppCompatActivity</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">View</span>.<span class="hljs-title">OnClickListener</span> </span>&#123;<br><br><span class="hljs-meta">@Override</span><br><span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span><span class="hljs-params">(Bundle savedInstanceState)</span> </span>&#123;<br>    <span class="hljs-keyword">super</span>.onCreate(savedInstanceState);<br>    setContentView(R.layout.activity_main);<br>    Button button = (Button) findViewById(R.id.button);<br>    button.setOnClickListener(<span class="hljs-keyword">this</span>);<br>&#125;<br><br><span class="hljs-meta">@Override</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onClick</span><span class="hljs-params">(View v)</span> </span>&#123;<br>    <span class="hljs-keyword">switch</span> (v.getId()) &#123;	<span class="hljs-comment">// 判断触发监听器的是哪个按钮</span><br>        <span class="hljs-keyword">case</span> R.id.button:<br>            <span class="hljs-comment">// 添加逻辑代码</span><br>            <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">default</span>:<br>            <span class="hljs-keyword">break</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="EditText"><a href="#EditText" class="headerlink" title="EditText"></a>EditText</h3><blockquote>
 <p>允许用户在控件里输入和编辑内容，并可以在程序中对这些内容进行处理</p>
 </blockquote>
-<h4 id="常用属性-2"><a href="#常用属性-2" class="headerlink" title="常用属性"></a>常用属性</h4><pre><code>android:hint=&quot;Type something here&quot;    输入时的提示信息
-android:maxLines=&quot;1&quot;    指定最大行数（如密码输入框最大行数为1），大于最大行数向下滚动</code></pre><h4 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h4><pre><code>getText()    // 获取输入的内容</code></pre><h3 id="AlertDialog"><a href="#AlertDialog" class="headerlink" title="AlertDialog"></a>AlertDialog</h3><blockquote>
+<h4 id="常用属性-2"><a href="#常用属性-2" class="headerlink" title="常用属性"></a>常用属性</h4><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-symbol">android:</span>hint=<span class="hljs-string">"Type something here"</span>	输入时的提示信息<br><span class="hljs-symbol">android:</span>maxLines=<span class="hljs-string">"1"</span>	指定最大行数（如密码输入框最大行数为<span class="hljs-number">1</span>），大于最大行数向下滚动<br></code></pre></td></tr></table></figure>
+
+<h4 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-function"><span class="hljs-title">getText</span><span class="hljs-params">()</span></span>	<span class="hljs-comment">// 获取输入的内容</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="AlertDialog"><a href="#AlertDialog" class="headerlink" title="AlertDialog"></a>AlertDialog</h3><blockquote>
 <p>在当前的界面弹出一个对话框，这个对话框是置顶于所有界面元素之上的，能够屏蔽掉其他控件的交互能力，因此 AlertDialog 一般都是用于提示一些非常重要的内容或者警告信息</p>
 </blockquote>
 <h4 id="对话框使用流程"><a href="#对话框使用流程" class="headerlink" title="对话框使用流程"></a>对话框使用流程</h4><ol>
@@ -159,47 +141,9 @@ android:maxLines=&quot;1&quot;    指定最大行数（如密码输入框最大�
 <li>调用 show()方法将对话框显示出来</li>
 </ol>
 <h4 id="点击按钮将EditText在对话框中弹出"><a href="#点击按钮将EditText在对话框中弹出" class="headerlink" title="点击按钮将EditText在对话框中弹出"></a>点击按钮将EditText在对话框中弹出</h4><p>该示例需要使用到按钮点击事件，从EditText获取内容，及AlertDialog的相关操作。</p>
-<pre><code>public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">public <span class="hljs-keyword">class</span> MainActivity extends AppCompatActivity implements View.OnClickListener &#123;<br><br>    <span class="hljs-keyword">private</span> EditText editText;<br><br>    @Override<br>    protected void on<span class="hljs-constructor">Create(Bundle <span class="hljs-params">savedInstanceState</span>)</span> &#123;<br>        super.on<span class="hljs-constructor">Create(<span class="hljs-params">savedInstanceState</span>)</span>;<br>        set<span class="hljs-constructor">ContentView(R.<span class="hljs-params">layout</span>.<span class="hljs-params">activity_main</span>)</span>;<br>        Button button = (Button) find<span class="hljs-constructor">ViewById(R.<span class="hljs-params">id</span>.<span class="hljs-params">button</span>)</span>;<br>        editText = (EditText) find<span class="hljs-constructor">ViewById(R.<span class="hljs-params">id</span>.<span class="hljs-params">edit_text</span>)</span>;<br>        button.set<span class="hljs-constructor">OnClickListener(<span class="hljs-params">this</span>)</span>;<br>    &#125;<br><br><br>    @Override<br>    public void on<span class="hljs-constructor">Click(View <span class="hljs-params">v</span>)</span> &#123;<br>        switch (v.get<span class="hljs-constructor">Id()</span>) &#123;<br>            case <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">R</span>.</span></span>id.button:<br>                String inputText = editText.get<span class="hljs-constructor">Text()</span>.<span class="hljs-keyword">to</span><span class="hljs-constructor">String()</span>;	<span class="hljs-comment">// 获取输入内容</span><br>                AlertDialog.Builder dialog = <span class="hljs-keyword">new</span> AlertDialog.<span class="hljs-constructor">Builder(MainActivity.<span class="hljs-params">this</span>)</span>;<br>                dialog.set<span class="hljs-constructor">Message(<span class="hljs-params">inputText</span>)</span>;<br>                dialog.set<span class="hljs-constructor">Cancelable(<span class="hljs-params">false</span>)</span>;<br>                dialog.set<span class="hljs-constructor">PositiveButton(<span class="hljs-string">"OK"</span>, <span class="hljs-params">new</span> DialogInterface.OnClickListener()</span> &#123;<br>                    @Override<br>                    public void on<span class="hljs-constructor">Click(DialogInterface <span class="hljs-params">dialogInterface</span>, <span class="hljs-params">int</span> <span class="hljs-params">i</span>)</span> &#123;<br><br>                    &#125;<br>                &#125;);<br>                dialog.set<span class="hljs-constructor">NegativeButton(<span class="hljs-string">"Cancel"</span>, <span class="hljs-params">new</span> DialogInterface.OnClickListener()</span> &#123;<br>                    @Override<br>                    public void on<span class="hljs-constructor">Click(DialogInterface <span class="hljs-params">dialogInterface</span>, <span class="hljs-params">int</span> <span class="hljs-params">i</span>)</span> &#123;<br><br>                    &#125;<br>                &#125;);<br>                dialog.show<span class="hljs-literal">()</span>;<br>                break;<br>            default:<br>                break;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-    private EditText editText;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Button button = (Button) findViewById(R.id.button);
-        editText = (EditText) findViewById(R.id.edit_text);
-        button.setOnClickListener(this);
-    }
-
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.button:
-                String inputText = editText.getText().toString();    // 获取输入内容
-                AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
-                dialog.setMessage(inputText);
-                dialog.setCancelable(false);
-                dialog.setPositiveButton(&quot;OK&quot;, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                });
-                dialog.setNegativeButton(&quot;Cancel&quot;, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                });
-                dialog.show();
-                break;
-            default:
-                break;
-        }
-    }
-}</code></pre><img src="http://cdn.ziyedy.top/Android%E5%BC%80%E5%8F%91%E4%B8%89%EF%BC%9A%E5%B8%83%E5%B1%80%EF%BC%88layout%EF%BC%89/%E8%BE%93%E5%85%A5%E6%A1%86%E5%BC%B9%E5%87%BA%E6%95%88%E6%9E%9C.png" style="zoom:67%;" />
+<img src="http://cdn.ziyedy.top/Android%E5%BC%80%E5%8F%91%E4%B8%89%EF%BC%9A%E5%B8%83%E5%B1%80%EF%BC%88layout%EF%BC%89/%E8%BE%93%E5%85%A5%E6%A1%86%E5%BC%B9%E5%87%BA%E6%95%88%E6%9E%9C.png" style="zoom:67%;" />
 
 
 
@@ -207,15 +151,19 @@ android:maxLines=&quot;1&quot;    指定最大行数（如密码输入框最大�
 <p>在界面上展示图片的一个控件</p>
 <p>图片通常放置在以 “drawable” 开头的目录下（drawable后会跟具体的分辨率）</p>
 </blockquote>
-<h4 id="常用属性和方法"><a href="#常用属性和方法" class="headerlink" title="常用属性和方法"></a>常用属性和方法</h4><pre><code>android:src=&quot;@drawable/img_1 &quot;    指定显示图片的位置</code></pre><p>在代码中可以使用<code>setImageResource(R.drawable.img_2)</code>来指定图片的位置</p>
+<h4 id="常用属性和方法"><a href="#常用属性和方法" class="headerlink" title="常用属性和方法"></a>常用属性和方法</h4><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-symbol">android:</span>src=<span class="hljs-string">"@drawable/img_1 "</span>	指定显示图片的位置<br></code></pre></td></tr></table></figure>
+
+<p>在代码中可以使用<code>setImageResource(R.drawable.img_2)</code>来指定图片的位置</p>
 <h3 id="ProgressBar"><a href="#ProgressBar" class="headerlink" title="ProgressBar"></a>ProgressBar</h3><blockquote>
 <p>在界面上显示一个进度条，表示我们的程序正在加载一些数据</p>
 </blockquote>
-<h4 id="常用属性-3"><a href="#常用属性-3" class="headerlink" title="常用属性"></a>常用属性</h4><pre><code>style=&quot;?android:attr/progressBarStyleHorizontal&quot;    使用style属性改变进度条的样式（该行为指定为水平条状）
-android:max=&quot;100&quot;    max设置进度条最大值</code></pre><h4 id="常用方法-1"><a href="#常用方法-1" class="headerlink" title="常用方法"></a>常用方法</h4><pre><code>getVisibility()
-setVisibility(View.VISIBLE)    // 设置可见度
-getProgress()    // 获取进度条进度
-setProgress(progress)    // 更改进度条进度</code></pre><h3 id="ProgressDialog"><a href="#ProgressDialog" class="headerlink" title="ProgressDialog"></a>ProgressDialog</h3><blockquote>
+<h4 id="常用属性-3"><a href="#常用属性-3" class="headerlink" title="常用属性"></a>常用属性</h4><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs maxima"><span class="hljs-built_in">style</span>=<span class="hljs-string">"?android:attr/progressBarStyleHorizontal"</span>	使用<span class="hljs-built_in">style</span>属性改变进度条的样式（该行为指定为水平条状）<br>android:<span class="hljs-built_in">max</span>=<span class="hljs-string">"100"</span>	<span class="hljs-built_in">max</span>设置进度条最大值<br></code></pre></td></tr></table></figure>
+
+<h4 id="常用方法-1"><a href="#常用方法-1" class="headerlink" title="常用方法"></a>常用方法</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-function"><span class="hljs-title">getVisibility</span><span class="hljs-params">()</span></span><br><span class="hljs-function"><span class="hljs-title">setVisibility</span><span class="hljs-params">(View.VISIBLE)</span></span>	<span class="hljs-comment">// 设置可见度</span><br><span class="hljs-function"><span class="hljs-title">getProgress</span><span class="hljs-params">()</span></span>	<span class="hljs-comment">// 获取进度条进度</span><br><span class="hljs-function"><span class="hljs-title">setProgress</span><span class="hljs-params">(progress)</span></span>	<span class="hljs-comment">// 更改进度条进度</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="ProgressDialog"><a href="#ProgressDialog" class="headerlink" title="ProgressDialog"></a>ProgressDialog</h3><blockquote>
 <p>与<code>AlertDialog</code>类似，都可以在界面上弹出一个对话框，都能够屏蔽掉其他控件的交互能力</p>
 <p>不同的是，ProgressDialog 会在对话框中显示一个进度条，一般用于表示当前操作比较耗时，让用户耐心地等待</p>
 <p><strong>用法和 AlertDialog 也相似</strong></p>
@@ -227,10 +175,9 @@ setProgress(progress)    // 更改进度条进度</code></pre><h3 id="ProgressDi
 <h4 id="基础用法"><a href="#基础用法" class="headerlink" title="基础用法"></a>基础用法</h4><ol>
 <li>编写相关的布局代码</li>
 </ol>
-<pre><code>&lt;ListView
-    android:id=&quot;@+id/list_view&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;match_parent&quot; /&gt;</code></pre><ol start="2">
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs routeros">&lt;ListView<br>	android:<span class="hljs-attribute">id</span>=<span class="hljs-string">"@+id/list_view"</span><br>	android:<span class="hljs-attribute">layout_width</span>=<span class="hljs-string">"match_parent"</span><br>	android:<span class="hljs-attribute">layout_height</span>=<span class="hljs-string">"match_parent"</span> /&gt;<br></code></pre></td></tr></table></figure>
+
+<ol start="2">
 <li>定义数据，并使用<code>ArrayAdapter</code>适配器将要适配的数据传入</li>
 </ol>
 <blockquote>
@@ -240,21 +187,9 @@ setProgress(progress)    // 更改进度条进度</code></pre><h3 id="ProgressDi
 <ol start="3">
 <li>调用 ListView 的<code>setAdapter()</code>方法，将构建好的适配器对象传递进去，建立ListView与数据的关联</li>
 </ol>
-<pre><code>private String[] data = { &quot;Apple&quot;, &quot;Banana&quot;, &quot;Orange&quot;, &quot;Watermelon&quot;,
-            &quot;Pear&quot;, &quot;Grape&quot;, &quot;Pineapple&quot;, &quot;Strawberry&quot;, &quot;Cherry&quot;, &quot;Mango&quot;,
-            &quot;Apple&quot;, &quot;Banana&quot;, &quot;Orange&quot;, &quot;Watermelon&quot;, &quot;Pear&quot;, &quot;Grape&quot;,
-            &quot;Pineapple&quot;, &quot;Strawberry&quot;, &quot;Cherry&quot;, &quot;Mango&quot; };
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-keyword">private</span> String<span class="hljs-literal">[]</span> data = &#123; <span class="hljs-string">"Apple"</span>, <span class="hljs-string">"Banana"</span>, <span class="hljs-string">"Orange"</span>, <span class="hljs-string">"Watermelon"</span>,<br>            <span class="hljs-string">"Pear"</span>, <span class="hljs-string">"Grape"</span>, <span class="hljs-string">"Pineapple"</span>, <span class="hljs-string">"Strawberry"</span>, <span class="hljs-string">"Cherry"</span>, <span class="hljs-string">"Mango"</span>,<br>            <span class="hljs-string">"Apple"</span>, <span class="hljs-string">"Banana"</span>, <span class="hljs-string">"Orange"</span>, <span class="hljs-string">"Watermelon"</span>, <span class="hljs-string">"Pear"</span>, <span class="hljs-string">"Grape"</span>,<br>            <span class="hljs-string">"Pineapple"</span>, <span class="hljs-string">"Strawberry"</span>, <span class="hljs-string">"Cherry"</span>, <span class="hljs-string">"Mango"</span> &#125;;<br><br>@Override<br>protected void on<span class="hljs-constructor">Create(Bundle <span class="hljs-params">savedInstanceState</span>)</span> &#123;<br>    super.on<span class="hljs-constructor">Create(<span class="hljs-params">savedInstanceState</span>)</span>;<br>    set<span class="hljs-constructor">ContentView(R.<span class="hljs-params">layout</span>.<span class="hljs-params">activity_main</span>)</span>;<br>	<span class="hljs-comment">// 使用适配器</span><br>    ArrayAdapter&lt;String&gt; adapter = <span class="hljs-keyword">new</span> ArrayAdapter&lt;&gt;(<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">MainActivity</span>.</span></span>this,<br>                android.<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">R</span>.</span></span>layout.simple_list_item_1, data);<br>    ListView listView = (ListView) find<span class="hljs-constructor">ViewById(R.<span class="hljs-params">id</span>.<span class="hljs-params">list_view</span>)</span>;<br>    listView.set<span class="hljs-constructor">Adapter(<span class="hljs-params">adapter</span>)</span>;	<span class="hljs-comment">// 传入适配器</span><br>&#125;<br></code></pre></td></tr></table></figure>
 
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    // 使用适配器
-    ArrayAdapter&lt;String&gt; adapter = new ArrayAdapter&lt;&gt;(MainActivity.this,
-                android.R.layout.simple_list_item_1, data);
-    ListView listView = (ListView) findViewById(R.id.list_view);
-    listView.setAdapter(adapter);    // 传入适配器
-}</code></pre><p><strong>显示效果如下</strong></p>
+<p><strong>显示效果如下</strong></p>
 <img src="http://cdn.ziyedy.top/Android%E5%BC%80%E5%8F%91%E4%B8%89%EF%BC%9A%E5%B8%83%E5%B1%80%EF%BC%88layout%EF%BC%89/ListView%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8.png" style="zoom: 50%;" />
 
 
@@ -266,57 +201,31 @@ protected void onCreate(Bundle savedInstanceState) {
 <p>4、按ListView的基础用法在主活动中引入即可</p>
 </blockquote>
 <h4 id="ListView的点击事件"><a href="#ListView的点击事件" class="headerlink" title="ListView的点击事件"></a>ListView的点击事件</h4><p><strong>标准写法如下：<code>setOnItemClickListener</code></strong></p>
-<pre><code>listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-    @Override
-    public void onItemClick(AdapterView&lt;?&gt; parent, View view, int position, long id) {
-        // position指列表中点击的索引
-        // 添加逻辑代码
-    }
-});</code></pre><h3 id="RecyclerView"><a href="#RecyclerView" class="headerlink" title="RecyclerView"></a>RecyclerView</h3><blockquote>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">listView.set<span class="hljs-constructor">OnItemClickListener(<span class="hljs-params">new</span> AdapterView.OnItemClickListener()</span> &#123;<br>    @Override<br>    public void on<span class="hljs-constructor">ItemClick(AdapterView&lt;?&gt; <span class="hljs-params">parent</span>, View <span class="hljs-params">view</span>, <span class="hljs-params">int</span> <span class="hljs-params">position</span>, <span class="hljs-params">long</span> <span class="hljs-params">id</span>)</span> &#123;<br>    	<span class="hljs-comment">// position指列表中点击的索引</span><br>        <span class="hljs-comment">// 添加逻辑代码</span><br>    &#125;<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="RecyclerView"><a href="#RecyclerView" class="headerlink" title="RecyclerView"></a>RecyclerView</h3><blockquote>
 <p>加强版的ListView，更推荐使用</p>
 <p>ListView 的布局排列是由自身去管理的，而 RecyclerView 则将这个工作交给了<code>LayoutManager</code>等接口，因此在布局上非常方便</p>
 </blockquote>
 <h4 id="标准使用"><a href="#标准使用" class="headerlink" title="标准使用"></a>标准使用</h4><blockquote>
 <p>与ListView相比不同之处在于<code>setLayoutManager</code>设置了“滚动方式”</p>
 </blockquote>
-<pre><code>RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">RecyclerView recyclerView = (RecyclerView) find<span class="hljs-constructor">ViewById(R.<span class="hljs-params">id</span>.<span class="hljs-params">recycler_view</span>)</span>;<br><br>LinearLayoutManager layoutManager = <span class="hljs-keyword">new</span> <span class="hljs-constructor">LinearLayoutManager(<span class="hljs-params">this</span>)</span>;<br>layoutManager.set<span class="hljs-constructor">Orientation(LinearLayoutManager.HORIZONTAL)</span>;	<span class="hljs-comment">// 设置滚动方式（此处设置为水平）</span><br>recyclerView.set<span class="hljs-constructor">LayoutManager(<span class="hljs-params">layoutManager</span>)</span>;	<span class="hljs-comment">// 设置LinearLayoutManager对象</span><br>FruitAdapter adapter = <span class="hljs-keyword">new</span> <span class="hljs-constructor">FruitAdapter(<span class="hljs-params">fruitList</span>)</span>;<br>recyclerView.set<span class="hljs-constructor">Adapter(<span class="hljs-params">adapter</span>)</span>;<br></code></pre></td></tr></table></figure>
 
-LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);    // 设置滚动方式（此处设置为水平）
-recyclerView.setLayoutManager(layoutManager);    // 设置LinearLayoutManager对象
-FruitAdapter adapter = new FruitAdapter(fruitList);
-recyclerView.setAdapter(adapter);</code></pre><p>除此之外，还可以通过<code>GridLayoutManager</code>与<code>StaggeredGridLayoutManager</code>这两种方式实现网格布局和瀑布流布局</p>
-<h2 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h2><h3 id="常用布局属性"><a href="#常用布局属性" class="headerlink" title="常用布局属性"></a>常用布局属性</h3><pre><code>android:layout_width=&quot;match_parent&quot;        表示width与父布局的width相同
-android:layout_height=&quot;wrap_content&quot;    表示height刚好能够容纳内容</code></pre><h3 id="线性布局（LinearLayout）"><a href="#线性布局（LinearLayout）" class="headerlink" title="线性布局（LinearLayout）"></a>线性布局（LinearLayout）</h3><pre><code>&lt;LinearLayout
-    android:orientation=&quot;horizontal&quot;    
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;match_parent&quot;&gt;
+<p>除此之外，还可以通过<code>GridLayoutManager</code>与<code>StaggeredGridLayoutManager</code>这两种方式实现网格布局和瀑布流布局</p>
+<h2 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h2><h3 id="常用布局属性"><a href="#常用布局属性" class="headerlink" title="常用布局属性"></a>常用布局属性</h3><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs arduino">android:layout_width=<span class="hljs-string">"match_parent"</span>		表示<span class="hljs-built_in">width</span>与父布局的<span class="hljs-built_in">width</span>相同<br>android:layout_height=<span class="hljs-string">"wrap_content"</span>	表示<span class="hljs-built_in">height</span>刚好能够容纳内容<br></code></pre></td></tr></table></figure>
 
-    &lt;!-- 添加布局内部的组件 --&gt;
 
-&lt;/LinearLayout&gt;</code></pre><h4 id="常用属性-4"><a href="#常用属性-4" class="headerlink" title="常用属性"></a>常用属性</h4><pre><code>android:orientation=&quot;horizontal&quot;    指定是水平还是垂直（horizontal与vertical可选）
-android:layout _gravity        指定布局内控件的对齐方式
-android:layout _weight        使用比例的方式来指定控件的大小（即将所有控件按比例指定长宽大小）</code></pre><h4 id="layout-weight示例"><a href="#layout-weight示例" class="headerlink" title="layout_weight示例"></a>layout_weight示例</h4><pre><code>&lt;LinearLayout
-    android:orientation=&quot;horizontal&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;match_parent&quot;&gt;
 
-&lt;EditText
-    android:id=&quot;@+id/edit_text&quot;
-    android:layout_width=&quot;0dp&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:layout_weight=&quot;3&quot;
-    /&gt;
+<h3 id="线性布局（LinearLayout）"><a href="#线性布局（LinearLayout）" class="headerlink" title="线性布局（LinearLayout）"></a>线性布局（LinearLayout）</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">LinearLayout</span><br>    <span class="hljs-attr">android:orientation</span>=<span class="hljs-string">"horizontal"</span>    <br>    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span><br>    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span>&gt;</span><br>        <br>	<span class="hljs-comment">&lt;!-- 添加布局内部的组件 --&gt;</span><br>    <br><span class="hljs-tag">&lt;/<span class="hljs-name">LinearLayout</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
-&lt;Button
-    android:id=&quot;@+id/button&quot;
-    android:layout_width=&quot;0dp&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:text=&quot;send&quot;
-    android:layout_weight=&quot;1&quot;
-    /&gt;
+<h4 id="常用属性-4"><a href="#常用属性-4" class="headerlink" title="常用属性"></a>常用属性</h4><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-symbol">android:</span>orientation=<span class="hljs-string">"horizontal"</span>	指定是水平还是垂直（horizontal与vertical可选）<br><span class="hljs-symbol">android:</span>layout _gravity		指定布局内控件的对齐方式<br><span class="hljs-symbol">android:</span>layout _weight		使用比例的方式来指定控件的大小（即将所有控件按比例指定长宽大小）<br></code></pre></td></tr></table></figure>
 
-&lt;/LinearLayout&gt;</code></pre><p><img src="http://cdn.ziyedy.top/Android%E5%BC%80%E5%8F%91%E4%B8%89%EF%BC%9A%E5%B8%83%E5%B1%80%EF%BC%88layout%EF%BC%89/layout-weight%E6%95%88%E6%9E%9C.png" alt="layout-weight：3比1的效果"></p>
+<h4 id="layout-weight示例"><a href="#layout-weight示例" class="headerlink" title="layout_weight示例"></a>layout_weight示例</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">LinearLayout</span><br>    <span class="hljs-attr">android:orientation</span>=<span class="hljs-string">"horizontal"</span><br>    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span><br>    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">EditText</span><br>    <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/edit_text"</span><br>    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"0dp"</span><br>    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span><br>    <span class="hljs-attr">android:layout_weight</span>=<span class="hljs-string">"3"</span><br>    /&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">Button</span><br>    <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/button"</span><br>    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"0dp"</span><br>    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span><br>    <span class="hljs-attr">android:text</span>=<span class="hljs-string">"send"</span><br>    <span class="hljs-attr">android:layout_weight</span>=<span class="hljs-string">"1"</span><br>    /&gt;</span><br>    <br><span class="hljs-tag">&lt;/<span class="hljs-name">LinearLayout</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="http://cdn.ziyedy.top/Android%E5%BC%80%E5%8F%91%E4%B8%89%EF%BC%9A%E5%B8%83%E5%B1%80%EF%BC%88layout%EF%BC%89/layout-weight%E6%95%88%E6%9E%9C.png" alt="layout-weight：3比1的效果"></p>
 <h3 id="相对布局（RelativeLayout）"><a href="#相对布局（RelativeLayout）" class="headerlink" title="相对布局（RelativeLayout）"></a>相对布局（RelativeLayout）</h3><blockquote>
 <p>相对布局较为灵活，可以通过相对定位的方式让控件出现在布局的任何位置</p>
 </blockquote>
@@ -347,29 +256,9 @@ android:layout _weight        使用比例的方式来指定控件的大小（�
 <p>自定义控件即编写布局中的响应事件，避免重复编写相同代码</p>
 </blockquote>
 <h4 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h4><p>在之前自定义布局的基础上，新建一个Java类，继承自<code>LinearLayout</code>，代码如下（即实现了该布局中控件的相关功能）：</p>
-<pre><code>public class TitleLayout extends LinearLayout {
-    public TitleLayout(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        LayoutInflater.from(context).inflate(R.layout.title, this);    // 进行加载
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">public <span class="hljs-keyword">class</span> TitleLayout extends LinearLayout &#123;<br>    public <span class="hljs-constructor">TitleLayout(Context <span class="hljs-params">context</span>, AttributeSet <span class="hljs-params">attrs</span>)</span> &#123;<br>        super(context, attrs);<br>        <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">LayoutInflater</span>.</span></span>from(context).inflate(<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">R</span>.</span></span>layout.title, this);	<span class="hljs-comment">// 进行加载</span><br><br>		<span class="hljs-comment">// 编写控件中的按钮代码</span><br>        Button titleBack = (Button) find<span class="hljs-constructor">ViewById(R.<span class="hljs-params">id</span>.<span class="hljs-params">title_back</span>)</span>;<br>        Button titleEdit = (Button) find<span class="hljs-constructor">ViewById(R.<span class="hljs-params">id</span>.<span class="hljs-params">title_edit</span>)</span>;<br>        titleBack.set<span class="hljs-constructor">OnClickListener(<span class="hljs-params">new</span> OnClickListener()</span> &#123;<br>            @Override<br>            public void on<span class="hljs-constructor">Click(View <span class="hljs-params">view</span>)</span> &#123;<br>                ((Activity) get<span class="hljs-constructor">Context()</span>).finish<span class="hljs-literal">()</span>;<br>            &#125;<br>        &#125;);<br>        titleEdit.set<span class="hljs-constructor">OnClickListener(<span class="hljs-params">new</span> OnClickListener()</span> &#123;<br>            @Override<br>            public void on<span class="hljs-constructor">Click(View <span class="hljs-params">view</span>)</span> &#123;<br>                <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Toast</span>.</span></span>make<span class="hljs-constructor">Text(<span class="hljs-params">getContext</span>()</span>, <span class="hljs-string">"You clicked Edit button"</span>,<br>                        Toast.LENGTH_SHORT).show<span class="hljs-literal">()</span>;<br>            &#125;<br>        &#125;);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-        // 编写控件中的按钮代码
-        Button titleBack = (Button) findViewById(R.id.title_back);
-        Button titleEdit = (Button) findViewById(R.id.title_edit);
-        titleBack.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((Activity) getContext()).finish();
-            }
-        });
-        titleEdit.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getContext(), &quot;You clicked Edit button&quot;,
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-}</code></pre><img src="http://cdn.ziyedy.top/Android%E5%BC%80%E5%8F%91%E4%B8%89%EF%BC%9A%E5%B8%83%E5%B1%80%EF%BC%88layout%EF%BC%89/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8E%A7%E4%BB%B6.png" style="zoom:67%;" />
+<img src="http://cdn.ziyedy.top/Android%E5%BC%80%E5%8F%91%E4%B8%89%EF%BC%9A%E5%B8%83%E5%B1%80%EF%BC%88layout%EF%BC%89/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8E%A7%E4%BB%B6.png" style="zoom:67%;" />
 
 
 
@@ -451,7 +340,7 @@ android:layout _weight        使用比例的方式来指定控件的大小（�
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/" rel="tag">移动端</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li></ul>
 
     </footer>
   </div>

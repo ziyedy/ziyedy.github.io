@@ -13,7 +13,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    vi基本用法 |  浔庐子夜
+    vim基本用法 |  浔庐子夜
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-其他/工作效率/vi基本用法"
+  id="post-工具使用/vim基本用法"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -59,7 +59,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  vi基本用法
+  vim基本用法
 </h1>
  
 
@@ -70,7 +70,7 @@
   <time datetime="2020-08-16T01:52:18.000Z" itemprop="datePublished">2020-08-16</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a> / <a class="article-category-link" href="/categories/%E5%85%B6%E4%BB%96/%E5%B7%A5%E4%BD%9C%E6%95%88%E7%8E%87/">工作效率</a>
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">88</span>
+            <span class="post-count">519</span>
         </span>
     </span>
 
@@ -102,10 +102,58 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h3 id="启动vi"><a href="#启动vi" class="headerlink" title="启动vi"></a>启动vi</h3><pre><code>vi</code></pre><h3 id="退出"><a href="#退出" class="headerlink" title="退出"></a>退出</h3><p>退出vi，出现未保存文件等情况会无法退出</p>
-<pre><code>:q</code></pre><p>强制退出</p>
-<pre><code>:q!</code></pre><h3 id="保存"><a href="#保存" class="headerlink" title="保存"></a>保存</h3><pre><code>:w</code></pre><h3 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h3><h3 id="插入模式"><a href="#插入模式" class="headerlink" title="插入模式"></a>插入模式</h3><p>要在文件中添加文本，我们需要先进入插入模式。按下”i”键进入插入模式。</p>
+  <h3 id="启动vi"><a href="#启动vi" class="headerlink" title="启动vi"></a>启动vi</h3><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">vi</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="退出"><a href="#退出" class="headerlink" title="退出"></a>退出</h3><p>退出vi，出现未保存文件等情况会无法退出</p>
+<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs clojure"><span class="hljs-symbol">:q</span><br></code></pre></td></tr></table></figure>
+
+<p>强制退出</p>
+<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs clojure"><span class="hljs-symbol">:q!</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="保存"><a href="#保存" class="headerlink" title="保存"></a>保存</h3><figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs clojure"><span class="hljs-symbol">:w</span><br></code></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>vi分为3种模式，一般命令模式、编辑模式、命令行模式</p>
+</blockquote>
+<h3 id="一般命令模式（commmand-mode）"><a href="#一般命令模式（commmand-mode）" class="headerlink" title="一般命令模式（commmand mode）"></a>一般命令模式（commmand mode）</h3><p>默认的模式，可以移动光标、删除字符删除整行、复制粘贴文件内容</p>
+<h3 id="编辑模式（insert-mode）"><a href="#编辑模式（insert-mode）" class="headerlink" title="编辑模式（insert mode）"></a>编辑模式（insert mode）</h3><p>要在文件中添加文本，我们需要先进入插入模式。按下”i”键进入插入模式。</p>
 <p>若要退出插入模式返回命令模式，按下 Esc 按键。</p>
+<h3 id="命令行模式（command-line-mode）"><a href="#命令行模式（command-line-mode）" class="headerlink" title="命令行模式（command-line mode）"></a>命令行模式（command-line mode）</h3><p>输入<code>: / ?</code>任意一个字符则可以在底部输入命令，可以实现查找数据、读取保存批量替换字符、退出、显示行号等操作</p>
+<p>常用命令记录</p>
+<p>使用数字键 n⬇就代表向下移动n行</p>
+<p>Ctrl + f  向下翻页</p>
+<p>Ctrl + b 向上翻页</p>
+<p>0 或 Home 移动到该行最前面</p>
+<p>$ 或 End 移动到改行最后面</p>
+<p>G 移动到文件最后一行</p>
+<p>gg 1G 移动到文件第一行</p>
+<p>nG 移动到文件第n行</p>
+<p>n&lt;space&gt; 光标向后移动n个字符</p>
+<p>n&lt;Enter&gt; n为数字，光标向下移动n行</p>
+<p>/word 向光标之下查找名为word的字符串</p>
+<p>?word 向光标之上查找名为word的字符串</p>
+<p>n 此处n不代表数字，重复前一个查找操作</p>
+<p>N 与n的查找方向相反</p>
+<p>:1,10s/word1/word2/g 将第1到10行之间的word1替换为word2</p>
+<p>:1,$s/word1/word2/g 全文替换</p>
+<p>:1,$s/word1/word2/gc 全文替换，并在替换前让用户confirm</p>
+<p>x 向后删除一个字符</p>
+<p>nx 向后删除n个字符</p>
+<p>dd 删除（剪切）光标所在行</p>
+<p>ndd 处理后面n行</p>
+<p>yy 复制光标所在行</p>
+<p>nyy</p>
+<p>p 在光标下一行粘贴</p>
+<p>u 撤销上一步操作</p>
+<p>Ctrl+r 重做上一个操作（撤销还原）</p>
+<p>. 重复上一个操作</p>
+<p>:! command 暂时退出vi到中断执行command命令：</p>
+<p>:set nu 显示行号</p>
+<p>:set nonu 取消行号</p>
  
       <!-- reward -->
       
@@ -181,6 +229,8 @@
 </div>
 
 <div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/" rel="tag">vim</a></li></ul>
+
     </footer>
   </div>
 
@@ -191,7 +241,7 @@
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            numpy常用属性与方法
+            Numpy常用属性与方法
           
         </div>
       </a>

@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-计算机基础/数据结构与算法/8、哈希表"
+  id="post-学习笔记/数据结构与算法/8、哈希表"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-08-01T04:44:21.000Z" itemprop="datePublished">2020-08-01</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a> / <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a>
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a> / <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">553</span>
+            <span class="post-count">554</span>
         </span>
     </span>
 
@@ -103,7 +103,9 @@
     <div class="article-entry" itemprop="articleBody">
        
   <h3 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h3><p>哈希表可以理解为是通过一个映射函数（哈希函数）直接得到存储地址的数据结构，通常基于数组实现（<strong>容量通常采用质数</strong>）。</p>
-<pre><code>存储地址 = f(关键字)    // f为哈希函数</code></pre><p>根据这一基本特征可以看出，哈希表可以提供非常快速的插入-删除操作，理想状况下时间复杂度为0(1)级别。</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gcode">存储地址 = f<span class="hljs-comment">(关键字)</span>	<span class="hljs-comment">// f为哈希函数</span><br></code></pre></td></tr></table></figure>
+
+<p>根据这一基本特征可以看出，哈希表可以提供非常快速的插入-删除操作，理想状况下时间复杂度为0(1)级别。</p>
 <h3 id="哈希函数"><a href="#哈希函数" class="headerlink" title="哈希函数"></a>哈希函数</h3><p>哈希函数可以简单理解为是对需要存储的元素本身——&gt;存储下标的映射。</p>
 <p>如对字符串可以分别取其符号进行运算（整型则通常使用取模得到），而对于相关类，也可以自己定义hashcode函数，来获取坐标方式。</p>
 <h4 id="哈希函数的设计："><a href="#哈希函数的设计：" class="headerlink" title="哈希函数的设计："></a>哈希函数的设计：</h4><p>一致性：如果a==b,则hash(a)==hash(b)</p>

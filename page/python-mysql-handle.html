@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Python/数据库/Python操作MySQL数据库"
+  id="post-编程相关/Python/Python操作MySQL数据库"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-06-15T07:37:28.000Z" itemprop="datePublished">2020-06-15</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Python/">Python</a> / <a class="article-category-link" href="/categories/Python/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Python/">Python</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">184</span>
+            <span class="post-count">161</span>
         </span>
     </span>
 
@@ -104,43 +104,34 @@
        
   <p><strong>使用<code>mysql.connector</code>模块实现MySQL与Python的交互</strong></p>
 <h3 id="创建连接"><a href="#创建连接" class="headerlink" title="创建连接"></a>创建连接</h3><p>代码示例如下</p>
-<pre><code>import mysql.connector
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs routeros">import mysql.connector<br><span class="hljs-built_in"><br>config </span>= &#123;<br>    <span class="hljs-string">"host"</span>: <span class="hljs-string">"localhost"</span>,<br>    <span class="hljs-string">"port"</span>: <span class="hljs-string">"3306"</span>,<br>    <span class="hljs-string">"user"</span>: <span class="hljs-string">"root"</span>,<br>    <span class="hljs-string">"password"</span>: <span class="hljs-string">"password"</span>,<br>    <span class="hljs-string">"database"</span>: <span class="hljs-string">"demo"</span><br>&#125;<br><br>con = mysql.connector.connect(*<span class="hljs-number">*c</span>onfig)<br><br>con.close()<br></code></pre></td></tr></table></figure>
 
-config = {
-    &quot;host&quot;: &quot;localhost&quot;,
-    &quot;port&quot;: &quot;3306&quot;,
-    &quot;user&quot;: &quot;root&quot;,
-    &quot;password&quot;: &quot;password&quot;,
-    &quot;database&quot;: &quot;demo&quot;
-}
 
-con = mysql.connector.connect(**config)
 
-con.close()</code></pre><h3 id="游标（Cursor）"><a href="#游标（Cursor）" class="headerlink" title="游标（Cursor）"></a>游标（Cursor）</h3><p><code>mysql.connector</code>中使用游标来执行SQL语句，并且查询结果也会保存在游标中</p>
-<h4 id="执行SQL语句"><a href="#执行SQL语句" class="headerlink" title="执行SQL语句"></a>执行SQL语句</h4><pre><code>curser = con.cursor()
-curser.execute()</code></pre><p>示例</p>
-<pre><code>curser = con.cursor()
-sql = &quot;SELECT ename FROM t_emp;&quot;
-curser.execute(sql)
-for one in curser:
-    print(one[0])</code></pre><p>事务控制</p>
-<pre><code>con.start_transaction()
-con.commit()
-con.rollback()</code></pre><p>异常处理</p>
-<pre><code>try:
-    con = mysql.connector.connect(**config)
-    con.start_transaction()
-    con.commit()
-except Exception as e:
-    con.rollback()
-finally:
-    if &quot;con&quot; in dir():
-        con.close()</code></pre><p>数据库连接池</p>
-<pre><code>pool = mysql.connector.pooling.MySQLConnectionPool(
-    **config,
-    pool_size=10
-)
-con = pool.get_connection()</code></pre><h3 id="SQL注入攻击"><a href="#SQL注入攻击" class="headerlink" title="SQL注入攻击"></a>SQL注入攻击</h3> 
+
+
+<h3 id="游标（Cursor）"><a href="#游标（Cursor）" class="headerlink" title="游标（Cursor）"></a>游标（Cursor）</h3><p><code>mysql.connector</code>中使用游标来执行SQL语句，并且查询结果也会保存在游标中</p>
+<h4 id="执行SQL语句"><a href="#执行SQL语句" class="headerlink" title="执行SQL语句"></a>执行SQL语句</h4><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs vim">curser = <span class="hljs-keyword">con</span>.<span class="hljs-built_in">cursor</span>()<br>curser.<span class="hljs-keyword">execute</span>()<br></code></pre></td></tr></table></figure>
+
+<p>示例</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs vim">curser = <span class="hljs-keyword">con</span>.<span class="hljs-built_in">cursor</span>()<br>sql = <span class="hljs-string">"SELECT ename FROM t_emp;"</span><br>curser.<span class="hljs-keyword">execute</span>(sql)<br><span class="hljs-keyword">for</span> one in curser:<br>    <span class="hljs-keyword">print</span>(one[<span class="hljs-number">0</span>])<br></code></pre></td></tr></table></figure>
+
+
+
+<p>事务控制</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">con</span><span class="hljs-selector-class">.start_transaction</span>()<br><span class="hljs-selector-tag">con</span><span class="hljs-selector-class">.commit</span>()<br><span class="hljs-selector-tag">con</span><span class="hljs-selector-class">.rollback</span>()<br></code></pre></td></tr></table></figure>
+
+<p>异常处理</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">try</span>:<br>    <span class="hljs-keyword">con</span> = mysql.connector.connect(**config)<br>    <span class="hljs-keyword">con</span>.start_transaction()<br>    <span class="hljs-keyword">con</span>.commit()<br>except Exception <span class="hljs-keyword">as</span> <span class="hljs-keyword">e</span>:<br>    <span class="hljs-keyword">con</span>.rollback()<br><span class="hljs-keyword">finally</span>:<br>    <span class="hljs-keyword">if</span> <span class="hljs-string">"con"</span> in dir():<br>        <span class="hljs-keyword">con</span>.<span class="hljs-keyword">close</span>()<br></code></pre></td></tr></table></figure>
+
+
+
+<p>数据库连接池</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs nix"><span class="hljs-attr">pool</span> = mysql.connector.pooling.MySQLConnectionPool(<br>    **config,<br>    <span class="hljs-attr">pool_size=10</span><br>)<br><span class="hljs-attr">con</span> = pool.get_connection()<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="SQL注入攻击"><a href="#SQL注入攻击" class="headerlink" title="SQL注入攻击"></a>SQL注入攻击</h3> 
       <!-- reward -->
       
       <div id="reword-out">

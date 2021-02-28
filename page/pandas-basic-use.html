@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Python/常用模块/Pandas库基本用法"
+  id="post-编程相关/Python/Python常用模块/Pandas库基本用法"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-08-22T03:38:29.000Z" itemprop="datePublished">2020-08-22</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Python/">Python</a> / <a class="article-category-link" href="/categories/Python/%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97/">常用模块</a>
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Python/">Python</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Python/Python%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97/">Python常用模块</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">459</span>
+            <span class="post-count">438</span>
         </span>
     </span>
 
@@ -127,21 +127,12 @@
 </tbody></table>
 <h2 id="Series类型"><a href="#Series类型" class="headerlink" title="Series类型"></a>Series类型</h2><p>Series类型由一组数据及与之相关的数据索引组成（类似python的enumerate）</p>
 <p>如下所示，Series为列表<strong>自动创建了索引</strong></p>
-<pre><code>&gt;&gt;&gt; import pandas as pd
-&gt;&gt;&gt; p = pd.Series([4,3,2,1])
-&gt;&gt;&gt; p
-0    4
-1    3
-2    2
-3    1
-dtype: int64</code></pre><p>也可以使用index参数<strong>手动指定索引</strong>（index可省略）</p>
-<pre><code>&gt;&gt;&gt; import pandas as pd
-&gt;&gt;&gt; a = pd.Series([1,2,3],[&#39;a&#39;,&#39;b&#39;,&#39;c&#39;])
-&gt;&gt;&gt; a
-a    1
-b    2
-c    3
-dtype: int64</code></pre><h3 id="Series类型的创建"><a href="#Series类型的创建" class="headerlink" title="Series类型的创建"></a>Series类型的创建</h3><blockquote>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">&gt;&gt;&gt; <span class="hljs-keyword">import</span> pandas as pd<br>&gt;&gt;&gt; p = pd.Series([<span class="hljs-number">4</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>])<br>&gt;&gt;&gt; p<br><span class="hljs-number">0</span>    <span class="hljs-number">4</span><br><span class="hljs-number">1</span>    <span class="hljs-number">3</span><br><span class="hljs-number">2</span>    <span class="hljs-number">2</span><br><span class="hljs-number">3</span>    <span class="hljs-number">1</span><br>dtype: <span class="hljs-built_in">int</span>64<br></code></pre></td></tr></table></figure>
+
+<p>也可以使用index参数<strong>手动指定索引</strong>（index可省略）</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-meta">&gt;&gt;</span>&gt; import pandas as pd<br><span class="hljs-meta">&gt;&gt;</span>&gt; a = pd.Series([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>],[<span class="hljs-string">'a'</span>,<span class="hljs-string">'b'</span>,<span class="hljs-string">'c'</span>])<br><span class="hljs-meta">&gt;&gt;</span>&gt; a<br>a    <span class="hljs-number">1</span><br>b    <span class="hljs-number">2</span><br>c    <span class="hljs-number">3</span><br><span class="hljs-symbol">dtype:</span> int64<br></code></pre></td></tr></table></figure>
+
+<h3 id="Series类型的创建"><a href="#Series类型的创建" class="headerlink" title="Series类型的创建"></a>Series类型的创建</h3><blockquote>
 <ul>
 <li><p>Python列表，index与列表元素个数一致</p>
 </li>
@@ -155,10 +146,9 @@ dtype: int64</code></pre><h3 id="Series类型的创建"><a href="#Series类型�
 </li>
 </ul>
 </blockquote>
-<h3 id="Series类型的操作"><a href="#Series类型的操作" class="headerlink" title="Series类型的操作"></a>Series类型的操作</h3><h4 id="获得索引与数据"><a href="#获得索引与数据" class="headerlink" title="获得索引与数据"></a>获得索引与数据</h4><pre><code>&gt;&gt;&gt; a.index
-Index([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;], dtype=&#39;object&#39;)
-&gt;&gt;&gt; a.values
-array([1, 2, 3], dtype=int64)</code></pre><h4 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h4><p><strong>其他操作基本与numpy和Python中自带的字典一致，包括切片等功能，其中自定义索引与自动索引并存，但不能混用</strong></p>
+<h3 id="Series类型的操作"><a href="#Series类型的操作" class="headerlink" title="Series类型的操作"></a>Series类型的操作</h3><h4 id="获得索引与数据"><a href="#获得索引与数据" class="headerlink" title="获得索引与数据"></a>获得索引与数据</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs stylus">&gt;&gt;&gt; <span class="hljs-selector-tag">a</span><span class="hljs-selector-class">.index</span><br><span class="hljs-function"><span class="hljs-title">Index</span><span class="hljs-params">([<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>], dtype=<span class="hljs-string">'object'</span>)</span></span><br>&gt;&gt;&gt; <span class="hljs-selector-tag">a</span><span class="hljs-selector-class">.values</span><br><span class="hljs-function"><span class="hljs-title">array</span><span class="hljs-params">([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], dtype=int64)</span></span><br></code></pre></td></tr></table></figure>
+
+<h4 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h4><p><strong>其他操作基本与numpy和Python中自带的字典一致，包括切片等功能，其中自定义索引与自动索引并存，但不能混用</strong></p>
 <h2 id="DataFrame类型"><a href="#DataFrame类型" class="headerlink" title="DataFrame类型"></a>DataFrame类型</h2><p><strong>DataFrame类型由共用相同索引的一组列组成（一种表格型的数据类型）</strong></p>
 <h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>MOOC上北理工相关课程PPT</p>
  
@@ -236,6 +226,8 @@ array([1, 2, 3], dtype=int64)</code></pre><h4 id="其他操作"><a href="#其他
 </div>
 
 <div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pandas/" rel="tag">Pandas</a></li></ul>
+
     </footer>
   </div>
 

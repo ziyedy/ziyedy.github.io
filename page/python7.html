@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Python/语言基础/7、Python的线程与进程"
+  id="post-编程相关/Python/Python基础/7、Python的线程与进程"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-05-18T01:59:00.000Z" itemprop="datePublished">2020-05-18</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Python/">Python</a> / <a class="article-category-link" href="/categories/Python/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/">语言基础</a>
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Python/">Python</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Python/Python%E5%9F%BA%E7%A1%80/">Python基础</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1.1k</span>
+            <span class="post-count">1k</span>
         </span>
     </span>
 
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">5 min</span>
+            <span class="post-count">4 min</span>
         </span>
     </span>
 </div>
@@ -118,235 +118,48 @@
 <p>I/O密集型应用（如网页之类），CPU密集型应用（数据分析，可借助C或CPP的拓展）</p>
 <p>GIL执行顺序</p>
 <p>实现一个线程</p>
-<pre><code>import threading
-import time
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs clean"><span class="hljs-keyword">import</span> threading<br><span class="hljs-keyword">import</span> time<br><br><span class="hljs-keyword">class</span> LoopThread(threading.Thread):<br>    n = <span class="hljs-number">0</span><br>    def run(self) -&gt; None:<br>        while self.n &lt; <span class="hljs-number">5</span>:<br>            now_thread = threading.current_thread()<br>            print(<span class="hljs-string">'loop now: &#123;0&#125;'</span>.format(now_thread.name))<br>            print(self.n)<br>            time.sleep(<span class="hljs-number">1</span>)<br>            self.n += <span class="hljs-number">1</span><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:<br>    now_thread = threading.current_thread()<br>    print(<span class="hljs-string">'now: &#123;0&#125;'</span>.format(now_thread.name))<br><br>    t = LoopThread(name=<span class="hljs-string">'loop_thread'</span>)<br>    t.start()<br>    t.join()<br>    <br>############################################<br>now: MainThread<br>loop now: loop_thread<br><span class="hljs-number">0</span><br>loop now: loop_thread<br><span class="hljs-number">1</span><br>loop now: loop_thread<br><span class="hljs-number">2</span><br>loop now: loop_thread<br><span class="hljs-number">3</span><br>loop now: loop_thread<br><span class="hljs-number">4</span><br></code></pre></td></tr></table></figure>
 
-class LoopThread(threading.Thread):
-    n = 0
-    def run(self) -&gt; None:
-        while self.n &lt; 5:
-            now_thread = threading.current_thread()
-            print(&#39;loop now: {0}&#39;.format(now_thread.name))
-            print(self.n)
-            time.sleep(1)
-            self.n += 1
 
-if __name__ == &#39;__main__&#39;:
-    now_thread = threading.current_thread()
-    print(&#39;now: {0}&#39;.format(now_thread.name))
 
-    t = LoopThread(name=&#39;loop_thread&#39;)
-    t.start()
-    t.join()
+<p>多线程并发</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs clean"><span class="hljs-keyword">import</span> threading<br><span class="hljs-keyword">import</span> time<br><br>num = <span class="hljs-number">0</span><br><br>def test(n):<br>    global num<br>    num += n<br>    time.sleep(<span class="hljs-number">2</span>)<br>    num -= n<br>    time.sleep(<span class="hljs-number">1</span>)<br>    print(<span class="hljs-string">'----------------&#123;0&#125;'</span>.format(num))<br><br><span class="hljs-keyword">class</span> testThread(threading.Thread):<br>    def __init__(self, n, *args, **kwargs):<br>        super().__init__(*args, **kwargs)<br>        self.n = n<br><br>    def run(self) -&gt; None:<br>        for i <span class="hljs-keyword">in</span> range(<span class="hljs-number">1000</span>):<br>            test(self.n)<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:<br>    t1 = testThread(<span class="hljs-number">1</span>)<br>    t2 = testThread(<span class="hljs-number">2</span>)<br>    t1.start()<br>    t2.start()<br>    t1.join()<br>    t2.join()<br>    <br>############################################<br>---------------<span class="hljs-number">-0</span><br>---------------<span class="hljs-number">-2</span><br>---------------<span class="hljs-number">-0</span><br>---------------<span class="hljs-number">-2</span><br>---------------<span class="hljs-number">-0</span><br>---------------<span class="hljs-number">-1</span><br>---------------<span class="hljs-number">-0</span><br>---------------<span class="hljs-number">-1</span><br></code></pre></td></tr></table></figure>
 
-############################################
-now: MainThread
-loop now: loop_thread
-0
-loop now: loop_thread
-1
-loop now: loop_thread
-2
-loop now: loop_thread
-3
-loop now: loop_thread
-4</code></pre><p>多线程并发</p>
-<pre><code>import threading
-import time
 
-num = 0
 
-def test(n):
-    global num
-    num += n
-    time.sleep(2)
-    num -= n
-    time.sleep(1)
-    print(&#39;----------------{0}&#39;.format(num))
-
-class testThread(threading.Thread):
-    def __init__(self, n, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.n = n
-
-    def run(self) -&gt; None:
-        for i in range(1000):
-            test(self.n)
-
-if __name__ == &#39;__main__&#39;:
-    t1 = testThread(1)
-    t2 = testThread(2)
-    t1.start()
-    t2.start()
-    t1.join()
-    t2.join()
-
-############################################
-----------------0
-----------------2
-----------------0
-----------------2
-----------------0
-----------------1
-----------------0
-----------------1</code></pre><p>多线程中的锁</p>
+<p>多线程中的锁</p>
 <p><code>RLock</code>在一个线程中锁住了还能够再锁</p>
 <p>不能重复锁，否则资源被死锁</p>
-<pre><code>import threading
-import time
-
-num = 0
-lock = threading.Lock()
-
-def test(n):
-    global num
-    num += n
-    time.sleep(2)
-    num -= n
-    time.sleep(1)
-    print(&#39;----------------{0}&#39;.format(num))
-
-class testThread(threading.Thread):
-    def __init__(self, n, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.n = n
-
-    def run(self) -&gt; None:
-        for i in range(1000):
-            lock.acquire()
-            try:
-                test(self.n)
-            finally:
-                lock.release()
-
-if __name__ == &#39;__main__&#39;:
-    t1 = testThread(1)
-    t2 = testThread(2)
-    t1.start()
-    t2.start()
-    t1.join()
-    t2.join()
-
-###########################################
-----------------0
-----------------0
-----------------0
-----------------0
-----------------0
-----------------0</code></pre><p>产生死锁</p>
-<pre><code>def run(self) -&gt; None:
-    for i in range(1000):
-        print(&#39;start lock&#39;)
-        lock.acquire()
-        print(&#39;lock again&#39;)
-        lock.acquire()
-        print(&#39;lock end&#39;)
-        try:
-            test(self.n)
-        finally:
-            lock.release()
-
-###########################################
-start lock
-lock again
-start lock</code></pre><p>线程的调度与优化</p>
-<pre><code>import threading, time
-from multiprocessing.dummy import Pool as ThreadPool
-
-def run(n):
-    time.sleep(1)
-    print(threading.current_thread().name, n)
-
-def test():
-    t1 = time.time()
-    for n in range(10):
-        run(n)
-    print(time.time() - t1)
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs clean"><span class="hljs-keyword">import</span> threading<br><span class="hljs-keyword">import</span> time<br><br>num = <span class="hljs-number">0</span><br>lock = threading.Lock()<br><br>def test(n):<br>    global num<br>    num += n<br>    time.sleep(<span class="hljs-number">2</span>)<br>    num -= n<br>    time.sleep(<span class="hljs-number">1</span>)<br>    print(<span class="hljs-string">'----------------&#123;0&#125;'</span>.format(num))<br><br><span class="hljs-keyword">class</span> testThread(threading.Thread):<br>    def __init__(self, n, *args, **kwargs):<br>        super().__init__(*args, **kwargs)<br>        self.n = n<br><br>    def run(self) -&gt; None:<br>        for i <span class="hljs-keyword">in</span> range(<span class="hljs-number">1000</span>):<br>            lock.acquire()<br>            try:<br>                test(self.n)<br>            finally:<br>                lock.release()<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:<br>    t1 = testThread(<span class="hljs-number">1</span>)<br>    t2 = testThread(<span class="hljs-number">2</span>)<br>    t1.start()<br>    t2.start()<br>    t1.join()<br>    t2.join()<br>    <br>###########################################<br>---------------<span class="hljs-number">-0</span><br>---------------<span class="hljs-number">-0</span><br>---------------<span class="hljs-number">-0</span><br>---------------<span class="hljs-number">-0</span><br>---------------<span class="hljs-number">-0</span><br>---------------<span class="hljs-number">-0</span><br></code></pre></td></tr></table></figure>
 
 
-if __name__ == &#39;__main__&#39;:
-    test()
 
-########################################
-MainThread 0
-MainThread 1
-MainThread 2
-MainThread 3
-MainThread 4
-MainThread 5
-MainThread 6
-MainThread 7
-MainThread 8
-MainThread 9
-10.0053870677948</code></pre><p>快了很多</p>
-<pre><code>import threading, time
-from multiprocessing.dummy import Pool as ThreadPool
-
-def run(n):
-    time.sleep(1)
-    print(threading.current_thread().name, n)
-
-def test_use_thread():
-    t1 = time.time()
-    ls = []
-    for i in range(10):
-        t = threading.Thread(target=run, args=(i,))
-        ls.append(t)
-        t.start()
-
-    for l in ls:
-        l.join()
-    print(time.time() - t1)
-
-def test():
-    t1 = time.time()
-    for n in range(10):
-        run(n)
-    print(time.time() - t1)
+<p>产生死锁</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs clean">def run(self) -&gt; None:<br>    for i <span class="hljs-keyword">in</span> range(<span class="hljs-number">1000</span>):<br>        print(<span class="hljs-string">'start lock'</span>)<br>        lock.acquire()<br>        print(<span class="hljs-string">'lock again'</span>)<br>        lock.acquire()<br>        print(<span class="hljs-string">'lock end'</span>)<br>        try:<br>            test(self.n)<br>        finally:<br>            lock.release()<br>            <br>###########################################<br>start lock<br>lock again<br>start lock<br></code></pre></td></tr></table></figure>
 
 
-if __name__ == &#39;__main__&#39;:
-    test_use_thread()
 
-###############################################
-Thread-2 1
-Thread-3 2
-Thread-1 0
-Thread-5 4
-Thread-4 3
-Thread-6 5
-Thread-10 9
-Thread-8 7
-Thread-9 8
-Thread-7 6
-1.0038871765136719</code></pre><pre><code>def test_use_pool():
-    t1 = time.time()
-    n_list = range(100)
-    pool = Pool(10)
-    pool.map(run, n_list)
-    pool.close()
-    pool.join()
-    print(time.time() - t1)</code></pre><p>达到了线程的复用</p>
+
+
+<p>线程的调度与优化</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs clean"><span class="hljs-keyword">import</span> threading, time<br><span class="hljs-keyword">from</span> multiprocessing.dummy <span class="hljs-keyword">import</span> Pool <span class="hljs-keyword">as</span> ThreadPool<br><br>def run(n):<br>    time.sleep(<span class="hljs-number">1</span>)<br>    print(threading.current_thread().name, n)<br><br>def test():<br>    t1 = time.time()<br>    for n <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>):<br>        run(n)<br>    print(time.time() - t1)<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:<br>    test()<br>    <br>########################################<br>MainThread <span class="hljs-number">0</span><br>MainThread <span class="hljs-number">1</span><br>MainThread <span class="hljs-number">2</span><br>MainThread <span class="hljs-number">3</span><br>MainThread <span class="hljs-number">4</span><br>MainThread <span class="hljs-number">5</span><br>MainThread <span class="hljs-number">6</span><br>MainThread <span class="hljs-number">7</span><br>MainThread <span class="hljs-number">8</span><br>MainThread <span class="hljs-number">9</span><br><span class="hljs-number">10.0053870677948</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>快了很多</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs clean"><span class="hljs-keyword">import</span> threading, time<br><span class="hljs-keyword">from</span> multiprocessing.dummy <span class="hljs-keyword">import</span> Pool <span class="hljs-keyword">as</span> ThreadPool<br><br>def run(n):<br>    time.sleep(<span class="hljs-number">1</span>)<br>    print(threading.current_thread().name, n)<br><br>def test_use_thread():<br>    t1 = time.time()<br>    ls = []<br>    for i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>):<br>        t = threading.Thread(target=run, args=(i,))<br>        ls.append(t)<br>        t.start()<br><br>    for l <span class="hljs-keyword">in</span> ls:<br>        l.join()<br>    print(time.time() - t1)<br><br>def test():<br>    t1 = time.time()<br>    for n <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>):<br>        run(n)<br>    print(time.time() - t1)<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:<br>    test_use_thread()<br>    <br>###############################################<br>Thread<span class="hljs-number">-2</span> <span class="hljs-number">1</span><br>Thread<span class="hljs-number">-3</span> <span class="hljs-number">2</span><br>Thread<span class="hljs-number">-1</span> <span class="hljs-number">0</span><br>Thread<span class="hljs-number">-5</span> <span class="hljs-number">4</span><br>Thread<span class="hljs-number">-4</span> <span class="hljs-number">3</span><br>Thread<span class="hljs-number">-6</span> <span class="hljs-number">5</span><br>Thread<span class="hljs-number">-10</span> <span class="hljs-number">9</span><br>Thread<span class="hljs-number">-8</span> <span class="hljs-number">7</span><br>Thread<span class="hljs-number">-9</span> <span class="hljs-number">8</span><br>Thread<span class="hljs-number">-7</span> <span class="hljs-number">6</span><br><span class="hljs-number">1.0038871765136719</span><br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs routeros">def test_use_pool():<br>    t1 = time.time()<br>    n_list = range(100)<br>   <span class="hljs-built_in"> pool </span>= Pool(10)<br>    pool.map(run, n_list)<br>    pool.close()<br>    pool.join()<br>    <span class="hljs-builtin-name">print</span>(time.time() - t1)<br></code></pre></td></tr></table></figure>
+
+
+
+<p>达到了线程的复用</p>
 <h3 id="Python进程"><a href="#Python进程" class="headerlink" title="Python进程"></a>Python进程</h3><p>进程的实现</p>
-<pre><code>import time
-from multiprocessing import Process
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> time<br><span class="hljs-keyword">from</span> multiprocessing <span class="hljs-keyword">import</span> Process<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">run</span><span class="hljs-params">(name)</span>:</span><br>    <span class="hljs-string">"""<br>    name: 进程名称<br>    """</span><br>    print(<span class="hljs-string">"进程名称：&#123;&#125;"</span>.format(name))<br>    time.sleep(<span class="hljs-number">5</span>)<br>    print(<span class="hljs-string">"进程完成"</span>)<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:<br>    p = Process(target=run, args=(<span class="hljs-string">'my process'</span>,))<br>    p.start()<br>    p.join()<br>    <br><span class="hljs-comment">##############################################</span><br>进程名称：my process<br>进程完成<br></code></pre></td></tr></table></figure>
 
-def run(name):
-    &quot;&quot;&quot;
-    name: 进程名称
-    &quot;&quot;&quot;
-    print(&quot;进程名称：{}&quot;.format(name))
-    time.sleep(5)
-    print(&quot;进程完成&quot;)
-
-if __name__ == &#39;__main__&#39;:
-    p = Process(target=run, args=(&#39;my process&#39;,))
-    p.start()
-    p.join()
-
-##############################################
-进程名称：my process
-进程完成</code></pre><p>使用过os模块下的<code>os.getpid()</code>可以得到当前进程的ID</p>
+<p>使用过os模块下的<code>os.getpid()</code>可以得到当前进程的ID</p>
 <p>进程间的通信</p>
 <p>多进程中的锁：</p>
  
@@ -424,6 +237,8 @@ if __name__ == &#39;__main__&#39;:
 </div>
 
 <div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+
     </footer>
   </div>
 

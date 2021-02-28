@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-Hans">
+
+
+<head>
+  <meta charset="utf-8" />
+   
+  <meta name="keywords" content="生活" />
+   
+  <meta name="description" content="子夜写字的地方" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    Java：反射 |  浔庐子夜
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-编程相关/Java/Java基础/10、Java：反射"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  Java：反射
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/page/Java-reflection.html" class="article-date">
+  <time datetime="2021-01-27T09:26:30.000Z" itemprop="datePublished">2021-01-27</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Java/">Java</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Java/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">1k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">4 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="反射的基本概念"><a href="#反射的基本概念" class="headerlink" title="反射的基本概念"></a>反射的基本概念</h1><h2 id="反射（reflective）"><a href="#反射（reflective）" class="headerlink" title="反射（reflective）"></a>反射（reflective）</h2><p>程序可以访问、检测和修改它本身状态和行为的能力（自描述和自控制），称为反射，在<code>java.lang.reflect</code>包中。</p>
+<p>即在运行时加载、探知和使用编译期间完全未知的类，能够<strong>增加动态语言特性，弥补强动态语言的不足</strong></p>
+<p>注：直观来说就是可以将类名以字符串形式传入，从而达到动态修改程序的目的</p>
+<h2 id="反射机制的作用"><a href="#反射机制的作用" class="headerlink" title="反射机制的作用"></a>反射机制的作用</h2><ul>
+<li>在运行时分析类的能力</li>
+<li>在运行时查看和操作对象（比如编写一个适用于所有类的toString方法）</li>
+<li>实现泛型数组操作代码</li>
+<li>利用Method对象（类似于C++中的函数指针）</li>
+</ul>
+<h2 id="创建对象的方法"><a href="#创建对象的方法" class="headerlink" title="创建对象的方法"></a>创建对象的方法</h2><h3 id="方法1：静态编译"><a href="#方法1：静态编译" class="headerlink" title="方法1：静态编译"></a>方法1：静态编译</h3><p>即传统的使用<code>new</code>关键字创建对象</p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dns"><span class="hljs-keyword">A</span> a = new <span class="hljs-keyword">A</span>()<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="方法2：克隆"><a href="#方法2：克隆" class="headerlink" title="方法2：克隆"></a>方法2：克隆</h3><p>即实现<code>Cloneable</code>接口，直接拷贝内存中的相关信息，不再调用构造函数</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs haxe"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span> <span class="hljs-keyword"><span class="hljs-keyword">implements</span> <span class="hljs-type">Cloneable</span></span> </span>&#123;<br><br>&#125;<br><br>A a1 = <span class="hljs-keyword">new</span> <span class="hljs-type">A</span>();<br>A a2 = (A) a1.clone();<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="方法3：反射"><a href="#方法3：反射" class="headerlink" title="方法3：反射"></a>方法3：反射</h3><p>使用反射直接构建类对象</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">A a = (A) <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Class</span>.</span></span>for<span class="hljs-constructor">Name(<span class="hljs-string">"A"</span>)</span>.<span class="hljs-keyword">new</span><span class="hljs-constructor">Instance()</span>;<br></code></pre></td></tr></table></figure>
+
+<p>使用构造器构造类对象</p>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs delphi"><span class="hljs-function"><span class="hljs-keyword">Constructor</span>&lt;<span class="hljs-title">A</span>&gt; <span class="hljs-title">constructor</span> = <span class="hljs-title">A</span>.<span class="hljs-title">class</span>.<span class="hljs-title">getConstructor</span><span class="hljs-params">()</span>;</span><br>A a = <span class="hljs-function"><span class="hljs-keyword">constructor</span>.<span class="hljs-title">newInstance</span><span class="hljs-params">()</span>;</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="反射的关键类与方法"><a href="#反射的关键类与方法" class="headerlink" title="反射的关键类与方法"></a>反射的关键类与方法</h1><h2 id="Class类"><a href="#Class类" class="headerlink" title="Class类"></a>Class类</h2><p>在Java程序运行时，JVM为每个对象维护一个<em>运行时类型标识</em>，该信息追踪每个对象所属的类，而JVM则利用该信息选择要执行的正确的方法。</p>
+<blockquote>
+<p>可以使用<code>Class</code>类访问这些信息，而Object类中的<code>getClass()</code>方法则会返回一个Class类型的实例</p>
+</blockquote>
+<h2 id="Class类的获取"><a href="#Class类的获取" class="headerlink" title="Class类的获取"></a>Class类的获取</h2><p><em>Class类实际上是一个泛型类，<code>A.class</code>的类型是<code>Class&lt;A&gt;</code></em>，主要有以下三种获取Class类对象的方法</p>
+<h3 id="使用getClass-方法"><a href="#使用getClass-方法" class="headerlink" title="使用getClass()方法"></a>使用<code>getClass()</code>方法</h3><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">String s = <span class="hljs-string">"123"</span>;<br>Class c = s.get<span class="hljs-constructor">Class()</span>;<br><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(c.get<span class="hljs-constructor">Name()</span>); # java.lang.String<br></code></pre></td></tr></table></figure>
+
+<h3 id="使用forName-方法"><a href="#使用forName-方法" class="headerlink" title="使用forName()方法"></a>使用<code>forName()</code>方法</h3><p>若类名保存在一个字符串中，即可以使用该方法。使用该方法时必须提供一个异常处理器（用于应对输入字符串不是一个类的情况）</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">Class c = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Class</span>.</span></span>for<span class="hljs-constructor">Name(<span class="hljs-string">"java.lang.String"</span>)</span>;<br><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(c.get<span class="hljs-constructor">Name()</span>); # java.lang.String<br></code></pre></td></tr></table></figure>
+
+<h3 id="使用-class"><a href="#使用-class" class="headerlink" title="使用.class"></a>使用<code>.class</code></h3><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">Class c = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">String</span>.</span></span><span class="hljs-keyword">class</span>;<br><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(c.get<span class="hljs-constructor">Name()</span>); # java.lang.String<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="Class类中常用方法"><a href="#Class类中常用方法" class="headerlink" title="Class类中常用方法"></a>Class类中常用方法</h2><figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs fortran">// 获取<span class="hljs-keyword">Target</span>类的<span class="hljs-keyword">class</span>对象<br><span class="hljs-keyword">Class</span> c = <span class="hljs-keyword">Target</span>.<span class="hljs-keyword">class</span>;<br></code></pre></td></tr></table></figure>
+
+<h3 id="成员变量（Field）"><a href="#成员变量（Field）" class="headerlink" title="成员变量（Field）"></a>成员变量（Field）</h3><blockquote>
+<p>在运行时获取到类的所有成员变量，还可以给成员变量赋值和获取成员变量的值。</p>
+</blockquote>
+<h4 id="获取成员变量"><a href="#获取成员变量" class="headerlink" title="获取成员变量"></a>获取成员变量</h4><figure class="highlight protobuf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs protobuf"><span class="hljs-comment">// 获取所有public修饰的成员变量</span><br>Field[] fields1 = c.getFields();<br><br><span class="hljs-comment">// 获取所有声明的成员变量</span><br>Field[] fields2 = c.getDeclaredFields();	<br><br><span class="hljs-comment">// 获取变量名为value1的变量</span><br>Field field3 = c.getField(<span class="hljs-string">"value1"</span>);<br>Field field4 = c.getDeclaredField(<span class="hljs-string">"value1"</span>);<br></code></pre></td></tr></table></figure>
+
+<h4 id="获取变量类型"><a href="#获取变量类型" class="headerlink" title="获取变量类型"></a>获取变量类型</h4><figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vbnet"><span class="hljs-built_in">Object</span> fieldType = field3.<span class="hljs-built_in">getType</span>();<br></code></pre></td></tr></table></figure>
+
+<h4 id="成员变量赋值与取值"><a href="#成员变量赋值与取值" class="headerlink" title="成员变量赋值与取值"></a>成员变量赋值与取值</h4><blockquote>
+<p>使用<code>Field</code>中的<code>set</code>与<code>get</code>方法</p>
+</blockquote>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cs">Target t = <span class="hljs-keyword">new</span> Target();	<span class="hljs-comment">// 获取target对象</span><br>Object <span class="hljs-keyword">value</span> = filed3.<span class="hljs-keyword">get</span>(t);	<span class="hljs-comment">// 传入对象，获取成员变量值</span><br>field3.setAccessible(<span class="hljs-literal">true</span>);	<span class="hljs-comment">// 为了对类中的参数进行修改取消安全检查（针对私有变量）</span><br>field3.<span class="hljs-keyword">set</span>(t, <span class="hljs-number">1</span>)	<span class="hljs-comment">// 将该值设置成1</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="成员方法（Method）"><a href="#成员方法（Method）" class="headerlink" title="成员方法（Method）"></a>成员方法（Method）</h3><h4 id="获取成员方法"><a href="#获取成员方法" class="headerlink" title="获取成员方法"></a>获取成员方法</h4><blockquote>
+<p>获取方法数组无法获取到继承父类的方法</p>
+</blockquote>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs oxygene"><span class="hljs-comment">// 获取所有public修饰的方法</span><br><span class="hljs-function"><span class="hljs-keyword">Method</span>[] <span class="hljs-title">methods</span> = <span class="hljs-title">c</span>.<span class="hljs-title">getMethods</span><span class="hljs-params">()</span>;</span>	<br><br><span class="hljs-comment">// 获取所有声明的成员方法</span><br><span class="hljs-function"><span class="hljs-keyword">Method</span>[] <span class="hljs-title">methods1</span> = <span class="hljs-title">c</span>.<span class="hljs-title">getDeclaredMethods</span><span class="hljs-params">()</span>;</span><br><br><span class="hljs-comment">// 获取无参的method方法</span><br><span class="hljs-function"><span class="hljs-keyword">Method</span> <span class="hljs-title">method</span> = <span class="hljs-title">birdClass</span>.<span class="hljs-title">getMethod</span><span class="hljs-params">("<span class="hljs-keyword">method</span>", null)</span>;</span><br><br><span class="hljs-comment">// 获取参数为指定类型的method方法</span><br><span class="hljs-function"><span class="hljs-keyword">Method</span> <span class="hljs-title">method1</span> = <span class="hljs-title">birdClass</span>.<span class="hljs-title">getDeclaredMethod</span><span class="hljs-params">("<span class="hljs-keyword">method</span>", <span class="hljs-keyword">new</span> <span class="hljs-keyword">Class</span>[]&#123;int.<span class="hljs-keyword">class</span>&#125;)</span>;</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="获取方法参数与与返回类型"><a href="#获取方法参数与与返回类型" class="headerlink" title="获取方法参数与与返回类型"></a>获取方法参数与与返回类型</h4><figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs oxygene"><span class="hljs-comment">// 获取参数列表</span><br><span class="hljs-keyword">Class</span>[] parameterTypes = <span class="hljs-function"><span class="hljs-keyword">method</span>.<span class="hljs-title">getParameterTypes</span><span class="hljs-params">()</span>;</span><br><br><span class="hljs-comment">// 获取返回类型</span><br><span class="hljs-keyword">Class</span> returnType = <span class="hljs-function"><span class="hljs-keyword">method</span>.<span class="hljs-title">getReturnType</span><span class="hljs-params">()</span>;</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="invoke-方法"><a href="#invoke-方法" class="headerlink" title="invoke()方法"></a>invoke()方法</h4><blockquote>
+<p>只要通过反射获取到方法名之后，就可以使用<code>invoke()</code>调用对应的方法</p>
+<p>参数1为调用方法的对象，参数2而调用方法的参数</p>
+<p>当调用static方法时，参数1为null</p>
+</blockquote>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs oxygene">Target t = <span class="hljs-keyword">new</span> Target();	<span class="hljs-comment">// 获取target对象</span><br><span class="hljs-function"><span class="hljs-keyword">method</span>.<span class="hljs-title">invoke</span><span class="hljs-params">(t, “123”)</span>;</span>	<span class="hljs-comment">// 调用method方法，传入参数“123”</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="构造方法（Constructor）"><a href="#构造方法（Constructor）" class="headerlink" title="构造方法（Constructor）"></a>构造方法（Constructor）</h3><figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs delphi"><span class="hljs-function"><span class="hljs-keyword">Constructor</span>[] <span class="hljs-title">constructors</span> = <span class="hljs-title">c</span>.<span class="hljs-title">getConstructors</span><span class="hljs-params">()</span>;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>其他获取父接口等等暂略</p>
+<h2 id="应用举例"><a href="#应用举例" class="headerlink" title="应用举例"></a>应用举例</h2><h1 id="反射的应用举例"><a href="#反射的应用举例" class="headerlink" title="反射的应用举例"></a>反射的应用举例</h1><p>暂略</p>
+<blockquote>
+<p>参考：</p>
+<p>《Java核心技术卷1》</p>
+<p>MOOC华东师范大学Java核心技术课程</p>
+<p><a href="https://zhuanlan.zhihu.com/p/80519709" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/80519709</a></p>
+</blockquote>
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          Donate
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://ziyedy.top/page/Java-reflection.html" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/page/servlet-basic-summary.html" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            Servlet基础总结
+          
+        </div>
+      </a>
+    
+    
+      <a href="/page/java-datatype-operator.html" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">Java：数据类型与运算符</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "pgmMLBlWl23i6NPFUgTT7XqR-gzGzoHsz",
+    app_key: "yx9IIauIiK8JBBHDxxqPpEFQ",
+    path: window.location.pathname,
+    avatar: "retro",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2019-2021
+        <i class="ri-heart-fill heart_icon"></i> 子夜
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s4.cnzz.com/z_stat.php?id=1279587217&amp;web_id=1279587217'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="浔庐子夜"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gg">足迹</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+</body>
+
+</html>

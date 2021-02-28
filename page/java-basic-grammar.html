@@ -13,7 +13,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    Java基础语法 |  浔庐子夜
+    Java：基本概念与语言特点 |  浔庐子夜
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Java/Java基础/1、Java基础语法"
+  id="post-编程相关/Java/Java基础/1、Java：基本概念与语言特点"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -59,7 +59,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Java基础语法
+  Java：基本概念与语言特点
 </h1>
  
 
@@ -70,7 +70,7 @@
   <time datetime="2020-06-27T09:25:12.000Z" itemprop="datePublished">2020-06-27</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Java/">Java</a> / <a class="article-category-link" href="/categories/Java/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Java/">Java</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Java/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">3.1k</span>
+            <span class="post-count">1.4k</span>
         </span>
     </span>
 
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">12 min</span>
+            <span class="post-count">5 min</span>
         </span>
     </span>
 </div>
@@ -102,254 +102,99 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <p>参考：<a href="https://github.com/Snailclimb/JavaGuide" target="_blank" rel="noopener">https://github.com/Snailclimb/JavaGuide</a></p>
-<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>1、<strong>JVM</strong>：Java虚拟机，用于运行Java字节码，其针对不同的操作系统有着特定的实现，使得相同的字节码运行会给出相同的结果。</p>
+  <h2 id="常见名词解释"><a href="#常见名词解释" class="headerlink" title="常见名词解释"></a>常见名词解释</h2><h3 id="JVM（Java-Virtual-Machine）"><a href="#JVM（Java-Virtual-Machine）" class="headerlink" title="JVM（Java Virtual Machine）"></a>JVM（Java Virtual Machine）</h3><p>Java虚拟机，用于运行Java字节码，其针对不同的操作系统有着特定的实现，使得相同的字节码运行会给出相同的结果。</p>
 <p>在Java中，JVM能够理解的代码就叫做<strong>字节码</strong>（.class文件）。其不面向任何特定的处理器，只面向虚拟机。</p>
-<p>2、<strong>JDK（Java Development Kit）</strong>，即Java Development Kit，是功能齐全的Java软件开发包，拥有JRE所拥有的一切，有编译器（javac）和一些其他工具，能够创建和编译程序。</p>
-<p>3、<strong>JRE（Java Runtime Environment）</strong>，即Java运行时环境。其为运行已编译Java程序所需要的所有内容的集合，包括Java虚拟机、Java类库、Java命令和其他一些基础的构建。但是，其不能用于创建新程序。</p>
-<p><strong>编译与解释并存</strong>：Java程序要经过先编译、后解释两个步骤。（先经过编译生成字节码文件*.class，再经过解释进行执行）</p>
-<h3 id="命令行编译"><a href="#命令行编译" class="headerlink" title="命令行编译"></a>命令行编译</h3><pre><code>javac Test.java
-java Test</code></pre><p><code>javac</code>程序是一个Java编译器，将<code>*.java</code>编译成<code>*.class</code>（需要<code>.java</code>后缀）</p>
+<h3 id="JDK（Java-Development-Kit）"><a href="#JDK（Java-Development-Kit）" class="headerlink" title="JDK（Java Development Kit）"></a>JDK（Java Development Kit）</h3><p>JDK是功能齐全的Java软件开发包，拥有JRE所拥有的一切，有编译器（javac）和一些其他工具，能够创建和编译程序。</p>
+<h3 id="JRE（Java-Runtime-Environment）"><a href="#JRE（Java-Runtime-Environment）" class="headerlink" title="JRE（Java Runtime Environment）"></a>JRE（Java Runtime Environment）</h3><p>即Java运行时环境。其为运行已编译Java程序所需要的所有内容的集合，包括Java虚拟机、Java类库、Java命令和其他一些基础的构建。但是，其不能用于创建新程序。</p>
+<h3 id="Java-SE（Standard-Edition）"><a href="#Java-SE（Standard-Edition）" class="headerlink" title="Java SE（Standard Edition）"></a>Java SE（Standard Edition）</h3><p>即Java标准版，包括Java语言规范等等</p>
+<h3 id="Java-EE（J2EE）"><a href="#Java-EE（J2EE）" class="headerlink" title="Java EE（J2EE）"></a>Java EE（J2EE）</h3><p>Java平台企业版，可以理解为为企业级应用开发的一些Java Web框架等内容。</p>
+<h2 id="Java语言特点"><a href="#Java语言特点" class="headerlink" title="Java语言特点"></a>Java语言特点</h2><h3 id="基本特性"><a href="#基本特性" class="headerlink" title="基本特性"></a>基本特性</h3><blockquote>
+<p>1、面向对象（具有封装、继承、多态等特性）</p>
+<p>2、平台无关性（JVM的实现使得Java具有平台无关性）</p>
+<p>3、可靠性、安全性</p>
+<p>4、提供了多线程支持</p>
+<p>5、支持网络编程且十分方便</p>
+<p>6、编译与解释并存：Java程序要经过先编译、后解释两个步骤。（<code>.java</code>源文件先经过JDK中的<code>javac</code>命令<strong>编译</strong>生成字节码文件<code>*.class</code>，再经过JVM<strong>解释</strong>进行执行）</p>
+</blockquote>
+<h3 id="与C-的区别"><a href="#与C-的区别" class="headerlink" title="与C++的区别"></a>与C++的区别</h3><blockquote>
+<p>1、Java不提供指针来直接访问内存，程序内存更安全</p>
+<p>2、Java的类是单继承的，而C++支持多继承</p>
+<p>3、Java有自动内存管理垃圾回收机制（GC），不需要手动释放无用内存</p>
+<p>4、Java的字符串与字符数组最后没有一个额外的字符<code>\0</code>来表示结束（Java字符串与数组都可以理解为类，预先知道大小，所以不需要结束字符）</p>
+</blockquote>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><h3 id="命令行编译"><a href="#命令行编译" class="headerlink" title="命令行编译"></a>命令行编译</h3><p>利用<code>javac</code>和<code>java</code>能够实现对<code>.java</code>文件进行编译和运行</p>
+<p><code>javac</code>程序是一个Java编译器，将<code>*.java</code>编译成<code>*.class</code>（需要<code>.java</code>后缀）</p>
 <p><code>java</code>程序启动Java虚拟机（只需要指定类名）</p>
-<h2 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h2><p>Java有8中基本数据类型，数字类型（byte&lt;1&gt;、short&lt;2&gt;、int&lt;4&gt;、long&lt;8&gt;、float&lt;4&gt;、double&lt;8&gt;）；字符类型（char&lt;2&gt;）；布尔型（boolean&lt;依赖于JVM的具体实现&gt;），其中&lt;&gt;内为其所对应的字节数，每个基本数据类型又有对应的默认值。</p>
-<h3 id="装箱与拆箱"><a href="#装箱与拆箱" class="headerlink" title="装箱与拆箱"></a>装箱与拆箱</h3><p>参考：<a href="https://www.cnblogs.com/dolphin0520/p/3780005.html" target="_blank" rel="noopener">https://www.cnblogs.com/dolphin0520/p/3780005.html</a></p>
-<p>Java为每种基本数据类型都提供了对应的包装器类型，将基本数据类型转换成包装类称为<strong>装箱</strong>，反之则称为<strong>拆箱</strong>。</p>
-<p>1、装箱：其中第一种方法不会触发自动装箱的机制，在执行效率和资源占用上，第二种方法通常要优于第一种情况。</p>
-<pre><code>Integer i = new Integer(10);    // 手动装箱
-Integer i = 10;    // 自动装箱</code></pre><p>拆箱（直接进行赋值语句即可）：</p>
-<pre><code>int i2 = i;</code></pre><p><strong>装箱过程是通过调用包装器的valueOf方法实现的，而拆箱过程是通过调用包装器的 xxxValue方法实现的。（xxx代表对应的基本数据类型）。</strong></p>
-<hr>
-<p><strong>注意：</strong></p>
-<p>如下代码的输出不同，原因在于valueOf的实现方法，<em>可以简单总结为若数值在[-128,127]之间，便返回IntegerCache.cache中已存在的对象的引用，否则创建一个新的Integer对象</em></p>
-<pre><code>Integer i1 = 100;
-Integer i2 = 100;
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-keyword">javac </span>Main.<span class="hljs-keyword">java<br></span><span class="hljs-keyword">java </span>Main<br></code></pre></td></tr></table></figure>
 
-Integer i3 = 200;
-Integer i4 = 200;
+<p>如下编译运行一个helloworld程序：</p>
+<p><img src="http://cdn.ziyedy.top/1%E3%80%81Java%EF%BC%9A%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E4%B8%8E%E8%AF%AD%E8%A8%80%E7%89%B9%E7%82%B9/javac.png" alt=""></p>
+<h3 id="反编译"><a href="#反编译" class="headerlink" title="反编译"></a>反编译</h3><p>使用<code>javap</code>能够对<code>.class</code>文件进行反编译，通过该命令能够有效了解JVM的内部原理</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-keyword">javap	</span><span class="hljs-comment"># 对其进行反编译（得到近似的Java源码）</span><br><span class="hljs-keyword">javap </span>-c	<span class="hljs-comment"># 对其进行反汇编</span><br><span class="hljs-keyword">javap </span>-verbose	<span class="hljs-comment"># 最常用，显示附加信息</span><br></code></pre></td></tr></table></figure>
 
-System.out.println(i1==i2);
-System.out.println(i3==i4);
-
-####################################
-true
-false</code></pre><p>同时，Integer、Short、Byte、Character、Long这几个类的valueOf方法的实现是类似的（<strong>这些方法实现了常量池技术</strong>），而Double、Float的valueOf方法的实现是类似的（<strong>这些方法没有使用常量池技术</strong>）。因此，上述代码若换成Double，会输出“false false”，换成Boolean会输出“true true”。</p>
-<p>除此之外，还应该注意的是，如果这些包装类使用了算数运算符，那么“==”比较的将会是数值（即触发了自动拆箱），如下：</p>
-<pre><code>Integer a = 1;
-Integer b = 2;
-Integer c = 3;
-System.out.println(c==(a+b));
-
-#########################################
-true</code></pre><hr>
-<p>对于包装器类型，equals方法并不会进行类型转换，如下：</p>
-<pre><code>Integer a = 1;
-Integer b = 2;
-
-Long c = 3L;
-Long d = 2L;
-
-System.out.println(c==a+b);
-System.out.println(c.equals(a+b));
-System.out.println(c.equals(a+d));
-
-###########################################
-true
-false
-true</code></pre><h2 id="方法（函数）"><a href="#方法（函数）" class="headerlink" title="方法（函数）"></a>方法（函数）</h2><h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><p><strong>1、一个方法不能修改一个基本数据类型的参数</strong></p>
-<p>示例：</p>
-<pre><code>public static void main(String[] args) {
-    int num1 = 10;
-    int num2 = 20;
-
-    swap(num1, num2);
-
-    System.out.println(&quot;num1 = &quot; + num1);
-    System.out.println(&quot;num2 = &quot; + num2);
-}
-
-public static void swap(int a, int b) {
-    int temp = a;
-    a = b;
-    b = temp;
-
-    System.out.println(&quot;a = &quot; + a);
-    System.out.println(&quot;b = &quot; + b);
-}</code></pre><p>结果：</p>
-<pre><code>a = 20
-b = 10
-num1 = 10
-num2 = 20</code></pre><p>说明：</p>
-<p>在 swap 方法中，a、b 的值进行交换，并不会影响到 num1、num2。因为，a、b 中的值，只是从 num1、num2 的复制过来的（<strong>值传递</strong>）。也就是说，a、b 相当于 num1、num2 的副本，副本的内容无论怎么修改，都不会影响到原件本身。</p>
-<p><strong>2、一个方法可以改变一个对象参数的状态</strong></p>
-<p>示例：</p>
-<pre><code>public static void main(String[] args) {
-    int[] arr = { 1, 2, 3, 4, 5 };
-    System.out.println(arr[0]);
-    change(arr);
-    System.out.println(arr[0]);
-}
-
-public static void change(int[] array) {
-    // 将数组的第一个元素变为0
-    array[0] = 0;
-}</code></pre><p>结果：</p>
-<pre><code>1
-0</code></pre><p>说明：</p>
-<p>array 被初始化 arr 的拷贝也就是一个对象的引用，也就是说 array 和 arr 指向的是同一个数组对象。 因此，外部对引用对象的改变会反映到所对应的对象上（类似于C++ 的引用传递）。</p>
-<p><strong>3、一个方法不能让对象参数引用一个新的对象</strong></p>
-<p>示例：</p>
-<pre><code>public class Test {
-
-    public static void main(String[] args) {
-        // TODO Auto-generated method stub
-        Student s1 = new Student(&quot;小张&quot;);
-        Student s2 = new Student(&quot;小李&quot;);
-        Test.swap(s1, s2);
-        System.out.println(&quot;s1:&quot; + s1.getName());
-        System.out.println(&quot;s2:&quot; + s2.getName());
-    }
-
-    public static void swap(Student x, Student y) {
-        Student temp = x;
-        x = y;
-        y = temp;
-        System.out.println(&quot;x:&quot; + x.getName());
-        System.out.println(&quot;y:&quot; + y.getName());
-    }
-}</code></pre><p>结果：</p>
-<pre><code>x:小李
-y:小张
-s1:小张
-s2:小李</code></pre><p>说明：</p>
-<p>方法并没有改变存储在变量 s1 和 s2 中的对象引用。swap 方法的参数 x 和 y 被初始化为两个对象引用的拷贝，这个方法交换的是这两个拷贝</p>
-<h4 id="深拷贝、浅拷贝"><a href="#深拷贝、浅拷贝" class="headerlink" title="深拷贝、浅拷贝"></a>深拷贝、浅拷贝</h4><p>1、<strong>浅拷贝</strong>：对基本数据类型进行值传递，对引用数据类型进行引用传递般的拷贝，此为浅拷贝。</p>
-<p>2、<strong>深拷贝</strong>：对基本数据类型进行值传递，对引用数据类型，创建一个新的对象，并复制其内容，此为深拷贝。</p>
-<p><img src="1%E3%80%81Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/java-deep-and-shallow-copy.jpg" alt=""></p>
-<h3 id="方法重载（Overload）"><a href="#方法重载（Overload）" class="headerlink" title="方法重载（Overload）"></a>方法重载（Overload）</h3><p>同样的方法根据输入数据的不同，做出不同处理（同一个类中多个同名方法根据不同的传参来执行不同的逻辑处理）。满足如下要求：</p>
-<p>a、同一个类中</p>
-<p>b、方法名相同，参数列表不同，方法返回值相同</p>
-<p>c、访问修饰符。</p>
-<h3 id="方法重写（Override）"><a href="#方法重写（Override）" class="headerlink" title="方法重写（Override）"></a>方法重写（Override）</h3><p>重写发生在<strong>运行期</strong>，是子类对父类的允许访问的方法的实现过程进行重新编写（重写就是<strong>子类对父类方法的重新改造</strong>，外部样子不能改变，内部逻辑可以改变）。满足以下条件：</p>
-<p>1、发生有继承关系的子类中，且父类方法的<strong>访问修饰符为private/final/static则表示该方法不能重写</strong>，但是使用static修饰的方法能够被再次声明。同时构造方法不能被重写。</p>
-<p>2、子类方法的<strong>访问权限必须大于等于</strong>父类方法；</p>
-<p>3、子类方法的返回类型必须是父类方法返回类型或为其子类型。</p>
-<p>4、子类方法抛出的异常类型必须是父类抛出异常类型或为其子类型。</p>
-<pre><code>class SuperClass {
-    protected List&lt;Integer&gt; func() throws Throwable {
-        return new ArrayList&lt;&gt;();
-    }
-}
-
-class SubClass extends SuperClass {
-    @Override
-    public ArrayList&lt;Integer&gt; func() throws Exception {
-        return new ArrayList&lt;&gt;();
-    }
-}</code></pre><p>如上代码段，子类的访问权限public&gt;父类访问权限protected；子类返回值是父类接口的一个类实现（父类的子类型）；子类抛出的异常为父类抛出异常的子类。</p>
-<p><em>注：使用 @Override 注解，可以让编译器帮忙检查是否满足上面的限制条件</em></p>
-<h2 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h2><h3 id="1、final"><a href="#1、final" class="headerlink" title="1、final"></a>1、final</h3><p><strong>a. 数据</strong></p>
-<p>声明数据为常量，可以是编译时常量，也可以是在运行时被初始化后不能被改变的常量。</p>
+<p>如下反编译之前的helloworld程序</p>
+<p><img src="http://cdn.ziyedy.top/1%E3%80%81Java%EF%BC%9A%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E4%B8%8E%E8%AF%AD%E8%A8%80%E7%89%B9%E7%82%B9/javap.png" alt=""></p>
+<p>而加上<code>-verbose</code>则可以显示详细信息，辅助代码分析</p>
+<p><img src="http://cdn.ziyedy.top/1%E3%80%81Java%EF%BC%9A%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E4%B8%8E%E8%AF%AD%E8%A8%80%E7%89%B9%E7%82%B9/javap-v.png" alt=""></p>
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><p>Java编译器在编译代码之前会把代码中的所有注释抹掉，字节码中不保留注释</p>
+<ol>
+<li><p>单行注释：<code>//</code></p>
+</li>
+<li><p>多行注释：<code>/* */</code></p>
+</li>
+<li><p>文档注释：<code>/** */</code></p>
+</li>
+</ol>
+<h2 id="常用关键字"><a href="#常用关键字" class="headerlink" title="常用关键字"></a>常用关键字</h2><h3 id="final——（最终，不可改变）"><a href="#final——（最终，不可改变）" class="headerlink" title="final——（最终，不可改变）"></a>final——（最终，不可改变）</h3><h4 id="修饰数据"><a href="#修饰数据" class="headerlink" title="修饰数据"></a>修饰数据</h4><blockquote>
+<p>声明数据为常量（不能再次赋值），可以是编译时常量，也可以是在运行时被初始化后不能被改变的常量。</p>
+</blockquote>
 <ul>
 <li>对于基本类型，final 使数值不变；</li>
 <li>对于引用类型，final 使引用不变，也就不能引用其它对象，但是被引用的对象本身是可以修改的。</li>
 </ul>
-<p><strong>b. 方法</strong></p>
+<h4 id="修饰方法"><a href="#修饰方法" class="headerlink" title="修饰方法"></a>修饰方法</h4><blockquote>
 <p>声明方法不能被子类重写。</p>
+</blockquote>
 <p>其中，<strong>private方法隐式的被指定为final</strong>。如果在子类中定义的方法和父类中的一个private方法相同，则视为子类中定义了一个新方法。</p>
-<p><strong>c. 类</strong></p>
+<h4 id="修饰类"><a href="#修饰类" class="headerlink" title="修饰类"></a>修饰类</h4><blockquote>
 <p>声明类不能被继承</p>
-<h3 id="4、static"><a href="#4、static" class="headerlink" title="4、static"></a>4、static</h3><p><strong>a. 静态变量</strong></p>
-<p>又称为类变量，类所有的实例都共享静态变量，可以直接通过类名来访问它。静态变量在内存中只存在一份。</p>
-<pre><code>public class A() {
-    private static int x;    // 静态变量
-}</code></pre><p><strong>b. 静态方法</strong>（main方法就是）</p>
+</blockquote>
+<h3 id="static——（静态）"><a href="#static——（静态）" class="headerlink" title="static——（静态）"></a>static——（静态）</h3><h4 id="静态变量"><a href="#静态变量" class="headerlink" title="静态变量"></a>静态变量</h4><blockquote>
+<p>又称为类变量，类所有的实例都共享静态变量，可以直接通过类名来访问它（<em>只依赖于类存在，不依赖于对象实例存在</em>）。</p>
+<p>静态变量在内存中<strong>只存在一份</strong>，所有的对象实例共享。</p>
+</blockquote>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-symbol">A</span>() &#123;<br>	<span class="hljs-keyword">private</span> static <span class="hljs-built_in">int</span> x;	<span class="hljs-comment">// 静态变量</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h4><blockquote>
 <p>静态方法在类加载的时候就存在了，它<strong>不依赖于任何实例</strong>。所以静态方法<strong>必须有实现</strong>，也就是说它不能是抽象方法。</p>
-<p>同时，静态方法只能访问所属类的静态字段和静态方法。</p>
+<p>同时，静态方法<em>只能访问所属类的静态字段和静态方法</em>。</p>
+<p>main方法就是静态方法</p>
+</blockquote>
 <p><strong>方法中不能有this和super关键字</strong>（这两个关键字与具体对象关联，而静态方法是不依赖于实例的）</p>
-<p><strong>c.静态语句块</strong></p>
-<p>静态语句块在<strong>类初始化</strong>时运行一次（注意不是实例化运行）</p>
-<pre><code>public class test {
-    static {
-        System.out.println(&quot;gg&quot;);
-    }
+<h4 id="静态语句块"><a href="#静态语句块" class="headerlink" title="静态语句块"></a>静态语句块</h4><blockquote>
+<p>只在类第一次被加载时调用（程序运行期间，这段代码只运行一次）</p>
+<p>执行顺序：static块 &gt; 普通匿名块 &gt; 构造函数</p>
+</blockquote>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs ruby">public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">test</span> &#123;</span><br>    static &#123;<br>        System.out.println(<span class="hljs-string">"gg"</span>);<br>    &#125;<br><br>    public static void main(String[] args) &#123;<br>    &#125;<br>&#125;<br>/<span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span> <br>gg<br></code></pre></td></tr></table></figure>
 
-    public static void main(String[] args) {
-    }
-}
-///////////////////////////////////////////
-gg</code></pre><p><strong>4. 静态内部类</strong></p>
-<p>非静态内部类依赖于外部类的实例，也就是说需要先创建外部类实例，才能用这个实例去创建非静态内部类。而静态内部类不需要。静态内部类不能访问外部类的非静态的变量和方法。</p>
-<p>构造函数需要一个有参构造和一个无参构造</p>
-<p>getter/setter</p>
-<p>包：一个JAVA源文件中只能有一个package语句</p>
-<p>命名方法：域名倒序+模块+功能</p>
-<p>共有：public：任意位置</p>
-<p>私有：private：本类中访问</p>
-<p>保护：protected：当前类、同包子类/非子类、跨包子类（跨包子类不允许）</p>
-<p>默认：当前类、同包子类（跨包子类不允许调用）</p>
-<p>super：父类对象的引用</p>
-<p>super.print() 访问父类成员方法</p>
-<p>super.name 访问父类属性</p>
-<p>super() 访问父类构造方法，必须位于子类构造方法的第一行</p>
-<p>子类的构造过程必须调用其父类的构造方法，若子类构造方法中没有显式标注，则系统默认调用父类无参构造方法（若子类构造方法无显式标值且父类中没有无参构造方法，则编译出错）</p>
-<p>多态：不同类的对象对同一消息做出不同响应</p>
-<p>编译时多态：（方法重载）</p>
-<p>运行时多态：程序运行时动态决定调用哪个方法</p>
-<p>多态必要条件</p>
-<p>1、满足继承关系</p>
-<p>2、父类引用指向子类对象</p>
-<p>向上转型，父类引用指向子类实例。可以调用子类重现父类的方法以及父类派生的方法，无法调用子类独有的方法</p>
-<p>Animal two = new Cat()</p>
-<p>向下转型，子类引用指向父类实例，此处要求必须进行强转</p>
-<p>instanceof 运算符，返回 true false</p>
-<pre><code>if(obj instanceof Cat) {
-    Cat temp = (Cat)obj
-}</code></pre><pre><code>if() {
-    return new Dog();
-} else {
-    return new Cat();
-}</code></pre><p>abstract关键字</p>
-<p>抽象类，无法进行实例化的类（可以通过向上转型指向子类实例 ）</p>
-<p>抽象方法：子类必须进行实现（或者子类也设置为抽象类），在父类定义时不能有方法体</p>
-<p>包含抽象方法的类是抽象类</p>
-<p>抽象类中可以没有抽象方法</p>
-<p>static/final/private不能与abstract共存</p>
-<p>接口：命名通常以“I”打头</p>
-<p>接口定义了某一批类所需要遵守的规范</p>
-<p>接口不关心这些类的内部数据，也不关心类中方法的实现细节，只规定这些类中必须提供某些方法</p>
-<p>接口访问修饰符：public 默认</p>
-<p>接口中抽象方法可以不写abstract关键字</p>
-<p>作为接口的实现类必须实现接口中定义的所有方法，否则需要将该类设置为抽象类</p>
-<p>接口中可以包含常量，默认public static final</p>
-<pre><code>public interface ITest {
-    public void func();
-}</code></pre><pre><code>public class A implements ITest {
-
-    @java.lang.Override
-    public void func() {
-
-    }
-}</code></pre><pre><code>INet net = new A();
-</code></pre><p>default 关键字</p>
-<pre><code>public interface ITest {
-    // 默认方法
-    default void func1() {
-
-    }
-    // 静态方法
-    static void func2() {
-
-    }
-}
-
-// 调用接口中的默认方法
-ITest.super.func1();</code></pre><p>接口的继承，可以一对多</p>
-<p>在Java中，可以将一个类定义在另一个类中或者一个方法中，这样的类称为内部类</p>
-<p>1、成员内部类</p>
-<p>获取内部类</p>
-<pre><code>A.a1 me = new A().new a1();</code></pre><p>2、静态内部类</p>
-<p>3、方法内部类</p>
-<p>4、匿名内部类</p>
+<h4 id="静态内部类（使用的很少）"><a href="#静态内部类（使用的很少）" class="headerlink" title="静态内部类（使用的很少）"></a>静态内部类（使用的很少）</h4><p>非静态内部类依赖于外部类的实例，也就是说需要先创建外部类实例，才能用这个实例去创建非静态内部类。而静态内部类不需要。静态内部类不能访问外部类的非静态的变量和方法。</p>
+<h2 id="包"><a href="#包" class="headerlink" title="包"></a>包</h2><h3 id="package关键字"><a href="#package关键字" class="headerlink" title="package关键字"></a>package关键字</h3><blockquote>
+<p>package包与C++中的<code>namespace</code>类似</p>
+<p>Java中常用域名倒序的方法来定义包名，一个Java源文件中只能有一个package语句</p>
+</blockquote>
+<h3 id="import关键字"><a href="#import关键字" class="headerlink" title="import关键字"></a>import关键字</h3><blockquote>
+<p>用于引入Java不同包中的类，放置在<code>package</code>之后，类定义之前</p>
+</blockquote>
+<h3 id="jar文件"><a href="#jar文件" class="headerlink" title="jar文件"></a>jar文件</h3><blockquote>
+<p>jar文件是一组class文件的压缩包，易于传播（其中可以包含很多Java类），且能够有效保护源码（其中不包含.java文件）</p>
+<p>可以利用IDE打包jar文件，也可以使用<code>jar.exe</code>命令进行打包</p>
+</blockquote>
+<blockquote>
+<p>参考：</p>
+<p><a href="https://github.com/Snailclimb/JavaGuide" target="_blank" rel="noopener">https://github.com/Snailclimb/JavaGuide</a></p>
+<p>《Java核心技术卷1》</p>
+<p>mooc华东师范大学Java核心技术课程</p>
+</blockquote>
  
       <!-- reward -->
       

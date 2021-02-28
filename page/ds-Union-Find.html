@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-计算机基础/数据结构与算法/并查集"
+  id="post-学习笔记/数据结构与算法/并查集"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-07-31T05:24:46.000Z" itemprop="datePublished">2020-07-31</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a> / <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a>
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a> / <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a>
   </div>
   
 <div class="word_count">
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">4 min</span>
+            <span class="post-count">5 min</span>
         </span>
     </span>
 </div>
@@ -108,148 +108,35 @@
 <li>判断两个元素是否属于同一个集合<strong>（Find）</strong></li>
 </ol>
 <p>基于此，可以实现一个并查集的Java接口如下：</p>
-<pre><code>public interface UF {
-    int getSize();  // 获取元素个数
-    boolean find(int p, int q); // 判断两个元素是否属于同一集合
-    void union(int p, int q);   // 合并两个不相交的集合
-}</code></pre><h2 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h2><h3 id="Quick-Find概述"><a href="#Quick-Find概述" class="headerlink" title="Quick Find概述"></a>Quick Find概述</h3><p>如图，使用一个数组id标识不同元素所属的集合。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">UF</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">getSize</span><span class="hljs-params">()</span></span>;  <span class="hljs-comment">// 获取元素个数</span><br>    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-keyword">int</span> p, <span class="hljs-keyword">int</span> q)</span></span>; <span class="hljs-comment">// 判断两个元素是否属于同一集合</span><br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">union</span><span class="hljs-params">(<span class="hljs-keyword">int</span> p, <span class="hljs-keyword">int</span> q)</span></span>;   <span class="hljs-comment">// 合并两个不相交的集合</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h2><h3 id="Quick-Find概述"><a href="#Quick-Find概述" class="headerlink" title="Quick Find概述"></a>Quick Find概述</h3><p>如图，使用一个数组id标识不同元素所属的集合。</p>
 <p><img src="http://cdn.ziyedy.top/image/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%B9%B6%E6%9F%A5%E9%9B%86/quickfind.jpg" alt=""></p>
 <p>则并查集的实现逻辑如下。由于可以直接通过索引得到某元素所属的集合，则<strong>Find操作的时间复杂度为O(1)</strong>，但Union操作由于要遍历整个数组，因此<strong>时间复杂度为O(n)</strong>。</p>
-<pre><code>public class UnionFind1 implements UF {
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UnionFind1</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">UF</span> </span>&#123;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span>[] id;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">UnionFind1</span><span class="hljs-params">(<span class="hljs-keyword">int</span> size)</span> </span>&#123;<br>        id = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[size];<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;id.length;i++)<br>            id[i] = i;<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getSize</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> id.length;<br>    &#125;<br><br>    <span class="hljs-comment">// 获取元素所属集合</span><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getID</span><span class="hljs-params">(<span class="hljs-keyword">int</span> p)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (p &lt; <span class="hljs-number">0</span> || p &gt;=id.length)<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(<span class="hljs-string">"p is illegal"</span>);<br>        <span class="hljs-keyword">return</span> id[p];<br>    &#125;<br><br>    <span class="hljs-comment">// 查看元素p和元素q是否所属同一个集合</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-keyword">int</span> p, <span class="hljs-keyword">int</span> q)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> getID(p) == getID(q);<br>    &#125;<br><br>    <span class="hljs-comment">// 合并元素p和元素q</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">union</span><span class="hljs-params">(<span class="hljs-keyword">int</span> p, <span class="hljs-keyword">int</span> q)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> pID = getID(p);<br>        <span class="hljs-keyword">int</span> qID = getID(q);<br>        <span class="hljs-keyword">if</span>(pID == qID)<br>            <span class="hljs-keyword">return</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;id.length;i++) &#123;<br>            <span class="hljs-keyword">if</span>(id[i] == qID)<br>                id[i] = pID;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-    private int[] id;
-
-    public UnionFind1(int size) {
-        id = new int[size];
-        for(int i=0;i&lt;id.length;i++)
-            id[i] = i;
-    }
-
-    @Override
-    public int getSize() {
-        return id.length;
-    }
-
-    // 获取元素所属集合
-    private int getID(int p) {
-        if (p &lt; 0 || p &gt;=id.length)
-            throw new IllegalArgumentException(&quot;p is illegal&quot;);
-        return id[p];
-    }
-
-    // 查看元素p和元素q是否所属同一个集合
-    @Override
-    public boolean find(int p, int q) {
-        return getID(p) == getID(q);
-    }
-
-    // 合并元素p和元素q
-    @Override
-    public void union(int p, int q) {
-        int pID = getID(p);
-        int qID = getID(q);
-        if(pID == qID)
-            return;
-        for (int i=0;i&lt;id.length;i++) {
-            if(id[i] == qID)
-                id[i] = pID;
-        }
-    }
-}</code></pre><h3 id="Quick-Union概述"><a href="#Quick-Union概述" class="headerlink" title="Quick Union概述"></a>Quick Union概述</h3><p>很显然，之前的Quick Find中查找是否属于同一元素速度很快，而Quick Union则着重于合并的速度。</p>
+<h3 id="Quick-Union概述"><a href="#Quick-Union概述" class="headerlink" title="Quick Union概述"></a>Quick Union概述</h3><p>很显然，之前的Quick Find中查找是否属于同一元素速度很快，而Quick Union则着重于合并的速度。</p>
 <p>如图所示，Quick Union的设计思想采用树（森林）进行。每个集合都使用一个根节点进行标识（根节点的父节点为其自身），<strong>在具体存储时，也可以使用一个parent数组来标识其父节点的位置</strong>。因此：</p>
 <p><strong>Find操作只需要找到对应节点的根节点判断是否相等即可；</strong></p>
 <p><strong>Union操作只需要将一个元素的根节点指向Union操作的另一元素的根节点即可</strong>，具体如图将元素1与元素2进行合并的操作示意</p>
 <p><img src="http://cdn.ziyedy.top/image/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%B9%B6%E6%9F%A5%E9%9B%86/quickunion.jpg" alt=""></p>
 <p>具体实现如下（略去了不关键的几个方法）：这种方法下，find与union操作的时间复杂度都为O(h)，h为树的深度。</p>
-<pre><code>public class UnionFind2 implements UF {
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UnionFind2</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">UF</span> </span>&#123;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span>[] parent;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">UnionFind2</span><span class="hljs-params">(<span class="hljs-keyword">int</span> size)</span> </span>&#123;<br>        parent = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[size];<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;size;i++) &#123;<br>            parent[i] = i;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getID</span><span class="hljs-params">(<span class="hljs-keyword">int</span> p)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (p &lt; <span class="hljs-number">0</span> || p &gt;= parent.length)<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(<span class="hljs-string">"p is out of bound"</span>);<br>        <span class="hljs-keyword">while</span> (p != parent[p])<br>            p = parent[p];<br>        <span class="hljs-keyword">return</span> p;<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-keyword">int</span> p, <span class="hljs-keyword">int</span> q)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> getID(p) == getID(q);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">union</span><span class="hljs-params">(<span class="hljs-keyword">int</span> p, <span class="hljs-keyword">int</span> q)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> pRoot = getID(p);<br>        <span class="hljs-keyword">int</span> qRoot = getID(q);<br><br>        <span class="hljs-keyword">if</span>(pRoot == qRoot)<br>            <span class="hljs-keyword">return</span>;<br><br>        parent[pRoot] = qRoot;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-    private int[] parent;
-
-    public UnionFind2(int size) {
-        parent = new int[size];
-
-        for (int i=0;i&lt;size;i++) {
-            parent[i] = i;
-        }
-    }
-
-    private int getID(int p) {
-        if (p &lt; 0 || p &gt;= parent.length)
-            throw new IllegalArgumentException(&quot;p is out of bound&quot;);
-        while (p != parent[p])
-            p = parent[p];
-        return p;
-    }
-
-    @Override
-    public boolean find(int p, int q) {
-        return getID(p) == getID(q);
-    }
-
-    @Override
-    public void union(int p, int q) {
-        int pRoot = getID(p);
-        int qRoot = getID(q);
-
-        if(pRoot == qRoot)
-            return;
-
-        parent[pRoot] = qRoot;
-    }
-}</code></pre><h3 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h3><p>Quick Union的效率与树的深度有关，因此需要尽可能的缩短树的深度，从而提高效率。</p>
+<h3 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h3><p>Quick Union的效率与树的深度有关，因此需要尽可能的缩短树的深度，从而提高效率。</p>
 <h4 id="思路1：记录每棵树的节点个数"><a href="#思路1：记录每棵树的节点个数" class="headerlink" title="思路1：记录每棵树的节点个数"></a>思路1：记录每棵树的节点个数</h4><p>节点个数多的树<strong>大概率</strong>深度高，因此让节点个数少的集合的根节点指向节点个数大的根节点即可。代码逻辑如下（sz[i]表示以i为根的集合中元素个数）</p>
-<pre><code>@Override
-public void union(int p, int q) {
-    int pRoot = getID(p);
-    int qRoot = getID(q);
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs crystal">@Override<br>public void <span class="hljs-class"><span class="hljs-keyword">union</span>(<span class="hljs-title">int</span> <span class="hljs-title">p</span>, <span class="hljs-title">int</span> <span class="hljs-title">q</span>) &#123;</span><br>    int pRoot = getID(p);<br>    int qRoot = getID(q);<br><br>    <span class="hljs-keyword">if</span>(pRoot == qRoot)<br>        <span class="hljs-keyword">return</span>;<br><br>    <span class="hljs-keyword">if</span>(sz[pRoot] &lt; sz[qRoot]) &#123;<br>        parent[pRoot] = qRoot;<br>        sz[qRoot] += sz[pRoot];<br>    &#125;<br>    <span class="hljs-keyword">else</span> &#123;<br>        parent[qRoot] = pRoot;<br>        sz[pRoot] += sz[qRoot];<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-    if(pRoot == qRoot)
-        return;
+<h4 id="思路2：记录没棵树的深度"><a href="#思路2：记录没棵树的深度" class="headerlink" title="思路2：记录没棵树的深度"></a>思路2：记录没棵树的深度</h4><p>思路1的主要漏洞在于节点个数多的树未必深度大，因此可以通过记录树的深度来进行判断，代码逻辑如下（rank[i]表示以i为根的集合的层数）</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs crystal">public void <span class="hljs-class"><span class="hljs-keyword">union</span>(<span class="hljs-title">int</span> <span class="hljs-title">p</span>, <span class="hljs-title">int</span> <span class="hljs-title">q</span>) &#123;</span><br>    int pRoot = getID(p);<br>    int qRoot = getID(q);<br><br>    <span class="hljs-keyword">if</span>(pRoot == qRoot)<br>        <span class="hljs-keyword">return</span>;<br><br>    <span class="hljs-keyword">if</span>(rank[pRoot] &lt; rank[qRoot]) &#123;<br>        parent[pRoot] = qRoot;<br>    &#125;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(rank[qRoot] &lt; rank[pRoot])&#123;<br>        parent[qRoot] = pRoot;<br>    &#125;<br>    <span class="hljs-keyword">else</span> &#123;<br>        parent[pRoot] = qRoot;<br>        rank[qRoot]++;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-    if(sz[pRoot] &lt; sz[qRoot]) {
-        parent[pRoot] = qRoot;
-        sz[qRoot] += sz[pRoot];
-    }
-    else {
-        parent[qRoot] = pRoot;
-        sz[pRoot] += sz[qRoot];
-    }
-}</code></pre><h4 id="思路2：记录没棵树的深度"><a href="#思路2：记录没棵树的深度" class="headerlink" title="思路2：记录没棵树的深度"></a>思路2：记录没棵树的深度</h4><p>思路1的主要漏洞在于节点个数多的树未必深度大，因此可以通过记录树的深度来进行判断，代码逻辑如下（rank[i]表示以i为根的集合的层数）</p>
-<pre><code>public void union(int p, int q) {
-    int pRoot = getID(p);
-    int qRoot = getID(q);
+<h4 id="思路3：路径压缩（Path-Compression）"><a href="#思路3：路径压缩（Path-Compression）" class="headerlink" title="思路3：路径压缩（Path Compression）"></a>思路3：路径压缩（Path Compression）</h4><p>使用<code>parent[p] = parent[parent[p]]</code>这种逻辑在每次获取根节点时将树的高度缩减。</p>
+<figure class="highlight zephir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs zephir"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> getID(<span class="hljs-keyword">int</span> p) &#123;<br>    <span class="hljs-keyword">if</span> (p &lt; <span class="hljs-number">0</span> || p &gt;= <span class="hljs-keyword">parent</span>.length)<br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(<span class="hljs-string">"p is out of bound"</span>);<br>    <span class="hljs-keyword">while</span> (p != <span class="hljs-keyword">parent</span>[p]) &#123;<br>        <span class="hljs-keyword">parent</span>[p] = <span class="hljs-keyword">parent</span>[<span class="hljs-keyword">parent</span>[p]];  <span class="hljs-comment">// 路径压缩</span><br>        p = <span class="hljs-keyword">parent</span>[p];<br>    &#125;<br>    <span class="hljs-keyword">return</span> p;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-    if(pRoot == qRoot)
-        return;
-
-    if(rank[pRoot] &lt; rank[qRoot]) {
-        parent[pRoot] = qRoot;
-    }
-    else if(rank[qRoot] &lt; rank[pRoot]){
-        parent[qRoot] = pRoot;
-    }
-    else {
-        parent[pRoot] = qRoot;
-        rank[qRoot]++;
-    }
-}</code></pre><h4 id="思路3：路径压缩（Path-Compression）"><a href="#思路3：路径压缩（Path-Compression）" class="headerlink" title="思路3：路径压缩（Path Compression）"></a>思路3：路径压缩（Path Compression）</h4><p>使用<code>parent[p] = parent[parent[p]]</code>这种逻辑在每次获取根节点时将树的高度缩减。</p>
-<pre><code>private int getID(int p) {
-    if (p &lt; 0 || p &gt;= parent.length)
-        throw new IllegalArgumentException(&quot;p is out of bound&quot;);
-    while (p != parent[p]) {
-        parent[p] = parent[parent[p]];  // 路径压缩
-        p = parent[p];
-    }
-    return p;
-}</code></pre><p>使用递归直接将，每个元素直接连接在集合的根节点上</p>
-<pre><code>private int getID2(int p) {
-    if (p &lt; 0 || p &gt;= parent.length)
-        throw new IllegalArgumentException(&quot;p is out of bound&quot;);
-    if(p != parent[p]) {
-        parent[p] = getID2(p);
-    }
-    return parent[p];
-}</code></pre> 
+<p>使用递归直接将，每个元素直接连接在集合的根节点上</p>
+<figure class="highlight zephir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs zephir"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> getID2(<span class="hljs-keyword">int</span> p) &#123;<br>    <span class="hljs-keyword">if</span> (p &lt; <span class="hljs-number">0</span> || p &gt;= <span class="hljs-keyword">parent</span>.length)<br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(<span class="hljs-string">"p is out of bound"</span>);<br>    <span class="hljs-keyword">if</span>(p != <span class="hljs-keyword">parent</span>[p]) &#123;<br>        <span class="hljs-keyword">parent</span>[p] = getID2(p);<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">parent</span>[p];<br>&#125;<br></code></pre></td></tr></table></figure> 
       <!-- reward -->
       
       <div id="reword-out">

@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Android/Android开发五：广播机制"
+  id="post-编程相关/Android/Android开发五：广播机制"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-09-02T02:50:44.000Z" itemprop="datePublished">2020-09-02</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Android/">Android</a>
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Android/">Android</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">955</span>
+            <span class="post-count">940</span>
         </span>
     </span>
 
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">4 min</span>
+            <span class="post-count">3 min</span>
         </span>
     </span>
 </div>
@@ -108,40 +108,27 @@
 <blockquote>
 <p>新建一个继承自 <code>BroadcastReceiver</code>的类，并重写父类的 <code>onReceive()</code> 方法</p>
 </blockquote>
-<pre><code>class NetworkChangeReceiver extends BroadcastReceiver {
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        // 若检测到变化，则弹出相关信息
-        Toast.makeText(context, &quot;network changes&quot;, Toast.LENGTH_SHORT).show();
-    }
-}</code></pre><ol start="2">
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs scala"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NetworkChangeReceiver</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BroadcastReceiver</span> </span>&#123;<br>    <span class="hljs-meta">@Override</span><br>    public void onReceive(<span class="hljs-type">Context</span> context, <span class="hljs-type">Intent</span> intent) &#123;<br>    	<span class="hljs-comment">// 若检测到变化，则弹出相关信息</span><br>        <span class="hljs-type">Toast</span>.makeText(context, <span class="hljs-string">"network changes"</span>, <span class="hljs-type">Toast</span>.<span class="hljs-type">LENGTH_SHORT</span>).show();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ol start="2">
 <li>在<code>onCreate()</code>中创建一个<code>IntentFilter</code>实例，并使用<code>addAction()</code>添加系统发送的广播（<code>action1</code>）。之后创建一个步骤1类的实例。调用<code>registerReceiver()</code>方法将<code>NetworkChangeReceiver</code>的实例与<code>IntentFilter</code>的实例都传进去，即可<strong>使得<code>NetworkChangeReceiver</code>接收到对应的<code>action1</code></strong></li>
 </ol>
-<pre><code>private IntentFilter intentFilter;
-private NetworkChangeReceive networkChangeReceive;
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-keyword">private</span> IntentFilter intentFilter;<br><span class="hljs-keyword">private</span> NetworkChangeReceive networkChangeReceive;<br><br>@Override<br>protected void on<span class="hljs-constructor">Create(Bundle <span class="hljs-params">savedInstanceState</span>)</span> &#123;<br>    super.on<span class="hljs-constructor">Create(<span class="hljs-params">savedInstanceState</span>)</span>;<br>    set<span class="hljs-constructor">ContentView(R.<span class="hljs-params">layout</span>.<span class="hljs-params">activity_main</span>)</span>;<br>    intentFilter = <span class="hljs-keyword">new</span> <span class="hljs-constructor">IntentFilter()</span>;<br>    intentFilter.add<span class="hljs-constructor">Action(<span class="hljs-string">"android.net.conn.CONNECTIVITY_CHANGE"</span>)</span>;	<span class="hljs-comment">// 添加需要监听的广播</span><br>    networkChangeReceive = <span class="hljs-keyword">new</span> <span class="hljs-constructor">NetworkChangeReceive()</span>;<br>    register<span class="hljs-constructor">Receiver(<span class="hljs-params">networkChangeReceive</span>, <span class="hljs-params">intentFilter</span>)</span>;	<span class="hljs-comment">// 绑定</span><br>&#125;<br></code></pre></td></tr></table></figure>
 
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    intentFilter = new IntentFilter();
-    intentFilter.addAction(&quot;android.net.conn.CONNECTIVITY_CHANGE&quot;);    // 添加需要监听的广播
-    networkChangeReceive = new NetworkChangeReceive();
-    registerReceiver(networkChangeReceive, intentFilter);    // 绑定
-}</code></pre><ol start="3">
+<ol start="3">
 <li>动态注册的广播接收器一定都要取消注册才行，在<code>onDestroy()</code>方法中通过调用<code>unregisterReceiver()</code>方法来实现</li>
 </ol>
-<pre><code>@Override
-protected void onDestroy() {
-    super.onDestroy();
-    unregisterReceiver(networkChangeReceive);
-}</code></pre><ol start="4">
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs aspectj"><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">protected</span> <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">onDestroy</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">super</span>.onDestroy();<br>    unregisterReceiver(networkChangeReceive);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ol start="4">
 <li>在<code>AndroidManifest.xml</code>中声明权限</li>
 </ol>
 <blockquote>
 <p>注：如果程序需要进行一些对用户来说比较敏感的操作，就必须在配置文件中声明权限才可以，否则程序将会直接崩溃</p>
 </blockquote>
-<pre><code>&lt;uses-permission android:name=&quot;填入相关权限&quot; /&gt;</code></pre><h3 id="静态注册（开机启动）"><a href="#静态注册（开机启动）" class="headerlink" title="静态注册（开机启动）"></a>静态注册（开机启动）</h3><ol>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">&lt;uses-permission android:<span class="hljs-built_in">name</span>=<span class="hljs-string">"填入相关权限"</span> /&gt;<br></code></pre></td></tr></table></figure>
+
+<h3 id="静态注册（开机启动）"><a href="#静态注册（开机启动）" class="headerlink" title="静态注册（开机启动）"></a>静态注册（开机启动）</h3><ol>
 <li><p>右击 com.example.broadcasttest 包 →New→Other→ Broadcast Receiver，创建一个广播接收器</p>
 </li>
 <li><p>重写<code>onReceive()</code>方法</p>
@@ -149,61 +136,62 @@ protected void onDestroy() {
 <li><p>在<code>AndroidManifest.xml</code>文件中注册（AS通常情况会自动注册）</p>
 </li>
 </ol>
-<pre><code>&lt;!-- 声明权限 --&gt;
-&lt;uses-permission android:name=&quot;android.permission.RECEIVE_BOOT_COMPLETED&quot; /&gt;
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- 声明权限 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.RECEIVE_BOOT_COMPLETED"</span> /&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">receiver</span><br>    <span class="hljs-attr">android:name</span>=<span class="hljs-string">".BootCompleteReceiver"</span><br>    <span class="hljs-attr">android:enabled</span>=<span class="hljs-string">"true"</span><br>    <span class="hljs-attr">android:exported</span>=<span class="hljs-string">"true"</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">intent-filter</span>&gt;</span><br>    	<span class="hljs-comment">&lt;!-- 开机启动 --&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">action</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.intent.action.BOOT_COMPLETED"</span> /&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">intent-filter</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">receiver</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
-&lt;receiver
-    android:name=&quot;.BootCompleteReceiver&quot;
-    android:enabled=&quot;true&quot;
-    android:exported=&quot;true&quot;&gt;
-    &lt;intent-filter&gt;
-        &lt;!-- 开机启动 --&gt;
-        &lt;action android:name=&quot;android.intent.action.BOOT_COMPLETED&quot; /&gt;
-    &lt;/intent-filter&gt;
-&lt;/receiver&gt;</code></pre><h2 id="自定义广播"><a href="#自定义广播" class="headerlink" title="自定义广播"></a>自定义广播</h2><h3 id="发送标准广播"><a href="#发送标准广播" class="headerlink" title="发送标准广播"></a>发送标准广播</h3><ol>
+
+
+<h2 id="自定义广播"><a href="#自定义广播" class="headerlink" title="自定义广播"></a>自定义广播</h2><h3 id="发送标准广播"><a href="#发送标准广播" class="headerlink" title="发送标准广播"></a>发送标准广播</h3><ol>
 <li>定义接收器（与上一部分一样）</li>
 </ol>
-<pre><code>public class MyReceiver extends BroadcastReceiver {
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        Toast.makeText(context, &quot;received in MyReceiver&quot;, Toast.LENGTH_SHORT).show();
-    }
-}</code></pre><ol start="2">
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs scala">public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyReceiver</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BroadcastReceiver</span> </span>&#123;<br>    <span class="hljs-meta">@Override</span><br>    public void onReceive(<span class="hljs-type">Context</span> context, <span class="hljs-type">Intent</span> intent) &#123;<br>        <span class="hljs-type">Toast</span>.makeText(context, <span class="hljs-string">"received in MyReceiver"</span>, <span class="hljs-type">Toast</span>.<span class="hljs-type">LENGTH_SHORT</span>).show();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ol start="2">
 <li>在<code>AndroidManifest.xml</code>中对事件接收器进行注册（注册接收什么事件）</li>
 </ol>
-<pre><code>&lt;receiver
-    android:name=&quot;.MyReceiver&quot;
-    android:enabled=&quot;true&quot;
-    android:exported=&quot;true&quot;&gt;
-    &lt;intent-filter&gt;
-        &lt;!-- 接收名为MY_BROADCAST的广播 --&gt;
-        &lt;action android:name=&quot;com.example.broadcasttest.MY_BROADCAST&quot; /&gt;
-    &lt;/intent-filter&gt;
-&lt;/receiver&gt;</code></pre><ol start="3">
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">receiver</span><br>    <span class="hljs-attr">android:name</span>=<span class="hljs-string">".MyReceiver"</span><br>    <span class="hljs-attr">android:enabled</span>=<span class="hljs-string">"true"</span><br>    <span class="hljs-attr">android:exported</span>=<span class="hljs-string">"true"</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">intent-filter</span>&gt;</span><br>    	<span class="hljs-comment">&lt;!-- 接收名为MY_BROADCAST的广播 --&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">action</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"com.example.broadcasttest.MY_BROADCAST"</span> /&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">intent-filter</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">receiver</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<ol start="3">
 <li>定义发送广播（名称与接收处一致，此处以点击事件作为例子）。首先构建一个<code>Intent</code>对象，并传入广播值，之后调用<code>sendBroadcast()</code>方法将广播发送出去（此时所有监听该广播的广播接收器就会收到消息）</li>
 </ol>
-<pre><code>@Override
-public void onClick(View view) {
-    Intent intent = new Intent(&quot;com.example.broadcasttest.MY_BROADCAST&quot;);
-    sendBroadcast(intent);
-}</code></pre><h3 id="发送有序广播"><a href="#发送有序广播" class="headerlink" title="发送有序广播"></a>发送有序广播</h3><blockquote>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">@Override<br>public void on<span class="hljs-constructor">Click(View <span class="hljs-params">view</span>)</span> &#123;<br>    Intent intent = <span class="hljs-keyword">new</span> <span class="hljs-constructor">Intent(<span class="hljs-string">"com.example.broadcasttest.MY_BROADCAST"</span>)</span>;<br>    send<span class="hljs-constructor">Broadcast(<span class="hljs-params">intent</span>)</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="发送有序广播"><a href="#发送有序广播" class="headerlink" title="发送有序广播"></a>发送有序广播</h3><blockquote>
 <p>广播是一种可以跨进程的通信方式，即在我们应用程序内发出的广播，其他的应用程序应该也可以收到</p>
 </blockquote>
 <p>发送有序广播只需要改变广播发送的代码为<code>sendOrderedBroadcast()</code>，传入Intent和与权限相关的字符串。</p>
-<pre><code>sendOrderedBroadcast(intent, null);</code></pre><h4 id="设置广播接收器的先后顺序"><a href="#设置广播接收器的先后顺序" class="headerlink" title="设置广播接收器的先后顺序"></a>设置广播接收器的先后顺序</h4><p>如下，使用<code>android:priority</code>设置优先级为100</p>
-<pre><code>&lt;intent-filter android:priority=&quot;100&quot;&gt;
-    &lt;action android:name=&quot;com.example.broadcasttest.MY_BROADCAST&quot; /&gt;
-&lt;/intent-filter&gt;</code></pre><h4 id="中断广播"><a href="#中断广播" class="headerlink" title="中断广播"></a>中断广播</h4><p>在<code>onReceive()</code>方法中调用了<code>abortBroadcast()</code>方法，就表示将这条广播截断，后面的广播接收器将无法再接收到这条广播。</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">send<span class="hljs-constructor">OrderedBroadcast(<span class="hljs-params">intent</span>, <span class="hljs-params">null</span>)</span>;<br></code></pre></td></tr></table></figure>
+
+<h4 id="设置广播接收器的先后顺序"><a href="#设置广播接收器的先后顺序" class="headerlink" title="设置广播接收器的先后顺序"></a>设置广播接收器的先后顺序</h4><p>如下，使用<code>android:priority</code>设置优先级为100</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">intent-filter</span> <span class="hljs-attr">android:priority</span>=<span class="hljs-string">"100"</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">action</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"com.example.broadcasttest.MY_BROADCAST"</span> /&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">intent-filter</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="中断广播"><a href="#中断广播" class="headerlink" title="中断广播"></a>中断广播</h4><p>在<code>onReceive()</code>方法中调用了<code>abortBroadcast()</code>方法，就表示将这条广播截断，后面的广播接收器将无法再接收到这条广播。</p>
 <h2 id="本地广播"><a href="#本地广播" class="headerlink" title="本地广播"></a>本地广播</h2><blockquote>
 <p><strong>本地广播机制</strong>：使用这个机制发出的广播只能够在应用程序的内部进行传递，并且广播接收器也只能接收来自本应用程序发出的广播</p>
 </blockquote>
 <blockquote>
 <p><strong>本地广播使用</strong>：使用一个<code>LocalBroadcastManager</code>来对广播进行管理，并提供了发送广播和注册广播接收器的方法（<em>与动态注册广播流程基本一致</em>）</p>
 </blockquote>
-<pre><code>LocalBroadcastManager localBroadcastManager;
-localBroadcastManager = LocalBroadcastManager.getInstance(this);    // 获取实例
-localBroadcastManager.sendBroadcast(intent);    // 发送本地广播
-localBroadcastManager.registerReceiver(localReceiver, intentFilter);     // 注册本地广播监听器</code></pre> 
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">LocalBroadcastManager localBroadcastManager;<br>localBroadcastManager = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">LocalBroadcastManager</span>.</span></span>get<span class="hljs-constructor">Instance(<span class="hljs-params">this</span>)</span>;	<span class="hljs-comment">// 获取实例</span><br>localBroadcastManager.send<span class="hljs-constructor">Broadcast(<span class="hljs-params">intent</span>)</span>;	<span class="hljs-comment">// 发送本地广播</span><br>localBroadcastManager.register<span class="hljs-constructor">Receiver(<span class="hljs-params">localReceiver</span>, <span class="hljs-params">intentFilter</span>)</span>; 	<span class="hljs-comment">// 注册本地广播监听器</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
       <!-- reward -->
       
       <div id="reword-out">
@@ -278,7 +266,7 @@ localBroadcastManager.registerReceiver(localReceiver, intentFilter);     // 注�
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/" rel="tag">移动端</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li></ul>
 
     </footer>
   </div>

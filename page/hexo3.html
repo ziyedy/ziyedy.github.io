@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-前端/Hexo/Hexo实现多台机器同时编写博客"
+  id="post-问题解决/Hexo/Hexo实现多台机器同时编写博客"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-03-13T03:05:41.000Z" itemprop="datePublished">2020-03-13</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a> / <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/hexo/">hexo</a>
+    <a class="article-category-link" href="/categories/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">问题解决</a> / <a class="article-category-link" href="/categories/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/Hexo/">Hexo</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">750</span>
+            <span class="post-count">748</span>
         </span>
     </span>
 
@@ -105,7 +105,9 @@
   <p>正常情况下，只在一台电脑上使用hexo编写部署博客非常方便，但多台电脑进行部署就需要云盘等媒介进行md文件的传输了。我的电脑是双系统，因此如果要部署的话还得重启，比较麻烦，因此干脆实现一个博客多设备管理，方便快捷。</p>
 <p>实现多设备的博客管理关键就是要实现本地hexo源文件的多台设备传输与修改，首先想到的当然是使用git了。本地的<code>_config.yml</code>文件中默认使用<code>hexo d</code>进行部署是部署在GitHub相应项目（也就是以用户名命名的博客项目）的<code>master</code>分支上的，因此，只需要在同一项目上新建一个存储源文件的分支即可解决问题。</p>
 <h3 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h3><p>在已经作为博客本地文件的地方打开终端输入以下命令</p>
-<pre><code>git branch &lt;hexo&gt;    //hexo处为你想建立的分支的名字</code></pre><p>之后在github中博客仓库的<code>-&gt;Settings-&gt;Branches-&gt;Default branch</code>下将默认分支改为新建的分支，并保存更新。</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dts">git branch <span class="hljs-params">&lt;hexo&gt;</span>	<span class="hljs-comment">//hexo处为你想建立的分支的名字</span><br></code></pre></td></tr></table></figure>
+
+<p>之后在github中博客仓库的<code>-&gt;Settings-&gt;Branches-&gt;Default branch</code>下将默认分支改为新建的分支，并保存更新。</p>
 <h3 id="分支连接本地文件"><a href="#分支连接本地文件" class="headerlink" title="分支连接本地文件"></a>分支连接本地文件</h3><ol>
 <li><p>最简单且有效的方法就是将新建的<code>hexo</code>分支<code>git clone</code>到本地文件夹内，输入<code>git branch</code>即可看到当前分支为<code>hexo</code>。</p>
 </li>
@@ -116,14 +118,15 @@
 <li><p>输入如下命令你的博客的源码分支hexo就建立好了。</p>
 </li>
 </ol>
-<pre><code>git add .
-git commit -m &quot;first push&quot;
-git push origin hexo</code></pre><ol start="5">
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-symbol">git</span> <span class="hljs-keyword">add </span>.<br><span class="hljs-symbol">git</span> commit -m <span class="hljs-string">"first push"</span><br><span class="hljs-symbol">git</span> <span class="hljs-keyword">push </span>origin hexo<br></code></pre></td></tr></table></figure>
+
+<ol start="5">
 <li>想在另一台电脑上写博客时。只要确保该电脑安装了hexo所需要的各种环境（再在GitHub上加入ssh密匙），只需要在本地建立一个文件夹将博客源文件<code>clone</code>下来即可。而每次更新上传后，在另一台计算机上只需每次使用<code>git pull</code>更新一下源文件即可十分方便。</li>
 </ol>
 <h3 id="其他问题"><a href="#其他问题" class="headerlink" title="其他问题"></a>其他问题</h3><p>多机同时管理博客其实就是在一个github仓库的<code>master</code>分支存储网页静态文件，在<code>hexo</code>分支存储博客源文件。由于hexo进行部署时默认是在<code>master</code>分支上部署（<code>_config.yml</code>文件中可见），因此部署博客时还是输入以下代码即可</p>
-<pre><code>hexo g
-hexo d</code></pre><p>同时应该注意的是，这样做会使得源文件开源，不想开源的话可以在github仓库中设置该仓库为private。这样该仓库就不可见但gitpage的功能也使用不了了，所以要怎样做仁者见仁智者见智吧。</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-attr">hexo</span> <span class="hljs-string">g</span><br><span class="hljs-attr">hexo</span> <span class="hljs-string">d</span><br></code></pre></td></tr></table></figure>
+
+<p>同时应该注意的是，这样做会使得源文件开源，不想开源的话可以在github仓库中设置该仓库为private。这样该仓库就不可见但gitpage的功能也使用不了了，所以要怎样做仁者见仁智者见智吧。</p>
  
       <!-- reward -->
       
@@ -199,7 +202,7 @@ hexo d</code></pre><p>同时应该注意的是，这样做会使得源文件开�
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" rel="tag">博客搭建</a></li></ul>
 
     </footer>
   </div>

@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Java/Java基础/Java算法题的常用语法"
+  id="post-编程相关/Java/Java基础/Java算法题的常用语法"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-08-15T06:34:11.000Z" itemprop="datePublished">2020-08-15</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Java/">Java</a> / <a class="article-category-link" href="/categories/Java/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Java/">Java</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Java/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">843</span>
+            <span class="post-count">861</span>
         </span>
     </span>
 
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">3 min</span>
+            <span class="post-count">4 min</span>
         </span>
     </span>
 </div>
@@ -102,10 +102,19 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="控制台输入与输出"><a href="#控制台输入与输出" class="headerlink" title="控制台输入与输出"></a>控制台输入与输出</h2><h3 id="控制台输入"><a href="#控制台输入" class="headerlink" title="控制台输入"></a>控制台输入</h3><pre><code class="java">Scanner sc = new Scanner(System.in);</code></pre>
+  <h2 id="控制台输入与输出"><a href="#控制台输入与输出" class="headerlink" title="控制台输入与输出"></a>控制台输入与输出</h2><h3 id="控制台输入"><a href="#控制台输入" class="headerlink" title="控制台输入"></a>控制台输入</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Scanner sc = <span class="hljs-keyword">new</span> Scanner(System.in);<br></code></pre></td></tr></table></figure>
+
 <h4 id="输入一整行数据"><a href="#输入一整行数据" class="headerlink" title="输入一整行数据"></a>输入一整行数据</h4><p>以换行为终止，返回一个String类型变量.</p>
-<pre><code>String s = sc.nextLine();</code></pre><h4 id="输入单个数据（方法名为next后面跟基本数据类型名）"><a href="#输入单个数据（方法名为next后面跟基本数据类型名）" class="headerlink" title="输入单个数据（方法名为next后面跟基本数据类型名）"></a>输入单个数据（方法名为next后面跟基本数据类型名）</h4><p>如下为输入一个整型</p>
-<pre><code>int a = sc.nextInt();</code></pre><h4 id="输入一个字符串"><a href="#输入一个字符串" class="headerlink" title="输入一个字符串"></a>输入一个字符串</h4><pre><code>String str = sc.next();</code></pre><h3 id="控制台输出"><a href="#控制台输出" class="headerlink" title="控制台输出"></a>控制台输出</h3><h4 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h4><p>输出内容：<code>System.out.print(&quot;&quot;);</code></p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf">String s = sc.nextLine()<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="输入单个数据（方法名为next后面跟基本数据类型名）"><a href="#输入单个数据（方法名为next后面跟基本数据类型名）" class="headerlink" title="输入单个数据（方法名为next后面跟基本数据类型名）"></a>输入单个数据（方法名为next后面跟基本数据类型名）</h4><p>如下为输入一个整型</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-built_in">int</span> a = sc.next<span class="hljs-constructor">Int()</span>;<br></code></pre></td></tr></table></figure>
+
+<h4 id="输入一个字符串"><a href="#输入一个字符串" class="headerlink" title="输入一个字符串"></a>输入一个字符串</h4><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-keyword">String </span><span class="hljs-keyword">str </span>= sc.next()<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="控制台输出"><a href="#控制台输出" class="headerlink" title="控制台输出"></a>控制台输出</h3><h4 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h4><p>输出内容：<code>System.out.print(&quot;&quot;);</code></p>
 <p>输出内容并换行：<code>System.out.println(&quot;&quot;);</code></p>
 <p>格式化输出1： <code>System.out.format(String format, Object ... args);</code></p>
 <p>格式化输出2：<code>System.out.printf((String format, Object ... args);</code></p>
@@ -159,51 +168,49 @@
 <td>00010</td>
 </tr>
 </tbody></table>
-<h4 id="常用示例"><a href="#常用示例" class="headerlink" title="常用示例"></a>常用示例</h4><pre><code>// 输出带有五位小数的浮点型
-System.out.printf(&quot;%.5f&quot;, 99.89);    // 99.89000
-// 输出在前面补齐5位数
-System.out.printf(&quot;%05d&quot;, 99);    // 00099</code></pre><h2 id="基本容器的使用"><a href="#基本容器的使用" class="headerlink" title="基本容器的使用"></a>基本容器的使用</h2><h3 id="常用容器的基本使用"><a href="#常用容器的基本使用" class="headerlink" title="常用容器的基本使用"></a>常用容器的基本使用</h3><p><img src="http://cdn.ziyedy.top/image/Java%E7%AE%97%E6%B3%95%E9%A2%98%E7%9A%84%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/Collection.png" alt=""></p>
+<h4 id="常用示例"><a href="#常用示例" class="headerlink" title="常用示例"></a>常用示例</h4><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-comment">// 输出带有五位小数的浮点型</span><br><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.printf(<span class="hljs-string">"%.5f"</span>, <span class="hljs-number">99.89</span>);	<span class="hljs-comment">// 99.89000</span><br><span class="hljs-comment">// 输出在前面补齐5位数</span><br><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.printf(<span class="hljs-string">"%05d"</span>, <span class="hljs-number">99</span>);	<span class="hljs-comment">// 00099</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="基本容器的使用"><a href="#基本容器的使用" class="headerlink" title="基本容器的使用"></a>基本容器的使用</h2><h3 id="常用容器的基本使用"><a href="#常用容器的基本使用" class="headerlink" title="常用容器的基本使用"></a>常用容器的基本使用</h3><p><img src="http://cdn.ziyedy.top/image/Java%E7%AE%97%E6%B3%95%E9%A2%98%E7%9A%84%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/Collection.png" alt=""></p>
 <h2 id="容器的基本操作"><a href="#容器的基本操作" class="headerlink" title="容器的基本操作"></a>容器的基本操作</h2><h3 id="Arrays"><a href="#Arrays" class="headerlink" title="Arrays"></a>Arrays</h3><h4 id="Arrays-sort-——排序"><a href="#Arrays-sort-——排序" class="headerlink" title="Arrays.sort()——排序"></a>Arrays.sort()——排序</h4><p>对所有数组元素进行排序（默认正序）</p>
-<pre><code class="java">int[] a = new int[]{-2,-3,2,1,9};
-Arrays.sort(a);    // 默认升序： -3 -2 1 2 9
-</code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">int</span>[] a = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[]&#123;-<span class="hljs-number">2</span>,-<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">9</span>&#125;;<br>Arrays.sort(a);	<span class="hljs-comment">// 默认升序： -3 -2 1 2 9</span><br></code></pre></td></tr></table></figure>
+
 <p>使用<strong>lamda表达式</strong>更改排序方式，以倒序为例，此时需要注意<strong>声明数组必须使用其包装类</strong>，否则会报错</p>
-<pre><code class="java">Integer[] a = new Integer[]{-2,-3,2,1,9};
-Arrays.sort(a, (a1, a2)-&gt;a2-a1);    // 倒序：9 2 1 -2 -3</code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">Integer[] a = <span class="hljs-keyword">new</span> Integer[]&#123;-<span class="hljs-number">2</span>,-<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">9</span>&#125;;<br>Arrays.sort(a, (a1, a2)-&gt;a2-a1);	<span class="hljs-comment">// 倒序：9 2 1 -2 -3</span><br></code></pre></td></tr></table></figure>
+
 <p>对指定索引范围内元素进行排序</p>
-<pre><code>int[] b = new int[]{-2,-3,2,1,9};
-// 对[0, 2)范围内数组元素进行排序
-// 之后也可更改排序方式
-Arrays.sort(b, 0, 2);    // -3 -2 2 1 9</code></pre><h4 id="Arrays-fill-——填充"><a href="#Arrays-fill-——填充" class="headerlink" title="Arrays.fill()——填充"></a>Arrays.fill()——填充</h4><p>为数组元素填充相同值</p>
-<pre><code>int[] a = new int[]{-2,-3,2,1,9};
-Arrays.fill(a, 10);    // 10 10 10 10 10</code></pre><p>为指定索引范围内数组填充相同值</p>
-<pre><code>int[] a = new int[]{-2,-3,2,1,9};
-// 在索引[1, 3)范围内填充5
-Arrays.fill(a, 1, 3, 5);    // -2 5 5 1 9</code></pre><h4 id="Arrays-equals-——判断两个数组各元素是否都相等"><a href="#Arrays-equals-——判断两个数组各元素是否都相等" class="headerlink" title="Arrays.equals()——判断两个数组各元素是否都相等"></a>Arrays.equals()——判断两个数组各元素是否都相等</h4><pre><code class="java">int[] a = new int[]{-2,-3,2,1,9};
-int[] b = new int[]{-2,-3,2,1,9};
-System.out.println(Arrays.equals(a, b));    // true</code></pre>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-built_in">int</span>[] b = new <span class="hljs-built_in">int</span>[]&#123;<span class="hljs-number">-2</span>,<span class="hljs-number">-3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">9</span>&#125;;<br><span class="hljs-comment">// 对[0, 2)范围内数组元素进行排序</span><br><span class="hljs-comment">// 之后也可更改排序方式</span><br>Arrays.sort(b, <span class="hljs-number">0</span>, <span class="hljs-number">2</span>);	<span class="hljs-comment">// -3 -2 2 1 9</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="Arrays-fill-——填充"><a href="#Arrays-fill-——填充" class="headerlink" title="Arrays.fill()——填充"></a>Arrays.fill()——填充</h4><p>为数组元素填充相同值</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-built_in">int</span>[] a = new <span class="hljs-built_in">int</span>[]&#123;<span class="hljs-number">-2</span>,<span class="hljs-number">-3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">9</span>&#125;;<br>Arrays.fill(a, <span class="hljs-number">10</span>);	<span class="hljs-comment">// 10 10 10 10 10</span><br></code></pre></td></tr></table></figure>
+
+<p>为指定索引范围内数组填充相同值</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-built_in">int</span>[] a = new <span class="hljs-built_in">int</span>[]&#123;<span class="hljs-number">-2</span>,<span class="hljs-number">-3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">9</span>&#125;;<br><span class="hljs-comment">// 在索引[1, 3)范围内填充5</span><br>Arrays.fill(a, <span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>);	<span class="hljs-comment">// -2 5 5 1 9</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="Arrays-equals-——判断两个数组各元素是否都相等"><a href="#Arrays-equals-——判断两个数组各元素是否都相等" class="headerlink" title="Arrays.equals()——判断两个数组各元素是否都相等"></a>Arrays.equals()——判断两个数组各元素是否都相等</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">int</span>[] a = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[]&#123;-<span class="hljs-number">2</span>,-<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">9</span>&#125;;<br><span class="hljs-keyword">int</span>[] b = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[]&#123;-<span class="hljs-number">2</span>,-<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">9</span>&#125;;<br>System.out.println(Arrays.equals(a, b));	<span class="hljs-comment">// true</span><br></code></pre></td></tr></table></figure>
+
 <h4 id="Arrays-binarySerch-——二分查找定位元素下标"><a href="#Arrays-binarySerch-——二分查找定位元素下标" class="headerlink" title="Arrays.binarySerch()——二分查找定位元素下标"></a>Arrays.binarySerch()——二分查找定位元素下标</h4><p>注意：数组一定要是<strong>排好序的</strong>，否则会出错，若没有搜索到返回一个负值</p>
-<pre><code>int[] a = new int[]{-3,-2,2,3,9};
-System.out.println(Arrays.binarySearch(a, 2));    // 2</code></pre><h4 id="Arrays-copyOfRange-——截取数组"><a href="#Arrays-copyOfRange-——截取数组" class="headerlink" title="Arrays.copyOfRange()——截取数组"></a>Arrays.copyOfRange()——截取数组</h4><pre><code>int[] a = new int[]{-2,-3,2,1,9};
-// 截取[1, 3)的数组
-int[] b = Arrays.copyOfRange(a,1,3);
-for (int m : b) System.out.print(m + &quot; &quot;);    // -3 2</code></pre><h3 id="Collections"><a href="#Collections" class="headerlink" title="Collections"></a>Collections</h3><p>示例列表如下：</p>
-<pre><code>ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;();
-list.add(2);
-list.add(-2);
-list.add(5);
-list.add(99);
-list.add(-10);
-for (int v : list) System.out.print(v + &quot; &quot;);    // 2 -2 5 99 -10</code></pre><h4 id="void-reverse-List-list-：反转"><a href="#void-reverse-List-list-：反转" class="headerlink" title="void reverse(List list)：反转"></a>void reverse(List list)：反转</h4><pre><code>// 反转整个列表
-Collections.reverse(list);    // -10 99 5 -2 2
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-built_in">int</span>[] a = new <span class="hljs-built_in">int</span>[]&#123;<span class="hljs-number">-3</span>,<span class="hljs-number">-2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">9</span>&#125;;<br>System.<span class="hljs-keyword">out</span>.println(Arrays.binarySearch(a, <span class="hljs-number">2</span>));	<span class="hljs-comment">// 2</span><br></code></pre></td></tr></table></figure>
 
-// 反转[1, 3)的列表
-Collections.reverse(list.subList(1, 3));    // 2 5 -2 99 -10</code></pre><h4 id="void-sort-List-list-：排序"><a href="#void-sort-List-list-：排序" class="headerlink" title="void sort(List list)：排序"></a>void sort(List list)：排序</h4><pre><code>// 自然升序
-Collections.sort(list);    // -10 -2 2 5 99
+<h4 id="Arrays-copyOfRange-——截取数组"><a href="#Arrays-copyOfRange-——截取数组" class="headerlink" title="Arrays.copyOfRange()——截取数组"></a>Arrays.copyOfRange()——截取数组</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-built_in">int</span>[] a = new <span class="hljs-built_in">int</span>[]&#123;<span class="hljs-number">-2</span>,<span class="hljs-number">-3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">9</span>&#125;;<br><span class="hljs-comment">// 截取[1, 3)的数组</span><br><span class="hljs-built_in">int</span>[] b = Arrays.copyOfRange(a,<span class="hljs-number">1</span>,<span class="hljs-number">3</span>);<br><span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> m : b) System.<span class="hljs-keyword">out</span>.print(m + <span class="hljs-string">" "</span>);	<span class="hljs-comment">// -3 2</span><br></code></pre></td></tr></table></figure>
 
-// 自定义排序方法（此处为降序）
-Collections.sort(list, (a, b)-&gt;b-a);    // 99 5 2 -2 -10</code></pre><h4 id="void-swap-List-list-int-i-int-j-：交换两个索引位置的元素"><a href="#void-swap-List-list-int-i-int-j-：交换两个索引位置的元素" class="headerlink" title="void swap(List list, int i , int j)：交换两个索引位置的元素"></a>void swap(List list, int i , int j)：交换两个索引位置的元素</h4><pre><code>// 交换索引为0 和 4的元素
-Collections.swap(list, 0, 4);    // -10 -2 5 99 2</code></pre> 
+
+
+<h3 id="Collections"><a href="#Collections" class="headerlink" title="Collections"></a>Collections</h3><p>示例列表如下：</p>
+<figure class="highlight sas"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sas">ArrayList&lt;Integer&gt; <span class="hljs-meta">list</span> = new ArrayList&lt;&gt;();<br><span class="hljs-meta">list</span>.<span class="hljs-meta">add</span>(2);<br><span class="hljs-meta">list</span>.<span class="hljs-meta">add</span>(-2);<br><span class="hljs-meta">list</span>.<span class="hljs-meta">add</span>(5);<br><span class="hljs-meta">list</span>.<span class="hljs-meta">add</span>(99);<br><span class="hljs-meta">list</span>.<span class="hljs-meta">add</span>(-10);<br>for (int v : <span class="hljs-meta">list</span>) System.<span class="hljs-meta">out</span>.p<span class="hljs-meta">rint(</span>v + <span class="hljs-string">" "</span>);	// 2 -2 5 99 -10<br></code></pre></td></tr></table></figure>
+
+<h4 id="void-reverse-List-list-：反转"><a href="#void-reverse-List-list-：反转" class="headerlink" title="void reverse(List list)：反转"></a>void reverse(List list)：反转</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">//</span> <span class="hljs-string">反转整个列表</span><br><span class="hljs-string">Collections.reverse(list);</span>	<span class="hljs-string">//</span> <span class="hljs-number">-10</span> <span class="hljs-number">99</span> <span class="hljs-number">5</span> <span class="hljs-number">-2</span> <span class="hljs-number">2</span><br><br><span class="hljs-string">//</span> <span class="hljs-string">反转[1,</span> <span class="hljs-number">3</span><span class="hljs-string">)的列表</span><br><span class="hljs-string">Collections.reverse(list.subList(1,</span> <span class="hljs-number">3</span><span class="hljs-string">));</span>	<span class="hljs-string">//</span> <span class="hljs-number">2</span> <span class="hljs-number">5</span> <span class="hljs-number">-2</span> <span class="hljs-number">99</span> <span class="hljs-number">-10</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="void-sort-List-list-：排序"><a href="#void-sort-List-list-：排序" class="headerlink" title="void sort(List list)：排序"></a>void sort(List list)：排序</h4><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-comment">// 自然升序</span><br><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Collections</span>.</span></span>sort(<span class="hljs-built_in">list</span>);	<span class="hljs-comment">// -10 -2 2 5 99</span><br><br><span class="hljs-comment">// 自定义排序方法（此处为降序）</span><br><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Collections</span>.</span></span>sort(<span class="hljs-built_in">list</span>, (a, b)-&gt;b-a);	<span class="hljs-comment">// 99 5 2 -2 -10</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="void-swap-List-list-int-i-int-j-：交换两个索引位置的元素"><a href="#void-swap-List-list-int-i-int-j-：交换两个索引位置的元素" class="headerlink" title="void swap(List list, int i , int j)：交换两个索引位置的元素"></a>void swap(List list, int i , int j)：交换两个索引位置的元素</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">//</span> <span class="hljs-string">交换索引为0</span> <span class="hljs-string">和</span> <span class="hljs-number">4</span><span class="hljs-string">的元素</span><br><span class="hljs-string">Collections.swap(list,</span> <span class="hljs-number">0</span><span class="hljs-string">,</span> <span class="hljs-number">4</span><span class="hljs-string">);</span>	<span class="hljs-string">//</span> <span class="hljs-number">-10</span> <span class="hljs-number">-2</span> <span class="hljs-number">5</span> <span class="hljs-number">99</span> <span class="hljs-number">2</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+ 
       <!-- reward -->
       
       <div id="reword-out">
@@ -296,9 +303,9 @@ Collections.swap(list, 0, 4);    // -10 -2 5 99 2</code></pre>
       </a>
     
     
-      <a href="/page/python-requests-basic.html" class="article-nav-link">
+      <a href="/page/python-bs4-basic.html" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">requests库基本使用</div>
+        <div class="article-nav-title">bs4库基本使用</div>
       </a>
     
   </nav>
