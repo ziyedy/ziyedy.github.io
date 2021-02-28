@@ -13,7 +13,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    Blender使用Python脚本生成CV数据集 |  浔庐子夜
+    Blender使用Python脚本生成CV数据集 |  子夜nostalgic
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1.7k</span>
+            <span class="post-count">1.8k</span>
         </span>
     </span>
 
@@ -136,10 +136,17 @@
 </ol>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">transform_matrix = obj.matrix_world.copy()	// obj为获得的物体<br>gt_rt = camera_param[<span class="hljs-string">'RT'</span>] @ obj_matrix		// 相机外参与获取物体相乘<br></code></pre></td></tr></table></figure>
 
-<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>obj与ply的存储坐标有不同（没有详细查看文件格式，但经过实验应该是这样的，如下图所示，即obj在读入blender中时会在x轴自带90度的旋转）</p>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>1、当物体相对原点有旋转与平移的情况</p>
+<p>obj与ply的存储坐标有不同（没有详细查看文件格式，但经过实验应该是这样的，如下图所示，即obj在读入blender中时会在x轴自带90度的旋转）</p>
 <p>所以如果使用obj文件进行渲染时，在获取目标平移旋转矩阵时不进行以上第2步，则不能得到正确的GT值，需要注意。</p>
 <p><img src="http://cdn.ziyedy.top/Blender%E4%BD%BF%E7%94%A8Python%E8%84%9A%E6%9C%AC%E7%94%9F%E6%88%90CV%E6%95%B0%E6%8D%AE%E9%9B%86/obj_and_ply.png" alt=""></p>
-<h2 id="渲染背景图片"><a href="#渲染背景图片" class="headerlink" title="渲染背景图片"></a>渲染背景图片</h2><p>即让对应的模型带上背景图片，参考</p>
+<p>2、对物体进行刚体运动后<code>matrix_world</code>没变</p>
+<p>这是由于blender没有在物体转变后立刻重新计算，在blender2.8的版本下需要在刚体变化后加上如下代码，参考<a href="https://blender.stackexchange.com/questions/27667/incorrect-matrix-world-after-transformation" target="_blank" rel="noopener">https://blender.stackexchange.com/questions/27667/incorrect-matrix-world-after-transformation</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">context.view_layer.update()<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="渲染背景图片"><a href="#渲染背景图片" class="headerlink" title="渲染背景图片"></a>渲染背景图片</h2><p>即让对应的模型带上背景图片，参考<a href="https://henryegloff.com/how-to-render-a-background-image-in-blender-2-8/" target="_blank" rel="noopener">https://henryegloff.com/how-to-render-a-background-image-in-blender-2-8/</a></p>
 <p>在blender中的处理流程如下（在<code>Compositor</code>模式下）</p>
 <p><img src="http://cdn.ziyedy.top/Blender%E4%BD%BF%E7%94%A8Python%E8%84%9A%E6%9C%AC%E7%94%9F%E6%88%90CV%E6%95%B0%E6%8D%AE%E9%9B%86/bg_render.png" alt=""></p>
 <h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><ol>
@@ -174,12 +181,13 @@
 
 
 
-<h2 id="生成Mask"><a href="#生成Mask" class="headerlink" title="生成Mask"></a>生成Mask</h2><p>生成mask关键在于删除物体已有材质，之后将物体的材质设置成某颜色（或标准的数值），参考</p>
+<h2 id="生成Mask"><a href="#生成Mask" class="headerlink" title="生成Mask"></a>生成Mask</h2><p>生成mask关键在于删除物体已有材质，之后将物体的材质设置成某颜色（或标准的数值），参考<a href="https://blender.stackexchange.com/questions/80906/create-a-segmentation-picture-with-each-object-class-rendered-in-different-color/80925#80925" target="_blank" rel="noopener">https://blender.stackexchange.com/questions/80906/create-a-segmentation-picture-with-each-object-class-rendered-in-different-color/80925#80925</a></p>
 <p><img src="http://cdn.ziyedy.top/Blender%E4%BD%BF%E7%94%A8Python%E8%84%9A%E6%9C%AC%E7%94%9F%E6%88%90CV%E6%95%B0%E6%8D%AE%E9%9B%86/mask_render.png" alt=""></p>
-<h3 id="代码实现-2"><a href="#代码实现-2" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">render_mask</span><span class="hljs-params">()</span>:</span><br>    scene = bpy.context.scene<br>    objs = [obj <span class="hljs-keyword">for</span> obj <span class="hljs-keyword">in</span> bpy.data.objects <span class="hljs-keyword">if</span> obj.type <span class="hljs-keyword">in</span> (<span class="hljs-string">"MESH"</span>, <span class="hljs-string">"CURVE"</span>)]<br>    <span class="hljs-keyword">for</span> obj_idx, obj <span class="hljs-keyword">in</span> enumerate(objs):<br>        color = cfg.colors[obj_idx] + (<span class="hljs-number">1</span>,)<br><br>        material_name = <span class="hljs-string">"auto.material."</span> + obj.name<br>        material = bpy.data.materials.new(material_name)<br><br>        material[<span class="hljs-string">"is_auto"</span>] = <span class="hljs-literal">True</span><br>        material.use_nodes = <span class="hljs-literal">True</span><br>        material.node_tree.nodes.clear()<br><br>        emission = material.node_tree.nodes.new(type=<span class="hljs-string">"ShaderNodeEmission"</span>)<br>        emission.inputs[<span class="hljs-string">'Color'</span>].default_value = color<br><br>        output = material.node_tree.nodes.new(type=<span class="hljs-string">"ShaderNodeOutputMaterial"</span>)<br>        material.node_tree.links.new(emission.outputs[<span class="hljs-string">'Emission'</span>], output.inputs[<span class="hljs-string">'Surface'</span>])<br><br>        obj.data.materials.clear()<br>        obj.data.materials.append(material)<br><br>    scene.render.filepath = cfg.OUTPUT_DIR + <span class="hljs-string">'mask.png'</span><br></code></pre></td></tr></table></figure>
+<h3 id="代码实现-2"><a href="#代码实现-2" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">render_mask</span><span class="hljs-params">()</span>:</span><br>    scene = bpy.context.scene<br>    objs = [obj <span class="hljs-keyword">for</span> obj <span class="hljs-keyword">in</span> bpy.data.objects <span class="hljs-keyword">if</span> obj.type <span class="hljs-keyword">in</span> (<span class="hljs-string">"MESH"</span>, <span class="hljs-string">"CURVE"</span>)]<br>    <span class="hljs-keyword">for</span> obj_idx, obj <span class="hljs-keyword">in</span> enumerate(objs):<br>        color = cfg.colors[obj_idx] + (<span class="hljs-number">1</span>,)	<span class="hljs-comment"># 得到不同的颜色</span><br><br>        material_name = <span class="hljs-string">"auto.material."</span> + obj.name	<br>        material = bpy.data.materials.new(material_name)<br><br>        material[<span class="hljs-string">"is_auto"</span>] = <span class="hljs-literal">True</span><br>        material.use_nodes = <span class="hljs-literal">True</span><br>        material.node_tree.nodes.clear()<br><br>        emission = material.node_tree.nodes.new(type=<span class="hljs-string">"ShaderNodeEmission"</span>)<br>        emission.inputs[<span class="hljs-string">'Color'</span>].default_value = color	<span class="hljs-comment"># 给不同物体设置不同颜色</span><br><br>        output = material.node_tree.nodes.new(type=<span class="hljs-string">"ShaderNodeOutputMaterial"</span>)<br>        material.node_tree.links.new(emission.outputs[<span class="hljs-string">'Emission'</span>], output.inputs[<span class="hljs-string">'Surface'</span>])<br><br>        obj.data.materials.clear()	<span class="hljs-comment"># 删除物体之前的所有材质</span><br>        obj.data.materials.append(material)	<span class="hljs-comment"># 将刚刚创建并初始化颜色的材质加入物体</span><br><br>    scene.render.filepath = cfg.OUTPUT_DIR + <span class="hljs-string">'mask.png'</span><br></code></pre></td></tr></table></figure>
 
 <h3 id="渲染结果-1"><a href="#渲染结果-1" class="headerlink" title="渲染结果"></a>渲染结果</h3><p><img src="http://cdn.ziyedy.top/Blender%E4%BD%BF%E7%94%A8Python%E8%84%9A%E6%9C%AC%E7%94%9F%E6%88%90CV%E6%95%B0%E6%8D%AE%E9%9B%86/mask.png" alt=""></p>
-<h2 id="为模型中每个点赋值并渲染"><a href="#为模型中每个点赋值并渲染" class="headerlink" title="为模型中每个点赋值并渲染"></a>为模型中每个点赋值并渲染</h2><p>由于渲染数据集时需要使用新数据集用nocs方法进行方法性能检验，所以必须要渲染得到nocs图（nocs相关见）</p>
+<h2 id="为模型中每个点赋值并渲染"><a href="#为模型中每个点赋值并渲染" class="headerlink" title="为模型中每个点赋值并渲染"></a>为模型中每个点赋值并渲染</h2><p>由于渲染数据集时需要使用新数据集用nocs方法进行方法性能检验，所以必须要渲染得到nocs图（nocs相关见<a href="https://github.com/hughw19/NOCS_CVPR2019）" target="_blank" rel="noopener">https://github.com/hughw19/NOCS_CVPR2019）</a></p>
+<p>参考<a href="https://blender.stackexchange.com/questions/2324/using-wrl-data-in-cycles/2325#2325" target="_blank" rel="noopener">https://blender.stackexchange.com/questions/2324/using-wrl-data-in-cycles/2325#2325</a></p>
 <p><img src="http://cdn.ziyedy.top/Blender%E4%BD%BF%E7%94%A8Python%E8%84%9A%E6%9C%AC%E7%94%9F%E6%88%90CV%E6%95%B0%E6%8D%AE%E9%9B%86/nocs_render.png" alt=""></p>
 <h3 id="代码实现-3"><a href="#代码实现-3" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">render_nocs</span><span class="hljs-params">()</span>:</span><br>    scene = bpy.context.scene<br>    objs = [obj <span class="hljs-keyword">for</span> obj <span class="hljs-keyword">in</span> bpy.data.objects <span class="hljs-keyword">if</span> obj.type <span class="hljs-keyword">in</span> (<span class="hljs-string">"MESH"</span>, <span class="hljs-string">"CURVE"</span>)]<br>    <span class="hljs-keyword">for</span> obj_idx, obj <span class="hljs-keyword">in</span> enumerate(objs):<br>        vcol_layer = obj.data.vertex_colors.new()<br>        <span class="hljs-keyword">for</span> loop_index, loop <span class="hljs-keyword">in</span> enumerate(obj.data.loops):<br>            loop_vert_index = loop.vertex_index<br>            scale = <span class="hljs-number">1</span><br>            color = scale * obj.data.vertices[loop_vert_index].co + Vector([<span class="hljs-number">0.5</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.5</span>])<br>            color = tuple(color) + (<span class="hljs-number">1</span>,)<br><br>            vcol_layer.data[loop_index].color = color<br>        obj.data.vertex_colors.active = vcol_layer<br>        obj.data.update()<br><br>        material = bpy.data.materials.new(<span class="hljs-string">'coord_color'</span>)<br><br>        material.alpha_threshold = <span class="hljs-number">1</span><br><br>        material[<span class="hljs-string">"is_auto"</span>] = <span class="hljs-literal">True</span><br>        material.use_nodes = <span class="hljs-literal">True</span><br>        material.node_tree.nodes.clear()<br><br>        attr = material.node_tree.nodes.new(type=<span class="hljs-string">"ShaderNodeAttribute"</span>)<br>        attr.attribute_name = <span class="hljs-string">"Col"</span><br><br>        output = material.node_tree.nodes.new(type=<span class="hljs-string">"ShaderNodeOutputMaterial"</span>)<br><br>        material.node_tree.links.new(attr.outputs[<span class="hljs-string">'Color'</span>], output.inputs[<span class="hljs-string">'Surface'</span>])<br><br>        obj.data.materials.clear()<br>        obj.data.materials.append(material)<br>        obj.active_material = material<br>    scene.render.filepath = cfg.OUTPUT_DIR + <span class="hljs-string">'nocs.png'</span><br></code></pre></td></tr></table></figure>
 
@@ -269,8 +277,17 @@
    
   <nav class="article-nav">
     
-    
       <a href="/page/null.html" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            死锁
+          
+        </div>
+      </a>
+    
+    
+      <a href="/page/process-thread.html" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
         <div class="article-nav-title">进程与线程</div>
       </a>
@@ -395,7 +412,7 @@
 <nav class="navbar">
   
   <div class="logo">
-    <a href="/"><img src="/images/ayer-side.svg" alt="浔庐子夜"></a>
+    <a href="/"><img src="/images/ayer-side.svg" alt="子夜nostalgic"></a>
   </div>
   
   <ul class="nav nav-main">

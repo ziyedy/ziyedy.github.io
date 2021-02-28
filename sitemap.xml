@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://ziyedy.top/page/blender-render-cv-dataset.html</loc>
+    
+    <lastmod>2021-02-28</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://ziyedy.top/page/process-thread.html</loc>
+    
+    <lastmod>2021-02-28</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://ziyedy.top/page/java-collection.html</loc>
+    
+    <lastmod>2021-02-28</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://ziyedy.top/page/null.html</loc>
+    
+    <lastmod>2021-02-28</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://ziyedy.top/page/tomcat-basic-summary.html</loc>
     
     <lastmod>2021-02-28</lastmod>
@@ -100,21 +128,7 @@
   </url>
   
   <url>
-    <loc>http://ziyedy.top/page/blender-render-cv-dataset.html</loc>
-    
-    <lastmod>2021-02-28</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://ziyedy.top/page/transport-layer.html</loc>
-    
-    <lastmod>2021-02-26</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://ziyedy.top/page/null.html</loc>
     
     <lastmod>2021-02-26</lastmod>
     
@@ -187,13 +201,6 @@
     <loc>http://ziyedy.top/page/Java-string.html</loc>
     
     <lastmod>2021-01-30</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://ziyedy.top/page/java-collection.html</loc>
-    
-    <lastmod>2021-01-23</lastmod>
     
   </url>
   
@@ -1151,6 +1158,13 @@
     <priority>0.6</priority>
   </url>
   
+  <url>
+    <loc>http://ziyedy.top/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</loc>
+    <lastmod>2021-02-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
 
   
   <url>
@@ -1351,6 +1365,13 @@
   
   <url>
     <loc>http://ziyedy.top/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Java/JVM/</loc>
+    <lastmod>2021-02-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://ziyedy.top/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</loc>
     <lastmod>2021-02-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

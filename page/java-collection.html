@@ -13,7 +13,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    Java：集合与容器 |  浔庐子夜
+    Java：集合与容器 |  子夜nostalgic
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">485</span>
+            <span class="post-count">1.2k</span>
         </span>
     </span>
 
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">1 min</span>
+            <span class="post-count">5 min</span>
         </span>
     </span>
 </div>
@@ -102,26 +102,61 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <p>equal方法指内容是否相同</p>
-<p>==指地址是否相同</p>
-<p>String的对象一旦被创建，则不能修改，是不可变的（即使用substr等函数时其本身是不会变的）</p>
-<p>当频繁操作字符串时，使用StringBuilder</p>
-<p>常用方法</p>
-<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs processing">StringBuilder <span class="hljs-built_in">str</span> = <span class="hljs-keyword">new</span> StringBuilder(<span class="hljs-string">"hello"</span>);<br><span class="hljs-built_in">str</span>.<span class="hljs-built_in">append</span>(<span class="hljs-string">" world"</span>);	<span class="hljs-comment">// 向后添加字符串</span><br><span class="hljs-built_in">str</span>.delete(<span class="hljs-number">0</span>,<span class="hljs-number">5</span>);	<span class="hljs-comment">// 删除第0-4个字符</span><br><span class="hljs-built_in">str</span>.insert(<span class="hljs-number">4</span>,<span class="hljs-string">"gg"</span>);	<span class="hljs-comment">// 在索引4向后插入gg</span><br><span class="hljs-built_in">str</span>.replace(<span class="hljs-number">4</span>,<span class="hljs-number">6</span>,<span class="hljs-string">"aa"</span>);	<span class="hljs-comment">// 在缩影4到5处替换为aa</span><br></code></pre></td></tr></table></figure>
-
-
-
-<h3 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h3><p>Collection：List，Queue，Set</p>
+  <h1 id="集合框架体系"><a href="#集合框架体系" class="headerlink" title="集合框架体系"></a>集合框架体系</h1><h1 id="List"><a href="#List" class="headerlink" title="List"></a>List</h1><p>List集合的主要实现类有ArrayList和LinkedList，分别是数据结构中顺序表和链表的实现。另外还包括栈和队列的实现类：Deque和Queue。</p>
 <p>List是元素有序并且可以重复的集合，称为序列</p>
 <p>两个主要实现类：ArrayList，LinkedList</p>
+<p>有序 元素不唯一</p>
+<h2 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h2><p>在内存中分配连续的空间，实现了长度可变的数组</p>
+<p>优点：遍历元素和随机访问元素的效率比较高</p>
+<p>缺点：添加和删除需大量移动元素效率低，按照内容查询效率低</p>
 <p>ArrayList底层由数组实现，动态增长，其中元素可以为null</p>
-<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs arduino">ArrayList <span class="hljs-built_in">list</span> = <span class="hljs-keyword">new</span> ArrayList();<br><span class="hljs-built_in">list</span>.add(<span class="hljs-number">1</span>);	<span class="hljs-comment">// 向后添加</span><br><span class="hljs-built_in">list</span>.<span class="hljs-built_in">size</span>();	<span class="hljs-comment">// 获取元素数量</span><br><span class="hljs-built_in">list</span>.<span class="hljs-built_in">get</span>(<span class="hljs-number">1</span>);	<span class="hljs-comment">// 取出索引值为1的元素</span><br><span class="hljs-built_in">list</span>.<span class="hljs-built_in">remove</span>(<span class="hljs-number">2</span>);	<span class="hljs-comment">// 移除索引为2的元素</span><br></code></pre></td></tr></table></figure>
+<h3 id="主要方法"><a href="#主要方法" class="headerlink" title="主要方法"></a>主要方法</h3><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs arduino">ArrayList <span class="hljs-built_in">list</span> = <span class="hljs-keyword">new</span> ArrayList();<br><span class="hljs-built_in">list</span>.add(<span class="hljs-number">1</span>);	<span class="hljs-comment">// 向后添加</span><br><span class="hljs-built_in">list</span>.<span class="hljs-built_in">size</span>();	<span class="hljs-comment">// 获取元素数量</span><br><span class="hljs-built_in">list</span>.<span class="hljs-built_in">get</span>(<span class="hljs-number">1</span>);	<span class="hljs-comment">// 取出索引值为1的元素</span><br><span class="hljs-built_in">list</span>.<span class="hljs-built_in">remove</span>(<span class="hljs-number">2</span>);	<span class="hljs-comment">// 移除索引为2的元素</span><br></code></pre></td></tr></table></figure>
 
 
 
-<p>Set</p>
-<p>元素无序且不可以重复的集合。</p>
+<h3 id="底层实现"><a href="#底层实现" class="headerlink" title="底层实现"></a>底层实现</h3><p><code>ArrayList</code>底层就是一个长度可以动态增长的Object数组，如下<code>elementData</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ArrayList</span>&lt;<span class="hljs-title">E</span>&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title">AbstractList</span>&lt;<span class="hljs-title">E</span>&gt;<br>        <span class="hljs-keyword">implements</span> <span class="hljs-title">List</span>&lt;<span class="hljs-title">E</span>&gt;, <span class="hljs-title">RandomAccess</span>, <span class="hljs-title">Cloneable</span>, <span class="hljs-title">java</span>.<span class="hljs-title">io</span>.<span class="hljs-title">Serializable</span><br></span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">long</span> serialVersionUID = <span class="hljs-number">8683452581122892189L</span>;<br><br>    <span class="hljs-comment">/**<br>     * Default initial capacity.<br>     */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> DEFAULT_CAPACITY = <span class="hljs-number">10</span>;<br><br>    <span class="hljs-comment">/**<br>     * Shared empty array instance used for empty instances.<br>     */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Object[] EMPTY_ELEMENTDATA = &#123;&#125;;<br><br>    <span class="hljs-comment">/**<br>     * Shared empty array instance used for default sized empty instances. We<br>     * distinguish this from EMPTY_ELEMENTDATA to know how much to inflate when<br>     * first element is added.<br>     */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = &#123;&#125;;<br><br>    <span class="hljs-comment">/**<br>     * The array buffer into which the elements of the ArrayList are stored.<br>     * The capacity of the ArrayList is the length of this array buffer. Any<br>     * empty ArrayList with elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA<br>     * will be expanded to DEFAULT_CAPACITY when the first element is added.<br>     */</span><br>    <span class="hljs-keyword">transient</span> Object[] elementData; <span class="hljs-comment">// non-private to simplify nested class access</span><br><br>    <span class="hljs-comment">/**<br>     * The size of the ArrayList (the number of elements it contains).<br>     */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> size;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>JDK1.7中，使用无参数构造方法创建<code>ArrayList</code>对象时，默认底层数组长度是10。</p>
+<p>JDK1.8中，使用无参数构造方法创建<code>ArrayList</code>对象时，默认底层数组长度是0</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**<br>* Constructs an empty list with an initial capacity of ten.<br>*/</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ArrayList</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">this</span>.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;<br>&#125;<br><br><span class="hljs-keyword">private</span> Object[] grow(<span class="hljs-keyword">int</span> minCapacity) &#123;<br>    <span class="hljs-keyword">int</span> oldCapacity = elementData.length;<br>    <span class="hljs-keyword">if</span> (oldCapacity &gt; <span class="hljs-number">0</span> || elementData != DEFAULTCAPACITY_EMPTY_ELEMENTDATA) &#123;<br>        <span class="hljs-keyword">int</span> newCapacity = ArraysSupport.newLength(oldCapacity,<br>                                                  minCapacity - oldCapacity, <span class="hljs-comment">/* minimum growth */</span><br>                                                  oldCapacity &gt;&gt; <span class="hljs-number">1</span>           <span class="hljs-comment">/* preferred growth */</span>);<br>        <span class="hljs-keyword">return</span> elementData = Arrays.copyOf(elementData, newCapacity);<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> elementData = <span class="hljs-keyword">new</span> Object[Math.max(DEFAULT_CAPACITY, minCapacity)];<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>ArrayList中提供了一个内部类Itr，实现了<code>Iterator</code>接口，实现对集合元素的遍历</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> Iterator&lt;E&gt; <span class="hljs-title">iterator</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Itr();<br>&#125;<br><span class="hljs-keyword">private</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Itr</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Iterator</span>&lt;<span class="hljs-title">E</span>&gt; </span>&#123; &#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h2><p>采用双向链表方式存储</p>
+<p>缺点：遍历和随机访问元素效率低下</p>
+<p>优点：插入、删除元素效率比较高（但是前提也是必须先低效率查询才可。如果插入删除发生在头尾可以减少查询次数）</p>
+<p><code>LinkedList</code>实现了<code>Deque</code>接口，所以除了可以作为线性表来使用外，还可以当做队列和栈来使用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LinkedList</span>&lt;<span class="hljs-title">E</span>&gt;<br>    <span class="hljs-keyword">extends</span> <span class="hljs-title">AbstractSequentialList</span>&lt;<span class="hljs-title">E</span>&gt;<br>    <span class="hljs-keyword">implements</span> <span class="hljs-title">List</span>&lt;<span class="hljs-title">E</span>&gt;, <span class="hljs-title">Deque</span>&lt;<span class="hljs-title">E</span>&gt;, <span class="hljs-title">Cloneable</span>, <span class="hljs-title">java</span>.<span class="hljs-title">io</span>.<span class="hljs-title">Serializable</span><br></span>&#123;<br>    <span class="hljs-keyword">transient</span> <span class="hljs-keyword">int</span> size = <span class="hljs-number">0</span>;<br><br>    <span class="hljs-comment">/**<br>     * Pointer to first node.<br>     */</span><br>    <span class="hljs-keyword">transient</span> Node&lt;E&gt; first;<br><br>    <span class="hljs-comment">/**<br>     * Pointer to last node.<br>     */</span><br>    <span class="hljs-keyword">transient</span> Node&lt;E&gt; last;<br><br>    <span class="hljs-comment">/**<br>     * Constructs an empty list.<br>     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">LinkedList</span><span class="hljs-params">()</span> </span>&#123;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<p>有一个静态内部类Node，表示双向链表的节点。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Node</span>&lt;<span class="hljs-title">E</span>&gt; </span>&#123;<br>    E item;<br>    Node&lt;E&gt; next;<br>    Node&lt;E&gt; prev;<br><br>    Node(Node&lt;E&gt; prev, E element, Node&lt;E&gt; next) &#123;<br>        <span class="hljs-keyword">this</span>.item = element;<br>        <span class="hljs-keyword">this</span>.next = next;<br>        <span class="hljs-keyword">this</span>.prev = prev;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h1 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h1><p>元素无序，且不可以重复的集合。</p>
+<h2 id="HashSet"><a href="#HashSet" class="headerlink" title="HashSet"></a>HashSet</h2><p>•    采用Hashtable哈希表存储结构（神奇的结构）</p>
+<p>•    优点：添加速度快 查询速度快 删除速度快</p>
+<p>•    缺点：无序</p>
 <p>HashSet是Set的一个重要元素，称为哈希集，其中元素无序且不可以重复，只允许一个null元素。</p>
+<h2 id="LinkedHashSet"><a href="#LinkedHashSet" class="headerlink" title="LinkedHashSet"></a>LinkedHashSet</h2><p>•    采用哈希表存储结构，同时使用链表维护次序</p>
+<p>•    有序（添加顺序）</p>
+<h2 id="TreeSet"><a href="#TreeSet" class="headerlink" title="TreeSet"></a>TreeSet</h2><p>•    采用二叉树（红黑树）的存储结构</p>
+<p>•    优点：有序 查询速度比List快（按照内容查询）</p>
+<p>•    缺点：查询速度没有HashSet快</p>
 <h3 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h3><p>Iterator接口可以以统一的方式对各种集合元素进行遍历，调用各种集合元素的iterator()方法得到迭代器。</p>
 <p>hasNext()方法检测集合中是否还有下一个元素</p>
 <p>next()方法返回集合中的下一个元素</p>
@@ -360,7 +395,7 @@
 <nav class="navbar">
   
   <div class="logo">
-    <a href="/"><img src="/images/ayer-side.svg" alt="浔庐子夜"></a>
+    <a href="/"><img src="/images/ayer-side.svg" alt="子夜nostalgic"></a>
   </div>
   
   <ul class="nav nav-main">
