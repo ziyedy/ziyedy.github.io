@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://ziyedy.top/page/mybatis-basic-summary.html</loc>
+    
+    <lastmod>2021-02-28</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://ziyedy.top/page/design-pattern-6-principle.html</loc>
+    
+    <lastmod>2021-02-28</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://ziyedy.top/page/factory-pattern.html</loc>
+    
+    <lastmod>2021-02-28</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://ziyedy.top/page/singleton-pattern.html</loc>
+    
+    <lastmod>2021-02-28</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://ziyedy.top/page/blender-render-cv-dataset.html</loc>
     
     <lastmod>2021-02-28</lastmod>
@@ -45,13 +73,6 @@
   
   <url>
     <loc>http://ziyedy.top/page/servlet-basic-summary.html</loc>
-    
-    <lastmod>2021-02-28</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://ziyedy.top/page/null.html</loc>
     
     <lastmod>2021-02-28</lastmod>
     
@@ -131,27 +152,6 @@
     <loc>http://ziyedy.top/page/transport-layer.html</loc>
     
     <lastmod>2021-02-26</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://ziyedy.top/page/null.html</loc>
-    
-    <lastmod>2021-02-23</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://ziyedy.top/page/null.html</loc>
-    
-    <lastmod>2021-02-22</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://ziyedy.top/page/null.html</loc>
-    
-    <lastmod>2021-02-22</lastmod>
     
   </url>
   
@@ -1165,6 +1165,13 @@
     <priority>0.6</priority>
   </url>
   
+  <url>
+    <loc>http://ziyedy.top/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2021-02-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
 
   
   <url>
@@ -1372,6 +1379,20 @@
   
   <url>
     <loc>http://ziyedy.top/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</loc>
+    <lastmod>2021-02-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://ziyedy.top/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2021-02-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://ziyedy.top/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Java/%E6%A1%86%E6%9E%B6/</loc>
     <lastmod>2021-02-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

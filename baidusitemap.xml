@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://ziyedy.top/page/mybatis-basic-summary.html</loc>
+    <lastmod>2021-02-28</lastmod>
+  </url>
+  <url>
+    <loc>http://ziyedy.top/page/design-pattern-6-principle.html</loc>
+    <lastmod>2021-02-28</lastmod>
+  </url>
+  <url>
+    <loc>http://ziyedy.top/page/factory-pattern.html</loc>
+    <lastmod>2021-02-28</lastmod>
+  </url>
+  <url>
+    <loc>http://ziyedy.top/page/singleton-pattern.html</loc>
+    <lastmod>2021-02-28</lastmod>
+  </url>
+  <url>
     <loc>http://ziyedy.top/page/blender-render-cv-dataset.html</loc>
     <lastmod>2021-02-28</lastmod>
   </url>
@@ -26,10 +42,6 @@
   </url>
   <url>
     <loc>http://ziyedy.top/page/servlet-basic-summary.html</loc>
-    <lastmod>2021-02-28</lastmod>
-  </url>
-  <url>
-    <loc>http://ziyedy.top/page/null.html</loc>
     <lastmod>2021-02-28</lastmod>
   </url>
   <url>
@@ -75,18 +87,6 @@
   <url>
     <loc>http://ziyedy.top/page/transport-layer.html</loc>
     <lastmod>2021-02-26</lastmod>
-  </url>
-  <url>
-    <loc>http://ziyedy.top/page/null.html</loc>
-    <lastmod>2021-02-23</lastmod>
-  </url>
-  <url>
-    <loc>http://ziyedy.top/page/null.html</loc>
-    <lastmod>2021-02-22</lastmod>
-  </url>
-  <url>
-    <loc>http://ziyedy.top/page/null.html</loc>
-    <lastmod>2021-02-22</lastmod>
   </url>
   <url>
     <loc>http://ziyedy.top/page/maven.html</loc>
