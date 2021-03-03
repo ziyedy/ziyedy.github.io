@@ -1,7 +1,151 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://ziyedy.top/page/mybatis-basic-summary.html</loc>
+    <lastmod>2021-02-28</lastmod>
+  </url>
+  <url>
+    <loc>http://ziyedy.top/page/design-pattern-6-principle.html</loc>
+    <lastmod>2021-02-28</lastmod>
+  </url>
+  <url>
+    <loc>http://ziyedy.top/page/factory-pattern.html</loc>
+    <lastmod>2021-02-28</lastmod>
+  </url>
+  <url>
+    <loc>http://ziyedy.top/page/singleton-pattern.html</loc>
+    <lastmod>2021-02-28</lastmod>
+  </url>
+  <url>
+    <loc>http://ziyedy.top/page/blender-render-cv-dataset.html</loc>
+    <lastmod>2021-02-28</lastmod>
+  </url>
+  <url>
+    <loc>http://ziyedy.top/page/process-thread.html</loc>
+    <lastmod>2021-02-28</lastmod>
+  </url>
+  <url>
+    <loc>http://ziyedy.top/page/java-collection.html</loc>
+    <lastmod>2021-02-28</lastmod>
+  </url>
+  <url>
+    <loc>http://ziyedy.top/page/null.html</loc>
+    <lastmod>2021-02-28</lastmod>
+  </url>
+  <url>
+    <loc>http://ziyedy.top/page/tomcat-basic-summary.html</loc>
+    <lastmod>2021-02-28</lastmod>
+  </url>
+  <url>
+    <loc>http://ziyedy.top/page/jdbc-basic-summary.html</loc>
+    <lastmod>2021-02-28</lastmod>
+  </url>
+  <url>
+    <loc>http://ziyedy.top/page/servlet-basic-summary.html</loc>
+    <lastmod>2021-02-28</lastmod>
+  </url>
+  <url>
+    <loc>http://ziyedy.top/page/jvm-classloader.html</loc>
+    <lastmod>2021-02-28</lastmod>
+  </url>
+  <url>
+    <loc>http://ziyedy.top/page/jvm-classbytecode.html</loc>
+    <lastmod>2021-02-28</lastmod>
+  </url>
+  <url>
+    <loc>http://ziyedy.top/page/java-datatype-operator.html</loc>
+    <lastmod>2021-02-28</lastmod>
+  </url>
+  <url>
+    <loc>http://ziyedy.top/page/java-orient-object.html</loc>
+    <lastmod>2021-02-28</lastmod>
+  </url>
+  <url>
+    <loc>http://ziyedy.top/page/Java-annotation.html</loc>
+    <lastmod>2021-02-28</lastmod>
+  </url>
+  <url>
+    <loc>http://ziyedy.top/page/Java-reflection.html</loc>
+    <lastmod>2021-02-28</lastmod>
+  </url>
+  <url>
+    <loc>http://ziyedy.top/page/java-input-output-stream.html</loc>
+    <lastmod>2021-02-28</lastmod>
+  </url>
+  <url>
+    <loc>http://ziyedy.top/page/Java-exception-handle.html</loc>
+    <lastmod>2021-02-28</lastmod>
+  </url>
+  <url>
+    <loc>http://ziyedy.top/page/java-interface-abstractclass.html</loc>
+    <lastmod>2021-02-28</lastmod>
+  </url>
+  <url>
+    <loc>http://ziyedy.top/page/blender-python-script-basic.html</loc>
+    <lastmod>2021-02-28</lastmod>
+  </url>
+  <url>
+    <loc>http://ziyedy.top/page/transport-layer.html</loc>
+    <lastmod>2021-02-26</lastmod>
+  </url>
+  <url>
+    <loc>http://ziyedy.top/page/maven.html</loc>
+    <lastmod>2021-02-07</lastmod>
+  </url>
+  <url>
+    <loc>http://ziyedy.top/page/null.html</loc>
+    <lastmod>2021-02-06</lastmod>
+  </url>
+  <url>
+    <loc>http://ziyedy.top/page/java-basic-grammar.html</loc>
+    <lastmod>2021-02-01</lastmod>
+  </url>
+  <url>
+    <loc>http://ziyedy.top/page/no2-application-llayer.html</loc>
+    <lastmod>2021-01-31</lastmod>
+  </url>
+  <url>
+    <loc>http://ziyedy.top/page/no1-computer-network-and-the-internet.html</loc>
+    <lastmod>2021-01-31</lastmod>
+  </url>
+  <url>
+    <loc>http://ziyedy.top/page/Java-generic.html</loc>
+    <lastmod>2021-01-30</lastmod>
+  </url>
+  <url>
+    <loc>http://ziyedy.top/page/Java-string.html</loc>
+    <lastmod>2021-01-30</lastmod>
+  </url>
+  <url>
+    <loc>http://ziyedy.top/page/mysql2.html</loc>
+    <lastmod>2021-01-22</lastmod>
+  </url>
+  <url>
+    <loc>http://ziyedy.top/page/null.html</loc>
+    <lastmod>2021-01-21</lastmod>
+  </url>
+  <url>
     <loc>http://ziyedy.top/page/ubuntu-install-summary.html</loc>
+    <lastmod>2021-01-21</lastmod>
+  </url>
+  <url>
+    <loc>http://ziyedy.top/page/vim-basic-use.html</loc>
+    <lastmod>2021-01-21</lastmod>
+  </url>
+  <url>
+    <loc>http://ziyedy.top/page/python-depth-points.html</loc>
+    <lastmod>2021-01-11</lastmod>
+  </url>
+  <url>
+    <loc>http://ziyedy.top/page/plyfile.html</loc>
+    <lastmod>2021-01-11</lastmod>
+  </url>
+  <url>
+    <loc>http://ziyedy.top/page/python-mysql-handle.html</loc>
+    <lastmod>2021-01-11</lastmod>
+  </url>
+  <url>
+    <loc>http://ziyedy.top/page/pygame-basic-knowledge.html</loc>
     <lastmod>2021-01-11</lastmod>
   </url>
   <url>
@@ -18,10 +162,6 @@
   </url>
   <url>
     <loc>http://ziyedy.top/page/hexo2.html</loc>
-    <lastmod>2021-01-11</lastmod>
-  </url>
-  <url>
-    <loc>http://ziyedy.top/page/mysql2.html</loc>
     <lastmod>2021-01-11</lastmod>
   </url>
   <url>
@@ -90,18 +230,6 @@
   </url>
   <url>
     <loc>http://ziyedy.top/page/ds-dynamic-array.html</loc>
-    <lastmod>2021-01-11</lastmod>
-  </url>
-  <url>
-    <loc>http://ziyedy.top/page/null.html</loc>
-    <lastmod>2021-01-11</lastmod>
-  </url>
-  <url>
-    <loc>http://ziyedy.top/page/no2-application-llayer.html</loc>
-    <lastmod>2021-01-11</lastmod>
-  </url>
-  <url>
-    <loc>http://ziyedy.top/page/no1-computer-network-and-the-internet.html</loc>
     <lastmod>2021-01-11</lastmod>
   </url>
   <url>
@@ -174,10 +302,6 @@
   </url>
   <url>
     <loc>http://ziyedy.top/page/tf2-nn-basic-handle.html</loc>
-    <lastmod>2021-01-11</lastmod>
-  </url>
-  <url>
-    <loc>http://ziyedy.top/page/vim-basic-use.html</loc>
     <lastmod>2021-01-11</lastmod>
   </url>
   <url>
@@ -301,47 +425,7 @@
     <lastmod>2021-01-11</lastmod>
   </url>
   <url>
-    <loc>http://ziyedy.top/page/Java-string.html</loc>
-    <lastmod>2021-01-11</lastmod>
-  </url>
-  <url>
     <loc>http://ziyedy.top/page/java-for-algorithm-test.html</loc>
-    <lastmod>2021-01-11</lastmod>
-  </url>
-  <url>
-    <loc>http://ziyedy.top/page/java_polymorphic.html</loc>
-    <lastmod>2021-01-11</lastmod>
-  </url>
-  <url>
-    <loc>http://ziyedy.top/page/java4.html</loc>
-    <lastmod>2021-01-11</lastmod>
-  </url>
-  <url>
-    <loc>http://ziyedy.top/page/java-input-output.html</loc>
-    <lastmod>2021-01-11</lastmod>
-  </url>
-  <url>
-    <loc>http://ziyedy.top/page/Java-generic.html</loc>
-    <lastmod>2021-01-11</lastmod>
-  </url>
-  <url>
-    <loc>http://ziyedy.top/page/Java-exception.html</loc>
-    <lastmod>2021-01-11</lastmod>
-  </url>
-  <url>
-    <loc>http://ziyedy.top/page/java-collection.html</loc>
-    <lastmod>2021-01-11</lastmod>
-  </url>
-  <url>
-    <loc>http://ziyedy.top/page/java-interface.html</loc>
-    <lastmod>2021-01-11</lastmod>
-  </url>
-  <url>
-    <loc>http://ziyedy.top/page/java-orient-object.html</loc>
-    <lastmod>2021-01-11</lastmod>
-  </url>
-  <url>
-    <loc>http://ziyedy.top/page/java-basic-grammar.html</loc>
     <lastmod>2021-01-11</lastmod>
   </url>
   <url>
@@ -387,46 +471,6 @@
   <url>
     <loc>http://ziyedy.top/page/ArcGIS_dev.html</loc>
     <lastmod>2021-01-11</lastmod>
-  </url>
-  <url>
-    <loc>http://ziyedy.top/page/blender-script-basic.html</loc>
-    <lastmod>2020-10-19</lastmod>
-  </url>
-  <url>
-    <loc>http://ziyedy.top/page/plyfile.html</loc>
-    <lastmod>2020-10-16</lastmod>
-  </url>
-  <url>
-    <loc>http://ziyedy.top/page/python-depth-points.html</loc>
-    <lastmod>2020-10-05</lastmod>
-  </url>
-  <url>
-    <loc>http://ziyedy.top/page/terminal-process-manage.html</loc>
-    <lastmod>2020-09-03</lastmod>
-  </url>
-  <url>
-    <loc>http://ziyedy.top/page/linux-temp.html</loc>
-    <lastmod>2020-09-03</lastmod>
-  </url>
-  <url>
-    <loc>http://ziyedy.top/page/linux-io-redirection.html</loc>
-    <lastmod>2020-09-03</lastmod>
-  </url>
-  <url>
-    <loc>http://ziyedy.top/page/linux-terminal-file-path.html</loc>
-    <lastmod>2020-09-03</lastmod>
-  </url>
-  <url>
-    <loc>http://ziyedy.top/page/linux-terminal-1.html</loc>
-    <lastmod>2020-09-03</lastmod>
-  </url>
-  <url>
-    <loc>http://ziyedy.top/page/pygame-basic-knowledge.html</loc>
-    <lastmod>2020-08-20</lastmod>
-  </url>
-  <url>
-    <loc>http://ziyedy.top/page/python-mysql-handle.html</loc>
-    <lastmod>2020-08-20</lastmod>
   </url>
   <url>
     <loc>http://ziyedy.top/page/qgis-thematic-map-drawing.html</loc>

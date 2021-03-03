@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-Hans">
+
+
+<head>
+  <meta charset="utf-8" />
+   
+  <meta name="keywords" content="生活" />
+   
+  <meta name="description" content="子夜写字的地方" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    Blender使用Python脚本生成CV数据集 |  子夜nostalgic
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-编程相关/Python/Blender使用Python脚本生成CV数据集"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  Blender使用Python脚本生成CV数据集
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/page/blender-render-cv-dataset.html" class="article-date">
+  <time datetime="2021-02-26T09:12:39.000Z" itemprop="datePublished">2021-02-26</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Python/">Python</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">1.8k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">8 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="获取相机内参、旋转平移等基本信息"><a href="#获取相机内参、旋转平移等基本信息" class="headerlink" title="获取相机内参、旋转平移等基本信息"></a>获取相机内参、旋转平移等基本信息</h2><p>参考：<a href="https://blender.stackexchange.com/questions/38009/3x4-camera-matrix-from-blender-camera" target="_blank" rel="noopener">https://blender.stackexchange.com/questions/38009/3x4-camera-matrix-from-blender-camera</a></p>
+<p>这个应该是使用blender渲染数据集并获取相应GT信息的标准方法与代码了。</p>
+<h3 id="获取相机内参"><a href="#获取相机内参" class="headerlink" title="获取相机内参"></a>获取相机内参</h3><p>主要可以通过在blender中对相机对象及渲染方面的设置得到，</p>
+<ol>
+<li>定义相机类（以blender中的相机对象作为输入）</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Camera</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, camera)</span>:</span><br>        self.camera = camera<br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>获取相机内部传感器的模式与尺寸</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_sensor_size</span><span class="hljs-params">(sensor_fit, sensor_x, sensor_y)</span>:</span><br>    <span class="hljs-keyword">if</span> sensor_fit == <span class="hljs-string">'VERTICAL'</span>:<br>        <span class="hljs-keyword">return</span> sensor_y<br>    <span class="hljs-keyword">return</span> sensor_x<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_sensor_fit</span><span class="hljs-params">(sensor_fit, size_x, size_y)</span>:</span><br>    <span class="hljs-keyword">if</span> sensor_fit == <span class="hljs-string">'AUTO'</span>:<br>        <span class="hljs-keyword">if</span> size_x &gt;= size_y:<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">'HORIZONTAL'</span><br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">'VERTICAL'</span><br>    <span class="hljs-keyword">return</span> sensor_fit<br></code></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>计算得到相机内参</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_camera_intrinsic</span><span class="hljs-params">(self)</span>:</span><br>    camd = self.camera.data<br>    <span class="hljs-keyword">if</span> camd.type != <span class="hljs-string">'PERSP'</span>:<br>        <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">'Non-perspective cameras not supported'</span>)<br>    scene = bpy.context.scene<br>    f_in_mm = camd.lens<br>    scale = scene.render.resolution_percentage / <span class="hljs-number">100</span><br>    resolution_x_in_px = scale * scene.render.resolution_x<br>    resolution_y_in_px = scale * scene.render.resolution_y<br>    <span class="hljs-comment"># 获取传感器的最长边</span><br>    sensor_size_in_mm = get_sensor_size(camd.sensor_fit, camd.sensor_width, camd.sensor_height)<br>    <span class="hljs-comment"># 获取传感器模式</span><br>    sensor_fit = get_sensor_fit(<br>        camd.sensor_fit,<br>        scene.render.pixel_aspect_x * resolution_x_in_px,<br>        scene.render.pixel_aspect_y * resolution_y_in_px<br>    )<br>    pixel_aspect_ratio = scene.render.pixel_aspect_y / scene.render.pixel_aspect_x<br>    <span class="hljs-keyword">if</span> sensor_fit == <span class="hljs-string">'HORIZONTAL'</span>:<br>        view_fac_in_px = resolution_x_in_px<br>    <span class="hljs-keyword">else</span>:<br>        view_fac_in_px = pixel_aspect_ratio * resolution_y_in_px<br>    pixel_size_mm_per_px = sensor_size_in_mm / f_in_mm / view_fac_in_px<br>    s_u = <span class="hljs-number">1</span> / pixel_size_mm_per_px<br>    s_v = <span class="hljs-number">1</span> / pixel_size_mm_per_px / pixel_aspect_ratio<br><br>	<span class="hljs-comment"># Parameters of intrinsic calibration matrix K</span><br>    u_0 = resolution_x_in_px / <span class="hljs-number">2</span> - camd.shift_x * view_fac_in_px<br>    v_0 = resolution_y_in_px / <span class="hljs-number">2</span> + camd.shift_y * view_fac_in_px / pixel_aspect_ratio<br>    skew = <span class="hljs-number">0</span>  <span class="hljs-comment"># only use rectangular pixels</span><br><br>    K = Matrix(<br>        ((s_u, skew, u_0),<br>        (<span class="hljs-number">0</span>, s_v, v_0),<br>        (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>)))<br>    <span class="hljs-keyword">return</span> K<br></code></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>根据获取相机内参中的逻辑可以编写通过内参矩阵设置相机内参的代码</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">set_camera_intrinsic</span><span class="hljs-params">(self, K)</span>:</span><br>    scene = bpy.context.scene<br>    camd = self.camera.data<br><br>    scale = scene.render.resolution_percentage / <span class="hljs-number">100</span><br>    resolution_x_in_px = scale * scene.render.resolution_x<br>    resolution_y_in_px = scale * scene.render.resolution_y<br><br>    <span class="hljs-comment"># 获取传感器的最长边</span><br>    sensor_size_in_mm = get_sensor_size(camd.sensor_fit, camd.sensor_width, camd.sensor_height)<br>    <span class="hljs-comment"># 获取传感器模式</span><br>    sensor_fit = get_sensor_fit(<br>        camd.sensor_fit,<br>        scene.render.pixel_aspect_x * resolution_x_in_px,<br>        scene.render.pixel_aspect_y * resolution_y_in_px<br>    )<br>    pixel_aspect_ratio = scene.render.pixel_aspect_y / scene.render.pixel_aspect_x<br>    <span class="hljs-keyword">if</span> sensor_fit == <span class="hljs-string">'HORIZONTAL'</span>:<br>        view_fac_in_px = resolution_x_in_px<br>        <span class="hljs-keyword">else</span>:<br>            view_fac_in_px = pixel_aspect_ratio * resolution_y_in_px<br><br>            camd.lens = K[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>] * sensor_size_in_mm / view_fac_in_px<br>            camd.shift_x = (resolution_x_in_px / <span class="hljs-number">2</span> - K[<span class="hljs-number">0</span>, <span class="hljs-number">2</span>]) / view_fac_in_px<br>            camd.shift_y = ((K[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>] - resolution_y_in_px / <span class="hljs-number">2</span>) * pixel_aspect_ratio) / view_fac_in_px<br></code></pre></td></tr></table></figure>
+
+<h3 id="获取物体旋转平移矩阵"><a href="#获取物体旋转平移矩阵" class="headerlink" title="获取物体旋转平移矩阵"></a>获取物体旋转平移矩阵</h3><p>主要在于获取相机在世界坐标系的位置（经过转化后可以视为blender中内置的坐标）与旋转，以及目标物体在世界坐标系中的位置与旋转，之后可以根据定义计算得到。</p>
+<ol>
+<li>获取相机的外参矩阵（代码逻辑可以参考上述stackexchange中的内容）</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_camera_extrinsic</span><span class="hljs-params">(self)</span>:</span><br>    R_bcam2cv = Matrix(<br>        ((<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>),<br>         (<span class="hljs-number">0</span>, <span class="hljs-number">-1</span>, <span class="hljs-number">0</span>),<br>         (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">-1</span>)))<br><br>    location, rotation = self.camera.matrix_world.decompose()[<span class="hljs-number">0</span>: <span class="hljs-number">2</span>]<br><br>    R_world2bcam = rotation.to_matrix().transposed()<br>    T_world2bcam = <span class="hljs-number">-1</span> * R_world2bcam @ location<br><br>    R_world2cv = R_bcam2cv @ R_world2bcam<br>    T_world2cv = R_bcam2cv @ T_world2bcam<br><br>    RT = Matrix((<br>        R_world2cv[<span class="hljs-number">0</span>][:] + (T_world2cv[<span class="hljs-number">0</span>],),<br>        R_world2cv[<span class="hljs-number">1</span>][:] + (T_world2cv[<span class="hljs-number">1</span>],),<br>        R_world2cv[<span class="hljs-number">2</span>][:] + (T_world2cv[<span class="hljs-number">2</span>],),<br>        (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>)<br>    ))<br><br>    <span class="hljs-keyword">return</span> RT<br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>获取物体相对于blender原点的旋转与平移</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">transform_matrix = obj.matrix_world.copy()	// obj为获得的物体<br>gt_rt = camera_param[<span class="hljs-string">'RT'</span>] @ obj_matrix		// 相机外参与获取物体相乘<br></code></pre></td></tr></table></figure>
+
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>1、当物体相对原点有旋转与平移的情况</p>
+<p>obj与ply的存储坐标有不同（没有详细查看文件格式，但经过实验应该是这样的，如下图所示，即obj在读入blender中时会在x轴自带90度的旋转）</p>
+<p>所以如果使用obj文件进行渲染时，在获取目标平移旋转矩阵时不进行以上第2步，则不能得到正确的GT值，需要注意。</p>
+<p><img src="http://cdn.ziyedy.top/Blender%E4%BD%BF%E7%94%A8Python%E8%84%9A%E6%9C%AC%E7%94%9F%E6%88%90CV%E6%95%B0%E6%8D%AE%E9%9B%86/obj_and_ply.png" alt=""></p>
+<p>2、对物体进行刚体运动后<code>matrix_world</code>没变</p>
+<p>这是由于blender没有在物体转变后立刻重新计算，在blender2.8的版本下需要在刚体变化后加上如下代码，参考<a href="https://blender.stackexchange.com/questions/27667/incorrect-matrix-world-after-transformation" target="_blank" rel="noopener">https://blender.stackexchange.com/questions/27667/incorrect-matrix-world-after-transformation</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">context.view_layer.update()<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="渲染背景图片"><a href="#渲染背景图片" class="headerlink" title="渲染背景图片"></a>渲染背景图片</h2><p>即让对应的模型带上背景图片，参考<a href="https://henryegloff.com/how-to-render-a-background-image-in-blender-2-8/" target="_blank" rel="noopener">https://henryegloff.com/how-to-render-a-background-image-in-blender-2-8/</a></p>
+<p>在blender中的处理流程如下（在<code>Compositor</code>模式下）</p>
+<p><img src="http://cdn.ziyedy.top/Blender%E4%BD%BF%E7%94%A8Python%E8%84%9A%E6%9C%AC%E7%94%9F%E6%88%90CV%E6%95%B0%E6%8D%AE%E9%9B%86/bg_render.png" alt=""></p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><ol>
+<li>获取作为背景的图片</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">bg_img = bpy.data.images.load(filepath=<span class="hljs-string">"/path/to/bg_img.png"</span>)<br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>传入背景图片，使用脚本完成节点的构建</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">render_rgb</span><span class="hljs-params">(bg_img)</span>:</span><br>    scene = bpy.context.scene<br>    scene.use_nodes = <span class="hljs-literal">True</span><br>    tree = scene.node_tree<br>    links = tree.links<br>    links.clear()<br><br>    <span class="hljs-comment"># 合成渲染</span><br>    composite_node = tree.nodes[<span class="hljs-string">"Composite"</span>]<br>    rl_node = tree.nodes[<span class="hljs-string">"Render Layers"</span>]<br><br>    img_node = tree.nodes.new(type=<span class="hljs-string">"CompositorNodeImage"</span>)<br>    scale_node = tree.nodes.new(type=<span class="hljs-string">"CompositorNodeScale"</span>)<br>    ao_node = tree.nodes.new(type=<span class="hljs-string">"CompositorNodeAlphaOver"</span>)<br><br>    img_node.image = bg_img<br><br>    scale_node.space = <span class="hljs-string">'RENDER_SIZE'</span><br>    scale_node.frame_method = <span class="hljs-string">'CROP'</span><br><br>    links.new(img_node.outputs[<span class="hljs-string">'Image'</span>], scale_node.inputs[<span class="hljs-string">'Image'</span>])<br>    links.new(scale_node.outputs[<span class="hljs-string">'Image'</span>], ao_node.inputs[<span class="hljs-number">1</span>])<br>    links.new(rl_node.outputs[<span class="hljs-string">'Image'</span>], ao_node.inputs[<span class="hljs-number">2</span>])<br><br>    links.new(ao_node.outputs[<span class="hljs-string">'Image'</span>], composite_node.inputs[<span class="hljs-string">'Image'</span>])<br><br>    scene.render.filepath = cfg.OUTPUT_DIR + <span class="hljs-string">'test.png'</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="为物体加上阴影"><a href="#为物体加上阴影" class="headerlink" title="为物体加上阴影"></a>为物体加上阴影</h3><p>添加plane在需要投影的位置并且合理设置灯光即可得到物体相对的投影，参考</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">bpy.ops.mesh.primitive_plane_add()	// 新建plane<br>bpy.context.object.cycles.is_shadow_catcher = <span class="hljs-literal">True</span>	// 设置相应的渲染属性<br></code></pre></td></tr></table></figure>
+
+<h3 id="渲染结果"><a href="#渲染结果" class="headerlink" title="渲染结果"></a>渲染结果</h3><p><img src="http://cdn.ziyedy.top/Blender%E4%BD%BF%E7%94%A8Python%E8%84%9A%E6%9C%AC%E7%94%9F%E6%88%90CV%E6%95%B0%E6%8D%AE%E9%9B%86/background.png" alt=""></p>
+<h2 id="生成深度图"><a href="#生成深度图" class="headerlink" title="生成深度图"></a>生成深度图</h2><p>在blender中的处理流程如下（在<code>Compositor</code>模式下），其实就是在渲染背景图的基础上新添加了一个用于处理depth的节点与一个渲染输出节点</p>
+<p><img src="http://cdn.ziyedy.top/Blender%E4%BD%BF%E7%94%A8Python%E8%84%9A%E6%9C%AC%E7%94%9F%E6%88%90CV%E6%95%B0%E6%8D%AE%E9%9B%86/depth_render.png" alt=""></p>
+<h3 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h3><ol>
+<li>设置节点及连接渲染得到exr格式的深度图</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">render_depth</span><span class="hljs-params">()</span>:</span><br>    scene = bpy.context.scene<br>    tree = scene.node_tree<br>    links = tree.links<br><br>    rl_node = tree.nodes[<span class="hljs-string">"Render Layers"</span>]<br><br>    map_node = tree.nodes.new(type=<span class="hljs-string">"CompositorNodeMapRange"</span>)<br>    map_node.inputs[<span class="hljs-number">1</span>].default_value = <span class="hljs-number">0</span><br>    map_node.inputs[<span class="hljs-number">2</span>].default_value = <span class="hljs-number">2</span><br>    map_node.inputs[<span class="hljs-number">3</span>].default_value = <span class="hljs-number">0</span><br>    map_node.inputs[<span class="hljs-number">4</span>].default_value = <span class="hljs-number">1</span><br><br>    depth_file_output = tree.nodes.new(type=<span class="hljs-string">"CompositorNodeOutputFile"</span>)<br>    depth_file_output.base_path = <span class="hljs-string">''</span><br>    depth_file_output.format.file_format = <span class="hljs-string">'OPEN_EXR'</span><br>    depth_file_output.format.color_depth = <span class="hljs-string">'32'</span><br><br>    links.new(rl_node.outputs[<span class="hljs-string">'Depth'</span>], map_node.inputs[<span class="hljs-number">0</span>])<br>    links.new(map_node.outputs[<span class="hljs-number">0</span>], depth_file_output.inputs[<span class="hljs-number">0</span>])<br><br>    depth_file_output.file_slots[<span class="hljs-number">0</span>].path = cfg.OUTPUT_DIR + <span class="hljs-string">'depth_'</span><br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>将渲染得到的exr格式的深度图转化为常用的png格式，需要安装<code>OpenEXR</code>库</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python">// 先转化为png再删除exr文件<br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">exr_to_png</span><span class="hljs-params">(exr_path)</span>:</span><br>    depth_path = exr_path.replace(<span class="hljs-string">'.exr'</span>, <span class="hljs-string">'.png'</span>)<br>    exr_image = OpenEXR.InputFile(exr_path)<br>    dw = exr_image.header()[<span class="hljs-string">'dataWindow'</span>]<br>    (width, height) = (dw.max.x - dw.min.x + <span class="hljs-number">1</span>, dw.max.y - dw.min.y + <span class="hljs-number">1</span>)<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read_exr</span><span class="hljs-params">(s, width, height)</span>:</span><br>        mat = np.fromstring(s, dtype=np.float32)<br>        mat = mat.reshape(height, width)<br>        <span class="hljs-keyword">return</span> mat<br><br>    dmap, _, _ = [read_exr(s, width, height) <span class="hljs-keyword">for</span> s <span class="hljs-keyword">in</span><br>                  exr_image.channels(<span class="hljs-string">'BGR'</span>, Imath.PixelType(Imath.PixelType.FLOAT))]<br>    dmap = Image.fromarray((dmap != <span class="hljs-number">1</span>).astype(np.int32))<br>    dmap.save(depth_path)<br>    exr_image.close()<br>    os.system(<span class="hljs-string">'rm &#123;&#125;'</span>.format(exr_path))<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="生成Mask"><a href="#生成Mask" class="headerlink" title="生成Mask"></a>生成Mask</h2><p>生成mask关键在于删除物体已有材质，之后将物体的材质设置成某颜色（或标准的数值），参考<a href="https://blender.stackexchange.com/questions/80906/create-a-segmentation-picture-with-each-object-class-rendered-in-different-color/80925#80925" target="_blank" rel="noopener">https://blender.stackexchange.com/questions/80906/create-a-segmentation-picture-with-each-object-class-rendered-in-different-color/80925#80925</a></p>
+<p><img src="http://cdn.ziyedy.top/Blender%E4%BD%BF%E7%94%A8Python%E8%84%9A%E6%9C%AC%E7%94%9F%E6%88%90CV%E6%95%B0%E6%8D%AE%E9%9B%86/mask_render.png" alt=""></p>
+<h3 id="代码实现-2"><a href="#代码实现-2" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">render_mask</span><span class="hljs-params">()</span>:</span><br>    scene = bpy.context.scene<br>    objs = [obj <span class="hljs-keyword">for</span> obj <span class="hljs-keyword">in</span> bpy.data.objects <span class="hljs-keyword">if</span> obj.type <span class="hljs-keyword">in</span> (<span class="hljs-string">"MESH"</span>, <span class="hljs-string">"CURVE"</span>)]<br>    <span class="hljs-keyword">for</span> obj_idx, obj <span class="hljs-keyword">in</span> enumerate(objs):<br>        color = cfg.colors[obj_idx] + (<span class="hljs-number">1</span>,)	<span class="hljs-comment"># 得到不同的颜色</span><br><br>        material_name = <span class="hljs-string">"auto.material."</span> + obj.name	<br>        material = bpy.data.materials.new(material_name)<br><br>        material[<span class="hljs-string">"is_auto"</span>] = <span class="hljs-literal">True</span><br>        material.use_nodes = <span class="hljs-literal">True</span><br>        material.node_tree.nodes.clear()<br><br>        emission = material.node_tree.nodes.new(type=<span class="hljs-string">"ShaderNodeEmission"</span>)<br>        emission.inputs[<span class="hljs-string">'Color'</span>].default_value = color	<span class="hljs-comment"># 给不同物体设置不同颜色</span><br><br>        output = material.node_tree.nodes.new(type=<span class="hljs-string">"ShaderNodeOutputMaterial"</span>)<br>        material.node_tree.links.new(emission.outputs[<span class="hljs-string">'Emission'</span>], output.inputs[<span class="hljs-string">'Surface'</span>])<br><br>        obj.data.materials.clear()	<span class="hljs-comment"># 删除物体之前的所有材质</span><br>        obj.data.materials.append(material)	<span class="hljs-comment"># 将刚刚创建并初始化颜色的材质加入物体</span><br><br>    scene.render.filepath = cfg.OUTPUT_DIR + <span class="hljs-string">'mask.png'</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="渲染结果-1"><a href="#渲染结果-1" class="headerlink" title="渲染结果"></a>渲染结果</h3><p><img src="http://cdn.ziyedy.top/Blender%E4%BD%BF%E7%94%A8Python%E8%84%9A%E6%9C%AC%E7%94%9F%E6%88%90CV%E6%95%B0%E6%8D%AE%E9%9B%86/mask.png" alt=""></p>
+<h2 id="为模型中每个点赋值并渲染"><a href="#为模型中每个点赋值并渲染" class="headerlink" title="为模型中每个点赋值并渲染"></a>为模型中每个点赋值并渲染</h2><p>由于渲染数据集时需要使用新数据集用nocs方法进行方法性能检验，所以必须要渲染得到nocs图（nocs相关见<a href="https://github.com/hughw19/NOCS_CVPR2019）" target="_blank" rel="noopener">https://github.com/hughw19/NOCS_CVPR2019）</a></p>
+<p>参考<a href="https://blender.stackexchange.com/questions/2324/using-wrl-data-in-cycles/2325#2325" target="_blank" rel="noopener">https://blender.stackexchange.com/questions/2324/using-wrl-data-in-cycles/2325#2325</a></p>
+<p><img src="http://cdn.ziyedy.top/Blender%E4%BD%BF%E7%94%A8Python%E8%84%9A%E6%9C%AC%E7%94%9F%E6%88%90CV%E6%95%B0%E6%8D%AE%E9%9B%86/nocs_render.png" alt=""></p>
+<h3 id="代码实现-3"><a href="#代码实现-3" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">render_nocs</span><span class="hljs-params">()</span>:</span><br>    scene = bpy.context.scene<br>    objs = [obj <span class="hljs-keyword">for</span> obj <span class="hljs-keyword">in</span> bpy.data.objects <span class="hljs-keyword">if</span> obj.type <span class="hljs-keyword">in</span> (<span class="hljs-string">"MESH"</span>, <span class="hljs-string">"CURVE"</span>)]<br>    <span class="hljs-keyword">for</span> obj_idx, obj <span class="hljs-keyword">in</span> enumerate(objs):<br>        vcol_layer = obj.data.vertex_colors.new()<br>        <span class="hljs-keyword">for</span> loop_index, loop <span class="hljs-keyword">in</span> enumerate(obj.data.loops):<br>            loop_vert_index = loop.vertex_index<br>            scale = <span class="hljs-number">1</span><br>            color = scale * obj.data.vertices[loop_vert_index].co + Vector([<span class="hljs-number">0.5</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.5</span>])<br>            color = tuple(color) + (<span class="hljs-number">1</span>,)<br><br>            vcol_layer.data[loop_index].color = color<br>        obj.data.vertex_colors.active = vcol_layer<br>        obj.data.update()<br><br>        material = bpy.data.materials.new(<span class="hljs-string">'coord_color'</span>)<br><br>        material.alpha_threshold = <span class="hljs-number">1</span><br><br>        material[<span class="hljs-string">"is_auto"</span>] = <span class="hljs-literal">True</span><br>        material.use_nodes = <span class="hljs-literal">True</span><br>        material.node_tree.nodes.clear()<br><br>        attr = material.node_tree.nodes.new(type=<span class="hljs-string">"ShaderNodeAttribute"</span>)<br>        attr.attribute_name = <span class="hljs-string">"Col"</span><br><br>        output = material.node_tree.nodes.new(type=<span class="hljs-string">"ShaderNodeOutputMaterial"</span>)<br><br>        material.node_tree.links.new(attr.outputs[<span class="hljs-string">'Color'</span>], output.inputs[<span class="hljs-string">'Surface'</span>])<br><br>        obj.data.materials.clear()<br>        obj.data.materials.append(material)<br>        obj.active_material = material<br>    scene.render.filepath = cfg.OUTPUT_DIR + <span class="hljs-string">'nocs.png'</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="渲染结果-2"><a href="#渲染结果-2" class="headerlink" title="渲染结果"></a>渲染结果</h3><p><img src="http://cdn.ziyedy.top/Blender%E4%BD%BF%E7%94%A8Python%E8%84%9A%E6%9C%AC%E7%94%9F%E6%88%90CV%E6%95%B0%E6%8D%AE%E9%9B%86/nocs.png" alt=""></p>
+<h2 id="不错的源码"><a href="#不错的源码" class="headerlink" title="不错的源码"></a>不错的源码</h2><p>blender中资源本身比较少，以下是我编写代码时找到的一个质量不错的源码，值得参考</p>
+<p><a href="https://github.com/DIYer22/bpycv" target="_blank" rel="noopener">https://github.com/DIYer22/bpycv</a></p>
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          Donate
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://ziyedy.top/page/blender-render-cv-dataset.html" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Blender/" rel="tag">Blender</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/page/null.html" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            死锁
+          
+        </div>
+      </a>
+    
+    
+      <a href="/page/process-thread.html" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">进程与线程</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "pgmMLBlWl23i6NPFUgTT7XqR-gzGzoHsz",
+    app_key: "yx9IIauIiK8JBBHDxxqPpEFQ",
+    path: window.location.pathname,
+    avatar: "retro",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2019-2021
+        <i class="ri-heart-fill heart_icon"></i> 子夜
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s4.cnzz.com/z_stat.php?id=1279587217&amp;web_id=1279587217'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="子夜nostalgic"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gg">足迹</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+</body>
+
+</html>

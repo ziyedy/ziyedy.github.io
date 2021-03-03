@@ -157,17 +157,27 @@ gt_rt = camera_param['RT'] @ obj_matrix		// 相机外参与获取物体相乘
 
 ### 注意事项
 
+1、当物体相对原点有旋转与平移的情况
+
 obj与ply的存储坐标有不同（没有详细查看文件格式，但经过实验应该是这样的，如下图所示，即obj在读入blender中时会在x轴自带90度的旋转）
 
 所以如果使用obj文件进行渲染时，在获取目标平移旋转矩阵时不进行以上第2步，则不能得到正确的GT值，需要注意。
 
 ![](http://cdn.ziyedy.top/Blender%E4%BD%BF%E7%94%A8Python%E8%84%9A%E6%9C%AC%E7%94%9F%E6%88%90CV%E6%95%B0%E6%8D%AE%E9%9B%86/obj_and_ply.png)
 
+2、对物体进行刚体运动后`matrix_world`没变
+
+这是由于blender没有在物体转变后立刻重新计算，在blender2.8的版本下需要在刚体变化后加上如下代码，参考https://blender.stackexchange.com/questions/27667/incorrect-matrix-world-after-transformation
+
+```python
+context.view_layer.update()
+```
+
 
 
 ## 渲染背景图片
 
-即让对应的模型带上背景图片，参考
+即让对应的模型带上背景图片，参考https://henryegloff.com/how-to-render-a-background-image-in-blender-2-8/
 
 在blender中的处理流程如下（在`Compositor`模式下）
 
@@ -296,7 +306,7 @@ def exr_to_png(exr_path):
 
 ## 生成Mask
 
-生成mask关键在于删除物体已有材质，之后将物体的材质设置成某颜色（或标准的数值），参考
+生成mask关键在于删除物体已有材质，之后将物体的材质设置成某颜色（或标准的数值），参考https://blender.stackexchange.com/questions/80906/create-a-segmentation-picture-with-each-object-class-rendered-in-different-color/80925#80925
 
 ![](http://cdn.ziyedy.top/Blender%E4%BD%BF%E7%94%A8Python%E8%84%9A%E6%9C%AC%E7%94%9F%E6%88%90CV%E6%95%B0%E6%8D%AE%E9%9B%86/mask_render.png)
 
@@ -307,9 +317,9 @@ def render_mask():
     scene = bpy.context.scene
     objs = [obj for obj in bpy.data.objects if obj.type in ("MESH", "CURVE")]
     for obj_idx, obj in enumerate(objs):
-        color = cfg.colors[obj_idx] + (1,)
+        color = cfg.colors[obj_idx] + (1,)	# 得到不同的颜色
 
-        material_name = "auto.material." + obj.name
+        material_name = "auto.material." + obj.name	
         material = bpy.data.materials.new(material_name)
 
         material["is_auto"] = True
@@ -317,13 +327,13 @@ def render_mask():
         material.node_tree.nodes.clear()
 
         emission = material.node_tree.nodes.new(type="ShaderNodeEmission")
-        emission.inputs['Color'].default_value = color
+        emission.inputs['Color'].default_value = color	# 给不同物体设置不同颜色
 
         output = material.node_tree.nodes.new(type="ShaderNodeOutputMaterial")
         material.node_tree.links.new(emission.outputs['Emission'], output.inputs['Surface'])
 
-        obj.data.materials.clear()
-        obj.data.materials.append(material)
+        obj.data.materials.clear()	# 删除物体之前的所有材质
+        obj.data.materials.append(material)	# 将刚刚创建并初始化颜色的材质加入物体
 
     scene.render.filepath = cfg.OUTPUT_DIR + 'mask.png'
 ```
@@ -336,7 +346,9 @@ def render_mask():
 
 ## 为模型中每个点赋值并渲染
 
-由于渲染数据集时需要使用新数据集用nocs方法进行方法性能检验，所以必须要渲染得到nocs图（nocs相关见）
+由于渲染数据集时需要使用新数据集用nocs方法进行方法性能检验，所以必须要渲染得到nocs图（nocs相关见https://github.com/hughw19/NOCS_CVPR2019）
+
+参考https://blender.stackexchange.com/questions/2324/using-wrl-data-in-cycles/2325#2325
 
 ![](http://cdn.ziyedy.top/Blender%E4%BD%BF%E7%94%A8Python%E8%84%9A%E6%9C%AC%E7%94%9F%E6%88%90CV%E6%95%B0%E6%8D%AE%E9%9B%86/nocs_render.png)
 

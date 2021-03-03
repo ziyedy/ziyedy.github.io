@@ -13,7 +13,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    SQL语句——查 |  浔庐子夜
+    SQL常用查询语句 |  子夜nostalgic
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-编程相关/SQL/SQL语句——查"
+  id="post-编程相关/SQL/SQL常用查询语句"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -59,7 +59,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  SQL语句——查
+  SQL常用查询语句
 </h1>
  
 
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1.1k</span>
+            <span class="post-count">1.3k</span>
         </span>
     </span>
 
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">4 min</span>
+            <span class="post-count">5 min</span>
         </span>
     </span>
 </div>
@@ -102,34 +102,37 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h3 id="SELECT语句"><a href="#SELECT语句" class="headerlink" title="SELECT语句"></a>SELECT语句</h3><p>1、基本使用框架</p>
+  <h2 id="SELECT——查询"><a href="#SELECT——查询" class="headerlink" title="SELECT——查询"></a>SELECT——查询</h2><h3 id="SELECT-FROM——基本句式（从XX表选择XX字段）"><a href="#SELECT-FROM——基本句式（从XX表选择XX字段）" class="headerlink" title="SELECT-FROM——基本句式（从XX表选择XX字段）"></a>SELECT-FROM——基本句式（从XX表选择XX字段）</h3><p>1、基本使用框架</p>
 <figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs n1ql"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> 数据表<br>[<span class="hljs-keyword">WHERE</span>]<br>[<span class="hljs-keyword">LIMIT</span>]<br>[<span class="hljs-keyword">OFFSET</span>]<br></code></pre></td></tr></table></figure>
 
 <p>2、使用别名</p>
-<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs n1ql"><span class="hljs-keyword">SELECT</span><br>	字段名 <span class="hljs-keyword">AS</span> 别名<br><span class="hljs-keyword">FROM</span> 数据表<br></code></pre></td></tr></table></figure>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs n1ql"><span class="hljs-keyword">SELECT</span><br>	字段名 <span class="hljs-keyword">AS</span> 别名<br><span class="hljs-keyword">FROM</span> 数据表 <span class="hljs-keyword">AS</span> 别名<br></code></pre></td></tr></table></figure>
 
 <p>3、查询语句的执行顺序：</p>
 <p>先进行语法分析和优化，找到关键字优先级，先执行FROM，再执行SELECT</p>
-<h3 id="查询相关功能"><a href="#查询相关功能" class="headerlink" title="查询相关功能"></a>查询相关功能</h3><p>1、<strong>ORDER BY</strong>子句功能，对查询的结果进行<strong>排序</strong>，示例如下</p>
-<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs oxygene"><span class="hljs-comment">// 按照相关信息进行排序</span><br><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> * <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> 列名 [<span class="hljs-keyword">ASC</span>|<span class="hljs-keyword">DESC</span>]<br><span class="hljs-comment">// 多个排序信息</span><br><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> * <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> 列名 [<span class="hljs-keyword">ASC</span>|<span class="hljs-keyword">DESC</span>],列名 [<span class="hljs-keyword">ASC</span>|<span class="hljs-keyword">DESC</span>]<br></code></pre></td></tr></table></figure>
+<h3 id="LIMIT-OFFSET——限制查询返回数量，跳过的数据条数"><a href="#LIMIT-OFFSET——限制查询返回数量，跳过的数据条数" class="headerlink" title="LIMIT-OFFSET——限制查询返回数量，跳过的数据条数"></a>LIMIT-OFFSET——限制查询返回数量，跳过的数据条数</h3><p>注意：<strong>检索出来的第一行是行0</strong></p>
+<p>同时若指定的行数不够，则返回最多能返回的行。</p>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs excel"># 返回<span class="hljs-built_in">n</span>条数据<br>LIMIT <span class="hljs-built_in">n</span><br>LIMIT <span class="hljs-number">0</span>, <span class="hljs-built_in">n</span><br># 跳过x条数据，之后返回<span class="hljs-built_in">n</span>条数据（两者等价）<br>LIMIT x, <span class="hljs-built_in">n</span><br>LIMIT <span class="hljs-built_in">n</span> <span class="hljs-built_in">OFFSET</span> x<br></code></pre></td></tr></table></figure>
 
 
 
-<p>2、去除结果中的<strong>重复记录</strong>，在字段名称前加上<strong>DISTINCT</strong>字段，只支持一个字段名。</p>
+
+
+<h3 id="DISTINCT——去重"><a href="#DISTINCT——去重" class="headerlink" title="DISTINCT——去重"></a>DISTINCT——去重</h3><p>去除结果中的<strong>重复记录</strong>，在字段名称前加上<code>DISTINCT</code>字段，只支持一个字段名。</p>
 <figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs n1ql"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">DISTINCT</span> 字段名 <span class="hljs-keyword">FROM</span> *;<br></code></pre></td></tr></table></figure>
 
 
 
-<p>3、<strong>条件查询</strong>，使用<strong>WHERE</strong>语句指定查询的条件逻辑，中间使用AND|OR等逻辑连接符连接，同时注意判断相等的条件是“=”而不是“==”。</p>
-<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs n1ql"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> * <span class="hljs-keyword">WHERE</span> 条件<span class="hljs-number">1</span> [<span class="hljs-keyword">AND</span>|<span class="hljs-keyword">OR</span>] 条件<span class="hljs-number">2</span> ......;<br></code></pre></td></tr></table></figure>
+<h3 id="ORDER-BY——排序"><a href="#ORDER-BY——排序" class="headerlink" title="ORDER BY——排序"></a>ORDER BY——排序</h3><p>注意：<strong><code>ORDER BY</code>必须位于<code>WHERE</code></strong>之后</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment"># 按照相关信息进行排序</span><br><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> * <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> 列名 [<span class="hljs-keyword">ASC</span>|<span class="hljs-keyword">DESC</span>]<br><span class="hljs-comment"># 多个排序信息</span><br><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> * <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> 列名 [<span class="hljs-keyword">ASC</span>|<span class="hljs-keyword">DESC</span>],列名 [<span class="hljs-keyword">ASC</span>|<span class="hljs-keyword">DESC</span>]<br></code></pre></td></tr></table></figure>
 
 
 
-<p>4、使用<strong>聚合函数</strong>。所谓聚合函数，也就是平均值、最大值等函数，以下为求该字段名下的平均值函数（AVG），其他函数使用方法与此类似。该类方法在实际使用时可以将统计结果作为一个子表进行查询。</p>
+<h3 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h3><p>使用<strong>聚合函数</strong>。所谓聚合函数，也就是平均值、最大值等函数，以下为求该字段名下的平均值函数（AVG），其他函数使用方法与此类似。该类方法在实际使用时可以将统计结果作为一个子表进行查询。</p>
 <figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs n1ql"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">AVG</span>(字段名) <span class="hljs-keyword">FROM</span> 表名<br></code></pre></td></tr></table></figure>
 
 <p><strong>COUNT(*)</strong>用于获得包含空值的记录数，<strong>COUNT(字段名)</strong>用于获取包含非空值的记录数。</p>
-<p>5、<strong>分组查询</strong>，使用<strong>GROUP BY</strong>字句。即通过一定规则将数据集分为若干个部分进行查询处理。以下即为使用字段1进行分组统计每一组中字段2的平均值。</p>
+<h3 id="GROUP-BY——分组查询"><a href="#GROUP-BY——分组查询" class="headerlink" title="GROUP BY——分组查询"></a>GROUP BY——分组查询</h3><p><strong>分组查询</strong>，使用<code>GROUP BY</code>子句。即通过一定规则将数据集分为若干个部分进行查询处理。以下即为使用字段1进行分组统计每一组中字段2的平均值。</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">SELECT 字段1,AVG(字段2) <span class="hljs-keyword">FROM</span> 表名<span class="hljs-built_in"> GROUP </span>BY 字段1;<br></code></pre></td></tr></table></figure>
 
 <p>使用分组查询SELECT语句中只能出现用以分组的字段以及其他字段的聚合函数，否则会报错（由于产生了<strong>一对多</strong>的关系）。为解决这个问题，可以使用<code>GROUP_CONCAT</code>函数，这个函数可以将符合条件的值连接起来进行输出，可以理解为将“多”的部分进行了字符串拼接。</p>
@@ -140,33 +143,40 @@
 
 
 
-<p>6、<strong>HAVING</strong>子句，以及为何要使用HAVING子句</p>
-<p>由于WHERE子句执行在GROUP BY子句之前，因此如果WHERE子句中出现了如平均值等信息时SQL会不知道在哪个范围内进行平均，因此会出错，如以下代码即为错误的（聚合函数作为判断条件）。所以需要使用<code>HAVING</code>子句。</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment"># 使用错误</span><br>SELECT f1<br><span class="hljs-keyword">FROM</span> table<br>WHERE AVG(f2) &gt; 10<span class="hljs-built_in"><br>GROUP </span>BY f1;<br></code></pre></td></tr></table></figure>
+<h3 id="HAVING——分组查询条件"><a href="#HAVING——分组查询条件" class="headerlink" title="HAVING——分组查询条件"></a>HAVING——分组查询条件</h3><p>为何要使用HAVING子句（与WHERE的区别）</p>
+<p><strong>WHERE子句执行在GROUP BY子句之前</strong>，因此如果WHERE子句中出现了如平均值等信息时SQL会不知道在哪个范围内进行平均，即报错。所以需要使用<code>HAVING</code>子句。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment"># 使用错误，WHERE不知道AVG作用范围</span><br>SELECT f1<br><span class="hljs-keyword">FROM</span> table<br>WHERE AVG(f2) &gt; 10<span class="hljs-built_in"><br>GROUP </span>BY f1;<br></code></pre></td></tr></table></figure>
 
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment"># 使用正确</span><br>SELECT f1<br><span class="hljs-keyword">FROM</span> table<span class="hljs-built_in"><br>GROUP </span>BY f1 HAVING AVG(f2) &gt; 10;<br></code></pre></td></tr></table></figure>
 
 
 
+<h2 id="WHERE——条件查询"><a href="#WHERE——条件查询" class="headerlink" title="WHERE——条件查询"></a>WHERE——条件查询</h2><p>过滤数据，使用<code>WHERE</code>语句指定查询的条件逻辑，中间使用AND|OR等逻辑连接符连接</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs n1ql"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> * <span class="hljs-keyword">WHERE</span> 条件<span class="hljs-number">1</span> [<span class="hljs-keyword">AND</span>|<span class="hljs-keyword">OR</span>] 条件<span class="hljs-number">2</span> ......;<br></code></pre></td></tr></table></figure>
 
-
-<h3 id="表的连接"><a href="#表的连接" class="headerlink" title="表的连接"></a>表的连接</h3><p>表的连接很重要，具体有内外两种连接构成。</p>
-<p>1、<strong>内连接</strong>：结果集中只保留符合连接条件的记录</p>
+<p>同时注意判断相等的条件是<code>=</code>而不是<code>==</code>；不等于通常写成<code>&lt;&gt;</code>。</p>
+<p>除此之外还有BETWEEN，LIKE，IN等常用运算符</p>
+<h3 id="常用操作符"><a href="#常用操作符" class="headerlink" title="常用操作符"></a>常用操作符</h3><h3 id="使用通配符"><a href="#使用通配符" class="headerlink" title="使用通配符"></a>使用通配符</h3><h2 id="JOIN——表连接"><a href="#JOIN——表连接" class="headerlink" title="JOIN——表连接"></a>JOIN——表连接</h2><p>表连接即把多个表通过表之间的共用字段连接起来，可以将其视为一张表进行操作。</p>
+<h3 id="INNER-JOIN"><a href="#INNER-JOIN" class="headerlink" title="INNER JOIN"></a>INNER JOIN</h3><p>如果表中有至少一个匹配，则返回行。结果集中只保留符合连接条件的记录。</p>
+<p><strong>使用WHERE语句连接默认也是INNER JOIN</strong>，如下面第3条语句</p>
 <figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs n1ql"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> 表<span class="hljs-number">1</span> [<span class="hljs-keyword">INNER</span>] <span class="hljs-keyword">JOIN</span> 表<span class="hljs-number">2</span> <span class="hljs-keyword">ON</span> 连接条件;<br><br><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> 表<span class="hljs-number">1</span> [<span class="hljs-keyword">INNER</span>] <span class="hljs-keyword">JOIN</span> 表<span class="hljs-number">2</span> <span class="hljs-keyword">WHERE</span> 连接条件;<br><br><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> 表<span class="hljs-number">1</span>, 表<span class="hljs-number">2</span> <span class="hljs-keyword">WHERE</span> 连接条件;<br></code></pre></td></tr></table></figure>
 
 
 
-<p>2、<strong>外连接</strong>：不管是否符合连接条件，记录都要保留在结果集里</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gradle"><span class="hljs-comment">// 右表出NULL值和左表连接</span><br>LEFT <span class="hljs-keyword">JOIN</span><br></code></pre></td></tr></table></figure>
-
-
-
-<p>3、<strong>内外连接的区别</strong>。具体如图所示（图片摘自LeetCode）</p>
-<p>1）左联结（left join），联结结果保留左表的全部数据<br>2）右联结（right join），联结结果保留右表的全部数据<br>3）内联结（inner join），取两表的公共数据</p>
-<p><img src="%5CSQL%E8%AF%AD%E5%8F%A5%E2%80%94%E2%80%94%E6%9F%A5%5Csql%E8%BF%9E%E6%8E%A5.png" alt=""></p>
+<h3 id="LEFT-JOIN——左连接"><a href="#LEFT-JOIN——左连接" class="headerlink" title="LEFT JOIN——左连接"></a>LEFT JOIN——左连接</h3><p>即使右表中没有匹配，联结结果也保留左表的全部数据。同时<em>右表中对应数据视为NULL</em></p>
+<h3 id="RIGHT-JOIN——右连接"><a href="#RIGHT-JOIN——右连接" class="headerlink" title="RIGHT JOIN——右连接"></a>RIGHT JOIN——右连接</h3><p>与左连接相反，联结结果保留右表的全部数据</p>
 <p>应用在<a href="https://leetcode-cn.com/problems/combine-two-tables/" target="_blank" rel="noopener">175.组合两个表中</a>。该题需要满足“无论 person 是否有地址信息，都需要基于上述两表提供 person 的以下信息”，所以当person表在左时采用左连接。</p>
-<h3 id="一些注意事项"><a href="#一些注意事项" class="headerlink" title="一些注意事项"></a>一些注意事项</h3><p>1、<strong>表连接时on和where的区别</strong></p>
-<p>以下不推荐，因为查询速度会很慢，每一次都会执行WHERE语句中的内容。</p>
+<h3 id="on和where的区别"><a href="#on和where的区别" class="headerlink" title="on和where的区别"></a>on和where的区别</h3><ol>
+<li>对<code>INNER JOIN</code>，条件放在ON和WHERE中结果集是相同的</li>
+<li>对外连接，条件放在ON中，则不管一些条件是否为真，都会返回对应表中的记录</li>
+</ol>
+<p>比如在<code>LEFT JOIN</code>中写上右表的条件，则不论是否满足有些行都会返回NULL</p>
+<p>而</p>
+<blockquote>
+<p>具体参考：<a href="https://www.runoob.com/w3cnote/sql-different-on-and-where.html" target="_blank" rel="noopener">https://www.runoob.com/w3cnote/sql-different-on-and-where.html</a></p>
+</blockquote>
+<p><strong>几种条件查询语句执行顺序：ON &gt; WHERE &gt; 聚合函数 &gt; having</strong></p>
+<h2 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h2><p>以下不推荐，因为查询速度会很慢，每一次都会执行WHERE语句中的内容。</p>
 <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">SELECT</span> ename <br><span class="hljs-keyword">FROM</span> t_emp<br><span class="hljs-keyword">WHERE</span> deptno = (<span class="hljs-keyword">SELECT</span> deptno <span class="hljs-keyword">FROM</span> t_emp <span class="hljs-keyword">WHERE</span> ename="SCOTT")<br></code></pre></td></tr></table></figure>
 
 
@@ -182,7 +192,9 @@
 <p>正确</p>
 <figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs n1ql"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">e</span>.ename<br><span class="hljs-keyword">FROM</span> t_emp <span class="hljs-built_in">e</span> <br><span class="hljs-keyword">JOIN</span> (<span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">AVG</span>(sal) <span class="hljs-built_in">avg</span> <span class="hljs-keyword">FROM</span> t_emp) t<br><span class="hljs-keyword">ON</span> <span class="hljs-built_in">e</span>.sal &gt;= t.<span class="hljs-built_in">avg</span>;<br></code></pre></td></tr></table></figure>
 
- 
+
+
+<h2 id="组合查询"><a href="#组合查询" class="headerlink" title="组合查询"></a>组合查询</h2> 
       <!-- reward -->
       
       <div id="reword-out">
@@ -400,7 +412,7 @@
 <nav class="navbar">
   
   <div class="logo">
-    <a href="/"><img src="/images/ayer-side.svg" alt="浔庐子夜"></a>
+    <a href="/"><img src="/images/ayer-side.svg" alt="子夜nostalgic"></a>
   </div>
   
   <ul class="nav nav-main">

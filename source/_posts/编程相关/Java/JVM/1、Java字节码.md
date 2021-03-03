@@ -7,7 +7,7 @@ categories:
 	- 编程相关
 	- Java
 	- JVM
-fileName:
+fileName: jvm-classbytecode
 ---
 
 ## Class文件
@@ -300,5 +300,3 @@ InnerClasses:
 stack：方法执行时操作栈深度
 
 locals：局部变量所需的存储空间，单位是slot（虚拟机为局部变量分配内存的最小单位）
-
-args_size：

@@ -13,7 +13,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    Java字符串 |  浔庐子夜
+    Java：字符串 |  子夜nostalgic
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-编程相关/Java/Java基础语法/Java字符串"
+  id="post-编程相关/Java/Java基础/3、Java：字符串"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -59,7 +59,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Java字符串
+  Java：字符串
 </h1>
  
 
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">391</span>
+            <span class="post-count">724</span>
         </span>
     </span>
 
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">1 min</span>
+            <span class="post-count">2 min</span>
         </span>
     </span>
 </div>
@@ -102,21 +102,57 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h3 id="String类"><a href="#String类" class="headerlink" title="String类"></a>String类</h3><h4 id="基本实现"><a href="#基本实现" class="headerlink" title="基本实现"></a>基本实现</h4><p>String被声明为final，因此不可被继承。在<strong>Java8</strong>中，String内部使用char数组存储数据。</p>
+  <h2 id="String类"><a href="#String类" class="headerlink" title="String类"></a>String类</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><blockquote>
+<p>在Java中，所有类似“ABC”的字面值，都是String类的实例；</p>
+<p>String类位于java.lang包下，是Java语言的核心类，提供了字符串的比较、查找、截取、大小写转换等操作；</p>
+<p>Java语言为<code>“+”</code>连接符（字符串连接符）以及对象转换为字符串提供了特殊的支持，字符串对象可以使用<code>“+”</code>连接其他对象</p>
+</blockquote>
+<h3 id="基本实现"><a href="#基本实现" class="headerlink" title="基本实现"></a>基本实现</h3><p>String被声明为<code>final</code>，因此不可被继承，同时也说明<strong>String具有不可变特性</strong>。在<strong>Java8</strong>中，String内部使用char数组存储数据。</p>
 <figure class="highlight zephir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs zephir"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">String</span><br>    <span class="hljs-keyword">implements</span> <span class="hljs-title">java</span>.<span class="hljs-title">io</span>.<span class="hljs-title">Serializable</span>, <span class="hljs-title">Comparable</span>&lt;<span class="hljs-title">String</span>&gt;, <span class="hljs-title">CharSequence</span> </span>&#123;<br>    <span class="hljs-comment">/** The value is used for character storage. */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">char</span> value[];<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>在<strong>Java9</strong>之后，String类的实现改用byte数组存储字符串，同时使用coder来标识使用哪种编码。</p>
+<p>在<strong>Java9</strong>之后，<em>String类的实现改用byte数组存储字符串，同时使用coder来标识使用哪种编码</em>。</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">String</span><br>    <span class="hljs-keyword">implements</span> <span class="hljs-title">java</span>.<span class="hljs-title">io</span>.<span class="hljs-title">Serializable</span>, <span class="hljs-title">Comparable</span>&lt;<span class="hljs-title">String</span>&gt;, <span class="hljs-title">CharSequence</span> </span>&#123;<br>    <span class="hljs-comment">/** The value is used for character storage. */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> byte[] value;<br><br>    <span class="hljs-comment">/** The identifier of the encoding used to encode the bytes in &#123;<span class="hljs-doctag">@code</span> value&#125;. */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> byte coder;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<h4 id="不可变特性"><a href="#不可变特性" class="headerlink" title="不可变特性"></a>不可变特性</h4><p>上述中<em>value</em>使用了final关键字修饰，这说明value数组初始化后就不能再引用其他数组，因此String是不可变的。</p>
-<h4 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h4><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs processing"><span class="hljs-comment">// 获取字符串长度</span><br><span class="hljs-built_in">int</span> length()<br><br><span class="hljs-comment">// 获取从begin到end的字符串</span><br><span class="hljs-keyword">String</span> substring(<span class="hljs-built_in">int</span> beginIndex, <span class="hljs-built_in">int</span> endIndex)<br><br><span class="hljs-comment">// 获取指定位置的字符</span><br><span class="hljs-built_in">char</span> charAt(<span class="hljs-built_in">int</span> index)<br><br><span class="hljs-comment">// 将字符串分割为子字符串</span><br><span class="hljs-keyword">String</span>[] <span class="hljs-built_in">split</span>(<span class="hljs-keyword">String</span> regex, <span class="hljs-built_in">int</span> limit)	<br><br><span class="hljs-comment">// 将该字符串转换为byte数组</span><br><span class="hljs-built_in">byte</span>[] getBytes()<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs processing"><span class="hljs-comment">// 获取字符串长度</span><br><span class="hljs-built_in">int</span> length()<br><br><span class="hljs-comment">// 获取从begin到end的字符串</span><br><span class="hljs-keyword">String</span> substring(<span class="hljs-built_in">int</span> beginIndex, <span class="hljs-built_in">int</span> endIndex)<br><br><span class="hljs-comment">// 获取指定位置的字符</span><br><span class="hljs-built_in">char</span> charAt(<span class="hljs-built_in">int</span> index)<br><br><span class="hljs-comment">// 将字符串分割为子字符串</span><br><span class="hljs-keyword">String</span>[] <span class="hljs-built_in">split</span>(<span class="hljs-keyword">String</span> regex, <span class="hljs-built_in">int</span> limit)	<br><br><span class="hljs-comment">// 将该字符串转换为byte数组</span><br><span class="hljs-built_in">byte</span>[] getBytes()<br></code></pre></td></tr></table></figure>
 
 
 
+<h2 id="“-”连接符"><a href="#“-”连接符" class="headerlink" title="“+”连接符"></a>“+”连接符</h2><h3 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h3><blockquote>
+<p>“+”连接符实现字符串连接是通过<strong>StringBuilder（或 StringBuffer）类及其append 方法实现的</strong></p>
+<p>Java在使用“+”连接字符串时，会创建一个<code>StringBuilder</code>对象，并调用<code>append()</code>方法进行拼接，最后调用<code>toString()</code>方法返回拼接好的字符串</p>
+</blockquote>
+<h3 id="效率"><a href="#效率" class="headerlink" title="效率"></a>效率</h3><blockquote>
+<p>由于使用“+”连接符时，JVM会隐式创建StringBuilder对象</p>
+<p>因此在大规模进行字符串拼接时还是构建一个<code>StringBuilder</code>对象手动调用<code>append</code>方法比较好</p>
+<p>但同时，当”+”两端均为编译期确定的字符串常量时，编译器会进行相应的<strong>优化</strong>，直接将两个字符串常量拼接好</p>
+</blockquote>
+<p>比如：</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(<span class="hljs-string">"a"</span> + <span class="hljs-string">"b"</span>);<br><br><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(<span class="hljs-string">"ab"</span>);	<span class="hljs-comment">// 反编译后直接拼接好</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="String、StringBuilder、StringBuffer"><a href="#String、StringBuilder、StringBuffer" class="headerlink" title="String、StringBuilder、StringBuffer"></a>String、StringBuilder、StringBuffer</h2><h3 id="主要区别"><a href="#主要区别" class="headerlink" title="主要区别"></a>主要区别</h3><ol>
+<li>String是不可变字符序列，StringBuilder和StringBuffer是可变字符序列</li>
+<li>执行速度StringBuilder &gt; StringBuffer &gt; String</li>
+<li>StringBuilder是非线程安全的，StringBuffer是线程安全的</li>
+</ol>
 <h3 id="StringBuild类"><a href="#StringBuild类" class="headerlink" title="StringBuild类"></a>StringBuild类</h3><p>String具有不可变性（变化都是通过赋值完成的，类内方法不能使当前对象中的字符串进行改变），而StringBuild不具备</p>
 <p>当频繁操作字符串时，应该使用StringBuild</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs sql">// 追加内容到当前StringBuild对象的末尾<br>StringBuild append(字符串)	<br><br>// 将内容插入到指定的位置<br>StringBuild <span class="hljs-keyword">insert</span>(位置， 字符串)<br><br>// 将之转化为<span class="hljs-keyword">String</span>对象<br><span class="hljs-keyword">String</span> toString()<br><br>// 删除<span class="hljs-keyword">start</span>到<span class="hljs-keyword">end</span>的字符串。[<span class="hljs-keyword">start</span>, <span class="hljs-keyword">end</span>)<br><span class="hljs-keyword">String</span> <span class="hljs-keyword">delete</span>(<span class="hljs-keyword">start</span>, <span class="hljs-keyword">end</span>)<br><br>// 将<span class="hljs-keyword">start</span>到<span class="hljs-keyword">end</span>之间的字符串替换为<span class="hljs-keyword">str</span><br><span class="hljs-keyword">String</span> <span class="hljs-keyword">replace</span>(<span class="hljs-keyword">start</span>, <span class="hljs-keyword">end</span>, <span class="hljs-keyword">str</span>)<br><br>// 获取字符串长度<br><span class="hljs-built_in">int</span> <span class="hljs-keyword">length</span>()<br></code></pre></td></tr></table></figure>
+<h4 id="常用方法-1"><a href="#常用方法-1" class="headerlink" title="常用方法"></a>常用方法</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs sql">// 追加内容到当前StringBuild对象的末尾<br>StringBuild append(字符串)	<br><br>// 将内容插入到指定的位置<br>StringBuild <span class="hljs-keyword">insert</span>(位置， 字符串)<br><br>// 将之转化为<span class="hljs-keyword">String</span>对象<br><span class="hljs-keyword">String</span> toString()<br><br>// 删除<span class="hljs-keyword">start</span>到<span class="hljs-keyword">end</span>的字符串。[<span class="hljs-keyword">start</span>, <span class="hljs-keyword">end</span>)<br><span class="hljs-keyword">String</span> <span class="hljs-keyword">delete</span>(<span class="hljs-keyword">start</span>, <span class="hljs-keyword">end</span>)<br><br>// 将<span class="hljs-keyword">start</span>到<span class="hljs-keyword">end</span>之间的字符串替换为<span class="hljs-keyword">str</span><br><span class="hljs-keyword">String</span> <span class="hljs-keyword">replace</span>(<span class="hljs-keyword">start</span>, <span class="hljs-keyword">end</span>, <span class="hljs-keyword">str</span>)<br><br>// 获取字符串长度<br><span class="hljs-built_in">int</span> <span class="hljs-keyword">length</span>()<br></code></pre></td></tr></table></figure>
 
+
+
+
+
+<h2 id="字符串常量池"><a href="#字符串常量池" class="headerlink" title="字符串常量池"></a>字符串常量池</h2><p>暂略</p>
+<blockquote>
+<p>参考：</p>
+<p><a href="https://blog.csdn.net/ifwinds/article/details/80849184" target="_blank" rel="noopener">https://blog.csdn.net/ifwinds/article/details/80849184</a></p>
+</blockquote>
  
       <!-- reward -->
       
@@ -200,7 +236,7 @@
    
   <nav class="article-nav">
     
-      <a href="/page/java-input-output.html" class="article-nav-link">
+      <a href="/page/java-input-output-stream.html" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
@@ -335,7 +371,7 @@
 <nav class="navbar">
   
   <div class="logo">
-    <a href="/"><img src="/images/ayer-side.svg" alt="浔庐子夜"></a>
+    <a href="/"><img src="/images/ayer-side.svg" alt="子夜nostalgic"></a>
   </div>
   
   <ul class="nav nav-main">

@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-Hans">
+
+
+<head>
+  <meta charset="utf-8" />
+   
+  <meta name="keywords" content="生活" />
+   
+  <meta name="description" content="子夜写字的地方" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    第三章：传输层 |  子夜nostalgic
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-学习笔记/计算机网络/第三章：传输层"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  第三章：传输层
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/page/transport-layer.html" class="article-date">
+  <time datetime="2020-10-05T06:41:47.000Z" itemprop="datePublished">2020-10-05</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a> / <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">3.5k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">12 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="传输层概述"><a href="#传输层概述" class="headerlink" title="传输层概述"></a>传输层概述</h2><h3 id="传输层概述-1"><a href="#传输层概述-1" class="headerlink" title="传输层概述"></a>传输层概述</h3><blockquote>
+<p>传输层协议为运行在不同主机上的<strong>应用进程</strong>之间提供<strong>逻辑通信</strong>功能</p>
+<p>传输层协议是在<strong>端系统</strong>中而不是在网络路由器中实现的</p>
+</blockquote>
+<h3 id="传输层与网络层关系"><a href="#传输层与网络层关系" class="headerlink" title="传输层与网络层关系"></a>传输层与网络层关系</h3><blockquote>
+<p>传输层为运行在不同主机上的<strong>进程间</strong>的逻辑通信，而网络层则提供了<strong>主机之间</strong>的逻辑通信</p>
+<p>传输层协议所能提供的服务也受到了<em>底层网络层协议的服务模型的限制</em>，</p>
+</blockquote>
+<h3 id="因特网传输概述"><a href="#因特网传输概述" class="headerlink" title="因特网传输概述"></a>因特网传输概述</h3><p>传输层主要有TCP（传输控制协议）与UDP（用户数据报协议）两种协议，特点及区别如下：</p>
+<p><img src="http://cdn.ziyedy.top/%E7%AC%AC%E4%B8%89%E7%AB%A0%EF%BC%9A%E4%BC%A0%E8%BE%93%E5%B1%82/TCP%2CUDP.png" alt=""></p>
+<h2 id="多路复用与多路分解"><a href="#多路复用与多路分解" class="headerlink" title="多路复用与多路分解"></a>多路复用与多路分解</h2><blockquote>
+<p>多路复用与多路分解：本质上是将网络层所提供的<em>主机到主机</em>交付服务，<strong>扩展</strong>到为在主机上运行的应用程序所提供的<em>进程到进程</em>交付服务</p>
+<p>即将从网络层接收的报文段，交付给合适的应用进程</p>
+</blockquote>
+<h3 id="多路复用"><a href="#多路复用" class="headerlink" title="多路复用"></a>多路复用</h3><blockquote>
+<p>从源主机的不同套接字中收集数据块，井为每个数据块封装上首部信息( ( 在多路分解时使用) ) 从而生成报文段，然后将报文段传递到网络层的工作称为多路复用</p>
+</blockquote>
+<p>传输层要达到多路复用，必须保证</p>
+<ul>
+<li>套接字有唯一标识符</li>
+<li>每个传输层报文段有特殊字段来指示该报文段所要交付的套接字（即源端口号字段与目的端口号字段）</li>
+</ul>
+<h3 id="多路分解"><a href="#多路分解" class="headerlink" title="多路分解"></a>多路分解</h3><blockquote>
+<p>将传输层报文段中的数据放置到正确的套接字的工作称为多路分解，确切地说，多路分解其实是多路分发，或者说是数据流的分解。</p>
+</blockquote>
+<h2 id="无连接传输：UDP"><a href="#无连接传输：UDP" class="headerlink" title="无连接传输：UDP"></a>无连接传输：UDP</h2><blockquote>
+<p>UDP 只是做了传输层协议能够做的最少工作。除了多路复用/多路分解功能及少量的差错检测外，它几乎没有对 IP 增加别的东西</p>
+<p>UDP发送报文前，发送方与接收方之间并未进行握手，因此UDP是<strong>无连接的</strong></p>
+<p>DNS即是一个使用UDP的例子</p>
+</blockquote>
+<h4 id="UDP的优点"><a href="#UDP的优点" class="headerlink" title="UDP的优点"></a>UDP的优点</h4><ul>
+<li>应用层能更好地设置要发送的数据和发送时间（有较快发送速率，且能容忍一些丢包）</li>
+<li>无需建立连接（不会引入建立连接的时延）</li>
+<li>无连接状态（UDP无连接状态，也无需追踪一些相关参数）</li>
+<li>分组首部开销小（TCP有20字节的首部开销，而UDP仅有8个字节）</li>
+</ul>
+<h4 id="UDP报文结构"><a href="#UDP报文结构" class="headerlink" title="UDP报文结构"></a>UDP报文结构</h4><p><img src="http://cdn.ziyedy.top/%E7%AC%AC%E4%B8%89%E7%AB%A0%EF%BC%9A%E4%BC%A0%E8%BE%93%E5%B1%82/UDP%E6%8A%A5%E6%96%87%E6%AE%B5.png" alt=""></p>
+<p>由4个字段组成，每个字段包含2个字节</p>
+<p>源端口号、目的端口号</p>
+<p>长度：包含首部在内的UDP报文段长度，以字节为单位</p>
+<p>校验和：计算报文段在传输的过程中是否出现了差错</p>
+<h4 id="校验和"><a href="#校验和" class="headerlink" title="校验和"></a>校验和</h4><blockquote>
+<p>校验和提供了差错检测功能，即当 UDP 报文段从源到达目的时，校验和用于确定其中的比特是否发生了改变</p>
+</blockquote>
+<h2 id="可靠数据传输原理（建模）"><a href="#可靠数据传输原理（建模）" class="headerlink" title="可靠数据传输原理（建模）"></a>可靠数据传输原理（建模）</h2><blockquote>
+<p>考虑单向实现可靠传输的建模，得到TCP实现的基本思路</p>
+</blockquote>
+<h3 id="完全可靠信道上"><a href="#完全可靠信道上" class="headerlink" title="完全可靠信道上"></a>完全可靠信道上</h3><blockquote>
+<p>底层信道完全可靠</p>
+<p>no bit errors;    no loss of packets</p>
+</blockquote>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-comment">// 发送方</span><br>packet = make<span class="hljs-constructor">_pkt(<span class="hljs-params">data</span>)</span>	<span class="hljs-comment">// 生成数据分组</span><br>packet = make<span class="hljs-constructor">_pkt(<span class="hljs-params">data</span>)</span>	<span class="hljs-comment">// 发送分组</span><br><br><span class="hljs-comment">// 接收方</span><br>extract (packet,data)	<span class="hljs-comment">// 从分组中提取</span><br>deliver<span class="hljs-constructor">_data(<span class="hljs-params">data</span>)</span>		<span class="hljs-comment">// 交付数据给应用层</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="具有比特差错信道上"><a href="#具有比特差错信道上" class="headerlink" title="具有比特差错信道上"></a>具有比特差错信道上</h3><h4 id="ACK、NAK不受损"><a href="#ACK、NAK不受损" class="headerlink" title="ACK、NAK不受损"></a>ACK、NAK不受损</h4><blockquote>
+<p>在传输过程中会产生比特差错</p>
+<p>需要引入：<strong>自动重传请求协议</strong>（ARQ），即</p>
+<ul>
+<li>差错检测</li>
+<li>接收方反馈（ACK：数据包OK；NAK：数据包存在错误）</li>
+<li>重传：接收方收到有差错的分组时，发送方进行重传</li>
+</ul>
+</blockquote>
+<h4 id="ACK、NAK受损"><a href="#ACK、NAK受损" class="headerlink" title="ACK、NAK受损"></a>ACK、NAK受损</h4><blockquote>
+<p>确认信息在传输中本身出现错误</p>
+<p>解决方法：发送方为数据报添加<strong>序号字段</strong>，而接收方抛弃重复的数据报</p>
+</blockquote>
+<h3 id="具有比特差错的丢包信道上"><a href="#具有比特差错的丢包信道上" class="headerlink" title="具有比特差错的丢包信道上"></a>具有比特差错的丢包信道上</h3><blockquote>
+<p>除去比特受损外，还有可能丢包</p>
+<p>解决方法：发送方等待ACK到来足够的时间（采用<strong>定时器</strong>实现），然后进行<strong>重传</strong></p>
+</blockquote>
+<h3 id="流水线可靠数据传输协议"><a href="#流水线可靠数据传输协议" class="headerlink" title="流水线可靠数据传输协议"></a>流水线可靠数据传输协议</h3><blockquote>
+<p>为提高发送效率（解决上述“停等协议”的问题）：以“不停等”方式运行，<em>允许发送方发送多个分组而无需等待确认</em>，该技术称为流水线。流水线提出了新的需求：</p>
+</blockquote>
+<ul>
+<li>必须增加序号范围。保证每个传输的分组有一个唯一的序号</li>
+<li>协议的发送方和接收方必须缓存多个分组。</li>
+<li>所需序号范围和对缓冲的要求取决于数据传输协议处理丢失、损坏及过度延时分组：<strong>回退N步与选择重传</strong></li>
+</ul>
+<h4 id="回退N步（GBN）"><a href="#回退N步（GBN）" class="headerlink" title="回退N步（GBN）"></a>回退N步（GBN）</h4><blockquote>
+<p>在 GBN 协议中，允许发送方发送多个分组而不需等待确认，但<em>在流水线中未确认的分组数不能超过某个最大允许数N</em></p>
+<p>已被发送但还未被确认的分组的许可序号范围可以被看成是一个<strong>在序号范围内长度为N的窗口</strong>，因此N常被称为窗口长度，GBN也被称为滑动窗口协议</p>
+<p><em>当有超时事件发生，出现丢失和过度时延分组时，发送方将重传所有已发送但还未被确认的分组</em></p>
+<p>GBN使用了<strong>累积确认</strong>技术，累积确认指接收一个未出错分组（可能失序）时总是返回一个最后接收的按顺序到达分组的确认。</p>
+</blockquote>
+<h4 id="选择重传"><a href="#选择重传" class="headerlink" title="选择重传"></a>选择重传</h4><blockquote>
+<p>选择重传 (SR) 协议通过让发送方仅重传那些它怀疑在接收方出错的分组而避免了不必要的重传。</p>
+<p>这种个别的、按需的重传要求接收方逐个地确认正确接收的分组，也用窗口长度N来限制流水线中未完成、未被确认的分组数。</p>
+</blockquote>
+<h2 id="面向连接的传输：TCP"><a href="#面向连接的传输：TCP" class="headerlink" title="面向连接的传输：TCP"></a>面向连接的传输：TCP</h2><blockquote>
+<p>TCP是<strong>面向连接</strong>的传输层协议，<em>连接的实质是双方都初始化与连接相关的发送/接收缓冲区，以及许多 TCP 状态变量</em></p>
+</blockquote>
+<ul>
+<li>TCP连接提供的是全双工服务</li>
+<li>TCP连接是点对点的（TCP不可能多播）</li>
+</ul>
+<p>TCP连接每一端都有各自的发送缓冲和接收缓存，TCP 可从缓存中取出并放入报文段中发送的数据量受限于<strong>最大报文段长MSS（Maximum Segment Size）</strong>，通常由<strong>最大链路层帧长度（即最大传输单元MTU）</strong>来决定（也就是底层的通信链路决定）</p>
+<p>除去进行通信的两台主机之中维护TCP连接所需的内容，这两台主机之间的路由器交换机并未为该连接分配任何缓存和控制变量</p>
+<h3 id="TCP报文格式"><a href="#TCP报文格式" class="headerlink" title="TCP报文格式"></a>TCP报文格式</h3><p><img src="http://cdn.ziyedy.top/%E7%AC%AC%E4%B8%89%E7%AB%A0%EF%BC%9A%E4%BC%A0%E8%BE%93%E5%B1%82/TCP%E6%8A%A5%E6%96%87%E6%AE%B5.png" alt=""></p>
+<ul>
+<li>源端口号与目的端口号：用于多路复用/多路分解来自或送至上层应用的数据</li>
+<li>32 比特的序号字段和 32 比特的确认号字段：用来实现可靠数据传输服务</li>
+</ul>
+<blockquote>
+<p>序号字段：即该数据报在所需传送的字节流上的位置，用于实现TCP报文的有序性</p>
+<p>确认号字段：用于标识接收方期待从发送方收到的下一报文段首字节的序号</p>
+</blockquote>
+<ul>
+<li>16 比特的接收窗口字段：用于<em>流量控制</em>，用于指示接受方能够接收的字节数量</li>
+<li>4 比特的首部长度字段：用于指示以 32 比特的字为单位的 TCP 首部长度，一般 TCP 首部的长度就是 20 字节</li>
+<li>6比特标志字段：主要使用以下三个</li>
+</ul>
+<blockquote>
+<p>ACK：用于指示确认字段中的值是有效的（对成功接收报文的确认），ACK=1时有效</p>
+<p>SYN：表示建立一个连接</p>
+<p>​    SYN=1，ACK=0时，表示这是一个<strong>连接请求报文段</strong></p>
+<p>​    SYN=1，ACK=1时，表示对方同意建立连接</p>
+<p>FIN：告知对方关闭连接</p>
+</blockquote>
+<h3 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h3><p><img src="http://cdn.ziyedy.top/%E7%AC%AC%E4%B8%89%E7%AB%A0%EF%BC%9A%E4%BC%A0%E8%BE%93%E5%B1%82/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png" alt=""></p>
+<h4 id="第一次握手"><a href="#第一次握手" class="headerlink" title="第一次握手"></a>第一次握手</h4><p>发送方创建一个特殊的TCP报文段（<strong>SYN报文段</strong>）：</p>
+<ol>
+<li>不包含任何应用层数据；</li>
+<li>将SYN标志位置为1；</li>
+<li>随机生成一个初始序号（client_isn），并将该序号置于该报文的序号字段（seq）处</li>
+</ol>
+<h4 id="第二次握手"><a href="#第二次握手" class="headerlink" title="第二次握手"></a>第二次握手</h4><p>收到SYN报文段后，接收方会返回允许连接的报文段（SYNACK报文段）：</p>
+<ol>
+<li>SYN标志位置为1，ACK标志位置为1；</li>
+<li>确认号字段（ack）置为client_isn+1；</li>
+<li>接收端生成一个自己的初始序号（server_isn），并将该序号置于自己报文的序号字段（seq）处</li>
+</ol>
+<h4 id="第三次握手"><a href="#第三次握手" class="headerlink" title="第三次握手"></a>第三次握手</h4><ol>
+<li>SYN被置为0，ACK置为1</li>
+<li>确认号字段置为server_isn+1</li>
+<li>seq字段设置为client_isn+1</li>
+</ol>
+<h3 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h3><p><img src="http://cdn.ziyedy.top/%E7%AC%AC%E4%B8%89%E7%AB%A0%EF%BC%9A%E4%BC%A0%E8%BE%93%E5%B1%82/%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B.png" alt=""></p>
+<ol>
+<li>主机A发送一个标识了<strong>FIN=1</strong>的数据段，序列号<strong>seq=a</strong>的报文用来释放连接</li>
+<li>主机B回应一个标识了<strong>ACK=1</strong>的数据段，序列号<strong>seq=b</strong>，确认序号<strong>ack=a+1</strong>，作为对主机A的FIN报文的确认</li>
+<li>主机A收到主机B的确认后进入<strong>等待状态</strong>，等待主机B请求释放连接。主机B向主机A发送一个标识了<strong>FIN=1，ACK=1</strong>的数据段，序列号为<strong>seq=b</strong>，确认序列号为<strong>ack=a+1</strong>，用以释放连接</li>
+<li>主机A发送标识了<strong>ACK=1</strong>，序列号<strong>seq=a+1</strong>，确认序号<strong>ack=b+1</strong>，用以确认关闭</li>
+</ol>
+<p>为什么要进行四次挥手：因为关闭连接时，接收端收到FIN报文时，很可能不会立刻关闭连接，因此需要多一次挥手</p>
+<h3 id="TCP可靠数据传输"><a href="#TCP可靠数据传输" class="headerlink" title="TCP可靠数据传输"></a>TCP可靠数据传输</h3><p>主要有超时重传和快速重传：</p>
+<ul>
+<li>超时重传：超时后进行重传，需要设置超时事件（通常4个往返时间RTT）</li>
+<li>快速重传：如果发送者收到了重复的3个ACK报文段（接收方如果发现有丢失（即收到了间隔后的报文段）会重复发送ACK报文段，），说明该报文段所指下一个段丢失，会在超时触发前快速重传该报文段。可以避免超时引起的大时延</li>
+</ul>
+<h3 id="TCP流量控制——滑动窗口"><a href="#TCP流量控制——滑动窗口" class="headerlink" title="TCP流量控制——滑动窗口"></a>TCP流量控制——滑动窗口</h3><blockquote>
+<p>流量控制只要在于消除发送方导致接收方缓存溢出的可能性，流量控制是一个<strong>速度匹配</strong>服务，即发送方的发送速率与接收方应用程序的读速率相匹配</p>
+</blockquote>
+<p>TCP通过维护<strong>接收窗口</strong>来提供流量控制，接收窗口用于告诉发送方，该接收方还有多少可用的缓存空间</p>
+<h2 id="拥塞控制原理"><a href="#拥塞控制原理" class="headerlink" title="拥塞控制原理"></a>拥塞控制原理</h2><h3 id="产生拥塞的情况"><a href="#产生拥塞的情况" class="headerlink" title="产生拥塞的情况"></a>产生拥塞的情况</h3><h4 id="情况1"><a href="#情况1" class="headerlink" title="情况1"></a>情况1</h4><blockquote>
+<p>两个发送方和一个具有无穷大缓存的路由器</p>
+</blockquote>
+<p>当分组到达速率接近<em>链路容量</em>时，分组将经历较长的排队时延</p>
+<h4 id="情况2"><a href="#情况2" class="headerlink" title="情况2"></a>情况2</h4><blockquote>
+<p>两个发送方和一个具有有限缓存的路由器</p>
+</blockquote>
+<p>发送方在遇到大时延时所进行的不必要重传，导致路由器需要利用其链路带宽来转发不必要的分组</p>
+<h4 id="情况3"><a href="#情况3" class="headerlink" title="情况3"></a>情况3</h4><blockquote>
+<p>四个发送方、具有有限缓存的多台路由器和多跳路径</p>
+</blockquote>
+<p>当一个分组沿一条路径被丢弃时每个上游路由器用于转发该分组而使用的传输容量最终被浪费掉了</p>
+<h3 id="拥塞控制方法"><a href="#拥塞控制方法" class="headerlink" title="拥塞控制方法"></a>拥塞控制方法</h3><h4 id="端到端控制"><a href="#端到端控制" class="headerlink" title="端到端控制"></a>端到端控制</h4><blockquote>
+<p>网络层没有为传输层拥塞控制提供显式支持，因此端系统必须对网络行为观察（分组丢失、时延等），来<strong>推断</strong>拥塞的发生</p>
+</blockquote>
+<p>TCP中将报文段的丢失（通过超时或3次冗余确认得知），认为是网络拥塞的一个迹象，之后TCP会相应减小其发送的窗口</p>
+<h4 id="网络辅助的拥塞控制"><a href="#网络辅助的拥塞控制" class="headerlink" title="网络辅助的拥塞控制"></a>网络辅助的拥塞控制</h4><blockquote>
+<p>网络层对是否产生拥塞显式反馈给端系统</p>
+</blockquote>
+<h2 id="TCP拥塞控制"><a href="#TCP拥塞控制" class="headerlink" title="TCP拥塞控制"></a>TCP拥塞控制</h2><blockquote>
+<p>由于IP向端系统提供显式的网络拥塞反馈，因此TCP必须使用端到端的拥塞控制</p>
+<p>拥塞控制的过程是源主机不断试探网络传输能力的过程，如果一个TCP发送方没有感知到拥塞，它就会增加其发送速率；如果感知到拥塞，则降低其发送速率</p>
+</blockquote>
+<p>TCP拥塞控制机制使用一个控制变量，即拥塞窗口（congestion window）来表征网络的拥塞情况</p>
+<p>发送窗口 = min{CongWin, RcvWin}</p>
+<h3 id="加性增，乘性减"><a href="#加性增，乘性减" class="headerlink" title="加性增，乘性减"></a>加性增，乘性减</h3><ul>
+<li>加性增：每个RTT周期CongWin增加1个MSS单位，直到检测到丢包</li>
+<li>乘性减：当检测到丢包时，CongWin减半</li>
+</ul>
+<p><img src="http://cdn.ziyedy.top/%E7%AC%AC%E4%B8%89%E7%AB%A0%EF%BC%9A%E4%BC%A0%E8%BE%93%E5%B1%82/%E5%8A%A0%E6%80%A7%E5%A2%9E%E4%B9%98%E6%80%A7%E5%87%8F.png" alt=""></p>
+<h3 id="慢启动"><a href="#慢启动" class="headerlink" title="慢启动"></a>慢启动</h3><p>在慢启动阶段，每当一个传输的报文段被确认后，CongWin 的值就增加1个 MSS ，由于TCP 一次发送多个报文段进入网络，从<br>而使发送方的发送速率在经过一个 RTT 时间后成倍增长</p>
+<p>以指数级增长后，直到遇到一个丢包，CongWin减半后开始变为线性增长</p>
+<h3 id="对超时事件的反应"><a href="#对超时事件的反应" class="headerlink" title="对超时事件的反应"></a>对超时事件的反应</h3><ol>
+<li>收到3个冗余ACK后，TCP将拥塞窗口减小一半，然后线性增长</li>
+<li>超时事件发生后，TCP则进入一个慢启动状态</li>
+</ol>
+<p>TCP通过维持一个称为阈值 (Threshold) 的变量来确定慢启动将结束并且拥塞避免将开始的窗口长度</p>
+<p>变量Threshold初始化时被设置为一个很大的值，每当发生一个丢包事件时，Threshold值就会被设置为当前CongWin值的一半</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>慢启动：CongWin &lt; Threshold，CongWin指数增长</li>
+<li>拥塞避免：CongWin &gt; Threshold，CongWin线性增长</li>
+<li>快速恢复：3个冗余ACK，Threshold设置为Threshold/2，CongWin设置为Threshold</li>
+<li>超时处理：timeout事件，Threshold设置为Threshold/2，CongWin设置为1MMS大小</li>
+</ul>
+<p><img src="http://cdn.ziyedy.top/%E7%AC%AC%E4%B8%89%E7%AB%A0%EF%BC%9A%E4%BC%A0%E8%BE%93%E5%B1%82/TCP%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6%E8%BF%87%E7%A8%8B.png" alt=""></p>
+<p>参考：</p>
+<blockquote>
+<p><a href="https://zhuanlan.zhihu.com/p/145260638" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/145260638</a></p>
+</blockquote>
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          Donate
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://ziyedy.top/page/transport-layer.html" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/page/pca-basic-use.html" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            PCA算法
+          
+        </div>
+      </a>
+    
+    
+      <a href="/page/plyfile.html" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">使用plyfile库对.ply文件进行读写操作</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "pgmMLBlWl23i6NPFUgTT7XqR-gzGzoHsz",
+    app_key: "yx9IIauIiK8JBBHDxxqPpEFQ",
+    path: window.location.pathname,
+    avatar: "retro",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2019-2021
+        <i class="ri-heart-fill heart_icon"></i> 子夜
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s4.cnzz.com/z_stat.php?id=1279587217&amp;web_id=1279587217'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="子夜nostalgic"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gg">足迹</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+</body>
+
+</html>

@@ -13,7 +13,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    Java泛型 |  浔庐子夜
+    Java：泛型 |  子夜nostalgic
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-编程相关/Java/Java基础语法/6、Java泛型"
+  id="post-编程相关/Java/Java基础/9、Java：泛型"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -59,7 +59,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Java泛型
+  Java：泛型
 </h1>
  
 
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">777</span>
+            <span class="post-count">1.5k</span>
         </span>
     </span>
 
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">3 min</span>
+            <span class="post-count">5 min</span>
         </span>
     </span>
 </div>
@@ -102,48 +102,103 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h3 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>泛型的本质是参数化类型，也就是说所操作的数据类型被指定为一个参数。</p>
+  <h1 id="泛型基础"><a href="#泛型基础" class="headerlink" title="泛型基础"></a>泛型基础</h1><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>泛型的本质是<strong>参数化类型</strong>，也就是说所操作的数据类型被指定为一个参数。</p>
 <p>Java的泛型是<strong>伪泛型</strong>，这是因为Java在编译期间，所有的泛型信息都会被擦掉</p>
 <p>Java的泛型基本上都是在编译器这个层次上实现的，在生成的字节码中是不包含泛型中的类型信息的，使用泛型的时候加上类型参数，在编译器编译的时候会去掉，这个过程成为<strong>类型擦除</strong>。</p>
 <p>如在代码中定义<code>List&lt;Object&gt;</code>和<code>List&lt;String&gt;</code>等类型，在编译后都会变成<code>List</code>，JVM看到的只是List，而由泛型附加的类型信息对JVM是看不到的。Java编译器会在编译时尽可能的发现可能出错的地方，但是仍然无法在运行时刻出现的类型转换异常的情况，类型擦除也是Java的泛型与C++模板机制实现方式之间的重要区别。</p>
-<h4 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h4><p>注：变量声明的类型必须匹配传递给实际对象的类型（即前后尖括号中的内容必须相同）</p>
-<p><strong>1、泛型类</strong></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//此处T可以随便写为任意标识，常见的如T、E、K、V等形式的参数常用于表示泛型</span><br><span class="hljs-comment">//在实例化泛型类时，必须指定T的具体类型</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Generic</span>&lt;T&gt;&#123;</span> <br>   <br>    <span class="hljs-keyword">private</span> T key;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Generic</span><span class="hljs-params">(T key)</span> </span>&#123; <br>        <span class="hljs-keyword">this</span>.key = key;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> T <span class="hljs-title">getKey</span><span class="hljs-params">()</span></span>&#123; <br>        <span class="hljs-keyword">return</span> key;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="三种主要使用形式"><a href="#三种主要使用形式" class="headerlink" title="三种主要使用形式"></a>三种主要使用形式</h2><p>引入类型可以用来修饰成员变量/局部变量/参数/返回值</p>
+<p>注：变量声明的类型必须匹配传递给实际对象的类型（即前后尖括号中的内容必须相同）</p>
+<h3 id="1、泛型类"><a href="#1、泛型类" class="headerlink" title="1、泛型类"></a>1、泛型类</h3><blockquote>
+<p>常见的如<code>ArrayList</code>、<code>HashSet</code>、<code>HashMap</code>等等</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 此处T可以随便写为任意标识，常见的如T、E、K、V等形式的参数常用于表示泛型</span><br><span class="hljs-comment">// 在实例化泛型类时，必须指定T的具体类型</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Generic</span>&lt;T&gt;&#123;</span> <br>   <br>    <span class="hljs-keyword">private</span> T key;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Generic</span><span class="hljs-params">(T key)</span> </span>&#123; <br>        <span class="hljs-keyword">this</span>.key = key;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> T <span class="hljs-title">getKey</span><span class="hljs-params">()</span></span>&#123; <br>        <span class="hljs-keyword">return</span> key;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 
-<p><strong>2、泛型接口</strong></p>
+<h3 id="2、泛型接口"><a href="#2、泛型接口" class="headerlink" title="2、泛型接口"></a>2、泛型接口</h3><blockquote>
+<p>实现泛型的接口，如<code>Iterator</code>、<code>List</code>等即为泛型接口</p>
+</blockquote>
+<p><strong>泛型接口定义</strong></p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros">public<span class="hljs-built_in"> interface </span>Generator&lt;T&gt; &#123;<br>    public T method();<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>实现泛型接口时不指定类型</p>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-keyword">class</span> <span class="hljs-symbol">GeneratorImpl</span>&lt;<span class="hljs-symbol">T</span>&gt; <span class="hljs-symbol">implements</span> <span class="hljs-symbol">Generator</span>&lt;<span class="hljs-symbol">T</span>&gt;&#123;<br>    @Override<br>    <span class="hljs-keyword">public</span> T method() &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="实现时不指定类型"><a href="#实现时不指定类型" class="headerlink" title="实现时不指定类型"></a>实现时不指定类型</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-keyword">class</span> <span class="hljs-symbol">GeneratorImpl</span>&lt;<span class="hljs-symbol">T</span>&gt; <span class="hljs-symbol">implements</span> <span class="hljs-symbol">Generator</span>&lt;<span class="hljs-symbol">T</span>&gt;&#123;<br>    @Override<br>    <span class="hljs-keyword">public</span> T method() &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>实现泛型接口时指定类型</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs \">class GeneratorImpl&lt;T&gt; implements Generator&lt;String&gt;&#123;<br>    @Override<br>    public String method() &#123;<br>        return &quot;hello&quot;;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="实现时指定类型"><a href="#实现时指定类型" class="headerlink" title="实现时指定类型"></a>实现时指定类型</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs \">class GeneratorImpl&lt;T&gt; implements Generator&lt;String&gt;&#123;<br>    @Override<br>    public String method() &#123;<br>        return &quot;hello&quot;;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 
-<p><strong>3、泛型方法</strong></p>
-<p>注：泛型方法不一定要写在泛型类当中</p>
-<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;E&gt; <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">printArray</span><span class="hljs-params">( E[] inputArray )</span><br></span>&#123;         <br>	<span class="hljs-keyword">for</span> ( E element : inputArray )&#123;        <br>    	System.out.<span class="hljs-built_in">printf</span>( <span class="hljs-string">"%s "</span>, element );<br>    &#125;<br>        System.out.<span class="hljs-built_in">println</span>();<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="3、泛型方法"><a href="#3、泛型方法" class="headerlink" title="3、泛型方法"></a>3、泛型方法</h3><blockquote>
+<p>具有泛型参数的方法，可位于普通类/泛型类中（<strong>泛型方法不一定要写在泛型类当中</strong>）</p>
+<p>如<code>Arrays.sort()</code>等方法即是泛型方法</p>
+<p>泛型参数&lt;T&gt;在修饰符后，返回类型前，如下示例</p>
+<p>若传入参数不统一会寻找共同的<em>超类</em>，一般应该统一参数</p>
+</blockquote>
+<h4 id="泛型方法定义"><a href="#泛型方法定义" class="headerlink" title="泛型方法定义"></a>泛型方法定义</h4><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;E&gt; <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">printArray</span><span class="hljs-params">( E[] inputArray )</span><br></span>&#123;         <br>	<span class="hljs-keyword">for</span> ( E element : inputArray )&#123;        <br>    	System.out.<span class="hljs-built_in">printf</span>( <span class="hljs-string">"%s "</span>, element );<br>    &#125;<br>        System.out.<span class="hljs-built_in">println</span>();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="泛型方法调用"><a href="#泛型方法调用" class="headerlink" title="泛型方法调用"></a>泛型方法调用</h4><figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs oxygene">Target t = <span class="hljs-keyword">new</span> Target();<br>String s = t.&lt;String&gt;<span class="hljs-function"><span class="hljs-keyword">method</span><span class="hljs-params">()</span>;</span>	<span class="hljs-comment">// 调用时不省略泛型</span><br>String s = t<span class="hljs-function">.<span class="hljs-keyword">method</span><span class="hljs-params">()</span>;</span>	<span class="hljs-comment">// 调用时省略泛型</span><br></code></pre></td></tr></table></figure>
 
 
 
-
-
-<h4 id="通配符"><a href="#通配符" class="headerlink" title="通配符"></a>通配符</h4><p><strong>常用的通配符为： T，E，K，V，？</strong></p>
-<p>本质上这些个都是通配符，没啥区别，只不过是编码时的一种约定俗成的东西。比如上述代码中的 T ，我们可以换成 A-Z 之间的任何一个 字母都可以，并不会影响程序的正常运行，但是如果换成其他的字母代替 T ，在可读性上可能会弱一些。<strong>通常情况下，T，E，K，V，？ 是这样约定的：</strong></p>
+<h1 id="泛型限定"><a href="#泛型限定" class="headerlink" title="泛型限定"></a>泛型限定</h1><h2 id="泛型通配符"><a href="#泛型通配符" class="headerlink" title="泛型通配符"></a>泛型通配符</h2><h3 id="常用通配符"><a href="#常用通配符" class="headerlink" title="常用通配符"></a>常用通配符</h3><blockquote>
+<p><strong>常用的有： T，E，K，V，？</strong>（通常只将?视为通配符）</p>
+<p>本质上这些个都是通配符，没啥区别，只不过是编码时的一种约定俗成的东西。比如上述代码中的 T ，我们可以换成 A-Z 之间的任何一个 字母都可以，并不会影响程序的正常运行，但是如果换成其他的字母代替 T ，在可读性上可能会弱一些。</p>
+</blockquote>
 <ul>
-<li>？ 表示不确定的 java 类型</li>
-<li>T (type) 表示具体的一个java类型</li>
-<li>K V (key value) 分别代表java键值中的Key Value</li>
-<li>E (element) 代表Element</li>
+<li>？ 表示不确定的 Java类型</li>
+<li>T (Template) 表示具体的一个Java类型，自定义泛型常用T</li>
+<li>K V (Key Value) 分别代表Java键值中的Key Value</li>
+<li>E (Element) 代表元素Element</li>
 </ul>
-<p><strong>上界通配符 &lt;? extends 类名&gt; **：表示参数化的类型可能是所指定的类型，或者是此类型的</strong>子类**。</p>
-<p><strong>下界通配符 &lt; ? super 类名&gt;</strong>：表示参数化的类型可能是所指定的类型，或者是此类型的父类型，直至 Object</p>
+<h3 id="上界通配符"><a href="#上界通配符" class="headerlink" title="上界通配符"></a>上界通配符</h3><p><code>&lt;? extends 类名&gt;</code>：表示能接受的参数类型可能是<em>所指定的类型本身，或者是此类型的子类</em></p>
+<blockquote>
+<p>使用上界通配符，编译器能够保证取出来的类型一定是指定类型的子类，但不保证放入的对象是什么类型</p>
+<p>所以<strong>只能进行<code>get</code>操作，而不能进行<code>set</code>操作</strong></p>
+</blockquote>
+<p>举例说明：</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs haxe">Pair&lt;Apple&gt; apples = <span class="hljs-keyword">new</span> <span class="hljs-type">Pair</span>&lt;&gt;(<span class="hljs-keyword">new</span> <span class="hljs-type">Apple</span>(<span class="hljs-number">3</span>));<br>Pair&lt;? extends Fruit&gt; fruit = apples;<br>fruit.<span class="hljs-keyword">set</span>(<span class="hljs-keyword">new</span> <span class="hljs-type">Orange</span>(<span class="hljs-number">3</span>));	<span class="hljs-comment">// 编译错误</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="下界通配符"><a href="#下界通配符" class="headerlink" title="下界通配符"></a>下界通配符</h3><p><code>&lt; ? super 类名&gt;</code>：表示参数化的类型可能是<em>所指定的类型本身，或者是此类型的父类型，直至 Object</em></p>
+<blockquote>
+<p>编译器能保证放入的是其本身或其超类（传入子类时进行类型转换），但无法保证取出的是哪个类。</p>
+<p>所以<strong>只能进行<code>set</code>操作，而不能进行<code>get</code>操作</strong></p>
+</blockquote>
+<h3 id="泛型PECS原则"><a href="#泛型PECS原则" class="headerlink" title="泛型PECS原则"></a>泛型PECS原则</h3><blockquote>
+<p>Producer Extends 泛型是生产者，向外输出，使用<code>Extends</code></p>
+</blockquote>
+<blockquote>
+<p>Consumer Super 泛型是消费者，向内增加东西，使用<code>Super</code></p>
+</blockquote>
+<h3 id="？和T的区别"><a href="#？和T的区别" class="headerlink" title="？和T的区别"></a>？和T的区别</h3><blockquote>
+<p><code>T</code>是一个<strong>确定</strong>的类型，而<code>?</code>是一个不确定的类型</p>
+<p>可以对<code>T</code>进行操作，而不能对<code>?</code>进行操作</p>
+</blockquote>
+<h3 id="extends关键字"><a href="#extends关键字" class="headerlink" title="extends关键字"></a>extends关键字</h3><blockquote>
+<p>使用<code>extends</code>关键字约定该类型必须是某某的<em>子类</em></p>
+</blockquote>
+<p>如<code>&lt;T extends Comparable&gt;</code>约定T必须是<code>Comparable</code>的子类</p>
+<p><code>extends</code>后可跟多个，<strong>以<code>&amp;</code>拼接</strong>，同时该限定可以有多个接口，但只能有一个类，且类必须排第一位。</p>
+<h3 id="泛型的类型关系"><a href="#泛型的类型关系" class="headerlink" title="泛型的类型关系"></a>泛型的类型关系</h3><blockquote>
+<p>Java中的泛型是不变的，即List&lt;Object&gt;与List&lt;String&gt;并无父类与子类的关系</p>
+</blockquote>
+<h1 id="泛型实现的本质"><a href="#泛型实现的本质" class="headerlink" title="泛型实现的本质"></a>泛型实现的本质</h1><h2 id="类型擦除"><a href="#类型擦除" class="headerlink" title="类型擦除"></a>类型擦除</h2><p>泛型是JDK1.5引入的新特性，因此JVM中没有泛型对象，而是采用<strong>类型擦除</strong>技术，只有普通的类和方法</p>
+<blockquote>
+<p>擦除泛型对象，替换为原始类型（无限定则替换为为Object，有限定则替换为第一个类型），使得该类与引入泛型之前的类并无不同</p>
+</blockquote>
+<p>比如：<code>Pair&lt;T&gt;</code>则可视为<code>Pair&lt;Object&gt;</code>。因为T未指定类型</p>
+<p><code>Pair&lt;T extends A &amp; B&gt;</code>则可视为<code>Pair&lt;A&gt;</code></p>
+<h2 id="自动类型转换"><a href="#自动类型转换" class="headerlink" title="自动类型转换"></a>自动类型转换</h2><blockquote>
+<p>擦除泛型后，编译时会进行自动类型转换</p>
+<p>即先生成一个<code>Object</code>对象，再使用强制类型转化转换为对应的对象</p>
+</blockquote>
+<h2 id="自动桥方法"><a href="#自动桥方法" class="headerlink" title="自动桥方法"></a>自动桥方法</h2><blockquote>
+<p>即泛型中自动生成的参数为<code>Object</code>方法会自动调用用户传入相关参数类型的对应方法</p>
+</blockquote>
+<blockquote>
 <p>参考：</p>
+<p>mooc华东师范大学：Java高级</p>
 <p>类型擦除：<a href="https://www.cnblogs.com/wuqinglong/p/9456193.html" target="_blank" rel="noopener">https://www.cnblogs.com/wuqinglong/p/9456193.html</a></p>
 <p><a href="https://juejin.im/post/5d5789d26fb9a06ad0056bd9" target="_blank" rel="noopener">https://juejin.im/post/5d5789d26fb9a06ad0056bd9</a></p>
+</blockquote>
  
       <!-- reward -->
       
@@ -237,9 +292,9 @@
       </a>
     
     
-      <a href="/page/Java-exception.html" class="article-nav-link">
+      <a href="/page/Java-exception-handle.html" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">Java异常</div>
+        <div class="article-nav-title">Java：异常与异常处理</div>
       </a>
     
   </nav>
@@ -362,7 +417,7 @@
 <nav class="navbar">
   
   <div class="logo">
-    <a href="/"><img src="/images/ayer-side.svg" alt="浔庐子夜"></a>
+    <a href="/"><img src="/images/ayer-side.svg" alt="子夜nostalgic"></a>
   </div>
   
   <ul class="nav nav-main">
