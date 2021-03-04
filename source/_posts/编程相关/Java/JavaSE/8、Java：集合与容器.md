@@ -350,7 +350,7 @@ JDK1.7及其之前，HashMap底层是一个**table数组+链表**实现的哈希
 
 JDK1.8及以后，当链表的存储数据个数 **≥8** 的时候，不再采用链表存储，而采用红黑树存储结构。这么做能够降低查询的时间复杂度（链表O(n) -> 红黑树O(logn)）。
 
-JDK1.7中链表的每个节点就是一个`Entry`，其中包括以下四个部分：
+JDK1.7中链表的每个节点就是一个`Entry`，1.8之后改为了`Node`，其中包括以下四个部分：
 
 ```java
 static class Entry<K, V> implements Map.Entry<K, V> {
@@ -381,8 +381,6 @@ public class HashMap<K, V> implements Map<K, V> {
     }
 }
 ```
-
-
 
 
 
