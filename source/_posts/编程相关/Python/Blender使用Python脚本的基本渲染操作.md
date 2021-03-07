@@ -14,7 +14,18 @@ fileName: blender-python-script-basic
 
 ## bpy模块
 
-bpy模块是blender脚本插件核心库
+### bpy模块IDE开发
+
+bpy模块是blender脚本插件核心库，封装在blender内置的Python库中，因此在外界要使用该库并不方便
+
+为了能够在相关IDE中进行blender二次开发，可以使用`fake-bpy-module`这个包，该包是一套Blender API伪SDK库，能够用于blender二次开发的相关代码补全
+
+安装`fake-bpy-module`只需要使用pip就可以了，如下就是安装2.83版本的 方法
+
+```
+pip install fake-bpy-module-<version>
+pip install fake-bpy-module-2.83
+```
 
 ### bpy.ops
 
