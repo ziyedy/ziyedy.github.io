@@ -164,6 +164,23 @@ Cannot resolve plugin org.apache.maven.plugins:maven-clean-plugin:2.5 Maven
 
 <img src="http://cdn.ziyedy.top/Maven/bug2.png" style="zoom:67%;" />
 
+### bug3：Could not transfer artifact ...
+
+在导入的虚拟机选项中插入如下代码，忽略SSL证书的验证
+
+```
+-Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true
+```
+
+<img src="http://cdn.ziyedy.top/Maven/bug3.png" style="zoom: 50%;" />
+
+如果还报错的话，则将maven本地包中结尾为`.lastUpdate`的文件删除，输出该类文件需要使用相关命令或脚本，如下为Windows下删除方法。
+
+```
+cd maven仓库
+for /r %i in (*.lastUpdated) do del %i
+```
+
 
 
 
