@@ -19,8 +19,6 @@ fileName: Java-string
 >
 > Java语言为`“+”`连接符（字符串连接符）以及对象转换为字符串提供了特殊的支持，字符串对象可以使用`“+”`连接其他对象
 
-
-
 ### 基本实现
 
 String被声明为`final`，因此不可被继承，同时也说明**String具有不可变特性**。在**Java8**中，String内部使用char数组存储数据。
@@ -50,12 +48,12 @@ public final class String
 
 ### 常用方法
 
-```
+```java
 // 获取字符串长度
 int length()
 
-// 获取从begin到end的字符串
-String substring(int beginIndex, int endIndex)
+// 获取从 beginIndex 到 endIndex 的字符串
+public String substring(int beginIndex, int endIndex)
 
 // 获取指定位置的字符
 char charAt(int index)
@@ -66,6 +64,10 @@ String[] split(String regex, int limit)
 // 将该字符串转换为byte数组
 byte[] getBytes()	
 ```
+
+
+
+
 
 
 

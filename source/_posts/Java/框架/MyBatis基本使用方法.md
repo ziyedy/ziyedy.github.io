@@ -9,5 +9,19 @@ categories:
 fileName: mybatis-basic-summary
 ---
 
+#
+
+JDBC需要的主要步骤：
+
+```java
+// 注册数据库驱动
+Class.forName("com.mysql.jdbc.Driver");
+// 创建连接对象
+Connection conn = DriverManager.getConnection(url, username, password);
+// 创建 Statement, 用来执行 sql 语句
+Statement stmt = conn.createStatement();
+
+```
+
 
 
