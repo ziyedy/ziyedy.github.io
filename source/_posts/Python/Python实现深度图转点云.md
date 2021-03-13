@@ -5,7 +5,6 @@ tags:
 	- 3D视觉
 	- 点云
 categories:
-	- 编程相关
 	- Python
 fileName: python-depth-points
 ---

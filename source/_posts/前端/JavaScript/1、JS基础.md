@@ -4,7 +4,7 @@ date: 2020-07-29 20:14:04
 tags:
 	- JavaScript
 categories:
-	- 编程相关
+	- 前端
 	- JavaScript
 fileName: js-basic-grammer
 ---

@@ -1,4 +1,0 @@
----
-title: gg
-layout: "gg"
----

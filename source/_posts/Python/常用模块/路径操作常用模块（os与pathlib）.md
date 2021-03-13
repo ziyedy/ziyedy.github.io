@@ -4,9 +4,8 @@ date: 2020-06-20 09:41:07
 tags:
 	- Python
 categories:
-	- 编程相关
 	- Python
-	- Python常用模块
+	- 常用模块
 fileName: Python-path-operation
 ---
 

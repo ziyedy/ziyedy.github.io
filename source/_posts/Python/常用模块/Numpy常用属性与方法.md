@@ -4,9 +4,8 @@ date: 2020-08-21 09:51:27
 tags:
 	- Numpy
 categories:
-	- 编程相关
 	- Python
-	- Python常用模块
+	- 常用模块
 fileName: numpy-basic-use
 ---
 

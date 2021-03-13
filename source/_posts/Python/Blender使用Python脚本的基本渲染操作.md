@@ -4,7 +4,6 @@ date: 2020-09-13 09:17:32
 tags:
 	- Blender
 categories:
-	- 编程相关
 	- Python
 top: true
 fileName: blender-python-script-basic

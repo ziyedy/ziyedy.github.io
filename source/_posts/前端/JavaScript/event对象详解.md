@@ -2,9 +2,9 @@
 title: 2.1、JS事件处理
 date: 2020-08-15 22:51:57
 tags:
-	- 前端
+	- JavaScript
 categories:
-	- 编程相关
+	- 前端
 	- JavaScript
 fileName: event-obj
 ---

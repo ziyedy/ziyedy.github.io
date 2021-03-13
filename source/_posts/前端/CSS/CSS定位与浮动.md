@@ -4,7 +4,7 @@ date: 2020-08-04 16:07:30
 tags:
 	- 前端样式
 categories:
-	- 编程相关
+	- 前端
 	- CSS
 fileName: css-float-position
 ---

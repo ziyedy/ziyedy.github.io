@@ -4,7 +4,6 @@ date: 2021-02-26 17:12:39
 tags:
 	- Blender
 categories:
-	- 编程相关
 	- Python
 top: true
 fileName: blender-render-cv-dataset
@@ -394,6 +393,44 @@ def render_nocs():
 ### 渲染结果
 
 ![](http://cdn.ziyedy.top/Blender%E4%BD%BF%E7%94%A8Python%E8%84%9A%E6%9C%AC%E7%94%9F%E6%88%90CV%E6%95%B0%E6%8D%AE%E9%9B%86/nocs.png)
+
+## 判断两个模型有没有穿模
+
+实际上也就是判断两个模型有没有交集，参考：
+
+https://blender.stackexchange.com/questions/71289/using-overlap-to-check-if-two-meshes-are-intersecting
+
+https://blender.stackexchange.com/questions/9073/how-to-check-if-two-meshes-intersect-in-python
+
+### 代码实现
+
+```python
+def intersection_check(self, entered_model_list):
+    """
+    Check if there some intersection between current model and the other model which has add into blender
+    IF: EXIST intersection -> False
+    """
+    bm1 = bmesh.new()
+    bm1.from_mesh(self.model.data)
+    bm1.transform(self.model.matrix_world)
+    bvhTree1 = BVHTree.FromBMesh(bm1)
+
+    for item in entered_model_list:
+        bm2 = bmesh.new()
+        bm2.from_mesh(item.model.data)
+        bm2.transform(item.model.matrix_world)
+        bvhTree2 = BVHTree.FromBMesh(bm2)
+
+        inter = bvhTree1.overlap(bvhTree2)	# 得到交集
+        # if there exists intersection -> false
+        if inter:
+            return False
+    return True
+```
+
+
+
+
 
 ## 不错的源码
 

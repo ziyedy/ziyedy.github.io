@@ -4,9 +4,8 @@ date: 2020-08-22 11:38:29
 tags:
 	- Pandas
 categories:
-	- 编程相关
 	- Python
-	- Python常用模块
+	- 常用模块
 fileName: pandas-basic-use
 ---
 

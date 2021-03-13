@@ -4,9 +4,8 @@ date: 2020-08-21 13:58:33
 tags:
 	- matplotlib
 categories:
-	- 编程相关
 	- Python
-	- Python常用模块
+	- 常用模块
 fileName: python-matplotlib-use
 ---
 

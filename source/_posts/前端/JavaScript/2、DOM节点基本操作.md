@@ -4,7 +4,7 @@ date: 2020-06-21 14:38:46
 tags:
 	- JavaScript
 categories:
-	- 编程相关
+	- 前端
 	- JavaScript
 fileName: js-dom-basic-handle
 ---
