@@ -2,23 +2,16 @@
 title: ThreadLocal
 date: 2021-03-13 17:05:55
 tags:
+	- 并发编程
 categories:
-fileName:
+	- Java
+	- JavaSE
+fileName: java12-ThreadLocal
 ---
 
 #
 
-利用“线程封闭”的思路解决线程安全问题
-
-
-
-共享变量、方法内的局部变量
-
-作用域介于两者之间，既能保证线程安全，又不至于只局限于方法内部的方式呢
-
-
-
-ThreadLocal变量的作用域是为线程，也就是说线程内跨方法共享
+利用“线程封闭”的思路解决线程安全问题，ThreadLocal变量的作用域是为线程，同一线程内共享
 
 
 
@@ -36,7 +29,7 @@ ThreadLocal的特性决定了它的使用场景，由于ThreadLocal中存储的�
 
 
 
-## ThreadLocal源代码解析
+## ThreadLocal源码解析
 
 多个线程对同一个对象set操作，但只会get出自己set进去的值，原理如下：
 

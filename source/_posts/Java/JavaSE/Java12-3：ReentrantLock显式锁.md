@@ -13,7 +13,7 @@ fileName: Java12-
 
 
 
- java.util.concurrent.locks 包下的 Lock 接口和它的实现 ReentrantLock
+`java.util.concurrent.locks` 包下的 Lock 接口和它的实现 ReentrantLock
 
 ReentrantLock 也是互斥锁，有如下三种互斥情况：读/写、写/写、读/读。
 

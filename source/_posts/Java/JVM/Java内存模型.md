@@ -1,12 +1,12 @@
 ---
-title: Java内存区域
+title: Java内存模型
 date: 2021-03-06 13:13:47
 tags:
 	- JVM
 categories:
 	- Java
 	- JVM
-fileName: jvm-memory-area
+fileName: jvm-memory-model
 ---
 
 > 针对的是HotSpot虚拟机 

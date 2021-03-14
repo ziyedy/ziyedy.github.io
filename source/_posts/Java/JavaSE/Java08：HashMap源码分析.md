@@ -17,3 +17,12 @@ https://blog.csdn.net/qq_24549805/article/details/103849708?utm_medium=distribut
 
 
 https://blog.csdn.net/weixin_39283212/article/details/90711340
+
+
+
+HashMap 底层的数据结构主要是：数组 + 链表 + 红黑树。其中当链表的长度大于等于 8 时，链表会转化成红黑树，当红黑树的大小小于等于 6 时，红黑树会转化成链表
+
+
+
+## 新增
+

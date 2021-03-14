@@ -13,19 +13,6 @@ fileName: blender-python-script-basic
 
 ## bpy模块
 
-### bpy模块IDE开发
-
-bpy模块是blender脚本插件核心库，封装在blender内置的Python库中，因此在外界要使用该库并不方便
-
-为了能够在相关IDE中进行blender二次开发，可以使用`fake-bpy-module`这个包，该包是一套Blender API伪SDK库，能够用于blender二次开发的相关代码补全
-
-安装`fake-bpy-module`只需要使用pip就可以了，如下就是安装2.83版本的 方法
-
-```
-pip install fake-bpy-module-<version>
-pip install fake-bpy-module-2.83
-```
-
 ### bpy.ops
 
 > 对于操纵3D对象，最重要的两个类是`bpy.ops.object`和`bpy.ops.mesh`
@@ -44,8 +31,6 @@ bpy.context.selected_objects
 # 访问目前激活的对象
 bpy.context.active_object
 ```
-
-
 
 ### bpy.data
 
@@ -74,8 +59,6 @@ bpy.data.objects[1]  #访问列表中的第1个对象
 bpy.data.objects['Cube'].name #访问对象名称
 bpy.data.objects['Cube'].location #访问对象的位置
 ```
-
-
 
 ## 常用基本操作
 
@@ -119,10 +102,6 @@ bpy.ops.transform.translate(value=(1, -2, 3))
 bpy.data.objects['Cube'].location = (1, 2, 3)
 ```
 
-
-
-
-
 ## 灯光操作
 
 ```
@@ -144,8 +123,6 @@ bpy.data.objects['Light'+str(i)].select_set(True)
 bpy.ops.object.delete()
 ```
 
-
-
 ## 相机操作
 
 ### 改变相机指向
@@ -160,8 +137,6 @@ def look_at(obj_camera, point=Vector((0, 0, 0))):
     rot_quat = direction.to_track_quat('-Z', 'Y')
     obj_camera.rotation_euler = rot_quat.to_euler()
 ```
-
-
 
 ## 实现多角度渲染物体
 
@@ -223,14 +198,33 @@ bpy.ops.render.render(write_still=True, use_viewport=False)
 
 ![](http://cdn.ziyedy.top/Blender%E7%89%A9%E4%BD%93%E6%B8%B2%E6%9F%93%E8%84%9A%E6%9C%AC/%E6%B8%B2%E6%9F%93%E7%BB%93%E6%9E%9C2.png)
 
-## 总结
+## Blender脚本编写tips
 
-总而言之，blender插件脚本的python开发是一个文档相对欠缺（官方文档写的我个人认为很烂）而且不同版本之间差别较大的二次开发工具。
+### 根据软件操作获得代码
 
-如果没有特别的要求非得使用blender，我的建议是能不用就不用（尤其对于新手）。顺带一提，blender内置的Python脚本开发环境也极其糟糕，理论上vscode内是有相应的插件的，但bug较多我个人认为也很不好用。
+对blender不熟悉的话很多操作不知道如何使用Python编写（官方文档是指望不上的），所以可以在软件内进行操作，然后在Script中即可以看到上次操作的代码，这样的话如果摸清楚了Blender中的操作流程的话，可以很方便的转化为代码
 
-之后如果还会使用blender的话我会写一个专题好好记录一下学习的过程（希望不会有这一天）
+![](http://cdn.ziyedy.top/Blender%E4%BD%BF%E7%94%A8Python%E8%84%9A%E6%9C%AC%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%B8%B2%E6%9F%93%E6%93%8D%E4%BD%9C/blender%E6%98%BE%E7%A4%BA%E6%93%8D%E4%BD%9C%E4%BB%A3%E7%A0%81.png)
 
-### 参考
+### IDE开发
 
-https://github.com/zju3dv/pvnet-rendering
+bpy模块是blender脚本插件核心库，封装在blender内置的Python库中，因此在外界要使用该库并不方便
+
+为了能够在相关IDE中进行blender二次开发，可以使用`fake-bpy-module`这个包，该包是一套Blender API伪SDK库，能够用于blender二次开发的相关代码补全
+
+安装`fake-bpy-module`只需要使用pip就可以了，如下就是安装2.83版本的 方法
+
+```
+pip install fake-bpy-module-<version>
+pip install fake-bpy-module-2.83
+```
+
+### 帮助文档
+
+blender插件脚本的python开发是一个文档相对欠缺（官方文档写的我个人认为很烂）而且不同版本之间差别较大。
+
+因此建议初学者不要直接上官方文档，而应该面对具体问题在 https://blender.stackexchange.com/ 上找到相应解决方案
+
+或者可以面向软件，找到在软件中的操作手法，之后根据tip1完成代码的编写
+
+

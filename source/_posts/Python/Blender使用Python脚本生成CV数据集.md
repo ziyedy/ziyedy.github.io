@@ -430,10 +430,10 @@ def intersection_check(self, entered_model_list):
 
 
 
-
-
 ## 不错的源码
 
 blender中资源本身比较少，以下是我编写代码时找到的一个质量不错的源码，值得参考
 
 https://github.com/DIYer22/bpycv
+
+https://github.com/zju3dv/pvnet-rendering
