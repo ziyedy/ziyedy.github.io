@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-Hans">
+
+
+<head>
+  <meta charset="utf-8" />
+   
+  <meta name="keywords" content="生活" />
+   
+  <meta name="description" content="子夜写字的地方" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    Java12：多线程与并发编程 |  子夜nostalgic
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-Java/JavaSE/Java12：多线程与并发编程"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  Java12：多线程与并发编程
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/page/Java12-multithread-concurrency.html" class="article-date">
+  <time datetime="2021-01-03T05:58:43.000Z" itemprop="datePublished">2021-01-03</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Java/">Java</a> / <a class="article-category-link" href="/categories/Java/JavaSE/">JavaSE</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">1.3k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">4 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="线程创建"><a href="#线程创建" class="headerlink" title="线程创建"></a>线程创建</h2><h3 id="继承Thread类"><a href="#继承Thread类" class="headerlink" title="继承Thread类"></a>继承Thread类</h3><p>Thread类是Java提供的线程顶级类，继承Thread类可快速定义线程。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyThread</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Thread</span> </span>&#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>		<span class="hljs-comment">// 线程体，线程要完成的任务，要执行的代码</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="实现Runnable接口"><a href="#实现Runnable接口" class="headerlink" title="实现Runnable接口"></a>实现Runnable接口</h3><p>实现Runnable接口，作为参数传递给Thread构造函数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyRunnable</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Runnable</span> </span>&#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-comment">// 线程体，线程要执行的任务</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="两者比较"><a href="#两者比较" class="headerlink" title="两者比较"></a>两者比较</h3><p>使用Runnable接口更好</p>
+<ul>
+<li>Java不支持双继承，如果继承Thread会降低其拓展性</li>
+<li>从代码架构来说：使用Runnable能够解耦合（线程控制逻辑在Thread类中，业务运行逻辑在Runnable实现类中），并且实现Runnable的实例，可以被多个线程共享并执行</li>
+<li>新建线程的损耗：使用Runnable只需要传入target，不需要反复创建与销毁线程</li>
+</ul>
+<h2 id="线程启动"><a href="#线程启动" class="headerlink" title="线程启动"></a>线程启动</h2><blockquote>
+<p>调用start方法才是真正开始了一个线程的周期，而调用run方法则只是调用一个普通的方法</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">MyThread myThread = <span class="hljs-keyword">new</span> MyThread();<br>myThread.run();		<span class="hljs-comment">// 未启动线程，只是调用了myThread实例的run方法</span><br>myThread.start();	<span class="hljs-comment">// 启动线程</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="Thread中start方法源码分析"><a href="#Thread中start方法源码分析" class="headerlink" title="Thread中start方法源码分析"></a>Thread中start方法源码分析</h3><p>start方法调用start0（start0是一个native方法，也称为JNI（Java Native Interface）方法），而start0方法在JVM中会调用run方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title">start</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-comment">// 检查线程的状态，判断是否可以启动</span><br>    <span class="hljs-keyword">if</span> (threadStatus != <span class="hljs-number">0</span>)<br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalThreadStateException();<br>    <br>    <span class="hljs-comment">// 把线程加入到线程group中</span><br>    group.add(<span class="hljs-keyword">this</span>);<br><br>    <span class="hljs-comment">// 调用了start0()方法</span><br>    <span class="hljs-keyword">boolean</span> started = <span class="hljs-keyword">false</span>;<br>    <span class="hljs-keyword">try</span> &#123;<br>        start0();<br>        started = <span class="hljs-keyword">true</span>;<br>    &#125; <span class="hljs-keyword">finally</span> &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-keyword">if</span> (!started) &#123;<br>                group.threadStartFailed(<span class="hljs-keyword">this</span>);<br>            &#125;<br>        &#125; <span class="hljs-keyword">catch</span> (Throwable ignore) &#123;<br>        &#125;<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">native</span> <span class="hljs-keyword">void</span> <span class="hljs-title">start0</span><span class="hljs-params">()</span></span>;<br></code></pre></td></tr></table></figure>
+
+<p>而run方法则会先判断target是否为空（target即为传入的Runnable对象），因此当传入Runnable对象后，该Thread类所执行的代码是传入的Runnable对象的run方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> Runnable target;	<span class="hljs-comment">// 传入的 Runnable</span><br><br><span class="hljs-meta">@Override</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-comment">// 判断如果target不为空，则执行传入的target中的逻辑</span><br>    <span class="hljs-keyword">if</span> (target != <span class="hljs-keyword">null</span>) &#123;<br>        target.run();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="线程生命周期"><a href="#线程生命周期" class="headerlink" title="线程生命周期"></a>线程生命周期</h2><ul>
+<li><p><strong>New状态</strong>：当一个 Thread 对象刚刚被创建时，状态为 NEW，此时与其他 Java 对象没有什么不同</p>
+</li>
+<li><p><strong>RUNNABLE状态</strong>：调用 <code>start</code> 方法后即进入 RUNNABLE 状态</p>
+</li>
+<li><p><strong>RUNNING状态</strong>：该状态得到CPU分配时即进入RUNNING状态</p>
+</li>
+<li><p><strong>BLOCKED状态</strong>：包括Blocked（被阻塞）、Waiting（等待）、Time_waiting（计时等待）等等</p>
+</li>
+<li><p><strong>TERMINATED状态</strong>：线程的终止状态，意味着线程的生命周期已经走完</p>
+</li>
+</ul>
+<h2 id="Thread类常用方法"><a href="#Thread类常用方法" class="headerlink" title="Thread类常用方法"></a>Thread类常用方法</h2><h3 id="currentThread-及线程对象常用方法"><a href="#currentThread-及线程对象常用方法" class="headerlink" title="currentThread()及线程对象常用方法"></a>currentThread()及线程对象常用方法</h3><p>该方法返回的是代码实际运行时候的<strong>线程对象实例</strong></p>
+<p><em>注：由于同一段代码可能被不同线程执行，因此当前线程是相对的</em></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">Thread.currentThread();					    <span class="hljs-comment">// 获取当前线程</span><br>Thread.currentThread().getName();		    <span class="hljs-comment">// 获取当前线程名称</span><br>Thread.currentThread().setName(线程名称);	 <span class="hljs-comment">// 设置线程名称</span><br>Thread.currentThread().isAlive();			<span class="hljs-comment">// 判断当前线程是否处于活动状态</span><br>Thread.currentThread().getId();				<span class="hljs-comment">// 获得线程的唯一标识</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="join-——阻塞线程（插队）"><a href="#join-——阻塞线程（插队）" class="headerlink" title="join()——阻塞线程（插队）"></a>join()——阻塞线程（插队）</h3><p><code>t.join()</code>方法是阻塞调用此方法的线程进入<code>Timed_Waited</code>状态，直到线程t完成，此线程再继续。因此，<strong>join()方法是阻塞别的线程，让自己先运行</strong>，也就是插队</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">MyThread myThread = <span class="hljs-keyword">new</span> MyThread();<br><span class="hljs-comment">/**		启动线程	**/</span><br>myThread.join();	<span class="hljs-comment">// 先执行完myThread再执行其他</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="sleep-——让线程休眠"><a href="#sleep-——让线程休眠" class="headerlink" title="sleep()——让线程休眠"></a>sleep()——让线程休眠</h3><p>使当前线程（即调用<code>Thread.currentThread()</code>返回的线程）休眠指定的毫秒数</p>
+<p>但在这段时间内，该线程持有的 monitor 锁并不会被放弃（所占有的资源并不会交还）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Thread.sleep(<span class="hljs-number">10</span>);	<span class="hljs-comment">// 休眠10毫秒</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="yield-——礼让线程"><a href="#yield-——礼让线程" class="headerlink" title="yield()——礼让线程"></a>yield()——礼让线程</h3><p>让当前正在执行线程暂停（即让出CPU资源），不是阻塞线程，而是将线程转入就绪（RUNNABLE）状态。</p>
+<p>如果调用了yield方法之后，没有其他等待执行的线程，这个时候当前线程就会马上恢复执行</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Thread.yield();<br></code></pre></td></tr></table></figure>
+
+<h3 id="设置线程优先级"><a href="#设置线程优先级" class="headerlink" title="设置线程优先级"></a>设置线程优先级</h3><p>用于设置/获得线程的优先级（所谓优先级只是获得CPU资源的<em>概率</em>），默认为5，最高为10，最低为1</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getPriority</span><span class="hljs-params">()</span></span>;	<span class="hljs-comment">// 获取线程优先级</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setPriority</span><span class="hljs-params">(<span class="hljs-keyword">int</span> newPriority)</span></span>;	<span class="hljs-comment">// 设置线程优先级</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="setDaemon-——设置守护线程"><a href="#setDaemon-——设置守护线程" class="headerlink" title="setDaemon()——设置守护线程"></a>setDaemon()——设置守护线程</h3><p>守护线程即在后台运行的线程，比如JVM中的垃圾清理就是守护线程执行</p>
+<p>当 JVM 中没有任何一个非守护线程时，所有的守护线程都会进入到 TERMINATED 状态，此时JVM 退出</p>
+<p>可以将指定的线程设置成后台线程，创建后台线程的线程结束时，后台线程也随之消亡。</p>
+<p><em>只能在线程启动（即 start 方法调用前）之前把它设为后台线程</em></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">Thread t = <span class="hljs-keyword">new</span> Thread();<br>t.setDaemon(<span class="hljs-keyword">true</span>);<br>t.start();<br></code></pre></td></tr></table></figure>
+
+<h3 id="interrupt-——中断"><a href="#interrupt-——中断" class="headerlink" title="interrupt()——中断"></a>interrupt()——中断</h3><p>并不是中断线程，而是让可中断方法（如sleep）中断</p>
+<p>一旦调用了 interrupt 方法，那么在不进行处理的情况下，线程的 interrupted 状态会一直为 ture</p>
+<h2 id="其他线程控制方法"><a href="#其他线程控制方法" class="headerlink" title="其他线程控制方法"></a>其他线程控制方法</h2><h3 id="wait-notify"><a href="#wait-notify" class="headerlink" title="wait/notify"></a>wait/notify</h3><p>这两类方法不在Thread上，而是在Object类中，所有Java类都会继承这两类方法</p>
+<ul>
+<li>调用 <code>wait</code>方法：原本 RUNNING 的线程，进入 BLOCKING 状态，此线程会放弃原来持有的锁</li>
+<li>调用 <code>notify</code> 方法：唤醒 wait 的线程，让其继续往下执行</li>
+</ul>
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          Donate
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://ziyedy.top/page/Java12-multithread-concurrency.html" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" rel="tag">并发编程</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/page/Java12-synchronized.html" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            Java12-2：synchronized关键字总结
+          
+        </div>
+      </a>
+    
+    
+      <a href="/page/ic.html" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">利用独立级联模型求解影响力最大的点</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "pgmMLBlWl23i6NPFUgTT7XqR-gzGzoHsz",
+    app_key: "yx9IIauIiK8JBBHDxxqPpEFQ",
+    path: window.location.pathname,
+    avatar: "retro",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2019-2021
+        <i class="ri-heart-fill heart_icon"></i> 子夜
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s4.cnzz.com/z_stat.php?id=1279587217&amp;web_id=1279587217'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="子夜nostalgic"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gg">足迹</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+</body>
+
+</html>

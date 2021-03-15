@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-Hans">
+
+
+<head>
+  <meta charset="utf-8" />
+   
+  <meta name="keywords" content="生活" />
+   
+  <meta name="description" content="子夜写字的地方" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    内存管理 |  子夜nostalgic
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-学习笔记/操作系统/内存管理"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  内存管理
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/page/memory-management.html" class="article-date">
+  <time datetime="2021-03-01T01:36:30.000Z" itemprop="datePublished">2021-03-01</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a> / <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">3.2k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">10 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="内存概述"><a href="#内存概述" class="headerlink" title="内存概述"></a>内存概述</h1><h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><blockquote>
+<p>内存是用于存放数据的硬件，程序执行前需要先放到内存中才能被CPU处理</p>
+</blockquote>
+<ul>
+<li><p>存储单元：按字节编址（一个存储单元1个字节，8个二进制位）；按字长编址（一个存储单元1个字长，按计算机的字长决定存储单元大小）</p>
+</li>
+<li><p>内存地址：从0开始，每一个地址对应一个存储单元</p>
+</li>
+</ul>
+<h2 id="逻辑地址与物理地址"><a href="#逻辑地址与物理地址" class="headerlink" title="逻辑地址与物理地址"></a>逻辑地址与物理地址</h2><p>代码翻译成CPU可识别的指令，这些指令会告诉CPU该去内存中的哪个地址存/取数据，这时表示的是实际存放的地址，即<strong>物理地址</strong></p>
+<p>生成机器指令的时候并不知道该进程的数据会放到什么位置，编译生成的指令中使用的是相对地址，即<strong>逻辑地址</strong></p>
+<h2 id="程序运行基本原理"><a href="#程序运行基本原理" class="headerlink" title="程序运行基本原理"></a>程序运行基本原理</h2><p><img src="http://cdn.ziyedy.top/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E5%9F%BA%E6%9C%AC%E8%BF%87%E7%A8%8B.jpg" alt=""></p>
+<h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><p>源代码文件(.c)生成目标模块(.o)，将高级语言翻译为机器语言。每一个目标模块都具有独立的逻辑地址</p>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>目标模块生成装入模块(可执行文件，如.exe)，链接完成使得各模块形成整体的链接地址</p>
+<ul>
+<li><p>静态链接：装入前链接成一个完整模块</p>
+</li>
+<li><p>装入时动态链接：运行前边装入边链接</p>
+</li>
+<li><p>运行时动态链接：运行时需要什么模块才装入并链接</p>
+</li>
+</ul>
+<h3 id="装载"><a href="#装载" class="headerlink" title="装载"></a>装载</h3><p>将装入模块装入内存运行，装入后形成物理地址</p>
+<ul>
+<li><p>绝对装入：编译时产生绝对地址，只适用于单道程序环境(那时候还没有操作系统，编译器负责实现)</p>
+</li>
+<li><p>静态重定位：编译链接后的装入模块地址是逻辑地址，装入时进行重定位，将指令中逻辑地址+装入的起始物理地址得到真实的物理地址（地址写死，早期系统使用）</p>
+</li>
+<li><p>动态重定位：运行时才将逻辑地址转换为物理地址。</p>
+</li>
+</ul>
+<h1 id="内存空间的分配与回收"><a href="#内存空间的分配与回收" class="headerlink" title="内存空间的分配与回收"></a>内存空间的分配与回收</h1><h2 id="连续分配管理方式"><a href="#连续分配管理方式" class="headerlink" title="连续分配管理方式"></a>连续分配管理方式</h2><h3 id="单一连续分配"><a href="#单一连续分配" class="headerlink" title="单一连续分配"></a>单一连续分配</h3><p>内存被分为系统区和用户区，系统区通常位于内存的低地址部分，用于存放操作系统相关数据；而用户区用于存放用户进程相关数据</p>
+<p>内存中只能有一道用户程序，用户程序独占用户区</p>
+<h3 id="固定分区分配"><a href="#固定分区分配" class="headerlink" title="固定分区分配"></a>固定分区分配</h3><p>将用户空间划分为若干个固定大小（可以一样大也可以不一样大）的分区，在每个分区中只装入一个作业。操作系统需要建立并管理一个“分区说明表“，用来实现每个分区的分配与回收</p>
+<p><img src="http://cdn.ziyedy.top/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E5%9B%BA%E5%AE%9A%E5%88%86%E5%8C%BA%E5%AD%98%E5%82%A8.png" alt=""></p>
+<ul>
+<li>优点：实现简单，无外部碎片</li>
+<li>缺点：进程太多必须使用覆盖技术，使得性能降低；同时会采用内部碎片，导致内存利用率低</li>
+</ul>
+<h3 id="动态分区分配"><a href="#动态分区分配" class="headerlink" title="动态分区分配"></a>动态分区分配</h3><p>不事先划定分区，而是在进程装入内存时，根据进程的大小动态的建立分区（系统分区的大小和数目是可变的）</p>
+<p>要实现动态分区分配，操作系统需要维护并管理存储<strong>空闲分区</strong>信息的数据结构，常用的有空闲分区表和空闲分区链</p>
+<p>可以使用”紧凑“方法来解决外部随便，所谓紧凑就是移动进程所分配的内存块从而将空闲内存连续起来</p>
+<p>实现动态分区分配的主要方法：</p>
+<p><img src="http://cdn.ziyedy.top/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E5%8A%A8%E6%80%81%E5%88%86%E5%8C%BA%E5%88%86%E9%85%8D%E7%AE%97%E6%B3%95.jpg" alt=""></p>
+<h2 id="！非连续分配管理方式"><a href="#！非连续分配管理方式" class="headerlink" title="！非连续分配管理方式"></a>！非连续分配管理方式</h2><blockquote>
+<p>为用户进程分配的内存可以是一个<strong>离散</strong>的内存空间</p>
+</blockquote>
+<p>主要包括：分页管理、分段管理、段页式存储管理</p>
+<h2 id="分页管理"><a href="#分页管理" class="headerlink" title="分页管理"></a>分页管理</h2><h3 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h3><ul>
+<li><p>内存空间：分成一个个<strong>相等的小分区</strong>，每个分区就是一个<em>页框<em>，并从0开始依次分配</em>页框号</em></p>
+</li>
+<li><p>用户进程地址空间：拆分成一个个<strong>与页框大小相等</strong>的小部分，称为<em>页</em>，每个页也有一个从0开始分配的<em>页号</em></p>
+</li>
+</ul>
+<p>之后<strong>操作系统以页框为单位为各个进程分配内存空间</strong>，进程的页与内存的页框一一对应，各个页不必连续存放，也不必按照一定顺序，实现了离散的存储</p>
+<h3 id="页表"><a href="#页表" class="headerlink" title="页表"></a>页表</h3><p>为了能知道进程的每个页面在内存中存放的位置，操作系统要<strong>为每一个进程建立一张页表</strong>，页表具有如下特点：</p>
+<p>1、一个进程对应一张页表</p>
+<p>2、进程的每一页对应一块页表项</p>
+<p>3、每个页表项由”页号“和”块号“组成</p>
+<p>4、页表记录进程页面和实际存放的内存块之间的对应关系</p>
+<p>5、每个页表项长度是相同的，所以页号是”隐含“的</p>
+<h3 id="基本地址转换"><a href="#基本地址转换" class="headerlink" title="基本地址转换"></a>基本地址转换</h3><p>页表寄存器：保存页表在内存中的起始地址F和页表长度M。进程未执行的时候，F和M放在PCB中，进程被调度时，操作系统内核将其放到页表寄存器中</p>
+<p><img src="http://cdn.ziyedy.top/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E5%88%86%E9%A1%B5%E5%9F%BA%E6%9C%AC%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2.png" alt=""></p>
+<h3 id="利用快表的地址转换"><a href="#利用快表的地址转换" class="headerlink" title="利用快表的地址转换"></a>利用快表的地址转换</h3><p>根据<strong>局部性原理</strong>（见下文），可以使用快表（TLB，是一种告诉存储单元）来存放当前访问的若干页表项，以加速地址转化的过程</p>
+<p><img src="http://cdn.ziyedy.top/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E5%88%86%E9%A1%B5%E5%BF%AB%E8%A1%A8%E5%9C%B0%E5%9D%80%E8%BD%AC%E5%8C%96.png" alt=""></p>
+<h3 id="多级页表"><a href="#多级页表" class="headerlink" title="多级页表"></a>多级页表</h3><p>单级页表存在几个问题：</p>
+<ul>
+<li>所有页表项都要连续存放，页表很大时占用页框很多</li>
+<li>进程一段时间可能只访问某几个特定的页面，因此没有必要让页表常驻</li>
+</ul>
+<p>为解决这些问题可以采用多级页表</p>
+<h2 id="分段管理"><a href="#分段管理" class="headerlink" title="分段管理"></a>分段管理</h2><h3 id="基本思想-1"><a href="#基本思想-1" class="headerlink" title="基本思想"></a>基本思想</h3><ul>
+<li><p>进程的地址空间：按照程序自身的逻辑关系划分为若干个段，每个段有一个段名，每个段从0开始编址</p>
+</li>
+<li><p>内存分配规则：以段为单位进行分配，每个段在内存中占据连续空间，但各段之间可以不相邻</p>
+</li>
+</ul>
+<h3 id="地址转换"><a href="#地址转换" class="headerlink" title="地址转换"></a>地址转换</h3><p>程序分为多个段，离散的放入内存，必须能够从物理内存中找到各个逻辑段的存放位置（<strong>段表</strong>）</p>
+<p>记录该段在内存中的起始位置（基址）、段的长度。各个段表项的长度一致，因此段号是隐含的可以不进行记录</p>
+<p><img src="http://cdn.ziyedy.top/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E5%88%86%E6%AE%B5%E5%9C%B0%E5%9D%80%E5%8F%98%E6%8D%A2.jpg" alt=""></p>
+<h2 id="段页式管理"><a href="#段页式管理" class="headerlink" title="段页式管理"></a>段页式管理</h2><h3 id="分段与分页的优缺点"><a href="#分段与分页的优缺点" class="headerlink" title="分段与分页的优缺点"></a>分段与分页的优缺点</h3><p><img src="http://cdn.ziyedy.top/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E5%88%86%E6%AE%B5%E4%B8%8E%E5%88%86%E9%A1%B5%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9.jpg" alt=""></p>
+<h3 id="基本思想-2"><a href="#基本思想-2" class="headerlink" title="基本思想"></a>基本思想</h3><blockquote>
+<p>将进程按逻辑模块分段，再进行分页</p>
+</blockquote>
+<p><img src="http://cdn.ziyedy.top/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E6%AE%B5%E9%A1%B5%E5%BC%8F.png" alt=""></p>
+<h3 id="地址转换-1"><a href="#地址转换-1" class="headerlink" title="地址转换"></a>地址转换</h3><p>逻辑：段号、页号、页内地址（业内偏移量）</p>
+<p>段号决定了每个进程最多可以分几个段</p>
+<p>页号决定了每个段最大有多少页</p>
+<p><img src="http://cdn.ziyedy.top/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E6%AE%B5%E9%A1%B5%E5%9C%B0%E5%9D%80%E5%8F%98%E6%8D%A2.jpg" alt=""></p>
+<h1 id="内存空间的扩充"><a href="#内存空间的扩充" class="headerlink" title="内存空间的扩充"></a>内存空间的扩充</h1><h2 id="覆盖技术"><a href="#覆盖技术" class="headerlink" title="覆盖技术"></a>覆盖技术</h2><p>按自身逻辑结构，让一些不可能被同时访问的程序段共享同一覆盖区（只存在于早期操作系统）</p>
+<h2 id="交换技术"><a href="#交换技术" class="headerlink" title="交换技术"></a>交换技术</h2><p>将磁盘分为对换区（swap）和文件区，前者连续分配追求I/O速度，后者离散分配追求存储空间利用率</p>
+<p><strong>内存紧张时，把进程暂时换出到外存相应区域</strong>。优先换出阻塞进程、低优先级进程（可能导致饥饿）、还要考虑进程在内存的驻留时间，PCB不会换出</p>
+<h2 id="！虚拟存储技术"><a href="#！虚拟存储技术" class="headerlink" title="！虚拟存储技术"></a>！虚拟存储技术</h2><h3 id="传统内存分配方法缺陷"><a href="#传统内存分配方法缺陷" class="headerlink" title="传统内存分配方法缺陷"></a>传统内存分配方法缺陷</h3><ul>
+<li>一次性：作业必须一次性全部装入内存后才能开始运行。大作业无法运行，多道程序并发度下降（比如一些几十个G的游戏显然无法在有限的内存中运行）。</li>
+<li>驻留性：作业在运行期间一直驻留在内存，内存中驻留大量的暂时用不到的数据，浪费了宝贵的内存资源。</li>
+</ul>
+<h3 id="局部性原理"><a href="#局部性原理" class="headerlink" title="局部性原理"></a>局部性原理</h3><ul>
+<li>时间局部性：现在访问的指令、数据在不久后很可能再次访问</li>
+<li>空间局部性：现在访问的内存单元周围的内存空间很可能在不久之后访问</li>
+<li>高速缓存：频繁访问的数据放到更高速的储存器中</li>
+</ul>
+<h3 id="虚拟内存概述"><a href="#虚拟内存概述" class="headerlink" title="虚拟内存概述"></a>虚拟内存概述</h3><p>根据传统内存分配方法的缺陷以及局部性原理的特点，使用虚拟内存方法进行改进：</p>
+<blockquote>
+<p>程序不需要全部装入内存即可运行，运行时根据需要动态调入数据，内存不够时，换出一些数据到外存</p>
+</blockquote>
+<ul>
+<li>多次性：作业无需在运行时一次装入内存，而是允许分多次调用</li>
+<li>对换性：作业无需在运行时常驻内存，允许作业换入、换出</li>
+<li><strong>虚拟性：从逻辑上扩充了内存容量，用户看到的容量，远大于实际容量</strong></li>
+</ul>
+<h1 id="虚拟内存的实现"><a href="#虚拟内存的实现" class="headerlink" title="虚拟内存的实现"></a>虚拟内存的实现</h1><h2 id="请求换页"><a href="#请求换页" class="headerlink" title="请求换页"></a>请求换页</h2><blockquote>
+<p>访问的信息不存在时，操作系统负责将需要的信息从外存调入内存</p>
+</blockquote>
+<h3 id="新增页表项"><a href="#新增页表项" class="headerlink" title="新增页表项"></a>新增页表项</h3><ul>
+<li>状态位：表示页面是否已在内存中</li>
+<li>访问字段：记录最近的被访问情况，供页面置换算法参考</li>
+<li>修改位：表示页面调入内存中是否修改过，只有修改过的页面才需要在置换时写回外存</li>
+<li>外存地址：页面在外存中存放的位置</li>
+</ul>
+<h3 id="缺页中断机制"><a href="#缺页中断机制" class="headerlink" title="缺页中断机制"></a>缺页中断机制</h3><p>每当访问的页面不存在时，便产生一个<strong>缺页中断</strong>，然后由操作系统的缺页中断处理程序处理中断。此时缺页的进程<strong>阻塞</strong>，放入阻塞队列，掉页完成后再将其放入就绪队列</p>
+<h2 id="页面置换"><a href="#页面置换" class="headerlink" title="页面置换"></a>页面置换</h2><p>内存空间不足时，将内存中暂时不用的信息换到外存</p>
+<p>页面的换入换出需要磁盘I/O，时间开销是很大的，缺页率越小越好</p>
+<h3 id="最佳置换算法-OPT"><a href="#最佳置换算法-OPT" class="headerlink" title="最佳置换算法(OPT)"></a>最佳置换算法(OPT)</h3><blockquote>
+<p>每次选择淘汰的页面将是<strong>以后再不使用的，或是在最长时间内不再被访问的页面</strong>，以保证最低的缺页率</p>
+</blockquote>
+<p>该算法实现的前提是知道页面的访问序列，这是无法预知的，因此该方法<strong>无法实现</strong></p>
+<h3 id="先进先出置换算法-FIFO"><a href="#先进先出置换算法-FIFO" class="headerlink" title="先进先出置换算法(FIFO)"></a>先进先出置换算法(FIFO)</h3><blockquote>
+<p>每次选择淘汰的页面是<strong>最早进入内存的页面</strong>，可以使用队列进行实现</p>
+</blockquote>
+<blockquote>
+<p>Belady异常：当为进程分配的物理块增大时，缺页次数不增反降</p>
+</blockquote>
+<p>FIFO算法会产生Belady异常，其实现简单，但性能差（最早进入与最近是否访问没有明显关联）</p>
+<h3 id="最近最久未使用算法-LRU"><a href="#最近最久未使用算法-LRU" class="headerlink" title="最近最久未使用算法(LRU)"></a>最近最久未使用算法(LRU)</h3><blockquote>
+<p>LRU（least recently used）：每次选择淘汰的页面是<strong>最近最久未使用的页面</strong></p>
+</blockquote>
+<p>实现方式：给每个页面对应的页表项中，用访问字段记录该页面自上次被访问以来所经历的时间t，当需要淘汰一个页面时，选择所有页面中t最大的，即最近最久未使用的页面</p>
+<h3 id="时钟置换算法-CLOCK"><a href="#时钟置换算法-CLOCK" class="headerlink" title="时钟置换算法(CLOCK)"></a>时钟置换算法(CLOCK)</h3><p>实现方法：</p>
+<p>为每个页面设置一个访问位（如1表示最近访问过，0表示最近没访问过），再将内存中的页面链接为一个循环队列</p>
+<p>若某页被访问，则将访问位置为1。当需要淘汰一个页面时，则<strong>淘汰第一个访问位为0的页面</strong>，若遇到访问位为1的页面，则将其访问位置为0</p>
+<p>因此，使用该方法选择一个淘汰页面最多会进行<strong>两轮扫描</strong></p>
+<h3 id="改进型时钟置换算法"><a href="#改进型时钟置换算法" class="headerlink" title="改进型时钟置换算法"></a>改进型时钟置换算法</h3><blockquote>
+<p>相对于普通时钟置换算法，最大的改变就是使用<strong>（访问位，修改位）</strong>的形式表示各页面的状态</p>
+<p>以优先找到最近<strong>既没被访问过，又没被修改过</strong>的页面</p>
+</blockquote>
+<h3 id="页面置换算法总结与比较"><a href="#页面置换算法总结与比较" class="headerlink" title="页面置换算法总结与比较"></a>页面置换算法总结与比较</h3><p><img src="http://cdn.ziyedy.top/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95%E6%AF%94%E8%BE%83.jpg" alt=""></p>
+<h1 id="页面分配策略"><a href="#页面分配策略" class="headerlink" title="页面分配策略"></a>页面分配策略</h1><h2 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h2><blockquote>
+<p>驻留集：请求分页存储管理中给进程分配的物理块的集合。在采用了虚拟存储技术的系统中，驻留集大小一般小于进程大小</p>
+</blockquote>
+<ul>
+<li><p>固定分配：操作系统为进程分配一组固定数目的物理块，在运行期间不变（驻留集不变）</p>
+</li>
+<li><p>可变分配：在运行期间驻留集大小可变</p>
+</li>
+<li><p>局部置换：发生缺页时只能进程自己的物理块进行置换</p>
+</li>
+<li><p>全局置换：可以使用其他空间进行置换</p>
+</li>
+<li><p>抖动现象：给进程分配的物理块太少，刚刚换出的页面马上又要换入内存,刚刚换入的页面马上又要换出外存，这种<strong>频繁的页面调度行为</strong>称为抖动或颠簸。</p>
+</li>
+</ul>
+<h2 id="从何处调页"><a href="#从何处调页" class="headerlink" title="从何处调页"></a>从何处调页</h2><h3 id="对换区空间足够"><a href="#对换区空间足够" class="headerlink" title="对换区空间足够"></a>对换区空间足够</h3><p><img src="http://cdn.ziyedy.top/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E5%AF%B9%E6%8D%A2%E5%8C%BA%E7%A9%BA%E9%97%B4%E8%B6%B3%E5%A4%9F.png" alt=""></p>
+<h3 id="对换区空间不够"><a href="#对换区空间不够" class="headerlink" title="对换区空间不够"></a>对换区空间不够</h3><p><img src="http://cdn.ziyedy.top/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E5%AF%B9%E6%8D%A2%E5%8C%BA%E7%A9%BA%E9%97%B4%E4%B8%8D%E5%A4%9F.png" alt=""></p>
+<h3 id="Unix-方式"><a href="#Unix-方式" class="headerlink" title="Unix 方式"></a>Unix 方式</h3><p><img src="http://cdn.ziyedy.top/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/unix%E6%96%B9%E5%BC%8F.png" alt=""></p>
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          Donate
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://ziyedy.top/page/memory-management.html" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/page/null.html" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            排序算法
+          
+        </div>
+      </a>
+    
+    
+      <a href="/page/blender-render-cv-dataset.html" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">Blender使用Python脚本生成CV数据集</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "pgmMLBlWl23i6NPFUgTT7XqR-gzGzoHsz",
+    app_key: "yx9IIauIiK8JBBHDxxqPpEFQ",
+    path: window.location.pathname,
+    avatar: "retro",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2019-2021
+        <i class="ri-heart-fill heart_icon"></i> 子夜
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s4.cnzz.com/z_stat.php?id=1279587217&amp;web_id=1279587217'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="子夜nostalgic"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gg">足迹</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+</body>
+
+</html>

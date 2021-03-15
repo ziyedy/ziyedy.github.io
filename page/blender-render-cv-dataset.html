@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-编程相关/Python/Blender使用Python脚本生成CV数据集"
+  id="post-Python/Blender使用Python脚本生成CV数据集"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2021-02-26T09:12:39.000Z" itemprop="datePublished">2021-02-26</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Python/">Python</a>
+    <a class="article-category-link" href="/categories/Python/">Python</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1.8k</span>
+            <span class="post-count">2k</span>
         </span>
     </span>
 
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">8 min</span>
+            <span class="post-count">9 min</span>
         </span>
     </span>
 </div>
@@ -192,8 +192,16 @@
 <h3 id="代码实现-3"><a href="#代码实现-3" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">render_nocs</span><span class="hljs-params">()</span>:</span><br>    scene = bpy.context.scene<br>    objs = [obj <span class="hljs-keyword">for</span> obj <span class="hljs-keyword">in</span> bpy.data.objects <span class="hljs-keyword">if</span> obj.type <span class="hljs-keyword">in</span> (<span class="hljs-string">"MESH"</span>, <span class="hljs-string">"CURVE"</span>)]<br>    <span class="hljs-keyword">for</span> obj_idx, obj <span class="hljs-keyword">in</span> enumerate(objs):<br>        vcol_layer = obj.data.vertex_colors.new()<br>        <span class="hljs-keyword">for</span> loop_index, loop <span class="hljs-keyword">in</span> enumerate(obj.data.loops):<br>            loop_vert_index = loop.vertex_index<br>            scale = <span class="hljs-number">1</span><br>            color = scale * obj.data.vertices[loop_vert_index].co + Vector([<span class="hljs-number">0.5</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.5</span>])<br>            color = tuple(color) + (<span class="hljs-number">1</span>,)<br><br>            vcol_layer.data[loop_index].color = color<br>        obj.data.vertex_colors.active = vcol_layer<br>        obj.data.update()<br><br>        material = bpy.data.materials.new(<span class="hljs-string">'coord_color'</span>)<br><br>        material.alpha_threshold = <span class="hljs-number">1</span><br><br>        material[<span class="hljs-string">"is_auto"</span>] = <span class="hljs-literal">True</span><br>        material.use_nodes = <span class="hljs-literal">True</span><br>        material.node_tree.nodes.clear()<br><br>        attr = material.node_tree.nodes.new(type=<span class="hljs-string">"ShaderNodeAttribute"</span>)<br>        attr.attribute_name = <span class="hljs-string">"Col"</span><br><br>        output = material.node_tree.nodes.new(type=<span class="hljs-string">"ShaderNodeOutputMaterial"</span>)<br><br>        material.node_tree.links.new(attr.outputs[<span class="hljs-string">'Color'</span>], output.inputs[<span class="hljs-string">'Surface'</span>])<br><br>        obj.data.materials.clear()<br>        obj.data.materials.append(material)<br>        obj.active_material = material<br>    scene.render.filepath = cfg.OUTPUT_DIR + <span class="hljs-string">'nocs.png'</span><br></code></pre></td></tr></table></figure>
 
 <h3 id="渲染结果-2"><a href="#渲染结果-2" class="headerlink" title="渲染结果"></a>渲染结果</h3><p><img src="http://cdn.ziyedy.top/Blender%E4%BD%BF%E7%94%A8Python%E8%84%9A%E6%9C%AC%E7%94%9F%E6%88%90CV%E6%95%B0%E6%8D%AE%E9%9B%86/nocs.png" alt=""></p>
+<h2 id="判断两个模型有没有穿模"><a href="#判断两个模型有没有穿模" class="headerlink" title="判断两个模型有没有穿模"></a>判断两个模型有没有穿模</h2><p>实际上也就是判断两个模型有没有交集，参考：</p>
+<p><a href="https://blender.stackexchange.com/questions/71289/using-overlap-to-check-if-two-meshes-are-intersecting" target="_blank" rel="noopener">https://blender.stackexchange.com/questions/71289/using-overlap-to-check-if-two-meshes-are-intersecting</a></p>
+<p><a href="https://blender.stackexchange.com/questions/9073/how-to-check-if-two-meshes-intersect-in-python" target="_blank" rel="noopener">https://blender.stackexchange.com/questions/9073/how-to-check-if-two-meshes-intersect-in-python</a></p>
+<h3 id="代码实现-4"><a href="#代码实现-4" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">intersection_check</span><span class="hljs-params">(self, entered_model_list)</span>:</span><br>    <span class="hljs-string">"""<br>    Check if there some intersection between current model and the other model which has add into blender<br>    IF: EXIST intersection -&gt; False<br>    """</span><br>    bm1 = bmesh.new()<br>    bm1.from_mesh(self.model.data)<br>    bm1.transform(self.model.matrix_world)<br>    bvhTree1 = BVHTree.FromBMesh(bm1)<br><br>    <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> entered_model_list:<br>        bm2 = bmesh.new()<br>        bm2.from_mesh(item.model.data)<br>        bm2.transform(item.model.matrix_world)<br>        bvhTree2 = BVHTree.FromBMesh(bm2)<br><br>        inter = bvhTree1.overlap(bvhTree2)	<span class="hljs-comment"># 得到交集</span><br>        <span class="hljs-comment"># if there exists intersection -&gt; false</span><br>        <span class="hljs-keyword">if</span> inter:<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br></code></pre></td></tr></table></figure>
+
+
+
 <h2 id="不错的源码"><a href="#不错的源码" class="headerlink" title="不错的源码"></a>不错的源码</h2><p>blender中资源本身比较少，以下是我编写代码时找到的一个质量不错的源码，值得参考</p>
 <p><a href="https://github.com/DIYer22/bpycv" target="_blank" rel="noopener">https://github.com/DIYer22/bpycv</a></p>
+<p><a href="https://github.com/zju3dv/pvnet-rendering" target="_blank" rel="noopener">https://github.com/zju3dv/pvnet-rendering</a></p>
  
       <!-- reward -->
       
@@ -277,19 +285,19 @@
    
   <nav class="article-nav">
     
-      <a href="/page/null.html" class="article-nav-link">
+      <a href="/page/memory-management.html" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            死锁
+            内存管理
           
         </div>
       </a>
     
     
-      <a href="/page/process-thread.html" class="article-nav-link">
+      <a href="/page/process-management.html" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">进程与线程</div>
+        <div class="article-nav-title">进程管理</div>
       </a>
     
   </nav>

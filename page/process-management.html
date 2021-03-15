@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-Hans">
+
+
+<head>
+  <meta charset="utf-8" />
+   
+  <meta name="keywords" content="生活" />
+   
+  <meta name="description" content="子夜写字的地方" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    进程管理 |  子夜nostalgic
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-学习笔记/操作系统/进程管理"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  进程管理
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/page/process-management.html" class="article-date">
+  <time datetime="2021-02-26T07:45:58.000Z" itemprop="datePublished">2021-02-26</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a> / <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">3.8k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">12 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h1><blockquote>
+<p>进程是程序的一次执行过程，是一个程序及其数据在处理机上顺序执行时所发生的活动</p>
+</blockquote>
+<h2 id="进程模型"><a href="#进程模型" class="headerlink" title="进程模型"></a>进程模型</h2><h3 id="进程组成"><a href="#进程组成" class="headerlink" title="进程组成"></a>进程组成</h3><p>进程由以下三个部分组成</p>
+<ul>
+<li>程序段：存放程序代码本身</li>
+<li>数据段：存放程序运行过程中处理的各种数据</li>
+<li>PCB：进程管理所需的数据都放在这里，PCB是进程存在的标志</li>
+</ul>
+<p>其中操作系统管理进程，主要是管理进程所对应的PCB</p>
+<p><strong>PCB中包括了进程的描述信息</strong>（进程标识符 PID、用户标识符 UID、父进程、子进程等）；进程控制和管理信息（进程优先级、进程当前状态、进程同步和通信机制等）；资源分配清单（程序段指针、数据段指针、外设资源等）；处理器信息（如各类寄存器的值，程序计数器等等）</p>
+<h3 id="进程的组织"><a href="#进程的组织" class="headerlink" title="进程的组织"></a>进程的组织</h3><blockquote>
+<p>进程的组织其实就是组织进程所对应的PCB</p>
+</blockquote>
+<p>主要可以用两种数据结构实现：</p>
+<ul>
+<li>链接方式：即按照进程状态将PCB分为多个队列，同时操作系统对各队列的指针进行管理（比如进程的就绪队列等等）</li>
+<li>索引方式：根据进程状态建立索引表，操作系统持有各表的指针</li>
+</ul>
+<h3 id="进程控制"><a href="#进程控制" class="headerlink" title="进程控制"></a>进程控制</h3><blockquote>
+<p>进程控制就是对系统中的所有进程实施有效的管理，如创建新进程、撤销已有进程、实现进程状态转换等功能</p>
+<p><strong>进程控制使用原语实现</strong></p>
+</blockquote>
+<p>进程控制会导致进程状态的转换，主要需要实现如下控制：</p>
+<ul>
+<li>更新PCB中的信息</li>
+<li>将PCB插入合适的队列</li>
+<li>分配/回收资源</li>
+</ul>
+<h3 id="进程的特性"><a href="#进程的特性" class="headerlink" title="进程的特性"></a>进程的特性</h3><ul>
+<li>动态性：最基本特征。进程是程序的一次执行过程，是动态地产生、变化和消亡的</li>
+<li>并发性：内存中有多个进程实体，各进程可以并行执行</li>
+<li>独立性：进程是能独立运行、获得资源、接受调度的基本单位</li>
+<li><strong>异步性</strong>：各进程按各自独立的、不可预测的速度向前推进，异步性会导致并发程序执行结果的不确定性，操作系统要提供<strong>“进程同步机制”</strong>来解决异步问题</li>
+<li>结构性：每一个进程都会配置PCB</li>
+</ul>
+<h2 id="进程的状态与转换"><a href="#进程的状态与转换" class="headerlink" title="进程的状态与转换"></a>进程的状态与转换</h2><h3 id="进程的状态"><a href="#进程的状态" class="headerlink" title="进程的状态"></a>进程的状态</h3><blockquote>
+<p>进程有三个基本状态：运行、就绪、阻塞/等待，此外还有创建状态和终止状态</p>
+</blockquote>
+<ul>
+<li>运行状态(Running)：占有CPU，并在CPU上运行</li>
+<li>就绪状态(Ready)：进程已经具备一切运行条件，除了没有空闲CPU，导致暂时不能运行</li>
+<li>阻塞状态(Waiting/Blocked)：等待某一事件或资源而暂时不能运行，比如等待操作系统分配打印机、等待磁盘读写</li>
+<li>创建状态(New)：操作系统为该进程分配所需内存等系统资源，为其创建、初始化PCB(分配PID等等)</li>
+<li>终止状态(Terminated)：进程运行结束，或者出现Bug导致无法继续执行，操作系统需要撤销进程 完成资源回收，撤销PCB</li>
+</ul>
+<h3 id="进程状态转换"><a href="#进程状态转换" class="headerlink" title="进程状态转换"></a>进程状态转换</h3><p><img src="http://cdn.ziyedy.top/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/%E8%BF%9B%E7%A8%8B%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2.jpg" alt=""></p>
+<h1 id="进程间通信（IPC）"><a href="#进程间通信（IPC）" class="headerlink" title="进程间通信（IPC）"></a>进程间通信（IPC）</h1><h2 id="进程通信"><a href="#进程通信" class="headerlink" title="进程通信"></a>进程通信</h2><blockquote>
+<p>进程通信就是进程之间的信息交换。</p>
+<p>由于各进程的内存地址空间相互独立，一个进程不能直接访问另一个进程的地址空间，所以就产生了进程间通信（IPC）问题</p>
+</blockquote>
+<h3 id="1、共享存储"><a href="#1、共享存储" class="headerlink" title="1、共享存储"></a>1、共享存储</h3><blockquote>
+<p>使得多个进程可以访问同一块内存空间，不同进程可以看到对方进程对共享内存中数据的更新。</p>
+</blockquote>
+<p>两个进程对共享空间的访问必须是<strong>互斥</strong>的，所以该方法需要依靠某种同步操作，如互斥锁和信号量等</p>
+<p><img src="http://cdn.ziyedy.top/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/%E5%85%B1%E4%BA%AB%E5%AD%98%E5%82%A8.png" alt=""></p>
+<h3 id="2、管道通信"><a href="#2、管道通信" class="headerlink" title="2、管道通信"></a>2、管道通信</h3><blockquote>
+<p>管道是指用于连接读写进程的一个共享文件</p>
+</blockquote>
+<p>管道只能采用半双工通信，某一时间段只能实现单向传输，同时各进程也必须<strong>互斥</strong>的访问管道</p>
+<p><img src="http://cdn.ziyedy.top/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/%E7%AE%A1%E9%81%93%E9%80%9A%E4%BF%A1.png" alt=""></p>
+<h3 id="3、消息传递"><a href="#3、消息传递" class="headerlink" title="3、消息传递"></a>3、消息传递</h3><blockquote>
+<p>进程间的数据交换以格式化的消息（Message）为单位，进程通过操作系统提供的“发送消息/接收消息”原语进行数据交换，如<strong>消息队列</strong>等等</p>
+</blockquote>
+<h2 id="进程同步"><a href="#进程同步" class="headerlink" title="进程同步"></a>进程同步</h2><blockquote>
+<p>进程同步又叫进程的“直接制约关系”，为了完成某种任务而建立两个或多个进程，这些进程因为需要在某些位置上<strong>协调工作次序</strong>而产生制约关系。</p>
+</blockquote>
+<p>进程具有异步性，各并发执行的进程以各自独立、不可预测的速度向前推进。</p>
+<p>但有时需要保证不同的进程按照特地的次序推进，比如管道读、写数据两个操作必需按照“写数据-&gt;读数据”的顺序执行，因此就产生了进程同步的需求</p>
+<h2 id="进程互斥"><a href="#进程互斥" class="headerlink" title="进程互斥"></a>进程互斥</h2><blockquote>
+<p>进程互斥指一个进程访问某些临界资源时，另一个想要访问该临界资源的进程必需等待，直到资源被释放。又叫“间接制约关系”</p>
+</blockquote>
+<blockquote>
+<p><strong>临界资源</strong>：一个时间段内只允许一个进程使用的资源（比如一些物理设备，变量数据，内存缓冲区）</p>
+</blockquote>
+<p>进程互斥主要包括三个部分</p>
+<ol>
+<li>进入区：负责检查是否可以进入临界区，若可以进入则设置“正在访问临界资源的标志”（<strong>上锁</strong>），阻止其它进程同时进入临界区</li>
+<li>临界区：负责访问临界资源</li>
+<li>负责解除“正在访问临界资源的标志”（<strong>解锁</strong>）</li>
+</ol>
+<h3 id="原则"><a href="#原则" class="headerlink" title="原则"></a>原则</h3><ul>
+<li>空闲让进：临界区空闲，应允许一个进程访问</li>
+<li>忙则等待：临界区正在被访问时，其它试图访问的进程需要等待</li>
+<li>有限等待：在有限的时间内进入临界区，保证不会饥饿</li>
+<li>让权等待：进不了临界区的进程，释放处理机，防止忙等</li>
+</ul>
+<h2 id="进程互斥软件实现方法"><a href="#进程互斥软件实现方法" class="headerlink" title="进程互斥软件实现方法"></a>进程互斥软件实现方法</h2><h3 id="1、单标志法"><a href="#1、单标志法" class="headerlink" title="1、单标志法"></a>1、单标志法</h3><p>两个进程在访问完临界区后会把临界区的权限转交给下一个进程（<strong>每个进程进入临界区的权限只能被另一个进程赋予</strong>）</p>
+<p>因此如果一个进程一直不使用临界区资源，会导致即使临界区空闲，仍然无法访问，<strong>违背”空闲让进“原则</strong></p>
+<p><img src="http://cdn.ziyedy.top/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/%E5%8D%95%E6%A0%87%E5%BF%97%E6%B3%95.png" alt=""></p>
+<h3 id="2、双标志先检查"><a href="#2、双标志先检查" class="headerlink" title="2、双标志先检查"></a>2、双标志先检查</h3><p>使用一个数组来标记各进程是否想进入临界区，每个进程在进入临界区前查看是否有其他进程想访问临界区，若没有，则设置自身标记再访问临界区。</p>
+<p>如下，若按照①-&gt;⑤-&gt;…进行执行的话，会使得P0和P1同时进入临界区，<strong>违背忙则等待</strong></p>
+<p>原因：进入临界区的“检查”与“上锁”两个处理不是一气呵成的，两者之间可能会发生进程切换</p>
+<p><img src="http://cdn.ziyedy.top/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/%E5%8F%8C%E6%A0%87%E5%BF%97%E6%B3%95.png" alt=""></p>
+<h3 id="3、双标志后检查"><a href="#3、双标志后检查" class="headerlink" title="3、双标志后检查"></a>3、双标志后检查</h3><p>即改为先上锁、再检查</p>
+<p>当按照①-&gt;⑤-&gt;…进行执行的话，会使得P0和P1都无法进入临界区，<strong>违背空闲让进和有限等待</strong></p>
+<p><img src="http://cdn.ziyedy.top/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/%E5%8F%8C%E6%A0%87%E5%BF%97%E5%90%8E%E6%A3%80%E6%9F%A5%E6%B3%95.png" alt=""></p>
+<h3 id="4、Peterson算法"><a href="#4、Peterson算法" class="headerlink" title="4、Peterson算法"></a>4、Peterson算法</h3><p>若几个进程都想进入临界区，则主动让对方先进入临界区</p>
+<p>是几个方法中最好的，但违背让权等待，可能造成CPU资源的浪费</p>
+<p><img src="http://cdn.ziyedy.top/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/Peterson%E7%AE%97%E6%B3%95.png" alt=""></p>
+<h2 id="信号量机制"><a href="#信号量机制" class="headerlink" title="信号量机制"></a>信号量机制</h2><p>软件解决方案的主要问题是由<strong>“进入区的各种操作无法一次性完成”</strong> ，因此如果能把进入区、退出区的操作都用<strong>“原语”</strong>实现就能避免问题。</p>
+<blockquote>
+<p><strong>信号量</strong>：一个标识系统中某种资源数量等标志的变量</p>
+</blockquote>
+<p>用户进程可以通过使用操作系统提供的一对原语来对信号量进行操作，从而实现进程的互斥与同步</p>
+<p>即wait(S)原语和signal(S)原语，也即PV操作，可以简写为P(S)、V(S)</p>
+<p>因此利用信号量机制实现进程的互斥与同步只需要将PV操作置于合适的位置并且在PV操作内对信号量进行合理的操作即可</p>
+<h1 id="进程调度"><a href="#进程调度" class="headerlink" title="进程调度"></a>进程调度</h1><blockquote>
+<p>任务很多资源有限，就需要确定某种规则来决定任务的处理顺序</p>
+<p>进程的调度就是从就绪队列中按照一定算法选择一个进程并将处理机分配给他运行，以实现进程的并发执行</p>
+</blockquote>
+<h2 id="调度概述"><a href="#调度概述" class="headerlink" title="调度概述"></a>调度概述</h2><h3 id="进程调度的时机"><a href="#进程调度的时机" class="headerlink" title="进程调度的时机"></a>进程调度的时机</h3><ul>
+<li>进程自动放弃处理机：正常终止、异常终止、主动请求阻塞</li>
+<li>进程被动放弃处理机：时间片用完、更高优先级进程进入就绪队列（被抢夺）</li>
+</ul>
+<h3 id="调度算法的评价指标"><a href="#调度算法的评价指标" class="headerlink" title="调度算法的评价指标"></a>调度算法的评价指标</h3><ul>
+<li>CPU利用率：CPU忙碌时间(+IO时间)/总时间</li>
+<li>系统吞吐量：总共完成的作业数/总时间</li>
+<li>周转时间</li>
+<li>等待时间</li>
+<li>响应时间</li>
+</ul>
+<h2 id="批处理系统中的调度算法"><a href="#批处理系统中的调度算法" class="headerlink" title="批处理系统中的调度算法"></a>批处理系统中的调度算法</h2><h3 id="1、先来先服务（FCFS）"><a href="#1、先来先服务（FCFS）" class="headerlink" title="1、先来先服务（FCFS）"></a>1、先来先服务（FCFS）</h3><p>作业/进程谁先到后备队列的谁先得到服务，是非抢占式算法</p>
+<p>优点：公平，算法简单</p>
+<p>缺点：对长作业（进程）有利，对短作业不利（带权周转时间很大） ，不会导致饥饿</p>
+<h3 id="2、最短作业优先（SJF）"><a href="#2、最短作业优先（SJF）" class="headerlink" title="2、最短作业优先（SJF）"></a>2、最短作业优先（SJF）</h3><p>算法思想：追求最少的平均等待时间，最少平均周转时间，最少平均带权周转时间</p>
+<p>算法规则：需要服务时间最短的作业、进程先得到服务，可以实现为非抢占式也可以实现为抢占式</p>
+<p>优点：“最短的”平均等待时间、平均周转时间</p>
+<p>缺点：不公平，短作业有利，长作业不利。 可能导致饥饿，如果有源源不断的短作业到来，长作业可能一直得不到服务（饿死）</p>
+<h3 id="3、高响应比优先"><a href="#3、高响应比优先" class="headerlink" title="3、高响应比优先"></a>3、高响应比优先</h3><p>算法思想：综合考虑作业/进程的等待时间和服务时间</p>
+<p>算法规则：每次调度时选择响应比最高的作业/进程。响应比=(等待时间+要求服务时间)/要求服务时间</p>
+<p>非抢占式，除非当前作业/进程主动放弃处理机，才需要调度</p>
+<p>优点：综合考虑了等待时间和运行时间</p>
+<h2 id="交互式系统中的调度算法"><a href="#交互式系统中的调度算法" class="headerlink" title="交互式系统中的调度算法"></a>交互式系统中的调度算法</h2><h3 id="1、时间片轮转（round-robin）"><a href="#1、时间片轮转（round-robin）" class="headerlink" title="1、时间片轮转（round robin）"></a>1、时间片轮转（round robin）</h3><p>常用于分时操作系统，注重响应时间，而非周转时间</p>
+<p>算法思想：公平、轮流地为各个进程服务，让每个进程在一定时间间隔内都可以得到响应</p>
+<p>算法规则：按照各进程到达就绪队列的顺序,轮流让各个进程执行一个时间片(如100ms) 。若进程未在一个时间片内执行完,则剥夺处理机,将进程重新放到就绪队列队尾重新排队。</p>
+<p>抢占式算法，由时钟中断通知CPU时间片已到，不会饥饿</p>
+<p>缺点：高频率进程切换，有一定的开销，不区分任务的紧急程度</p>
+<h3 id="2、优先级调度"><a href="#2、优先级调度" class="headerlink" title="2、优先级调度"></a>2、优先级调度</h3><p>调度时选择优先级高的进程，适用于实时操作系统，可能发生饥饿</p>
+<p>根据优先级是否可以动态改变分为静态优先级和动态优先级两种</p>
+<p>通常系统进程优先级高于用户进程，前台进程优先级高于后台进程</p>
+<h3 id="3、多级反馈队列"><a href="#3、多级反馈队列" class="headerlink" title="3、多级反馈队列"></a>3、多级反馈队列</h3><p>对之前所述算法的综合，抢占式，可能导致饥饿，<em>Unix即使用该算法</em></p>
+<p><img src="http://cdn.ziyedy.top/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/%E5%A4%9A%E7%BA%A7%E5%8F%8D%E9%A6%88%E9%98%9F%E5%88%97.png" alt=""></p>
+<h4 id="算法过程"><a href="#算法过程" class="headerlink" title="算法过程"></a>算法过程</h4><p>如上图所示：</p>
+<p>1、设置多级就绪队列，各级队列优先级从高到低，时间片从小到大</p>
+<p>2、新进程到达时进入第1级队列，按FCFS原则等待分配时间片，若时间片用完还未运行结束，则进入下一级队列队尾，若已经在最后一级队列，则重新放回该队列队尾</p>
+<p>3、只有第k级队列为空，才会为k+1级队列分配时间片用于进程调度</p>
+<p>4、该算法是抢占式的，在第k级队列的进程运行时，若上层队列进入了一个新进程，则该新进程会抢占处理机</p>
+<h1 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h1><h2 id="死锁的概念"><a href="#死锁的概念" class="headerlink" title="死锁的概念"></a>死锁的概念</h2><blockquote>
+<p>并发环境下，各进程因为竞争资源造成的：互相等待对方手里的资源，导致各进程都阻塞，无法向前推进的现象</p>
+</blockquote>
+<p>其中资源泛指一类需要排他性使用的对象，对不可剥夺资源<em>分配不合理</em>可能导致死锁</p>
+<p>死锁是“循环等待对方手中的资源”导致的，因此若有死锁现象，则至少有两个或两个以上的进程同时发生死锁</p>
+<h2 id="死锁产生的条件"><a href="#死锁产生的条件" class="headerlink" title="死锁产生的条件"></a>死锁产生的条件</h2><ul>
+<li>互斥条件：争抢互斥资源</li>
+<li>不可剥夺条件：进程获得的资源未使用完成，其它进程不能强行夺走，只能等待主动释放</li>
+<li>请求和保持条件：进程已经保持了至少一个资源，但是又提出新的资源请求，同时该资源被其它进程占有，此时请求进程被阻塞，但是对自己拥有资源又保持不放</li>
+<li>循环等待条件：死锁时存在循环等待链（比如哲学家吃饭问题每个哲学家拿出一个筷子）</li>
+</ul>
+<h2 id="死锁的处理策略"><a href="#死锁的处理策略" class="headerlink" title="死锁的处理策略"></a>死锁的处理策略</h2><h3 id="预防死锁"><a href="#预防死锁" class="headerlink" title="预防死锁"></a>预防死锁</h3><p>即破坏上述死锁产生的四个条件</p>
+<h3 id="避免死锁"><a href="#避免死锁" class="headerlink" title="避免死锁"></a>避免死锁</h3><blockquote>
+<p>安全序列：系统按照这种序列分配资源，能让每个进程都顺利完成</p>
+</blockquote>
+<blockquote>
+<p>不安全状态：只要存在一个安全序列，系统就是安全状态。找不到安全序列，即为不安全状态</p>
+</blockquote>
+<p><em>不安全状态可能发生死锁（不一定发生），安全状态一定不会死锁</em></p>
+<p>避免死锁即避免系统进入不安全状态（银行家算法），即构建最大需求、已分配资源、最多还需要资源的表格并进行比较，从而找到一条安全序列</p>
+<h3 id="检测和解除死锁"><a href="#检测和解除死锁" class="headerlink" title="检测和解除死锁"></a>检测和解除死锁</h3><p>死锁发生后，操作系统负责检查死锁并解除死锁</p>
+<p><img src="http://cdn.ziyedy.top/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/%E8%B5%84%E6%BA%90%E5%88%86%E9%85%8D%E5%9B%BE.png" alt="资源分配图"></p>
+<h4 id="检测死锁"><a href="#检测死锁" class="headerlink" title="检测死锁"></a>检测死锁</h4><blockquote>
+<p>死锁定理：如果某时刻资源分配图是不可完全简化的，那么此时进程死锁</p>
+</blockquote>
+<p>因此检测死锁就是在资源分配图中，不断找出能够变为“孤点”的进程，在一系列操作中若能消去图中的所有变，则称该图是可完全简化的</p>
+<p>同时，用死锁检测算法化简资源分配图后，<strong>还连着边的就是死锁进程</strong></p>
+<h4 id="死锁解除"><a href="#死锁解除" class="headerlink" title="死锁解除"></a>死锁解除</h4><ul>
+<li>资源剥夺法：挂起死锁进程并剥夺其所有资源（必须防止饥饿）</li>
+<li>终止进程法：直接终止，可能造成系统资源的浪费</li>
+<li>进程回退法：让死锁进程回退到足以避免死锁的地步</li>
+</ul>
+<p>参考：</p>
+<blockquote>
+<p>《现代操作系统》</p>
+<p><a href="https://mubu.com/doc/Cd-Y4YOfkh" target="_blank" rel="noopener">https://mubu.com/doc/Cd-Y4YOfkh</a></p>
+</blockquote>
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          Donate
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://ziyedy.top/page/process-management.html" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/page/blender-render-cv-dataset.html" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            Blender使用Python脚本生成CV数据集
+          
+        </div>
+      </a>
+    
+    
+      <a href="/page/singleton-pattern.html" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">单例模式</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "pgmMLBlWl23i6NPFUgTT7XqR-gzGzoHsz",
+    app_key: "yx9IIauIiK8JBBHDxxqPpEFQ",
+    path: window.location.pathname,
+    avatar: "retro",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2019-2021
+        <i class="ri-heart-fill heart_icon"></i> 子夜
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s4.cnzz.com/z_stat.php?id=1279587217&amp;web_id=1279587217'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="子夜nostalgic"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gg">足迹</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+</body>
+
+</html>
