@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-编程相关/Java/JVM/2、Java类加载机制"
+  id="post-Java/JVM/JVM类加载机制"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2021-02-04T05:38:33.000Z" itemprop="datePublished">2021-02-04</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Java/">Java</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Java/JVM/">JVM</a>
+    <a class="article-category-link" href="/categories/Java/">Java</a> / <a class="article-category-link" href="/categories/Java/JVM/">JVM</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">0</span>
+            <span class="post-count">2.1k</span>
         </span>
     </span>
 
@@ -87,20 +87,139 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">1 min</span>
+            <span class="post-count">7 min</span>
         </span>
     </span>
 </div>
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <h1 id="类加载的时机"><a href="#类加载的时机" class="headerlink" title="类加载的时机"></a>类加载的时机</h1><h2 id="类的生命周期"><a href="#类的生命周期" class="headerlink" title="类的生命周期"></a>类的生命周期</h2><blockquote>
+<p>类从被加载到虚拟机内存开始，到卸载出内存为止，它的整个生命周期包括以下 7 个阶段</p>
+</blockquote>
+<img src="http://cdn.ziyedy.top/JVM%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png" style="zoom:67%;" />
+
+<h2 id="类加载中初始化的时机"><a href="#类加载中初始化的时机" class="headerlink" title="类加载中初始化的时机"></a>类加载中初始化的时机</h2><p>Java 虚拟机规范没有强制约束类加载过程的第一阶段（即：加载）什么时候开始，但<strong>对于“初始化”阶段，有着严格的规定</strong>。有且仅有 5 种情况必须立即对类进行“初始化”（即<strong>主动引用</strong>）</p>
+<ul>
+<li><p>在遇到 new、putstatic、getstatic、invokestatic <strong>特定字节码指令</strong>时，如果类尚未初始化，则需要先触发其初始化</p>
+</li>
+<li><p>对类进行<strong>反射调用</strong>时，如果类还没有初始化，则需要先触发其初始化</p>
+</li>
+<li><p>初始化一个类时，如果其父类还没有初始化，则需要先初始化父类（<em>与接口的区别</em>）</p>
+</li>
+<li><p>虚拟机启动时，用于需要指定一个<strong>包含 <code>main()</code> 方法的主类</strong>，虚拟机会先初始化这个主类</p>
+</li>
+<li><p>当使用 JDK 1.7 的动态语言支持时，如果一个 java.lang.invoke.MethodHandle 实例最后的解析结果为 REF_getStatic、REF_putStatic、REF_invokeStatic 的方法句柄，并且这个方法句柄所对应的类还没初始化，则需要先触发其初始化</p>
+</li>
+</ul>
+<h2 id="接口的加载"><a href="#接口的加载" class="headerlink" title="接口的加载"></a>接口的加载</h2><ul>
+<li><p>当一个类在初始化时，要求其父类全部都已经初始化过了</p>
+</li>
+<li><p>一个接口在初始化时，并不要求其父接口全部都完成了初始化，当<strong>真正用到父接口的时候才会初始化</strong>。</p>
+</li>
+</ul>
+<h1 id="类加载过程"><a href="#类加载过程" class="headerlink" title="类加载过程"></a>类加载过程</h1><h2 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h2><h3 id="加载的过程"><a href="#加载的过程" class="headerlink" title="加载的过程"></a>加载的过程</h3><ol>
+<li>通过类的全限定名获取该类的二进制字节流</li>
+<li>将二进制字节流所代表的静态结构转化为方法区的运行时数据结构</li>
+<li>在内存中创建一个代表该类的 <code>java.lang.Class</code> 对象，作为方法区这个类的各种数据的访问入口</li>
+</ol>
+<p><em>注：对于 HotSpot 虚拟机而言，Class 对象比较特殊，它虽然是对象，但存放在方法区中</em></p>
+<h3 id="“非数组类”与“数组类”加载比较"><a href="#“非数组类”与“数组类”加载比较" class="headerlink" title="“非数组类”与“数组类”加载比较"></a>“非数组类”与“数组类”加载比较</h3><ul>
+<li>非数组类加载阶段可以使用系统提供的引导类加载器，也可以由用户自定义的类加载器完成（如重写一个类加载器的 <code>loadClass()</code> 方法）</li>
+<li><strong>数组类本身不通过类加载器创建</strong>，它是由 Java 虚拟机直接创建的，再由类加载器创建数组中的元素类</li>
+</ul>
+<h2 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h2><blockquote>
+<p>就是将已经读入内存的类的二进制数据合并到JVM运行时环境中</p>
+</blockquote>
+<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><blockquote>
+<p>确保被加载类的正确性（即class文件的字节流符合一般文件格式及当前虚拟机的要求）</p>
+</blockquote>
+<ul>
+<li><p><strong>类文件结构检查</strong>∶按照JVM规范规定的类文件结构进行</p>
+</li>
+<li><p><strong>元数据验证</strong>：对字节码描述的信息进行语义分析，保证其符合Java语言规范要求</p>
+</li>
+<li><p><strong>字节码验证</strong>∶通过对数据流和控制流进行分析，确保程序语义是合法和符合逻辑的。这里主要对<strong>方法体</strong>进行校验</p>
+</li>
+<li><p><strong>符号引用验证</strong>：对类自身以外的信息，也就是常量池中的各种符号引用，进行匹配校验，<strong>确保解析正常执行</strong></p>
+</li>
+</ul>
+<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><blockquote>
+<p>为类的静态成员变量分配内存，并设置初始值</p>
+<p>这些变量（不包括实例变量）所使用的内存都在方法区中进行分配</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> value = <span class="hljs-number">123</span>;			<span class="hljs-comment">// 准备阶段后初始值为 0</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> value = <span class="hljs-number">123</span>;	<span class="hljs-comment">// 准备阶段后初始值为 123</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h3><blockquote>
+<p>将常量池中的符号引用替换为直接引用</p>
+</blockquote>
+<ul>
+<li><p>符号引用：以一组无歧义的符号来描述所引用的目标，与虚拟机无关</p>
+</li>
+<li><p>直接引用：直接指向目标的指针、相对偏移量、或是能间接定位到目标的句柄，是和虚拟机实现相关的</p>
+</li>
+</ul>
+<p>主要针对：类、接口、字段、类方法、接口方法、方法类型、方法句柄、调用点限定符</p>
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><blockquote>
+<p>为类的静态变量赋初始值，或者说是执行类构造器<code>&lt;clinit&gt;</code>方法的过程</p>
+</blockquote>
+<blockquote>
+<p><code>&lt;clinit&gt;</code>方法是由<strong>编译器自动收集</strong>类中的所有类变量的赋值动作和静态语句块（static {} 块）中的语句<strong>合并</strong>产生的，编译器收集的顺序是由语句在源文件中出现的顺序所决定的</p>
+</blockquote>
+<h1 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h1><h2 id="类加载器种类"><a href="#类加载器种类" class="headerlink" title="类加载器种类"></a>类加载器种类</h2><p>Java虚拟机自带的加载器包括如下3种∶</p>
+<ul>
+<li><p>启动类加载器（BootstrapClassLoader）：由C++语言实现，是虚拟机的一部分</p>
+<p> 负责将存放在 <code>&lt;JAVA_HOME&gt;\lib</code> 目录中的，并且能被虚拟机识别的（仅<strong>按照文件名</strong>识别，如 rt.jar，名字不符合的类库即使放在 lib 目录中也不会被加载）类库加载到虚拟机内存中</p>
+</li>
+<li><p>拓展类加载器（Extension ClassLoader，JDK8）  </p>
+<p> JDK9之后为平台类加载器（PlatformClassLoader）。负责加载 <code>&lt;JAVA_HOME&gt;\lib\ext</code> 目录中的所有类库，开发者可以直接使用扩展类加载器</p>
+</li>
+<li><p>应用程序类加载器（AppClassLoader）</p>
+<p>它负责加载用户类路径（classpath）上所指定的类库，开发者可以直接使用这个类加载器，如果应用程序中没有自定义过自己的类加载器，一般情况下这个就是程序中<strong>默认的类加载器</strong>。</p>
+</li>
+<li><p>用户自定义的加载器</p>
+<p>是<code>java.lang.ClassLoader</code>的子类，用户可以定制类的加载方式;只不过自定义类加载器其加载的顺序是在所有系统类加载器的最后</p>
+</li>
+</ul>
+<img src="http://cdn.ziyedy.top/JVM%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8.png" style="zoom:67%;" />
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>&#123;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        Test t = <span class="hljs-keyword">new</span> Test();<br><br>        Class&lt;? extends Test&gt; tClass = t.getClass();<br><br>        ClassLoader classLoader = tClass.getClassLoader();<br>        System.out.println(classLoader);<br>        System.out.println(classLoader.getParent());<br>        System.out.println(classLoader.getParent().getParent());<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">/**<br> * jdk.internal.loader.ClassLoaders$AppClassLoader@3fee733d<br> * jdk.internal.loader.ClassLoaders$PlatformClassLoader@6acbcfc0<br> * null	表示启动类加载器<br>*/</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="双亲委派模型"><a href="#双亲委派模型" class="headerlink" title="双亲委派模型"></a>双亲委派模型</h2><p>JVM中的ClassLoader通常采用双亲委派模型，要求除了启动类加载器外，其余的类加载器都应该有自己的父级加载器（这里的父子关系一般不会以继承的关系实现，而是<strong>以组合关系来复用父加载器的代码</strong>）</p>
+<img src="http://cdn.ziyedy.top/JVM%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6.png" style="zoom: 80%;" />
+
+<h3 id="工作过程"><a href="#工作过程" class="headerlink" title="工作过程"></a>工作过程</h3><p>1、首先判断当前类是否被加载过，已经被加载的类会直接返回，否则才会尝试加载；</p>
+<p>2、加载的时候，首先会把该请求委派该父类加载器的 <code>loadClass()</code> 处理，因此所有的请求最终都应该传送到顶层的启动类加载器 <code>BootstrapClassLoader</code> 中；</p>
+<p>3、当父类加载器无法完成这个加载请求（找不到所需的类）时，子加载器才会尝试自己去加载。</p>
+<h3 id="为何使用双亲委派模型"><a href="#为何使用双亲委派模型" class="headerlink" title="为何使用双亲委派模型"></a>为何使用双亲委派模型</h3><p>1、双亲委派模型保证了Java程序的稳定运作，可以避免类的重复加载（JVM 区分不同类的方式不仅仅根据类名，相同的类文件被不同的类加载器加载产生的是两个不同的类），<em>保证没有同包同名的类</em></p>
+<p>2、保证了Java的核心API不被篡改，<em>保证系统类不会被覆盖</em></p>
+<p>比如我们编写一个称为 <code>java.lang.Object</code> 类的话，那么程序运行的时候，系统就会出现多个不同的 <code>Object</code> 类，而双亲委派机制很好的避免了这个问题。</p>
+<h2 id="自定义类加载器"><a href="#自定义类加载器" class="headerlink" title="自定义类加载器"></a>自定义类加载器</h2><blockquote>
+<p>由于实现双亲委派的代码在<code>java.lang.ClassLoader</code>的<code>loadClass()</code>方法中，如果自定义类加载器的话，推荐覆盖实现<code>findClass()</code>方法</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyClassLoader</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ClassLoader</span></span>&#123;<br>    <span class="hljs-keyword">private</span> String name;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MyClassLoader</span><span class="hljs-params">(String name)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.name = name;<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">protected</span> Class&lt;?&gt; findClass(String name) <span class="hljs-keyword">throws</span> ClassNotFoundException &#123;<br>        <span class="hljs-keyword">byte</span>[] data = loadClassData(name);<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.defineClass(name, data, <span class="hljs-number">0</span>, data.length);<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">byte</span>[] loadClassData(String clsName) &#123;<br>        <span class="hljs-keyword">byte</span>[] data = <span class="hljs-keyword">null</span>;<br>        <span class="hljs-comment">// 进行输入输出流的编写</span><br>        <span class="hljs-comment">// 可以自行定义一些规则，比如加载某些或不加载某些</span><br>        <span class="hljs-keyword">return</span> data;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<p>参考：</p>
+<blockquote>
+<p><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B" target="_blank" rel="noopener">https://snailclimb.gitee.io/javaguide/#/docs/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B</a></p>
+<p>《深入理解Java虚拟机》</p>
+<p><a href="https://github.com/doocs/jvm" target="_blank" rel="noopener">https://github.com/doocs/jvm</a></p>
+</blockquote>
+ 
       <!-- reward -->
       
       <div id="reword-out">
@@ -187,7 +306,7 @@
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            Maven
+            Maven基础使用
           
         </div>
       </a>

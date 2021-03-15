@@ -13,7 +13,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    1.2、JS内置对象使用 |  子夜nostalgic
+    JS01-2：内置对象使用 |  子夜nostalgic
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-编程相关/JavaScript/1.2、JS内置对象使用"
+  id="post-前端/JavaScript/JS01-2：内置对象使用"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -59,7 +59,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  1.2、JS内置对象使用
+  JS01-2：内置对象使用
 </h1>
  
 
@@ -70,7 +70,7 @@
   <time datetime="2020-07-30T13:44:41.000Z" itemprop="datePublished">2020-07-30</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/JavaScript/">JavaScript</a>
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a> / <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/JavaScript/">JavaScript</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">678</span>
+            <span class="post-count">673</span>
         </span>
     </span>
 
@@ -118,8 +118,6 @@
 
 
 
-
-
 <h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs delphi"><span class="hljs-comment">// 颠倒数组</span><br><span class="hljs-keyword">array</span>.reverse()	<br><br><span class="hljs-comment">// 对数组进行排序（默认升序）</span><br><span class="hljs-keyword">array</span>.sort()<br><br><span class="hljs-comment">// 传入比较函数，变为降序</span><br><span class="hljs-comment">// 作为参数的函数返回值大于0，则元素会交换位置</span><br><span class="hljs-keyword">array</span>.sort(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(a, b)</span> <span class="hljs-comment">&#123;return b-a&#125;</span>)<br><span class="hljs-title">array</span>.<span class="hljs-title">slice</span><span class="hljs-params">(start, <span class="hljs-keyword">end</span>)</span>	<span class="hljs-comment">// 从[start, end)的切片</span></span><br></code></pre></td></tr></table></figure>
 
 
@@ -132,10 +130,6 @@
 <figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs n1ql">// 删除从<span class="hljs-keyword">index</span>处开始的零个或多个元素<br><span class="hljs-keyword">array</span>.splice(<span class="hljs-keyword">index</span>, <span class="hljs-built_in">count</span>)<br>// 在<span class="hljs-keyword">index</span>后插入值<br><span class="hljs-keyword">array</span>.splice(<span class="hljs-keyword">index</span>, <span class="hljs-number">0</span>, item1.....)<br>// 替换<br><span class="hljs-keyword">array</span>.splice(<span class="hljs-keyword">index</span>, <span class="hljs-built_in">count</span>, item1.....)<br></code></pre></td></tr></table></figure>
 
 <h3 id="元素的查找"><a href="#元素的查找" class="headerlink" title="元素的查找"></a>元素的查找</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-comment">// 查找值为value的索引，没有则返回-1</span><br>array.indexOf(value)<br><br><span class="hljs-comment">// 找出第一个满足「指定条件返回 true」的元素</span><br><span class="hljs-function"><span class="hljs-title">find</span><span class="hljs-params">(func)</span></span><br><br><span class="hljs-comment">// 找出第一个满足「指定条件返回 true」的元素的 index</span><br><span class="hljs-function"><span class="hljs-title">findIndex</span><span class="hljs-params">(func)</span></span><br></code></pre></td></tr></table></figure>
-
-<h3 id="遍历数组"><a href="#遍历数组" class="headerlink" title="遍历数组"></a>遍历数组</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plain"><br><br></code></pre></td></tr></table></figure>
-
-
 
 
 
@@ -294,7 +288,7 @@
     
       <a href="/page/priority-queue-and-heap.html" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">堆与优先队列</div>
+        <div class="article-nav-title">DS07:堆与优先队列</div>
       </a>
     
   </nav>

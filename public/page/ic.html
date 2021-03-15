@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-Hans">
+
+
+<head>
+  <meta charset="utf-8" />
+   
+  <meta name="keywords" content="生活" />
+   
+  <meta name="description" content="子夜写字的地方" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    利用独立级联模型求解影响力最大的点 |  子夜nostalgic
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-AI相关/利用独立级联模型求解影响力最大的点"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  利用独立级联模型求解影响力最大的点
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/page/ic.html" class="article-date">
+  <time datetime="2020-12-24T01:17:47.000Z" itemprop="datePublished">2020-12-24</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/AI%E7%9B%B8%E5%85%B3/">AI相关</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">1.6k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">6 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>给定750个点以及点与点之间的感染概率，并且感染过程符合独立级联（IC）模型以及一次感染的要求，求解在该点集中影响力最大的top5个点与top10个点</p>
+<h2 id="原理介绍"><a href="#原理介绍" class="headerlink" title="原理介绍"></a>原理介绍</h2><p>给定的数据其实可以归纳为一个有向有权图结构，而整个问题也就可以抽象为一个有向有权图中求影响力最大的问题，也就是“影响力最大化”问题，该问题在本题中可以归纳为给定节点个数k，选择出k个节点作为种子集使得种子集能影响的节点数最多。</p>
+<p>而解决这类问题最主要的就是确定传播模型，传播模型中比较经典的有独立级联（IC）模型与线性阈值（LT）模型，由于本题直接指定了传播模型，因此解决问题的关键原理其实也就集中到了独立级联（IC）模型的介绍上。</p>
+<p>独立级联模型是一种概率型的传播模型，英文全称为Independent Cascade Model，其基本原理的描述如下：</p>
+<p>在有向有权图G（V，E）中，点集V中的节点具有两种状态，即激活状态与待激活状态。初始状态下，处于激活状态的节点会以一定概率（这种概率就是其边集E所带的权值决定）将与其相连的处于待激活状态状态下的节点激活。</p>
+<p>整个过程可以归纳如下：</p>
+<p>1、首先，在初始状态下，即t=0时，有且仅有种子集合S（也可以按照顺序将各个点作为种子集合）中的节点全部被设置为激活状态。</p>
+<p>2、之后，当t=k时，所有在t=k-1时由待激活状态转变为激活状态态的全部节点，以一定的概率去尝试影响它们所有处于待激活态的邻节点。</p>
+<p>3、不断重复过程2，直到整个网络中所剩余的具备激活其他节点能力的节点数为0（即待激活节点为0），传播过程结束。</p>
+<h2 id="实验思路与过程"><a href="#实验思路与过程" class="headerlink" title="实验思路与过程"></a>实验思路与过程</h2><h3 id="1、读入数据，得到图的邻接矩阵"><a href="#1、读入数据，得到图的邻接矩阵" class="headerlink" title="1、读入数据，得到图的邻接矩阵"></a>1、读入数据，得到图的邻接矩阵</h3><p>该步骤主要完成数据的加载以及图的邻接矩阵的初始化，使用numpy中的相应函数完成即可。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">generate_graph</span><span class="hljs-params">(data)</span>:</span><br>    <span class="hljs-string">"""<br>    通过输入数据生成图的邻接矩阵（感染概率矩阵）<br>    :param data: 输入数据(父节点, 子节点, 感染概率)<br>    :return: 图的邻接矩阵<br>    """</span><br>    num_node = int(data.max())   <span class="hljs-comment"># 节点个数</span><br>    num_line = data.shape[<span class="hljs-number">0</span>]    <span class="hljs-comment"># 数据条数</span><br>    graph = np.zeros((num_node, num_node))<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(num_line):<br>        x, y = int(data[i, <span class="hljs-number">0</span>] - <span class="hljs-number">1</span>), int(data[i, <span class="hljs-number">1</span>] - <span class="hljs-number">1</span>)<br>        graph[x, y] = data[i, <span class="hljs-number">2</span>]<br>    <span class="hljs-keyword">return</span> graph<br><br>data = np.loadtxt(<span class="hljs-string">"DUNF with Weights.txt"</span>)<br>graph = generate_graph(data)<br>print(graph)<br></code></pre></td></tr></table></figure>
+
+<h3 id="2、构建独立级联模型（主要逻辑）"><a href="#2、构建独立级联模型（主要逻辑）" class="headerlink" title="2、构建独立级联模型（主要逻辑）"></a>2、构建独立级联模型（主要逻辑）</h3><p>该步骤主要完成整个模型的逻辑编写。在实现中，我将整个过程封装成立一个类，而独立级联模型等等要用到的逻辑代码则作为类中的私有函数，其中逻辑上主要可以分为模拟爆发与增量计算两个过程。</p>
+<p>模拟爆发则是在实现单个点的独立级联传播函数的基础上对所有点进行多次模拟，采用了一定蒙特卡洛算法的思想，假设感染概率为0.3，则生成一个0到1的随机数，若该随机数大于0.3则未能通过传播，若该随机数小于0.3，则通过了传播，以此进行多次模拟（本题我分别使用100000次实验了三次，使用500000次实验了一次），得到了一个到达概率矩阵（以矩阵坐标举例，即横坐标的点传播到纵坐标的点的概率）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ICModel</span>:</span><br>    <span class="hljs-string">"""<br>    独立级联模型类<br>    """</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, graph)</span>:</span><br>        <span class="hljs-string">"""<br>        :param graph: 感染概率矩阵<br>        """</span><br>        <span class="hljs-comment"># 邻接矩阵（感染概率矩阵）</span><br>        self.graph = graph<br>        <span class="hljs-comment"># 节点的个数</span><br>        self.num_node = graph.shape[<span class="hljs-number">0</span>]<br>        <span class="hljs-comment"># 到达概率矩阵</span><br>        self.influence_matrix = np.zeros_like(graph)<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_ic_process</span><span class="hljs-params">(self, actived_node)</span>:</span><br>        <span class="hljs-string">"""<br>        实现独立级联过程<br>        :param actived_node: 初始激活点<br>        """</span><br>        self.influence_matrix[actived_node, actived_node] += <span class="hljs-number">1</span><br>        actived_new = [actived_node]<br>        actived_set = [actived_node]<br>        <span class="hljs-comment"># 进行类似于广度优先搜索的过程</span><br>        <span class="hljs-keyword">while</span> actived_new:<br>            <span class="hljs-keyword">for</span> node <span class="hljs-keyword">in</span> actived_new:<br>                actived_new.remove(node)<br>                p = np.random.uniform(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>)     <span class="hljs-comment"># 生成[0, 1)的随机数</span><br>                news = np.where(self.graph[node] &gt; p)[<span class="hljs-number">0</span>].tolist()   <span class="hljs-comment"># 找到通过的节点</span><br>                <span class="hljs-keyword">for</span> new <span class="hljs-keyword">in</span> news:<br>                    <span class="hljs-comment"># 防止多次感染</span><br>                    <span class="hljs-keyword">if</span> new <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> actived_set:<br>                        actived_new.append(new)<br>                        actived_set.append(new)<br>                        self.influence_matrix[actived_node, new] += <span class="hljs-number">1</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_caculate_increase_matrix</span><span class="hljs-params">(self, m1, m2)</span>:</span><br>        <span class="hljs-string">"""<br>        计算增量矩阵<br>        :return: 增量矩阵<br>        """</span><br>        res = m1 - m2<br>        res[res &lt; <span class="hljs-number">0</span>] = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">return</span> res<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_increase</span><span class="hljs-params">(self)</span>:</span><br>        <span class="hljs-string">"""<br>        计算增量过程<br>        :return: 影响力最大的10个点<br>        """</span><br>        result = []<br>        <span class="hljs-comment"># 按行求和找到影响力最大的点，并作为搜索起始点</span><br>        best_node = np.argmax(self.influence_matrix.sum(axis=<span class="hljs-number">1</span>))<br>        best_row = self.influence_matrix[best_node]<br>        <span class="hljs-comment"># 将影响力最大的点加入（不要忘了加1）</span><br>        result.append(best_node + <span class="hljs-number">1</span>)<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">9</span>):<br>            increase_matrix = self._caculate_increase_matrix(self.influence_matrix, best_row)<br>            best_node = np.argmax(increase_matrix.sum(axis=<span class="hljs-number">1</span>))<br>            best_row = np.maximum(self.influence_matrix[best_node], best_row)<br>            result.append(best_node + <span class="hljs-number">1</span>)<br>        <span class="hljs-keyword">return</span> result<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">run</span><span class="hljs-params">(self, times)</span>:</span><br>        <span class="hljs-string">"""<br>        向外的接口，用于运行整个搜索最大影响力点的过程<br>        :param times: 模拟爆发的次数<br>        :return: 到达概率矩阵, 影响力最大的十个点<br>        """</span><br>        <span class="hljs-keyword">for</span> node <span class="hljs-keyword">in</span> range(self.num_node):<br>            <span class="hljs-comment"># 显示运行进度</span><br>            <span class="hljs-keyword">if</span> node % <span class="hljs-number">50</span> == <span class="hljs-number">0</span>:<br>                print(<span class="hljs-string">'The node\'s number: &#123;&#125;'</span>.format(node))    <br>            <span class="hljs-keyword">for</span> time <span class="hljs-keyword">in</span> range(times):<br>                self._ic_process(node)<br>        self.influence_matrix /= times<br>        result = self._increase()<br>        <span class="hljs-keyword">return</span> self.influence_matrix, result<br></code></pre></td></tr></table></figure>
+
+<h3 id="3、开始搜索"><a href="#3、开始搜索" class="headerlink" title="3、开始搜索"></a>3、开始搜索</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">ic = ICModel(graph)<br>influence_matrix, result = ic.run(<span class="hljs-number">100000</span>)<br></code></pre></td></tr></table></figure>
+
+<h2 id="实验结果与分析"><a href="#实验结果与分析" class="headerlink" title="实验结果与分析"></a>实验结果与分析</h2><h3 id="可视化分析"><a href="#可视化分析" class="headerlink" title="可视化分析"></a>可视化分析</h3><p>使用Python中的networkx包进行可视化分析，networkx包是一种专门用来处理图结构数据的包，因此能够很轻松的实现可视化等操作，相关代码及结果如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> networkx <span class="hljs-keyword">as</span> nx<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><br>G = nx.DiGraph()<br>G.add_weighted_edges_from(data)<br>node_color_map = []<br>node_size_map = []<br><span class="hljs-comment"># 给节点赋颜色与大小</span><br><span class="hljs-keyword">for</span> node <span class="hljs-keyword">in</span> G:<br>    <span class="hljs-keyword">if</span> node <span class="hljs-keyword">in</span> result:<br>        node_color_map.append(<span class="hljs-string">'red'</span>)<br>        node_size_map.append(<span class="hljs-number">50</span>)<br>    <span class="hljs-keyword">else</span>:<br>        node_color_map.append(<span class="hljs-string">'green'</span>)<br>        node_size_map.append(<span class="hljs-number">5</span>)<br>nx.draw(G, node_size=node_size_map, node_color=node_color_map, width=<span class="hljs-number">0.5</span>)<br>plt.show()<br></code></pre></td></tr></table></figure>
+
+<p><img src="http://cdn.ziyedy.top/%E5%BD%B1%E5%93%8D%E5%8A%9B%E5%8F%AF%E8%A7%86%E5%8C%96.png" alt=""></p>
+<p>由上图可视化结果，其中绿色的点为普通的节点，而红色的节点为求出的影响力最大的十个点，从图中可以很明显的看出红色的节点基本处于整个网络中比较密集的区域（也就是其出度通常都较大），与“影响力”这个要求还是比较吻合的</p>
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          Donate
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://ziyedy.top/page/ic.html" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E7%AE%97%E6%B3%95/" rel="tag">智能算法</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/page/Java12-multithread-concurrency.html" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            Java12：多线程与并发编程
+          
+        </div>
+      </a>
+    
+    
+      <a href="/page/mybatis-basic-summary.html" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">MyBatis基本使用方法</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "pgmMLBlWl23i6NPFUgTT7XqR-gzGzoHsz",
+    app_key: "yx9IIauIiK8JBBHDxxqPpEFQ",
+    path: window.location.pathname,
+    avatar: "retro",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2019-2021
+        <i class="ri-heart-fill heart_icon"></i> 子夜
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s4.cnzz.com/z_stat.php?id=1279587217&amp;web_id=1279587217'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="子夜nostalgic"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gg">足迹</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+</body>
+
+</html>

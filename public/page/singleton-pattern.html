@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">82</span>
+            <span class="post-count">443</span>
         </span>
     </span>
 
@@ -109,6 +109,33 @@
 <p>没有接口，拓展比较困难，私有构造器，线程安全，延迟加载</p>
 <p>序列化反序列化</p>
 <p>反射</p>
+<p>数据库的连接池不会反复创建</p>
+<h3 id="懒汉模式（线程不安全）"><a href="#懒汉模式（线程不安全）" class="headerlink" title="懒汉模式（线程不安全）"></a>懒汉模式（线程不安全）</h3><ul>
+<li>默认的构造函数中添加了私有属性<code>private</code></li>
+<li>多个访问者同时获取对象实例会造成多个同样的实例并存</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Singleton</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Singleton instance;<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">Singleton_01</span><span class="hljs-params">()</span> </span>&#123; &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Singleton <span class="hljs-title">getInstance</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">null</span> != instance) <span class="hljs-keyword">return</span> instance;<br>        instance = <span class="hljs-keyword">new</span> Singleton();<br>        <span class="hljs-keyword">return</span> instance;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="懒汉模式（线程安全）"><a href="#懒汉模式（线程安全）" class="headerlink" title="懒汉模式（线程安全）"></a>懒汉模式（线程安全）</h3><p>相对上一种实现方法在获取实例方法前使用了<code>synchronized</code>关键字，但这种模式由于上锁会导致资源浪费，不建议使用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Singleton</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Singleton instance;<br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">Singleton</span><span class="hljs-params">()</span> </span>&#123; &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">synchronized</span> Singleton <span class="hljs-title">getInstance</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">null</span> != instance) <span class="hljs-keyword">return</span> instance;<br>        instance = <span class="hljs-keyword">new</span> Singleton();<br>        <span class="hljs-keyword">return</span> instance;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="饿汉模式（线程安全）"><a href="#饿汉模式（线程安全）" class="headerlink" title="饿汉模式（线程安全）"></a>饿汉模式（线程安全）</h3><p>在程序启动的时候直接运⾏行行加载，后续有外部需要使⽤用的时候获取即可，但不是懒加载，会造成性能上的损失</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Singleton</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Singleton instance = <span class="hljs-keyword">new</span> Singleton();<br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">Singleton</span><span class="hljs-params">()</span> </span>&#123; &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Singleton <span class="hljs-title">getInstance</span><span class="hljs-params">()</span> </span>&#123;<br>    	<span class="hljs-keyword">return</span> instance;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="使用类的内部类（线程安全）"><a href="#使用类的内部类（线程安全）" class="headerlink" title="使用类的内部类（线程安全）"></a>使用类的内部类（线程安全）</h3><p>是一种比较好的方式</p>
+<p>既保证了线程安全又保证了懒加载，同时不会因为加锁的方式耗费性能（因为JVM保证了一个类的构造方法在多线程环境下能够被正确的加载）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Singleton</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SingletonHolder</span> </span>&#123;<br>    	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Singleton instance = <span class="hljs-keyword">new</span> Singleton();<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">Singleton</span><span class="hljs-params">()</span> </span>&#123; &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Singleton <span class="hljs-title">getInstance</span><span class="hljs-params">()</span> </span>&#123;<br>    	<span class="hljs-keyword">return</span> SingletonHolder.instance;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
  
       <!-- reward -->
       
@@ -192,11 +219,11 @@
    
   <nav class="article-nav">
     
-      <a href="/page/process-thread.html" class="article-nav-link">
+      <a href="/page/process-management.html" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            进程与线程
+            进程管理
           
         </div>
       </a>

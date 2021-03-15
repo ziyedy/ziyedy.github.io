@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-编程相关/Python/Blender使用Python脚本的基本渲染操作"
+  id="post-Python/Blender使用Python脚本的基本渲染操作"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-09-13T01:17:32.000Z" itemprop="datePublished">2020-09-13</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a> / <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/Python/">Python</a>
+    <a class="article-category-link" href="/categories/Python/">Python</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1.3k</span>
+            <span class="post-count">1.4k</span>
         </span>
     </span>
 
@@ -105,8 +105,7 @@
   <blockquote>
 <p>渲染可以简单理解为将3D场景转化为2D场景的过程</p>
 </blockquote>
-<h2 id="bpy模块"><a href="#bpy模块" class="headerlink" title="bpy模块"></a>bpy模块</h2><p>bpy模块是blender脚本插件核心库</p>
-<h3 id="bpy-ops"><a href="#bpy-ops" class="headerlink" title="bpy.ops"></a>bpy.ops</h3><blockquote>
+<h2 id="bpy模块"><a href="#bpy模块" class="headerlink" title="bpy模块"></a>bpy模块</h2><h3 id="bpy-ops"><a href="#bpy-ops" class="headerlink" title="bpy.ops"></a>bpy.ops</h3><blockquote>
 <p>对于操纵3D对象，最重要的两个类是<code>bpy.ops.object</code>和<code>bpy.ops.mesh</code></p>
 <p>Object类包含用于同时操作多个选定对象的函数以及许多常规实用程序。Mesh类包含用于一次操作一个对象的顶点、边和面的函数</p>
 </blockquote>
@@ -114,8 +113,6 @@
 <p>context（正文）是blender数据管理中的一个全局变量集合，它包含了目前被选择的和激活的（物体的两种属性状态）的物体的信息，还记录了当前物体的编辑模式<br>用于按各种状态条件访问 Blender 的对象和区域（如用户选定的对象），用于将我们指向对象组（即<code>bpy.context</code>类将生成对<code>bpy.data</code>类的数据块的引用）</p>
 </blockquote>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs css"># 访问选定对象的列表<br><span class="hljs-selector-tag">bpy</span><span class="hljs-selector-class">.context</span><span class="hljs-selector-class">.selected_objects</span><br><br># 访问目前激活的对象<br><span class="hljs-selector-tag">bpy</span><span class="hljs-selector-class">.context</span><span class="hljs-selector-class">.active_object</span><br></code></pre></td></tr></table></figure>
-
-
 
 <h3 id="bpy-data"><a href="#bpy-data" class="headerlink" title="bpy.data"></a>bpy.data</h3><blockquote>
 <p>blender界面上所有可使用调节的对象内容（包括mesh模型、lamp灯光、camera摄像机，material材质等）都在python中以特定的类型存储起来</p>
@@ -130,8 +127,6 @@
 <p>访问对象属性</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">bpy</span><span class="hljs-selector-class">.data</span><span class="hljs-selector-class">.objects</span><span class="hljs-selector-attr">[<span class="hljs-string">'Cube'</span>]</span><span class="hljs-selector-class">.name</span> #访问对象名称<br><span class="hljs-selector-tag">bpy</span><span class="hljs-selector-class">.data</span><span class="hljs-selector-class">.objects</span><span class="hljs-selector-attr">[<span class="hljs-string">'Cube'</span>]</span><span class="hljs-selector-class">.location</span> #访问对象的位置<br></code></pre></td></tr></table></figure>
 
-
-
 <h2 id="常用基本操作"><a href="#常用基本操作" class="headerlink" title="常用基本操作"></a>常用基本操作</h2><h3 id="选择对象"><a href="#选择对象" class="headerlink" title="选择对象"></a>选择对象</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment"># 选中所有</span><br>bpy.ops.object.select_all(<span class="hljs-attribute">action</span>=<span class="hljs-string">'SELECT'</span>)<br><br><span class="hljs-comment"># 取消所有选中</span><br>bpy.ops.object.select_all(<span class="hljs-attribute">action</span>=<span class="hljs-string">'DESELECT'</span>)<br><br><span class="hljs-comment">#通过select_pattern命令来按照物体命名查找选定物体，支持通配符*模糊匹配</span><br>bpy.ops.object.select_pattern(<span class="hljs-attribute">pattern</span>=<span class="hljs-string">"Cube"</span>, <span class="hljs-attribute">case_sensitive</span>=<span class="hljs-literal">False</span>, <span class="hljs-attribute">extend</span>=<span class="hljs-literal">True</span>)<br><br><span class="hljs-comment"># 选中名为Cube的对象</span><br>bpy.data.objects[<span class="hljs-string">'Cube'</span>].select_set(<span class="hljs-literal">True</span>)<br></code></pre></td></tr></table></figure>
 
 <h3 id="对选中物体进行缩放"><a href="#对选中物体进行缩放" class="headerlink" title="对选中物体进行缩放"></a>对选中物体进行缩放</h3><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"># 按 x y z 进行缩放<br>bpy.ops.transform.resize(value=(<span class="hljs-number">1.1</span>, <span class="hljs-number">1.2</span>, <span class="hljs-number">1.4</span>))<br></code></pre></td></tr></table></figure>
@@ -140,17 +135,9 @@
 
 <h3 id="对选中物体进行平移操作"><a href="#对选中物体进行平移操作" class="headerlink" title="对选中物体进行平移操作"></a>对选中物体进行平移操作</h3><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"># 按 x y z 方向平移物体<br>bpy.ops.transform.translate(value=(<span class="hljs-number">1</span>, <span class="hljs-number">-2</span>, <span class="hljs-number">3</span>))<br><br># 设置位置<br>bpy.data.objects[<span class="hljs-string">'Cube'</span>].location = (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)<br></code></pre></td></tr></table></figure>
 
-
-
-
-
 <h2 id="灯光操作"><a href="#灯光操作" class="headerlink" title="灯光操作"></a>灯光操作</h2><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment"># 新建一个点光源</span><br>light_data = bpy.data.lights.new(<span class="hljs-attribute">name</span>=<span class="hljs-string">'Light'</span>, <span class="hljs-attribute">type</span>=<span class="hljs-string">'POINT'</span>)<br><br><span class="hljs-comment"># 设置该光源的一些属性（具体属性可查看文档）</span><br>light_data.distance = 2400.<br>light_data.use_nodes = <span class="hljs-literal">True</span><br>light_data.energy = 5<br><br><span class="hljs-comment"># 激活灯光</span><br>light = bpy.data.objects.new(<span class="hljs-attribute">name</span>=<span class="hljs-string">"Light"</span>, <span class="hljs-attribute">object_data</span>=light_data)<br>scene.objects.link(light)<br>bpy.context.view_layer.objects.active = light<br><br><span class="hljs-comment"># 脚本使用完毕后删除灯光</span><br>bpy.data.objects[<span class="hljs-string">'Light'</span>+str(i)].select_set(<span class="hljs-literal">True</span>)<br>bpy.ops.object.delete()<br></code></pre></td></tr></table></figure>
 
-
-
 <h2 id="相机操作"><a href="#相机操作" class="headerlink" title="相机操作"></a>相机操作</h2><h3 id="改变相机指向"><a href="#改变相机指向" class="headerlink" title="改变相机指向"></a>改变相机指向</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">look_at</span><span class="hljs-params">(obj_camera, point=Vector<span class="hljs-params">(<span class="hljs-params">(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>)</span>)</span>)</span>:</span><br>	<span class="hljs-string">"""<br>	使相机指向point点<br>	"""</span><br>    loc_camera = obj_camera.location<br>    direction = point - loc_camera<br>    rot_quat = direction.to_track_quat(<span class="hljs-string">'-Z'</span>, <span class="hljs-string">'Y'</span>)<br>    obj_camera.rotation_euler = rot_quat.to_euler()<br></code></pre></td></tr></table></figure>
-
-
 
 <h2 id="实现多角度渲染物体"><a href="#实现多角度渲染物体" class="headerlink" title="实现多角度渲染物体"></a>实现多角度渲染物体</h2><blockquote>
 <p>实现多角度渲染物体生成物体模板主要需要进行以下工作</p>
@@ -172,10 +159,16 @@
 <h4 id="渲染结果"><a href="#渲染结果" class="headerlink" title="渲染结果"></a>渲染结果</h4><p>渲染结果如下，实现了<strong>模型的批量渲染处理</strong></p>
 <p><img src="http://cdn.ziyedy.top/Blender%E7%89%A9%E4%BD%93%E6%B8%B2%E6%9F%93%E8%84%9A%E6%9C%AC/%E6%B8%B2%E6%9F%93%E7%BB%93%E6%9E%9C1.png" alt=""></p>
 <p><img src="http://cdn.ziyedy.top/Blender%E7%89%A9%E4%BD%93%E6%B8%B2%E6%9F%93%E8%84%9A%E6%9C%AC/%E6%B8%B2%E6%9F%93%E7%BB%93%E6%9E%9C2.png" alt=""></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>总而言之，blender插件脚本的python开发是一个文档相对欠缺（官方文档写的我个人认为很烂）而且不同版本之间差别较大的二次开发工具。</p>
-<p>如果没有特别的要求非得使用blender，我的建议是能不用就不用（尤其对于新手）。顺带一提，blender内置的Python脚本开发环境也极其糟糕，理论上vscode内是有相应的插件的，但bug较多我个人认为也很不好用。</p>
-<p>之后如果还会使用blender的话我会写一个专题好好记录一下学习的过程（希望不会有这一天）</p>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://github.com/zju3dv/pvnet-rendering" target="_blank" rel="noopener">https://github.com/zju3dv/pvnet-rendering</a></p>
+<h2 id="Blender脚本编写tips"><a href="#Blender脚本编写tips" class="headerlink" title="Blender脚本编写tips"></a>Blender脚本编写tips</h2><h3 id="根据软件操作获得代码"><a href="#根据软件操作获得代码" class="headerlink" title="根据软件操作获得代码"></a>根据软件操作获得代码</h3><p>对blender不熟悉的话很多操作不知道如何使用Python编写（官方文档是指望不上的），所以可以在软件内进行操作，然后在Script中即可以看到上次操作的代码，这样的话如果摸清楚了Blender中的操作流程的话，可以很方便的转化为代码</p>
+<p><img src="http://cdn.ziyedy.top/Blender%E4%BD%BF%E7%94%A8Python%E8%84%9A%E6%9C%AC%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%B8%B2%E6%9F%93%E6%93%8D%E4%BD%9C/blender%E6%98%BE%E7%A4%BA%E6%93%8D%E4%BD%9C%E4%BB%A3%E7%A0%81.png" alt=""></p>
+<h3 id="IDE开发"><a href="#IDE开发" class="headerlink" title="IDE开发"></a>IDE开发</h3><p>bpy模块是blender脚本插件核心库，封装在blender内置的Python库中，因此在外界要使用该库并不方便</p>
+<p>为了能够在相关IDE中进行blender二次开发，可以使用<code>fake-bpy-module</code>这个包，该包是一套Blender API伪SDK库，能够用于blender二次开发的相关代码补全</p>
+<p>安装<code>fake-bpy-module</code>只需要使用pip就可以了，如下就是安装2.83版本的 方法</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ruby">pip install fake-bpy-<span class="hljs-class"><span class="hljs-keyword">module</span>-&lt;version&gt;</span><br>pip install fake-bpy-<span class="hljs-class"><span class="hljs-keyword">module</span>-2.83</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="帮助文档"><a href="#帮助文档" class="headerlink" title="帮助文档"></a>帮助文档</h3><p>blender插件脚本的python开发是一个文档相对欠缺（官方文档写的我个人认为很烂）而且不同版本之间差别较大。</p>
+<p>因此建议初学者不要直接上官方文档，而应该面对具体问题在 <a href="https://blender.stackexchange.com/" target="_blank" rel="noopener">https://blender.stackexchange.com/</a> 上找到相应解决方案</p>
+<p>或者可以面向软件，找到在软件中的操作手法，之后根据tip1完成代码的编写</p>
  
       <!-- reward -->
       

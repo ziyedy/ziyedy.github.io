@@ -13,7 +13,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    4、链表 |  子夜nostalgic
+    DS04:链表 |  子夜nostalgic
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-学习笔记/数据结构与算法/4、链表"
+  id="post-学习笔记/数据结构/4、链表"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -59,7 +59,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  4、链表
+  DS04:链表
 </h1>
  
 
@@ -70,7 +70,7 @@
   <time datetime="2020-07-17T02:45:22.000Z" itemprop="datePublished">2020-07-17</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a> / <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a>
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a> / <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
   </div>
   
 <div class="word_count">
@@ -106,7 +106,7 @@
 <img src="http://cdn.ziyedy.top/image/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/4%E3%80%81%E9%93%BE%E8%A1%A8/%E9%93%BE%E8%A1%A8%E7%A4%BA%E6%84%8F%E5%9B%BE.png" style="zoom: 80%;" />
 
 <p>数据存储在节点（Node）中，主要模型如下：包括该节点存储的<strong>元素</strong>以及下一个节点的<strong>地址</strong>。</p>
-<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">class <span class="hljs-keyword">Node</span> <span class="hljs-title">&#123;<br>	E</span> e;<br>	<span class="hljs-keyword">Node</span> <span class="hljs-title">next</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Node</span> </span>&#123;<br>	E e;<br>	Node next;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <h4 id="与顺序表的对比"><a href="#与顺序表的对比" class="headerlink" title="与顺序表的对比"></a>与顺序表的对比</h4><p><strong>1、顺序表</strong></p>
 <p>优点：</p>
@@ -118,17 +118,17 @@
 <p><strong>2、链表</strong></p>
 <p>优点：相对于动态数组通过“扩容”等操作实现动态，链表是真正的动态，不需要处理固定容量的问题。</p>
 <p>缺点：丧失了随机访问的能力（即无法通过索引进行访问）</p>
-<h3 id="链表的实现"><a href="#链表的实现" class="headerlink" title="链表的实现"></a>链表的实现</h3><h4 id="类内基本元素"><a href="#类内基本元素" class="headerlink" title="类内基本元素"></a>类内基本元素</h4><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">public class LinkedList<span class="hljs-tag">&lt;E&gt;</span> &#123;<br>    private class <span class="hljs-keyword">Node</span> <span class="hljs-title">&#123;<br>        public</span> E e;<br>        public <span class="hljs-keyword">Node</span> <span class="hljs-title">next</span>;<br><br>        public <span class="hljs-keyword">Node</span><span class="hljs-title">(E</span> e, <span class="hljs-keyword">Node</span> <span class="hljs-title">next</span>) &#123;<br>            this.e = e;<br>            this.next = next;<br>        &#125;<br><br>        public <span class="hljs-keyword">Node</span><span class="hljs-title">(E</span> e) &#123;<br>            this(e, null);<br>        &#125;<br><br>        public <span class="hljs-keyword">Node</span><span class="hljs-title">() &#123;<br>            this</span>(null, null);<br>        &#125;<br>    &#125;<br><br>    private <span class="hljs-keyword">Node</span> <span class="hljs-title">dummyHead</span>;	// 哑节点，指向链表头节点<br>    int size;<br><br>    public LinkedList() &#123;<br>        dummyHead = new <span class="hljs-keyword">Node</span><span class="hljs-title">(null</span>, null);<br>        size = <span class="hljs-number">0</span>;<br>    &#125;<br></code></pre></td></tr></table></figure>
+<h3 id="链表的实现"><a href="#链表的实现" class="headerlink" title="链表的实现"></a>链表的实现</h3><h4 id="类内基本元素"><a href="#类内基本元素" class="headerlink" title="类内基本元素"></a>类内基本元素</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LinkedList</span>&lt;<span class="hljs-title">E</span>&gt; </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Node</span> </span>&#123;<br>        <span class="hljs-keyword">public</span> E e;<br>        <span class="hljs-keyword">public</span> Node next;<br><br>        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Node</span><span class="hljs-params">(E e, Node next)</span> </span>&#123;<br>            <span class="hljs-keyword">this</span>.e = e;<br>            <span class="hljs-keyword">this</span>.next = next;<br>        &#125;<br><br>        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Node</span><span class="hljs-params">(E e)</span> </span>&#123;<br>            <span class="hljs-keyword">this</span>(e, <span class="hljs-keyword">null</span>);<br>        &#125;<br><br>        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Node</span><span class="hljs-params">()</span> </span>&#123;<br>            <span class="hljs-keyword">this</span>(<span class="hljs-keyword">null</span>, <span class="hljs-keyword">null</span>);<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> Node dummyHead;	<span class="hljs-comment">// 哑节点，指向链表头节点</span><br>    <span class="hljs-keyword">int</span> size;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">LinkedList</span><span class="hljs-params">()</span> </span>&#123;<br>        dummyHead = <span class="hljs-keyword">new</span> Node(<span class="hljs-keyword">null</span>, <span class="hljs-keyword">null</span>);<br>        size = <span class="hljs-number">0</span>;<br>    &#125;<br></code></pre></td></tr></table></figure>
 
 
 
 <h4 id="插入元素"><a href="#插入元素" class="headerlink" title="插入元素"></a>插入元素</h4><p>时间复杂度为O(n)。</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs gradle"><span class="hljs-comment">// 在链表中间添加元素</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> add(<span class="hljs-keyword">int</span> index, E e) &#123;<br>    <span class="hljs-keyword">if</span>(index &lt; <span class="hljs-number">0</span> || index &gt; <span class="hljs-keyword">size</span>) &#123;<br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(<span class="hljs-string">"Add failed"</span>);<br>    &#125;<br>    Node prev = dummyHead;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;index;i++) &#123;<br>        prev = prev.<span class="hljs-keyword">next</span>;<br>    &#125;<br>    prev.<span class="hljs-keyword">next</span> = <span class="hljs-keyword">new</span> Node(e, prev.<span class="hljs-keyword">next</span>);<br>    <span class="hljs-keyword">size</span>++;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 在链表中间添加元素</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-keyword">int</span> index, E e)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span>(index &lt; <span class="hljs-number">0</span> || index &gt; size) &#123;<br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(<span class="hljs-string">"Add failed"</span>);<br>    &#125;<br>    Node prev = dummyHead;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;index;i++) &#123;<br>        prev = prev.next;<br>    &#125;<br>    prev.next = <span class="hljs-keyword">new</span> Node(e, prev.next);<br>    size++;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 
 <h4 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h4><p>时间复杂度为O(n)</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs gradle"><span class="hljs-comment">// 删除索引为index的元素</span><br><span class="hljs-keyword">public</span> E remove(<span class="hljs-keyword">int</span> index) &#123;<br>    <span class="hljs-keyword">if</span>(index &lt; <span class="hljs-number">0</span> || index &gt; <span class="hljs-keyword">size</span>) &#123;<br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(<span class="hljs-string">"Add failed"</span>);<br>        &#125;<br>    Node prev = dummyHead;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;index;i++) &#123;<br>        prev = prev.<span class="hljs-keyword">next</span>;<br>    &#125;<br>    Node res = prev.<span class="hljs-keyword">next</span>;<br>    prev.<span class="hljs-keyword">next</span> = res.<span class="hljs-keyword">next</span>;<br>    res.<span class="hljs-keyword">next</span> = <span class="hljs-keyword">null</span>;<br>    <span class="hljs-keyword">size</span>--;<br>    <span class="hljs-keyword">return</span> res.e;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 删除索引为index的元素</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> E <span class="hljs-title">remove</span><span class="hljs-params">(<span class="hljs-keyword">int</span> index)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span>(index &lt; <span class="hljs-number">0</span> || index &gt; size) &#123;<br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(<span class="hljs-string">"Add failed"</span>);<br>        &#125;<br>    Node prev = dummyHead;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;index;i++) &#123;<br>        prev = prev.next;<br>    &#125;<br>    Node res = prev.next;<br>    prev.next = res.next;<br>    res.next = <span class="hljs-keyword">null</span>;<br>    size--;<br>    <span class="hljs-keyword">return</span> res.e;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 
@@ -217,11 +217,11 @@
    
   <nav class="article-nav">
     
-      <a href="/page/ds-bst.html" class="article-nav-link">
+      <a href="/page/ds-tree-binarytree.html" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            5.2、二叉搜索树
+            DS05.1:树与二叉树
           
         </div>
       </a>
@@ -229,7 +229,7 @@
     
       <a href="/page/ds-queue.html" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">3、队列</div>
+        <div class="article-nav-title">DS03:队列</div>
       </a>
     
   </nav>

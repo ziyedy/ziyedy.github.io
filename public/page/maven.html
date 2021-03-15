@@ -13,7 +13,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    Maven |  子夜nostalgic
+    Maven基础使用 |  子夜nostalgic
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-工具使用/Maven"
+  id="post-工具使用/Maven基础使用"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -59,7 +59,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Maven
+  Maven基础使用
 </h1>
  
 
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1k</span>
+            <span class="post-count">1.1k</span>
         </span>
     </span>
 
@@ -198,6 +198,14 @@
 <h4 id="解决-1"><a href="#解决-1" class="headerlink" title="解决"></a>解决</h4><p>如图所示，删除对应出错的插件，然后点击左上角重新构建即可</p>
 <img src="http://cdn.ziyedy.top/Maven/bug2.png" style="zoom:67%;" />
 
+<h3 id="bug3：Could-not-transfer-artifact-…"><a href="#bug3：Could-not-transfer-artifact-…" class="headerlink" title="bug3：Could not transfer artifact …"></a>bug3：Could not transfer artifact …</h3><p>在导入的虚拟机选项中插入如下代码，忽略SSL证书的验证</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">-<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Dmaven</span>.</span></span>wagon.http.ssl.insecure=<span class="hljs-literal">true</span> -<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Dmaven</span>.</span></span>wagon.http.ssl.allowall=<span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
+
+<img src="http://cdn.ziyedy.top/Maven/bug3.png" style="zoom: 50%;" />
+
+<p>如果还报错的话，则将maven本地包中结尾为<code>.lastUpdate</code>的文件删除，输出该类文件需要使用相关命令或脚本，如下为Windows下删除方法。</p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs maxima">cd maven仓库<br><span class="hljs-keyword">for</span> /r <span class="hljs-literal">%i</span> <span class="hljs-keyword">in</span> (*.lastUpdated) <span class="hljs-keyword">do</span> <span class="hljs-built_in">del</span> <span class="hljs-literal">%i</span><br></code></pre></td></tr></table></figure>
+
 
 
 
@@ -285,11 +293,11 @@
    
   <nav class="article-nav">
     
-      <a href="/page/null.html" class="article-nav-link">
+      <a href="/page/factory-pattern.html" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            docker
+            工厂模式
           
         </div>
       </a>
