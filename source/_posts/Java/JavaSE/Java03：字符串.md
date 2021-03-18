@@ -13,15 +13,17 @@ fileName: Java-string
 
 ### 简介
 
-> 在Java中，所有类似“ABC”的字面值，都是String类的实例；
->
-> String类位于java.lang包下，是Java语言的核心类，提供了字符串的比较、查找、截取、大小写转换等操作；
->
-> Java语言为`“+”`连接符（字符串连接符）以及对象转换为字符串提供了特殊的支持，字符串对象可以使用`“+”`连接其他对象
+在Java中，所有类似“ABC”的字面值，都是String类的实例；
+
+String类位于`java.lang`包下，是Java语言的核心类，提供了字符串的比较、查找、截取、大小写转换等操作；
+
+Java语言为`“+”`连接符（字符串连接符）以及对象转换为字符串提供了特殊的支持，字符串对象可以使用`“+”`连接其他对象
 
 ### 基本实现
 
 String被声明为`final`，因此不可被继承，同时也说明**String具有不可变特性**。在**Java8**中，String内部使用char数组存储数据。
+
+*注：也正是因为这种不可变性，String类的大多数操作方法都会返回新的String，而不是在原字符串上进行更改*
 
 ```
 public final class String
@@ -44,8 +46,6 @@ public final class String
 }
 ```
 
-
-
 ### 常用方法
 
 ```java
@@ -60,26 +60,21 @@ char charAt(int index)
 
 // 将字符串分割为子字符串
 String[] split(String regex, int limit)	
+    
+// 替换所有 a 字符串为 b
+String replace("a", "b")
 
 // 将该字符串转换为byte数组
 byte[] getBytes()	
 ```
-
-
-
-
-
-
 
 ## “+”连接符
 
 ### 实现原理
 
 > "+"连接符实现字符串连接是通过**StringBuilder（或 StringBuffer）类及其append 方法实现的**
->
-> Java在使用“+”连接字符串时，会创建一个`StringBuilder`对象，并调用`append()`方法进行拼接，最后调用`toString()`方法返回拼接好的字符串
 
-
+Java在使用“+”连接字符串时，会创建一个`StringBuilder`对象，并调用`append()`方法进行拼接，最后调用`toString()`方法返回拼接好的字符串
 
 ### 效率
 

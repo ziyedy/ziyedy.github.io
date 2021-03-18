@@ -38,7 +38,7 @@ fileName: servlet-basic-summary
 
 示例如下，表示该网页位于`root/gg/ss`下，（name只是作为一个标识，没有太大实际作用）
 
-```
+```java
 @WebServlet("/gg/ss")
 @WebServlet(value="/gg/ss")
 @WebServlet(urlPatterns="/gg/ss")
@@ -53,7 +53,7 @@ fileName: servlet-basic-summary
 
 ### IDEA中更改Web项目根目录
 
-![](http://cdn.ziyedy.top/Servlet%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/IDEA%E8%AE%BE%E7%BD%AEURL%E5%9C%B0%E5%9D%80.png)
+<img src="http://cdn.ziyedy.top/Servlet%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/IDEA%E8%AE%BE%E7%BD%AEURL%E5%9C%B0%E5%9D%80.png" style="zoom: 50%;" />
 
 ## Servlet生命周期
 
@@ -108,7 +108,7 @@ fileName: servlet-basic-summary
 
 HTML表单如下：
 
-```
+```html
 <form action="test" method="get">
     请输入：
     <input type="text" name="info" />
@@ -116,11 +116,11 @@ HTML表单如下：
 </form>
 ```
 
-![](http://cdn.ziyedy.top/Servlet%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/%E5%A4%84%E7%90%86%E8%A1%A8%E5%8D%95%E8%BE%93%E5%85%A5.png)
+<img src="http://cdn.ziyedy.top/Servlet%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/%E5%A4%84%E7%90%86%E8%A1%A8%E5%8D%95%E8%BE%93%E5%85%A5.png" style="zoom:80%;" />
 
 Servlet处理逻辑：
 
-```
+```java
 @WebServlet("/test")    // 子目录
 public class test extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException {
@@ -135,7 +135,7 @@ public class test extends HttpServlet {
 }
 ```
 
-![](http://cdn.ziyedy.top/Servlet%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/%E5%A4%84%E7%90%86%E8%A1%A8%E5%8D%95%E7%BB%93%E6%9E%9C.png)
+<img src="http://cdn.ziyedy.top/Servlet%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/%E5%A4%84%E7%90%86%E8%A1%A8%E5%8D%95%E7%BB%93%E6%9E%9C.png" style="zoom:67%;" />
 
 ## HttpServletResponse对象
 
@@ -221,7 +221,7 @@ response.sendRedirect("index.jsp");
 
 ### 获取与常用方法
 
-```
+```java
 // 通过 request 对象获取
 ServletContext servletContext = request.getServletContext();
 
@@ -243,7 +243,7 @@ String serverInfo = request.getServletContext().getServerInfo();
 
 ### ServletContext域对象使用
 
-```
+```java
 // 获取ServletContext对象
 ServletContext servletContext = request.getServletContext();
 // 设置域对象
@@ -271,18 +271,18 @@ servletContext.removeAttribute("name");
 
 ### Cookie的创建与发送
 
-```
+```java
 // 创建Cookie对象
 Cookie cookie = new Cookie("id", 0);
 // 发送Cookie对象
 response.addCookie(cookie);
 ```
 
-![](http://cdn.ziyedy.top/Servlet%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/%E5%88%9B%E5%BB%BAcookie.png)
+<img src="http://cdn.ziyedy.top/Servlet%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/%E5%88%9B%E5%BB%BAcookie.png" style="zoom:67%;" />
 
 如上，即创建了我们自己的cookie
 
-```
+```java
 @WebServlet("/cookie1")
 public class Cookie1 extends HttpServlet {
     @Override
@@ -301,7 +301,7 @@ public class Cookie1 extends HttpServlet {
 
 
 
-```
+```java
 // 获取Cookie数组
 Cookie[] cookies = request.getCookies();
 // 判断数组是否为空
@@ -354,7 +354,7 @@ cookie.setPath("/gg/ss");
 
 ### Session的获取与基本使用
 
-```
+```java
 @WebServlet("/session1")
 public class Session1 extends HttpServlet {
     @Override
@@ -385,7 +385,7 @@ public class Session1 extends HttpServlet {
 
 > 使用一个叫JSESSIONID的特殊cookie来标识一次会话，Session 的底层依赖 Cookie 来实现
 
-![](http://cdn.ziyedy.top/Servlet%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/session.png)
+<img src="http://cdn.ziyedy.top/Servlet%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/session.png" style="zoom: 67%;" />
 
 ### Session域对象
 
@@ -466,7 +466,7 @@ session.invalidate();
 >
 > 2、 Servlet 将 `multipart/form-data` 的 POST 请求封装成 Part，通过 Part 对上传的文件进行操作
 
-```
+```java
 @WebServlet("/uploadServlet")
 @MultipartConfig()
 public class UploadServlet extends HttpServlet {

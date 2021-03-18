@@ -1,12 +1,15 @@
 ---
-title: Java线程池
+title: Java12-4：线程池
 date: 2021-03-08 17:45:15
 tags:
+	- 并发编程
 categories:
-fileName:
+	- Java
+	- JavaSE
+fileName: Java12-thread-pool
 ---
 
-#
+## 线程池简介
 
 并发的本质其实就是任务的并行处理，所以绝大部分并发程序都是围绕离散任务进行的
 
@@ -16,15 +19,21 @@ fileName:
 
 
 
-## 线程池简介
+## 
 
 线程池的作用是维护一定数量的线程，接收任意数量的任务，这些任务被线程池中的线程并发执行
 
-## 自开发线程池设计
+## 线程池设计与实现
+
+### 基本思路
+
+维护一个任务队列 `RunnableTaskQueue ` 用以接收 `Runnable `任务，其中任务一旦被线程池取完，则调用 `wait` 方法进入阻塞状态，而一旦有新的任务被添加进来，则
+
+创建固定数量的线程作为线程池，不断的从 `RunnableTaskQueue ` 中取得 `Runnable` 并调用其 `run`方法
 
 
 
 
 
-## Executor 框架的使用
+## Executor 线程池框架
 

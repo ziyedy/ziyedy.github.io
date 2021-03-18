@@ -179,6 +179,16 @@ gg
 
 非静态内部类依赖于外部类的实例，也就是说需要先创建外部类实例，才能用这个实例去创建非静态内部类。而静态内部类不需要。静态内部类不能访问外部类的非静态的变量和方法。
 
+### transient
+
+该关键字常用来修饰类变量，其所修饰的变量是不需要序列化的（在序列化时会自动忽略该变量）
+
+比如 `ArrayList` 中存储数据的数组就使用了该关键字修饰：
+
+```java
+transient Object[] elementData; // non-private to simplify nested class access
+```
+
 
 
 ## 包

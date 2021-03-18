@@ -102,7 +102,9 @@ public void run() {
 }
 ```
 
+如下，`start`方法执行总结如下：
 
+![](http://cdn.ziyedy.top/Java12%EF%BC%9A%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/start%E6%96%B9%E6%B3%95.jpg)
 
 
 
@@ -110,10 +112,13 @@ public void run() {
 
 * **New状态**：当一个 Thread 对象刚刚被创建时，状态为 NEW，此时与其他 Java 对象没有什么不同
 * **RUNNABLE状态**：调用 `start` 方法后即进入 RUNNABLE 状态
-
 * **RUNNING状态**：该状态得到CPU分配时即进入RUNNING状态
 * **BLOCKED状态**：包括Blocked（被阻塞）、Waiting（等待）、Time_waiting（计时等待）等等
 * **TERMINATED状态**：线程的终止状态，意味着线程的生命周期已经走完
+
+### 线程状态的转换
+
+![](http://cdn.ziyedy.top/Java12%EF%BC%9A%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/%E7%BA%BF%E7%A8%8B%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png)
 
 
 
