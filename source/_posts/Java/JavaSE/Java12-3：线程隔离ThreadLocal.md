@@ -85,6 +85,10 @@ ThreadLocalMap getMap(Thread t) {
 ThreadLocal.ThreadLocalMap threadLocals = null;
 ```
 
+### 内存泄漏
+
+>  内存泄漏：为程序在申请内存后，无法释放已申请的内存空间（不会再被使用的对象或者变量占用的内存不能被回收）
+
 `ThreadLocalMap`功能与其他Map类容器作用类似，但其中作为 key 存储的`ThreadLocal`对象为弱引用（如下），因此很容易被垃圾回收，但value对象并不会与之一起被回收，这样就会造成**“内存泄漏”**问题
 
 ```java
@@ -99,3 +103,9 @@ static class Entry extends WeakReference<ThreadLocal<?>> {
     }
 }
 ```
+
+### 如何避免内存泄漏
+
+* 每次使用完 `ThreadLocal` 都调用其 `remove()`方法清除数据
+* 将 `ThreadLocal` 变量定义为static，这样就保证了一直存在其强引用
+

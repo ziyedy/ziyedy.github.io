@@ -1,11 +1,11 @@
 ---
-title: Java：泛型
+title: Java09：泛型
 date: 2020-07-28 11:40:48
 tags:
 	- Java
 categories:
 	- Java
-	- Java基础
+	- JavaSE
 fileName: Java-generic
 ---
 

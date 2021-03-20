@@ -1,11 +1,11 @@
 ---
-title: Java：接口与抽象类
+title: Java05：接口与抽象类
 date: 2020-07-28 11:38:34
 tags:
 	- Java
 categories:
 	- Java
-	- Java基础
+	- JavaSE
 fileName: java-interface-abstractclass
 ---
 

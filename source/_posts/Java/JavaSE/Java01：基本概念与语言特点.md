@@ -1,11 +1,11 @@
 ---
-title: Java：基本概念与语言特点
+title: Java01：基本概念与语言特点
 date: 2020-06-27 17:25:12
 tags:
 	- Java
 categories:
 	- Java
-	- Java基础
+	- JavaSE
 fileName: java-basic-grammar
 ---
 

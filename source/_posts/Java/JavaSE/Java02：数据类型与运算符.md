@@ -1,11 +1,11 @@
 ---
-title: Java：数据类型与运算符
+title: Java02：数据类型与运算符
 date: 2021-01-23 17:08:17
 tags:
 	- Java
 categories:
 	- Java
-	- Java基础
+	- JavaSE
 fileName: java-datatype-operator
 ---
 

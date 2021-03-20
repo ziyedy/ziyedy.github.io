@@ -1,11 +1,11 @@
 ---
-title: Java：反射
+title: Java10：反射
 date: 2021-01-27 17:26:30
 tags:
 	- Java
 categories:
 	- Java
-	- Java基础
+	- JavaSE
 fileName: Java-reflection
 ---
 

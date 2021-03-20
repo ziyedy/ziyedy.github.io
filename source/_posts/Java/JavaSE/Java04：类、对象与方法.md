@@ -1,11 +1,11 @@
 ---
-title: Java面向对象
+title: Java04：类、对象与方法
 date: 2020-07-04 10:43:51
 tags:
 	- Java
 categories:
 	- Java
-	- Java基础
+	- JavaSE
 fileName: java-orient-object
 ---
 

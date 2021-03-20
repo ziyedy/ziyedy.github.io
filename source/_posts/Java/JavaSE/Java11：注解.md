@@ -1,11 +1,11 @@
 ---
-title: Java：注解
+title: Java11：注解
 date: 2021-01-30 23:38:43
 tags:
 	- Java
 categories:
 	- Java
-	- Java基础
+	- JavaSE
 fileName: Java-annotation
 ---
 

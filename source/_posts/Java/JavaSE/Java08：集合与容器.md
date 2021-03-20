@@ -5,7 +5,7 @@ tags:
 	- Java
 categories:
 	- Java
-	- Java基础
+	- JavaSE
 fileName: java-collection
 ---
 

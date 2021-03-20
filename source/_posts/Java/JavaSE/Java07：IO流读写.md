@@ -1,11 +1,11 @@
 ---
-title: Java：IO流读写
+title: Java07：IO流读写
 date: 2020-07-28 08:21:32
 tags:
 	- Java
 categories:
 	- Java
-	- Java基础
+	- JavaSE
 fileName: java-input-output-stream
 ---
 
