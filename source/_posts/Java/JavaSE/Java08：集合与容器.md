@@ -107,50 +107,6 @@ list.forEach(System.out::println);
 
 * 缺点：添加和删除需大量移动元素，效率低
 
-### 底层实现
-
-`ArrayList`底层就是一个长度可以动态增长的Object数组，如下`elementData`。
-
-其中实现的接口中`RandomAccess`、`Cloneable`中都没有实现方法，更多的作为一种标识进行判断
-
-```java
-public class ArrayList<E> extends AbstractList<E>
-        implements List<E>, RandomAccess, Cloneable, java.io.Serializable
-{
-    private static final long serialVersionUID = 8683452581122892189L;
-
-    private static final int DEFAULT_CAPACITY = 10;	// 默认初始容量
-
-    private static final Object[] EMPTY_ELEMENTDATA = {};	// 空数组（用于空实例）
-
-    private static final Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = {};	// 默认空数组
-
-    transient Object[] elementData; // 保存ArrayList数据的数组
-
-    private int size;	// ArrayList 所包含的元素个数
-}
-```
-
-JDK1.7前，使用无参数构造方法创建`ArrayList`对象时，默认底层数组长度是10。类似于单例的饿汉式
-
-JDK1.8后，使用无参数构造方法创建`ArrayList`对象时，默认底层数组长度是0，如下即指向了`DEFAULTCAPACITY_EMPTY_ELEMENTDATA`。而当对数组进行添加元素操作后，才将数组扩容（第一次添加扩容为10），类似于单例的懒汉式
-
-```java
-// 初始化时没有传入数据，默认将elementData构造为一个空数组
-public ArrayList() {
-    this.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;
-}
-```
-
-ArrayList中提供了一个内部类Itr，实现了`Iterator`接口，实现对集合元素的遍历
-
-```java
-public Iterator<E> iterator() {
-    return new Itr();
-}
-private class Itr implements Iterator<E> { }
-```
-
 
 
 ## LinkedList
@@ -162,42 +118,6 @@ private class Itr implements Iterator<E> { }
 * 优点：插入、删除元素效率比较高
 
 * 缺点：遍历和随机访问元素效率低下
-
-### 底层实现
-
-`LinkedList`实现了`Deque`接口，所以除了可以作为线性表来使用外，还可以当做队列和栈来使用
-
-```java
-public class LinkedList<E>
-    extends AbstractSequentialList<E>
-    implements List<E>, Deque<E>, Cloneable, java.io.Serializable
-{
-    transient int size = 0;
-
-    transient Node<E> first;
-
-    transient Node<E> last;
-
-    public LinkedList() {
-    }
-}
-```
-
-利用静态内部类`Node`，表示双向链表的节点，如下：
-
-```java
-private static class Node<E> {
-    E item;
-    Node<E> next;
-    Node<E> prev;
-
-    Node(Node<E> prev, E element, Node<E> next) {
-        this.item = element;
-        this.next = next;
-        this.prev = prev;
-    }
-}
-```
 
 
 
@@ -342,44 +262,6 @@ public class TreeSet<E> extends AbstractSet<E> implements NavigableSet<E> {
 * 缺点：key值无序
 
 与`HashSet`对应，其也有`LinkedHashMap`保证键值按添加顺序使用链表维护
-
-### 底层实现
-
-JDK1.7及其之前，HashMap底层是一个**table数组+链表**实现的哈希表存储结构
-
-JDK1.8及以后，当链表的存储数据个数 **≥8** 的时候，不再采用链表存储，而采用红黑树存储结构。这么做能够降低查询的时间复杂度（链表O(n) -> 红黑树O(logn)）。
-
-JDK1.7中链表的每个节点就是一个`Entry`，1.8之后改为了`Node`，其中包括以下四个部分：
-
-```java
-static class Entry<K, V> implements Map.Entry<K, V> {
-    final K key; 	//key
-    V value;	//value
-    Entry<K, V> next; 	//指向下一个节点的指针
-    int hash;	//哈希码
-}
-```
-
-JDK1.7中HashMap的主要成员变量及其含义
-
-```java
-public class HashMap<K, V> implements Map<K, V> {
-	// 哈希表主数组的默认长度
-    static final int DEFAULT_INITIAL_CAPACITY = 16; 
-	// 默认的装填因子
-    static final float DEFAULT_LOAD_FACTOR = 0.75f; 
-	// 主数组的引用
-    transient Entry<K, V>[] table; 
-    // 阈值
-    int threshold;
-    // 装填因子
-    final float loadFactor;	
-    // 默认构造函数使用默认的长度与装填因子
-    public HashMap() {
-        this(DEFAULT_INITIAL_CAPACITY, DEFAULT_LOAD_FACTOR);
-    }
-}
-```
 
 
 

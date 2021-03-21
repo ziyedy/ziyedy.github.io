@@ -10,7 +10,49 @@ categories:
 fileName: Java08-hashmap-source-code
 ---
 
-#
+
+
+JDK1.7及其之前，HashMap底层是一个**table数组+链表**实现的哈希表存储结构
+
+JDK1.8及以后，当链表的存储数据个数 **≥8** 的时候，不再采用链表存储，而采用红黑树存储结构。这么做能够降低查询的时间复杂度（链表O(n) -> 红黑树O(logn)）。
+
+JDK1.7中链表的每个节点就是一个`Entry`，1.8之后改为了`Node`，其中包括以下四个部分：
+
+```java
+static class Entry<K, V> implements Map.Entry<K, V> {
+    final K key; 	//key
+    V value;	//value
+    Entry<K, V> next; 	//指向下一个节点的指针
+    int hash;	//哈希码
+}
+```
+
+JDK1.7中HashMap的主要成员变量及其含义
+
+```java
+public class HashMap<K, V> implements Map<K, V> {
+	// 哈希表主数组的默认长度
+    static final int DEFAULT_INITIAL_CAPACITY = 16; 
+	// 默认的装填因子
+    static final float DEFAULT_LOAD_FACTOR = 0.75f; 
+	// 主数组的引用
+    transient Entry<K, V>[] table; 
+    // 阈值
+    int threshold;
+    // 装填因子
+    final float loadFactor;	
+    // 默认构造函数使用默认的长度与装填因子
+    public HashMap() {
+        this(DEFAULT_INITIAL_CAPACITY, DEFAULT_LOAD_FACTOR);
+    }
+}
+```
+
+
+
+
+
+
 
 https://leetcode-cn.com/problems/lru-cache/solution/yuan-yu-linkedhashmapyuan-ma-by-jeromememory/
 

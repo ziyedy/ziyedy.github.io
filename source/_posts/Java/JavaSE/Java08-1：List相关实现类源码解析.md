@@ -10,6 +10,54 @@ categories:
 fileName: Java08-List-source-code
 ---
 
+# ArrayList 源码解析
+
+## 底层容器
+
+`ArrayList`底层就是一个长度可以动态增长的Object数组，如下`elementData`。
+
+其中实现的接口中`RandomAccess`、`Cloneable`中都没有实现方法，更多的作为一种标识进行判断
+
+```java
+public class ArrayList<E> extends AbstractList<E>
+        implements List<E>, RandomAccess, Cloneable, java.io.Serializable
+{
+    private static final long serialVersionUID = 8683452581122892189L;
+
+    private static final int DEFAULT_CAPACITY = 10;	// 默认初始容量
+
+    private static final Object[] EMPTY_ELEMENTDATA = {};	// 空数组（用于空实例）
+
+    private static final Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = {};	// 默认空数组
+
+    transient Object[] elementData; // 保存ArrayList数据的数组
+
+    private int size;	// ArrayList 所包含的元素个数
+}
+```
+
+JDK1.7前，使用无参数构造方法创建`ArrayList`对象时，默认底层数组长度是10。类似于单例的饿汉式
+
+JDK1.8后，使用无参数构造方法创建`ArrayList`对象时，默认底层数组长度是0，如下即指向了`DEFAULTCAPACITY_EMPTY_ELEMENTDATA`。而当对数组进行添加元素操作后，才将数组扩容（第一次添加扩容为10），类似于单例的懒汉式
+
+```java
+// 初始化时没有传入数据，默认将elementData构造为一个空数组
+public ArrayList() {
+    this.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;
+}
+```
+
+ArrayList中提供了一个内部类Itr，实现了`Iterator`接口，实现对集合元素的遍历
+
+```java
+public Iterator<E> iterator() {
+    return new Itr();
+}
+private class Itr implements Iterator<E> { }
+```
+
+
+
 ## 初始化
 
 主要有三种初始化办法：无参初始化、指定初始化数组大小初始化、指定初始数据初始化
@@ -105,7 +153,43 @@ private void grow(int minCapacity) {
 
 
 
+# LinkedList 源码解析
 
+
+
+`LinkedList`实现了`Deque`接口，所以除了可以作为线性表来使用外，还可以当做队列和栈来使用
+
+```java
+public class LinkedList<E>
+    extends AbstractSequentialList<E>
+    implements List<E>, Deque<E>, Cloneable, java.io.Serializable
+{
+    transient int size = 0;
+
+    transient Node<E> first;
+
+    transient Node<E> last;
+
+    public LinkedList() {
+    }
+}
+```
+
+利用静态内部类`Node`，表示双向链表的节点，如下：
+
+```java
+private static class Node<E> {
+    E item;
+    Node<E> next;
+    Node<E> prev;
+
+    Node(Node<E> prev, E element, Node<E> next) {
+        this.item = element;
+        this.next = next;
+        this.prev = prev;
+    }
+}
+```
 
 
 
