@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1.6k</span>
+            <span class="post-count">1.9k</span>
         </span>
     </span>
 
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">5 min</span>
+            <span class="post-count">6 min</span>
         </span>
     </span>
 </div>
@@ -113,15 +113,23 @@
 <p>循环引用就是：A引用B，B也引用A，但没别的对象引用这两个对象，这时其引用计数器不为0，所以引用计数器无法通知GC回收它们</p>
 <h3 id="可达性分析法"><a href="#可达性分析法" class="headerlink" title="可达性分析法"></a>可达性分析法</h3><p>通过一系列的称为 <strong>“GC Roots”</strong> 的对象作为起点，从这些节点开始向下搜索，节点所走过的路径称为引用链，当一个对象到 GC Roots 没有任何引用链相连的话，则证明此对象是不可用的</p>
 <p><img src="http://cdn.ziyedy.top/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/%E5%8F%AF%E8%BE%BE%E6%80%A7%E5%88%86%E6%9E%90.png" alt=""></p>
-<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><h3 id="强引用"><a href="#强引用" class="headerlink" title="强引用"></a>强引用</h3><p>如果一个对象具有强引用，Java 虚拟机宁愿抛出 <code>OutOfMemoryError</code> 错误，使程序异常终止，也不会靠随意回收具有强引用的对象来解决内存不足问题。</p>
-<h3 id="软引用"><a href="#软引用" class="headerlink" title="软引用"></a>软引用</h3><p>如果内存空间足够，垃圾回收器就不会回收它，如果内存空间不足了，就会回收这些对象的内存</p>
-<h3 id="弱引用"><a href="#弱引用" class="headerlink" title="弱引用"></a>弱引用</h3><p>弱引用与软引用的区别在于：只具有弱引用的对象拥有更短暂的生命周期。在垃圾回收器线程扫描它所管辖的内存区域的过程中，一旦发现了只具有弱引用的对象，不管当前内存空间足够与否，都会回收它的内存。</p>
-<h3 id="虚引用"><a href="#虚引用" class="headerlink" title="虚引用"></a>虚引用</h3><p>如果一个对象仅持有虚引用，那么它就和没有任何引用一样，在任何时候都可能被垃圾回收。</p>
-<h1 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h1><h2 id="标记-清除算法"><a href="#标记-清除算法" class="headerlink" title="标记-清除算法"></a>标记-清除算法</h2><p>首先<strong>标记出</strong>所有不需要回收的对象</p>
+<h4 id="固定可作为-GC-Root-的对象"><a href="#固定可作为-GC-Root-的对象" class="headerlink" title="固定可作为 GC Root 的对象"></a>固定可作为 GC Root 的对象</h4><ul>
+<li>虚拟机栈（栈帧中的本地变量表）中引用的对象</li>
+<li>方法区中类静态属性引用的对象</li>
+<li>在方法区中常量引用的对象，如字符串常量池中的引用</li>
+<li>本地方法栈中JNI（即一般说的native方法）引用的对象</li>
+<li>Java虚拟机内部的引用，如基本数据类型对应的Class对象，一些常驻异常对象，以及系统类加载器</li>
+<li>所有被同步锁（synchronized 关键字）修饰的对象</li>
+</ul>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><h3 id="强引用"><a href="#强引用" class="headerlink" title="强引用"></a>强引用</h3><p>如果一个对象具有强引用，Java 虚拟机宁愿抛出 <code>OutOfMemoryError</code> 错误，使程序异常终止，也<strong>不会靠随意回收具有强引用的对象来解决内存不足问题</strong>。</p>
+<h3 id="软引用"><a href="#软引用" class="headerlink" title="软引用"></a>软引用</h3><p>如果内存空间足够，垃圾回收器就不会回收它，<strong>如果内存空间不足了，就会回收这些对象的内存</strong></p>
+<h3 id="弱引用"><a href="#弱引用" class="headerlink" title="弱引用"></a>弱引用</h3><p>弱引用与软引用的区别在于：只具有弱引用的对象拥有更短暂的生命周期。在垃圾回收器线程扫描它所管辖的内存区域的过程中，一旦发现了只具有弱引用的对象，<strong>不管当前内存空间足够与否，都会回收它的内存</strong>。</p>
+<h3 id="虚引用"><a href="#虚引用" class="headerlink" title="虚引用"></a>虚引用</h3><p>如果一个对象仅持有虚引用，那么它就和没有任何引用一样，在<strong>任何时候都可能被垃圾回收</strong>。</p>
+<h1 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h1><h2 id="标记-清除算法（Mark-Sweep）"><a href="#标记-清除算法（Mark-Sweep）" class="headerlink" title="标记-清除算法（Mark-Sweep）"></a>标记-清除算法（Mark-Sweep）</h2><p>首先<strong>标记出</strong>所有不需要回收的对象</p>
 <p>在标记完成后<strong>统一回收</strong>掉所有没有被标记的对象</p>
 <img src="http://cdn.ziyedy.top/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/%E6%A0%87%E8%AE%B0-%E6%B8%85%E9%99%A4%E7%AE%97%E6%B3%95.jpeg" style="zoom:50%;" />
 
-<h2 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h2><p>将内存分为大小相同的两块，每次使用其中的一块。当这一块的内存使用完后，就将还存活的对象<strong>复制</strong>到另一块去，然后再把使用的空间一次清理掉</p>
+<h2 id="标记-复制算法"><a href="#标记-复制算法" class="headerlink" title="标记-复制算法"></a>标记-复制算法</h2><p>将内存分为大小相同的两块，每次使用其中的一块。当这一块的内存使用完后，就将还存活的对象<strong>复制</strong>到另一块去，然后再把使用的空间一次清理掉</p>
 <p>JVM实际实现中，是将内存分为一块较大的Eden区和两块较小的Survivor空间，每次使用Eden和一块Survivor，<strong>回收时，把存活的对象复制到另一块Survivor</strong>。HotSpot默认的Eden和Survivor比是8:1，每次能够使用90%新生代空间</p>
 <img src="http://cdn.ziyedy.top/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/%E5%A4%8D%E5%88%B6%E7%AE%97%E6%B3%95.png" style="zoom:50%;" />
 
@@ -135,12 +143,13 @@
 <h2 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h2><p>核心思想：根据对象存活周期的不同将内存分为几块，从而可以根据各个年代的特点选择合适的垃圾收集算法</p>
 <p><strong>如新生代通常采用复制算法，而老年代则采用标记-整理算法</strong></p>
 <h1 id="垃圾收集器"><a href="#垃圾收集器" class="headerlink" title="垃圾收集器"></a>垃圾收集器</h1><p>垃圾收集器具体实现垃圾收集算法。HotSpot常见的收集算法及其作用邻域如下：</p>
+<p>两个收集器之间存在连线，表示其可以搭配使用</p>
 <img src="http://cdn.ziyedy.top/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/HotSpot%E6%94%B6%E9%9B%86%E5%99%A8.png" style="zoom:67%;" />
 
 <h2 id="Serial收集器"><a href="#Serial收集器" class="headerlink" title="Serial收集器"></a>Serial收集器</h2><p>是一个单线程收集器，在进行垃圾收集工作的时候必须暂停其他所有的工作线程（ <strong>“Stop The World”</strong> ），直到它收集结束</p>
 <p><strong>新生代采用标记-复制算法，老年代采用标记-整理算法</strong></p>
 <p><img src="http://cdn.ziyedy.top/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/Serial%E6%94%B6%E9%9B%86%E5%99%A8.png" alt=""></p>
-<h2 id="ParNew收集器"><a href="#ParNew收集器" class="headerlink" title="ParNew收集器"></a>ParNew收集器</h2><p> Serial 收集器的多线程版本，除了使用多线程进行垃圾收集外，其余行为（控制参数、收集算法、回收策略等等）<strong>和 Serial 收集器完全一样</strong></p>
+<h2 id="ParNew收集器"><a href="#ParNew收集器" class="headerlink" title="ParNew收集器"></a>ParNew收集器</h2><p> Serial 收集器的多线程并行版本，除了使用多线程进行垃圾收集外，其余行为（控制参数、收集算法、回收策略等等）<strong>和 Serial 收集器完全一样</strong></p>
 <p><strong>新生代采用标记-复制算法，老年代采用标记-整理算法。</strong></p>
 <p>除了 Serial 收集器外，只有它能与 CMS 收集器配合工作</p>
 <p><img src="http://cdn.ziyedy.top/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/ParNew%E6%94%B6%E9%9B%86%E5%99%A8.png" alt=""></p>
@@ -151,22 +160,25 @@
 <p><img src="http://cdn.ziyedy.top/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/CMS.png" alt=""></p>
 <h3 id="运行过程"><a href="#运行过程" class="headerlink" title="运行过程"></a>运行过程</h3><p>使用的是<strong>标记-清除算法</strong>，其运行分为四个步骤：</p>
 <ul>
-<li>初始阶段：暂停所有的其他线程，并记录下直接与 root 相连的对象，速度很快</li>
-<li>并发阶段：同时开启 GC 和用户线程，用一个闭包结构去记录可达对象。跟踪记录<strong>发生引用更新的地方</strong></li>
-<li>重新标记：修正并发标记期间因为用户程序继续运行而导致标记产生变动的那一部分对象的标记记录</li>
-<li>并发清除：开启用户线程，同时 GC 线程开始对未标记的区域做清扫</li>
+<li><strong>初始标记</strong>阶段：暂停所有的其他线程，并记录下直接与 root 相连的对象，速度很快</li>
+<li><strong>并发标记</strong>阶段：同时开启 GC 和用户线程，用一个闭包结构去记录可达对象。跟踪记录<strong>发生引用更新的地方</strong></li>
+<li><strong>重新标记</strong>阶段：修正并发标记期间因为用户程序继续运行而导致标记产生变动的那一部分对象的标记记录</li>
+<li><strong>并发清除</strong>阶段：开启用户线程，同时 GC 线程开始对未标记的区域做清扫</li>
 </ul>
 <h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><ul>
 <li>优点：并发收集、低停顿</li>
 <li>缺点：对CPU资源敏感；无法处理浮动垃圾；由于使用标记-清除算法导致收集结束后会有大量空间碎片产生</li>
 </ul>
-<h2 id="G1"><a href="#G1" class="headerlink" title="G1"></a>G1</h2><p>G1 (Garbage-First) 是一款面向服务器的垃圾收集器，主要针对配备多处理器及大容量内存的机器.。以极高概率满足 GC 停顿时间要求的同时，还具备高吞吐量性能特征.</p>
+<h2 id="G1"><a href="#G1" class="headerlink" title="G1"></a>G1</h2><p>G1是一个分代的，增量的，并行与并发的标记-复制垃圾回收器。设计目标是为了适应现在不断扩大的内存和不断增加的处理器数量，进一步降低暂停时间（pause time），同时兼顾良好的吞吐量</p>
 <p><em>被视为 JDK1.7 中 HotSpot 虚拟机的一个重要进化特征</em></p>
+<p><img src="http://cdn.ziyedy.top/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/G1.png" alt=""></p>
 <h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ul>
-<li><strong>并行与并发</strong></li>
-<li><strong>分代收集</strong>：虽然 G1 可以<strong>不需要其他收集器</strong>配合就能独立管理整个 GC 堆，但是还是保留了分代的概念</li>
-<li><strong>空间整合</strong>：G1 从整体来看是基于“标记-整理”算法实现的收集器；从局部上来看是基于“标记-复制”算法实现的</li>
-<li><strong>可预测的停顿</strong>：G1 除了追求低停顿外，还能建立可预测的停顿时间模型</li>
+<li><p>可以面向堆内存任何部分来组成回收集（衡量标准不再是它属于哪个分代，而是哪块内存中存放的垃圾数量最多）</p>
+</li>
+<li><p>开创<strong>基于 Region 的堆内存布局</strong>，即将连续的Java堆划分为多个大小相等的独立区域（Region），每一个 Region 都能根据需要扮演新生代或老年代空间，从而采用不同的策略进行处理（还有一类特殊的 Region，Humongous，即一个对象的大小超过了某一个阈值——HotSpot中是Region的1/2，即标记为 Humongous）</p>
+</li>
+<li><p>G1 仍然保留新生代和老年代的概念，但新生代与老年代不再是固定的，都是一系列的动态集合（物理上不需要连续，逻辑上连续）</p>
+</li>
 </ul>
 <p>参考：</p>
 <blockquote>
@@ -255,11 +267,11 @@
    
   <nav class="article-nav">
     
-      <a href="/page/null.html" class="article-nav-link">
+      <a href="/page/Java12-thread-pool.html" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            Java线程池
+            Java12-4：线程池
           
         </div>
       </a>

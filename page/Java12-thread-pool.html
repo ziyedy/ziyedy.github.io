@@ -13,7 +13,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    Java12-2：synchronized关键字总结 |  子夜nostalgic
+    Java12-4：线程池 |  子夜nostalgic
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Java/JavaSE/Java12-2：synchronized关键字"
+  id="post-Java/JavaSE/Java12-4：线程池"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -59,15 +59,15 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Java12-2：synchronized关键字总结
+  Java12-4：线程池
 </h1>
  
 
     </header>
      
     <div class="article-meta">
-      <a href="/page/Java12-synchronized.html" class="article-date">
-  <time datetime="2021-01-13T08:41:06.000Z" itemprop="datePublished">2021-01-13</time>
+      <a href="/page/Java12-thread-pool.html" class="article-date">
+  <time datetime="2021-03-08T09:45:15.000Z" itemprop="datePublished">2021-03-08</time>
 </a> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/Java/">Java</a> / <a class="article-category-link" href="/categories/Java/JavaSE/">JavaSE</a>
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1k</span>
+            <span class="post-count">367</span>
         </span>
     </span>
 
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">3 min</span>
+            <span class="post-count">1 min</span>
         </span>
     </span>
 </div>
@@ -102,37 +102,16 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <p>使用 <code>synchronized</code> 修饰的作用域中的代码为同步执行的，也就是并发的情况下，执行到对<strong>同一个对象加锁的 synchronized 代码块</strong>时，为串行执行的</p>
-<h2 id="synchronized-使用"><a href="#synchronized-使用" class="headerlink" title="synchronized 使用"></a>synchronized 使用</h2><h3 id="1、同步代码块"><a href="#1、同步代码块" class="headerlink" title="1、同步代码块"></a>1、同步代码块</h3><p>小括号里的对象是可以是任意的对象，这个对象负责对想要执行同步代码块的线程进行“调度”</p>
-<p>每个对其 synchronized 的线程，它都会记录下来，然后等到同步代码块没有线程执行的时候，它就会通知其它线程来执行同步代码块</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">synchronized</span> (lock) &#123;<br>	<span class="hljs-comment">// 同步代码</span><br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p><em>不同类型的多个 Thread 如果有代码要同步执行，锁对象要使用所有线程共同持有的同一个对象</em></p>
-<h3 id="2、修饰方法"><a href="#2、修饰方法" class="headerlink" title="2、修饰方法"></a>2、修饰方法</h3><p>2.1 修饰普通成员方法</p>
-<p>此时锁对象就是<code>this</code>，所以以下两种写法等价</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title">eat</span><span class="hljs-params">()</span></span>&#123;<br>	.......<br>  .......<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">func</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-keyword">synchronized</span>(<span class="hljs-keyword">this</span>)&#123;<br>		.......<br>  	.......<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>2.2 修饰静态方法</p>
-<p>此时锁对象为类的 Class 对象。如果静态方法所在的类为 Test。那么锁对象就是 Test.class</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title">func</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-comment">// 锁对象为 Test.class</span><br>        <span class="hljs-comment">// 同步方法体</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p><em>注意：构造方法是不能使用 synchronized 关键字修饰的</em></p>
-<h2 id="synchronized-原理"><a href="#synchronized-原理" class="headerlink" title="synchronized 原理"></a>synchronized 原理</h2><p>普通的java对象能够完成同步，是因为每个对象都关联了一个 monitor lock（内置锁）。</p>
-<p>当一个线程获取了 monitor lock 后，其它线程如果运行到获取同一个 monitor 的时候就会被 block 住。当这个线程执行完同步代码，则会释放 monitor lock。</p>
-<p>每个 Java 对象在 JVM 的对等对象的头中保存锁状态，指向 ObjectMonitor。ObjectMonitor 保存了当前持有锁的线程引用，EntryList 中保存目前等待获取锁的线程，WaitSet 保存 wait 的线程。此外还有一个计数器，每当线程获得 monitor 锁，计数器 +1，当线程重入此锁时，计数器还会 +1。当计数器不为0时，其它尝试获取 monitor 锁的线程将会被保存到EntryList中，并被阻塞。当持有锁的线程释放了monitor 锁后，计数器 -1。当计数器归位为 0 时，所有 EntryList 中的线程会尝试去获取锁，但只会有一个线程会成功，没有成功的线程仍旧保存在 EntryList 中。<strong>由此可以看出 monitor 锁是非公平锁</strong></p>
-<p>使用<code>javap</code>命令进行反编译后，这两条指令就是上面所讲述的获取锁和释放锁的关键指令</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros">15: monitorenter<br><span class="hljs-built_in">..</span><span class="hljs-built_in">..</span><span class="hljs-built_in">..</span><br>128: monitorexit<br></code></pre></td></tr></table></figure>
-
-
-
-<h2 id="synchronized-使用注意"><a href="#synchronized-使用注意" class="headerlink" title="synchronized 使用注意"></a>synchronized 使用注意</h2><p>正确的编写方式应该把共享资源的操作放在 synchronized 代码块中</p>
-<p>尽量把不需要同步的代码移出 synchronized 代码块</p>
-<p>synchronized 关键字需要配合一个对象使用，这个对象可以是任何对象</p>
-<p>1、synchronized 使用的为非公平锁，如果你需要公平锁，那么不要使用 synchronized。可以使用 ReentrantLock，设置为公平锁。关于 ReentrantLock，会在后面章节进行讲解；</p>
-<p>2、锁对象不能为 null。如果锁对象为 null，何谈对象头，以及保存与其关联的 monitor 锁呢？所以代码中要确保synchronized使用的锁对象不为 null；</p>
-<p>3、只把需要同步的代码放入 synchronized 代码块。如果不思考，为了线程安全把方法中全部代码都放入同步代码块，那么将会丧失多线程的优势。再多的线程也只能串行执行，这完全违背了并发的初衷；</p>
-<p>4、只有使用同一个对象作为锁对象，才能同步。记住是同一个对象，而不是同一个类。有一种常犯的错误是，不同线程持有的是同一个类的不同实例。那么该对象实例用作锁对象的话，多个线程并不会同步。还一种错误是使用不同类的实例作为锁对象，但是期望不同位置的同步代码块能够同步执行。这是不可能达到你想要的效果的。</p>
- 
+  <h2 id="线程池简介"><a href="#线程池简介" class="headerlink" title="线程池简介"></a>线程池简介</h2><p>并发的本质其实就是任务的并行处理，所以绝大部分并发程序都是围绕离散任务进行的</p>
+<ol>
+<li>线程创建需要消耗资源。通过前面的学习，我们知道线程的创建和启动都需要消耗资源，需要 JVM 和操作系统提供支持。如果线程运行的任务十分轻量级，那么会造成创建线程的时间开销比任务逻辑运行时间还要长；</li>
+<li>CPU 性能有限。当活跃的线程超过了 CPU 的承载限度，那么会有大量线程参与竞争 CPU，造成系统额外的开销，但是永远都会有很多线程无法竞争到 CPU，造成了资源的浪费；</li>
+<li>系统能够支持的线程存在上限。如果超出上限，整个应用就会崩溃。</li>
+</ol>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><p>线程池的作用是维护一定数量的线程，接收任意数量的任务，这些任务被线程池中的线程并发执行</p>
+<h2 id="线程池设计与实现"><a href="#线程池设计与实现" class="headerlink" title="线程池设计与实现"></a>线程池设计与实现</h2><h3 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h3><p>维护一个任务队列 <code>RunnableTaskQueue</code> 用以接收 <code>Runnable</code>任务，其中任务一旦被线程池取完，则调用 <code>wait</code> 方法进入阻塞状态，而一旦有新的任务被添加进来，则</p>
+<p>创建固定数量的线程作为线程池，不断的从 <code>RunnableTaskQueue</code> 中取得 <code>Runnable</code> 并调用其 <code>run</code>方法</p>
+<h2 id="Executor-线程池框架"><a href="#Executor-线程池框架" class="headerlink" title="Executor 线程池框架"></a>Executor 线程池框架</h2> 
       <!-- reward -->
       
       <div id="reword-out">
@@ -202,7 +181,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://ziyedy.top/page/Java12-synchronized.html" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://ziyedy.top/page/Java12-thread-pool.html" alt="微信分享二维码">
     </div>
 </div>
 
@@ -215,19 +194,19 @@
    
   <nav class="article-nav">
     
-      <a href="/page/null.html" class="article-nav-link">
+      <a href="/page/java12-ThreadLocal.html" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            Ubuntu下bug解决
+            Java12-3：线程隔离ThreadLocal
           
         </div>
       </a>
     
     
-      <a href="/page/Java12-multithread-concurrency.html" class="article-nav-link">
+      <a href="/page/jvm-garbage-collection.html" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">Java12：多线程与并发编程</div>
+        <div class="article-nav-title">JVM垃圾回收</div>
       </a>
     
   </nav>

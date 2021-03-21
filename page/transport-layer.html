@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">3.5k</span>
+            <span class="post-count">3.8k</span>
         </span>
     </span>
 
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">12 min</span>
+            <span class="post-count">13 min</span>
         </span>
     </span>
 </div>
@@ -102,15 +102,15 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="传输层概述"><a href="#传输层概述" class="headerlink" title="传输层概述"></a>传输层概述</h2><h3 id="传输层概述-1"><a href="#传输层概述-1" class="headerlink" title="传输层概述"></a>传输层概述</h3><blockquote>
+  <h1 id="传输层概述"><a href="#传输层概述" class="headerlink" title="传输层概述"></a>传输层概述</h1><h2 id="传输层概述-1"><a href="#传输层概述-1" class="headerlink" title="传输层概述"></a>传输层概述</h2><blockquote>
 <p>传输层协议为运行在不同主机上的<strong>应用进程</strong>之间提供<strong>逻辑通信</strong>功能</p>
 <p>传输层协议是在<strong>端系统</strong>中而不是在网络路由器中实现的</p>
 </blockquote>
-<h3 id="传输层与网络层关系"><a href="#传输层与网络层关系" class="headerlink" title="传输层与网络层关系"></a>传输层与网络层关系</h3><blockquote>
+<h2 id="传输层与网络层关系"><a href="#传输层与网络层关系" class="headerlink" title="传输层与网络层关系"></a>传输层与网络层关系</h2><blockquote>
 <p>传输层为运行在不同主机上的<strong>进程间</strong>的逻辑通信，而网络层则提供了<strong>主机之间</strong>的逻辑通信</p>
 <p>传输层协议所能提供的服务也受到了<em>底层网络层协议的服务模型的限制</em>，</p>
 </blockquote>
-<h3 id="因特网传输概述"><a href="#因特网传输概述" class="headerlink" title="因特网传输概述"></a>因特网传输概述</h3><p>传输层主要有TCP（传输控制协议）与UDP（用户数据报协议）两种协议，特点及区别如下：</p>
+<h2 id="因特网传输概述"><a href="#因特网传输概述" class="headerlink" title="因特网传输概述"></a>因特网传输概述</h2><p>传输层主要有TCP（传输控制协议）与UDP（用户数据报协议）两种协议，特点及区别如下：</p>
 <p><img src="http://cdn.ziyedy.top/%E7%AC%AC%E4%B8%89%E7%AB%A0%EF%BC%9A%E4%BC%A0%E8%BE%93%E5%B1%82/TCP%2CUDP.png" alt=""></p>
 <h2 id="多路复用与多路分解"><a href="#多路复用与多路分解" class="headerlink" title="多路复用与多路分解"></a>多路复用与多路分解</h2><blockquote>
 <p>多路复用与多路分解：本质上是将网络层所提供的<em>主机到主机</em>交付服务，<strong>扩展</strong>到为在主机上运行的应用程序所提供的<em>进程到进程</em>交付服务</p>
@@ -127,35 +127,35 @@
 <h3 id="多路分解"><a href="#多路分解" class="headerlink" title="多路分解"></a>多路分解</h3><blockquote>
 <p>将传输层报文段中的数据放置到正确的套接字的工作称为多路分解，确切地说，多路分解其实是多路分发，或者说是数据流的分解。</p>
 </blockquote>
-<h2 id="无连接传输：UDP"><a href="#无连接传输：UDP" class="headerlink" title="无连接传输：UDP"></a>无连接传输：UDP</h2><blockquote>
+<h1 id="无连接传输：UDP"><a href="#无连接传输：UDP" class="headerlink" title="无连接传输：UDP"></a>无连接传输：UDP</h1><blockquote>
 <p>UDP 只是做了传输层协议能够做的最少工作。除了多路复用/多路分解功能及少量的差错检测外，它几乎没有对 IP 增加别的东西</p>
 <p>UDP发送报文前，发送方与接收方之间并未进行握手，因此UDP是<strong>无连接的</strong></p>
 <p>DNS即是一个使用UDP的例子</p>
 </blockquote>
-<h4 id="UDP的优点"><a href="#UDP的优点" class="headerlink" title="UDP的优点"></a>UDP的优点</h4><ul>
+<h2 id="UDP的优点"><a href="#UDP的优点" class="headerlink" title="UDP的优点"></a>UDP的优点</h2><ul>
 <li>应用层能更好地设置要发送的数据和发送时间（有较快发送速率，且能容忍一些丢包）</li>
 <li>无需建立连接（不会引入建立连接的时延）</li>
 <li>无连接状态（UDP无连接状态，也无需追踪一些相关参数）</li>
 <li>分组首部开销小（TCP有20字节的首部开销，而UDP仅有8个字节）</li>
 </ul>
-<h4 id="UDP报文结构"><a href="#UDP报文结构" class="headerlink" title="UDP报文结构"></a>UDP报文结构</h4><p><img src="http://cdn.ziyedy.top/%E7%AC%AC%E4%B8%89%E7%AB%A0%EF%BC%9A%E4%BC%A0%E8%BE%93%E5%B1%82/UDP%E6%8A%A5%E6%96%87%E6%AE%B5.png" alt=""></p>
+<h2 id="UDP报文结构"><a href="#UDP报文结构" class="headerlink" title="UDP报文结构"></a>UDP报文结构</h2><p><img src="http://cdn.ziyedy.top/%E7%AC%AC%E4%B8%89%E7%AB%A0%EF%BC%9A%E4%BC%A0%E8%BE%93%E5%B1%82/UDP%E6%8A%A5%E6%96%87%E6%AE%B5.png" alt=""></p>
 <p>由4个字段组成，每个字段包含2个字节</p>
 <p>源端口号、目的端口号</p>
 <p>长度：包含首部在内的UDP报文段长度，以字节为单位</p>
 <p>校验和：计算报文段在传输的过程中是否出现了差错</p>
-<h4 id="校验和"><a href="#校验和" class="headerlink" title="校验和"></a>校验和</h4><blockquote>
+<h3 id="校验和"><a href="#校验和" class="headerlink" title="校验和"></a>校验和</h3><blockquote>
 <p>校验和提供了差错检测功能，即当 UDP 报文段从源到达目的时，校验和用于确定其中的比特是否发生了改变</p>
 </blockquote>
-<h2 id="可靠数据传输原理（建模）"><a href="#可靠数据传输原理（建模）" class="headerlink" title="可靠数据传输原理（建模）"></a>可靠数据传输原理（建模）</h2><blockquote>
+<h1 id="可靠数据传输原理（建模）"><a href="#可靠数据传输原理（建模）" class="headerlink" title="可靠数据传输原理（建模）"></a>可靠数据传输原理（建模）</h1><blockquote>
 <p>考虑单向实现可靠传输的建模，得到TCP实现的基本思路</p>
 </blockquote>
-<h3 id="完全可靠信道上"><a href="#完全可靠信道上" class="headerlink" title="完全可靠信道上"></a>完全可靠信道上</h3><blockquote>
+<h2 id="完全可靠信道上"><a href="#完全可靠信道上" class="headerlink" title="完全可靠信道上"></a>完全可靠信道上</h2><blockquote>
 <p>底层信道完全可靠</p>
 <p>no bit errors;    no loss of packets</p>
 </blockquote>
 <figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-comment">// 发送方</span><br>packet = make<span class="hljs-constructor">_pkt(<span class="hljs-params">data</span>)</span>	<span class="hljs-comment">// 生成数据分组</span><br>packet = make<span class="hljs-constructor">_pkt(<span class="hljs-params">data</span>)</span>	<span class="hljs-comment">// 发送分组</span><br><br><span class="hljs-comment">// 接收方</span><br>extract (packet,data)	<span class="hljs-comment">// 从分组中提取</span><br>deliver<span class="hljs-constructor">_data(<span class="hljs-params">data</span>)</span>		<span class="hljs-comment">// 交付数据给应用层</span><br></code></pre></td></tr></table></figure>
 
-<h3 id="具有比特差错信道上"><a href="#具有比特差错信道上" class="headerlink" title="具有比特差错信道上"></a>具有比特差错信道上</h3><h4 id="ACK、NAK不受损"><a href="#ACK、NAK不受损" class="headerlink" title="ACK、NAK不受损"></a>ACK、NAK不受损</h4><blockquote>
+<h2 id="具有比特差错信道上"><a href="#具有比特差错信道上" class="headerlink" title="具有比特差错信道上"></a>具有比特差错信道上</h2><h3 id="ACK、NAK不受损"><a href="#ACK、NAK不受损" class="headerlink" title="ACK、NAK不受损"></a>ACK、NAK不受损</h3><blockquote>
 <p>在传输过程中会产生比特差错</p>
 <p>需要引入：<strong>自动重传请求协议</strong>（ARQ），即</p>
 <ul>
@@ -164,15 +164,15 @@
 <li>重传：接收方收到有差错的分组时，发送方进行重传</li>
 </ul>
 </blockquote>
-<h4 id="ACK、NAK受损"><a href="#ACK、NAK受损" class="headerlink" title="ACK、NAK受损"></a>ACK、NAK受损</h4><blockquote>
+<h3 id="ACK、NAK受损"><a href="#ACK、NAK受损" class="headerlink" title="ACK、NAK受损"></a>ACK、NAK受损</h3><blockquote>
 <p>确认信息在传输中本身出现错误</p>
 <p>解决方法：发送方为数据报添加<strong>序号字段</strong>，而接收方抛弃重复的数据报</p>
 </blockquote>
-<h3 id="具有比特差错的丢包信道上"><a href="#具有比特差错的丢包信道上" class="headerlink" title="具有比特差错的丢包信道上"></a>具有比特差错的丢包信道上</h3><blockquote>
+<h2 id="具有比特差错的丢包信道上"><a href="#具有比特差错的丢包信道上" class="headerlink" title="具有比特差错的丢包信道上"></a>具有比特差错的丢包信道上</h2><blockquote>
 <p>除去比特受损外，还有可能丢包</p>
 <p>解决方法：发送方等待ACK到来足够的时间（采用<strong>定时器</strong>实现），然后进行<strong>重传</strong></p>
 </blockquote>
-<h3 id="流水线可靠数据传输协议"><a href="#流水线可靠数据传输协议" class="headerlink" title="流水线可靠数据传输协议"></a>流水线可靠数据传输协议</h3><blockquote>
+<h2 id="流水线可靠数据传输协议"><a href="#流水线可靠数据传输协议" class="headerlink" title="流水线可靠数据传输协议"></a>流水线可靠数据传输协议</h2><blockquote>
 <p>为提高发送效率（解决上述“停等协议”的问题）：以“不停等”方式运行，<em>允许发送方发送多个分组而无需等待确认</em>，该技术称为流水线。流水线提出了新的需求：</p>
 </blockquote>
 <ul>
@@ -180,17 +180,17 @@
 <li>协议的发送方和接收方必须缓存多个分组。</li>
 <li>所需序号范围和对缓冲的要求取决于数据传输协议处理丢失、损坏及过度延时分组：<strong>回退N步与选择重传</strong></li>
 </ul>
-<h4 id="回退N步（GBN）"><a href="#回退N步（GBN）" class="headerlink" title="回退N步（GBN）"></a>回退N步（GBN）</h4><blockquote>
+<h3 id="回退N步（GBN）"><a href="#回退N步（GBN）" class="headerlink" title="回退N步（GBN）"></a>回退N步（GBN）</h3><blockquote>
 <p>在 GBN 协议中，允许发送方发送多个分组而不需等待确认，但<em>在流水线中未确认的分组数不能超过某个最大允许数N</em></p>
 <p>已被发送但还未被确认的分组的许可序号范围可以被看成是一个<strong>在序号范围内长度为N的窗口</strong>，因此N常被称为窗口长度，GBN也被称为滑动窗口协议</p>
 <p><em>当有超时事件发生，出现丢失和过度时延分组时，发送方将重传所有已发送但还未被确认的分组</em></p>
 <p>GBN使用了<strong>累积确认</strong>技术，累积确认指接收一个未出错分组（可能失序）时总是返回一个最后接收的按顺序到达分组的确认。</p>
 </blockquote>
-<h4 id="选择重传"><a href="#选择重传" class="headerlink" title="选择重传"></a>选择重传</h4><blockquote>
+<h3 id="选择重传"><a href="#选择重传" class="headerlink" title="选择重传"></a>选择重传</h3><blockquote>
 <p>选择重传 (SR) 协议通过让发送方仅重传那些它怀疑在接收方出错的分组而避免了不必要的重传。</p>
 <p>这种个别的、按需的重传要求接收方逐个地确认正确接收的分组，也用窗口长度N来限制流水线中未完成、未被确认的分组数。</p>
 </blockquote>
-<h2 id="面向连接的传输：TCP"><a href="#面向连接的传输：TCP" class="headerlink" title="面向连接的传输：TCP"></a>面向连接的传输：TCP</h2><blockquote>
+<h1 id="面向连接的传输：TCP"><a href="#面向连接的传输：TCP" class="headerlink" title="面向连接的传输：TCP"></a>面向连接的传输：TCP</h1><blockquote>
 <p>TCP是<strong>面向连接</strong>的传输层协议，<em>连接的实质是双方都初始化与连接相关的发送/接收缓冲区，以及许多 TCP 状态变量</em></p>
 </blockquote>
 <ul>
@@ -199,7 +199,7 @@
 </ul>
 <p>TCP连接每一端都有各自的发送缓冲和接收缓存，TCP 可从缓存中取出并放入报文段中发送的数据量受限于<strong>最大报文段长MSS（Maximum Segment Size）</strong>，通常由<strong>最大链路层帧长度（即最大传输单元MTU）</strong>来决定（也就是底层的通信链路决定）</p>
 <p>除去进行通信的两台主机之中维护TCP连接所需的内容，这两台主机之间的路由器交换机并未为该连接分配任何缓存和控制变量</p>
-<h3 id="TCP报文格式"><a href="#TCP报文格式" class="headerlink" title="TCP报文格式"></a>TCP报文格式</h3><p><img src="http://cdn.ziyedy.top/%E7%AC%AC%E4%B8%89%E7%AB%A0%EF%BC%9A%E4%BC%A0%E8%BE%93%E5%B1%82/TCP%E6%8A%A5%E6%96%87%E6%AE%B5.png" alt=""></p>
+<h2 id="TCP报文格式"><a href="#TCP报文格式" class="headerlink" title="TCP报文格式"></a>TCP报文格式</h2><p><img src="http://cdn.ziyedy.top/%E7%AC%AC%E4%B8%89%E7%AB%A0%EF%BC%9A%E4%BC%A0%E8%BE%93%E5%B1%82/TCP%E6%8A%A5%E6%96%87%E6%AE%B5.png" alt=""></p>
 <ul>
 <li>源端口号与目的端口号：用于多路复用/多路分解来自或送至上层应用的数据</li>
 <li>32 比特的序号字段和 32 比特的确认号字段：用来实现可靠数据传输服务</li>
@@ -220,58 +220,69 @@
 <p>​    SYN=1，ACK=1时，表示对方同意建立连接</p>
 <p>FIN：告知对方关闭连接</p>
 </blockquote>
-<h3 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h3><p><img src="http://cdn.ziyedy.top/%E7%AC%AC%E4%B8%89%E7%AB%A0%EF%BC%9A%E4%BC%A0%E8%BE%93%E5%B1%82/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png" alt=""></p>
-<h4 id="第一次握手"><a href="#第一次握手" class="headerlink" title="第一次握手"></a>第一次握手</h4><p>发送方创建一个特殊的TCP报文段（<strong>SYN报文段</strong>）：</p>
+<h2 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h2><p><img src="http://cdn.ziyedy.top/%E7%AC%AC%E4%B8%89%E7%AB%A0%EF%BC%9A%E4%BC%A0%E8%BE%93%E5%B1%82/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png" alt=""></p>
+<h3 id="第一次握手"><a href="#第一次握手" class="headerlink" title="第一次握手"></a>第一次握手</h3><p>发送方创建一个特殊的TCP报文段（<strong>SYN报文段</strong>）：</p>
 <ol>
 <li>不包含任何应用层数据；</li>
 <li>将SYN标志位置为1；</li>
 <li>随机生成一个初始序号（client_isn），并将该序号置于该报文的序号字段（seq）处</li>
 </ol>
-<h4 id="第二次握手"><a href="#第二次握手" class="headerlink" title="第二次握手"></a>第二次握手</h4><p>收到SYN报文段后，接收方会返回允许连接的报文段（SYNACK报文段）：</p>
+<h3 id="第二次握手"><a href="#第二次握手" class="headerlink" title="第二次握手"></a>第二次握手</h3><p>收到SYN报文段后，接收方会返回允许连接的报文段（SYNACK报文段）：</p>
 <ol>
 <li>SYN标志位置为1，ACK标志位置为1；</li>
 <li>确认号字段（ack）置为client_isn+1；</li>
 <li>接收端生成一个自己的初始序号（server_isn），并将该序号置于自己报文的序号字段（seq）处</li>
 </ol>
-<h4 id="第三次握手"><a href="#第三次握手" class="headerlink" title="第三次握手"></a>第三次握手</h4><ol>
+<h3 id="第三次握手"><a href="#第三次握手" class="headerlink" title="第三次握手"></a>第三次握手</h3><ol>
 <li>SYN被置为0，ACK置为1</li>
 <li>确认号字段置为server_isn+1</li>
 <li>seq字段设置为client_isn+1</li>
 </ol>
-<h3 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h3><p><img src="http://cdn.ziyedy.top/%E7%AC%AC%E4%B8%89%E7%AB%A0%EF%BC%9A%E4%BC%A0%E8%BE%93%E5%B1%82/%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B.png" alt=""></p>
+<h2 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h2><p><img src="http://cdn.ziyedy.top/%E7%AC%AC%E4%B8%89%E7%AB%A0%EF%BC%9A%E4%BC%A0%E8%BE%93%E5%B1%82/%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B.png" alt=""></p>
 <ol>
-<li>主机A发送一个标识了<strong>FIN=1</strong>的数据段，序列号<strong>seq=a</strong>的报文用来释放连接</li>
-<li>主机B回应一个标识了<strong>ACK=1</strong>的数据段，序列号<strong>seq=b</strong>，确认序号<strong>ack=a+1</strong>，作为对主机A的FIN报文的确认</li>
-<li>主机A收到主机B的确认后进入<strong>等待状态</strong>，等待主机B请求释放连接。主机B向主机A发送一个标识了<strong>FIN=1，ACK=1</strong>的数据段，序列号为<strong>seq=b</strong>，确认序列号为<strong>ack=a+1</strong>，用以释放连接</li>
+<li>主机A发送一个用来释放连接的报文（标识了<strong>FIN=1</strong>，序列号<strong>seq=a</strong>，ack=z，），并处于<strong>FIN-WAIT-1状态</strong>，此处A不再有数据发送，但仍然可以接收数据</li>
+<li>主机B回应一个标识了<strong>ACK=1</strong>的数据段，序列号<strong>seq=b</strong>，确认序号<strong>ack=a+1</strong>，作为对主机A的FIN报文的确认，并且进入<strong>CLOSE-WAIT状态</strong>。A收到确认后，进入<strong>FIN-WAIT-2**</strong>状态**，等待B的连接释放报文段</li>
+<li>主机B向主机A发送一个标识了<strong>FIN=1，ACK=1</strong>的数据段，序列号为<strong>seq=b</strong>，确认序列号为<strong>ack=a+1</strong>，用以释放连接</li>
 <li>主机A发送标识了<strong>ACK=1</strong>，序列号<strong>seq=a+1</strong>，确认序号<strong>ack=b+1</strong>，用以确认关闭</li>
 </ol>
-<p>为什么要进行四次挥手：因为关闭连接时，接收端收到FIN报文时，很可能不会立刻关闭连接，因此需要多一次挥手</p>
-<h3 id="TCP可靠数据传输"><a href="#TCP可靠数据传输" class="headerlink" title="TCP可靠数据传输"></a>TCP可靠数据传输</h3><p>主要有超时重传和快速重传：</p>
+<p><strong>客户端或服务器均可主动发起挥手动作</strong></p>
+<h3 id="为什么要进行四次挥手"><a href="#为什么要进行四次挥手" class="headerlink" title="为什么要进行四次挥手"></a>为什么要进行四次挥手</h3><p>因为TCP是全双工模式，一方发送FIN报文只是代表单方面没有信息需要发送了，但另一方可以继续发送报文，<strong>只有双方都发送了FIN报文整个通信过程才能结束</strong></p>
+<h3 id="TCP释放连接为何发送方time-wait状态必须等待2MSL的时间"><a href="#TCP释放连接为何发送方time-wait状态必须等待2MSL的时间" class="headerlink" title="TCP释放连接为何发送方time_wait状态必须等待2MSL的时间"></a>TCP释放连接为何发送方time_wait状态必须等待2MSL的时间</h3><blockquote>
+<p>MSL（Maximum Segment Lifetime）：报文段最大生存时间，任何报文在网络上存在时间超过该时间就会被丢弃</p>
+</blockquote>
+<ul>
+<li><p>为了保证A发送的最后一个ACK报文能够到达B。</p>
+<p>由于该ACK报文段有可能丢失，因而使处在LAST-ACK状态的B收不到对已发送的FIN+ACK报文段的确认，因此会引起超时重传。而若A不等待而是直接释放连接，就无法收到B重传的FIN报文段，就不会再发送一次确认报文段，<strong>最终会导致B无法按照正常的步骤进入CLOSED状态</strong></p>
+</li>
+<li><p>经过2MSL时间，可以使本次连接所产生的所有报文段都从网络中消失。这样就可以使下一个新的连接中不会出现旧的连接请求的报文段（<strong>彻底完成这次报文的发送与接收</strong>）</p>
+</li>
+</ul>
+<h2 id="TCP可靠数据传输"><a href="#TCP可靠数据传输" class="headerlink" title="TCP可靠数据传输"></a>TCP可靠数据传输</h2><p>主要有超时重传和快速重传：</p>
 <ul>
 <li>超时重传：超时后进行重传，需要设置超时事件（通常4个往返时间RTT）</li>
 <li>快速重传：如果发送者收到了重复的3个ACK报文段（接收方如果发现有丢失（即收到了间隔后的报文段）会重复发送ACK报文段，），说明该报文段所指下一个段丢失，会在超时触发前快速重传该报文段。可以避免超时引起的大时延</li>
 </ul>
-<h3 id="TCP流量控制——滑动窗口"><a href="#TCP流量控制——滑动窗口" class="headerlink" title="TCP流量控制——滑动窗口"></a>TCP流量控制——滑动窗口</h3><blockquote>
+<h2 id="TCP流量控制——滑动窗口"><a href="#TCP流量控制——滑动窗口" class="headerlink" title="TCP流量控制——滑动窗口"></a>TCP流量控制——滑动窗口</h2><blockquote>
 <p>流量控制只要在于消除发送方导致接收方缓存溢出的可能性，流量控制是一个<strong>速度匹配</strong>服务，即发送方的发送速率与接收方应用程序的读速率相匹配</p>
 </blockquote>
 <p>TCP通过维护<strong>接收窗口</strong>来提供流量控制，接收窗口用于告诉发送方，该接收方还有多少可用的缓存空间</p>
-<h2 id="拥塞控制原理"><a href="#拥塞控制原理" class="headerlink" title="拥塞控制原理"></a>拥塞控制原理</h2><h3 id="产生拥塞的情况"><a href="#产生拥塞的情况" class="headerlink" title="产生拥塞的情况"></a>产生拥塞的情况</h3><h4 id="情况1"><a href="#情况1" class="headerlink" title="情况1"></a>情况1</h4><blockquote>
+<h1 id="拥塞控制原理"><a href="#拥塞控制原理" class="headerlink" title="拥塞控制原理"></a>拥塞控制原理</h1><h2 id="产生拥塞的情况"><a href="#产生拥塞的情况" class="headerlink" title="产生拥塞的情况"></a>产生拥塞的情况</h2><h3 id="情况1"><a href="#情况1" class="headerlink" title="情况1"></a>情况1</h3><blockquote>
 <p>两个发送方和一个具有无穷大缓存的路由器</p>
 </blockquote>
 <p>当分组到达速率接近<em>链路容量</em>时，分组将经历较长的排队时延</p>
-<h4 id="情况2"><a href="#情况2" class="headerlink" title="情况2"></a>情况2</h4><blockquote>
+<h3 id="情况2"><a href="#情况2" class="headerlink" title="情况2"></a>情况2</h3><blockquote>
 <p>两个发送方和一个具有有限缓存的路由器</p>
 </blockquote>
 <p>发送方在遇到大时延时所进行的不必要重传，导致路由器需要利用其链路带宽来转发不必要的分组</p>
-<h4 id="情况3"><a href="#情况3" class="headerlink" title="情况3"></a>情况3</h4><blockquote>
+<h3 id="情况3"><a href="#情况3" class="headerlink" title="情况3"></a>情况3</h3><blockquote>
 <p>四个发送方、具有有限缓存的多台路由器和多跳路径</p>
 </blockquote>
 <p>当一个分组沿一条路径被丢弃时每个上游路由器用于转发该分组而使用的传输容量最终被浪费掉了</p>
-<h3 id="拥塞控制方法"><a href="#拥塞控制方法" class="headerlink" title="拥塞控制方法"></a>拥塞控制方法</h3><h4 id="端到端控制"><a href="#端到端控制" class="headerlink" title="端到端控制"></a>端到端控制</h4><blockquote>
+<h2 id="拥塞控制方法"><a href="#拥塞控制方法" class="headerlink" title="拥塞控制方法"></a>拥塞控制方法</h2><h3 id="端到端控制"><a href="#端到端控制" class="headerlink" title="端到端控制"></a>端到端控制</h3><blockquote>
 <p>网络层没有为传输层拥塞控制提供显式支持，因此端系统必须对网络行为观察（分组丢失、时延等），来<strong>推断</strong>拥塞的发生</p>
 </blockquote>
 <p>TCP中将报文段的丢失（通过超时或3次冗余确认得知），认为是网络拥塞的一个迹象，之后TCP会相应减小其发送的窗口</p>
-<h4 id="网络辅助的拥塞控制"><a href="#网络辅助的拥塞控制" class="headerlink" title="网络辅助的拥塞控制"></a>网络辅助的拥塞控制</h4><blockquote>
+<h3 id="网络辅助的拥塞控制"><a href="#网络辅助的拥塞控制" class="headerlink" title="网络辅助的拥塞控制"></a>网络辅助的拥塞控制</h3><blockquote>
 <p>网络层对是否产生拥塞显式反馈给端系统</p>
 </blockquote>
 <h2 id="TCP拥塞控制"><a href="#TCP拥塞控制" class="headerlink" title="TCP拥塞控制"></a>TCP拥塞控制</h2><blockquote>

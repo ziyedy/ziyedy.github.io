@@ -190,54 +190,67 @@
       </tags>
   </entry>
   <entry>
-    <title>Java12-3：Lock</title>
-    <url>/page/Java12-.html</url>
-    <content><![CDATA[<p>#</p>
-<p><code>java.util.concurrent.locks</code> 包下的 Lock 接口和它的实现 ReentrantLock</p>
-<p>ReentrantLock 也是互斥锁，有如下三种互斥情况：读/写、写/写、读/读。</p>
-<p>显式锁：</p>
-<p>在代码中需要主动的去进行 lock 操作</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java">Lock lock = <span class="hljs-keyword">new</span> ReentrantLock();<br>lock.lock();	<span class="hljs-comment">// 加锁</span><br><span class="hljs-keyword">try</span> &#123;<br>	<span class="hljs-comment">// code</span><br>&#125; <span class="hljs-keyword">finally</span> &#123;<br>	lock.unlock();	<span class="hljs-comment">// 解锁</span><br>&#125;<br></code></pre></td></tr></table></figure>
+    <title>常用设计模式</title>
+    <url>/page/design-pattern.html</url>
+    <content><![CDATA[<h1 id="行为模式"><a href="#行为模式" class="headerlink" title="行为模式"></a>行为模式</h1><h2 id="模板模式"><a href="#模板模式" class="headerlink" title="模板模式"></a>模板模式</h2><blockquote>
+<p>核心思想：在抽象类中定义抽象方法的执行顺序，并将抽象方法设定为只有子类实现</p>
+</blockquote>
+<p>模版模式定义了统⼀的执行结构（或者说特定方法的执行顺序与逻辑），使得后续实现者不需要关心调用逻辑，只需要关注具体的业务逻辑实现即可。这样有利于开发的拓展与迭代</p>
+<h3 id="应用举例"><a href="#应用举例" class="headerlink" title="应用举例"></a>应用举例</h3><p>Java中大名鼎鼎的 <code>AQS</code> （<code>AbstractQueueSynchronizer</code>）就使用了模板模式的思想进行实现</p>
+<h3 id="思路实现"><a href="#思路实现" class="headerlink" title="思路实现"></a>思路实现</h3><p>1、定义了抽象方法执行顺序逻辑的核心抽象类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Template</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">mainMethod</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-comment">// 定义抽象方法执行逻辑</span><br>        method1();<br>        method2();<br>        method3();<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">method1</span><span class="hljs-params">()</span></span>;<br>    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">method2</span><span class="hljs-params">()</span></span>;<br>    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">method3</span><span class="hljs-params">()</span></span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>相对于<code>synchronized</code>，<code>ReentrantLock</code> 更为灵活，它能够支持公平和非公平锁两种形式。只需要在声明的时候传入 true。</p>
-<p>默认的无参构造方法则会创建非公平锁</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java">Lock lock = <span class="hljs-keyword">new</span> ReentrantLock(<span class="hljs-keyword">true</span>);	<span class="hljs-comment">// 创建公平锁</span><br></code></pre></td></tr></table></figure>
+<p>2、定义抽象方法的具体实现</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Demo1</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Template</span></span>&#123;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">method1</span><span class="hljs-params">()</span> </span>&#123;<br>        System.out.println(<span class="hljs-string">"demo1 method1"</span>);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">method2</span><span class="hljs-params">()</span> </span>&#123;<br>        System.out.println(<span class="hljs-string">"demo1 method2"</span>);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">method3</span><span class="hljs-params">()</span> </span>&#123;<br>        System.out.println(<span class="hljs-string">"demo1 method3"</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
+<p>3、可以使用<code>Demo1</code>类中的实现完成逻辑</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    Template template = <span class="hljs-keyword">new</span> Demo1();<br>    template.mainMethod();<br>&#125;<br><br><span class="hljs-comment">// demo1 method1</span><br><span class="hljs-comment">// demo1 method2</span><br><span class="hljs-comment">// demo1 method3</span><br></code></pre></td></tr></table></figure>
 
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+        <category>设计模式</category>
+      </categories>
+      <tags>
+        <tag>设计模式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java08-1：List相关实现类源码解析</title>
+    <url>/page/Java08-List-source-code.html</url>
+    <content><![CDATA[<h1 id="ArrayList-源码解析"><a href="#ArrayList-源码解析" class="headerlink" title="ArrayList 源码解析"></a>ArrayList 源码解析</h1><h2 id="底层容器"><a href="#底层容器" class="headerlink" title="底层容器"></a>底层容器</h2><p><code>ArrayList</code>底层就是一个长度可以动态增长的Object数组，如下<code>elementData</code>。</p>
+<p>其中实现的接口中<code>RandomAccess</code>、<code>Cloneable</code>中都没有实现方法，更多的作为一种标识进行判断</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ArrayList</span>&lt;<span class="hljs-title">E</span>&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title">AbstractList</span>&lt;<span class="hljs-title">E</span>&gt;<br>        <span class="hljs-keyword">implements</span> <span class="hljs-title">List</span>&lt;<span class="hljs-title">E</span>&gt;, <span class="hljs-title">RandomAccess</span>, <span class="hljs-title">Cloneable</span>, <span class="hljs-title">java</span>.<span class="hljs-title">io</span>.<span class="hljs-title">Serializable</span><br></span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">long</span> serialVersionUID = <span class="hljs-number">8683452581122892189L</span>;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> DEFAULT_CAPACITY = <span class="hljs-number">10</span>;	<span class="hljs-comment">// 默认初始容量</span><br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Object[] EMPTY_ELEMENTDATA = &#123;&#125;;	<span class="hljs-comment">// 空数组（用于空实例）</span><br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = &#123;&#125;;	<span class="hljs-comment">// 默认空数组</span><br><br>    <span class="hljs-keyword">transient</span> Object[] elementData; <span class="hljs-comment">// 保存ArrayList数据的数组</span><br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> size;	<span class="hljs-comment">// ArrayList 所包含的元素个数</span><br>&#125;<br></code></pre></td></tr></table></figure>
 
-<h3 id="加锁操作"><a href="#加锁操作" class="headerlink" title="加锁操作"></a>加锁操作</h3><p>1、使用<code>lock.lock()</code>，此时加锁操作是阻塞的，直到获取锁才会继续向下进行</p>
-<p>2、使用<code>tryLock</code>，调用后会立即（也可以通过传入时间和单位，来控制等待获取锁的时长）返回获取锁的情况，获取为 true，未能获取为 false，因此能够根据结果进行进一步的处理</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span>(lock.tryLock(<span class="hljs-number">1</span>, TimeUnit.SECONDS))&#123;<br>    <span class="hljs-keyword">try</span> &#123;<br>        doSomething();<br>    &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;<br>        e.printStackTrace();<br>    &#125; <span class="hljs-keyword">finally</span> &#123;<br>        lock.unlock();<br>    &#125;<br>&#125;<span class="hljs-keyword">else</span>&#123;<br>    doSomethingElse();<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>JDK1.7前，使用无参数构造方法创建<code>ArrayList</code>对象时，默认底层数组长度是10。类似于单例的饿汉式</p>
+<p>JDK1.8后，使用无参数构造方法创建<code>ArrayList</code>对象时，默认底层数组长度是0，如下即指向了<code>DEFAULTCAPACITY_EMPTY_ELEMENTDATA</code>。而当对数组进行添加元素操作后，才将数组扩容（第一次添加扩容为10），类似于单例的懒汉式</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 初始化时没有传入数据，默认将elementData构造为一个空数组</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ArrayList</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">this</span>.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-
-
-<h2 id="lock-方法源码分析"><a href="#lock-方法源码分析" class="headerlink" title="lock 方法源码分析"></a>lock 方法源码分析</h2><figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 无参构造函数</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ReentrantLock</span><span class="hljs-params">()</span> </span>&#123;<br>    sync = <span class="hljs-keyword">new</span> NonfairSync();<br>&#125;<br><br><span class="hljs-comment">// 有参构造函数</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ReentrantLock</span><span class="hljs-params">(<span class="hljs-keyword">boolean</span> fair)</span> </span>&#123;<br>    sync = fair ? <span class="hljs-keyword">new</span> FairSync() : <span class="hljs-keyword">new</span> NonfairSync();<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>FairSync 和 NonFairSync 都继承自 Sync</p>
-<p>其中<code>AbstractQueuedSynchronizer</code>就是所谓AQS</p>
-<p>AQS 依赖先进先出队列实现了阻塞锁和相关的同步器（信号量、事件等）</p>
-<p>AQS 内部有一个 volatile 类型的 state 属性，实际上多线程对锁的竞争体现在对 state 值写入的竞争。一旦 state 从 0 变为 1，代表有线程已经竞争到锁，那么其它线程则进入等待队列。等待队列是一个链表结构的 FIFO 队列，这能够确保公平锁的实现。同一线程多次获取锁时，如果之前该线程已经持有锁，那么对 state 再次加 1。释放锁时，则会对 state-1。直到减为 0，才意味着此线程真正释放了锁。</p>
-<p>FairSync 实现的 lock 代码很简单</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">final</span> <span class="hljs-keyword">void</span> <span class="hljs-title">lock</span><span class="hljs-params">()</span> </span>&#123;<br>    acquire(<span class="hljs-number">1</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="ReadWriteLock-简介"><a href="#ReadWriteLock-简介" class="headerlink" title="ReadWriteLock 简介"></a>ReadWriteLock 简介</h2><p>ReadWriteLock 为我们提供了读写之间不同互斥策略的锁。因此，当程序有频繁的读操作时，他能够带来更好的性能</p>
-<p>由于读写控制的策略不一样，带来了锁内部的复杂度。所以如果你程序的读操作并没有达到一定数量，反而使用读写锁会比互斥锁性能更差</p>
-<p>ReadWriteLock 顾名思义读写锁，也就是说同一个锁对读和写的上锁方式是不一样的写锁的互斥性更高。</p>
-<p>锁降级：如果线程持有写锁，如果可以在不释放写锁的情况下，获取读锁，这就是锁降级。ReadWriteLock 是支持锁降级的</p>
-<p>锁升级：如果线程持有读锁，那么他是否可以不释放读锁，直接获取写锁。这意味着从一个低级别的锁升级到高级别的锁。其实就是变相的插队，无视其它在排队等待写锁的线程。ReadWriteLock 并不支持锁升级。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java">ReadWriteLock lock = <span class="hljs-keyword">new</span> ReentrantReadWriteLock();<br>Lock readLock = lock.readLock();<br>Lock writeLock = lock.writeLock();<br><br>writeLock.lock();<br>System.out.println(<span class="hljs-string">"got the write lock"</span>);	<span class="hljs-comment">// 成功输出</span><br>readLock.lock();<br>System.out.println(<span class="hljs-string">"got the read lock"</span>);	<span class="hljs-comment">// 成功输出</span><br></code></pre></td></tr></table></figure>
+<p>ArrayList中提供了一个内部类Itr，实现了<code>Iterator</code>接口，实现对集合元素的遍历</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> Iterator&lt;E&gt; <span class="hljs-title">iterator</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Itr();<br>&#125;<br><span class="hljs-keyword">private</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Itr</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Iterator</span>&lt;<span class="hljs-title">E</span>&gt; </span>&#123; &#125;<br></code></pre></td></tr></table></figure>
 
 
 
-<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java">ReadWriteLock lock = <span class="hljs-keyword">new</span> ReentrantReadWriteLock();<br>Lock readLock = lock.readLock();<br>Lock writeLock = lock.writeLock();<br><br>readLock.lock();<br>System.out.println(<span class="hljs-string">"got the read lock"</span>);	<span class="hljs-comment">// 成功输出</span><br>writeLock.lock();<br>System.out.println(<span class="hljs-string">"got the write lock"</span>);	<span class="hljs-comment">// 未输出</span><br></code></pre></td></tr></table></figure>
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><p>主要有三种初始化办法：无参初始化、指定初始化数组大小初始化、指定初始数据初始化</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = &#123;&#125;;<br><br><span class="hljs-comment">// 无参数初始化，数组大小为空</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ArrayList</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">this</span>.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;<br>&#125;<br><br><span class="hljs-comment">// 指定初始数据初始化</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ArrayList</span><span class="hljs-params">(Collection&lt;? extends E&gt; c)</span> </span>&#123;<br>    <span class="hljs-comment">// elementData 是保存数组的容器，默认为 null</span><br>    elementData = c.toArray();<br>    <span class="hljs-comment">// 如果给定的集合（c）数据有值</span><br>    <span class="hljs-keyword">if</span> ((size = elementData.length) != <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-comment">// 如果集合元素类型不是 Object 类型，我们会转成 Object</span><br>        <span class="hljs-keyword">if</span> (elementData.getClass() != Object[]<span class="hljs-class">.<span class="hljs-keyword">class</span>) </span>&#123;<br>            elementData = Arrays.copyOf(elementData, size, Object[]<span class="hljs-class">.<span class="hljs-keyword">class</span>)</span>;<br>        &#125;<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-comment">// 给定集合（c）无值，则默认空数组</span><br>        <span class="hljs-keyword">this</span>.elementData = EMPTY_ELEMENTDATA;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
+<p>需要注意，JDK 1.8之后：<em>ArrayList 无参构造器初始化时，默认大小是空数组，当第一次add后才扩容为10</em></p>
+<h2 id="新增与扩容"><a href="#新增与扩容" class="headerlink" title="新增与扩容"></a>新增与扩容</h2><h3 id="新增"><a href="#新增" class="headerlink" title="新增"></a>新增</h3><figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">add</span><span class="hljs-params">(E e)</span> </span>&#123;<br>      <span class="hljs-comment">// 确保数组大小足够，不够执行扩容，size 为当前数组的大小</span><br>      ensureCapacityInternal(size + <span class="hljs-number">1</span>);  <span class="hljs-comment">// Increments modCount!!</span><br>      <span class="hljs-comment">// 直接赋值(线程不安全)</span><br>      elementData[size++] = e;<br>      <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
+<h3 id="扩容"><a href="#扩容" class="headerlink" title="扩容"></a>扩容</h3><figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ensureCapacityInternal</span><span class="hljs-params">(<span class="hljs-keyword">int</span> minCapacity)</span> </span>&#123;<br>  	<span class="hljs-comment">//如果初始化数组大小时，有给定初始值，以给定的大小为准，不走 if 逻辑</span><br>	<span class="hljs-keyword">if</span> (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) &#123;<br>		minCapacity = Math.max(DEFAULT_CAPACITY, minCapacity);<br>    &#125;<br>    <span class="hljs-comment">// 确保容积足够</span><br>    ensureExplicitCapacity(minCapacity);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ensureExplicitCapacity</span><span class="hljs-params">(<span class="hljs-keyword">int</span> minCapacity)</span> </span>&#123;<br>    <span class="hljs-comment">// 修改记录数组</span><br>    modCount++;<br>    <span class="hljs-comment">// 如果我们期望的最小容量大于目前数组的长度，那么就扩容</span><br>    <span class="hljs-keyword">if</span> (minCapacity - elementData.length &gt; <span class="hljs-number">0</span>)<br>        grow(minCapacity);<br>&#125;<br><br><span class="hljs-comment">// 扩容(把现有数据拷贝到新的数组)</span><br><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">grow</span><span class="hljs-params">(<span class="hljs-keyword">int</span> minCapacity)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> oldCapacity = elementData.length;<br>    <span class="hljs-comment">// oldCapacity &gt;&gt; 1 是把 oldCapacity 除以 2 的意思</span><br>    <span class="hljs-keyword">int</span> newCapacity = oldCapacity + (oldCapacity &gt;&gt; <span class="hljs-number">1</span>);<br><br>    <span class="hljs-comment">// 如果扩容后的值 &lt; 我们的期望值，扩容后的值就等于我们的期望值</span><br>    <span class="hljs-keyword">if</span> (newCapacity - minCapacity &lt; <span class="hljs-number">0</span>)<br>        newCapacity = minCapacity;<br><br>    <span class="hljs-comment">// 如果扩容后的值 &gt; jvm 所能分配的数组的最大值，那么就用 Integer 的最大值</span><br>    <span class="hljs-keyword">if</span> (newCapacity - MAX_ARRAY_SIZE &gt; <span class="hljs-number">0</span>)<br>        newCapacity = hugeCapacity(minCapacity);<br><br>    <span class="hljs-comment">// 通过复制进行扩容</span><br>    elementData = Arrays.copyOf(elementData, newCapacity);<br>&#125;<br></code></pre></td></tr></table></figure>
 
+<p>注意：</p>
+<ul>
+<li>扩容的规则并不是翻倍，而是扩为之前容量的1.5倍</li>
+<li>ArrayList 中的数组的最大值是 <code>Integer.MAX_VALUE</code>，超过这个值，JVM 就不会给数组分配内存空间了</li>
+<li>新增时，并没有对值进行严格的校验，所以 ArrayList 是允许 null 值的</li>
+<li>扩容的底层是通过 <code>Arrays.copyOf(elementData, newCapacity);</code> 实现的</li>
+</ul>
+<h1 id="LinkedList-源码解析"><a href="#LinkedList-源码解析" class="headerlink" title="LinkedList 源码解析"></a>LinkedList 源码解析</h1><p><code>LinkedList</code>实现了<code>Deque</code>接口，所以除了可以作为线性表来使用外，还可以当做队列和栈来使用</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LinkedList</span>&lt;<span class="hljs-title">E</span>&gt;<br>    <span class="hljs-keyword">extends</span> <span class="hljs-title">AbstractSequentialList</span>&lt;<span class="hljs-title">E</span>&gt;<br>    <span class="hljs-keyword">implements</span> <span class="hljs-title">List</span>&lt;<span class="hljs-title">E</span>&gt;, <span class="hljs-title">Deque</span>&lt;<span class="hljs-title">E</span>&gt;, <span class="hljs-title">Cloneable</span>, <span class="hljs-title">java</span>.<span class="hljs-title">io</span>.<span class="hljs-title">Serializable</span><br></span>&#123;<br>    <span class="hljs-keyword">transient</span> <span class="hljs-keyword">int</span> size = <span class="hljs-number">0</span>;<br><br>    <span class="hljs-keyword">transient</span> Node&lt;E&gt; first;<br><br>    <span class="hljs-keyword">transient</span> Node&lt;E&gt; last;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">LinkedList</span><span class="hljs-params">()</span> </span>&#123;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
+<p>利用静态内部类<code>Node</code>，表示双向链表的节点，如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Node</span>&lt;<span class="hljs-title">E</span>&gt; </span>&#123;<br>    E item;<br>    Node&lt;E&gt; next;<br>    Node&lt;E&gt; prev;<br><br>    Node(Node&lt;E&gt; prev, E element, Node&lt;E&gt; next) &#123;<br>        <span class="hljs-keyword">this</span>.item = element;<br>        <span class="hljs-keyword">this</span>.next = next;<br>        <span class="hljs-keyword">this</span>.prev = prev;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 
@@ -247,30 +260,36 @@
         <category>JavaSE</category>
       </categories>
       <tags>
-        <tag>并发编程</tag>
+        <tag>Java</tag>
+        <tag>源码</tag>
       </tags>
   </entry>
   <entry>
-    <title>动态规划</title>
-    <url>/page/null.html</url>
-    <content><![CDATA[<p>#</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>ThreadLocal</title>
+    <title>Java12-3：线程隔离ThreadLocal</title>
     <url>/page/java12-ThreadLocal.html</url>
-    <content><![CDATA[<p>#</p>
-<p>利用“线程封闭”的思路解决线程安全问题，ThreadLocal变量的作用域是为线程，同一线程内共享</p>
-<p>ThreadLocal的特性决定了它的使用场景，由于ThreadLocal中存储的变量是线程隔离的</p>
-<p>1、存储需要在线程隔离的数据。比如线程执行的上下文信息，每个线程是不同的，但是对于同一个线程来说会共享同一份数据</p>
-<p>2、</p>
-<h2 id="ThreadLocal-的使用"><a href="#ThreadLocal-的使用" class="headerlink" title="ThreadLocal 的使用"></a>ThreadLocal 的使用</h2><h2 id="ThreadLocal源码解析"><a href="#ThreadLocal源码解析" class="headerlink" title="ThreadLocal源码解析"></a>ThreadLocal源码解析</h2><p>多个线程对同一个对象set操作，但只会get出自己set进去的值，原理如下：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// set时，把当前threadLocal对象作为key，想要保存的对象作为value，存入map</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">set</span><span class="hljs-params">(T value)</span> </span>&#123;<br>    Thread t = Thread.currentThread();<br>    ThreadLocalMap map = getMap(t);		<span class="hljs-comment">// 获取的 map 其实是与线程绑定的</span><br>    <span class="hljs-keyword">if</span> (map != <span class="hljs-keyword">null</span>)<br>        map.set(<span class="hljs-keyword">this</span>, value);<br>    <span class="hljs-keyword">else</span><br>        createMap(t, value);<br>&#125;<br><br><span class="hljs-function">ThreadLocalMap <span class="hljs-title">getMap</span><span class="hljs-params">(Thread t)</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> t.threadLocals;	<span class="hljs-comment">// ThreadLocalMap 就存在Thread对象中</span><br>&#125;<br></code></pre></td></tr></table></figure>
+    <content><![CDATA[<h2 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h2><h3 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h3><p>利用<strong>线程隔离</strong>的思路解决线程安全问题，<code>ThreadLocal</code>变量的作用域是为线程，同一线程内共享，因此也就保证了线程安全</p>
+<h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><p>基本使用就是声明<code>ThreadLocal</code>对象，然后使用<code>set</code>、<code>get</code>方法设置与得到相应的值（与线程绑定）</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>&#123;<br>    <span class="hljs-comment">// 通常将 ThreadLocal 对象声明为 static final</span><br>    <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> ThreadLocal&lt;String&gt; threadLocal = <span class="hljs-keyword">new</span> ThreadLocal&lt;&gt;();<br>    <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Subthread</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Thread</span> </span>&#123;<br>        <span class="hljs-meta">@Override</span><br>        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) &#123;<br>                <span class="hljs-comment">// set 设置线程相关值</span><br>                threadLocal.set(Thread.currentThread().getName() + <span class="hljs-string">'-'</span> + i);<br>                <span class="hljs-comment">// get 取出相关值</span><br>                String val = threadLocal.get();<br>                System.out.println(Thread.currentThread().getName() + <span class="hljs-string">": "</span> + val);<br>            &#125;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        Subthread t1 = <span class="hljs-keyword">new</span> Subthread();<br>        Subthread t2 = <span class="hljs-keyword">new</span> Subthread();<br>        t1.start();<br>        t2.start();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
+<p><img src="http://cdn.ziyedy.top/Java12-3%EF%BC%9A%E7%BA%BF%E7%A8%8B%E9%9A%94%E7%A6%BBThreadLocal/ThreadLocal%E4%BD%BF%E7%94%A8%E7%BB%93%E6%9E%9C.png" alt=""></p>
+<h2 id="ThreadLocal-源码解析"><a href="#ThreadLocal-源码解析" class="headerlink" title="ThreadLocal 源码解析"></a>ThreadLocal 源码解析</h2><h3 id="set-方法"><a href="#set-方法" class="headerlink" title="set 方法"></a>set 方法</h3><p>多个线程对同一个对象set操作，但只会get出自己set进去的值，原理如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// set时，把当前threadLocal对象作为key，想要保存的对象作为value，存入map</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">set</span><span class="hljs-params">(T value)</span> </span>&#123;<br>    Thread t = Thread.currentThread();<br>    ThreadLocalMap map = getMap(t);		<span class="hljs-comment">// 获取的 map 与当前线程绑定的</span><br>    <span class="hljs-keyword">if</span> (map != <span class="hljs-keyword">null</span>)<br>        map.set(<span class="hljs-keyword">this</span>, value);	<span class="hljs-comment">// 把当前threadLocal对象作为key，将value存入map</span><br>    <span class="hljs-keyword">else</span><br>        createMap(t, value);<br>&#125;<br><br><span class="hljs-function">ThreadLocalMap <span class="hljs-title">getMap</span><span class="hljs-params">(Thread t)</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> t.threadLocals;	<span class="hljs-comment">// ThreadLocalMap 就存在 Thread 对象中</span><br>&#125;<br></code></pre></td></tr></table></figure>
 
+<p><em>总结：<code>ThreadLocal</code> 看似自己保存了每个线程的变量副本，其实每个线程的变量副本是保存在线程对象中，因此自然就线程隔离了</em></p>
+<p><img src="http://cdn.ziyedy.top/Java12-3%EF%BC%9A%E7%BA%BF%E7%A8%8B%E9%9A%94%E7%A6%BBThreadLocal/ThreadLocal%E5%8E%9F%E7%90%86.jpg" alt=""></p>
+<h3 id="ThreadLocalMap-分析"><a href="#ThreadLocalMap-分析" class="headerlink" title="ThreadLocalMap 分析"></a>ThreadLocalMap 分析</h3><p><code>ThreadLocalMap</code>是<code>ThreadLocal</code>的静态内部类，其虽然作为属性存储在Thread类中，但由于访问权限问题只能由<code>ThreadLocal</code>进行维护</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 存在于 Thread 类中</span><br><span class="hljs-comment">// 即ThreadLocal其实是作为 “属性” 保存在Thread对象中的</span><br>ThreadLocal.ThreadLocalMap threadLocals = <span class="hljs-keyword">null</span>;<br></code></pre></td></tr></table></figure>
 
-<p>ThreadLocalMap是ThreadLocal的静态内部类</p>
-<p>在ThreadLocalMap中使用WeakReference包装后的ThreadLocal对象作为key，也就是说这里对ThreadLocal对象为弱引用。当ThreadLocal对象在ThreadLocalMap引用之外，再无其他引用的时候能够被垃圾回收</p>
+<h3 id="内存泄漏"><a href="#内存泄漏" class="headerlink" title="内存泄漏"></a>内存泄漏</h3><blockquote>
+<p> 内存泄漏：为程序在申请内存后，无法释放已申请的内存空间（不会再被使用的对象或者变量占用的内存不能被回收）</p>
+</blockquote>
+<p><code>ThreadLocalMap</code>功能与其他Map类容器作用类似，但其中作为 key 存储的<code>ThreadLocal</code>对象为弱引用（如下），因此很容易被垃圾回收，但value对象并不会与之一起被回收，这样就会造成<strong>“内存泄漏”</strong>问题</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 存在于 ThreadLocalMap 中，用于作为 key</span><br><span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Entry</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">WeakReference</span>&lt;<span class="hljs-title">ThreadLocal</span>&lt;?&gt;&gt; </span>&#123;<br>    <span class="hljs-comment">/** The value associated with this ThreadLocal. */</span><br>    Object value;<br><br>    Entry(ThreadLocal&lt;?&gt; k, Object v) &#123;<br>        <span class="hljs-keyword">super</span>(k);<br>        value = v;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="如何避免内存泄漏"><a href="#如何避免内存泄漏" class="headerlink" title="如何避免内存泄漏"></a>如何避免内存泄漏</h3><ul>
+<li>每次使用完 <code>ThreadLocal</code> 都调用其 <code>remove()</code>方法清除数据</li>
+<li>将 <code>ThreadLocal</code> 变量定义为static，这样就保证了一直存在其强引用</li>
+</ul>
 ]]></content>
       <categories>
         <category>Java</category>
@@ -281,30 +300,25 @@
       </tags>
   </entry>
   <entry>
-    <title>回溯算法</title>
-    <url>/page/null.html</url>
-    <content><![CDATA[<p>#</p>
-<p>全排列问题</p>
-<p>N皇后问题</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>多路查找树</title>
-    <url>/page/null.html</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>Java线程池</title>
-    <url>/page/null.html</url>
-    <content><![CDATA[<p>#</p>
-<p>并发的本质其实就是任务的并行处理，所以绝大部分并发程序都是围绕离散任务进行的</p>
+    <title>Java12-4：线程池</title>
+    <url>/page/Java12-thread-pool.html</url>
+    <content><![CDATA[<h2 id="线程池简介"><a href="#线程池简介" class="headerlink" title="线程池简介"></a>线程池简介</h2><p>并发的本质其实就是任务的并行处理，所以绝大部分并发程序都是围绕离散任务进行的</p>
 <ol>
 <li>线程创建需要消耗资源。通过前面的学习，我们知道线程的创建和启动都需要消耗资源，需要 JVM 和操作系统提供支持。如果线程运行的任务十分轻量级，那么会造成创建线程的时间开销比任务逻辑运行时间还要长；</li>
 <li>CPU 性能有限。当活跃的线程超过了 CPU 的承载限度，那么会有大量线程参与竞争 CPU，造成系统额外的开销，但是永远都会有很多线程无法竞争到 CPU，造成了资源的浪费；</li>
 <li>系统能够支持的线程存在上限。如果超出上限，整个应用就会崩溃。</li>
 </ol>
-<h2 id="线程池简介"><a href="#线程池简介" class="headerlink" title="线程池简介"></a>线程池简介</h2><p>线程池的作用是维护一定数量的线程，接收任意数量的任务，这些任务被线程池中的线程并发执行</p>
-<h2 id="自开发线程池设计"><a href="#自开发线程池设计" class="headerlink" title="自开发线程池设计"></a>自开发线程池设计</h2><h2 id="Executor-框架的使用"><a href="#Executor-框架的使用" class="headerlink" title="Executor 框架的使用"></a>Executor 框架的使用</h2>]]></content>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><p>线程池的作用是维护一定数量的线程，接收任意数量的任务，这些任务被线程池中的线程并发执行</p>
+<h2 id="线程池设计与实现"><a href="#线程池设计与实现" class="headerlink" title="线程池设计与实现"></a>线程池设计与实现</h2><h3 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h3><p>维护一个任务队列 <code>RunnableTaskQueue</code> 用以接收 <code>Runnable</code>任务，其中任务一旦被线程池取完，则调用 <code>wait</code> 方法进入阻塞状态，而一旦有新的任务被添加进来，则</p>
+<p>创建固定数量的线程作为线程池，不断的从 <code>RunnableTaskQueue</code> 中取得 <code>Runnable</code> 并调用其 <code>run</code>方法</p>
+<h2 id="Executor-线程池框架"><a href="#Executor-线程池框架" class="headerlink" title="Executor 线程池框架"></a>Executor 线程池框架</h2>]]></content>
+      <categories>
+        <category>Java</category>
+        <category>JavaSE</category>
+      </categories>
+      <tags>
+        <tag>并发编程</tag>
+      </tags>
   </entry>
   <entry>
     <title>JVM垃圾回收</title>
@@ -320,15 +334,23 @@
 <p>循环引用就是：A引用B，B也引用A，但没别的对象引用这两个对象，这时其引用计数器不为0，所以引用计数器无法通知GC回收它们</p>
 <h3 id="可达性分析法"><a href="#可达性分析法" class="headerlink" title="可达性分析法"></a>可达性分析法</h3><p>通过一系列的称为 <strong>“GC Roots”</strong> 的对象作为起点，从这些节点开始向下搜索，节点所走过的路径称为引用链，当一个对象到 GC Roots 没有任何引用链相连的话，则证明此对象是不可用的</p>
 <p><img src="http://cdn.ziyedy.top/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/%E5%8F%AF%E8%BE%BE%E6%80%A7%E5%88%86%E6%9E%90.png" alt=""></p>
-<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><h3 id="强引用"><a href="#强引用" class="headerlink" title="强引用"></a>强引用</h3><p>如果一个对象具有强引用，Java 虚拟机宁愿抛出 <code>OutOfMemoryError</code> 错误，使程序异常终止，也不会靠随意回收具有强引用的对象来解决内存不足问题。</p>
-<h3 id="软引用"><a href="#软引用" class="headerlink" title="软引用"></a>软引用</h3><p>如果内存空间足够，垃圾回收器就不会回收它，如果内存空间不足了，就会回收这些对象的内存</p>
-<h3 id="弱引用"><a href="#弱引用" class="headerlink" title="弱引用"></a>弱引用</h3><p>弱引用与软引用的区别在于：只具有弱引用的对象拥有更短暂的生命周期。在垃圾回收器线程扫描它所管辖的内存区域的过程中，一旦发现了只具有弱引用的对象，不管当前内存空间足够与否，都会回收它的内存。</p>
-<h3 id="虚引用"><a href="#虚引用" class="headerlink" title="虚引用"></a>虚引用</h3><p>如果一个对象仅持有虚引用，那么它就和没有任何引用一样，在任何时候都可能被垃圾回收。</p>
-<h1 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h1><h2 id="标记-清除算法"><a href="#标记-清除算法" class="headerlink" title="标记-清除算法"></a>标记-清除算法</h2><p>首先<strong>标记出</strong>所有不需要回收的对象</p>
+<h4 id="固定可作为-GC-Root-的对象"><a href="#固定可作为-GC-Root-的对象" class="headerlink" title="固定可作为 GC Root 的对象"></a>固定可作为 GC Root 的对象</h4><ul>
+<li>虚拟机栈（栈帧中的本地变量表）中引用的对象</li>
+<li>方法区中类静态属性引用的对象</li>
+<li>在方法区中常量引用的对象，如字符串常量池中的引用</li>
+<li>本地方法栈中JNI（即一般说的native方法）引用的对象</li>
+<li>Java虚拟机内部的引用，如基本数据类型对应的Class对象，一些常驻异常对象，以及系统类加载器</li>
+<li>所有被同步锁（synchronized 关键字）修饰的对象</li>
+</ul>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><h3 id="强引用"><a href="#强引用" class="headerlink" title="强引用"></a>强引用</h3><p>如果一个对象具有强引用，Java 虚拟机宁愿抛出 <code>OutOfMemoryError</code> 错误，使程序异常终止，也<strong>不会靠随意回收具有强引用的对象来解决内存不足问题</strong>。</p>
+<h3 id="软引用"><a href="#软引用" class="headerlink" title="软引用"></a>软引用</h3><p>如果内存空间足够，垃圾回收器就不会回收它，<strong>如果内存空间不足了，就会回收这些对象的内存</strong></p>
+<h3 id="弱引用"><a href="#弱引用" class="headerlink" title="弱引用"></a>弱引用</h3><p>弱引用与软引用的区别在于：只具有弱引用的对象拥有更短暂的生命周期。在垃圾回收器线程扫描它所管辖的内存区域的过程中，一旦发现了只具有弱引用的对象，<strong>不管当前内存空间足够与否，都会回收它的内存</strong>。</p>
+<h3 id="虚引用"><a href="#虚引用" class="headerlink" title="虚引用"></a>虚引用</h3><p>如果一个对象仅持有虚引用，那么它就和没有任何引用一样，在<strong>任何时候都可能被垃圾回收</strong>。</p>
+<h1 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h1><h2 id="标记-清除算法（Mark-Sweep）"><a href="#标记-清除算法（Mark-Sweep）" class="headerlink" title="标记-清除算法（Mark-Sweep）"></a>标记-清除算法（Mark-Sweep）</h2><p>首先<strong>标记出</strong>所有不需要回收的对象</p>
 <p>在标记完成后<strong>统一回收</strong>掉所有没有被标记的对象</p>
 <img src="http://cdn.ziyedy.top/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/%E6%A0%87%E8%AE%B0-%E6%B8%85%E9%99%A4%E7%AE%97%E6%B3%95.jpeg" style="zoom:50%;" />
 
-<h2 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h2><p>将内存分为大小相同的两块，每次使用其中的一块。当这一块的内存使用完后，就将还存活的对象<strong>复制</strong>到另一块去，然后再把使用的空间一次清理掉</p>
+<h2 id="标记-复制算法"><a href="#标记-复制算法" class="headerlink" title="标记-复制算法"></a>标记-复制算法</h2><p>将内存分为大小相同的两块，每次使用其中的一块。当这一块的内存使用完后，就将还存活的对象<strong>复制</strong>到另一块去，然后再把使用的空间一次清理掉</p>
 <p>JVM实际实现中，是将内存分为一块较大的Eden区和两块较小的Survivor空间，每次使用Eden和一块Survivor，<strong>回收时，把存活的对象复制到另一块Survivor</strong>。HotSpot默认的Eden和Survivor比是8:1，每次能够使用90%新生代空间</p>
 <img src="http://cdn.ziyedy.top/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/%E5%A4%8D%E5%88%B6%E7%AE%97%E6%B3%95.png" style="zoom:50%;" />
 
@@ -342,12 +364,13 @@
 <h2 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h2><p>核心思想：根据对象存活周期的不同将内存分为几块，从而可以根据各个年代的特点选择合适的垃圾收集算法</p>
 <p><strong>如新生代通常采用复制算法，而老年代则采用标记-整理算法</strong></p>
 <h1 id="垃圾收集器"><a href="#垃圾收集器" class="headerlink" title="垃圾收集器"></a>垃圾收集器</h1><p>垃圾收集器具体实现垃圾收集算法。HotSpot常见的收集算法及其作用邻域如下：</p>
+<p>两个收集器之间存在连线，表示其可以搭配使用</p>
 <img src="http://cdn.ziyedy.top/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/HotSpot%E6%94%B6%E9%9B%86%E5%99%A8.png" style="zoom:67%;" />
 
 <h2 id="Serial收集器"><a href="#Serial收集器" class="headerlink" title="Serial收集器"></a>Serial收集器</h2><p>是一个单线程收集器，在进行垃圾收集工作的时候必须暂停其他所有的工作线程（ <strong>“Stop The World”</strong> ），直到它收集结束</p>
 <p><strong>新生代采用标记-复制算法，老年代采用标记-整理算法</strong></p>
 <p><img src="http://cdn.ziyedy.top/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/Serial%E6%94%B6%E9%9B%86%E5%99%A8.png" alt=""></p>
-<h2 id="ParNew收集器"><a href="#ParNew收集器" class="headerlink" title="ParNew收集器"></a>ParNew收集器</h2><p> Serial 收集器的多线程版本，除了使用多线程进行垃圾收集外，其余行为（控制参数、收集算法、回收策略等等）<strong>和 Serial 收集器完全一样</strong></p>
+<h2 id="ParNew收集器"><a href="#ParNew收集器" class="headerlink" title="ParNew收集器"></a>ParNew收集器</h2><p> Serial 收集器的多线程并行版本，除了使用多线程进行垃圾收集外，其余行为（控制参数、收集算法、回收策略等等）<strong>和 Serial 收集器完全一样</strong></p>
 <p><strong>新生代采用标记-复制算法，老年代采用标记-整理算法。</strong></p>
 <p>除了 Serial 收集器外，只有它能与 CMS 收集器配合工作</p>
 <p><img src="http://cdn.ziyedy.top/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/ParNew%E6%94%B6%E9%9B%86%E5%99%A8.png" alt=""></p>
@@ -358,22 +381,25 @@
 <p><img src="http://cdn.ziyedy.top/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/CMS.png" alt=""></p>
 <h3 id="运行过程"><a href="#运行过程" class="headerlink" title="运行过程"></a>运行过程</h3><p>使用的是<strong>标记-清除算法</strong>，其运行分为四个步骤：</p>
 <ul>
-<li>初始阶段：暂停所有的其他线程，并记录下直接与 root 相连的对象，速度很快</li>
-<li>并发阶段：同时开启 GC 和用户线程，用一个闭包结构去记录可达对象。跟踪记录<strong>发生引用更新的地方</strong></li>
-<li>重新标记：修正并发标记期间因为用户程序继续运行而导致标记产生变动的那一部分对象的标记记录</li>
-<li>并发清除：开启用户线程，同时 GC 线程开始对未标记的区域做清扫</li>
+<li><strong>初始标记</strong>阶段：暂停所有的其他线程，并记录下直接与 root 相连的对象，速度很快</li>
+<li><strong>并发标记</strong>阶段：同时开启 GC 和用户线程，用一个闭包结构去记录可达对象。跟踪记录<strong>发生引用更新的地方</strong></li>
+<li><strong>重新标记</strong>阶段：修正并发标记期间因为用户程序继续运行而导致标记产生变动的那一部分对象的标记记录</li>
+<li><strong>并发清除</strong>阶段：开启用户线程，同时 GC 线程开始对未标记的区域做清扫</li>
 </ul>
 <h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><ul>
 <li>优点：并发收集、低停顿</li>
 <li>缺点：对CPU资源敏感；无法处理浮动垃圾；由于使用标记-清除算法导致收集结束后会有大量空间碎片产生</li>
 </ul>
-<h2 id="G1"><a href="#G1" class="headerlink" title="G1"></a>G1</h2><p>G1 (Garbage-First) 是一款面向服务器的垃圾收集器，主要针对配备多处理器及大容量内存的机器.。以极高概率满足 GC 停顿时间要求的同时，还具备高吞吐量性能特征.</p>
+<h2 id="G1"><a href="#G1" class="headerlink" title="G1"></a>G1</h2><p>G1是一个分代的，增量的，并行与并发的标记-复制垃圾回收器。设计目标是为了适应现在不断扩大的内存和不断增加的处理器数量，进一步降低暂停时间（pause time），同时兼顾良好的吞吐量</p>
 <p><em>被视为 JDK1.7 中 HotSpot 虚拟机的一个重要进化特征</em></p>
+<p><img src="http://cdn.ziyedy.top/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/G1.png" alt=""></p>
 <h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ul>
-<li><strong>并行与并发</strong></li>
-<li><strong>分代收集</strong>：虽然 G1 可以<strong>不需要其他收集器</strong>配合就能独立管理整个 GC 堆，但是还是保留了分代的概念</li>
-<li><strong>空间整合</strong>：G1 从整体来看是基于“标记-整理”算法实现的收集器；从局部上来看是基于“标记-复制”算法实现的</li>
-<li><strong>可预测的停顿</strong>：G1 除了追求低停顿外，还能建立可预测的停顿时间模型</li>
+<li><p>可以面向堆内存任何部分来组成回收集（衡量标准不再是它属于哪个分代，而是哪块内存中存放的垃圾数量最多）</p>
+</li>
+<li><p>开创<strong>基于 Region 的堆内存布局</strong>，即将连续的Java堆划分为多个大小相等的独立区域（Region），每一个 Region 都能根据需要扮演新生代或老年代空间，从而采用不同的策略进行处理（还有一类特殊的 Region，Humongous，即一个对象的大小超过了某一个阈值——HotSpot中是Region的1/2，即标记为 Humongous）</p>
+</li>
+<li><p>G1 仍然保留新生代和老年代的概念，但新生代与老年代不再是固定的，都是一系列的动态集合（物理上不需要连续，逻辑上连续）</p>
+</li>
 </ul>
 <p>参考：</p>
 <blockquote>
@@ -466,7 +492,7 @@
 <p>因此需要执行init方法对对象进行初始化</p>
 <h3 id="对象的内存布局"><a href="#对象的内存布局" class="headerlink" title="对象的内存布局"></a>对象的内存布局</h3><p>对象在内存中存储的布局分为三部分∶对象头、实例数据和对齐填充</p>
 <ul>
-<li><p><strong>对象头</strong>，包含两个部分︰<br>（1）MarkWord：存储对象自身的运行数据，如∶HashCode、GC分代年龄、锁状态标志等<br>（2）类型指针：对象指向它的类元数据的指针，虚拟机通过这个指针确定这个对象是哪个类的实例</p>
+<li><p><strong>对象头</strong>，包含两个部分︰<br>（1）MarkWord：存储对象自身的运行数据，如∶HashCode、GC分代年龄、锁状态标志（<em>synchronized对象锁机制中的Monitor等信息就存储在这儿</em>）等<br>（2）类型指针：对象指向它的类元数据的指针，虚拟机通过这个指针确定这个对象是哪个类的实例</p>
 </li>
 <li><p><strong>实例数据</strong><br>真正存放对象实例数据的地方，即程序所定义的各个类型的字段内容</p>
 </li>
@@ -595,47 +621,52 @@
       </tags>
   </entry>
   <entry>
-    <title>二分查找</title>
-    <url>/page/null.html</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>排序算法</title>
-    <url>/page/null.html</url>
-    <content><![CDATA[<h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">bubbleSort</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] arr)</span> </span>&#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; arr.length - <span class="hljs-number">1</span>; i++) &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; arr.length-i - <span class="hljs-number">1</span>; j++) &#123;<br>            <span class="hljs-keyword">if</span>(arr[j] &gt; arr[j+<span class="hljs-number">1</span>]) &#123;<br>                <span class="hljs-keyword">int</span> temp = arr[j];<br>                arr[j] = arr[j+<span class="hljs-number">1</span>];<br>                arr[j+<span class="hljs-number">1</span>] = temp;<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+    <title>Java08-2：HashMap源码分析</title>
+    <url>/page/Java08-hashmap-source-code.html</url>
+    <content><![CDATA[<h2 id="底层实现"><a href="#底层实现" class="headerlink" title="底层实现"></a>底层实现</h2><p>JDK1.7及其之前，HashMap底层是一个<strong>table数组 + 链表</strong>实现的哈希表存储结构</p>
+<p>JDK1.8以后，HashMap 底层的数据结构主要是：数组 + 链表 + 红黑树。其中当链表的长度大于等于 8 时，链表会转化成红黑树（能够降低查询的时间复杂度），当红黑树的大小小于等于 6 时，红黑树会转化成链表</p>
+<h3 id="基本属性"><a href="#基本属性" class="headerlink" title="基本属性"></a>基本属性</h3><figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 初始容量为 16</span><br><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> DEFAULT_INITIAL_CAPACITY = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">4</span>;<br><br><span class="hljs-comment">// 最大容量</span><br><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> MAXIMUM_CAPACITY = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">30</span>;<br><br><span class="hljs-comment">// 负载因子默认值</span><br><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">float</span> DEFAULT_LOAD_FACTOR = <span class="hljs-number">0.75f</span>;<br><br><span class="hljs-comment">// 桶上的链表长度大于等于8时，链表转化成红黑树</span><br><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> TREEIFY_THRESHOLD = <span class="hljs-number">8</span>;<br><br><span class="hljs-comment">// 桶上的红黑树大小小于等于6时，红黑树转化成链表</span><br><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> UNTREEIFY_THRESHOLD = <span class="hljs-number">6</span>;<br><br><span class="hljs-comment">// 当数组容量大于 64 时，链表才会转化成红黑树</span><br><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> MIN_TREEIFY_CAPACITY = <span class="hljs-number">64</span>;<br><br><span class="hljs-comment">// 记录迭代过程中 HashMap 结构是否发生变化，如果有变化，迭代时会 fail-fast</span><br><span class="hljs-keyword">transient</span> <span class="hljs-keyword">int</span> modCount;<br><br><span class="hljs-comment">// HashMap 的实际大小</span><br><span class="hljs-keyword">transient</span> <span class="hljs-keyword">int</span> size;<br><br><span class="hljs-comment">// 存放数据的数组</span><br><span class="hljs-keyword">transient</span> Node&lt;K,V&gt;[] table;<br><br><span class="hljs-comment">// 触发扩容的阈值，有两种情况：</span><br><span class="hljs-comment">// 1、初始化时，给定数组大小，通过 tableSizeFor 方法计算</span><br><span class="hljs-comment">//	  数组大小为比给定数值大的2的整数次幂，如给定初始化大小19，实际上初始化大小即为为32</span><br><span class="hljs-comment">// 2、通过 resize 方法进行扩容，大小 = 数组容量 * 0.75</span><br><span class="hljs-keyword">int</span> threshold;<br><br><span class="hljs-comment">//链表的节点</span><br><span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Node</span>&lt;<span class="hljs-title">K</span>,<span class="hljs-title">V</span>&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title">Map</span>.<span class="hljs-title">Entry</span>&lt;<span class="hljs-title">K</span>,<span class="hljs-title">V</span>&gt; </span>&#123;<br><br><span class="hljs-comment">//红黑树的节点</span><br><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TreeNode</span>&lt;<span class="hljs-title">K</span>,<span class="hljs-title">V</span>&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title">LinkedHashMap</span>.<span class="hljs-title">Entry</span>&lt;<span class="hljs-title">K</span>,<span class="hljs-title">V</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
 
 
-<h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">selectSort</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] arr)</span> </span>&#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; arr.length - <span class="hljs-number">1</span>; i++) &#123;<br>        <span class="hljs-keyword">int</span> min = arr[i];<br>        <span class="hljs-keyword">int</span> minIndex = i;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i+<span class="hljs-number">1</span>; j &lt; arr.length; j++) &#123;<br>            <span class="hljs-keyword">if</span>(arr[j] &lt; min) &#123;<br>                min = arr[j];<br>                minIndex = j;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">if</span>(minIndex != i) &#123;<br>            arr[minIndex] = arr[i];<br>            arr[i] = min;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="为什么是-gt-8-时扩容"><a href="#为什么是-gt-8-时扩容" class="headerlink" title="为什么是 &gt;= 8 时扩容"></a>为什么是 &gt;= 8 时扩容</h3><p>红黑树需要占用的空间为链表的2倍，而链表数据不多时两者的查询速度差距没有那么明显，因此考虑到转化时间和空间损耗，必须定义出转化的边界值</p>
+<p>因此使用<strong>泊松分布</strong>计算链表长度为8的概率，几乎接近于0，而一旦到8，说明哈希算法出现了问题，为提高性能则让链表转化为红黑树。</p>
+<h3 id="HashMap-中数组大小为何一定为2的n次方"><a href="#HashMap-中数组大小为何一定为2的n次方" class="headerlink" title="HashMap 中数组大小为何一定为2的n次方"></a>HashMap 中数组大小为何一定为2的n次方</h3><p>HashMap在取模和扩容时进行了优化（加入了高位参与运算的过程），主要有如下三个步骤：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> <span class="hljs-title">hash</span><span class="hljs-params">(Object key)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> h;<br>    <span class="hljs-comment">// 1、取hashCode值</span><br>    <span class="hljs-comment">// 2、高位参与运算</span><br>    <span class="hljs-keyword">return</span> (key == <span class="hljs-keyword">null</span>) ? <span class="hljs-number">0</span> : (h = key.hashCode()) ^ (h &gt;&gt;&gt; <span class="hljs-number">16</span>);<br>&#125;<br><br><span class="hljs-comment">//jdk1.7的源码，jdk1.8与之实现原理理一样</span><br><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">indexFor</span><span class="hljs-params">(<span class="hljs-keyword">int</span> h, <span class="hljs-keyword">int</span> length)</span> </span>&#123; <br>	<span class="hljs-keyword">return</span> h &amp; (length-<span class="hljs-number">1</span>); <span class="hljs-comment">// 3、取模运算</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>该方法非常巧妙，通过 <code>h &amp; (length-1)</code> 来获取目标对象的位置（等价于h % length），而length保持了2的n次方能够大大加快运算效率，避免直接取模的效率损失。</p>
+<h2 id="put-方法"><a href="#put-方法" class="headerlink" title="put 方法"></a>put 方法</h2><p>put方法的基本过程：</p>
+<ol>
+<li>空数组有无初始化，没有的话初始化；</li>
+<li>如果通过 key 的 hash 能够直接找到值，跳转到 6，否则到 3；</li>
+<li>如果 hash 冲突，两种解决方案：链表 or 红黑树；</li>
+<li>如果是链表，递归循环，把新元素追加到队尾；</li>
+<li>如果是红黑树，调用红黑树新增的方法；</li>
+<li>通过 2、4、5 将新元素追加成功，再根据 onlyIfAbsent 判断是否需要覆盖；</li>
+<li>判断是否需要扩容，需要扩容进行扩容，结束。</li>
+</ol>
+<h2 id="扩容机制"><a href="#扩容机制" class="headerlink" title="扩容机制"></a>扩容机制</h2><ul>
+<li>JDK 1.7链表采用头插法</li>
+<li>JDK 1.8链表采用尾插法</li>
+</ul>
+<p>由JDK1.7源码如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">resize</span><span class="hljs-params">(<span class="hljs-keyword">int</span> newCapacity)</span> </span>&#123; 	<span class="hljs-comment">// 传入新的容量</span><br>	Entry[] oldTable = table; 	<span class="hljs-comment">// 引⽤扩容前的Entry数组</span><br>	<span class="hljs-keyword">int</span> oldCapacity = oldTable.length;<br>	<span class="hljs-keyword">if</span> (oldCapacity == MAXIMUM_CAPACITY) &#123; 	<span class="hljs-comment">// 扩容前的数组大⼩如果已经达到最⼤(2^30)了</span><br>		threshold = Integer.MAX_VALUE; 		<span class="hljs-comment">// 修改阈值为int的最⼤大值(2^31-1)</span><br>		<span class="hljs-keyword">return</span>;<br>	&#125;<br>    <br>	Entry[] newTable = <span class="hljs-keyword">new</span> Entry[newCapacity]; <span class="hljs-comment">// 初始化一个新的Entry数组</span><br>	transfer(newTable); 	<span class="hljs-comment">// 将数据转移到新的Entry数组里</span><br>	table = newTable; 		<span class="hljs-comment">// HashMap的table属性引⽤新的Entry数组</span><br>	threshold = (<span class="hljs-keyword">int</span>)(newCapacity * loadFactor);	<span class="hljs-comment">// 修改阈值</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>其中 <code>transfer()</code> 方法将原有的数组中的元素拷贝到新的数组中去，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">transfer</span><span class="hljs-params">(Entry[] newTable)</span> </span>&#123;<br>	Entry[] src = table; 	<span class="hljs-comment">// src引⽤了旧的Entry数组</span><br>	<span class="hljs-keyword">int</span> newCapacity = newTable.length;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; src.length; j++) &#123; 	<span class="hljs-comment">// 遍历旧的Entry数组</span><br>		Entry&lt;K,V&gt; e = src[j]; 		<span class="hljs-comment">// 取得旧Entry数组的每个元素</span><br>		<span class="hljs-keyword">if</span> (e != <span class="hljs-keyword">null</span>) &#123;<br>			src[j] = <span class="hljs-keyword">null</span>;	<span class="hljs-comment">// 释放旧Entry数组的对象引⽤用（for循环后，旧的Entry数组不再引⽤用任何对象）</span><br>            <span class="hljs-keyword">do</span> &#123;<br>                Entry&lt;K,V&gt; next = e.next;<br>                <span class="hljs-keyword">int</span> i = indexFor(e.hash, newCapacity); <span class="hljs-comment">// 重新计算每个元素在数组中的位置</span><br>                e.next = newTable[i]; <span class="hljs-comment">//标记[1]</span><br>                newTable[i] = e; 	<span class="hljs-comment">//将元素放在数组上</span><br>                e = next;	 <span class="hljs-comment">// 访问下⼀个Entry链上的元素</span><br>            &#125; <span class="hljs-keyword">while</span> (e != <span class="hljs-keyword">null</span>);<br>		&#125;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 
-
-
-
-
-<h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">insertSort</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] arr)</span> </span>&#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; arr.length; i++) &#123;<br>        <span class="hljs-keyword">int</span> insertIndex = i;<br>        <span class="hljs-keyword">int</span> insertValue = arr[i];<br>        <span class="hljs-keyword">if</span> (insertValue &lt; arr[insertIndex - <span class="hljs-number">1</span>]) &#123;<br>            <span class="hljs-keyword">while</span> (insertIndex - <span class="hljs-number">1</span> &gt;= <span class="hljs-number">0</span> &amp;&amp; arr[insertIndex - <span class="hljs-number">1</span>] &gt; insertValue) &#123;<br>                arr[insertIndex] = arr[insertIndex - <span class="hljs-number">1</span>];<br>                insertIndex--;<br>            &#125;<br>            arr[insertIndex] = insertValue;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-
-
-<h2 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h2><figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 内部使用元素交换</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">shellSort</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] arr)</span> </span>&#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> gap = arr.length / <span class="hljs-number">2</span>; gap &gt; <span class="hljs-number">0</span>; gap /= <span class="hljs-number">2</span>) &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = gap; i &lt; arr.length; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; arr.length - gap; j += gap) &#123;<br>                <span class="hljs-keyword">if</span> (arr[j] &gt; arr[j + gap]) &#123;<br>                    <span class="hljs-keyword">int</span> temp = arr[j];<br>                    arr[j] = arr[j + gap];<br>                    arr[j + gap] = temp;<br>                &#125;<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">// 内部使用元素后移</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">shellSort2</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] arr)</span> </span>&#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> gap = arr.length / <span class="hljs-number">2</span>; gap &gt; <span class="hljs-number">0</span>; gap /= <span class="hljs-number">2</span>) &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = gap; i &lt; arr.length; i++) &#123;<br>            <span class="hljs-keyword">int</span> insertValue = arr[i];<br>            <span class="hljs-keyword">int</span> insertIndex = i;<br>            <span class="hljs-keyword">if</span> (insertValue &lt; arr[insertIndex - gap]) &#123;<br>                <span class="hljs-keyword">while</span> (insertIndex - gap &gt;= <span class="hljs-number">0</span> &amp;&amp; insertValue &lt; arr[insertIndex - gap]) &#123;<br>                    arr[insertIndex] = arr[insertIndex - gap];<br>                    insertIndex -= gap;<br>                &#125;<br>                arr[insertIndex] = insertValue;<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">quickSort</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] arr, <span class="hljs-keyword">int</span> left, <span class="hljs-keyword">int</span> right)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> l = left;<br>    <span class="hljs-keyword">int</span> r = right;<br>    <span class="hljs-keyword">int</span> pivot = arr[(left + right) / <span class="hljs-number">2</span>];<br>    <span class="hljs-keyword">while</span> (l &lt; r) &#123;<br>        <span class="hljs-comment">// 找大于等于pivot的值</span><br>        <span class="hljs-keyword">while</span> (arr[l] &lt; pivot) &#123;<br>            l++;<br>        &#125;<br>        <span class="hljs-comment">// 找小于等于pivot的值</span><br>        <span class="hljs-keyword">while</span> (arr[r] &gt; pivot) &#123;<br>            r--;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (l &gt;= r) &#123;<br>            <span class="hljs-keyword">break</span>;<br>        &#125;<br>        <span class="hljs-comment">// 进行交换</span><br>        <span class="hljs-keyword">int</span> temp = arr[l];<br>        arr[l] = arr[r];<br>        arr[r] = temp;<br><br>        <span class="hljs-comment">// 左右搜索时死循环</span><br>        <span class="hljs-keyword">if</span> (arr[l] == pivot) &#123;<br>            r--;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (arr[r] == pivot) &#123;<br>            l++;<br>        &#125;<br>    &#125;<br>    <span class="hljs-comment">// 避免递归时栈溢出</span><br>    <span class="hljs-keyword">if</span> (l == r) &#123;<br>        l++;<br>        r--;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (left &lt; r) &#123;<br>        quickSort(arr, left, r);<br>    &#125;<br>    <span class="hljs-keyword">if</span> (right &gt; l) &#123;<br>        quickSort(arr, l, right);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-
-
-<p>归并排序</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">mergeSort</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] arr, <span class="hljs-keyword">int</span> left, <span class="hljs-keyword">int</span> right, <span class="hljs-keyword">int</span>[] temp)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (left &lt; right) &#123;<br>        <span class="hljs-keyword">int</span> mid = (left + right) / <span class="hljs-number">2</span>;<br>        <span class="hljs-comment">// 递归分解</span><br>        mergeSort(arr, left, mid, temp);<br>        mergeSort(arr, mid + <span class="hljs-number">1</span>, right, temp);<br>        <span class="hljs-comment">// 合并</span><br>        merge(arr, left, mid, right, temp);<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">merge</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] arr, <span class="hljs-keyword">int</span> left, <span class="hljs-keyword">int</span> mid, <span class="hljs-keyword">int</span> right, <span class="hljs-keyword">int</span>[] temp)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> i = left;<br>    <span class="hljs-keyword">int</span> j = mid + <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">int</span> t = <span class="hljs-number">0</span>;  <span class="hljs-comment">// temp数组的当前索引</span><br><br>    <span class="hljs-comment">// 将排序后的数组存入临时数组temp</span><br>    <span class="hljs-keyword">while</span> (i &lt;= mid &amp;&amp; j &lt;= right) &#123;<br>        <span class="hljs-keyword">if</span> (arr[i] &lt; arr[j]) &#123;<br>            temp[t] = arr[i];<br>            i++;<br>            t++;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            temp[t] = arr[j];<br>            j++;<br>            t++;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">while</span> (i &lt;= mid) &#123;<br>        temp[t] = arr[i];<br>        i++;<br>        t++;<br>    &#125;<br>    <span class="hljs-keyword">while</span> (j &lt;= right) &#123;<br>        temp[t] = arr[j];<br>        j++;<br>        t++;<br>    &#125;<br><br>    <span class="hljs-comment">// 将元素拷贝回原数组，完成排序</span><br>    t = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> index = left; index &lt;= right; index++, t++) &#123;<br>        arr[index] = temp[t];<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-
-
-
-
+<h3 id="HashMap-并发安全问题"><a href="#HashMap-并发安全问题" class="headerlink" title="HashMap 并发安全问题"></a>HashMap 并发安全问题</h3><p><strong>并发的多线程环境使用HashMap可能会造成死循环</strong></p>
 ]]></content>
+      <categories>
+        <category>Java</category>
+        <category>JavaSE</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>源码</tag>
+      </tags>
   </entry>
   <entry>
     <title>内存管理</title>
@@ -1014,36 +1045,27 @@
     <title>单例模式</title>
     <url>/page/singleton-pattern.html</url>
     <content><![CDATA[<h2 id="单例"><a href="#单例" class="headerlink" title="单例"></a>单例</h2><blockquote>
-<p>保证一个类仅有一个实例，并提供一个全局访问点（创建型）</p>
+<p>保证一个类仅有一个实例，并提供一个全局访问点，属于创建者模式</p>
 </blockquote>
-<p>在内存中只有一个实例，减少内存开销，避免资源多重占用</p>
-<p>没有接口，拓展比较困难，私有构造器，线程安全，延迟加载</p>
-<p>序列化反序列化</p>
-<p>反射</p>
-<p>数据库的连接池不会反复创建</p>
-<h3 id="懒汉模式（线程不安全）"><a href="#懒汉模式（线程不安全）" class="headerlink" title="懒汉模式（线程不安全）"></a>懒汉模式（线程不安全）</h3><ul>
+<h3 id="使用案例"><a href="#使用案例" class="headerlink" title="使用案例"></a>使用案例</h3><p>数据库连接池等等</p>
+<h2 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h2><h3 id="懒汉模式（线程不安全）"><a href="#懒汉模式（线程不安全）" class="headerlink" title="懒汉模式（线程不安全）"></a>懒汉模式（线程不安全）</h3><ul>
 <li>默认的构造函数中添加了私有属性<code>private</code></li>
 <li>多个访问者同时获取对象实例会造成多个同样的实例并存</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Singleton</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Singleton instance;<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">Singleton_01</span><span class="hljs-params">()</span> </span>&#123; &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Singleton <span class="hljs-title">getInstance</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">null</span> != instance) <span class="hljs-keyword">return</span> instance;<br>        instance = <span class="hljs-keyword">new</span> Singleton();<br>        <span class="hljs-keyword">return</span> instance;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-
-
 <h3 id="懒汉模式（线程安全）"><a href="#懒汉模式（线程安全）" class="headerlink" title="懒汉模式（线程安全）"></a>懒汉模式（线程安全）</h3><p>相对上一种实现方法在获取实例方法前使用了<code>synchronized</code>关键字，但这种模式由于上锁会导致资源浪费，不建议使用</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Singleton</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Singleton instance;<br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">Singleton</span><span class="hljs-params">()</span> </span>&#123; &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">synchronized</span> Singleton <span class="hljs-title">getInstance</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">null</span> != instance) <span class="hljs-keyword">return</span> instance;<br>        instance = <span class="hljs-keyword">new</span> Singleton();<br>        <span class="hljs-keyword">return</span> instance;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-
 
 <h3 id="饿汉模式（线程安全）"><a href="#饿汉模式（线程安全）" class="headerlink" title="饿汉模式（线程安全）"></a>饿汉模式（线程安全）</h3><p>在程序启动的时候直接运⾏行行加载，后续有外部需要使⽤用的时候获取即可，但不是懒加载，会造成性能上的损失</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Singleton</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Singleton instance = <span class="hljs-keyword">new</span> Singleton();<br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">Singleton</span><span class="hljs-params">()</span> </span>&#123; &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Singleton <span class="hljs-title">getInstance</span><span class="hljs-params">()</span> </span>&#123;<br>    	<span class="hljs-keyword">return</span> instance;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-
-
 <h3 id="使用类的内部类（线程安全）"><a href="#使用类的内部类（线程安全）" class="headerlink" title="使用类的内部类（线程安全）"></a>使用类的内部类（线程安全）</h3><p>是一种比较好的方式</p>
 <p>既保证了线程安全又保证了懒加载，同时不会因为加锁的方式耗费性能（因为JVM保证了一个类的构造方法在多线程环境下能够被正确的加载）</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Singleton</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SingletonHolder</span> </span>&#123;<br>    	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Singleton instance = <span class="hljs-keyword">new</span> Singleton();<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">Singleton</span><span class="hljs-params">()</span> </span>&#123; &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Singleton <span class="hljs-title">getInstance</span><span class="hljs-params">()</span> </span>&#123;<br>    	<span class="hljs-keyword">return</span> SingletonHolder.instance;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Singleton</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SingletonHolder</span> </span>&#123;<br>    	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Singleton instance = <span class="hljs-keyword">new</span> Singleton();<br>    &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">Singleton</span><span class="hljs-params">()</span> </span>&#123; &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Singleton <span class="hljs-title">getInstance</span><span class="hljs-params">()</span> </span>&#123;<br>    	<span class="hljs-keyword">return</span> SingletonHolder.instance;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-
+<h3 id="双重锁校验（线程安全）"><a href="#双重锁校验（线程安全）" class="headerlink" title="双重锁校验（线程安全）"></a>双重锁校验（线程安全）</h3><p>是<strong>懒汉模式（线程安全）</strong>方法级锁的优化，减少了部分获取实例的耗时，同时也满足了懒加载</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Singleton</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Singleton instance;<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">Singleton</span><span class="hljs-params">()</span> </span>&#123; &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Singleton <span class="hljs-title">getSingleton</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">if</span>(instance == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> instance;<br>        <span class="hljs-keyword">synchronized</span> (Singleton<span class="hljs-class">.<span class="hljs-keyword">class</span>) </span>&#123;<br>            <span class="hljs-keyword">if</span>(instance == <span class="hljs-keyword">null</span>) &#123;<br>                instance = <span class="hljs-keyword">new</span> Singleton();<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> instance;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 
@@ -1454,7 +1476,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Java：注解</title>
+    <title>Java11：注解</title>
     <url>/page/Java-annotation.html</url>
     <content><![CDATA[<h2 id="注解基础"><a href="#注解基础" class="headerlink" title="注解基础"></a>注解基础</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><blockquote>
 <p>注解（Annotation），JDK1.5引入</p>
@@ -1523,7 +1545,7 @@
 ]]></content>
       <categories>
         <category>Java</category>
-        <category>Java基础</category>
+        <category>JavaSE</category>
       </categories>
       <tags>
         <tag>Java</tag>
@@ -1546,12 +1568,13 @@
 <p>可以通过注解指定访问路径（在Servlet 3.0之后版本支持，否则得配置<code>web.xml</code>文件）</p>
 </blockquote>
 <p>示例如下，表示该网页位于<code>root/gg/ss</code>下，（name只是作为一个标识，没有太大实际作用）</p>
-<figure class="highlight less"><table><tr><td class="code"><pre><code class="hljs less"><span class="hljs-variable">@WebServlet</span>(<span class="hljs-string">"/gg/ss"</span>)<br><span class="hljs-variable">@WebServlet</span>(value=<span class="hljs-string">"/gg/ss"</span>)<br><span class="hljs-variable">@WebServlet</span>(urlPatterns=<span class="hljs-string">"/gg/ss"</span>)<br><span class="hljs-variable">@WebServlet</span>(name=<span class="hljs-string">"Servlet01"</span>,value=<span class="hljs-string">"/gg/ss"</span>)<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@WebServlet</span>(<span class="hljs-string">"/gg/ss"</span>)<br><span class="hljs-meta">@WebServlet</span>(value=<span class="hljs-string">"/gg/ss"</span>)<br><span class="hljs-meta">@WebServlet</span>(urlPatterns=<span class="hljs-string">"/gg/ss"</span>)<br><span class="hljs-meta">@WebServlet</span>(name=<span class="hljs-string">"Servlet01"</span>,value=<span class="hljs-string">"/gg/ss"</span>)<br></code></pre></td></tr></table></figure>
 
 <p>也可以配置多路径访问，如下表示两个路径都能够进行访问。</p>
 <figure class="highlight reasonml"><table><tr><td class="code"><pre><code class="hljs reasonml">@<span class="hljs-constructor">WebServlet(<span class="hljs-params">name</span>=<span class="hljs-string">"Servlet01"</span>,<span class="hljs-params">value</span>=&#123;<span class="hljs-string">"/ss"</span>,'<span class="hljs-operator">/</span><span class="hljs-params">gg</span>'&#125;)</span><br></code></pre></td></tr></table></figure>
 
-<h3 id="IDEA中更改Web项目根目录"><a href="#IDEA中更改Web项目根目录" class="headerlink" title="IDEA中更改Web项目根目录"></a>IDEA中更改Web项目根目录</h3><p><img src="http://cdn.ziyedy.top/Servlet%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/IDEA%E8%AE%BE%E7%BD%AEURL%E5%9C%B0%E5%9D%80.png" alt=""></p>
+<h3 id="IDEA中更改Web项目根目录"><a href="#IDEA中更改Web项目根目录" class="headerlink" title="IDEA中更改Web项目根目录"></a>IDEA中更改Web项目根目录</h3><img src="http://cdn.ziyedy.top/Servlet%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/IDEA%E8%AE%BE%E7%BD%AEURL%E5%9C%B0%E5%9D%80.png" style="zoom: 50%;" />
+
 <h2 id="Servlet生命周期"><a href="#Servlet生命周期" class="headerlink" title="Servlet生命周期"></a>Servlet生命周期</h2><blockquote>
 <p>Servlet没有main()方法，不能独立运行，其运行完全由Servlet容器来控制和调度。</p>
 <p>其生命周期则是指Servlet容器何时创建servlet实例、何时调用其方法进行请求的处理、何时销毁其实例的整个过程。</p>
@@ -1611,13 +1634,15 @@
 <p>使用<code>getParameterValues()</code>方法获取指定名称所有对应值，返回数组</p>
 </blockquote>
 <p>HTML表单如下：</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><code class="hljs pgsql">&lt;form action="test" <span class="hljs-keyword">method</span>="get"&gt;<br>    请输入：<br>    &lt;<span class="hljs-keyword">input</span> <span class="hljs-keyword">type</span>="text" <span class="hljs-type">name</span>="info" /&gt;<br>    &lt;<span class="hljs-keyword">input</span> <span class="hljs-keyword">type</span>="submit" <span class="hljs-keyword">value</span>="提交" /&gt;<br>&lt;/form&gt;<br></code></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">"test"</span> <span class="hljs-attr">method</span>=<span class="hljs-string">"get"</span>&gt;</span><br>    请输入：<br>    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"info"</span> /&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"submit"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"提交"</span> /&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="http://cdn.ziyedy.top/Servlet%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/%E5%A4%84%E7%90%86%E8%A1%A8%E5%8D%95%E8%BE%93%E5%85%A5.png" alt=""></p>
+<img src="http://cdn.ziyedy.top/Servlet%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/%E5%A4%84%E7%90%86%E8%A1%A8%E5%8D%95%E8%BE%93%E5%85%A5.png" style="zoom:80%;" />
+
 <p>Servlet处理逻辑：</p>
-<figure class="highlight scala"><table><tr><td class="code"><pre><code class="hljs scala"><span class="hljs-meta">@WebServlet</span>(<span class="hljs-string">"/test"</span>)    <span class="hljs-comment">// 子目录</span><br>public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">test</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">HttpServlet</span> </span>&#123;<br>    public void doGet(<span class="hljs-type">HttpServletRequest</span> req, <span class="hljs-type">HttpServletResponse</span> resp)<span class="hljs-keyword">throws</span> <span class="hljs-type">ServletException</span>, <span class="hljs-type">IOException</span> &#123;<br>        resp.setContentType(<span class="hljs-string">"text/html;charset=UTF-8"</span>); <span class="hljs-comment">// 解决中文乱码</span><br>        <span class="hljs-type">String</span> info = req.getParameter(<span class="hljs-string">"info"</span>);	<span class="hljs-comment">// 获取名为info的值</span><br>        <span class="hljs-type">PrintWriter</span> out=resp.getWriter();<br>        out.println(<span class="hljs-string">"&lt;html&gt;&lt;head&gt;&lt;title&gt;test&lt;/title&gt;&lt;/head&gt;"</span>);<br>        out.println(<span class="hljs-string">"&lt;body&gt;&lt;h1&gt;"</span>+info+<span class="hljs-string">"&lt;/h1&gt;"</span>);<br>        out.println(<span class="hljs-string">"&lt;/body&gt;&lt;/html"</span>);<br>        out.close();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@WebServlet</span>(<span class="hljs-string">"/test"</span>)    <span class="hljs-comment">// 子目录</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">test</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">HttpServlet</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doGet</span><span class="hljs-params">(HttpServletRequest req, HttpServletResponse resp)</span><span class="hljs-keyword">throws</span> ServletException, IOException </span>&#123;<br>        resp.setContentType(<span class="hljs-string">"text/html;charset=UTF-8"</span>); <span class="hljs-comment">// 解决中文乱码</span><br>        String info = req.getParameter(<span class="hljs-string">"info"</span>);	<span class="hljs-comment">// 获取名为info的值</span><br>        PrintWriter out=resp.getWriter();<br>        out.println(<span class="hljs-string">"&lt;html&gt;&lt;head&gt;&lt;title&gt;test&lt;/title&gt;&lt;/head&gt;"</span>);<br>        out.println(<span class="hljs-string">"&lt;body&gt;&lt;h1&gt;"</span>+info+<span class="hljs-string">"&lt;/h1&gt;"</span>);<br>        out.println(<span class="hljs-string">"&lt;/body&gt;&lt;/html"</span>);<br>        out.close();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p><img src="http://cdn.ziyedy.top/Servlet%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/%E5%A4%84%E7%90%86%E8%A1%A8%E5%8D%95%E7%BB%93%E6%9E%9C.png" alt=""></p>
+<img src="http://cdn.ziyedy.top/Servlet%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/%E5%A4%84%E7%90%86%E8%A1%A8%E5%8D%95%E7%BB%93%E6%9E%9C.png" style="zoom:67%;" />
+
 <h2 id="HttpServletResponse对象"><a href="#HttpServletResponse对象" class="headerlink" title="HttpServletResponse对象"></a>HttpServletResponse对象</h2><blockquote>
 <p>主要用于向客户端输出数据</p>
 <p>service()方法中形参接收的是 HttpServletResponse 接口的实例化对象，这个对象中封装了向客户端发送数据、发送响应头、发送响应状态码的方法</p>
@@ -1659,9 +1684,9 @@
 <p>在Web容器启动的时候，会为每一个 Web 应用程序创建一个对应的 <code>ServletContext</code> 对象，每个Web应用都有且只有一个<code>ServletContext</code>对象</p>
 <p>主要作用：1、作为域对象在整个Web应用共享数据；2、保存了当前应用程序的相关信息</p>
 </blockquote>
-<h3 id="获取与常用方法"><a href="#获取与常用方法" class="headerlink" title="获取与常用方法"></a>获取与常用方法</h3><figure class="highlight reasonml"><table><tr><td class="code"><pre><code class="hljs reasonml"><span class="hljs-comment">// 通过 request 对象获取</span><br>ServletContext servletContext = request.get<span class="hljs-constructor">ServletContext()</span>;<br><br><span class="hljs-comment">// 通过 session 对象获取</span><br>ServletContext servletContext = request.get<span class="hljs-constructor">Session()</span>.get<span class="hljs-constructor">ServletContext()</span>;<br><br><span class="hljs-comment">// 通过 servletConfig 对象获取</span><br>ServletConfig servletConfig = get<span class="hljs-constructor">ServletConfig()</span>;<br>ServletContext servletContext = servletConfig.get<span class="hljs-constructor">ServletContext()</span>;<br><br><span class="hljs-comment">// 直接通过Servlet类获取</span><br>ServletContext servletContext = get<span class="hljs-constructor">ServletContext()</span>;<br><br><span class="hljs-comment">// 获取项目存放的真实路径</span><br>String realPath = request.get<span class="hljs-constructor">ServletContext()</span>.get<span class="hljs-constructor">RealPath(<span class="hljs-string">"/"</span>)</span>;<br><span class="hljs-comment">// 获取当前服务器的版本信息</span><br>String serverInfo = request.get<span class="hljs-constructor">ServletContext()</span>.get<span class="hljs-constructor">ServerInfo()</span>;<br></code></pre></td></tr></table></figure>
+<h3 id="获取与常用方法"><a href="#获取与常用方法" class="headerlink" title="获取与常用方法"></a>获取与常用方法</h3><figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 通过 request 对象获取</span><br>ServletContext servletContext = request.getServletContext();<br><br><span class="hljs-comment">// 通过 session 对象获取</span><br>ServletContext servletContext = request.getSession().getServletContext();<br><br><span class="hljs-comment">// 通过 servletConfig 对象获取</span><br>ServletConfig servletConfig = getServletConfig();<br>ServletContext servletContext = servletConfig.getServletContext();<br><br><span class="hljs-comment">// 直接通过Servlet类获取</span><br>ServletContext servletContext = getServletContext();<br><br><span class="hljs-comment">// 获取项目存放的真实路径</span><br>String realPath = request.getServletContext().getRealPath(<span class="hljs-string">"/"</span>);<br><span class="hljs-comment">// 获取当前服务器的版本信息</span><br>String serverInfo = request.getServletContext().getServerInfo();<br></code></pre></td></tr></table></figure>
 
-<h3 id="ServletContext域对象使用"><a href="#ServletContext域对象使用" class="headerlink" title="ServletContext域对象使用"></a>ServletContext域对象使用</h3><figure class="highlight reasonml"><table><tr><td class="code"><pre><code class="hljs reasonml"><span class="hljs-comment">// 获取ServletContext对象</span><br>ServletContext servletContext = request.get<span class="hljs-constructor">ServletContext()</span>;<br><span class="hljs-comment">// 设置域对象</span><br>servletContext.set<span class="hljs-constructor">Attribute(<span class="hljs-string">"name"</span>,<span class="hljs-string">"zhangsan"</span>)</span>;<br><span class="hljs-comment">// 获取域对象</span><br>String name = (String) servletContext.get<span class="hljs-constructor">Attribute(<span class="hljs-string">"name"</span>)</span>;<br><span class="hljs-comment">// 移除域对象</span><br>servletContext.remove<span class="hljs-constructor">Attribute(<span class="hljs-string">"name"</span>)</span>;<br></code></pre></td></tr></table></figure>
+<h3 id="ServletContext域对象使用"><a href="#ServletContext域对象使用" class="headerlink" title="ServletContext域对象使用"></a>ServletContext域对象使用</h3><figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 获取ServletContext对象</span><br>ServletContext servletContext = request.getServletContext();<br><span class="hljs-comment">// 设置域对象</span><br>servletContext.setAttribute(<span class="hljs-string">"name"</span>,<span class="hljs-string">"zhangsan"</span>);<br><span class="hljs-comment">// 获取域对象</span><br>String name = (String) servletContext.getAttribute(<span class="hljs-string">"name"</span>);<br><span class="hljs-comment">// 移除域对象</span><br>servletContext.removeAttribute(<span class="hljs-string">"name"</span>);<br></code></pre></td></tr></table></figure>
 
 
 
@@ -1674,16 +1699,17 @@
 <li>如果服务器端发送重复的Cookie那么会覆盖原有的Cookie</li>
 <li>浏览器存放Cookie的数量是有上限的</li>
 </ul>
-<h3 id="Cookie的创建与发送"><a href="#Cookie的创建与发送" class="headerlink" title="Cookie的创建与发送"></a>Cookie的创建与发送</h3><figure class="highlight reasonml"><table><tr><td class="code"><pre><code class="hljs reasonml"><span class="hljs-comment">// 创建Cookie对象</span><br>Cookie cookie = <span class="hljs-keyword">new</span> <span class="hljs-constructor">Cookie(<span class="hljs-string">"id"</span>, 0)</span>;<br><span class="hljs-comment">// 发送Cookie对象</span><br>response.add<span class="hljs-constructor">Cookie(<span class="hljs-params">cookie</span>)</span>;<br></code></pre></td></tr></table></figure>
+<h3 id="Cookie的创建与发送"><a href="#Cookie的创建与发送" class="headerlink" title="Cookie的创建与发送"></a>Cookie的创建与发送</h3><figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 创建Cookie对象</span><br>Cookie cookie = <span class="hljs-keyword">new</span> Cookie(<span class="hljs-string">"id"</span>, <span class="hljs-number">0</span>);<br><span class="hljs-comment">// 发送Cookie对象</span><br>response.addCookie(cookie);<br></code></pre></td></tr></table></figure>
 
-<p><img src="http://cdn.ziyedy.top/Servlet%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/%E5%88%9B%E5%BB%BAcookie.png" alt=""></p>
+<img src="http://cdn.ziyedy.top/Servlet%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/%E5%88%9B%E5%BB%BAcookie.png" style="zoom:67%;" />
+
 <p>如上，即创建了我们自己的cookie</p>
-<figure class="highlight scala"><table><tr><td class="code"><pre><code class="hljs scala"><span class="hljs-meta">@WebServlet</span>(<span class="hljs-string">"/cookie1"</span>)<br>public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Cookie1</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">HttpServlet</span> </span>&#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">protected</span> void service(<span class="hljs-type">HttpServletRequest</span> request, <span class="hljs-type">HttpServletResponse</span> response) <span class="hljs-keyword">throws</span> <span class="hljs-type">ServletException</span>, <span class="hljs-type">IOException</span> &#123;<br>        <span class="hljs-comment">// 创建Cookie对象</span><br>        <span class="hljs-type">Cookie</span> cookie = <span class="hljs-keyword">new</span> <span class="hljs-type">Cookie</span>(<span class="hljs-string">"id"</span>, <span class="hljs-string">"id"</span>);<br>        <span class="hljs-comment">// 发送Cookie对象</span><br>        response.addCookie(cookie);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@WebServlet</span>(<span class="hljs-string">"/cookie1"</span>)<br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Cookie1</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">HttpServlet</span> </span>&#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">service</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="hljs-keyword">throws</span> ServletException, IOException </span>&#123;<br>        <span class="hljs-comment">// 创建Cookie对象</span><br>        Cookie cookie = <span class="hljs-keyword">new</span> Cookie(<span class="hljs-string">"id"</span>, <span class="hljs-string">"id"</span>);<br>        <span class="hljs-comment">// 发送Cookie对象</span><br>        response.addCookie(cookie);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <h3 id="Cookie的获取"><a href="#Cookie的获取" class="headerlink" title="Cookie的获取"></a>Cookie的获取</h3><blockquote>
 <p>Servlet提供了一个 <code>getCookies()</code>的方法用来获取客户端回传的所有 cookie 组成的一个<em>数组</em>，如果需要获取单个 cookie 则需要通过遍历，<code>getName()</code>获取 Cookie 的名称，<code>getValue()</code>获取 Cookie 的值</p>
 </blockquote>
-<figure class="highlight reasonml"><table><tr><td class="code"><pre><code class="hljs reasonml"><span class="hljs-comment">// 获取Cookie数组</span><br>Cookie<span class="hljs-literal">[]</span> cookies = request.get<span class="hljs-constructor">Cookies()</span>;<br><span class="hljs-comment">// 判断数组是否为空</span><br><span class="hljs-keyword">if</span> (cookies != null<span class="hljs-operator"> &amp;&amp; </span>cookies.length &gt; <span class="hljs-number">0</span>) &#123;<br>  	<span class="hljs-comment">// 遍历Cookie数组</span><br>  	for (Cookie cookie : cookies)&#123;<br>  		<span class="hljs-comment">// 判断并获取</span><br>    	<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(cookie.get<span class="hljs-constructor">Name()</span>);<br>    	<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(cookie.get<span class="hljs-constructor">Value()</span>);<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 获取Cookie数组</span><br>Cookie[] cookies = request.getCookies();<br><span class="hljs-comment">// 判断数组是否为空</span><br><span class="hljs-keyword">if</span> (cookies != <span class="hljs-keyword">null</span> &amp;&amp; cookies.length &gt; <span class="hljs-number">0</span>) &#123;<br>  	<span class="hljs-comment">// 遍历Cookie数组</span><br>  	<span class="hljs-keyword">for</span> (Cookie cookie : cookies)&#123;<br>  		<span class="hljs-comment">// 判断并获取</span><br>    	System.out.println(cookie.getName());<br>    	System.out.println(cookie.getValue());<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <h3 id="Cookie的路径"><a href="#Cookie的路径" class="headerlink" title="Cookie的路径"></a>Cookie的路径</h3><blockquote>
 <p>Cookie的<code>setPath()</code>方法设置cookie的路径，这个路径直接决定服务器的请求是否会从浏览器中加载某些cookie</p>
@@ -1702,12 +1728,13 @@
 <p>对于服务器而言，每一个连接到它的客户端都是一个 session，servlet 容器使用<code>javax.servlet.http.HttpSession</code>创建 HTTP 客户端和 HTTP 服务器之间的会话</p>
 <p>简而言之，Session 的作用就是为了标识一次会话，或者说确认一个用户，并且在一次会话（一个用户的多次请求）期间共享数据</p>
 </blockquote>
-<h3 id="Session的获取与基本使用"><a href="#Session的获取与基本使用" class="headerlink" title="Session的获取与基本使用"></a>Session的获取与基本使用</h3><figure class="highlight scala"><table><tr><td class="code"><pre><code class="hljs scala"><span class="hljs-meta">@WebServlet</span>(<span class="hljs-string">"/session1"</span>)<br>public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Session1</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">HttpServlet</span> </span>&#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">protected</span> void service(<span class="hljs-type">HttpServletRequest</span> request, <span class="hljs-type">HttpServletResponse</span> response) <span class="hljs-keyword">throws</span> <span class="hljs-type">ServletException</span>, <span class="hljs-type">IOException</span> &#123;<br>    	<span class="hljs-comment">// 获取Session对象</span><br>        <span class="hljs-type">HttpSession</span> session = request.getSession();<br><br>		<span class="hljs-comment">// 获取Session会话标识符</span><br>		<span class="hljs-comment">// D111F6C6F0A65C44184672B9BF04D728</span><br>        <span class="hljs-type">System</span>.out.println(session.getId());<br><br>		<span class="hljs-comment">// 获取Session创建时间</span><br>		<span class="hljs-comment">// 1612756089930</span><br>        <span class="hljs-type">System</span>.out.println(session.getCreationTime());<br><br>		<span class="hljs-comment">// 获取最后一次访问时间</span><br>		<span class="hljs-comment">// 1612756089935</span><br>        <span class="hljs-type">System</span>.out.println(session.getLastAccessedTime());<br>		<br>		<span class="hljs-comment">// 判断是否是新的Session对象</span><br>		<span class="hljs-comment">// false</span><br>        <span class="hljs-type">System</span>.out.println(session.isNew());<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="Session的获取与基本使用"><a href="#Session的获取与基本使用" class="headerlink" title="Session的获取与基本使用"></a>Session的获取与基本使用</h3><figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@WebServlet</span>(<span class="hljs-string">"/session1"</span>)<br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Session1</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">HttpServlet</span> </span>&#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">service</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="hljs-keyword">throws</span> ServletException, IOException </span>&#123;<br>    	<span class="hljs-comment">// 获取Session对象</span><br>        HttpSession session = request.getSession();<br><br>		<span class="hljs-comment">// 获取Session会话标识符</span><br>		<span class="hljs-comment">// D111F6C6F0A65C44184672B9BF04D728</span><br>        System.out.println(session.getId());<br><br>		<span class="hljs-comment">// 获取Session创建时间</span><br>		<span class="hljs-comment">// 1612756089930</span><br>        System.out.println(session.getCreationTime());<br><br>		<span class="hljs-comment">// 获取最后一次访问时间</span><br>		<span class="hljs-comment">// 1612756089935</span><br>        System.out.println(session.getLastAccessedTime());<br>		<br>		<span class="hljs-comment">// 判断是否是新的Session对象</span><br>		<span class="hljs-comment">// false</span><br>        System.out.println(session.isNew());<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <h3 id="JSESSIONID标识符"><a href="#JSESSIONID标识符" class="headerlink" title="JSESSIONID标识符"></a>JSESSIONID标识符</h3><blockquote>
 <p>使用一个叫JSESSIONID的特殊cookie来标识一次会话，Session 的底层依赖 Cookie 来实现</p>
 </blockquote>
-<p><img src="http://cdn.ziyedy.top/Servlet%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/session.png" alt=""></p>
+<img src="http://cdn.ziyedy.top/Servlet%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/session.png" style="zoom: 67%;" />
+
 <h3 id="Session域对象"><a href="#Session域对象" class="headerlink" title="Session域对象"></a>Session域对象</h3><blockquote>
 <p>Session 用来表示一次会话，在一次会话中数据是可以共享的，这时 session 作为域对象存在</p>
 </blockquote>
@@ -1738,7 +1765,7 @@
 <p>1、使用注解<code>@MultipartConfig()</code>标识文件上传</p>
 <p>2、 Servlet 将 <code>multipart/form-data</code> 的 POST 请求封装成 Part，通过 Part 对上传的文件进行操作</p>
 </blockquote>
-<figure class="highlight scala"><table><tr><td class="code"><pre><code class="hljs scala"><span class="hljs-meta">@WebServlet</span>(<span class="hljs-string">"/uploadServlet"</span>)<br><span class="hljs-meta">@MultipartConfig</span>()<br>public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UploadServlet</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">HttpServlet</span> </span>&#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">protected</span> void service(<span class="hljs-type">HttpServletRequest</span> request, <span class="hljs-type">HttpServletResponse</span> response) <span class="hljs-keyword">throws</span> <span class="hljs-type">ServletException</span>, <span class="hljs-type">IOException</span> &#123;<br>        request.setCharacterEncoding(<span class="hljs-string">"UTF-8"</span>);<br>        <span class="hljs-type">Part</span> part = request.getPart(<span class="hljs-string">"myfile"</span>);<br><br>        <span class="hljs-type">String</span> cd = part.getHeader(<span class="hljs-string">"Content-Disposition"</span>);<br>        <span class="hljs-type">String</span> fileName = cd.substring(cd.lastIndexOf(<span class="hljs-string">"="</span>)+<span class="hljs-number">2</span>, cd.length()<span class="hljs-number">-1</span>);<br><br>        <span class="hljs-type">String</span> realPath = request.getServletContext().getRealPath(<span class="hljs-string">"/"</span>);<br>        part.write(realPath + fileName);	<span class="hljs-comment">// 写入文件</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@WebServlet</span>(<span class="hljs-string">"/uploadServlet"</span>)<br><span class="hljs-meta">@MultipartConfig</span>()<br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UploadServlet</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">HttpServlet</span> </span>&#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">service</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="hljs-keyword">throws</span> ServletException, IOException </span>&#123;<br>        request.setCharacterEncoding(<span class="hljs-string">"UTF-8"</span>);<br>        Part part = request.getPart(<span class="hljs-string">"myfile"</span>);<br><br>        String cd = part.getHeader(<span class="hljs-string">"Content-Disposition"</span>);<br>        String fileName = cd.substring(cd.lastIndexOf(<span class="hljs-string">"="</span>)+<span class="hljs-number">2</span>, cd.length()-<span class="hljs-number">1</span>);<br><br>        String realPath = request.getServletContext().getRealPath(<span class="hljs-string">"/"</span>);<br>        part.write(realPath + fileName);	<span class="hljs-comment">// 写入文件</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 
@@ -1753,7 +1780,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Java：反射</title>
+    <title>Java10：反射</title>
     <url>/page/Java-reflection.html</url>
     <content><![CDATA[<h1 id="反射的基本概念"><a href="#反射的基本概念" class="headerlink" title="反射的基本概念"></a>反射的基本概念</h1><h2 id="反射（reflective）"><a href="#反射（reflective）" class="headerlink" title="反射（reflective）"></a>反射（reflective）</h2><p>程序可以访问、检测和修改它本身状态和行为的能力（自描述和自控制），称为反射，在<code>java.lang.reflect</code>包中。</p>
 <p>即在运行时加载、探知和使用编译期间完全未知的类，能够<strong>增加动态语言特性，弥补强动态语言的不足</strong></p>
@@ -1843,14 +1870,14 @@
 ]]></content>
       <categories>
         <category>Java</category>
-        <category>Java基础</category>
+        <category>JavaSE</category>
       </categories>
       <tags>
         <tag>Java</tag>
       </tags>
   </entry>
   <entry>
-    <title>Java：数据类型与运算符</title>
+    <title>Java02：数据类型与运算符</title>
     <url>/page/java-datatype-operator.html</url>
     <content><![CDATA[<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><h3 id="8种基本数据类型"><a href="#8种基本数据类型" class="headerlink" title="8种基本数据类型"></a>8种基本数据类型</h3><blockquote>
 <p>Java有8中基本数据类型</p>
@@ -1947,7 +1974,7 @@
 ]]></content>
       <categories>
         <category>Java</category>
-        <category>Java基础</category>
+        <category>JavaSE</category>
       </categories>
       <tags>
         <tag>Java</tag>
@@ -1976,38 +2003,111 @@
       </tags>
   </entry>
   <entry>
-    <title>Java12-2：synchronized关键字总结</title>
-    <url>/page/Java12-synchronized.html</url>
-    <content><![CDATA[<p>使用 <code>synchronized</code> 修饰的作用域中的代码为同步执行的，也就是并发的情况下，执行到对<strong>同一个对象加锁的 synchronized 代码块</strong>时，为串行执行的</p>
-<h2 id="synchronized-使用"><a href="#synchronized-使用" class="headerlink" title="synchronized 使用"></a>synchronized 使用</h2><h3 id="1、同步代码块"><a href="#1、同步代码块" class="headerlink" title="1、同步代码块"></a>1、同步代码块</h3><p>小括号里的对象是可以是任意的对象，这个对象负责对想要执行同步代码块的线程进行“调度”</p>
+    <title>Java12-2：锁机制的使用与实现</title>
+    <url>/page/Java12-lock.html</url>
+    <content><![CDATA[<h1 id="synchronized"><a href="#synchronized" class="headerlink" title="synchronized"></a>synchronized</h1><p>使用 <code>synchronized</code> 修饰的作用域中的代码为同步执行的，也就是并发的情况下，执行到对<strong>同一个对象加锁</strong>的 synchronized 代码块时，为串行执行的</p>
+<h2 id="synchronized-使用"><a href="#synchronized-使用" class="headerlink" title="synchronized 使用"></a>synchronized 使用</h2><h3 id="1、同步代码块"><a href="#1、同步代码块" class="headerlink" title="1、同步代码块"></a>1、同步代码块</h3><p>小括号里的对象是可以是任意的对象，这个对象负责对想要执行同步代码块的线程进行“调度”，起到对象锁的作用</p>
 <p>每个对其 synchronized 的线程，它都会记录下来，然后等到同步代码块没有线程执行的时候，它就会通知其它线程来执行同步代码块</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">synchronized</span> (lock) &#123;<br>	<span class="hljs-comment">// 同步代码</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java">Lock lock = <span class="hljs-keyword">new</span> Lock();	<span class="hljs-comment">// 此处可以是任意对象</span><br><br><span class="hljs-comment">// 对象锁</span><br><span class="hljs-keyword">synchronized</span> (lock) &#123;<br>&#125;<br><br><span class="hljs-comment">// 类锁</span><br><span class="hljs-keyword">synchronized</span> (Lock<span class="hljs-class">.<span class="hljs-keyword">class</span>) </span>&#123;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p><em>不同类型的多个 Thread 如果有代码要同步执行，锁对象要使用所有线程共同持有的同一个对象</em></p>
-<h3 id="2、修饰方法"><a href="#2、修饰方法" class="headerlink" title="2、修饰方法"></a>2、修饰方法</h3><p>2.1 修饰普通成员方法</p>
-<p>此时锁对象就是<code>this</code>，所以以下两种写法等价</p>
+<h3 id="2、修饰方法"><a href="#2、修饰方法" class="headerlink" title="2、修饰方法"></a>2、修饰方法</h3><h4 id="2-1-修饰普通成员方法"><a href="#2-1-修饰普通成员方法" class="headerlink" title="2.1 修饰普通成员方法"></a>2.1 修饰普通成员方法</h4><p>此时锁对象就是<code>this</code>，所以以下两种写法等价</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title">eat</span><span class="hljs-params">()</span></span>&#123;<br>	.......<br>  .......<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">func</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-keyword">synchronized</span>(<span class="hljs-keyword">this</span>)&#123;<br>		.......<br>  	.......<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>2.2 修饰静态方法</p>
-<p>此时锁对象为类的 Class 对象。如果静态方法所在的类为 Test。那么锁对象就是 Test.class</p>
+<h4 id="2-2-修饰静态方法"><a href="#2-2-修饰静态方法" class="headerlink" title="2.2 修饰静态方法"></a>2.2 修饰静态方法</h4><p>此时锁对象为类的 Class 对象。如果静态方法所在的类为 Test。那么锁对象就是 Test.class</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title">func</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-comment">// 锁对象为 Test.class</span><br>        <span class="hljs-comment">// 同步方法体</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p><em>注意：构造方法是不能使用 synchronized 关键字修饰的</em></p>
-<h2 id="synchronized-原理"><a href="#synchronized-原理" class="headerlink" title="synchronized 原理"></a>synchronized 原理</h2><p>普通的java对象能够完成同步，是因为每个对象都关联了一个 monitor lock（内置锁）。</p>
-<p>当一个线程获取了 monitor lock 后，其它线程如果运行到获取同一个 monitor 的时候就会被 block 住。当这个线程执行完同步代码，则会释放 monitor lock。</p>
-<p>每个 Java 对象在 JVM 的对等对象的头中保存锁状态，指向 ObjectMonitor。ObjectMonitor 保存了当前持有锁的线程引用，EntryList 中保存目前等待获取锁的线程，WaitSet 保存 wait 的线程。此外还有一个计数器，每当线程获得 monitor 锁，计数器 +1，当线程重入此锁时，计数器还会 +1。当计数器不为0时，其它尝试获取 monitor 锁的线程将会被保存到EntryList中，并被阻塞。当持有锁的线程释放了monitor 锁后，计数器 -1。当计数器归位为 0 时，所有 EntryList 中的线程会尝试去获取锁，但只会有一个线程会成功，没有成功的线程仍旧保存在 EntryList 中。<strong>由此可以看出 monitor 锁是非公平锁</strong></p>
-<p>使用<code>javap</code>命令进行反编译后，这两条指令就是上面所讲述的获取锁和释放锁的关键指令</p>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><code class="hljs routeros">15: monitorenter<br><span class="hljs-built_in">..</span><span class="hljs-built_in">..</span><span class="hljs-built_in">..</span><br>128: monitorexit<br></code></pre></td></tr></table></figure>
+<h2 id="synchronized-原理"><a href="#synchronized-原理" class="headerlink" title="synchronized 原理"></a>synchronized 原理</h2><h3 id="1、synchronized-同步语句块原理"><a href="#1、synchronized-同步语句块原理" class="headerlink" title="1、synchronized 同步语句块原理"></a>1、synchronized 同步语句块原理</h3><figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SynchronizedDemo</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">method</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">synchronized</span> (<span class="hljs-keyword">this</span>) &#123;<br>            System.out.println(<span class="hljs-string">"synchronized 代码块"</span>);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>使用<code>javap</code>命令进行反编译后可以得到：</p>
+<img src="http://cdn.ziyedy.top/Java12-2%EF%BC%9A%E9%94%81%E6%9C%BA%E5%88%B6%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%AE%9E%E7%8E%B0/%E5%90%8C%E6%AD%A5%E8%AF%AD%E5%8F%A5%E5%9D%97%E5%8E%9F%E7%90%86.png" style="zoom:80%;" />
+
+<p>当执行 <code>monitorenter</code> 指令时，线程试图获取锁也就是获取 <strong>对象监视器 <code>monitor</code></strong> 的持有权。</p>
+<p><code>synchronized</code> 同步语句块的实现使用的是 <code>monitorenter</code> 和 <code>monitorexit</code> 指令，其中 <code>monitorenter</code> 指令指向同步代码块的开始位置， <code>monitorexit</code> 指令则指明同步代码块的结束位置</p>
+<p>在执行<code>monitorenter</code>时，会尝试获取对象的锁，如果锁的计数器为 0 则表示锁可以被获取，获取后将锁计数器设为 1 也就是加 1。</p>
+<p>在执行 <code>monitorexit</code> 指令后，将锁计数器设为 0，表明锁被释放。如果获取对象锁失败，那当前线程就要阻塞等待，直到锁被另外一个线程释放为止。</p>
+<p>在 Java 虚拟机(HotSpot)中，Monitor 是基于 C++实现的，由ObjectMonitor实现的。每个对象中都内置了一个 <code>ObjectMonitor</code>对象（在Java对象头中，维护了所需要的各类信息，如当前持有锁的对象，以及其他等待队列等）。</p>
+<p>另外，<code>wait/notify</code>等方法也依赖于<code>monitor</code>对象，这就是为什么只有在同步的块或者方法中才能调用<code>wait/notify</code>等方法，否则会抛出<code>java.lang.IllegalMonitorStateException</code>的异常的原因。</p>
+<h3 id="2、synchronized-修饰方法原理"><a href="#2、synchronized-修饰方法原理" class="headerlink" title="2、synchronized 修饰方法原理"></a>2、synchronized 修饰方法原理</h3><figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SynchronizedDemo</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title">method</span><span class="hljs-params">()</span> </span>&#123;<br>        System.out.println(<span class="hljs-string">"synchronized 方法"</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>使用<code>javap</code>命令进行反编译后可以得到：</p>
+<img src="http://cdn.ziyedy.top/Java12-2%EF%BC%9A%E9%94%81%E6%9C%BA%E5%88%B6%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%AE%9E%E7%8E%B0/%E5%90%8C%E6%AD%A5%E6%96%B9%E6%B3%95%E5%8E%9F%E7%90%86.png" style="zoom:80%;" />
+
+<p><code>synchronized</code> 修饰的方法并没有 <code>monitorenter</code> 指令和 <code>monitorexit</code> 指令，取而代之的是 <code>ACC_SYNCHRONIZED</code> 标识，该标识指明了该方法是一个同步方法。JVM 通过该 <code>ACC_SYNCHRONIZED</code> 访问标志来辨别一个方法是否声明为同步方法，从而执行相应的同步调用。</p>
+<p><strong>总结：两者的本质都是对对象监视器 monitor 的获取。同时 monitor 锁是非公平锁</strong></p>
+<h2 id="synchronized-注意事项"><a href="#synchronized-注意事项" class="headerlink" title="synchronized 注意事项"></a>synchronized 注意事项</h2><p>1、synchronized 使用的为非公平锁，如果需要公平锁，可以使用 ReentrantLock，设置为公平锁</p>
+<p>2、锁对象不能为 null。因为锁对象为 null，就不存在对象头，以及与其关联的 monitor 锁</p>
+<p>3、由于加锁的开销很大，所以应该把共享资源的操作放在 synchronized 代码块中，而尽量把不需要同步的代码移出 synchronized 代码块</p>
+<h1 id="Lock显式锁"><a href="#Lock显式锁" class="headerlink" title="Lock显式锁"></a>Lock显式锁</h1><p><code>java.util.concurrent.locks</code> 包下的 <code>Lock</code> 接口和它的一些实现类如 <code>ReentrantLock</code></p>
+<p>显式锁：在代码中需要主动的去进行 lock 操作</p>
+<h2 id="ReentrantLock"><a href="#ReentrantLock" class="headerlink" title="ReentrantLock"></a>ReentrantLock</h2><p>ReentrantLock 也是互斥锁，有如下三种互斥情况：读/写、写/写、读/读。</p>
+<p>相对于<code>synchronized</code>，<code>ReentrantLock</code> 更为灵活，它能够支持公平和非公平锁两种形式</p>
+<p>默认的无参构造方法则会创建非公平锁，要创建公平锁需要在声明的时候传入 true</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java">Lock lock = <span class="hljs-keyword">new</span> ReentrantLock(<span class="hljs-keyword">true</span>);	<span class="hljs-comment">// 创建公平锁</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><p>基本使用就是使用<code>lock</code>加锁，然后使用<code>unlock</code>解锁（建议使用<code>finally</code>避免出现异常锁没有释放掉）</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java">Lock lock = <span class="hljs-keyword">new</span> ReentrantLock();<br>lock.lock();	<span class="hljs-comment">// 加锁</span><br><span class="hljs-keyword">try</span> &#123;<br>	<span class="hljs-comment">// 操作代码</span><br>&#125; <span class="hljs-keyword">finally</span> &#123;<br>	lock.unlock();	<span class="hljs-comment">// 解锁</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="使用tryLock完成加锁操作"><a href="#使用tryLock完成加锁操作" class="headerlink" title="使用tryLock完成加锁操作"></a>使用<code>tryLock</code>完成加锁操作</h3><p>使用<code>lock.lock()</code>进行加锁操作是阻塞的，直到获取锁才会继续向下进行</p>
+<p>而使用<code>tryLock</code>，调用后会立即（也可以通过传入时间和单位，来控制等待获取锁的时长）返回获取锁的情况，获取为 true，未能获取为 false，因此能够<em>根据结果进行进一步的处理</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span>(lock.tryLock(<span class="hljs-number">1</span>, TimeUnit.SECONDS))&#123;<br>    <span class="hljs-keyword">try</span> &#123;<br>        doSomething();<br>    &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;<br>        e.printStackTrace();<br>    &#125; <span class="hljs-keyword">finally</span> &#123;<br>        lock.unlock();<br>    &#125;<br>&#125;<span class="hljs-keyword">else</span>&#123;<br>    doSomethingElse();<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 
-<h2 id="synchronized-使用注意"><a href="#synchronized-使用注意" class="headerlink" title="synchronized 使用注意"></a>synchronized 使用注意</h2><p>正确的编写方式应该把共享资源的操作放在 synchronized 代码块中</p>
-<p>尽量把不需要同步的代码移出 synchronized 代码块</p>
-<p>synchronized 关键字需要配合一个对象使用，这个对象可以是任何对象</p>
-<p>1、synchronized 使用的为非公平锁，如果你需要公平锁，那么不要使用 synchronized。可以使用 ReentrantLock，设置为公平锁。关于 ReentrantLock，会在后面章节进行讲解；</p>
-<p>2、锁对象不能为 null。如果锁对象为 null，何谈对象头，以及保存与其关联的 monitor 锁呢？所以代码中要确保synchronized使用的锁对象不为 null；</p>
-<p>3、只把需要同步的代码放入 synchronized 代码块。如果不思考，为了线程安全把方法中全部代码都放入同步代码块，那么将会丧失多线程的优势。再多的线程也只能串行执行，这完全违背了并发的初衷；</p>
-<p>4、只有使用同一个对象作为锁对象，才能同步。记住是同一个对象，而不是同一个类。有一种常犯的错误是，不同线程持有的是同一个类的不同实例。那么该对象实例用作锁对象的话，多个线程并不会同步。还一种错误是使用不同类的实例作为锁对象，但是期望不同位置的同步代码块能够同步执行。这是不可能达到你想要的效果的。</p>
+<h2 id="lock-方法源码解析"><a href="#lock-方法源码解析" class="headerlink" title="lock 方法源码解析"></a><code>lock</code> 方法源码解析</h2><p>如下可见，<code>lock</code> 方法通过 <code>ReentrantLock</code> 内置的 <code>syn</code> 对象上锁，而 <code>syn</code>对象则是在 <code>ReentrantLock</code> 的构造方法中创建</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">lock</span><span class="hljs-params">()</span> </span>&#123;<br>    sync.lock();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="ReentrantLock-的构造方法"><a href="#ReentrantLock-的构造方法" class="headerlink" title="ReentrantLock 的构造方法"></a>ReentrantLock 的构造方法</h3><p>如下可见 <code>ReentrantLock</code> 的构造方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 无参构造函数</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ReentrantLock</span><span class="hljs-params">()</span> </span>&#123;<br>    sync = <span class="hljs-keyword">new</span> NonfairSync();<br>&#125;<br><br><span class="hljs-comment">// 有参构造函数</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ReentrantLock</span><span class="hljs-params">(<span class="hljs-keyword">boolean</span> fair)</span> </span>&#123;<br>    sync = fair ? <span class="hljs-keyword">new</span> FairSync() : <span class="hljs-keyword">new</span> NonfairSync();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>如下：<code>FairSync</code> 和 <code>NonFairSync</code> 都继承自 <code>Sync</code>，而<code>Sync</code>继承自<code>AbstractQueuedSynchronizer</code>，即所谓的<strong>AQS</strong></p>
+<p><img src="http://cdn.ziyedy.top/Java12-2%EF%BC%9A%E9%94%81%E6%9C%BA%E5%88%B6%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%AE%9E%E7%8E%B0/Syn%E7%9A%84%E7%BB%A7%E6%89%BF%E5%85%B3%E7%B3%BB.jpg" alt=""></p>
+<h3 id="AQS"><a href="#AQS" class="headerlink" title="AQS"></a>AQS</h3><p>AQS 的实现思想就是：</p>
+<ul>
+<li>若资源空闲，则将当前请求的线程设置为有效工作线程，并将共享资源设置为锁定状态</li>
+<li>若资源被占用，则使用一套线程等待阻塞等待以及锁分配机制，该机制AQS使用一个<strong>虚拟双向队列</strong>实现</li>
+</ul>
+<p>通俗而言，就是AQS使用 <code>volatile</code> 去修饰共享变量 state，线程通过CAS去改变状态符，成功则获取共享内容，失败则进入等待队列，等待被唤醒，如下图所示：</p>
+<img src="http://cdn.ziyedy.top/Java12-2%EF%BC%9A%E9%94%81%E6%9C%BA%E5%88%B6%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%AE%9E%E7%8E%B0/AQS.jpg" style="zoom:80%;" />
+
+<p>AQS 底层使用<strong>模板方法模式</strong>，定义了两种资源共享方式：</p>
+<ul>
+<li><strong>Exclusive</strong>：独占资源，如ReentrantLock</li>
+<li><strong>Share</strong>：共享，多个线程可以同时执行，如ReadWriteLock</li>
+</ul>
+<h3 id="获取锁的流程"><a href="#获取锁的流程" class="headerlink" title="获取锁的流程"></a>获取锁的流程</h3><p>获取锁的流程大致如下，公平锁与不公平锁的实现主要体现在``tryAcquire<code></code>中逻辑的差异</p>
+<ol>
+<li>直接通过 <code>tryAcquire</code> 尝试获取锁，成功直接返回；</li>
+<li>如果没能获取成功，那么把自己加入等待队列；</li>
+<li><strong>自旋</strong>查看自己的排队情况；</li>
+<li>如果排队轮到自己，那么尝试通过 <code>tryAcquire</code> 获取锁；</li>
+<li>如果没轮到自己，那么回到第三步查看自己的排队情况。</li>
+</ol>
+<h2 id="ReadWriteLock"><a href="#ReadWriteLock" class="headerlink" title="ReadWriteLock"></a>ReadWriteLock</h2><p>ReadWriteLock 顾名思义读写锁，也就是说同一个锁对读和写的上锁方式是不一样的，写锁的互斥性更高。</p>
+<p>ReadWriteLock 提供了<em>读写之间不同互斥策略</em>的锁。因此，当程序有频繁的读操作时，他能够带来更好的性能</p>
+<p>由于读写控制的策略不一样，带来了锁内部的复杂度。所以如果程序的读操作并没有达到一定数量，使用读写锁会比互斥锁性能更差</p>
+<p>如下为读写锁的继承关系：</p>
+<p><img src="http://cdn.ziyedy.top/Java12-2%EF%BC%9A%E9%94%81%E6%9C%BA%E5%88%B6%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%AE%9E%E7%8E%B0/ReadWriteLock%E5%AE%9E%E7%8E%B0.jpg" alt=""></p>
+<h3 id="锁降级与锁升级"><a href="#锁降级与锁升级" class="headerlink" title="锁降级与锁升级"></a>锁降级与锁升级</h3><ul>
+<li><p>锁降级：如果线程持有写锁，如果可以在不释放写锁的情况下，获取读锁，这就是锁降级。</p>
+<p><strong>ReadWriteLock 支持锁降级</strong>，如下：</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java">ReadWriteLock lock = <span class="hljs-keyword">new</span> ReentrantReadWriteLock();<br>Lock readLock = lock.readLock();<br>Lock writeLock = lock.writeLock();<br><br>writeLock.lock();<br>System.out.println(<span class="hljs-string">"got the write lock"</span>);	<span class="hljs-comment">// 成功输出</span><br>readLock.lock();<br>System.out.println(<span class="hljs-string">"got the read lock"</span>);	<span class="hljs-comment">// 成功输出</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>锁升级：如果线程持有读锁，能够直接获取写锁。这意味着从一个低级别的锁升级到高级别的锁，其实就是变相的插队，无视其它在排队等待写锁的线程。</p>
+<p><strong>ReadWriteLock 并不支持锁升级</strong>，如下：</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java">ReadWriteLock lock = <span class="hljs-keyword">new</span> ReentrantReadWriteLock();<br>Lock readLock = lock.readLock();<br>Lock writeLock = lock.writeLock();<br><br>readLock.lock();<br>System.out.println(<span class="hljs-string">"got the read lock"</span>);	<span class="hljs-comment">// 成功输出</span><br>writeLock.lock();<br>System.out.println(<span class="hljs-string">"got the write lock"</span>);	<span class="hljs-comment">// 未输出</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><blockquote>
+<p><a href="https://www.cnblogs.com/three-fighter/p/14396208.html" target="_blank" rel="noopener">https://www.cnblogs.com/three-fighter/p/14396208.html</a></p>
+</blockquote>
 ]]></content>
       <categories>
         <category>Java</category>
@@ -2043,22 +2143,16 @@
 <p>而run方法则会先判断target是否为空（target即为传入的Runnable对象），因此当传入Runnable对象后，该Thread类所执行的代码是传入的Runnable对象的run方法</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> Runnable target;	<span class="hljs-comment">// 传入的 Runnable</span><br><br><span class="hljs-meta">@Override</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-comment">// 判断如果target不为空，则执行传入的target中的逻辑</span><br>    <span class="hljs-keyword">if</span> (target != <span class="hljs-keyword">null</span>) &#123;<br>        target.run();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-
-
-
-
+<p>如下，<code>start</code>方法执行总结如下：</p>
+<p><img src="http://cdn.ziyedy.top/Java12%EF%BC%9A%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/start%E6%96%B9%E6%B3%95.jpg" alt=""></p>
 <h2 id="线程生命周期"><a href="#线程生命周期" class="headerlink" title="线程生命周期"></a>线程生命周期</h2><ul>
-<li><p><strong>New状态</strong>：当一个 Thread 对象刚刚被创建时，状态为 NEW，此时与其他 Java 对象没有什么不同</p>
-</li>
-<li><p><strong>RUNNABLE状态</strong>：调用 <code>start</code> 方法后即进入 RUNNABLE 状态</p>
-</li>
-<li><p><strong>RUNNING状态</strong>：该状态得到CPU分配时即进入RUNNING状态</p>
-</li>
-<li><p><strong>BLOCKED状态</strong>：包括Blocked（被阻塞）、Waiting（等待）、Time_waiting（计时等待）等等</p>
-</li>
-<li><p><strong>TERMINATED状态</strong>：线程的终止状态，意味着线程的生命周期已经走完</p>
-</li>
+<li><strong>New状态</strong>：当一个 Thread 对象刚刚被创建时，状态为 NEW，此时与其他 Java 对象没有什么不同</li>
+<li><strong>RUNNABLE状态</strong>：调用 <code>start</code> 方法后即进入 RUNNABLE 状态</li>
+<li><strong>RUNNING状态</strong>：该状态得到CPU分配时即进入RUNNING状态</li>
+<li><strong>BLOCKED状态</strong>：包括Blocked（被阻塞）、Waiting（等待）、Time_waiting（计时等待）等等</li>
+<li><strong>TERMINATED状态</strong>：线程的终止状态，意味着线程的生命周期已经走完</li>
 </ul>
+<h3 id="线程状态的转换"><a href="#线程状态的转换" class="headerlink" title="线程状态的转换"></a>线程状态的转换</h3><p><img src="http://cdn.ziyedy.top/Java12%EF%BC%9A%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/%E7%BA%BF%E7%A8%8B%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png" alt=""></p>
 <h2 id="Thread类常用方法"><a href="#Thread类常用方法" class="headerlink" title="Thread类常用方法"></a>Thread类常用方法</h2><h3 id="currentThread-及线程对象常用方法"><a href="#currentThread-及线程对象常用方法" class="headerlink" title="currentThread()及线程对象常用方法"></a>currentThread()及线程对象常用方法</h3><p>该方法返回的是代码实际运行时候的<strong>线程对象实例</strong></p>
 <p><em>注：由于同一段代码可能被不同线程执行，因此当前线程是相对的</em></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java">Thread.currentThread();					    <span class="hljs-comment">// 获取当前线程</span><br>Thread.currentThread().getName();		    <span class="hljs-comment">// 获取当前线程名称</span><br>Thread.currentThread().setName(线程名称);	 <span class="hljs-comment">// 设置线程名称</span><br>Thread.currentThread().isAlive();			<span class="hljs-comment">// 判断当前线程是否处于活动状态</span><br>Thread.currentThread().getId();				<span class="hljs-comment">// 获得线程的唯一标识</span><br></code></pre></td></tr></table></figure>
@@ -2090,6 +2184,8 @@
 <li>调用 <code>wait</code>方法：原本 RUNNING 的线程，进入 BLOCKING 状态，此线程会放弃原来持有的锁</li>
 <li>调用 <code>notify</code> 方法：唤醒 wait 的线程，让其继续往下执行</li>
 </ul>
+<p>方法 <code>wait()</code> 的作用是使当前执行代码的线程进行等待， <strong><code>wait()</code> 方法只能在同步方法中或同步块中调用</strong>， <code>wait()</code> 方法执行后，当前线程释放锁，线程与其他线程竞争重新获取锁</p>
+<p>方法 <code>notify()</code> 也要在同步方法或同步块中调用，该方法是用来通知那些可能等待该对象的对象锁的其他线程，对其发出通知notify，并使进入就绪态，等待获取锁。如果有多个线程等待，则有线程规划器随机挑选出一个呈wait状态的线程。在notify()方法后，当前线程不会马上释放该对象锁，要等到执行notify()方法的线程将程序执行完，也就是退出同步代码块中</p>
 ]]></content>
       <categories>
         <category>Java</category>
@@ -2131,24 +2227,6 @@
       </categories>
       <tags>
         <tag>智能算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>MyBatis基本使用方法</title>
-    <url>/page/mybatis-basic-summary.html</url>
-    <content><![CDATA[<p>#</p>
-<p>JDBC需要的主要步骤：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 注册数据库驱动</span><br>Class.forName(<span class="hljs-string">"com.mysql.jdbc.Driver"</span>);<br><span class="hljs-comment">// 创建连接对象</span><br>Connection conn = DriverManager.getConnection(url, username, password);<br><span class="hljs-comment">// 创建 Statement, 用来执行 sql 语句</span><br>Statement stmt = conn.createStatement();<br></code></pre></td></tr></table></figure>
-
-
-
-]]></content>
-      <categories>
-        <category>Java</category>
-        <category>框架</category>
-      </categories>
-      <tags>
-        <tag>数据库</tag>
       </tags>
   </entry>
   <entry>
@@ -2348,15 +2426,15 @@
   <entry>
     <title>第三章：传输层</title>
     <url>/page/transport-layer.html</url>
-    <content><![CDATA[<h2 id="传输层概述"><a href="#传输层概述" class="headerlink" title="传输层概述"></a>传输层概述</h2><h3 id="传输层概述-1"><a href="#传输层概述-1" class="headerlink" title="传输层概述"></a>传输层概述</h3><blockquote>
+    <content><![CDATA[<h1 id="传输层概述"><a href="#传输层概述" class="headerlink" title="传输层概述"></a>传输层概述</h1><h2 id="传输层概述-1"><a href="#传输层概述-1" class="headerlink" title="传输层概述"></a>传输层概述</h2><blockquote>
 <p>传输层协议为运行在不同主机上的<strong>应用进程</strong>之间提供<strong>逻辑通信</strong>功能</p>
 <p>传输层协议是在<strong>端系统</strong>中而不是在网络路由器中实现的</p>
 </blockquote>
-<h3 id="传输层与网络层关系"><a href="#传输层与网络层关系" class="headerlink" title="传输层与网络层关系"></a>传输层与网络层关系</h3><blockquote>
+<h2 id="传输层与网络层关系"><a href="#传输层与网络层关系" class="headerlink" title="传输层与网络层关系"></a>传输层与网络层关系</h2><blockquote>
 <p>传输层为运行在不同主机上的<strong>进程间</strong>的逻辑通信，而网络层则提供了<strong>主机之间</strong>的逻辑通信</p>
 <p>传输层协议所能提供的服务也受到了<em>底层网络层协议的服务模型的限制</em>，</p>
 </blockquote>
-<h3 id="因特网传输概述"><a href="#因特网传输概述" class="headerlink" title="因特网传输概述"></a>因特网传输概述</h3><p>传输层主要有TCP（传输控制协议）与UDP（用户数据报协议）两种协议，特点及区别如下：</p>
+<h2 id="因特网传输概述"><a href="#因特网传输概述" class="headerlink" title="因特网传输概述"></a>因特网传输概述</h2><p>传输层主要有TCP（传输控制协议）与UDP（用户数据报协议）两种协议，特点及区别如下：</p>
 <p><img src="http://cdn.ziyedy.top/%E7%AC%AC%E4%B8%89%E7%AB%A0%EF%BC%9A%E4%BC%A0%E8%BE%93%E5%B1%82/TCP%2CUDP.png" alt=""></p>
 <h2 id="多路复用与多路分解"><a href="#多路复用与多路分解" class="headerlink" title="多路复用与多路分解"></a>多路复用与多路分解</h2><blockquote>
 <p>多路复用与多路分解：本质上是将网络层所提供的<em>主机到主机</em>交付服务，<strong>扩展</strong>到为在主机上运行的应用程序所提供的<em>进程到进程</em>交付服务</p>
@@ -2373,35 +2451,35 @@
 <h3 id="多路分解"><a href="#多路分解" class="headerlink" title="多路分解"></a>多路分解</h3><blockquote>
 <p>将传输层报文段中的数据放置到正确的套接字的工作称为多路分解，确切地说，多路分解其实是多路分发，或者说是数据流的分解。</p>
 </blockquote>
-<h2 id="无连接传输：UDP"><a href="#无连接传输：UDP" class="headerlink" title="无连接传输：UDP"></a>无连接传输：UDP</h2><blockquote>
+<h1 id="无连接传输：UDP"><a href="#无连接传输：UDP" class="headerlink" title="无连接传输：UDP"></a>无连接传输：UDP</h1><blockquote>
 <p>UDP 只是做了传输层协议能够做的最少工作。除了多路复用/多路分解功能及少量的差错检测外，它几乎没有对 IP 增加别的东西</p>
 <p>UDP发送报文前，发送方与接收方之间并未进行握手，因此UDP是<strong>无连接的</strong></p>
 <p>DNS即是一个使用UDP的例子</p>
 </blockquote>
-<h4 id="UDP的优点"><a href="#UDP的优点" class="headerlink" title="UDP的优点"></a>UDP的优点</h4><ul>
+<h2 id="UDP的优点"><a href="#UDP的优点" class="headerlink" title="UDP的优点"></a>UDP的优点</h2><ul>
 <li>应用层能更好地设置要发送的数据和发送时间（有较快发送速率，且能容忍一些丢包）</li>
 <li>无需建立连接（不会引入建立连接的时延）</li>
 <li>无连接状态（UDP无连接状态，也无需追踪一些相关参数）</li>
 <li>分组首部开销小（TCP有20字节的首部开销，而UDP仅有8个字节）</li>
 </ul>
-<h4 id="UDP报文结构"><a href="#UDP报文结构" class="headerlink" title="UDP报文结构"></a>UDP报文结构</h4><p><img src="http://cdn.ziyedy.top/%E7%AC%AC%E4%B8%89%E7%AB%A0%EF%BC%9A%E4%BC%A0%E8%BE%93%E5%B1%82/UDP%E6%8A%A5%E6%96%87%E6%AE%B5.png" alt=""></p>
+<h2 id="UDP报文结构"><a href="#UDP报文结构" class="headerlink" title="UDP报文结构"></a>UDP报文结构</h2><p><img src="http://cdn.ziyedy.top/%E7%AC%AC%E4%B8%89%E7%AB%A0%EF%BC%9A%E4%BC%A0%E8%BE%93%E5%B1%82/UDP%E6%8A%A5%E6%96%87%E6%AE%B5.png" alt=""></p>
 <p>由4个字段组成，每个字段包含2个字节</p>
 <p>源端口号、目的端口号</p>
 <p>长度：包含首部在内的UDP报文段长度，以字节为单位</p>
 <p>校验和：计算报文段在传输的过程中是否出现了差错</p>
-<h4 id="校验和"><a href="#校验和" class="headerlink" title="校验和"></a>校验和</h4><blockquote>
+<h3 id="校验和"><a href="#校验和" class="headerlink" title="校验和"></a>校验和</h3><blockquote>
 <p>校验和提供了差错检测功能，即当 UDP 报文段从源到达目的时，校验和用于确定其中的比特是否发生了改变</p>
 </blockquote>
-<h2 id="可靠数据传输原理（建模）"><a href="#可靠数据传输原理（建模）" class="headerlink" title="可靠数据传输原理（建模）"></a>可靠数据传输原理（建模）</h2><blockquote>
+<h1 id="可靠数据传输原理（建模）"><a href="#可靠数据传输原理（建模）" class="headerlink" title="可靠数据传输原理（建模）"></a>可靠数据传输原理（建模）</h1><blockquote>
 <p>考虑单向实现可靠传输的建模，得到TCP实现的基本思路</p>
 </blockquote>
-<h3 id="完全可靠信道上"><a href="#完全可靠信道上" class="headerlink" title="完全可靠信道上"></a>完全可靠信道上</h3><blockquote>
+<h2 id="完全可靠信道上"><a href="#完全可靠信道上" class="headerlink" title="完全可靠信道上"></a>完全可靠信道上</h2><blockquote>
 <p>底层信道完全可靠</p>
 <p>no bit errors;    no loss of packets</p>
 </blockquote>
 <figure class="highlight reasonml"><table><tr><td class="code"><pre><code class="hljs reasonml"><span class="hljs-comment">// 发送方</span><br>packet = make<span class="hljs-constructor">_pkt(<span class="hljs-params">data</span>)</span>	<span class="hljs-comment">// 生成数据分组</span><br>packet = make<span class="hljs-constructor">_pkt(<span class="hljs-params">data</span>)</span>	<span class="hljs-comment">// 发送分组</span><br><br><span class="hljs-comment">// 接收方</span><br>extract (packet,data)	<span class="hljs-comment">// 从分组中提取</span><br>deliver<span class="hljs-constructor">_data(<span class="hljs-params">data</span>)</span>		<span class="hljs-comment">// 交付数据给应用层</span><br></code></pre></td></tr></table></figure>
 
-<h3 id="具有比特差错信道上"><a href="#具有比特差错信道上" class="headerlink" title="具有比特差错信道上"></a>具有比特差错信道上</h3><h4 id="ACK、NAK不受损"><a href="#ACK、NAK不受损" class="headerlink" title="ACK、NAK不受损"></a>ACK、NAK不受损</h4><blockquote>
+<h2 id="具有比特差错信道上"><a href="#具有比特差错信道上" class="headerlink" title="具有比特差错信道上"></a>具有比特差错信道上</h2><h3 id="ACK、NAK不受损"><a href="#ACK、NAK不受损" class="headerlink" title="ACK、NAK不受损"></a>ACK、NAK不受损</h3><blockquote>
 <p>在传输过程中会产生比特差错</p>
 <p>需要引入：<strong>自动重传请求协议</strong>（ARQ），即</p>
 <ul>
@@ -2410,15 +2488,15 @@
 <li>重传：接收方收到有差错的分组时，发送方进行重传</li>
 </ul>
 </blockquote>
-<h4 id="ACK、NAK受损"><a href="#ACK、NAK受损" class="headerlink" title="ACK、NAK受损"></a>ACK、NAK受损</h4><blockquote>
+<h3 id="ACK、NAK受损"><a href="#ACK、NAK受损" class="headerlink" title="ACK、NAK受损"></a>ACK、NAK受损</h3><blockquote>
 <p>确认信息在传输中本身出现错误</p>
 <p>解决方法：发送方为数据报添加<strong>序号字段</strong>，而接收方抛弃重复的数据报</p>
 </blockquote>
-<h3 id="具有比特差错的丢包信道上"><a href="#具有比特差错的丢包信道上" class="headerlink" title="具有比特差错的丢包信道上"></a>具有比特差错的丢包信道上</h3><blockquote>
+<h2 id="具有比特差错的丢包信道上"><a href="#具有比特差错的丢包信道上" class="headerlink" title="具有比特差错的丢包信道上"></a>具有比特差错的丢包信道上</h2><blockquote>
 <p>除去比特受损外，还有可能丢包</p>
 <p>解决方法：发送方等待ACK到来足够的时间（采用<strong>定时器</strong>实现），然后进行<strong>重传</strong></p>
 </blockquote>
-<h3 id="流水线可靠数据传输协议"><a href="#流水线可靠数据传输协议" class="headerlink" title="流水线可靠数据传输协议"></a>流水线可靠数据传输协议</h3><blockquote>
+<h2 id="流水线可靠数据传输协议"><a href="#流水线可靠数据传输协议" class="headerlink" title="流水线可靠数据传输协议"></a>流水线可靠数据传输协议</h2><blockquote>
 <p>为提高发送效率（解决上述“停等协议”的问题）：以“不停等”方式运行，<em>允许发送方发送多个分组而无需等待确认</em>，该技术称为流水线。流水线提出了新的需求：</p>
 </blockquote>
 <ul>
@@ -2426,17 +2504,17 @@
 <li>协议的发送方和接收方必须缓存多个分组。</li>
 <li>所需序号范围和对缓冲的要求取决于数据传输协议处理丢失、损坏及过度延时分组：<strong>回退N步与选择重传</strong></li>
 </ul>
-<h4 id="回退N步（GBN）"><a href="#回退N步（GBN）" class="headerlink" title="回退N步（GBN）"></a>回退N步（GBN）</h4><blockquote>
+<h3 id="回退N步（GBN）"><a href="#回退N步（GBN）" class="headerlink" title="回退N步（GBN）"></a>回退N步（GBN）</h3><blockquote>
 <p>在 GBN 协议中，允许发送方发送多个分组而不需等待确认，但<em>在流水线中未确认的分组数不能超过某个最大允许数N</em></p>
 <p>已被发送但还未被确认的分组的许可序号范围可以被看成是一个<strong>在序号范围内长度为N的窗口</strong>，因此N常被称为窗口长度，GBN也被称为滑动窗口协议</p>
 <p><em>当有超时事件发生，出现丢失和过度时延分组时，发送方将重传所有已发送但还未被确认的分组</em></p>
 <p>GBN使用了<strong>累积确认</strong>技术，累积确认指接收一个未出错分组（可能失序）时总是返回一个最后接收的按顺序到达分组的确认。</p>
 </blockquote>
-<h4 id="选择重传"><a href="#选择重传" class="headerlink" title="选择重传"></a>选择重传</h4><blockquote>
+<h3 id="选择重传"><a href="#选择重传" class="headerlink" title="选择重传"></a>选择重传</h3><blockquote>
 <p>选择重传 (SR) 协议通过让发送方仅重传那些它怀疑在接收方出错的分组而避免了不必要的重传。</p>
 <p>这种个别的、按需的重传要求接收方逐个地确认正确接收的分组，也用窗口长度N来限制流水线中未完成、未被确认的分组数。</p>
 </blockquote>
-<h2 id="面向连接的传输：TCP"><a href="#面向连接的传输：TCP" class="headerlink" title="面向连接的传输：TCP"></a>面向连接的传输：TCP</h2><blockquote>
+<h1 id="面向连接的传输：TCP"><a href="#面向连接的传输：TCP" class="headerlink" title="面向连接的传输：TCP"></a>面向连接的传输：TCP</h1><blockquote>
 <p>TCP是<strong>面向连接</strong>的传输层协议，<em>连接的实质是双方都初始化与连接相关的发送/接收缓冲区，以及许多 TCP 状态变量</em></p>
 </blockquote>
 <ul>
@@ -2445,7 +2523,7 @@
 </ul>
 <p>TCP连接每一端都有各自的发送缓冲和接收缓存，TCP 可从缓存中取出并放入报文段中发送的数据量受限于<strong>最大报文段长MSS（Maximum Segment Size）</strong>，通常由<strong>最大链路层帧长度（即最大传输单元MTU）</strong>来决定（也就是底层的通信链路决定）</p>
 <p>除去进行通信的两台主机之中维护TCP连接所需的内容，这两台主机之间的路由器交换机并未为该连接分配任何缓存和控制变量</p>
-<h3 id="TCP报文格式"><a href="#TCP报文格式" class="headerlink" title="TCP报文格式"></a>TCP报文格式</h3><p><img src="http://cdn.ziyedy.top/%E7%AC%AC%E4%B8%89%E7%AB%A0%EF%BC%9A%E4%BC%A0%E8%BE%93%E5%B1%82/TCP%E6%8A%A5%E6%96%87%E6%AE%B5.png" alt=""></p>
+<h2 id="TCP报文格式"><a href="#TCP报文格式" class="headerlink" title="TCP报文格式"></a>TCP报文格式</h2><p><img src="http://cdn.ziyedy.top/%E7%AC%AC%E4%B8%89%E7%AB%A0%EF%BC%9A%E4%BC%A0%E8%BE%93%E5%B1%82/TCP%E6%8A%A5%E6%96%87%E6%AE%B5.png" alt=""></p>
 <ul>
 <li>源端口号与目的端口号：用于多路复用/多路分解来自或送至上层应用的数据</li>
 <li>32 比特的序号字段和 32 比特的确认号字段：用来实现可靠数据传输服务</li>
@@ -2466,58 +2544,69 @@
 <p>​    SYN=1，ACK=1时，表示对方同意建立连接</p>
 <p>FIN：告知对方关闭连接</p>
 </blockquote>
-<h3 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h3><p><img src="http://cdn.ziyedy.top/%E7%AC%AC%E4%B8%89%E7%AB%A0%EF%BC%9A%E4%BC%A0%E8%BE%93%E5%B1%82/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png" alt=""></p>
-<h4 id="第一次握手"><a href="#第一次握手" class="headerlink" title="第一次握手"></a>第一次握手</h4><p>发送方创建一个特殊的TCP报文段（<strong>SYN报文段</strong>）：</p>
+<h2 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h2><p><img src="http://cdn.ziyedy.top/%E7%AC%AC%E4%B8%89%E7%AB%A0%EF%BC%9A%E4%BC%A0%E8%BE%93%E5%B1%82/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png" alt=""></p>
+<h3 id="第一次握手"><a href="#第一次握手" class="headerlink" title="第一次握手"></a>第一次握手</h3><p>发送方创建一个特殊的TCP报文段（<strong>SYN报文段</strong>）：</p>
 <ol>
 <li>不包含任何应用层数据；</li>
 <li>将SYN标志位置为1；</li>
 <li>随机生成一个初始序号（client_isn），并将该序号置于该报文的序号字段（seq）处</li>
 </ol>
-<h4 id="第二次握手"><a href="#第二次握手" class="headerlink" title="第二次握手"></a>第二次握手</h4><p>收到SYN报文段后，接收方会返回允许连接的报文段（SYNACK报文段）：</p>
+<h3 id="第二次握手"><a href="#第二次握手" class="headerlink" title="第二次握手"></a>第二次握手</h3><p>收到SYN报文段后，接收方会返回允许连接的报文段（SYNACK报文段）：</p>
 <ol>
 <li>SYN标志位置为1，ACK标志位置为1；</li>
 <li>确认号字段（ack）置为client_isn+1；</li>
 <li>接收端生成一个自己的初始序号（server_isn），并将该序号置于自己报文的序号字段（seq）处</li>
 </ol>
-<h4 id="第三次握手"><a href="#第三次握手" class="headerlink" title="第三次握手"></a>第三次握手</h4><ol>
+<h3 id="第三次握手"><a href="#第三次握手" class="headerlink" title="第三次握手"></a>第三次握手</h3><ol>
 <li>SYN被置为0，ACK置为1</li>
 <li>确认号字段置为server_isn+1</li>
 <li>seq字段设置为client_isn+1</li>
 </ol>
-<h3 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h3><p><img src="http://cdn.ziyedy.top/%E7%AC%AC%E4%B8%89%E7%AB%A0%EF%BC%9A%E4%BC%A0%E8%BE%93%E5%B1%82/%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B.png" alt=""></p>
+<h2 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h2><p><img src="http://cdn.ziyedy.top/%E7%AC%AC%E4%B8%89%E7%AB%A0%EF%BC%9A%E4%BC%A0%E8%BE%93%E5%B1%82/%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B.png" alt=""></p>
 <ol>
-<li>主机A发送一个标识了<strong>FIN=1</strong>的数据段，序列号<strong>seq=a</strong>的报文用来释放连接</li>
-<li>主机B回应一个标识了<strong>ACK=1</strong>的数据段，序列号<strong>seq=b</strong>，确认序号<strong>ack=a+1</strong>，作为对主机A的FIN报文的确认</li>
-<li>主机A收到主机B的确认后进入<strong>等待状态</strong>，等待主机B请求释放连接。主机B向主机A发送一个标识了<strong>FIN=1，ACK=1</strong>的数据段，序列号为<strong>seq=b</strong>，确认序列号为<strong>ack=a+1</strong>，用以释放连接</li>
+<li>主机A发送一个用来释放连接的报文（标识了<strong>FIN=1</strong>，序列号<strong>seq=a</strong>，ack=z，），并处于<strong>FIN-WAIT-1状态</strong>，此处A不再有数据发送，但仍然可以接收数据</li>
+<li>主机B回应一个标识了<strong>ACK=1</strong>的数据段，序列号<strong>seq=b</strong>，确认序号<strong>ack=a+1</strong>，作为对主机A的FIN报文的确认，并且进入<strong>CLOSE-WAIT状态</strong>。A收到确认后，进入<strong>FIN-WAIT-2**</strong>状态**，等待B的连接释放报文段</li>
+<li>主机B向主机A发送一个标识了<strong>FIN=1，ACK=1</strong>的数据段，序列号为<strong>seq=b</strong>，确认序列号为<strong>ack=a+1</strong>，用以释放连接</li>
 <li>主机A发送标识了<strong>ACK=1</strong>，序列号<strong>seq=a+1</strong>，确认序号<strong>ack=b+1</strong>，用以确认关闭</li>
 </ol>
-<p>为什么要进行四次挥手：因为关闭连接时，接收端收到FIN报文时，很可能不会立刻关闭连接，因此需要多一次挥手</p>
-<h3 id="TCP可靠数据传输"><a href="#TCP可靠数据传输" class="headerlink" title="TCP可靠数据传输"></a>TCP可靠数据传输</h3><p>主要有超时重传和快速重传：</p>
+<p><strong>客户端或服务器均可主动发起挥手动作</strong></p>
+<h3 id="为什么要进行四次挥手"><a href="#为什么要进行四次挥手" class="headerlink" title="为什么要进行四次挥手"></a>为什么要进行四次挥手</h3><p>因为TCP是全双工模式，一方发送FIN报文只是代表单方面没有信息需要发送了，但另一方可以继续发送报文，<strong>只有双方都发送了FIN报文整个通信过程才能结束</strong></p>
+<h3 id="TCP释放连接为何发送方time-wait状态必须等待2MSL的时间"><a href="#TCP释放连接为何发送方time-wait状态必须等待2MSL的时间" class="headerlink" title="TCP释放连接为何发送方time_wait状态必须等待2MSL的时间"></a>TCP释放连接为何发送方time_wait状态必须等待2MSL的时间</h3><blockquote>
+<p>MSL（Maximum Segment Lifetime）：报文段最大生存时间，任何报文在网络上存在时间超过该时间就会被丢弃</p>
+</blockquote>
+<ul>
+<li><p>为了保证A发送的最后一个ACK报文能够到达B。</p>
+<p>由于该ACK报文段有可能丢失，因而使处在LAST-ACK状态的B收不到对已发送的FIN+ACK报文段的确认，因此会引起超时重传。而若A不等待而是直接释放连接，就无法收到B重传的FIN报文段，就不会再发送一次确认报文段，<strong>最终会导致B无法按照正常的步骤进入CLOSED状态</strong></p>
+</li>
+<li><p>经过2MSL时间，可以使本次连接所产生的所有报文段都从网络中消失。这样就可以使下一个新的连接中不会出现旧的连接请求的报文段（<strong>彻底完成这次报文的发送与接收</strong>）</p>
+</li>
+</ul>
+<h2 id="TCP可靠数据传输"><a href="#TCP可靠数据传输" class="headerlink" title="TCP可靠数据传输"></a>TCP可靠数据传输</h2><p>主要有超时重传和快速重传：</p>
 <ul>
 <li>超时重传：超时后进行重传，需要设置超时事件（通常4个往返时间RTT）</li>
 <li>快速重传：如果发送者收到了重复的3个ACK报文段（接收方如果发现有丢失（即收到了间隔后的报文段）会重复发送ACK报文段，），说明该报文段所指下一个段丢失，会在超时触发前快速重传该报文段。可以避免超时引起的大时延</li>
 </ul>
-<h3 id="TCP流量控制——滑动窗口"><a href="#TCP流量控制——滑动窗口" class="headerlink" title="TCP流量控制——滑动窗口"></a>TCP流量控制——滑动窗口</h3><blockquote>
+<h2 id="TCP流量控制——滑动窗口"><a href="#TCP流量控制——滑动窗口" class="headerlink" title="TCP流量控制——滑动窗口"></a>TCP流量控制——滑动窗口</h2><blockquote>
 <p>流量控制只要在于消除发送方导致接收方缓存溢出的可能性，流量控制是一个<strong>速度匹配</strong>服务，即发送方的发送速率与接收方应用程序的读速率相匹配</p>
 </blockquote>
 <p>TCP通过维护<strong>接收窗口</strong>来提供流量控制，接收窗口用于告诉发送方，该接收方还有多少可用的缓存空间</p>
-<h2 id="拥塞控制原理"><a href="#拥塞控制原理" class="headerlink" title="拥塞控制原理"></a>拥塞控制原理</h2><h3 id="产生拥塞的情况"><a href="#产生拥塞的情况" class="headerlink" title="产生拥塞的情况"></a>产生拥塞的情况</h3><h4 id="情况1"><a href="#情况1" class="headerlink" title="情况1"></a>情况1</h4><blockquote>
+<h1 id="拥塞控制原理"><a href="#拥塞控制原理" class="headerlink" title="拥塞控制原理"></a>拥塞控制原理</h1><h2 id="产生拥塞的情况"><a href="#产生拥塞的情况" class="headerlink" title="产生拥塞的情况"></a>产生拥塞的情况</h2><h3 id="情况1"><a href="#情况1" class="headerlink" title="情况1"></a>情况1</h3><blockquote>
 <p>两个发送方和一个具有无穷大缓存的路由器</p>
 </blockquote>
 <p>当分组到达速率接近<em>链路容量</em>时，分组将经历较长的排队时延</p>
-<h4 id="情况2"><a href="#情况2" class="headerlink" title="情况2"></a>情况2</h4><blockquote>
+<h3 id="情况2"><a href="#情况2" class="headerlink" title="情况2"></a>情况2</h3><blockquote>
 <p>两个发送方和一个具有有限缓存的路由器</p>
 </blockquote>
 <p>发送方在遇到大时延时所进行的不必要重传，导致路由器需要利用其链路带宽来转发不必要的分组</p>
-<h4 id="情况3"><a href="#情况3" class="headerlink" title="情况3"></a>情况3</h4><blockquote>
+<h3 id="情况3"><a href="#情况3" class="headerlink" title="情况3"></a>情况3</h3><blockquote>
 <p>四个发送方、具有有限缓存的多台路由器和多跳路径</p>
 </blockquote>
 <p>当一个分组沿一条路径被丢弃时每个上游路由器用于转发该分组而使用的传输容量最终被浪费掉了</p>
-<h3 id="拥塞控制方法"><a href="#拥塞控制方法" class="headerlink" title="拥塞控制方法"></a>拥塞控制方法</h3><h4 id="端到端控制"><a href="#端到端控制" class="headerlink" title="端到端控制"></a>端到端控制</h4><blockquote>
+<h2 id="拥塞控制方法"><a href="#拥塞控制方法" class="headerlink" title="拥塞控制方法"></a>拥塞控制方法</h2><h3 id="端到端控制"><a href="#端到端控制" class="headerlink" title="端到端控制"></a>端到端控制</h3><blockquote>
 <p>网络层没有为传输层拥塞控制提供显式支持，因此端系统必须对网络行为观察（分组丢失、时延等），来<strong>推断</strong>拥塞的发生</p>
 </blockquote>
 <p>TCP中将报文段的丢失（通过超时或3次冗余确认得知），认为是网络拥塞的一个迹象，之后TCP会相应减小其发送的窗口</p>
-<h4 id="网络辅助的拥塞控制"><a href="#网络辅助的拥塞控制" class="headerlink" title="网络辅助的拥塞控制"></a>网络辅助的拥塞控制</h4><blockquote>
+<h3 id="网络辅助的拥塞控制"><a href="#网络辅助的拥塞控制" class="headerlink" title="网络辅助的拥塞控制"></a>网络辅助的拥塞控制</h3><blockquote>
 <p>网络层对是否产生拥塞显式反馈给端系统</p>
 </blockquote>
 <h2 id="TCP拥塞控制"><a href="#TCP拥塞控制" class="headerlink" title="TCP拥塞控制"></a>TCP拥塞控制</h2><blockquote>
@@ -2766,35 +2855,53 @@
 <li>HTTP将每个对象封装在自己的响应报文里，而SMTP则将所有的报文对象放到一个报文之中；</li>
 </ul>
 <h3 id="邮件访问协议"><a href="#邮件访问协议" class="headerlink" title="邮件访问协议"></a>邮件访问协议</h3><p>需要注意的是，<strong>SMTP是邮件服务器之间发送邮件报文</strong>的协议，并不是用户通过代理和邮件服务器之间通信的协议；用户代理使用邮件访问协议来从邮件服务器上获取邮件信息；目前常用的邮件访问协议有<strong>POP3</strong>（Post Office Protocol-Version 3）、<strong>因特网邮件访问协议</strong>（<strong>IMAP</strong>，Internet Mail Access protocol）和<strong>HTTP</strong></p>
-<h2 id="DNS：因特网的目录服务"><a href="#DNS：因特网的目录服务" class="headerlink" title="DNS：因特网的目录服务"></a>DNS：因特网的目录服务</h2><blockquote>
-<p>DNS（Domain Name System）域名系统，用于处理<strong>主机名和IP地址的转换问题</strong>。</p>
-<p><strong>DNS是一个由分层的DNS服务器组成的分布式数据库和一个使得主机可以查询分布式数据库的应用层协议组成</strong></p>
-<p>DNS运行在UDP之上，使用53号端口</p>
-</blockquote>
-<h3 id="DNS提供的服务"><a href="#DNS提供的服务" class="headerlink" title="DNS提供的服务"></a>DNS提供的服务</h3><h3 id="DNS工作机理概述"><a href="#DNS工作机理概述" class="headerlink" title="DNS工作机理概述"></a>DNS工作机理概述</h3><blockquote>
-<p><strong>DNS采用分布式的设计方案</strong></p>
+<h2 id="DNS：因特网的目录服务"><a href="#DNS：因特网的目录服务" class="headerlink" title="DNS：因特网的目录服务"></a>DNS：因特网的目录服务</h2><p>DNS（Domain Name System）域名系统，用于处理<strong>主机名和IP地址的转换问题</strong>。</p>
+<p>DNS是一个由分层的DNS服务器组成的分布式数据库和一个使得主机可以查询分布式数据库的应用层协议组成</p>
+<p><strong>DNS运行在UDP之上</strong>，使用53号端口</p>
+<h3 id="DNS工作机理概述"><a href="#DNS工作机理概述" class="headerlink" title="DNS工作机理概述"></a>DNS工作机理概述</h3><p><strong>DNS采用分布式的设计方案</strong></p>
 <p>因为单一的DNS服务器无法解决<em>单点故障</em>、<em>保证通信容量</em>、<em>邻近所有的查询主机</em>和<em>维护困难</em>等问题</p>
-</blockquote>
 <h4 id="分布式层次的数据库"><a href="#分布式层次的数据库" class="headerlink" title="分布式层次的数据库"></a>分布式层次的数据库</h4><p>为了处理扩展性问题，DNS服务器采用层次式组织，并且分布在全世界范围内；大致来说，存在三种DNS服务器：<strong>根DNS服务器</strong>、<strong>顶级域DNS服务器</strong>和<strong>权威DNS服务器</strong></p>
-<ul>
-<li>根DNS服务器：因特网上有13个根DNS服务器</li>
-<li>顶级域DNS服务器：负责顶级域名，如com，org，net，edu，gov以及各个国家的顶级域名的转换</li>
-<li>权威DNS服务器：如大学、公司等公共可访问的DNS记录</li>
-<li><strong>本地DNS服务器（除去上面三个外重要的DNS服务器）</strong>：<strong>邻近</strong>其所在网络的其他主机。当主机发出DNS请求时，该请求被发往本地DNS服务器，它起着代理的作用，并将请求转发到DNS服务器层次结构中。</li>
-</ul>
-<blockquote>
-<p>解析<code>www.baidu.com</code>的IP地址的过程</p>
+<table>
+<thead>
+<tr>
+<th>分类</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>根DNS服务器</td>
+<td>因特网上有13个根DNS服务器</td>
+</tr>
+<tr>
+<td>顶级域DNS服务器</td>
+<td>负责顶级域名，如com，org，net，edu，gov以及各个国家的顶级域名的转换</td>
+</tr>
+<tr>
+<td>权威DNS服务器</td>
+<td>如大学、公司等公共可访问的DNS记录</td>
+</tr>
+<tr>
+<td><strong>本地DNS服务器</strong></td>
+<td>最重要的DNS服务器，当主机发出DNS请求时，该请求被发往本地DNS服务器，它起着<strong>代理</strong>的作用，并将请求转发到DNS服务器层次结构中</td>
+</tr>
+</tbody></table>
+<img src="http://cdn.ziyedy.top/%E7%AC%AC%E4%BA%8C%E7%AB%A0%EF%BC%9A%E5%BA%94%E7%94%A8%E5%B1%82/DNS%E5%9F%9F%E5%90%8D%E7%A9%BA%E9%97%B4%E7%BB%93%E6%9E%84.png" style="zoom:80%;" />
+
+<h3 id="域名解析过程"><a href="#域名解析过程" class="headerlink" title="域名解析过程"></a>域名解析过程</h3><p>DNS查询有两种，一种是<strong>递归查询</strong>一种是<strong>迭代查询</strong></p>
+<p>实践中，查询通常满足这样的模式：<strong>从请求主机到本地DNS服务器的查询是递归的，其余查询是迭代的</strong>。</p>
+<p>因此，域名解析过程具体可以描述如下：</p>
 <ol>
-<li>返回负责解析顶级域名<code>com</code>的服务器的IP地址</li>
-<li>顶级域DNS服务器建返回<code>baidu.com</code>的权威服务器的IP集合</li>
-<li>与这些服务器之一取得联系，获得<code>www.baidu.com</code>的IP地址</li>
+<li>主机先向本地域名服务器进行递归查询</li>
+<li>本地域名服务器采用迭代查询，向一个根域名服务器进行查询</li>
+<li>根域名服务器告诉本地域名服务器，下一次应该查询的顶级域名服务器的IP地址</li>
+<li>本地域名服务器向顶级域名服务器进行查询</li>
+<li>顶级域名服务器告诉本地域名服务器，下一步查询权限服务器的IP地址</li>
+<li>本地域名服务器向权限服务器进行查询</li>
+<li>权限服务器告诉本地域名服务器所查询的主机的IP地址</li>
+<li>本地域名服务器最后把查询结果告诉主机</li>
 </ol>
-</blockquote>
-<p>DNS查询有两种，一种是<strong>递归查询</strong>一种是<strong>迭代查询</strong>；实践中，查询通常满足这样的模式：<strong>从请求主机到本地DNS服务器的查询是递归的，其余查询是迭代的</strong>。</p>
-<h4 id="DNS缓存"><a href="#DNS缓存" class="headerlink" title="DNS缓存"></a>DNS缓存</h4><blockquote>
-<p>当某DNS服务器接收一个DNS回答时，其将映射缓存到本地存储器中</p>
+<h4 id="DNS缓存"><a href="#DNS缓存" class="headerlink" title="DNS缓存"></a>DNS缓存</h4><p>当某DNS服务器接收一个DNS回答时，其将映射缓存到本地存储器中</p>
 <p><strong>由于缓存，除了少数DNS查询以外，根服务器被绕过了</strong></p>
-</blockquote>
 <h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>《计算机网络——自顶向下方法》</p>
 <p><a href="https://blog.csdn.net/qq_39326472/article/details/88089747" target="_blank" rel="noopener">https://blog.csdn.net/qq_39326472/article/details/88089747</a></p>
 ]]></content>
@@ -5222,9 +5329,13 @@
 <li>从任意一个节点到叶子节点，经过的黑色节点是一样的。</li>
 </ol>
 <p>显然，根据第5条性质，可以知道<strong>红黑树是保持“黑平衡”的二叉树</strong>。因此严格意义上不是平衡二叉树，最大高度2log n（每个黑节点都带个红节点）</p>
-<h3 id="与AVL树的比较"><a href="#与AVL树的比较" class="headerlink" title="与AVL树的比较"></a>与AVL树的比较</h3><p>显然，如果单纯按照树的高度这一标准看，红黑树似乎比不上AVL树的性能，但<strong>红黑树添加元素、删除元素较AVL树更快</strong>，在整体性能上优于AVL树，所以这是一个相当重要的数据结构。</p>
-<p>当元素偏向于固定，主要进行查询等操作时，使用AVL树更优</p>
-<p>当需要频繁的进行插入与删除操作时，则使用红黑树更优。</p>
+<h3 id="与AVL树的比较"><a href="#与AVL树的比较" class="headerlink" title="与AVL树的比较"></a>与AVL树的比较</h3><p>显然，如果单纯按照树的高度这一标准看，红黑树似乎比不上AVL树的性能，但<strong>红黑树添加元素、删除元素较AVL树更快（由于没有AVL树要求那么严格，因此为维护平衡进行的旋转操作相对较少）</strong>，在整体性能上优于AVL树，所以这是一个相当重要的数据结构。</p>
+<ul>
+<li><p>当元素偏向于固定，主要进行查询等操作时，使用AVL树更优</p>
+</li>
+<li><p>当需要频繁的进行插入与删除操作时，则使用红黑树更优。</p>
+</li>
+</ul>
 <h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><p>红黑树的操作绝大部分与二叉搜索树相同，不同的地方与AVL树相同，主要在维护自平衡上，集中表现在插入与删除的过程。<strong>维护的时机也与AVL树一致，在添加节点后回溯向上维护（简单来讲就是代码应该写在插入的递归业务之后，采用后序的思想）</strong></p>
 <h3 id="辅助方法"><a href="#辅助方法" class="headerlink" title="辅助方法"></a>辅助方法</h3><h4 id="基本Node类"><a href="#基本Node类" class="headerlink" title="基本Node类"></a>基本Node类</h4><p>设置插入节点的初始颜色：<strong>红色</strong>。</p>
 <p>理由：红色在父结点（如果存在）为黑色结点时，红黑树的黑色平衡没被破坏，不需要做自平衡操作。但如果插入结点是黑色，那么插入位置所在的子树黑色结点总是多1，必须做自平衡。（得时刻记住，红黑树是一个黑节点平衡的树）</p>
@@ -5743,7 +5854,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Java：泛型</title>
+    <title>Java09：泛型</title>
     <url>/page/Java-generic.html</url>
     <content><![CDATA[<h1 id="泛型基础"><a href="#泛型基础" class="headerlink" title="泛型基础"></a>泛型基础</h1><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>泛型的本质是<strong>参数化类型</strong>，也就是说所操作的数据类型被指定为一个参数。</p>
 <p>Java的泛型是<strong>伪泛型</strong>，这是因为Java在编译期间，所有的泛型信息都会被擦掉</p>
@@ -5845,14 +5956,14 @@
 ]]></content>
       <categories>
         <category>Java</category>
-        <category>Java基础</category>
+        <category>JavaSE</category>
       </categories>
       <tags>
         <tag>Java</tag>
       </tags>
   </entry>
   <entry>
-    <title>Java：异常与异常处理</title>
+    <title>Java06：异常与异常处理</title>
     <url>/page/Java-exception-handle.html</url>
     <content><![CDATA[<h2 id="异常分类"><a href="#异常分类" class="headerlink" title="异常分类"></a>异常分类</h2><h3 id="异常层次结构"><a href="#异常层次结构" class="headerlink" title="异常层次结构"></a>异常层次结构</h3><img src="http://cdn.ziyedy.top/6%E3%80%81Java%EF%BC%9A%E5%BC%82%E5%B8%B8%E4%B8%8E%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/exception-chart.png" style="zoom:67%;" />
 
@@ -5913,14 +6024,14 @@
 ]]></content>
       <categories>
         <category>Java</category>
-        <category>Java基础</category>
+        <category>JavaSE</category>
       </categories>
       <tags>
         <tag>Java</tag>
       </tags>
   </entry>
   <entry>
-    <title>Java：接口与抽象类</title>
+    <title>Java05：接口与抽象类</title>
     <url>/page/java-interface-abstractclass.html</url>
     <content><![CDATA[<p>abstract关键字</p>
 <p>抽象类，无法进行实例化的类（可以通过向上转型指向子类实例 ）</p>
@@ -5955,14 +6066,14 @@
 ]]></content>
       <categories>
         <category>Java</category>
-        <category>Java基础</category>
+        <category>JavaSE</category>
       </categories>
       <tags>
         <tag>Java</tag>
       </tags>
   </entry>
   <entry>
-    <title>Java：IO流读写</title>
+    <title>Java07：IO流读写</title>
     <url>/page/java-input-output-stream.html</url>
     <content><![CDATA[<h1 id="IO流概述"><a href="#IO流概述" class="headerlink" title="IO流概述"></a>IO流概述</h1><blockquote>
 <p>Java程序中输入/输出操作以“流”（Stream方式进行），Java为获取不同种类的数据提供了各种各样的Stream类，基本位于<code>java.io</code>包中</p>
@@ -6053,40 +6164,31 @@
 ]]></content>
       <categories>
         <category>Java</category>
-        <category>Java基础</category>
+        <category>JavaSE</category>
       </categories>
       <tags>
         <tag>Java</tag>
       </tags>
   </entry>
   <entry>
-    <title>Java：字符串</title>
+    <title>Java03：字符串</title>
     <url>/page/Java-string.html</url>
-    <content><![CDATA[<h2 id="String类"><a href="#String类" class="headerlink" title="String类"></a>String类</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><blockquote>
-<p>在Java中，所有类似“ABC”的字面值，都是String类的实例；</p>
-<p>String类位于java.lang包下，是Java语言的核心类，提供了字符串的比较、查找、截取、大小写转换等操作；</p>
+    <content><![CDATA[<h2 id="String类"><a href="#String类" class="headerlink" title="String类"></a>String类</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>在Java中，所有类似“ABC”的字面值，都是String类的实例；</p>
+<p>String类位于<code>java.lang</code>包下，是Java语言的核心类，提供了字符串的比较、查找、截取、大小写转换等操作；</p>
 <p>Java语言为<code>“+”</code>连接符（字符串连接符）以及对象转换为字符串提供了特殊的支持，字符串对象可以使用<code>“+”</code>连接其他对象</p>
-</blockquote>
 <h3 id="基本实现"><a href="#基本实现" class="headerlink" title="基本实现"></a>基本实现</h3><p>String被声明为<code>final</code>，因此不可被继承，同时也说明<strong>String具有不可变特性</strong>。在<strong>Java8</strong>中，String内部使用char数组存储数据。</p>
+<p><em>注：也正是因为这种不可变性，String类的大多数操作方法都会返回新的String，而不是在原字符串上进行更改</em></p>
 <figure class="highlight zephir"><table><tr><td class="code"><pre><code class="hljs zephir"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">String</span><br>    <span class="hljs-keyword">implements</span> <span class="hljs-title">java</span>.<span class="hljs-title">io</span>.<span class="hljs-title">Serializable</span>, <span class="hljs-title">Comparable</span>&lt;<span class="hljs-title">String</span>&gt;, <span class="hljs-title">CharSequence</span> </span>&#123;<br>    <span class="hljs-comment">/** The value is used for character storage. */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">char</span> value[];<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>在<strong>Java9</strong>之后，<em>String类的实现改用byte数组存储字符串，同时使用coder来标识使用哪种编码</em>。</p>
 <figure class="highlight php"><table><tr><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">String</span><br>    <span class="hljs-keyword">implements</span> <span class="hljs-title">java</span>.<span class="hljs-title">io</span>.<span class="hljs-title">Serializable</span>, <span class="hljs-title">Comparable</span>&lt;<span class="hljs-title">String</span>&gt;, <span class="hljs-title">CharSequence</span> </span>&#123;<br>    <span class="hljs-comment">/** The value is used for character storage. */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> byte[] value;<br><br>    <span class="hljs-comment">/** The identifier of the encoding used to encode the bytes in &#123;<span class="hljs-doctag">@code</span> value&#125;. */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> byte coder;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-
-
-<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 获取字符串长度</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">length</span><span class="hljs-params">()</span><br><br><span class="hljs-comment">// 获取从 beginIndex 到 endIndex 的字符串</span><br><span class="hljs-keyword">public</span> String <span class="hljs-title">substring</span><span class="hljs-params">(<span class="hljs-keyword">int</span> beginIndex, <span class="hljs-keyword">int</span> endIndex)</span><br><br><span class="hljs-comment">// 获取指定位置的字符</span><br><span class="hljs-keyword">char</span> <span class="hljs-title">charAt</span><span class="hljs-params">(<span class="hljs-keyword">int</span> index)</span><br><br><span class="hljs-comment">// 将字符串分割为子字符串</span><br>String[] <span class="hljs-title">split</span><span class="hljs-params">(String regex, <span class="hljs-keyword">int</span> limit)</span>	<br><br><span class="hljs-comment">// 将该字符串转换为byte数组</span><br><span class="hljs-keyword">byte</span>[] <span class="hljs-title">getBytes</span><span class="hljs-params">()</span></span><br></code></pre></td></tr></table></figure>
-
-
-
-
-
-
+<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 获取字符串长度</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">length</span><span class="hljs-params">()</span><br><br><span class="hljs-comment">// 获取从 beginIndex 到 endIndex 的字符串</span><br><span class="hljs-keyword">public</span> String <span class="hljs-title">substring</span><span class="hljs-params">(<span class="hljs-keyword">int</span> beginIndex, <span class="hljs-keyword">int</span> endIndex)</span><br><br><span class="hljs-comment">// 获取指定位置的字符</span><br><span class="hljs-keyword">char</span> <span class="hljs-title">charAt</span><span class="hljs-params">(<span class="hljs-keyword">int</span> index)</span><br><br><span class="hljs-comment">// 将字符串分割为子字符串</span><br>String[] <span class="hljs-title">split</span><span class="hljs-params">(String regex, <span class="hljs-keyword">int</span> limit)</span>	<br>    <br><span class="hljs-comment">// 替换所有 a 字符串为 b</span><br>String <span class="hljs-title">replace</span><span class="hljs-params">(<span class="hljs-string">"a"</span>, <span class="hljs-string">"b"</span>)</span><br><br><span class="hljs-comment">// 将该字符串转换为byte数组</span><br><span class="hljs-keyword">byte</span>[] <span class="hljs-title">getBytes</span><span class="hljs-params">()</span></span><br></code></pre></td></tr></table></figure>
 
 <h2 id="“-”连接符"><a href="#“-”连接符" class="headerlink" title="“+”连接符"></a>“+”连接符</h2><h3 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h3><blockquote>
 <p>“+”连接符实现字符串连接是通过<strong>StringBuilder（或 StringBuffer）类及其append 方法实现的</strong></p>
-<p>Java在使用“+”连接字符串时，会创建一个<code>StringBuilder</code>对象，并调用<code>append()</code>方法进行拼接，最后调用<code>toString()</code>方法返回拼接好的字符串</p>
 </blockquote>
+<p>Java在使用“+”连接字符串时，会创建一个<code>StringBuilder</code>对象，并调用<code>append()</code>方法进行拼接，最后调用<code>toString()</code>方法返回拼接好的字符串</p>
 <h3 id="效率"><a href="#效率" class="headerlink" title="效率"></a>效率</h3><blockquote>
 <p>由于使用“+”连接符时，JVM会隐式创建StringBuilder对象</p>
 <p>因此在大规模进行字符串拼接时还是构建一个<code>StringBuilder</code>对象手动调用<code>append</code>方法比较好</p>
@@ -6120,7 +6222,7 @@
 ]]></content>
       <categories>
         <category>Java</category>
-        <category>Java基础</category>
+        <category>JavaSE</category>
       </categories>
       <tags>
         <tag>Java</tag>
@@ -6414,19 +6516,6 @@
 <li><p>缺点：添加和删除需大量移动元素，效率低</p>
 </li>
 </ul>
-<h3 id="底层实现"><a href="#底层实现" class="headerlink" title="底层实现"></a>底层实现</h3><p><code>ArrayList</code>底层就是一个长度可以动态增长的Object数组，如下<code>elementData</code>。</p>
-<p>其中实现的接口中<code>RandomAccess</code>、<code>Cloneable</code>中都没有实现方法，更多的作为一种标识进行判断</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ArrayList</span>&lt;<span class="hljs-title">E</span>&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title">AbstractList</span>&lt;<span class="hljs-title">E</span>&gt;<br>        <span class="hljs-keyword">implements</span> <span class="hljs-title">List</span>&lt;<span class="hljs-title">E</span>&gt;, <span class="hljs-title">RandomAccess</span>, <span class="hljs-title">Cloneable</span>, <span class="hljs-title">java</span>.<span class="hljs-title">io</span>.<span class="hljs-title">Serializable</span><br></span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">long</span> serialVersionUID = <span class="hljs-number">8683452581122892189L</span>;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> DEFAULT_CAPACITY = <span class="hljs-number">10</span>;	<span class="hljs-comment">// 默认初始容量</span><br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Object[] EMPTY_ELEMENTDATA = &#123;&#125;;	<span class="hljs-comment">// 空数组（用于空实例）</span><br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = &#123;&#125;;	<span class="hljs-comment">// 默认空数组</span><br><br>    <span class="hljs-keyword">transient</span> Object[] elementData; <span class="hljs-comment">// 保存ArrayList数据的数组</span><br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> size;	<span class="hljs-comment">// ArrayList 所包含的元素个数</span><br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>JDK1.7前，使用无参数构造方法创建<code>ArrayList</code>对象时，默认底层数组长度是10。类似于单例的饿汉式</p>
-<p>JDK1.8后，使用无参数构造方法创建<code>ArrayList</code>对象时，默认底层数组长度是0，如下即指向了<code>DEFAULTCAPACITY_EMPTY_ELEMENTDATA</code>。而当对数组进行添加元素操作后，才将数组扩容（第一次添加扩容为10），类似于单例的懒汉式</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 初始化时没有传入数据，默认将elementData构造为一个空数组</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ArrayList</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">this</span>.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>ArrayList中提供了一个内部类Itr，实现了<code>Iterator</code>接口，实现对集合元素的遍历</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> Iterator&lt;E&gt; <span class="hljs-title">iterator</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Itr();<br>&#125;<br><span class="hljs-keyword">private</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Itr</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Iterator</span>&lt;<span class="hljs-title">E</span>&gt; </span>&#123; &#125;<br></code></pre></td></tr></table></figure>
-
-
-
 <h2 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h2><blockquote>
 <p>采用<strong>双向链表</strong>方式存储</p>
 </blockquote>
@@ -6437,14 +6526,6 @@
 <li><p>缺点：遍历和随机访问元素效率低下</p>
 </li>
 </ul>
-<h3 id="底层实现-1"><a href="#底层实现-1" class="headerlink" title="底层实现"></a>底层实现</h3><p><code>LinkedList</code>实现了<code>Deque</code>接口，所以除了可以作为线性表来使用外，还可以当做队列和栈来使用</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LinkedList</span>&lt;<span class="hljs-title">E</span>&gt;<br>    <span class="hljs-keyword">extends</span> <span class="hljs-title">AbstractSequentialList</span>&lt;<span class="hljs-title">E</span>&gt;<br>    <span class="hljs-keyword">implements</span> <span class="hljs-title">List</span>&lt;<span class="hljs-title">E</span>&gt;, <span class="hljs-title">Deque</span>&lt;<span class="hljs-title">E</span>&gt;, <span class="hljs-title">Cloneable</span>, <span class="hljs-title">java</span>.<span class="hljs-title">io</span>.<span class="hljs-title">Serializable</span><br></span>&#123;<br>    <span class="hljs-keyword">transient</span> <span class="hljs-keyword">int</span> size = <span class="hljs-number">0</span>;<br><br>    <span class="hljs-keyword">transient</span> Node&lt;E&gt; first;<br><br>    <span class="hljs-keyword">transient</span> Node&lt;E&gt; last;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">LinkedList</span><span class="hljs-params">()</span> </span>&#123;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>利用静态内部类<code>Node</code>，表示双向链表的节点，如下：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Node</span>&lt;<span class="hljs-title">E</span>&gt; </span>&#123;<br>    E item;<br>    Node&lt;E&gt; next;<br>    Node&lt;E&gt; prev;<br><br>    Node(Node&lt;E&gt; prev, E element, Node&lt;E&gt; next) &#123;<br>        <span class="hljs-keyword">this</span>.item = element;<br>        <span class="hljs-keyword">this</span>.next = next;<br>        <span class="hljs-keyword">this</span>.prev = prev;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-
-
 <h2 id="栈与队列"><a href="#栈与队列" class="headerlink" title="栈与队列"></a>栈与队列</h2><h3 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h3><p>队列使用<code>Queue</code>接口实现，<code>Queue</code>直接继承<code>Collection</code>接口</p>
 <h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3><p>栈可以使用<code>Stack</code>也可以使用<code>Deque</code>实现，其中<code>Deque</code>是双向队列（即可以作为栈使用）</p>
 <p><code>Stack</code>继承了<code>Vector</code></p>
@@ -6473,7 +6554,7 @@
 <p>2、若有重复的<code>hashcode</code>，则调用<code>equals()</code>方法进行重复检查</p>
 <p>因此：</p>
 <p>要使用自定义类作为元素存储在<code>HashSet</code>与<code>LinkedHashSet</code>中时，<strong>自定义类必须实现<code>hashCode()</code>和<code>equals()</code></strong>，否则会存储“相同的元素”。</p>
-<h3 id="底层实现-2"><a href="#底层实现-2" class="headerlink" title="底层实现"></a>底层实现</h3><p><strong>HashSet的底层使用的是HashMap</strong>，所以底层结构也是哈希表 ，如下所示</p>
+<h3 id="底层实现"><a href="#底层实现" class="headerlink" title="底层实现"></a>底层实现</h3><p><strong>HashSet的底层使用的是HashMap</strong>，所以底层结构也是哈希表 ，如下所示</p>
 <p>HashSet的元素到HashMap中做key，value统一是同一个Object()</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HashSet</span>&lt;<span class="hljs-title">E</span>&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title">Set</span>&lt;<span class="hljs-title">E</span>&gt; </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">transient</span> HashMap&lt;E, Object&gt; map;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Object PRESENT = <span class="hljs-keyword">new</span> Object();<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">HashSet</span><span class="hljs-params">()</span> </span>&#123;<br>        map = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">add</span><span class="hljs-params">(E e)</span> </span>&#123;<br>		<span class="hljs-keyword">return</span> map.put(e, <span class="hljs-keyword">new</span> Object()) == <span class="hljs-keyword">null</span>;<br>        <span class="hljs-keyword">return</span> map.put(e, PRESENT) == <span class="hljs-keyword">null</span>;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">size</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> map.size();<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Iterator&lt;E&gt; <span class="hljs-title">iterator</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> map.keySet().iterator();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
@@ -6491,7 +6572,7 @@
 </li>
 </ul>
 <p><strong>使用自定义类作为元素存储在<code>TreeSet</code>中时，自定义类需要实现<code>Comparable</code>接口并指定比较的规则</strong>，否则会抛出异常。</p>
-<h3 id="底层实现-3"><a href="#底层实现-3" class="headerlink" title="底层实现"></a>底层实现</h3><blockquote>
+<h3 id="底层实现-1"><a href="#底层实现-1" class="headerlink" title="底层实现"></a>底层实现</h3><blockquote>
 <p><strong>TreeSet的底层使用的是TreeMap</strong>，所以底层结构也是红黑树 ，如下所示</p>
 <p>TreeSet的元素e是作为TreeMap的key存在的，value统一为同一个 Object()</p>
 </blockquote>
@@ -6512,16 +6593,6 @@
 <li>缺点：key值无序</li>
 </ul>
 <p>与<code>HashSet</code>对应，其也有<code>LinkedHashMap</code>保证键值按添加顺序使用链表维护</p>
-<h3 id="底层实现-4"><a href="#底层实现-4" class="headerlink" title="底层实现"></a>底层实现</h3><p>JDK1.7及其之前，HashMap底层是一个<strong>table数组+链表</strong>实现的哈希表存储结构</p>
-<p>JDK1.8及以后，当链表的存储数据个数 <strong>≥8</strong> 的时候，不再采用链表存储，而采用红黑树存储结构。这么做能够降低查询的时间复杂度（链表O(n) -&gt; 红黑树O(logn)）。</p>
-<p>JDK1.7中链表的每个节点就是一个<code>Entry</code>，1.8之后改为了<code>Node</code>，其中包括以下四个部分：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Entry</span>&lt;<span class="hljs-title">K</span>, <span class="hljs-title">V</span>&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title">Map</span>.<span class="hljs-title">Entry</span>&lt;<span class="hljs-title">K</span>, <span class="hljs-title">V</span>&gt; </span>&#123;<br>    <span class="hljs-keyword">final</span> K key; 	<span class="hljs-comment">//key</span><br>    V value;	<span class="hljs-comment">//value</span><br>    Entry&lt;K, V&gt; next; 	<span class="hljs-comment">//指向下一个节点的指针</span><br>    <span class="hljs-keyword">int</span> hash;	<span class="hljs-comment">//哈希码</span><br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>JDK1.7中HashMap的主要成员变量及其含义</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HashMap</span>&lt;<span class="hljs-title">K</span>, <span class="hljs-title">V</span>&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title">Map</span>&lt;<span class="hljs-title">K</span>, <span class="hljs-title">V</span>&gt; </span>&#123;<br>	<span class="hljs-comment">// 哈希表主数组的默认长度</span><br>    <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> DEFAULT_INITIAL_CAPACITY = <span class="hljs-number">16</span>; <br>	<span class="hljs-comment">// 默认的装填因子</span><br>    <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">float</span> DEFAULT_LOAD_FACTOR = <span class="hljs-number">0.75f</span>; <br>	<span class="hljs-comment">// 主数组的引用</span><br>    <span class="hljs-keyword">transient</span> Entry&lt;K, V&gt;[] table; <br>    <span class="hljs-comment">// 阈值</span><br>    <span class="hljs-keyword">int</span> threshold;<br>    <span class="hljs-comment">// 装填因子</span><br>    <span class="hljs-keyword">final</span> <span class="hljs-keyword">float</span> loadFactor;	<br>    <span class="hljs-comment">// 默认构造函数使用默认的长度与装填因子</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">HashMap</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>(DEFAULT_INITIAL_CAPACITY, DEFAULT_LOAD_FACTOR);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-
-
 <h2 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h2><blockquote>
 <p>底层由红黑树实现</p>
 </blockquote>
@@ -6529,7 +6600,7 @@
 <li>优点：key有序，查询速度比List快</li>
 <li>缺点：查询速度没有HashMap快</li>
 </ul>
-<h3 id="底层实现-5"><a href="#底层实现-5" class="headerlink" title="底层实现"></a>底层实现</h3><p>每个节点的结构如下</p>
+<h3 id="底层实现-2"><a href="#底层实现-2" class="headerlink" title="底层实现"></a>底层实现</h3><p>每个节点的结构如下</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Entry</span>&lt;<span class="hljs-title">K</span>,<span class="hljs-title">V</span>&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title">Map</span>.<span class="hljs-title">Entry</span>&lt;<span class="hljs-title">K</span>,<span class="hljs-title">V</span>&gt; </span>&#123;<br>    K key;<br>    V value;<br>    Entry&lt;K,V&gt; left;<br>    Entry&lt;K,V&gt; right;<br>    Entry&lt;K,V&gt; parent;<br>    <span class="hljs-keyword">boolean</span> color = BLACK;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
@@ -6557,7 +6628,7 @@
 ]]></content>
       <categories>
         <category>Java</category>
-        <category>Java基础</category>
+        <category>JavaSE</category>
       </categories>
       <tags>
         <tag>Java</tag>
@@ -6638,7 +6709,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Java面向对象</title>
+    <title>Java04：类、对象与方法</title>
     <url>/page/java-orient-object.html</url>
     <content><![CDATA[<h1 id="面向对象三大特性"><a href="#面向对象三大特性" class="headerlink" title="面向对象三大特性"></a>面向对象三大特性</h1><h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><p>封装是指把一个对象的状态信息（也就是属性）隐藏在对象内部，不允许外部对象直接访问对象的内部信息。但是可以提供一些可以被外界访问的方法来操作属性。</p>
 <h3 id="访问权限修饰符"><a href="#访问权限修饰符" class="headerlink" title="访问权限修饰符"></a>访问权限修饰符</h3><p>Java 中有三个访问权限修饰符：private、protected 以及 public，如果不加访问修饰符，表示包级可见。<strong>所以Java的访问权限应该有四个</strong></p>
@@ -6874,14 +6945,14 @@
 ]]></content>
       <categories>
         <category>Java</category>
-        <category>Java基础</category>
+        <category>JavaSE</category>
       </categories>
       <tags>
         <tag>Java</tag>
       </tags>
   </entry>
   <entry>
-    <title>Java：基本概念与语言特点</title>
+    <title>Java01：基本概念与语言特点</title>
     <url>/page/java-basic-grammar.html</url>
     <content><![CDATA[<h2 id="常见名词解释"><a href="#常见名词解释" class="headerlink" title="常见名词解释"></a>常见名词解释</h2><h3 id="JVM（Java-Virtual-Machine）"><a href="#JVM（Java-Virtual-Machine）" class="headerlink" title="JVM（Java Virtual Machine）"></a>JVM（Java Virtual Machine）</h3><p>Java虚拟机，用于运行Java字节码，其针对不同的操作系统有着特定的实现，使得相同的字节码运行会给出相同的结果。</p>
 <p>在Java中，JVM能够理解的代码就叫做<strong>字节码</strong>（.class文件）。其不面向任何特定的处理器，只面向虚拟机。</p>
@@ -6959,6 +7030,12 @@
 <figure class="highlight ruby"><table><tr><td class="code"><pre><code class="hljs ruby">public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">test</span> &#123;</span><br>    static &#123;<br>        System.out.println(<span class="hljs-string">"gg"</span>);<br>    &#125;<br><br>    public static void main(String[] args) &#123;<br>    &#125;<br>&#125;<br>/<span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span> <br>gg<br></code></pre></td></tr></table></figure>
 
 <h4 id="静态内部类（使用的很少）"><a href="#静态内部类（使用的很少）" class="headerlink" title="静态内部类（使用的很少）"></a>静态内部类（使用的很少）</h4><p>非静态内部类依赖于外部类的实例，也就是说需要先创建外部类实例，才能用这个实例去创建非静态内部类。而静态内部类不需要。静态内部类不能访问外部类的非静态的变量和方法。</p>
+<h3 id="transient"><a href="#transient" class="headerlink" title="transient"></a>transient</h3><p>该关键字常用来修饰类变量，其所修饰的变量是不需要序列化的（在序列化时会自动忽略该变量）</p>
+<p>比如 <code>ArrayList</code> 中存储数据的数组就使用了该关键字修饰：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">transient</span> Object[] elementData; <span class="hljs-comment">// non-private to simplify nested class access</span><br></code></pre></td></tr></table></figure>
+
+
+
 <h2 id="包"><a href="#包" class="headerlink" title="包"></a>包</h2><h3 id="package关键字"><a href="#package关键字" class="headerlink" title="package关键字"></a>package关键字</h3><blockquote>
 <p>package包与C++中的<code>namespace</code>类似</p>
 <p>Java中常用域名倒序的方法来定义包名，一个Java源文件中只能有一个package语句</p>
@@ -6979,7 +7056,7 @@
 ]]></content>
       <categories>
         <category>Java</category>
-        <category>Java基础</category>
+        <category>JavaSE</category>
       </categories>
       <tags>
         <tag>Java</tag>

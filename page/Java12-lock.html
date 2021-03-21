@@ -13,7 +13,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    Java12-3：Lock |  子夜nostalgic
+    Java12-2：锁机制的使用与实现 |  子夜nostalgic
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Java/JavaSE/Java12-3：ReentrantLock显式锁"
+  id="post-Java/JavaSE/Java12-2：锁机制的使用与实现"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -59,15 +59,15 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Java12-3：Lock
+  Java12-2：锁机制的使用与实现
 </h1>
  
 
     </header>
      
     <div class="article-meta">
-      <a href="/page/Java12-.html" class="article-date">
-  <time datetime="2021-03-13T09:59:41.000Z" itemprop="datePublished">2021-03-13</time>
+      <a href="/page/Java12-lock.html" class="article-date">
+  <time datetime="2021-01-13T08:41:06.000Z" itemprop="datePublished">2021-01-13</time>
 </a> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/Java/">Java</a> / <a class="article-category-link" href="/categories/Java/JavaSE/">JavaSE</a>
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">853</span>
+            <span class="post-count">2.1k</span>
         </span>
     </span>
 
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">3 min</span>
+            <span class="post-count">7 min</span>
         </span>
     </span>
 </div>
@@ -102,55 +102,109 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <p>#</p>
-<p><code>java.util.concurrent.locks</code> 包下的 Lock 接口和它的实现 ReentrantLock</p>
-<p>ReentrantLock 也是互斥锁，有如下三种互斥情况：读/写、写/写、读/读。</p>
-<p>显式锁：</p>
-<p>在代码中需要主动的去进行 lock 操作</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java">Lock lock = <span class="hljs-keyword">new</span> ReentrantLock();<br>lock.lock();	<span class="hljs-comment">// 加锁</span><br><span class="hljs-keyword">try</span> &#123;<br>	<span class="hljs-comment">// code</span><br>&#125; <span class="hljs-keyword">finally</span> &#123;<br>	lock.unlock();	<span class="hljs-comment">// 解锁</span><br>&#125;<br></code></pre></td></tr></table></figure>
+  <h1 id="synchronized"><a href="#synchronized" class="headerlink" title="synchronized"></a>synchronized</h1><p>使用 <code>synchronized</code> 修饰的作用域中的代码为同步执行的，也就是并发的情况下，执行到对<strong>同一个对象加锁</strong>的 synchronized 代码块时，为串行执行的</p>
+<h2 id="synchronized-使用"><a href="#synchronized-使用" class="headerlink" title="synchronized 使用"></a>synchronized 使用</h2><h3 id="1、同步代码块"><a href="#1、同步代码块" class="headerlink" title="1、同步代码块"></a>1、同步代码块</h3><p>小括号里的对象是可以是任意的对象，这个对象负责对想要执行同步代码块的线程进行“调度”，起到对象锁的作用</p>
+<p>每个对其 synchronized 的线程，它都会记录下来，然后等到同步代码块没有线程执行的时候，它就会通知其它线程来执行同步代码块</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java">Lock lock = <span class="hljs-keyword">new</span> Lock();	<span class="hljs-comment">// 此处可以是任意对象</span><br><br><span class="hljs-comment">// 对象锁</span><br><span class="hljs-keyword">synchronized</span> (lock) &#123;<br>&#125;<br><br><span class="hljs-comment">// 类锁</span><br><span class="hljs-keyword">synchronized</span> (Lock<span class="hljs-class">.<span class="hljs-keyword">class</span>) </span>&#123;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>相对于<code>synchronized</code>，<code>ReentrantLock</code> 更为灵活，它能够支持公平和非公平锁两种形式。只需要在声明的时候传入 true。</p>
-<p>默认的无参构造方法则会创建非公平锁</p>
+<p><em>不同类型的多个 Thread 如果有代码要同步执行，锁对象要使用所有线程共同持有的同一个对象</em></p>
+<h3 id="2、修饰方法"><a href="#2、修饰方法" class="headerlink" title="2、修饰方法"></a>2、修饰方法</h3><h4 id="2-1-修饰普通成员方法"><a href="#2-1-修饰普通成员方法" class="headerlink" title="2.1 修饰普通成员方法"></a>2.1 修饰普通成员方法</h4><p>此时锁对象就是<code>this</code>，所以以下两种写法等价</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title">eat</span><span class="hljs-params">()</span></span>&#123;<br>	.......<br>  .......<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">func</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-keyword">synchronized</span>(<span class="hljs-keyword">this</span>)&#123;<br>		.......<br>  	.......<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="2-2-修饰静态方法"><a href="#2-2-修饰静态方法" class="headerlink" title="2.2 修饰静态方法"></a>2.2 修饰静态方法</h4><p>此时锁对象为类的 Class 对象。如果静态方法所在的类为 Test。那么锁对象就是 Test.class</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title">func</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-comment">// 锁对象为 Test.class</span><br>        <span class="hljs-comment">// 同步方法体</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><em>注意：构造方法是不能使用 synchronized 关键字修饰的</em></p>
+<h2 id="synchronized-原理"><a href="#synchronized-原理" class="headerlink" title="synchronized 原理"></a>synchronized 原理</h2><h3 id="1、synchronized-同步语句块原理"><a href="#1、synchronized-同步语句块原理" class="headerlink" title="1、synchronized 同步语句块原理"></a>1、synchronized 同步语句块原理</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SynchronizedDemo</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">method</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">synchronized</span> (<span class="hljs-keyword">this</span>) &#123;<br>            System.out.println(<span class="hljs-string">"synchronized 代码块"</span>);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>使用<code>javap</code>命令进行反编译后可以得到：</p>
+<img src="http://cdn.ziyedy.top/Java12-2%EF%BC%9A%E9%94%81%E6%9C%BA%E5%88%B6%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%AE%9E%E7%8E%B0/%E5%90%8C%E6%AD%A5%E8%AF%AD%E5%8F%A5%E5%9D%97%E5%8E%9F%E7%90%86.png" style="zoom:80%;" />
+
+<p>当执行 <code>monitorenter</code> 指令时，线程试图获取锁也就是获取 <strong>对象监视器 <code>monitor</code></strong> 的持有权。</p>
+<p><code>synchronized</code> 同步语句块的实现使用的是 <code>monitorenter</code> 和 <code>monitorexit</code> 指令，其中 <code>monitorenter</code> 指令指向同步代码块的开始位置， <code>monitorexit</code> 指令则指明同步代码块的结束位置</p>
+<p>在执行<code>monitorenter</code>时，会尝试获取对象的锁，如果锁的计数器为 0 则表示锁可以被获取，获取后将锁计数器设为 1 也就是加 1。</p>
+<p>在执行 <code>monitorexit</code> 指令后，将锁计数器设为 0，表明锁被释放。如果获取对象锁失败，那当前线程就要阻塞等待，直到锁被另外一个线程释放为止。</p>
+<p>在 Java 虚拟机(HotSpot)中，Monitor 是基于 C++实现的，由ObjectMonitor实现的。每个对象中都内置了一个 <code>ObjectMonitor</code>对象（在Java对象头中，维护了所需要的各类信息，如当前持有锁的对象，以及其他等待队列等）。</p>
+<p>另外，<code>wait/notify</code>等方法也依赖于<code>monitor</code>对象，这就是为什么只有在同步的块或者方法中才能调用<code>wait/notify</code>等方法，否则会抛出<code>java.lang.IllegalMonitorStateException</code>的异常的原因。</p>
+<h3 id="2、synchronized-修饰方法原理"><a href="#2、synchronized-修饰方法原理" class="headerlink" title="2、synchronized 修饰方法原理"></a>2、synchronized 修饰方法原理</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SynchronizedDemo</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title">method</span><span class="hljs-params">()</span> </span>&#123;<br>        System.out.println(<span class="hljs-string">"synchronized 方法"</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>使用<code>javap</code>命令进行反编译后可以得到：</p>
+<img src="http://cdn.ziyedy.top/Java12-2%EF%BC%9A%E9%94%81%E6%9C%BA%E5%88%B6%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%AE%9E%E7%8E%B0/%E5%90%8C%E6%AD%A5%E6%96%B9%E6%B3%95%E5%8E%9F%E7%90%86.png" style="zoom:80%;" />
+
+<p><code>synchronized</code> 修饰的方法并没有 <code>monitorenter</code> 指令和 <code>monitorexit</code> 指令，取而代之的是 <code>ACC_SYNCHRONIZED</code> 标识，该标识指明了该方法是一个同步方法。JVM 通过该 <code>ACC_SYNCHRONIZED</code> 访问标志来辨别一个方法是否声明为同步方法，从而执行相应的同步调用。</p>
+<p><strong>总结：两者的本质都是对对象监视器 monitor 的获取。同时 monitor 锁是非公平锁</strong></p>
+<h2 id="synchronized-注意事项"><a href="#synchronized-注意事项" class="headerlink" title="synchronized 注意事项"></a>synchronized 注意事项</h2><p>1、synchronized 使用的为非公平锁，如果需要公平锁，可以使用 ReentrantLock，设置为公平锁</p>
+<p>2、锁对象不能为 null。因为锁对象为 null，就不存在对象头，以及与其关联的 monitor 锁</p>
+<p>3、由于加锁的开销很大，所以应该把共享资源的操作放在 synchronized 代码块中，而尽量把不需要同步的代码移出 synchronized 代码块</p>
+<h1 id="Lock显式锁"><a href="#Lock显式锁" class="headerlink" title="Lock显式锁"></a>Lock显式锁</h1><p><code>java.util.concurrent.locks</code> 包下的 <code>Lock</code> 接口和它的一些实现类如 <code>ReentrantLock</code></p>
+<p>显式锁：在代码中需要主动的去进行 lock 操作</p>
+<h2 id="ReentrantLock"><a href="#ReentrantLock" class="headerlink" title="ReentrantLock"></a>ReentrantLock</h2><p>ReentrantLock 也是互斥锁，有如下三种互斥情况：读/写、写/写、读/读。</p>
+<p>相对于<code>synchronized</code>，<code>ReentrantLock</code> 更为灵活，它能够支持公平和非公平锁两种形式</p>
+<p>默认的无参构造方法则会创建非公平锁，要创建公平锁需要在声明的时候传入 true</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Lock lock = <span class="hljs-keyword">new</span> ReentrantLock(<span class="hljs-keyword">true</span>);	<span class="hljs-comment">// 创建公平锁</span><br></code></pre></td></tr></table></figure>
 
+<h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><p>基本使用就是使用<code>lock</code>加锁，然后使用<code>unlock</code>解锁（建议使用<code>finally</code>避免出现异常锁没有释放掉）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java">Lock lock = <span class="hljs-keyword">new</span> ReentrantLock();<br>lock.lock();	<span class="hljs-comment">// 加锁</span><br><span class="hljs-keyword">try</span> &#123;<br>	<span class="hljs-comment">// 操作代码</span><br>&#125; <span class="hljs-keyword">finally</span> &#123;<br>	lock.unlock();	<span class="hljs-comment">// 解锁</span><br>&#125;<br></code></pre></td></tr></table></figure>
 
-
-<h3 id="加锁操作"><a href="#加锁操作" class="headerlink" title="加锁操作"></a>加锁操作</h3><p>1、使用<code>lock.lock()</code>，此时加锁操作是阻塞的，直到获取锁才会继续向下进行</p>
-<p>2、使用<code>tryLock</code>，调用后会立即（也可以通过传入时间和单位，来控制等待获取锁的时长）返回获取锁的情况，获取为 true，未能获取为 false，因此能够根据结果进行进一步的处理</p>
+<h3 id="使用tryLock完成加锁操作"><a href="#使用tryLock完成加锁操作" class="headerlink" title="使用tryLock完成加锁操作"></a>使用<code>tryLock</code>完成加锁操作</h3><p>使用<code>lock.lock()</code>进行加锁操作是阻塞的，直到获取锁才会继续向下进行</p>
+<p>而使用<code>tryLock</code>，调用后会立即（也可以通过传入时间和单位，来控制等待获取锁的时长）返回获取锁的情况，获取为 true，未能获取为 false，因此能够<em>根据结果进行进一步的处理</em></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span>(lock.tryLock(<span class="hljs-number">1</span>, TimeUnit.SECONDS))&#123;<br>    <span class="hljs-keyword">try</span> &#123;<br>        doSomething();<br>    &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;<br>        e.printStackTrace();<br>    &#125; <span class="hljs-keyword">finally</span> &#123;<br>        lock.unlock();<br>    &#125;<br>&#125;<span class="hljs-keyword">else</span>&#123;<br>    doSomethingElse();<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 
-<h2 id="lock-方法源码分析"><a href="#lock-方法源码分析" class="headerlink" title="lock 方法源码分析"></a>lock 方法源码分析</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 无参构造函数</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ReentrantLock</span><span class="hljs-params">()</span> </span>&#123;<br>    sync = <span class="hljs-keyword">new</span> NonfairSync();<br>&#125;<br><br><span class="hljs-comment">// 有参构造函数</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ReentrantLock</span><span class="hljs-params">(<span class="hljs-keyword">boolean</span> fair)</span> </span>&#123;<br>    sync = fair ? <span class="hljs-keyword">new</span> FairSync() : <span class="hljs-keyword">new</span> NonfairSync();<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="lock-方法源码解析"><a href="#lock-方法源码解析" class="headerlink" title="lock 方法源码解析"></a><code>lock</code> 方法源码解析</h2><p>如下可见，<code>lock</code> 方法通过 <code>ReentrantLock</code> 内置的 <code>syn</code> 对象上锁，而 <code>syn</code>对象则是在 <code>ReentrantLock</code> 的构造方法中创建</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">lock</span><span class="hljs-params">()</span> </span>&#123;<br>    sync.lock();<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>FairSync 和 NonFairSync 都继承自 Sync</p>
-<p>其中<code>AbstractQueuedSynchronizer</code>就是所谓AQS</p>
-<p>AQS 依赖先进先出队列实现了阻塞锁和相关的同步器（信号量、事件等）</p>
-<p>AQS 内部有一个 volatile 类型的 state 属性，实际上多线程对锁的竞争体现在对 state 值写入的竞争。一旦 state 从 0 变为 1，代表有线程已经竞争到锁，那么其它线程则进入等待队列。等待队列是一个链表结构的 FIFO 队列，这能够确保公平锁的实现。同一线程多次获取锁时，如果之前该线程已经持有锁，那么对 state 再次加 1。释放锁时，则会对 state-1。直到减为 0，才意味着此线程真正释放了锁。</p>
-<p>FairSync 实现的 lock 代码很简单</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">final</span> <span class="hljs-keyword">void</span> <span class="hljs-title">lock</span><span class="hljs-params">()</span> </span>&#123;<br>    acquire(<span class="hljs-number">1</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="ReentrantLock-的构造方法"><a href="#ReentrantLock-的构造方法" class="headerlink" title="ReentrantLock 的构造方法"></a>ReentrantLock 的构造方法</h3><p>如下可见 <code>ReentrantLock</code> 的构造方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 无参构造函数</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ReentrantLock</span><span class="hljs-params">()</span> </span>&#123;<br>    sync = <span class="hljs-keyword">new</span> NonfairSync();<br>&#125;<br><br><span class="hljs-comment">// 有参构造函数</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ReentrantLock</span><span class="hljs-params">(<span class="hljs-keyword">boolean</span> fair)</span> </span>&#123;<br>    sync = fair ? <span class="hljs-keyword">new</span> FairSync() : <span class="hljs-keyword">new</span> NonfairSync();<br>&#125;<br></code></pre></td></tr></table></figure>
 
+<p>如下：<code>FairSync</code> 和 <code>NonFairSync</code> 都继承自 <code>Sync</code>，而<code>Sync</code>继承自<code>AbstractQueuedSynchronizer</code>，即所谓的<strong>AQS</strong></p>
+<p><img src="http://cdn.ziyedy.top/Java12-2%EF%BC%9A%E9%94%81%E6%9C%BA%E5%88%B6%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%AE%9E%E7%8E%B0/Syn%E7%9A%84%E7%BB%A7%E6%89%BF%E5%85%B3%E7%B3%BB.jpg" alt=""></p>
+<h3 id="AQS"><a href="#AQS" class="headerlink" title="AQS"></a>AQS</h3><p>AQS 的实现思想就是：</p>
+<ul>
+<li>若资源空闲，则将当前请求的线程设置为有效工作线程，并将共享资源设置为锁定状态</li>
+<li>若资源被占用，则使用一套线程等待阻塞等待以及锁分配机制，该机制AQS使用一个<strong>虚拟双向队列</strong>实现</li>
+</ul>
+<p>通俗而言，就是AQS使用 <code>volatile</code> 去修饰共享变量 state，线程通过CAS去改变状态符，成功则获取共享内容，失败则进入等待队列，等待被唤醒，如下图所示：</p>
+<img src="http://cdn.ziyedy.top/Java12-2%EF%BC%9A%E9%94%81%E6%9C%BA%E5%88%B6%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%AE%9E%E7%8E%B0/AQS.jpg" style="zoom:80%;" />
 
-
-
-
-<h2 id="ReadWriteLock-简介"><a href="#ReadWriteLock-简介" class="headerlink" title="ReadWriteLock 简介"></a>ReadWriteLock 简介</h2><p>ReadWriteLock 为我们提供了读写之间不同互斥策略的锁。因此，当程序有频繁的读操作时，他能够带来更好的性能</p>
-<p>由于读写控制的策略不一样，带来了锁内部的复杂度。所以如果你程序的读操作并没有达到一定数量，反而使用读写锁会比互斥锁性能更差</p>
-<p>ReadWriteLock 顾名思义读写锁，也就是说同一个锁对读和写的上锁方式是不一样的写锁的互斥性更高。</p>
-<p>锁降级：如果线程持有写锁，如果可以在不释放写锁的情况下，获取读锁，这就是锁降级。ReadWriteLock 是支持锁降级的</p>
-<p>锁升级：如果线程持有读锁，那么他是否可以不释放读锁，直接获取写锁。这意味着从一个低级别的锁升级到高级别的锁。其实就是变相的插队，无视其它在排队等待写锁的线程。ReadWriteLock 并不支持锁升级。</p>
+<p>AQS 底层使用<strong>模板方法模式</strong>，定义了两种资源共享方式：</p>
+<ul>
+<li><strong>Exclusive</strong>：独占资源，如ReentrantLock</li>
+<li><strong>Share</strong>：共享，多个线程可以同时执行，如ReadWriteLock</li>
+</ul>
+<h3 id="获取锁的流程"><a href="#获取锁的流程" class="headerlink" title="获取锁的流程"></a>获取锁的流程</h3><p>获取锁的流程大致如下，公平锁与不公平锁的实现主要体现在``tryAcquire<code></code>中逻辑的差异</p>
+<ol>
+<li>直接通过 <code>tryAcquire</code> 尝试获取锁，成功直接返回；</li>
+<li>如果没能获取成功，那么把自己加入等待队列；</li>
+<li><strong>自旋</strong>查看自己的排队情况；</li>
+<li>如果排队轮到自己，那么尝试通过 <code>tryAcquire</code> 获取锁；</li>
+<li>如果没轮到自己，那么回到第三步查看自己的排队情况。</li>
+</ol>
+<h2 id="ReadWriteLock"><a href="#ReadWriteLock" class="headerlink" title="ReadWriteLock"></a>ReadWriteLock</h2><p>ReadWriteLock 顾名思义读写锁，也就是说同一个锁对读和写的上锁方式是不一样的，写锁的互斥性更高。</p>
+<p>ReadWriteLock 提供了<em>读写之间不同互斥策略</em>的锁。因此，当程序有频繁的读操作时，他能够带来更好的性能</p>
+<p>由于读写控制的策略不一样，带来了锁内部的复杂度。所以如果程序的读操作并没有达到一定数量，使用读写锁会比互斥锁性能更差</p>
+<p>如下为读写锁的继承关系：</p>
+<p><img src="http://cdn.ziyedy.top/Java12-2%EF%BC%9A%E9%94%81%E6%9C%BA%E5%88%B6%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%AE%9E%E7%8E%B0/ReadWriteLock%E5%AE%9E%E7%8E%B0.jpg" alt=""></p>
+<h3 id="锁降级与锁升级"><a href="#锁降级与锁升级" class="headerlink" title="锁降级与锁升级"></a>锁降级与锁升级</h3><ul>
+<li><p>锁降级：如果线程持有写锁，如果可以在不释放写锁的情况下，获取读锁，这就是锁降级。</p>
+<p><strong>ReadWriteLock 支持锁降级</strong>，如下：</p>
+</li>
+</ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java">ReadWriteLock lock = <span class="hljs-keyword">new</span> ReentrantReadWriteLock();<br>Lock readLock = lock.readLock();<br>Lock writeLock = lock.writeLock();<br><br>writeLock.lock();<br>System.out.println(<span class="hljs-string">"got the write lock"</span>);	<span class="hljs-comment">// 成功输出</span><br>readLock.lock();<br>System.out.println(<span class="hljs-string">"got the read lock"</span>);	<span class="hljs-comment">// 成功输出</span><br></code></pre></td></tr></table></figure>
 
-
-
+<ul>
+<li><p>锁升级：如果线程持有读锁，能够直接获取写锁。这意味着从一个低级别的锁升级到高级别的锁，其实就是变相的插队，无视其它在排队等待写锁的线程。</p>
+<p><strong>ReadWriteLock 并不支持锁升级</strong>，如下：</p>
+</li>
+</ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java">ReadWriteLock lock = <span class="hljs-keyword">new</span> ReentrantReadWriteLock();<br>Lock readLock = lock.readLock();<br>Lock writeLock = lock.writeLock();<br><br>readLock.lock();<br>System.out.println(<span class="hljs-string">"got the read lock"</span>);	<span class="hljs-comment">// 成功输出</span><br>writeLock.lock();<br>System.out.println(<span class="hljs-string">"got the write lock"</span>);	<span class="hljs-comment">// 未输出</span><br></code></pre></td></tr></table></figure>
 
 
 
-
-
-
-
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><blockquote>
+<p><a href="https://www.cnblogs.com/three-fighter/p/14396208.html" target="_blank" rel="noopener">https://www.cnblogs.com/three-fighter/p/14396208.html</a></p>
+</blockquote>
  
       <!-- reward -->
       
@@ -221,7 +275,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://ziyedy.top/page/Java12-.html" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://ziyedy.top/page/Java12-lock.html" alt="微信分享二维码">
     </div>
 </div>
 
@@ -234,10 +288,19 @@
    
   <nav class="article-nav">
     
-    
       <a href="/page/null.html" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            Ubuntu下bug解决
+          
+        </div>
+      </a>
+    
+    
+      <a href="/page/Java12-multithread-concurrency.html" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">动态规划</div>
+        <div class="article-nav-title">Java12：多线程与并发编程</div>
       </a>
     
   </nav>
