@@ -13,7 +13,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    Java：基本概念与语言特点 |  子夜nostalgic
+    Java01：基本概念与语言特点 |  子夜nostalgic
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -59,7 +59,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Java：基本概念与语言特点
+  Java01：基本概念与语言特点
 </h1>
  
 
@@ -70,7 +70,7 @@
   <time datetime="2020-06-27T09:25:12.000Z" itemprop="datePublished">2020-06-27</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Java/">Java</a> / <a class="article-category-link" href="/categories/Java/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+    <a class="article-category-link" href="/categories/Java/">Java</a> / <a class="article-category-link" href="/categories/Java/JavaSE/">JavaSE</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1.4k</span>
+            <span class="post-count">1.5k</span>
         </span>
     </span>
 
@@ -178,6 +178,12 @@
 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs ruby">public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">test</span> &#123;</span><br>    static &#123;<br>        System.out.println(<span class="hljs-string">"gg"</span>);<br>    &#125;<br><br>    public static void main(String[] args) &#123;<br>    &#125;<br>&#125;<br>/<span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span><span class="hljs-regexp">//</span> <br>gg<br></code></pre></td></tr></table></figure>
 
 <h4 id="静态内部类（使用的很少）"><a href="#静态内部类（使用的很少）" class="headerlink" title="静态内部类（使用的很少）"></a>静态内部类（使用的很少）</h4><p>非静态内部类依赖于外部类的实例，也就是说需要先创建外部类实例，才能用这个实例去创建非静态内部类。而静态内部类不需要。静态内部类不能访问外部类的非静态的变量和方法。</p>
+<h3 id="transient"><a href="#transient" class="headerlink" title="transient"></a>transient</h3><p>该关键字常用来修饰类变量，其所修饰的变量是不需要序列化的（在序列化时会自动忽略该变量）</p>
+<p>比如 <code>ArrayList</code> 中存储数据的数组就使用了该关键字修饰：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">transient</span> Object[] elementData; <span class="hljs-comment">// non-private to simplify nested class access</span><br></code></pre></td></tr></table></figure>
+
+
+
 <h2 id="包"><a href="#包" class="headerlink" title="包"></a>包</h2><h3 id="package关键字"><a href="#package关键字" class="headerlink" title="package关键字"></a>package关键字</h3><blockquote>
 <p>package包与C++中的<code>namespace</code>类似</p>
 <p>Java中常用域名倒序的方法来定义包名，一个Java源文件中只能有一个package语句</p>
@@ -282,7 +288,7 @@
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            Java面向对象
+            Java04：类、对象与方法
           
         </div>
       </a>

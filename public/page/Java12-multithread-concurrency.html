@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1.3k</span>
+            <span class="post-count">1.5k</span>
         </span>
     </span>
 
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">4 min</span>
+            <span class="post-count">5 min</span>
         </span>
     </span>
 </div>
@@ -125,22 +125,16 @@
 <p>而run方法则会先判断target是否为空（target即为传入的Runnable对象），因此当传入Runnable对象后，该Thread类所执行的代码是传入的Runnable对象的run方法</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> Runnable target;	<span class="hljs-comment">// 传入的 Runnable</span><br><br><span class="hljs-meta">@Override</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-comment">// 判断如果target不为空，则执行传入的target中的逻辑</span><br>    <span class="hljs-keyword">if</span> (target != <span class="hljs-keyword">null</span>) &#123;<br>        target.run();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-
-
-
-
+<p>如下，<code>start</code>方法执行总结如下：</p>
+<p><img src="http://cdn.ziyedy.top/Java12%EF%BC%9A%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/start%E6%96%B9%E6%B3%95.jpg" alt=""></p>
 <h2 id="线程生命周期"><a href="#线程生命周期" class="headerlink" title="线程生命周期"></a>线程生命周期</h2><ul>
-<li><p><strong>New状态</strong>：当一个 Thread 对象刚刚被创建时，状态为 NEW，此时与其他 Java 对象没有什么不同</p>
-</li>
-<li><p><strong>RUNNABLE状态</strong>：调用 <code>start</code> 方法后即进入 RUNNABLE 状态</p>
-</li>
-<li><p><strong>RUNNING状态</strong>：该状态得到CPU分配时即进入RUNNING状态</p>
-</li>
-<li><p><strong>BLOCKED状态</strong>：包括Blocked（被阻塞）、Waiting（等待）、Time_waiting（计时等待）等等</p>
-</li>
-<li><p><strong>TERMINATED状态</strong>：线程的终止状态，意味着线程的生命周期已经走完</p>
-</li>
+<li><strong>New状态</strong>：当一个 Thread 对象刚刚被创建时，状态为 NEW，此时与其他 Java 对象没有什么不同</li>
+<li><strong>RUNNABLE状态</strong>：调用 <code>start</code> 方法后即进入 RUNNABLE 状态</li>
+<li><strong>RUNNING状态</strong>：该状态得到CPU分配时即进入RUNNING状态</li>
+<li><strong>BLOCKED状态</strong>：包括Blocked（被阻塞）、Waiting（等待）、Time_waiting（计时等待）等等</li>
+<li><strong>TERMINATED状态</strong>：线程的终止状态，意味着线程的生命周期已经走完</li>
 </ul>
+<h3 id="线程状态的转换"><a href="#线程状态的转换" class="headerlink" title="线程状态的转换"></a>线程状态的转换</h3><p><img src="http://cdn.ziyedy.top/Java12%EF%BC%9A%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/%E7%BA%BF%E7%A8%8B%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png" alt=""></p>
 <h2 id="Thread类常用方法"><a href="#Thread类常用方法" class="headerlink" title="Thread类常用方法"></a>Thread类常用方法</h2><h3 id="currentThread-及线程对象常用方法"><a href="#currentThread-及线程对象常用方法" class="headerlink" title="currentThread()及线程对象常用方法"></a>currentThread()及线程对象常用方法</h3><p>该方法返回的是代码实际运行时候的<strong>线程对象实例</strong></p>
 <p><em>注：由于同一段代码可能被不同线程执行，因此当前线程是相对的</em></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">Thread.currentThread();					    <span class="hljs-comment">// 获取当前线程</span><br>Thread.currentThread().getName();		    <span class="hljs-comment">// 获取当前线程名称</span><br>Thread.currentThread().setName(线程名称);	 <span class="hljs-comment">// 设置线程名称</span><br>Thread.currentThread().isAlive();			<span class="hljs-comment">// 判断当前线程是否处于活动状态</span><br>Thread.currentThread().getId();				<span class="hljs-comment">// 获得线程的唯一标识</span><br></code></pre></td></tr></table></figure>
@@ -172,6 +166,8 @@
 <li>调用 <code>wait</code>方法：原本 RUNNING 的线程，进入 BLOCKING 状态，此线程会放弃原来持有的锁</li>
 <li>调用 <code>notify</code> 方法：唤醒 wait 的线程，让其继续往下执行</li>
 </ul>
+<p>方法 <code>wait()</code> 的作用是使当前执行代码的线程进行等待， <strong><code>wait()</code> 方法只能在同步方法中或同步块中调用</strong>， <code>wait()</code> 方法执行后，当前线程释放锁，线程与其他线程竞争重新获取锁</p>
+<p>方法 <code>notify()</code> 也要在同步方法或同步块中调用，该方法是用来通知那些可能等待该对象的对象锁的其他线程，对其发出通知notify，并使进入就绪态，等待获取锁。如果有多个线程等待，则有线程规划器随机挑选出一个呈wait状态的线程。在notify()方法后，当前线程不会马上释放该对象锁，要等到执行notify()方法的线程将程序执行完，也就是退出同步代码块中</p>
  
       <!-- reward -->
       
@@ -255,11 +251,11 @@
    
   <nav class="article-nav">
     
-      <a href="/page/Java12-synchronized.html" class="article-nav-link">
+      <a href="/page/Java12-lock.html" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            Java12-2：synchronized关键字总结
+            Java12-2：锁机制的使用与实现
           
         </div>
       </a>

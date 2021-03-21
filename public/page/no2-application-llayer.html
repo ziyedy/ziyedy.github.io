@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">2.6k</span>
+            <span class="post-count">2.7k</span>
         </span>
     </span>
 
@@ -181,35 +181,53 @@
 <li>HTTP将每个对象封装在自己的响应报文里，而SMTP则将所有的报文对象放到一个报文之中；</li>
 </ul>
 <h3 id="邮件访问协议"><a href="#邮件访问协议" class="headerlink" title="邮件访问协议"></a>邮件访问协议</h3><p>需要注意的是，<strong>SMTP是邮件服务器之间发送邮件报文</strong>的协议，并不是用户通过代理和邮件服务器之间通信的协议；用户代理使用邮件访问协议来从邮件服务器上获取邮件信息；目前常用的邮件访问协议有<strong>POP3</strong>（Post Office Protocol-Version 3）、<strong>因特网邮件访问协议</strong>（<strong>IMAP</strong>，Internet Mail Access protocol）和<strong>HTTP</strong></p>
-<h2 id="DNS：因特网的目录服务"><a href="#DNS：因特网的目录服务" class="headerlink" title="DNS：因特网的目录服务"></a>DNS：因特网的目录服务</h2><blockquote>
-<p>DNS（Domain Name System）域名系统，用于处理<strong>主机名和IP地址的转换问题</strong>。</p>
-<p><strong>DNS是一个由分层的DNS服务器组成的分布式数据库和一个使得主机可以查询分布式数据库的应用层协议组成</strong></p>
-<p>DNS运行在UDP之上，使用53号端口</p>
-</blockquote>
-<h3 id="DNS提供的服务"><a href="#DNS提供的服务" class="headerlink" title="DNS提供的服务"></a>DNS提供的服务</h3><h3 id="DNS工作机理概述"><a href="#DNS工作机理概述" class="headerlink" title="DNS工作机理概述"></a>DNS工作机理概述</h3><blockquote>
-<p><strong>DNS采用分布式的设计方案</strong></p>
+<h2 id="DNS：因特网的目录服务"><a href="#DNS：因特网的目录服务" class="headerlink" title="DNS：因特网的目录服务"></a>DNS：因特网的目录服务</h2><p>DNS（Domain Name System）域名系统，用于处理<strong>主机名和IP地址的转换问题</strong>。</p>
+<p>DNS是一个由分层的DNS服务器组成的分布式数据库和一个使得主机可以查询分布式数据库的应用层协议组成</p>
+<p><strong>DNS运行在UDP之上</strong>，使用53号端口</p>
+<h3 id="DNS工作机理概述"><a href="#DNS工作机理概述" class="headerlink" title="DNS工作机理概述"></a>DNS工作机理概述</h3><p><strong>DNS采用分布式的设计方案</strong></p>
 <p>因为单一的DNS服务器无法解决<em>单点故障</em>、<em>保证通信容量</em>、<em>邻近所有的查询主机</em>和<em>维护困难</em>等问题</p>
-</blockquote>
 <h4 id="分布式层次的数据库"><a href="#分布式层次的数据库" class="headerlink" title="分布式层次的数据库"></a>分布式层次的数据库</h4><p>为了处理扩展性问题，DNS服务器采用层次式组织，并且分布在全世界范围内；大致来说，存在三种DNS服务器：<strong>根DNS服务器</strong>、<strong>顶级域DNS服务器</strong>和<strong>权威DNS服务器</strong></p>
-<ul>
-<li>根DNS服务器：因特网上有13个根DNS服务器</li>
-<li>顶级域DNS服务器：负责顶级域名，如com，org，net，edu，gov以及各个国家的顶级域名的转换</li>
-<li>权威DNS服务器：如大学、公司等公共可访问的DNS记录</li>
-<li><strong>本地DNS服务器（除去上面三个外重要的DNS服务器）</strong>：<strong>邻近</strong>其所在网络的其他主机。当主机发出DNS请求时，该请求被发往本地DNS服务器，它起着代理的作用，并将请求转发到DNS服务器层次结构中。</li>
-</ul>
-<blockquote>
-<p>解析<code>www.baidu.com</code>的IP地址的过程</p>
+<table>
+<thead>
+<tr>
+<th>分类</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>根DNS服务器</td>
+<td>因特网上有13个根DNS服务器</td>
+</tr>
+<tr>
+<td>顶级域DNS服务器</td>
+<td>负责顶级域名，如com，org，net，edu，gov以及各个国家的顶级域名的转换</td>
+</tr>
+<tr>
+<td>权威DNS服务器</td>
+<td>如大学、公司等公共可访问的DNS记录</td>
+</tr>
+<tr>
+<td><strong>本地DNS服务器</strong></td>
+<td>最重要的DNS服务器，当主机发出DNS请求时，该请求被发往本地DNS服务器，它起着<strong>代理</strong>的作用，并将请求转发到DNS服务器层次结构中</td>
+</tr>
+</tbody></table>
+<img src="http://cdn.ziyedy.top/%E7%AC%AC%E4%BA%8C%E7%AB%A0%EF%BC%9A%E5%BA%94%E7%94%A8%E5%B1%82/DNS%E5%9F%9F%E5%90%8D%E7%A9%BA%E9%97%B4%E7%BB%93%E6%9E%84.png" style="zoom:80%;" />
+
+<h3 id="域名解析过程"><a href="#域名解析过程" class="headerlink" title="域名解析过程"></a>域名解析过程</h3><p>DNS查询有两种，一种是<strong>递归查询</strong>一种是<strong>迭代查询</strong></p>
+<p>实践中，查询通常满足这样的模式：<strong>从请求主机到本地DNS服务器的查询是递归的，其余查询是迭代的</strong>。</p>
+<p>因此，域名解析过程具体可以描述如下：</p>
 <ol>
-<li>返回负责解析顶级域名<code>com</code>的服务器的IP地址</li>
-<li>顶级域DNS服务器建返回<code>baidu.com</code>的权威服务器的IP集合</li>
-<li>与这些服务器之一取得联系，获得<code>www.baidu.com</code>的IP地址</li>
+<li>主机先向本地域名服务器进行递归查询</li>
+<li>本地域名服务器采用迭代查询，向一个根域名服务器进行查询</li>
+<li>根域名服务器告诉本地域名服务器，下一次应该查询的顶级域名服务器的IP地址</li>
+<li>本地域名服务器向顶级域名服务器进行查询</li>
+<li>顶级域名服务器告诉本地域名服务器，下一步查询权限服务器的IP地址</li>
+<li>本地域名服务器向权限服务器进行查询</li>
+<li>权限服务器告诉本地域名服务器所查询的主机的IP地址</li>
+<li>本地域名服务器最后把查询结果告诉主机</li>
 </ol>
-</blockquote>
-<p>DNS查询有两种，一种是<strong>递归查询</strong>一种是<strong>迭代查询</strong>；实践中，查询通常满足这样的模式：<strong>从请求主机到本地DNS服务器的查询是递归的，其余查询是迭代的</strong>。</p>
-<h4 id="DNS缓存"><a href="#DNS缓存" class="headerlink" title="DNS缓存"></a>DNS缓存</h4><blockquote>
-<p>当某DNS服务器接收一个DNS回答时，其将映射缓存到本地存储器中</p>
+<h4 id="DNS缓存"><a href="#DNS缓存" class="headerlink" title="DNS缓存"></a>DNS缓存</h4><p>当某DNS服务器接收一个DNS回答时，其将映射缓存到本地存储器中</p>
 <p><strong>由于缓存，除了少数DNS查询以外，根服务器被绕过了</strong></p>
-</blockquote>
 <h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>《计算机网络——自顶向下方法》</p>
 <p><a href="https://blog.csdn.net/qq_39326472/article/details/88089747" target="_blank" rel="noopener">https://blog.csdn.net/qq_39326472/article/details/88089747</a></p>
  

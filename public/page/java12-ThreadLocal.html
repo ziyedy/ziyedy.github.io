@@ -13,7 +13,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    ThreadLocal |  子夜nostalgic
+    Java12-3：线程隔离ThreadLocal |  子夜nostalgic
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Java/JavaSE/Java12-5：ThreadLocal"
+  id="post-Java/JavaSE/Java12-3：线程隔离ThreadLocal"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -59,7 +59,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  ThreadLocal
+  Java12-3：线程隔离ThreadLocal
 </h1>
  
 
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">291</span>
+            <span class="post-count">641</span>
         </span>
     </span>
 
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">1 min</span>
+            <span class="post-count">2 min</span>
         </span>
     </span>
 </div>
@@ -102,18 +102,29 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <p>#</p>
-<p>利用“线程封闭”的思路解决线程安全问题，ThreadLocal变量的作用域是为线程，同一线程内共享</p>
-<p>ThreadLocal的特性决定了它的使用场景，由于ThreadLocal中存储的变量是线程隔离的</p>
-<p>1、存储需要在线程隔离的数据。比如线程执行的上下文信息，每个线程是不同的，但是对于同一个线程来说会共享同一份数据</p>
-<p>2、</p>
-<h2 id="ThreadLocal-的使用"><a href="#ThreadLocal-的使用" class="headerlink" title="ThreadLocal 的使用"></a>ThreadLocal 的使用</h2><h2 id="ThreadLocal源码解析"><a href="#ThreadLocal源码解析" class="headerlink" title="ThreadLocal源码解析"></a>ThreadLocal源码解析</h2><p>多个线程对同一个对象set操作，但只会get出自己set进去的值，原理如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// set时，把当前threadLocal对象作为key，想要保存的对象作为value，存入map</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">set</span><span class="hljs-params">(T value)</span> </span>&#123;<br>    Thread t = Thread.currentThread();<br>    ThreadLocalMap map = getMap(t);		<span class="hljs-comment">// 获取的 map 其实是与线程绑定的</span><br>    <span class="hljs-keyword">if</span> (map != <span class="hljs-keyword">null</span>)<br>        map.set(<span class="hljs-keyword">this</span>, value);<br>    <span class="hljs-keyword">else</span><br>        createMap(t, value);<br>&#125;<br><br><span class="hljs-function">ThreadLocalMap <span class="hljs-title">getMap</span><span class="hljs-params">(Thread t)</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> t.threadLocals;	<span class="hljs-comment">// ThreadLocalMap 就存在Thread对象中</span><br>&#125;<br></code></pre></td></tr></table></figure>
+  <h2 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h2><h3 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h3><p>利用<strong>线程隔离</strong>的思路解决线程安全问题，<code>ThreadLocal</code>变量的作用域是为线程，同一线程内共享，因此也就保证了线程安全</p>
+<h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><p>基本使用就是声明<code>ThreadLocal</code>对象，然后使用<code>set</code>、<code>get</code>方法设置与得到相应的值（与线程绑定）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>&#123;<br>    <span class="hljs-comment">// 通常将 ThreadLocal 对象声明为 static final</span><br>    <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> ThreadLocal&lt;String&gt; threadLocal = <span class="hljs-keyword">new</span> ThreadLocal&lt;&gt;();<br>    <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Subthread</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Thread</span> </span>&#123;<br>        <span class="hljs-meta">@Override</span><br>        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) &#123;<br>                <span class="hljs-comment">// set 设置线程相关值</span><br>                threadLocal.set(Thread.currentThread().getName() + <span class="hljs-string">'-'</span> + i);<br>                <span class="hljs-comment">// get 取出相关值</span><br>                String val = threadLocal.get();<br>                System.out.println(Thread.currentThread().getName() + <span class="hljs-string">": "</span> + val);<br>            &#125;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        Subthread t1 = <span class="hljs-keyword">new</span> Subthread();<br>        Subthread t2 = <span class="hljs-keyword">new</span> Subthread();<br>        t1.start();<br>        t2.start();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
+<p><img src="http://cdn.ziyedy.top/Java12-3%EF%BC%9A%E7%BA%BF%E7%A8%8B%E9%9A%94%E7%A6%BBThreadLocal/ThreadLocal%E4%BD%BF%E7%94%A8%E7%BB%93%E6%9E%9C.png" alt=""></p>
+<h2 id="ThreadLocal-源码解析"><a href="#ThreadLocal-源码解析" class="headerlink" title="ThreadLocal 源码解析"></a>ThreadLocal 源码解析</h2><h3 id="set-方法"><a href="#set-方法" class="headerlink" title="set 方法"></a>set 方法</h3><p>多个线程对同一个对象set操作，但只会get出自己set进去的值，原理如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// set时，把当前threadLocal对象作为key，想要保存的对象作为value，存入map</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">set</span><span class="hljs-params">(T value)</span> </span>&#123;<br>    Thread t = Thread.currentThread();<br>    ThreadLocalMap map = getMap(t);		<span class="hljs-comment">// 获取的 map 与当前线程绑定的</span><br>    <span class="hljs-keyword">if</span> (map != <span class="hljs-keyword">null</span>)<br>        map.set(<span class="hljs-keyword">this</span>, value);	<span class="hljs-comment">// 把当前threadLocal对象作为key，将value存入map</span><br>    <span class="hljs-keyword">else</span><br>        createMap(t, value);<br>&#125;<br><br><span class="hljs-function">ThreadLocalMap <span class="hljs-title">getMap</span><span class="hljs-params">(Thread t)</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> t.threadLocals;	<span class="hljs-comment">// ThreadLocalMap 就存在 Thread 对象中</span><br>&#125;<br></code></pre></td></tr></table></figure>
 
+<p><em>总结：<code>ThreadLocal</code> 看似自己保存了每个线程的变量副本，其实每个线程的变量副本是保存在线程对象中，因此自然就线程隔离了</em></p>
+<p><img src="http://cdn.ziyedy.top/Java12-3%EF%BC%9A%E7%BA%BF%E7%A8%8B%E9%9A%94%E7%A6%BBThreadLocal/ThreadLocal%E5%8E%9F%E7%90%86.jpg" alt=""></p>
+<h3 id="ThreadLocalMap-分析"><a href="#ThreadLocalMap-分析" class="headerlink" title="ThreadLocalMap 分析"></a>ThreadLocalMap 分析</h3><p><code>ThreadLocalMap</code>是<code>ThreadLocal</code>的静态内部类，其虽然作为属性存储在Thread类中，但由于访问权限问题只能由<code>ThreadLocal</code>进行维护</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 存在于 Thread 类中</span><br><span class="hljs-comment">// 即ThreadLocal其实是作为 “属性” 保存在Thread对象中的</span><br>ThreadLocal.ThreadLocalMap threadLocals = <span class="hljs-keyword">null</span>;<br></code></pre></td></tr></table></figure>
 
-<p>ThreadLocalMap是ThreadLocal的静态内部类</p>
-<p>在ThreadLocalMap中使用WeakReference包装后的ThreadLocal对象作为key，也就是说这里对ThreadLocal对象为弱引用。当ThreadLocal对象在ThreadLocalMap引用之外，再无其他引用的时候能够被垃圾回收</p>
+<h3 id="内存泄漏"><a href="#内存泄漏" class="headerlink" title="内存泄漏"></a>内存泄漏</h3><blockquote>
+<p> 内存泄漏：为程序在申请内存后，无法释放已申请的内存空间（不会再被使用的对象或者变量占用的内存不能被回收）</p>
+</blockquote>
+<p><code>ThreadLocalMap</code>功能与其他Map类容器作用类似，但其中作为 key 存储的<code>ThreadLocal</code>对象为弱引用（如下），因此很容易被垃圾回收，但value对象并不会与之一起被回收，这样就会造成<strong>“内存泄漏”</strong>问题</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 存在于 ThreadLocalMap 中，用于作为 key</span><br><span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Entry</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">WeakReference</span>&lt;<span class="hljs-title">ThreadLocal</span>&lt;?&gt;&gt; </span>&#123;<br>    <span class="hljs-comment">/** The value associated with this ThreadLocal. */</span><br>    Object value;<br><br>    Entry(ThreadLocal&lt;?&gt; k, Object v) &#123;<br>        <span class="hljs-keyword">super</span>(k);<br>        value = v;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="如何避免内存泄漏"><a href="#如何避免内存泄漏" class="headerlink" title="如何避免内存泄漏"></a>如何避免内存泄漏</h3><ul>
+<li>每次使用完 <code>ThreadLocal</code> 都调用其 <code>remove()</code>方法清除数据</li>
+<li>将 <code>ThreadLocal</code> 变量定义为static，这样就保证了一直存在其强引用</li>
+</ul>
  
       <!-- reward -->
       
@@ -197,19 +208,19 @@
    
   <nav class="article-nav">
     
-      <a href="/page/null.html" class="article-nav-link">
+      <a href="/page/Java08-List-source-code.html" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            动态规划
+            Java08-1：List相关实现类源码解析
           
         </div>
       </a>
     
     
-      <a href="/page/null.html" class="article-nav-link">
+      <a href="/page/Java12-thread-pool.html" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">回溯算法</div>
+        <div class="article-nav-title">Java12-4：线程池</div>
       </a>
     
   </nav>
