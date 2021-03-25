@@ -31,11 +31,29 @@ fileName: Java12-thread-pool
 
 创建固定数量的线程作为线程池，不断的从 `RunnableTaskQueue ` 中取得 `Runnable` 并调用其 `run`方法
 
+### 阻塞队列
+
+阻塞队列是基于普通队列实现的，与多线程联系到一起。主要是对wait（）与notify（）操作的应用
+
+https://blog.csdn.net/weixin_45755718/article/details/106835215
+
 
 
 
 
 ## Executor 线程池框架
+
+
+
+### 参数
+
+1：coreSize（核心线程数）：当新任务提交时，发现运行的线程数小于 coreSize，一个新的线程将被创建，即使这时候其它工作线程是空闲的，可以通过 getCorePoolSize 方法获得 coreSize；
+
+2：maxSize（最大线程数）: 当任务提交时，coreSize < 运行线程数 <= maxSize，但队列没有满时，任务提交到队列中，如果队列满了，在 maxSize 允许的范围内新建线程；
+
+coreSize == maxSize：想让线程一下子增加到 maxSize，并且不要回收线程，防止线程回收，避免不断增加回收的损耗
+
+
 
 
 
@@ -45,7 +63,17 @@ fileName: Java12-thread-pool
 
 
 
+
+
 ### 种类（5）
+
+Executors#newCachedThreadPool 无界的线程池，并且可以自动回收
+
+Executors#newFixedThreadPool 固定大小线程池；
+
+Executors#newSingleThreadExecutor 单个线程的线程池；
+
+
 
 
 
