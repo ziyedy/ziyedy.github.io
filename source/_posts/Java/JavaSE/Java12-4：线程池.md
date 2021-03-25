@@ -31,6 +31,76 @@ fileName: Java12-thread-pool
 
 创建固定数量的线程作为线程池，不断的从 `RunnableTaskQueue ` 中取得 `Runnable` 并调用其 `run`方法
 
+
+
+```java
+public class RunnableTaskQueue {
+    private final LinkedList<Runnable> tasks = new LinkedList<>();
+
+    public Runnable getTask() throws InterruptedException {
+        synchronized (tasks) {
+            while (tasks.isEmpty()) {
+                System.out.println("TaskQueue is empty");
+                tasks.wait();
+            }
+            return tasks.removeFirst();
+        }
+    }
+
+    public void addTask(Runnable runnable) {
+        synchronized (tasks) {
+            tasks.add(runnable);
+            tasks.notifyAll();
+        }
+    }
+}
+```
+
+
+
+
+
+```java
+public class MyExecutor {
+    private final int poolSize;
+    private final RunnableTaskQueue runnableTaskQueue;
+    private final List<Thread> threads = new ArrayList<>();
+
+    public MyExecutor(int poolSize) {
+        this.poolSize = poolSize;
+        this.runnableTaskQueue = new RunnableTaskQueue();
+        Stream.iterate(1, item -> item + 1).limit(poolSize).forEach(item -> {
+            initThread();
+        });
+    }
+
+    private void initThread() {
+        if(threads.size() <= poolSize) {
+            Thread thread = new Thread(() -> {
+                while (true) {
+                    try {
+                        Runnable task = runnableTaskQueue.getTask();
+                        task.run();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            threads.add(thread);
+            thread.start();
+        }
+    }
+
+    public void execute(Runnable runnable) {
+        runnableTaskQueue.addTask(runnable);
+    }
+}
+```
+
+
+
+
+
 ### 阻塞队列
 
 阻塞队列是基于普通队列实现的，与多线程联系到一起。主要是对wait（）与notify（）操作的应用

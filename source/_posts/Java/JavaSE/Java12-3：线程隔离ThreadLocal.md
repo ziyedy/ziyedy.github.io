@@ -15,6 +15,10 @@ fileName: java12-ThreadLocal
 
 利用**线程隔离**的思路解决线程安全问题，`ThreadLocal`变量的作用域是为线程，同一线程内共享，因此也就保证了线程安全
 
+### 使用场景
+
+经典的使用场景是为每个线程分配一个 JDBC 连接 Connection。这样就可以保证每个线程的都在各自的 Connection 上进行数据库的操作，不会出现 A 线程关了 B线程正在使用的 Connection
+
 ### 基本使用
 
 基本使用就是声明`ThreadLocal`对象，然后使用`set`、`get`方法设置与得到相应的值（与线程绑定）
