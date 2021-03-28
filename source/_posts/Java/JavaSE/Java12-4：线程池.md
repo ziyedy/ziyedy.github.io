@@ -117,6 +117,12 @@ https://blog.csdn.net/weixin_45755718/article/details/106835215
 
 ### 参数
 
+
+
+`coreSize` ：线程池在完成初始化
+
+
+
 1：coreSize（核心线程数）：当新任务提交时，发现运行的线程数小于 coreSize，一个新的线程将被创建，即使这时候其它工作线程是空闲的，可以通过 getCorePoolSize 方法获得 coreSize；
 
 2：maxSize（最大线程数）: 当任务提交时，coreSize < 运行线程数 <= maxSize，但队列没有满时，任务提交到队列中，如果队列满了，在 maxSize 允许的范围内新建线程；
@@ -131,7 +137,13 @@ coreSize == maxSize：想让线程一下子增加到 maxSize，并且不要回�
 
 
 
+### 为什么建议手动创建线程池
 
+可以让我们更加明确线程池的运行规则，避免资源耗尽的风险
+
+正确创建方法：
+
+根据业务场景，自己设置线程池参数（如内存有多大，想给线程取什么名字）
 
 
 
@@ -139,11 +151,15 @@ coreSize == maxSize：想让线程一下子增加到 maxSize，并且不要回�
 
 Executors#newCachedThreadPool 无界的线程池，并且可以自动回收
 
-Executors#newFixedThreadPool 固定大小线程池；
+Executors#newFixedThreadPool 固定大小线程池；队列没有上限，有可能会导致OOM
 
 Executors#newSingleThreadExecutor 单个线程的线程池；
 
+ScheduledThreadPool	支持定时周期性任务执行的线程池
 
+
+
+workStealingPool JDK 1.8 加入的
 
 
 
