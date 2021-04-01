@@ -4,7 +4,7 @@ date: 2020-09-02 10:50:44
 tags:
 	- Android
 categories:
-	- 编程相关
+	- 移动端
 	- Android
 fileName: Android5-broadcast
 ---

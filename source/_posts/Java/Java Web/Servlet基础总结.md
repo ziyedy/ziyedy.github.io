@@ -347,10 +347,10 @@ cookie.setPath("/gg/ss");
 ## Session
 
 > session 本身就属于 HTTP 协议，用于保留某个用户访问的信息，只保存在当前浏览器当中。
->
-> 对于服务器而言，每一个连接到它的客户端都是一个 session，servlet 容器使用` javax.servlet.http.HttpSession`创建 HTTP 客户端和 HTTP 服务器之间的会话
->
-> 简而言之，Session 的作用就是为了标识一次会话，或者说确认一个用户，并且在一次会话（一个用户的多次请求）期间共享数据
+
+对于服务器而言，每一个连接到它的客户端都是一个 session，servlet 容器使用` javax.servlet.http.HttpSession`创建 HTTP 客户端和 HTTP 服务器之间的会话
+
+简而言之，Session 的作用就是为了标识一次会话，或者说确认一个用户，并且在一次会话（一个用户的多次请求）期间共享数据
 
 ### Session的获取与基本使用
 
@@ -383,7 +383,7 @@ public class Session1 extends HttpServlet {
 
 ### JSESSIONID标识符
 
-> 使用一个叫JSESSIONID的特殊cookie来标识一次会话，Session 的底层依赖 Cookie 来实现
+> 使用一个叫JSESSIONID的特殊cookie来标识一次会话，**Session 的底层依赖 Cookie 来实现**
 
 <img src="http://cdn.ziyedy.top/Servlet%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/session.png" style="zoom: 67%;" />
 
@@ -418,7 +418,7 @@ removeAttribute(name)
 
 #### 设置到期时间
 
-```
+```java
 // 设置session的最大不活动时间(单位为秒)
 session.setMaxInactiveInterval(30); // 30秒
 
@@ -435,13 +435,13 @@ session.invalidate();
 
 ### Servlet三大域对象
 
-> Servlet的三大域对象：
->
-> 1、request域对象；在一次请求中有效
->
-> 2、session域对象；在一次会话中有效
->
-> 3、servletContext域对象；在整个应用程序中有效，服务器关闭后失效
+Servlet的三大域对象：
+
+1、request域对象；在一次请求中有效
+
+2、session域对象；在一次会话中有效
+
+3、servletContext域对象；在整个应用程序中有效，服务器关闭后失效
 
 
 
@@ -462,9 +462,9 @@ session.invalidate();
 
 ### 后台实现
 
-> 1、使用注解`@MultipartConfig()`标识文件上传
->
-> 2、 Servlet 将 `multipart/form-data` 的 POST 请求封装成 Part，通过 Part 对上传的文件进行操作
+1、使用注解`@MultipartConfig()`标识文件上传
+
+2、 Servlet 将 `multipart/form-data` 的 POST 请求封装成 Part，通过 Part 对上传的文件进行操作
 
 ```java
 @WebServlet("/uploadServlet")

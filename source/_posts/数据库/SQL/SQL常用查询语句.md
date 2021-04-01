@@ -5,7 +5,7 @@ tags:
 	- 数据库
 	- SQL
 categories:
-	- 编程相关
+	- 数据库
 	- SQL
 fileName: mysql2
 ---

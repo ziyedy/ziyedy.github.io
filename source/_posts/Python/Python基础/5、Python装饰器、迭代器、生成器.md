@@ -4,7 +4,6 @@ date: 2020-05-13 14:25:10
 tags:
 	- Python
 categories:
-	- 编程相关
 	- Python
 	- Python基础
 fileName: python5

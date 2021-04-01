@@ -4,7 +4,6 @@ date: 2020-06-26 17:29:13
 tags:
 	- Python
 categories:
-	- 编程相关
 	- Python
 	- Python基础
 fileName: python-common-method

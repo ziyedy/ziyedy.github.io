@@ -4,7 +4,6 @@ date: 2020-06-19 15:01:02
 tags:
 	- Python
 categories:
-	- 编程相关
 	- Python
 	- Python基础
 fileName: python8

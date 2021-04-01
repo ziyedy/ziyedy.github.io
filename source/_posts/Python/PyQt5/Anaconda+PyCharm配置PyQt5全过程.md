@@ -5,7 +5,6 @@ tags:
 	- Python
 	- GUI
 categories:
-	- 编程相关
 	- Python
 	- PyQt5
 fileName: pyqt5-env-ide-build

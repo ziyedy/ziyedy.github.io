@@ -5,7 +5,6 @@ tags:
 	- Java
 categories:
 	- Java
-	- Java基础
 fileName: java-for-algorithm-test
 ---
 

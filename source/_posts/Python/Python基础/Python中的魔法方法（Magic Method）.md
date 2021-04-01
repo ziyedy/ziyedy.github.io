@@ -4,7 +4,6 @@ date: 2020-08-26 09:19:41
 tags:
 	- Python
 categories:
-	- 编程相关
 	- Python
 	- Python基础
 fileName: python-magic-method

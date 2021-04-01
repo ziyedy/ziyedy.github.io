@@ -4,7 +4,7 @@ date: 2020-08-30 09:21:58
 tags:
 	- Android
 categories:
-	- 编程相关
+	- 移动端
 	- Android
 fileName: Android2-activity
 ---

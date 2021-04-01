@@ -4,7 +4,7 @@ date: 2020-08-08 22:41:52
 tags:
 	- 6dof姿态估计
 categories:
-	- AI
+	- AI相关
 	- 论文阅读
 fileName: deepim-summary
 ---
