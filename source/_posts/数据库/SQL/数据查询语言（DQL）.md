@@ -1,5 +1,5 @@
 ---
-title: SQL常用查询语句
+title: 数据查询语言（DQL）
 date: 2020-06-10 17:30:10
 tags:
 	- 数据库
@@ -7,7 +7,7 @@ tags:
 categories:
 	- 数据库
 	- SQL
-fileName: mysql2
+fileName: DQL
 ---
 
 ## SELECT——查询
@@ -127,7 +127,7 @@ WHERE AVG(f2) > 10
 GROUP BY f1;
 ```
 
-```
+```sql
 # 使用正确
 SELECT f1
 FROM table
@@ -148,13 +148,23 @@ SELECT * FROM * WHERE 条件1 [AND|OR] 条件2 ......;
 
 除此之外还有BETWEEN，LIKE，IN等常用运算符
 
-### 常用操作符
 
 
+### 语句基本执行顺序
 
-### 使用通配符
+1、from
 
+2、where
 
+3、group by
+
+4、having
+
+5、select
+
+6、order by
+
+7、limit
 
 
 

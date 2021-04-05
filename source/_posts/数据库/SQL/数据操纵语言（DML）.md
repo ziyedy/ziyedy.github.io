@@ -1,5 +1,5 @@
 ---
-title: SQL的增删改等语句
+title: 数据操纵语言（DML）
 date: 2020-06-07 09:44:15
 tags:
 	- 数据库
@@ -7,7 +7,7 @@ tags:
 categories:
 	- 编程相关
 	- SQL
-fileName: mysql1
+fileName: DML
 ---
 
 
@@ -97,7 +97,7 @@ DROP INDEX 索引名称 ON 表名;
 
 
 
-
+## 添加数据 INSERT
 
 向数据表中写入记录
 
@@ -110,10 +110,10 @@ VALUES(值1,值2......);
 
 ```
 // 当插入数据有问题时直接忽略
-NSERT IGNORE INTO
+INSERT IGNORE INTO
 ```
 
-
+## 修改数据 UPDATE
 
 修改表的记录
 
@@ -127,7 +127,7 @@ LIMIT
 
 
 
-删除数据
+## 删除数据 DELETE
 
 ```
 DELETE [IGNORE] FROM 表名

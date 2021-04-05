@@ -284,7 +284,7 @@ public class TestDataStream {
 
 ## 对象流
 
-对象流ObjectInputStream和ObjectOutputStream
+对象流 `ObjectInputStream` 和 `ObjectOutputStream` ，可以将Java类与对象写出到文件，实现对象的持久存储
 
 ```java
 public class TestObjectStream {
@@ -329,14 +329,18 @@ public class TestObjectStream {
 
 ## 序列化与反序列化
 
-存储与传输时，需要将Java程序中的类对象等信息序列化为二进制字节流进行传输
+存储与传输时，需要将Java程序中的类对象等信息序列化为**二进制字节流**进行传输，该字节序列包含对象的数据、对象的类型和对象中存储的属性等信息。字节序列写出到文件后，相当于文件中**持久保存**了一个对象的信息。
 
-* 序列化：Serialization将对象的状态信息转换为可以存储或传输的形式的过程
-* 反序列化：
+* 序列化：`Serialization` 将对象的状态信息转换为可以存储或传输的形式的过程
+* 反序列化：从文件中读取出来，重构对象，对其进行反序列化
 
+### 序列化实现条件
 
+1、该类必须实现java.io.Serializable 接口，Serializable是一个标记接口，不实现此接口的类将不会使任何状态序列化或者反序列化，会抛出NotSerializableException异常
 
+2、该类的所有属性必须是可序列化的。如果有一个属性不需要可序列化的，则该属性必须注明是瞬态的，使用transient关键字修饰
 
+https://blog.csdn.net/Luojun13Class/article/details/88529622
 
 
 
