@@ -163,6 +163,14 @@ int[] b = Arrays.copyOfRange(a,1,3);
 for (int m : b) System.out.print(m + " ");	// -3 2
 ```
 
+#### Arrays.copyOf()——创建新数组
+
+```java
+Arrays.copyOf(arr, 10);
+```
+
+
+
 
 
 ### Collections
