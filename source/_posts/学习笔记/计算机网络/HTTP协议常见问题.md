@@ -1,3 +1,16 @@
+---
+title: HTTP协议常见问题
+date: 2021-04-11 12:50:14
+tags:
+	- 网络协议
+categories:
+	- 学习笔记
+	- 计算机网络
+fileName: HTTP
+---
+
+
+
 ## 问题汇总
 
 ### 1. TCP三次握手和四次挥手
@@ -45,12 +58,52 @@ HTTP/2.0：
 
 ### 8. HTTPS密钥交换过程
 
+
+
 ### 9. HTTP的缓存机制
+
+
 
 ### 10. 输入URL跳转网页的过程
 
-### 11. 计算机网络四层协议,五层协议,七层协议
 
-### 12. 什么是cookie和session,区别是什么, 禁用cookie怎么办
+
+## cookie与session
+
+### 区别
+
+
+
+### 禁用cookie
+
+
+
+### cookie的跨域共享
+
+正常的Cookie只能在一个应用中访问，使用`setDomain()` 等方法能够使得cookie实现跨域共享
+
+即 a. jd.com 和 b.jd.com 都能够共享 jd.com 的 Cookie
+
+
 
 ### 13. 页面加载不出来的原因
+
+
+
+a.jd.com能否共享的Cookie？呢？
+
+跨域共享
+
+[cookie的跨域共享和setDomain()方法_weixin_42053164的博客-CSDN博客](https://blog.csdn.net/weixin_42053164/article/details/102921758)
+
+
+
+### WebSocket
+
+推送功能：
+
+服务器可直接发送数据，而不必等待客户端的请求
+
+减少通信量：
+
+首部信息小，减少开销
