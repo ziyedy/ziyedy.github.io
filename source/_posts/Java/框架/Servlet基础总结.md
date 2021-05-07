@@ -2,11 +2,10 @@
 title: Servlet基础总结
 date: 2021-01-28 13:03:39
 tags:
-	- Java
-	- Web
+	- Java Web
 categories:
 	- Java
-	- Java Web
+	- 框架
 fileName: servlet-basic-summary
 ---
 
