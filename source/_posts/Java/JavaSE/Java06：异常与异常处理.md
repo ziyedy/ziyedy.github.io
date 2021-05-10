@@ -27,9 +27,9 @@ fileName: Java-exception-handle
 
 
 
-### Throwable常用方法
+### Throwable 常用方法
 
-```
+```java
 public string getMessage()	// 返回异常发生时的简要描述
 
 public string toString()	// 返回异常发生时的详细信息
@@ -71,9 +71,9 @@ try {
 >
 > 若一个方法可能出现异常，但没有能力处理异常，可以在方法声明处用throws子句来声明抛出异常
 
-```
+```java
 public void method() throws Exception1, Exception2 {
-	//可能产生异常的代码
+	// 可能产生异常的代码
 }
 ```
 
@@ -91,7 +91,7 @@ public void method() throws Exception1, Exception2 {
 
 如下，method2抛出了Exception，那么调用它的method1也必须抛出相应的方法
 
-```
+```java
 public void method1() throws Exception {
     method2();
 }
@@ -119,7 +119,7 @@ public void method2() throws Exception {
 
 ### 示例
 
-```
+```java
 public class MyException extends Exception {
     private String returnCode;  // 异常返回码
     private String returnMsg;   // 异常描述信息

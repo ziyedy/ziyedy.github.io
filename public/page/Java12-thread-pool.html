@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">367</span>
+            <span class="post-count">943</span>
         </span>
     </span>
 
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">1 min</span>
+            <span class="post-count">3 min</span>
         </span>
     </span>
 </div>
@@ -104,14 +104,66 @@
        
   <h2 id="线程池简介"><a href="#线程池简介" class="headerlink" title="线程池简介"></a>线程池简介</h2><p>并发的本质其实就是任务的并行处理，所以绝大部分并发程序都是围绕离散任务进行的</p>
 <ol>
-<li>线程创建需要消耗资源。通过前面的学习，我们知道线程的创建和启动都需要消耗资源，需要 JVM 和操作系统提供支持。如果线程运行的任务十分轻量级，那么会造成创建线程的时间开销比任务逻辑运行时间还要长；</li>
+<li>线程的创建与启动需要消耗资源，需要 JVM 和操作系统提供支持。如果线程运行的任务十分轻量级，那么反复创建线程开销巨大，会造成巨大的性能浪费</li>
 <li>CPU 性能有限。当活跃的线程超过了 CPU 的承载限度，那么会有大量线程参与竞争 CPU，造成系统额外的开销，但是永远都会有很多线程无法竞争到 CPU，造成了资源的浪费；</li>
-<li>系统能够支持的线程存在上限。如果超出上限，整个应用就会崩溃。</li>
+<li>系统能够支持的线程存在上限，过多的线程会占用过大的内存，造成OOM</li>
 </ol>
 <h2 id=""><a href="#" class="headerlink" title=""></a></h2><p>线程池的作用是维护一定数量的线程，接收任意数量的任务，这些任务被线程池中的线程并发执行</p>
 <h2 id="线程池设计与实现"><a href="#线程池设计与实现" class="headerlink" title="线程池设计与实现"></a>线程池设计与实现</h2><h3 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h3><p>维护一个任务队列 <code>RunnableTaskQueue</code> 用以接收 <code>Runnable</code>任务，其中任务一旦被线程池取完，则调用 <code>wait</code> 方法进入阻塞状态，而一旦有新的任务被添加进来，则</p>
 <p>创建固定数量的线程作为线程池，不断的从 <code>RunnableTaskQueue</code> 中取得 <code>Runnable</code> 并调用其 <code>run</code>方法</p>
-<h2 id="Executor-线程池框架"><a href="#Executor-线程池框架" class="headerlink" title="Executor 线程池框架"></a>Executor 线程池框架</h2> 
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RunnableTaskQueue</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> LinkedList&lt;Runnable&gt; tasks = <span class="hljs-keyword">new</span> LinkedList&lt;&gt;();<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Runnable <span class="hljs-title">getTask</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> InterruptedException </span>&#123;<br>        <span class="hljs-keyword">synchronized</span> (tasks) &#123;<br>            <span class="hljs-keyword">while</span> (tasks.isEmpty()) &#123;<br>                System.out.println(<span class="hljs-string">"TaskQueue is empty"</span>);<br>                tasks.wait();<br>            &#125;<br>            <span class="hljs-keyword">return</span> tasks.removeFirst();<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addTask</span><span class="hljs-params">(Runnable runnable)</span> </span>&#123;<br>        <span class="hljs-keyword">synchronized</span> (tasks) &#123;<br>            tasks.add(runnable);<br>            tasks.notifyAll();<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyExecutor</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> poolSize;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> RunnableTaskQueue runnableTaskQueue;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> List&lt;Thread&gt; threads = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MyExecutor</span><span class="hljs-params">(<span class="hljs-keyword">int</span> poolSize)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.poolSize = poolSize;<br>        <span class="hljs-keyword">this</span>.runnableTaskQueue = <span class="hljs-keyword">new</span> RunnableTaskQueue();<br>        Stream.iterate(<span class="hljs-number">1</span>, item -&gt; item + <span class="hljs-number">1</span>).limit(poolSize).forEach(item -&gt; &#123;<br>            initThread();<br>        &#125;);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">initThread</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">if</span>(threads.size() &lt;= poolSize) &#123;<br>            Thread thread = <span class="hljs-keyword">new</span> Thread(() -&gt; &#123;<br>                <span class="hljs-keyword">while</span> (<span class="hljs-keyword">true</span>) &#123;<br>                    <span class="hljs-keyword">try</span> &#123;<br>                        Runnable task = runnableTaskQueue.getTask();<br>                        task.run();<br>                    &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;<br>                        e.printStackTrace();<br>                    &#125;<br>                &#125;<br>            &#125;);<br>            threads.add(thread);<br>            thread.start();<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">execute</span><span class="hljs-params">(Runnable runnable)</span> </span>&#123;<br>        runnableTaskQueue.addTask(runnable);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="阻塞队列"><a href="#阻塞队列" class="headerlink" title="阻塞队列"></a>阻塞队列</h3><p>阻塞队列是基于普通队列实现的，与多线程联系到一起。主要是对wait（）与notify（）操作的应用</p>
+<p><a href="https://blog.csdn.net/weixin_45755718/article/details/106835215" target="_blank" rel="noopener">https://blog.csdn.net/weixin_45755718/article/details/106835215</a></p>
+<h2 id="Executor-线程池框架"><a href="#Executor-线程池框架" class="headerlink" title="Executor 线程池框架"></a>Executor 线程池框架</h2><h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p><code>coreSize</code> ：线程池在完成初始化</p>
+<p>1：coreSize（核心线程数）：当新任务提交时，发现运行的线程数小于 coreSize，一个新的线程将被创建，即使这时候其它工作线程是空闲的，可以通过 getCorePoolSize 方法获得 coreSize；</p>
+<p>2：maxSize（最大线程数）: 当任务提交时，coreSize &lt; 运行线程数 &lt;= maxSize，但队列没有满时，任务提交到队列中，如果队列满了，在 maxSize 允许的范围内新建线程；</p>
+<p>corePoolSize == maxSize：创建固定大小的线程池，想让线程一下子增加到 maxSize，并且不要回收线程，防止线程回收，避免不断增加回收的损耗</p>
+<p>线程池<strong>希望保持较少的线程数量</strong>，只有在负载变得很大时才增加它</p>
+<p>使用无界</p>
+<h3 id="向线程池提交任务的过程"><a href="#向线程池提交任务的过程" class="headerlink" title="向线程池提交任务的过程"></a>向线程池提交任务的过程</h3><h3 id="种类（5）"><a href="#种类（5）" class="headerlink" title="种类（5）"></a>种类（5）</h3><p>Executors#newCachedThreadPool 无界的线程池，并且可以自动回收</p>
+<p>Executors#newFixedThreadPool 固定大小线程池；队列没有上限，有可能会导致OOM</p>
+<p>Executors#newSingleThreadExecutor 单个线程的线程池；</p>
+<p>ScheduledThreadPool    支持定时周期性任务执行的线程池</p>
+<p>workStealingPool JDK 1.8 加入的</p>
+<h3 id="拒绝策略（4）"><a href="#拒绝策略（4）" class="headerlink" title="拒绝策略（4）"></a>拒绝策略（4）</h3><h3 id="为什么建议手动创建线程池"><a href="#为什么建议手动创建线程池" class="headerlink" title="为什么建议手动创建线程池"></a>为什么建议手动创建线程池</h3><p>可以让我们更加明确线程池的运行规则，避免资源耗尽的风险</p>
+<p>正确创建方法：根据不同业务场景，自己设置线程池参数（如内存有多大，想给线程取什么名字）</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://www.jianshu.com/p/7ab4ae9443b9" target="_blank" rel="noopener">https://www.jianshu.com/p/7ab4ae9443b9</a></p>
+ 
       <!-- reward -->
       
       <div id="reword-out">

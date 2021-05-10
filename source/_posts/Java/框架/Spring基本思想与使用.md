@@ -472,8 +472,134 @@ public class Main {
 
 运行结果：
 
+![](http://cdn.ziyedy.top/Spring%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3%E4%B8%8E%E4%BD%BF%E7%94%A8/AOP%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C.png)
 
 
 
+## 数据库事务管理
 
-## 实现事务
+通常情况下，需要在 service 层对事务进行管理，因此 Spring 也具备事务管理的能力
+
+### Spring 事务管理器接口
+
+> 事务管理器是 ` PlatformTransactionManager` 的接口对象，其主要用于完成事务的提交、回滚，及获取事务状态信息
+
+事务管理器接口针对不同的数据库操作方法有不同的实现类，这样可以**实现 Spring 对数据库操作的统一管理**。如 JDBC 与 mybatis 就有其自己的事务管理器实现类 `DataSourceTranactionManager`，而其他框架也有其相应的事务管理器实现类
+
+#### 回滚方式
+
+Spring 默认的回滚方式为：**发生运行时异常与 error 时回滚，发生其他编译异常时提交**（也可以手动指定相应编译异常回滚）
+
+事务的实现使用的是 环绕通知
+
+### Spring 事务定义接口
+
+事务定义接口 `TransactionDefinition` 中定义了事务描述相关的三类常量：
+
+* 事务隔离级别：5个值，4个隔离级别（即数据库相应的四大隔离级别），还有一个 `DEFAULT ` 值表示对应数据库默认的隔离级别
+* 事务传播行为：指处于不同事务中的方法在相互调用时，执行期间事务的维护情况。主要有三个值
+  * PROPAGATION_REQUIRED：指定的方法必须在事务内执行。若该方法被调用时存在事务，则加入当前事务；否则新建事务
+  * PROPAGATION_SUPPORTS：指定的方法支持当前事务，但当前没有事务也可以非事务方式执行
+  * PROPAGATION_REQUIRES_NEW：总是新建一个事务，若当前已经存在事务，则将当前事务挂起，直到新事物执行完毕
+* 事务默认超时时限：以秒为单位，表示一个业务方法的最长执行时间，默认为-1表示无限制
+
+### 使用 @Transactional 注解控制事务
+
+`@Transactional` 注解是 Spring 自带的注解，可以将事务织入到相应的 **public 方法中**，实现事务管理
+
+该注解可以用在 public 方法上面，也可以用在类的上面（表示该类所有public方法均加入事务）
+
+#### 可选属性
+
+* propagation：事务的传播行为，使用的 Propagation类的枚举值。例如 `Propagation.REQUIRED`
+* isolation：表示隔离级别， 使用 Isolation 类的枚举值，表示隔离级别。 默认 `Isolation.DEFAULT`
+* readOnly：boolean 类型的值，表示数据库操作是不是只读的。默认是false
+* timeout：事务超时时限，默认是-1， 整数值，单位是秒
+* rollbackFor：表示回滚的异常类列表，为一个数组，每个值是异常类型的class
+* rollbackForClassName：表示回滚的异常类列表，他的值是异常类名称，是String类型的值
+* noRollbackFor：不需要回滚的异常类列表，是class类型的。
+* noRollbackForClassName：不需要回滚的异常类列表，是String类型的值
+
+#### 使用步骤
+
+1、在 Spring 配置文件中，声明事务管理器，并且说明事务管理器对象
+
+```xml
+<bean id="transactionManager"  class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <!--指定数据源DataSource-->
+    <property name="dataSource" ref="myDataSource" />
+</bean>
+```
+
+2、声明使用注解管理事务，开启注解驱动
+
+```xml
+<!-- transaction-manager: 指定事务管理器的id -->
+<tx:annotation-driven transaction-manager="transactionManager" />
+```
+
+3、在相应方法上面添加 `@Transactional` 注解，例如：
+
+```java
+@Transactional(
+    propagation = Propagation.REQUIRED,
+    isolation = Isolation.DEFAULT,
+    readOnly = false, timeout = 20,
+    rollbackFor = {NullPointerException.class,NotEnougthException.class})
+```
+
+### 使用 Aspectj 框架使用配置文件管理事务
+
+1、在 Spring 配置文件中声明事务管理器
+
+```xml
+<bean id="transactionManager"  class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <!--指定数据源DataSource-->
+    <property name="dataSource" ref="myDataSource" />
+</bean>
+```
+
+2、声明业务方法需要的事务属性（如隔离级别、传播行为、超时时间等）
+
+```xml
+<tx:advice id="serviceAdvice" transaction-manager="transactionManager">
+    <!--给具体的业务方法增加事务的说明-->
+    <tx:attributes>
+        <!--
+            name: 业务方法名称：可直接指定名称，也可以使用通配符
+            propagation:指定传播行为的值
+            isolation：隔离级别
+            read-only：是否只读，默认是false
+            timeout：超时时间
+            rollback-for：指定回滚的异常类列表，使用的异常全限定名称
+        -->
+        <tx:method name="buy" propagation="REQUIRED" isolation="DEFAULT"
+                   read-only="false" timeout="20"
+                   rollback-for="java.lang.NullPointerException"/>
+
+
+        <!-- 在业务方法有命名规则后， 可以对一类命名规则的方法使用事务 -->
+        <tx:method name="add*" propagation="REQUIRES_NEW" rollback-for="java.lang.Exception" />
+        <tx:method name="remove*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+
+        <!-- 对以上定义了的方法以外的全部方法使用相关事务管理方法 -->
+        <tx:method name="*" propagation="SUPPORTS" read-only="true" />
+    </tx:attributes>
+</tx:advice>
+```
+
+3、声明切入点表达式
+
+```xml
+<!--声明切入点表达式： 表示那些包中的类，类中的方法参与事务-->
+<aop:config>
+    <!--声明切入点表达式
+        expression：切入点表达式，表示需要参与事务的方法与类
+        id：切入点表达式的名称，唯一值
+    -->
+    <aop:pointcut id="servicePointcut" expression="execution(* *..service..*.*(..))" />
+    <!-- 关联切入点表达式和事务通知 -->
+    <aop:advisor advice-ref="serviceAdvice" pointcut-ref="servicePointcut" />
+</aop:config>
+```
+
