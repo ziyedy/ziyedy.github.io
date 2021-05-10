@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Java/JavaSE/Java算法题的常用语法"
+  id="post-Java/Java算法题的常用语法"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
   <time datetime="2020-08-15T06:34:11.000Z" itemprop="datePublished">2020-08-15</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Java/">Java</a> / <a class="article-category-link" href="/categories/Java/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+    <a class="article-category-link" href="/categories/Java/">Java</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">861</span>
+            <span class="post-count">872</span>
         </span>
     </span>
 
@@ -194,6 +194,10 @@
 <figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-built_in">int</span>[] a = new <span class="hljs-built_in">int</span>[]&#123;<span class="hljs-number">-3</span>,<span class="hljs-number">-2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">9</span>&#125;;<br>System.<span class="hljs-keyword">out</span>.println(Arrays.binarySearch(a, <span class="hljs-number">2</span>));	<span class="hljs-comment">// 2</span><br></code></pre></td></tr></table></figure>
 
 <h4 id="Arrays-copyOfRange-——截取数组"><a href="#Arrays-copyOfRange-——截取数组" class="headerlink" title="Arrays.copyOfRange()——截取数组"></a>Arrays.copyOfRange()——截取数组</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-built_in">int</span>[] a = new <span class="hljs-built_in">int</span>[]&#123;<span class="hljs-number">-2</span>,<span class="hljs-number">-3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">9</span>&#125;;<br><span class="hljs-comment">// 截取[1, 3)的数组</span><br><span class="hljs-built_in">int</span>[] b = Arrays.copyOfRange(a,<span class="hljs-number">1</span>,<span class="hljs-number">3</span>);<br><span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> m : b) System.<span class="hljs-keyword">out</span>.print(m + <span class="hljs-string">" "</span>);	<span class="hljs-comment">// -3 2</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="Arrays-copyOf-——创建新数组"><a href="#Arrays-copyOf-——创建新数组" class="headerlink" title="Arrays.copyOf()——创建新数组"></a>Arrays.copyOf()——创建新数组</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Arrays.copyOf(arr, <span class="hljs-number">10</span>);<br></code></pre></td></tr></table></figure>
+
+
 
 
 

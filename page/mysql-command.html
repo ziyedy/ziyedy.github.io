@@ -13,7 +13,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    Ubuntu安装摘记 |  子夜nostalgic
+    MySQL常用命令 |  子夜nostalgic
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-问题解决/Ubuntu/Ubuntu安装摘记"
+  id="post-数据库/MySQL/MySQL常用命令"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -59,18 +59,18 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Ubuntu安装摘记
+  MySQL常用命令
 </h1>
  
 
     </header>
      
     <div class="article-meta">
-      <a href="/page/ubuntu-install-summary.html" class="article-date">
-  <time datetime="2020-09-24T03:11:26.000Z" itemprop="datePublished">2020-09-24</time>
+      <a href="/page/mysql-command.html" class="article-date">
+  <time datetime="2021-02-08T06:33:38.000Z" itemprop="datePublished">2021-02-08</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">问题解决</a> / <a class="article-category-link" href="/categories/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/Ubuntu/">Ubuntu</a>
+    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a> / <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/">MySQL</a>
   </div>
   
 <div class="word_count">
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">23</span>
+            <span class="post-count">203</span>
         </span>
     </span>
 
@@ -102,10 +102,19 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="卸载双系统Ubuntu"><a href="#卸载双系统Ubuntu" class="headerlink" title="卸载双系统Ubuntu"></a>卸载双系统Ubuntu</h2><blockquote>
-<p>从Win10系统中卸载ubuntu</p>
-</blockquote>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://blog.csdn.net/mtllyb/article/details/78635757" target="_blank" rel="noopener">https://blog.csdn.net/mtllyb/article/details/78635757</a></p>
+  <h3 id="查看数据库版本信息"><a href="#查看数据库版本信息" class="headerlink" title="查看数据库版本信息"></a>查看数据库版本信息</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment"># 查看数据库版本</span><br>mysql <span class="hljs-comment">--version</span><br>mysql -V<br></code></pre></td></tr></table></figure>
+
+<h3 id="登录数据库"><a href="#登录数据库" class="headerlink" title="登录数据库"></a>登录数据库</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment"># 登录数据库</span><br>mysql -u 用户名 -p 密码<br></code></pre></td></tr></table></figure>
+
+<h3 id="查看、操作数据库"><a href="#查看、操作数据库" class="headerlink" title="查看、操作数据库"></a>查看、操作数据库</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment"># 查看现有的数据库</span><br><span class="hljs-keyword">show</span> <span class="hljs-keyword">databases</span>; <br><br><span class="hljs-comment"># 创建叫 ziye 的数据库</span><br><span class="hljs-keyword">create</span> <span class="hljs-keyword">database</span> ziye;<br><br><span class="hljs-comment"># 使用 ziye 数据库</span><br><span class="hljs-keyword">use</span> ziye;<br><br><span class="hljs-comment"># 删除 ziye 数据库</span><br><span class="hljs-keyword">drop</span> <span class="hljs-keyword">database</span> ziye;<br><br><span class="hljs-comment"># 运行对应sql语句</span><br>source D:\ziye.sql<br></code></pre></td></tr></table></figure>
+
+<h3 id="使用-select-获取相关信息"><a href="#使用-select-获取相关信息" class="headerlink" title="使用 select 获取相关信息"></a>使用 select 获取相关信息</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment"># 查看当前使用的数据库</span><br><span class="hljs-keyword">select</span> <span class="hljs-keyword">database</span>();<br><br><span class="hljs-comment"># 常看数据库版本</span><br><span class="hljs-keyword">select</span> <span class="hljs-keyword">version</span>();<br></code></pre></td></tr></table></figure>
+
+<h3 id="查看表"><a href="#查看表" class="headerlink" title="查看表"></a>查看表</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment"># 查看当前库中的表</span><br><span class="hljs-keyword">show</span> <span class="hljs-keyword">tables</span>;<br><br><span class="hljs-comment"># 查看名为 ziye 的数据库中的表</span><br><span class="hljs-keyword">show</span> <span class="hljs-keyword">tables</span> <span class="hljs-keyword">from</span> ziye;<br></code></pre></td></tr></table></figure>
+
+<h3 id="查看表结构"><a href="#查看表结构" class="headerlink" title="查看表结构"></a>查看表结构</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment"># 查看 dept 表的表结构</span><br>desc dept;<br><br><span class="hljs-comment"># 查看 dept 表的创建语句</span><br><span class="hljs-keyword">show</span> <span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> dept;<br></code></pre></td></tr></table></figure>
+
+<h3 id="退出-mysql"><a href="#退出-mysql" class="headerlink" title="退出 mysql"></a>退出 mysql</h3><p>键入以下命令可退出数据库：<code>\q</code>、<code>quit</code> 、<code>exit</code></p>
  
       <!-- reward -->
       
@@ -176,12 +185,12 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://ziyedy.top/page/ubuntu-install-summary.html" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://ziyedy.top/page/mysql-command.html" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li></ul>
 
     </footer>
   </div>
@@ -189,19 +198,19 @@
    
   <nav class="article-nav">
     
-      <a href="/page/conda-debug.html" class="article-nav-link">
+      <a href="/page/factory-pattern.html" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            conda产生的bug处理
+            工厂模式
           
         </div>
       </a>
     
     
-      <a href="/page/blender-python-script-basic.html" class="article-nav-link">
+      <a href="/page/maven.html" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">Blender使用Python脚本的基本渲染操作</div>
+        <div class="article-nav-title">Maven基础使用</div>
       </a>
     
   </nav>

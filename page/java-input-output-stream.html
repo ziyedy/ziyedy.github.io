@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1.8k</span>
+            <span class="post-count">2k</span>
         </span>
     </span>
 
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">7 min</span>
+            <span class="post-count">8 min</span>
         </span>
     </span>
 </div>
@@ -170,18 +170,21 @@
 
 
 
-<h2 id="对象流"><a href="#对象流" class="headerlink" title="对象流"></a>对象流</h2><p>对象流ObjectInputStream和ObjectOutputStream</p>
+<h2 id="对象流"><a href="#对象流" class="headerlink" title="对象流"></a>对象流</h2><p>对象流 <code>ObjectInputStream</code> 和 <code>ObjectOutputStream</code> ，可以将Java类与对象写出到文件，实现对象的持久存储</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestObjectStream</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">write</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception</span>&#123;<br>        <span class="hljs-comment">//创建输出流</span><br>        OutputStream fos = <span class="hljs-keyword">new</span> FileOutputStream(<span class="hljs-string">"e:/readme.txt"</span>);<br>        BufferedOutputStream bos = <span class="hljs-keyword">new</span> BufferedOutputStream(fos);<br>        ObjectOutputStream oos = <span class="hljs-keyword">new</span> ObjectOutputStream(bos);        <br>        <span class="hljs-comment">//使用输出流</span><br>        oos.writeInt(<span class="hljs-number">123</span>);<br>        oos.writeDouble(<span class="hljs-number">3.14</span>);<br>        oos.writeChar(<span class="hljs-string">'A'</span>);<br>        oos.writeBoolean(<span class="hljs-keyword">true</span>);<br>        oos.writeUTF(<span class="hljs-string">"bjsxt"</span>);<br>        oos.writeObject(<span class="hljs-keyword">new</span> Date());<br>        oos.writeObject(<span class="hljs-keyword">new</span> Student(“ziye”));    <span class="hljs-comment">// 写入自己创建的对象    </span><br>        <span class="hljs-comment">//关闭输出流</span><br>        oos.close();<br>    &#125;   <br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">read</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception</span>&#123;<br>        <span class="hljs-comment">//创建输入流</span><br>        ObjectInputStream ois = <span class="hljs-keyword">new</span> ObjectInputStream(<span class="hljs-keyword">new</span> BufferedInputStream(<span class="hljs-keyword">new</span> FileInputStream(<span class="hljs-keyword">new</span> File(<span class="hljs-string">"e:/readme2.txt"</span>))));        <br>        <span class="hljs-comment">//使用输入流</span><br>        System.out.println(ois.readInt());<br>        <span class="hljs-keyword">double</span> d = ois.readDouble();<br>        System.out.println(d);<br>        System.out.println(ois.readChar());<br>        System.out.println(ois.readBoolean());<br>        System.out.println(ois.readUTF());<br>        Object date = (Date)ois.readObject();<br>        System.out.println(date);<br>        System.out.println(ois.readObject());    <span class="hljs-comment">// 读出自己创建的对象    </span><br>        <span class="hljs-comment">//关闭输入流</span><br>        ois.close();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 
 
 
-<h2 id="序列化与反序列化"><a href="#序列化与反序列化" class="headerlink" title="序列化与反序列化"></a>序列化与反序列化</h2><p>存储与传输时，需要将Java程序中的类对象等信息序列化为二进制字节流进行传输</p>
+<h2 id="序列化与反序列化"><a href="#序列化与反序列化" class="headerlink" title="序列化与反序列化"></a>序列化与反序列化</h2><p>存储与传输时，需要将Java程序中的类对象等信息序列化为<strong>二进制字节流</strong>进行传输，该字节序列包含对象的数据、对象的类型和对象中存储的属性等信息。字节序列写出到文件后，相当于文件中<strong>持久保存</strong>了一个对象的信息。</p>
 <ul>
-<li>序列化：Serialization将对象的状态信息转换为可以存储或传输的形式的过程</li>
-<li>反序列化：</li>
+<li>序列化：<code>Serialization</code> 将对象的状态信息转换为可以存储或传输的形式的过程</li>
+<li>反序列化：从文件中读取出来，重构对象，对其进行反序列化</li>
 </ul>
+<h3 id="序列化实现条件"><a href="#序列化实现条件" class="headerlink" title="序列化实现条件"></a>序列化实现条件</h3><p>1、该类必须实现java.io.Serializable 接口，Serializable是一个标记接口，不实现此接口的类将不会使任何状态序列化或者反序列化，会抛出NotSerializableException异常</p>
+<p>2、该类的所有属性必须是可序列化的。如果有一个属性不需要可序列化的，则该属性必须注明是瞬态的，使用transient关键字修饰</p>
+<p><a href="https://blog.csdn.net/Luojun13Class/article/details/88529622" target="_blank" rel="noopener">https://blog.csdn.net/Luojun13Class/article/details/88529622</a></p>
 <h3 id="输入字节流：InputStream"><a href="#输入字节流：InputStream" class="headerlink" title="输入字节流：InputStream"></a>输入字节流：InputStream</h3><blockquote>
 <p><code>InputStream</code>是一个抽象类，是所有输入流的超类，最重要的方法为<code>int read()</code>方法，返回字节的int值，返回<code>-1</code>表示无法继续读取。</p>
 <p>常用的子类有<code>FileInputStream</code>，从文件流中读取数据。</p>
