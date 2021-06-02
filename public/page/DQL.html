@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-Hans">
+
+
+<head>
+  <meta charset="utf-8" />
+   
+  <meta name="keywords" content="生活" />
+   
+  <meta name="description" content="子夜写字的地方" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    数据查询语言（DQL） |  子夜nostalgic
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-数据库/SQL/数据查询语言（DQL）"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  数据查询语言（DQL）
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/page/DQL.html" class="article-date">
+  <time datetime="2020-06-10T09:30:10.000Z" itemprop="datePublished">2020-06-10</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a> / <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/SQL/">SQL</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">1.3k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">5 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="SELECT——查询"><a href="#SELECT——查询" class="headerlink" title="SELECT——查询"></a>SELECT——查询</h2><h3 id="SELECT-FROM——基本句式（从XX表选择XX字段）"><a href="#SELECT-FROM——基本句式（从XX表选择XX字段）" class="headerlink" title="SELECT-FROM——基本句式（从XX表选择XX字段）"></a>SELECT-FROM——基本句式（从XX表选择XX字段）</h3><p>1、基本使用框架</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> 数据表<br>[<span class="hljs-keyword">WHERE</span>]<br>[<span class="hljs-keyword">LIMIT</span>]<br>[<span class="hljs-keyword">OFFSET</span>]<br></code></pre></td></tr></table></figure>
+
+<p>2、使用别名</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span><br>	字段名 <span class="hljs-keyword">AS</span> 别名<br><span class="hljs-keyword">FROM</span> 数据表 <span class="hljs-keyword">AS</span> 别名<br></code></pre></td></tr></table></figure>
+
+<p>3、查询语句的执行顺序：</p>
+<p>先进行语法分析和优化，找到关键字优先级，先执行FROM，再执行SELECT</p>
+<h3 id="LIMIT-OFFSET——限制查询返回数量，跳过的数据条数"><a href="#LIMIT-OFFSET——限制查询返回数量，跳过的数据条数" class="headerlink" title="LIMIT-OFFSET——限制查询返回数量，跳过的数据条数"></a>LIMIT-OFFSET——限制查询返回数量，跳过的数据条数</h3><p>注意：<strong>检索出来的第一行是行0</strong></p>
+<p>同时若指定的行数不够，则返回最多能返回的行。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment"># 返回n条数据</span><br>LIMIT n<br>LIMIT 0, n<br><span class="hljs-comment"># 跳过x条数据，之后返回n条数据（两者等价）</span><br>LIMIT x, n<br>LIMIT n OFFSET x<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="DISTINCT——去重"><a href="#DISTINCT——去重" class="headerlink" title="DISTINCT——去重"></a>DISTINCT——去重</h3><p>去除结果中的<strong>重复记录</strong>，在字段名称前加上<code>DISTINCT</code>字段，只支持一个字段名。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">DISTINCT</span> 字段名 <span class="hljs-keyword">FROM</span> *;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="ORDER-BY——排序"><a href="#ORDER-BY——排序" class="headerlink" title="ORDER BY——排序"></a>ORDER BY——排序</h3><p>注意：<strong><code>ORDER BY</code>必须位于<code>WHERE</code></strong>之后</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment"># 按照相关信息进行排序</span><br><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> * <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> 列名 [<span class="hljs-keyword">ASC</span>|<span class="hljs-keyword">DESC</span>]<br><span class="hljs-comment"># 多个排序信息</span><br><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> * <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> 列名 [<span class="hljs-keyword">ASC</span>|<span class="hljs-keyword">DESC</span>],列名 [<span class="hljs-keyword">ASC</span>|<span class="hljs-keyword">DESC</span>]<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="GROUP-BY——分组查询"><a href="#GROUP-BY——分组查询" class="headerlink" title="GROUP BY——分组查询"></a>GROUP BY——分组查询</h2><h3 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h3><p>使用<strong>聚合函数</strong>。所谓聚合函数，也就是平均值、最大值等函数，以下为求该字段名下的平均值函数（AVG），其他函数使用方法与此类似。该类方法在实际使用时可以将统计结果作为一个子表进行查询。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">AVG</span>(字段名) <span class="hljs-keyword">FROM</span> 表名<br></code></pre></td></tr></table></figure>
+
+<p><strong>COUNT(*)</strong>用于获得包含空值的记录数，<strong>COUNT(字段名)</strong>用于获取包含非空值的记录数。</p>
+<h3 id="分组查询"><a href="#分组查询" class="headerlink" title="分组查询"></a>分组查询</h3><p><strong>分组查询</strong>，使用<code>GROUP BY</code>子句。即通过一定规则将数据集分为若干个部分进行查询处理。以下即为使用字段1进行分组统计每一组中字段2的平均值。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> 字段<span class="hljs-number">1</span>,<span class="hljs-keyword">AVG</span>(字段<span class="hljs-number">2</span>) <span class="hljs-keyword">FROM</span> 表名 <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> 字段<span class="hljs-number">1</span>;<br></code></pre></td></tr></table></figure>
+
+<p>使用分组查询SELECT语句中只能出现用以分组的字段以及其他字段的聚合函数，否则会报错（由于产生了<strong>一对多</strong>的关系）。为解决这个问题，可以使用<code>GROUP_CONCAT</code>函数，这个函数可以将符合条件的值连接起来进行输出，可以理解为将“多”的部分进行了字符串拼接。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> 字段<span class="hljs-number">1</span>,<span class="hljs-keyword">GROUP_CONCAT</span>(字段<span class="hljs-number">2</span>) <span class="hljs-keyword">FROM</span> 表名 <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> 字段<span class="hljs-number">1</span>;<br></code></pre></td></tr></table></figure>
+
+<p>同时可以加上<code>WITH ROLLUP</code>再进行一次汇总运算（即在返回的查询结果之下再加上一条汇总记录）。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> 字段<span class="hljs-number">1</span>,<span class="hljs-keyword">AVG</span>(字段<span class="hljs-number">2</span>) <span class="hljs-keyword">FROM</span> 表名 <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> 字段<span class="hljs-number">1</span> <span class="hljs-keyword">WITH</span> <span class="hljs-keyword">ROLLUP</span>;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="HAVING——分组查询条件"><a href="#HAVING——分组查询条件" class="headerlink" title="HAVING——分组查询条件"></a>HAVING——分组查询条件</h3><p>为何要使用HAVING子句（与WHERE的区别）</p>
+<p><strong>WHERE子句执行在GROUP BY子句之前</strong>，因此如果WHERE子句中出现了如平均值等信息时SQL会不知道在哪个范围内进行平均，即报错。所以需要使用<code>HAVING</code>子句。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment"># 使用错误，WHERE不知道AVG作用范围</span><br><span class="hljs-keyword">SELECT</span> f1<br><span class="hljs-keyword">FROM</span> <span class="hljs-keyword">table</span><br><span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">AVG</span>(f2) &gt; <span class="hljs-number">10</span><br><span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> f1;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment"># 使用正确</span><br><span class="hljs-keyword">SELECT</span> f1<br><span class="hljs-keyword">FROM</span> <span class="hljs-keyword">table</span><br><span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> f1 <span class="hljs-keyword">HAVING</span> <span class="hljs-keyword">AVG</span>(f2) &gt; <span class="hljs-number">10</span>;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="WHERE——条件查询"><a href="#WHERE——条件查询" class="headerlink" title="WHERE——条件查询"></a>WHERE——条件查询</h2><p>过滤数据，使用<code>WHERE</code>语句指定查询的条件逻辑，中间使用AND|OR等逻辑连接符连接</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> * <span class="hljs-keyword">WHERE</span> 条件<span class="hljs-number">1</span> [<span class="hljs-keyword">AND</span>|<span class="hljs-keyword">OR</span>] 条件<span class="hljs-number">2</span> ......;<br></code></pre></td></tr></table></figure>
+
+<p>同时注意判断相等的条件是<code>=</code>而不是<code>==</code>；不等于通常写成<code>&lt;&gt;</code>。</p>
+<p>除此之外还有BETWEEN，LIKE，IN等常用运算符</p>
+<h3 id="语句基本执行顺序"><a href="#语句基本执行顺序" class="headerlink" title="语句基本执行顺序"></a>语句基本执行顺序</h3><p>1、from</p>
+<p>2、where</p>
+<p>3、group by</p>
+<p>4、having</p>
+<p>5、select</p>
+<p>6、order by</p>
+<p>7、limit</p>
+<h2 id="JOIN——表连接"><a href="#JOIN——表连接" class="headerlink" title="JOIN——表连接"></a>JOIN——表连接</h2><p>表连接即把多个表通过表之间的共用字段连接起来，可以将其视为一张表进行操作。</p>
+<h3 id="INNER-JOIN"><a href="#INNER-JOIN" class="headerlink" title="INNER JOIN"></a>INNER JOIN</h3><p>如果表中有至少一个匹配，则返回行。结果集中只保留符合连接条件的记录。</p>
+<p><strong>使用WHERE语句连接默认也是INNER JOIN</strong>，如下面第3条语句</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs n1ql"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> 表<span class="hljs-number">1</span> [<span class="hljs-keyword">INNER</span>] <span class="hljs-keyword">JOIN</span> 表<span class="hljs-number">2</span> <span class="hljs-keyword">ON</span> 连接条件;<br><br><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> 表<span class="hljs-number">1</span> [<span class="hljs-keyword">INNER</span>] <span class="hljs-keyword">JOIN</span> 表<span class="hljs-number">2</span> <span class="hljs-keyword">WHERE</span> 连接条件;<br><br><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> 表<span class="hljs-number">1</span>, 表<span class="hljs-number">2</span> <span class="hljs-keyword">WHERE</span> 连接条件;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="LEFT-JOIN——左连接"><a href="#LEFT-JOIN——左连接" class="headerlink" title="LEFT JOIN——左连接"></a>LEFT JOIN——左连接</h3><p>即使右表中没有匹配，联结结果也保留左表的全部数据。同时<em>右表中对应数据视为NULL</em></p>
+<h3 id="RIGHT-JOIN——右连接"><a href="#RIGHT-JOIN——右连接" class="headerlink" title="RIGHT JOIN——右连接"></a>RIGHT JOIN——右连接</h3><p>与左连接相反，联结结果保留右表的全部数据</p>
+<p>应用在<a href="https://leetcode-cn.com/problems/combine-two-tables/" target="_blank" rel="noopener">175.组合两个表中</a>。该题需要满足“无论 person 是否有地址信息，都需要基于上述两表提供 person 的以下信息”，所以当person表在左时采用左连接。</p>
+<h3 id="on和where的区别"><a href="#on和where的区别" class="headerlink" title="on和where的区别"></a>on和where的区别</h3><ol>
+<li>对<code>INNER JOIN</code>，条件放在ON和WHERE中结果集是相同的</li>
+<li>对外连接，条件放在ON中，则不管一些条件是否为真，都会返回对应表中的记录</li>
+</ol>
+<p>比如在<code>LEFT JOIN</code>中写上右表的条件，则不论是否满足有些行都会返回NULL</p>
+<p>而</p>
+<blockquote>
+<p>具体参考：<a href="https://www.runoob.com/w3cnote/sql-different-on-and-where.html" target="_blank" rel="noopener">https://www.runoob.com/w3cnote/sql-different-on-and-where.html</a></p>
+</blockquote>
+<p><strong>几种条件查询语句执行顺序：ON &gt; WHERE &gt; 聚合函数 &gt; having</strong></p>
+<h2 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h2><p>以下不推荐，因为查询速度会很慢，每一次都会执行WHERE语句中的内容。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> ename <br><span class="hljs-keyword">FROM</span> t_emp<br><span class="hljs-keyword">WHERE</span> deptno = (<span class="hljs-keyword">SELECT</span> deptno <span class="hljs-keyword">FROM</span> t_emp <span class="hljs-keyword">WHERE</span> ename=<span class="hljs-string">"SCOTT"</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> e2.ename<br><span class="hljs-keyword">FROM</span> t_emp e1 <span class="hljs-keyword">JOIN</span> t_emp e2 <span class="hljs-keyword">ON</span> e1.deptno=e2.deptno<br><span class="hljs-keyword">WHERE</span> e1.ename = <span class="hljs-string">"SCOTT"</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>将AVG的结果视为一个表，与原表进行连接。</p>
+<p>错误</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> e2.ename<br><span class="hljs-keyword">FROM</span> t_emp e1 <span class="hljs-keyword">JOIN</span> t_emp e2 <span class="hljs-keyword">ON</span> e2.sal &gt;= <span class="hljs-keyword">AVG</span>(e1.sal)<br></code></pre></td></tr></table></figure>
+
+<p>正确</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> e.ename<br><span class="hljs-keyword">FROM</span> t_emp e <br><span class="hljs-keyword">JOIN</span> (<span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">AVG</span>(sal) <span class="hljs-keyword">avg</span> <span class="hljs-keyword">FROM</span> t_emp) t<br><span class="hljs-keyword">ON</span> e.sal &gt;= t.avg;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="组合查询"><a href="#组合查询" class="headerlink" title="组合查询"></a>组合查询</h2> 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          Donate
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://ziyedy.top/page/DQL.html" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/page/python-mysql-handle.html" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            Python操作MySQL数据库
+          
+        </div>
+      </a>
+    
+    
+      <a href="/page/DML.html" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">数据操纵语言（DML）</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "pgmMLBlWl23i6NPFUgTT7XqR-gzGzoHsz",
+    app_key: "yx9IIauIiK8JBBHDxxqPpEFQ",
+    path: window.location.pathname,
+    avatar: "retro",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2019-2021
+        <i class="ri-heart-fill heart_icon"></i> 子夜
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s4.cnzz.com/z_stat.php?id=1279587217&amp;web_id=1279587217'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="子夜nostalgic"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gg">足迹</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+</body>
+
+</html>

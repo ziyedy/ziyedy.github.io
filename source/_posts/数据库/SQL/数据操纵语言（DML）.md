@@ -2,10 +2,9 @@
 title: 数据操纵语言（DML）
 date: 2020-06-07 09:44:15
 tags:
-	- 数据库
-	- SQL
+	- SQL语言
 categories:
-	- 编程相关
+	- 数据库
 	- SQL
 fileName: DML
 ---

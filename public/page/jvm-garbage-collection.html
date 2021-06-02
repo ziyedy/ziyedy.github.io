@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1.9k</span>
+            <span class="post-count">2.2k</span>
         </span>
     </span>
 
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">6 min</span>
+            <span class="post-count">7 min</span>
         </span>
     </span>
 </div>
@@ -180,9 +180,16 @@
 <li><p>G1 仍然保留新生代和老年代的概念，但新生代与老年代不再是固定的，都是一系列的动态集合（物理上不需要连续，逻辑上连续）</p>
 </li>
 </ul>
+<p>从年轻代空间（包括 Eden 和 Survivor 区域）回收内存被称为 Minor GC，对老年代GC称为Major GC，而Full GC是对整个堆来说的</p>
+<p><strong>Minor GC：</strong>发生在Young space中的gc</p>
+<p><strong>Major GC：</strong>发生在老年代Tenured space中的gc</p>
+<p>STW(stop the world)：指的是用户线程在运行至安全点（safe point）或安全区域（safe region）之后，就自行挂起，进入暂停状态，对外的表现就是卡顿，而不论何种gc算法，不论是minor gc还是major gc都会STW，区别只在于STW的时间长短。<br><strong>Full GC：</strong>无官方定义，通常意义上而言指的是一次特殊GC的行为描述，这次GC会回收整个堆的内存，包含老年代，新生代，metaspace等。</p>
+<p>但是实际情况中，我们主要看的是gc.log日志，其中也会发现在部分gc日志头中也有Full GC字眼，此处表示含义是在这次GC的全过程中，都是STW的状态，也就是说在这次GC的全过程中所有用户线程都是处于暂停的状态</p>
 <p>参考：</p>
 <blockquote>
 <p><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/jvm/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6" target="_blank" rel="noopener">https://snailclimb.gitee.io/javaguide/#/docs/java/jvm/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6</a></p>
+<p><a href="https://blog.csdn.net/weixin_39309402/article/details/104756815" target="_blank" rel="noopener">https://blog.csdn.net/weixin_39309402/article/details/104756815</a></p>
+<p><a href="https://blog.csdn.net/qq_38384440/article/details/81710887" target="_blank" rel="noopener">https://blog.csdn.net/qq_38384440/article/details/81710887</a> （什么时候会发生FullGC）</p>
 </blockquote>
  
       <!-- reward -->

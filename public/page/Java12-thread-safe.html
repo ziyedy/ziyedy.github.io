@@ -125,14 +125,17 @@
 <h3 id="volatile的用处"><a href="#volatile的用处" class="headerlink" title="volatile的用处"></a>volatile的用处</h3><p>如之前在可见性中“缓存失败案例”中所述，使用<code>volatile</code>关键字可以解决可见性的问题</p>
 <p>volatile 关键字可以用来修饰实例变量和类变量，被 volatile 修饰后，该变量可以获得可见性与有序性</p>
 <ul>
-<li><p>可见性：任何线程对其修改，其它线程马上就能读到最新值；</p>
+<li><p><strong>可见性</strong>：任何线程对其修改，其它线程马上就能读到最新值；</p>
 <p>volatile  编译为指令后有lock关键字，会锁住相关区域，即独占变量缓存而使其他缓存全部失效（缓存一致性协议）</p>
+<p>1、执行写操作后，JMM会把工作内存中的最新变量值强制刷新到主内存</p>
+<p>2、写操作会导致其他线程中的缓存无效</p>
 </li>
-<li><p>有序性：禁止指令重排序。</p>
+<li><p><strong>有序性</strong>：禁止指令重排序。</p>
 <p>通过<strong>内存屏障</strong>：即在屏障前所有指令可以重排序，在屏障后也可以重排序，但重排序不能够越过内存屏障</p>
 </li>
 </ul>
 <p><strong>注：volatile 无法保证原子性</strong></p>
+<p>参考：<a href="https://zhuanlan.zhihu.com/p/133851347" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/133851347</a></p>
 <h3 id="局限性"><a href="#局限性" class="headerlink" title="局限性"></a>局限性</h3><ol>
 <li>volatile 的可见性和有序性只能作用于单一变量，且无法修饰方法</li>
 <li>volatile 不能确保原子性</li>
