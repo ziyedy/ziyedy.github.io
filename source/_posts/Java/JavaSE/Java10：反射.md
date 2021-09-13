@@ -32,43 +32,36 @@ fileName: Java-reflection
 
 即传统的使用`new`关键字创建对象
 
-```
+```java
 A a = new A();
 ```
-
-
 
 ### 方法2：克隆
 
 即实现`Cloneable`接口，直接拷贝内存中的相关信息，不再调用构造函数
 
-```
+```java
 class A implements Cloneable {
-
 }
 
 A a1 = new A();
 A a2 = (A) a1.clone();
 ```
 
-
-
 ### 方法3：反射
 
 使用反射直接构建类对象
 
-```
+```java
 A a = (A) Class.forName("A").newInstance();
 ```
 
 使用构造器构造类对象
 
-```
+```java
 Constructor<A> constructor = A.class.getConstructor();
 A a = constructor.newInstance();
 ```
-
-
 
 
 

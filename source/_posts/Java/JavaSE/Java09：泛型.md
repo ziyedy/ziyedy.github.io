@@ -108,6 +108,8 @@ public static <E> void printArray( E[] inputArray )
 }
 ```
 
+也可以使用`Class<E>`来表示需要输入的该类参数
+
 #### 泛型方法调用
 
 ```

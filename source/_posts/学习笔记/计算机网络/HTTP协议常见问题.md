@@ -11,14 +11,16 @@ fileName: HTTP
 
 
 
+- HTTP 的 Keep-Alive，是由**应用层（用户态）** 实现的，称为 HTTP 长连接；
+- TCP 的 Keepalive，是由 **TCP 层（内核态）** 实现的，称为 TCP 保活机制；
+
+
+
+
+
 ## 问题汇总
 
-### 1. TCP三次握手和四次挥手
 
-1.1 TCP三次握手和四次挥手的过程
-1.2 为什么TCP建立连接需要三次握手,断开连接需要四次挥手
-1.3 TCP四次挥手为什么有Time-Wait过程
-1.4 TCP如果没有完成第四次挥手会发生什么
 1.5 TCP第三次握手可以传输数据吗
 
 ### 2. TCP和UDP的区别
@@ -58,7 +60,7 @@ HTTP/2.0：
 
 ### 8. HTTPS密钥交换过程
 
-
+https://www.jianshu.com/p/b1538c758c4a
 
 ### 9. HTTP的缓存机制
 

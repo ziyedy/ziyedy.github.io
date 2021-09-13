@@ -193,7 +193,14 @@ public class MyClassLoader extends ClassLoader{
 }
 ```
 
+### 自定义类加载器的应用场景
 
+参考：https://www.zhihu.com/question/46719811
+
+* 依赖冲突
+* 热加载
+* 热部署
+* 加密保护：正向加密后，在加载class文件之前通过自定义classloader先进行反向的解密操作
 
 
 

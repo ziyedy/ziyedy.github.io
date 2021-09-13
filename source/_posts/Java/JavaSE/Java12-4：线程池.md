@@ -9,7 +9,11 @@ categories:
 fileName: Java12-thread-pool
 ---
 
+https://blog.csdn.net/weixin_40151613/article/details/81835974
+
 ## 线程池简介
+
+线程池的作用是维护一定数量的线程，接收任意数量的任务，这些任务被线程池中的线程并发执行
 
 并发的本质其实就是任务的并行处理，所以绝大部分并发程序都是围绕离散任务进行的
 
@@ -18,10 +22,6 @@ fileName: Java12-thread-pool
 3. 系统能够支持的线程存在上限，过多的线程会占用过大的内存，造成OOM
 
 
-
-## 
-
-线程池的作用是维护一定数量的线程，接收任意数量的任务，这些任务被线程池中的线程并发执行
 
 ## 线程池设计与实现
 
@@ -113,6 +113,41 @@ https://blog.csdn.net/weixin_45755718/article/details/106835215
 
 ## Executor 线程池框架
 
+`Executors`是一个线程池工厂，提供了很多工厂方法用来创建相关的线程池
+
+### 创建线程种类
+
+```
+// 创建单一线程的线程池
+public static ExecutorService newSingleThreadExecutor();
+// 创建固定数量的线程池
+public static ExecutorService newFixedThreadPool(int nThreads);
+// 创建带缓存的线程池
+public static ExecutorService newCachedThreadPool();
+// 创建定时调度的线程池
+public static ScheduledExecutorService newScheduledThreadPool(int corePoolSize);
+// 创建流式（fork-join）线程池
+public static ExecutorService newWorkStealingPool();
+```
+
+Executors#newCachedThreadPool 无界的线程池，并且可以自动回收
+
+Executors#newFixedThreadPool 固定大小线程池；队列没有上限，有可能会导致OOM
+
+Executors#newSingleThreadExecutor 单个线程的线程池；
+
+ScheduledThreadPool	支持定时周期性任务执行的线程池
+
+workStealingPool JDK 1.8 加入的
+
+
+
+### 拒绝策略-handler
+
+拒绝策略：当线程池满了，队列也满了，对任务采取的措施。JDK自带4中拒绝策略
+
+* 
+
 
 
 ### 参数
@@ -149,19 +184,7 @@ corePoolSize == maxSize：创建固定大小的线程池，想让线程一下子
 
 
 
-### 种类（5）
 
-Executors#newCachedThreadPool 无界的线程池，并且可以自动回收
-
-Executors#newFixedThreadPool 固定大小线程池；队列没有上限，有可能会导致OOM
-
-Executors#newSingleThreadExecutor 单个线程的线程池；
-
-ScheduledThreadPool	支持定时周期性任务执行的线程池
-
-
-
-workStealingPool JDK 1.8 加入的
 
 
 
@@ -184,3 +207,5 @@ workStealingPool JDK 1.8 加入的
 ### 参考
 
 https://www.jianshu.com/p/7ab4ae9443b9
+
+美团技术团队：https://tech.meituan.com/2020/04/02/java-pooling-pratice-in-meituan.html
