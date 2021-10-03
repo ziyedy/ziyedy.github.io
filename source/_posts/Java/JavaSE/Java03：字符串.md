@@ -68,6 +68,18 @@ String replace("a", "b")
 byte[] getBytes()	
 ```
 
+### 比较字符串字典序
+
+利用`int compareTo(String anotherString)`进行比较，如`s1.compareTo(s2)`
+
+* s1与s2相同，返回0
+* s1 < s2，返回一个小于0的数（通常是第一个不同的字符的Unicode值的差）
+* s1 > s2，返回一个大于0的数（同上）
+
+参考：https://www.mapull.com/javastr/121
+
+
+
 ## “+”连接符
 
 ### 实现原理

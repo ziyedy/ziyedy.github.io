@@ -103,7 +103,7 @@ public class MyExecutor {
 
 ### 阻塞队列
 
-阻塞队列是基于普通队列实现的，与多线程联系到一起。主要是对wait（）与notify（）操作的应用
+阻塞队列是基于普通队列实现的，与多线程联系到一起。主要是对wait()与notify()操作的应用
 
 https://blog.csdn.net/weixin_45755718/article/details/106835215
 

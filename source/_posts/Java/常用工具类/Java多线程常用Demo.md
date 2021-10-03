@@ -1,10 +1,11 @@
 ---
-title: Java多线程常用Demo
+title: Java多线程常见问题
 date: 2021-04-17 18:27:42
 tags:
 	- 并发编程
 categories:
 	- Java
+    - 常用工具类
 fileName: Java-multithread-demo
 ---
 

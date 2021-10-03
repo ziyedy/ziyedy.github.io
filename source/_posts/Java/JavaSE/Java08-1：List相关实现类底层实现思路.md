@@ -1,5 +1,5 @@
 ---
-title: Java08-1：List相关实现类源码解析
+title: Java08-1：List相关实现类底层实现思路
 date: 2021-03-14 11:15:25
 tags:
 	- 源码

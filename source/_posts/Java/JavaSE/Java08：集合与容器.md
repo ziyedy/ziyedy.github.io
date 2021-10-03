@@ -11,11 +11,7 @@ fileName: java-collection
 
 # 集合框架体系
 
-
-
 Set是无序的，相比Collection没有增加任何方法，List相比Collection增加和索引相关的方法
-
-
 
 ## 迭代器
 
@@ -32,7 +28,7 @@ while (it.hasNext()) {	// 检测集合中是否还有下一个元素
 
 ### Iterator与Iterable
 
-* Iterator为Java中的迭代器对象，实现了对List这样的集合进行迭代遍历的底层依赖（使用迭代器设计模式实现）
+* Iterator为Java中的迭代器对象，实现了对List这样的集合进行迭代遍历的底层依赖（使用*迭代器设计模式*实现）
 
 * Iterable接口里定义了返回iterator的方法，相当于**对Iterator的封装**，如下所示。所以实现`Iterable`接口的集合类都可以使用迭代器遍历
 
@@ -47,6 +43,93 @@ public interface Iterable<T> {
 * 联系：for-each循环的底层使用的也是迭代器`Iterator`，因此凡是能够使用for-each进行循环的也一定能够使用迭代器进行遍历
 
 * 区别：但for-each能够遍历数组，而`Iterator`不行；同时使用for-each遍历集合时不能够删除元素
+
+## 比较机制
+
+Java 提供了两种比较机制：Comparable 和 Comparator，二者都是用来实现对象的比较、排序
+
+### Comparable
+
+可以理解为“内比较器”，实现了该接口的类可以和同类比较，也可以和其他类比较，具体依赖于`compareTo`方法的实现。**某类要支持比较排序的话必须实现`Comparable`接口**
+
+### Comparator
+
+可以理解为“外比较器”，**常用于不修改待比较类源代码，同时又需要新定义排序规则时，可以作为参数传递给sort方法**。该接口中有一个`compare`方法，方法有两个相同的泛型参数（也就是说只能比较完全相同的两个类型）
+
+### 示例
+
+```java
+package com;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+public class Test {
+    static class Obj implements Comparable<Obj> {
+        int a;
+        int b;
+
+        public Obj(int a, int b) {
+            this.a = a;
+            this.b = b;
+        }
+
+        @Override
+        public int compareTo(Obj o) {
+            if (this.a == o.a) {
+                return this.b - o.b;
+            } else {
+                return this.a - o.a;
+            }
+        }
+
+        @Override
+        public String toString() {
+            return "Obj{" +
+                    "a=" + a +
+                    ", b=" + b +
+                    '}';
+        }
+    }
+
+    public static void main(String[] args) {
+        List<Obj> list = new ArrayList<>();
+        Obj o1 = new Obj(1, 1);
+        Obj o2 = new Obj(2, 1);
+        Obj o3 = new Obj(1, 2);
+        list.add(o1);
+        list.add(o2);
+        list.add(o3);
+        System.out.println("初始状态：" + list);
+        Collections.sort(list);
+        System.out.println("按Comparable排序：" + list);
+        Collections.sort(list, new Comparator<Obj>() {
+            @Override
+            public int compare(Obj o1, Obj o2) {
+                if (o1.a == o2.a) {
+                    return o2.b - o1.b;
+                } else {
+                    return o2.a - o1.a;
+                }
+            }
+        });
+        System.out.println("按Comparator排序：" + list);
+    }
+
+}
+```
+
+可见当使用sort排序算法时，默认使用`Comparable`中的`CompareTo`方法的排序逻辑，但传入实现了`compare`方法的`Comparator`可以变更排序逻辑。
+
+注：传入参数的写法还可以使用lamda表达式等写法，效果一样
+
+```
+初始状态：[Obj{a=1, b=1}, Obj{a=2, b=1}, Obj{a=1, b=2}]
+按Comparable排序：[Obj{a=1, b=1}, Obj{a=1, b=2}, Obj{a=2, b=1}]
+按Comparator排序：[Obj{a=2, b=1}, Obj{a=1, b=2}, Obj{a=1, b=1}]
+```
 
 
 
@@ -97,8 +180,6 @@ list.forEach((elem)->System.out.println(elem2));
 list.forEach(System.out::println);
 ```
 
-
-
 ## ArrayList
 
 > ArrayList底层由数组（`Object[]`）实现，在内存中分配连续的空间，实现了长度可变的数组
@@ -106,8 +187,6 @@ list.forEach(System.out::println);
 * 优点：遍历元素和随机访问元素的效率比较高
 
 * 缺点：添加和删除需大量移动元素，效率低
-
-
 
 ## LinkedList
 
@@ -118,8 +197,6 @@ list.forEach(System.out::println);
 * 优点：插入、删除元素效率比较高
 
 * 缺点：遍历和随机访问元素效率低下
-
-
 
 ## 栈与队列
 
@@ -206,10 +283,6 @@ public class HashSet<E> implements Set<E> {
 }
 ```
 
-
-
-
-
 ## TreeSet
 
 > 采用二叉树（红黑树）的存储结构
@@ -218,7 +291,7 @@ public class HashSet<E> implements Set<E> {
 
 * 缺点：查询速度没有HashSet快
 
-**使用自定义类作为元素存储在`TreeSet`中时，自定义类需要实现`Comparable`接口并指定比较的规则**，否则会抛出异常。
+使用自定义类作为元素存储在`TreeSet`中时，**自定义类需要实现`Comparable`接口并指定比较的规则**，否则会抛出异常。
 
 ### 底层实现
 
@@ -248,8 +321,6 @@ public class TreeSet<E> extends AbstractSet<E> implements NavigableSet<E> {
 
 
 
-
-
 # Map
 
 > 存储的键值对映射关系，根据key可以找到value
@@ -263,7 +334,14 @@ public class TreeSet<E> extends AbstractSet<E> implements NavigableSet<E> {
 
 与`HashSet`对应，其也有`LinkedHashMap`保证键值按添加顺序使用链表维护
 
+### HashTable与HashMap
 
+HashTable是较为远古的使用Hash算法的容器结构了，现在基本已被淘汰，单线程转为使用HashMap，多线程使用ConcurrentHashMap。
+
+* 线程安全：HashTable是线程安全的类，但很多方法使用synchronized修饰，导致效率低下，而HashMap是线程不安全的类
+* 插入null值：HashMap允许一个键为null，允许多个值为null；而HashTable不允许键或值为null
+* 容量与映射策略不同
+* 底层结构不同（HashTable一直为数组+链表）
 
 ## TreeMap
 
@@ -288,40 +366,6 @@ static final class Entry<K,V> implements Map.Entry<K,V> {
 ```
 
 
-
-
-
-
-
-
-
-### 迭代器
-
-
-
-排序
-
-```
-Collections.sort(list);
-```
-
-使用Comparable或Comparator接口对自定义类进行排序
-
-
-
-Comparator接口
-
-强行对某个对象进行整体排序的比较函数
-
-可以将Comparator传递给sort方法（Collections.sort()或Arrays.sort）
-
-int compare()
-
-
-
-Comparable接口
-
-此接口强行对实现它的每个类的对象进行整体排序
 
 
 

@@ -2,7 +2,7 @@
 title: MyBatis使用方法总结
 date: 2020-12-22 15:59:21
 tags:
-	- 数据库
+	- ORM
 categories:
 	- Java
 	- 框架
@@ -304,7 +304,7 @@ List<Student> students = dao.selectStudentByMap(data);	// 传入map调用相应�
 
 
 
-## mapper文件常用标签
+## mapper文件常用标签（动态SQL）
 
 > mybatis框架提供的标签，可以实现**同一个dao的方法， 根据不同的条件可以表示不同的sql语句**
 

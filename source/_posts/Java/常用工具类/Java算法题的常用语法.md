@@ -5,6 +5,7 @@ tags:
 	- Java
 categories:
 	- Java
+    - 常用工具类
 fileName: java-for-algorithm-test
 ---
 

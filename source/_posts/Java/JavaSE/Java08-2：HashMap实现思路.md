@@ -1,5 +1,5 @@
 ---
-title: Java08-2：HashMap实现方法总结
+title: Java08-2：HashMap实现思路
 date: 2021-03-04 20:38:50
 tags:
 	- 源码
@@ -156,9 +156,11 @@ void transfer(Entry[] newTable) {
 
 ## HashMap 并发安全问题
 
-并发的多线程环境使用HashMap可能会造成死循环（并发插入元素的时候，有可能出现带环链表，让下一次读操作死循环）
+并发的多线程环境使用HashMap可能会造成死循环（并发**扩容**的时候，有可能出现带环链表，让下一次读操作死循环）
 
 
+
+参考：[深入浅出HashMap扩容死循环问题 - 简书 (jianshu.com)](https://www.jianshu.com/p/4d1cad21853b)
 
 
 
